@@ -1,9 +1,12 @@
 /**
  * @author schroedln
  * 
- * $Id: GeneDeliveryManagerImpl.java,v 1.25 2007-09-12 19:36:03 pandyas Exp $
+ * $Id: GeneDeliveryManagerImpl.java,v 1.26 2007-10-31 19:04:08 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.25  2007/09/12 19:36:03  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.24  2007/06/26 17:26:41  pandyas
  * populateOrgan method was accidentally deleted before uploading to cvs
  *
@@ -225,7 +228,7 @@ public class GeneDeliveryManagerImpl extends BaseManager implements
 					"ViralVector");
 
 			inGeneDelivery.setViralVector(null);
-			inGeneDelivery.setViralVectorUnctrlVocab(inGeneDeliveryData
+			inGeneDelivery.setViralVectorAlternEntry(inGeneDeliveryData
 					.getOtherViralVector());
 		}
 		// anytime viral vector is not other set uncontrolled vocab to null
@@ -233,7 +236,7 @@ public class GeneDeliveryManagerImpl extends BaseManager implements
 		else {
 			System.out.println("viral vector not other");
 			inGeneDelivery.setViralVector(inGeneDeliveryData.getViralVector());
-			inGeneDelivery.setViralVectorUnctrlVocab(null);
+			inGeneDelivery.setViralVectorAlternEntry(null);
 		}
 
 		inGeneDelivery.getTreatment().setRegimen(
@@ -241,6 +244,8 @@ public class GeneDeliveryManagerImpl extends BaseManager implements
 		inGeneDelivery.setGeneInVirus(inGeneDeliveryData.getGeneInVirus());
 
 		log.debug("Exiting GeneDeliveryManagerImpl.populateGeneDelivery");
+		
+		inGeneDelivery.setComments(inGeneDeliveryData.getComments());
 		
         // Update loop handeled separately for conceptCode = 00000
         if (inGeneDeliveryData.getOrganTissueCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)){

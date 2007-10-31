@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: CarcinogenExposureManagerImpl.java,v 1.8 2007-09-14 13:56:05 pandyas Exp $
+ * $Id: CarcinogenExposureManagerImpl.java,v 1.9 2007-10-31 19:01:53 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2007/09/14 13:56:05  pandyas
+ * Cleaned up name for class
+ *
  * Revision 1.7  2007/09/12 19:36:03  pandyas
  * modified debug statements for build to stage tier
  *
@@ -553,6 +556,9 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
             theCarcinogenExposure.setEnvironmentalFactor(theEF);
         }
         theEF.setType(inType);
+        
+        //set comments from EF object
+        theEF.setComments(inNameData.getComments());
 
         /* Set other name or selected chemical name */
         // anytime the name is "other"
@@ -563,14 +569,14 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
             sendEmail(inAnimalModel, inNameData.getOtherName(), "CarcinogenExposureName");
 
             theEF.setName(null);
-            theEF.setNameUnctrlVocab(inNameData.getOtherName());
+            theEF.setNameAlternEntry(inNameData.getOtherName());
         }
         // anytime name is not other, set uncontrolled vocab to null (covers editing)
         else
         {
             log.debug("Name is not other");
             theEF.setName(inNameData.getName());
-            theEF.setNameUnctrlVocab(null);
+            theEF.setNameAlternEntry(null);
         }
 
     }
@@ -616,7 +622,8 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
 
         // save the treatment
         theTreatment.setRegimen(inTreatmentData.getRegimen());
-    }
+        
+     }
 
     private void populateDose(DoseData inDoseData,
                               CarcinogenExposure theCarcinogenExposure)
@@ -660,7 +667,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
             log.debug("admin route equals other");
 
             theCarcinogenExposure.getTreatment().setAdministrativeRoute(null);
-            theCarcinogenExposure.getTreatment().setAdminRouteUnctrlVocab(inAdministrationData.getOtherAdministrativeRoute());
+            theCarcinogenExposure.getTreatment().setAdminRouteAlternEntry(inAdministrationData.getOtherAdministrativeRoute());
 
             log.debug("Sending Notification eMail - new Administrative Route added");
             sendEmail(inAnimalModel, inAdministrationData.getOtherAdministrativeRoute(), "AdministrativeRoute");
@@ -674,7 +681,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
             log.debug("admin route not other or null");
 
             theCarcinogenExposure.getTreatment().setAdministrativeRoute(inAdministrationData.getAdministrativeRoute());
-            theCarcinogenExposure.getTreatment().setAdminRouteUnctrlVocab(null);
+            theCarcinogenExposure.getTreatment().setAdminRouteAlternEntry(null);
         }
 
         EnvironmentalFactor theEF = theCarcinogenExposure.getEnvironmentalFactor();
