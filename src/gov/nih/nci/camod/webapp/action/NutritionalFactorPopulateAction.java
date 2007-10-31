@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: NutritionalFactorPopulateAction.java,v 1.12 2006-11-09 17:30:15 pandyas Exp $
+ * $Id: NutritionalFactorPopulateAction.java,v 1.13 2007-10-31 18:31:59 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2006/11/09 17:30:15  pandyas
+ * Commented out debug code
+ *
  * Revision 1.11  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -66,9 +69,9 @@ public class NutritionalFactorPopulateAction extends BaseAction {
             request.setAttribute("aCarcinogenExposureID", aCarcinogenExposureID);
 
 			// Set the otherName and/or the selected name attribute
-			if (ce.getEnvironmentalFactor().getNameUnctrlVocab() != null) {
+			if (ce.getEnvironmentalFactor().getNameAlternEntry() != null) {
 				nutritForm.setName(Constants.Dropdowns.OTHER_OPTION);
-				nutritForm.setOtherName(ce.getEnvironmentalFactor().getNameUnctrlVocab());
+				nutritForm.setOtherName(ce.getEnvironmentalFactor().getNameAlternEntry());
 			} else {
 				nutritForm.setName(ce.getEnvironmentalFactor().getName());
 			}
@@ -81,6 +84,11 @@ public class NutritionalFactorPopulateAction extends BaseAction {
 			nutritForm.setRegimen(ce.getTreatment().getRegimen());
 			nutritForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
             nutritForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit());
+            
+            if (ce.getEnvironmentalFactor().getComments() != null)
+            {
+            	nutritForm.setComments(ce.getEnvironmentalFactor().getComments());
+            }            
 
 		}
 
