@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SpontaneousMutationData.java,v 1.4 2007-04-04 13:23:37 pandyas Exp $
+ * $Id: SpontaneousMutationData.java,v 1.5 2007-10-31 17:57:47 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2007/04/04 13:23:37  pandyas
+ * modified names for mutation identifier fields (number changed to id)
+ *
  * Revision 1.3  2007/03/26 12:03:10  pandyas
  * caMOd 2.3 enhancements for Zebrafish support
  *
@@ -38,9 +41,9 @@ public interface SpontaneousMutationData
 
     public void setMethodOfObservation(String methodOfObservation);
 
-    public String getGeneId();
-
-    public void setGeneId(String geneId);
+	public String getGeneIdentifier();
+	
+	public void setGeneIdentifier(String geneIdentifier);
     
 	public String getRgdId();
 

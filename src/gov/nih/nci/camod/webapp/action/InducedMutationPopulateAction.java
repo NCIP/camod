@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: InducedMutationPopulateAction.java,v 1.18 2007-04-04 13:19:08 pandyas Exp $
+ * $Id: InducedMutationPopulateAction.java,v 1.19 2007-10-31 18:03:30 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2007/04/04 13:19:08  pandyas
+ * modified names for mutation identifier fields (number changed to id)
+ *
  * Revision 1.17  2007/03/26 12:02:31  pandyas
  * caMOd 2.3 enhancements for Zebrafish support
  *
@@ -29,6 +32,7 @@ package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.EnvironmentalFactor;
+import gov.nih.nci.camod.domain.GeneIdentifier;
 import gov.nih.nci.camod.domain.InducedMutation;
 import gov.nih.nci.camod.domain.MutationIdentifier;
 import gov.nih.nci.camod.service.impl.InducedMutationManagerSingleton;
@@ -60,17 +64,21 @@ public class InducedMutationPopulateAction extends BaseAction {
             EnvironmentalFactor environFactor = theInducedMutation.getEnvironmentalFactor();
 
             inducedMutationForm.setType(environFactor.getType());
-            if (environFactor.getTypeUnctrlVocab() != null) {
-                inducedMutationForm.setOtherType(environFactor.getTypeUnctrlVocab());
+            if (environFactor.getTypeAlternEntry() != null) {
+                inducedMutationForm.setOtherType(environFactor.getTypeAlternEntry());
                 inducedMutationForm.setType(Constants.Dropdowns.OTHER_OPTION);
             }
 
             inducedMutationForm.setCasNumber(environFactor.getCasNumber());
-            inducedMutationForm.setGeneId(theInducedMutation.getGeneId());
+            
+            // Set GeneIdentifier attribute 
+            if (theInducedMutation.getGeneIdentifier() != null) {
+            	inducedMutationForm.setGeneIdentifier(theInducedMutation.getGeneIdentifier().getEntrezGeneID());
+            }          
             
             // Name of Inducing Agent - Saved in uncontrolled vocab in 2.1 (free text)
-            if (environFactor.getNameUnctrlVocab() != null) {
-                inducedMutationForm.setName(environFactor.getNameUnctrlVocab());
+            if (environFactor.getNameAlternEntry() != null) {
+                inducedMutationForm.setName(environFactor.getNameAlternEntry());
             }  else {          
             inducedMutationForm.setName(environFactor.getName());
             }

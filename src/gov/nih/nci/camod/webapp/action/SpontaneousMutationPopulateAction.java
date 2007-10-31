@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SpontaneousMutationPopulateAction.java,v 1.13 2007-04-04 13:19:08 pandyas Exp $
+ * $Id: SpontaneousMutationPopulateAction.java,v 1.14 2007-10-31 18:03:30 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2007/04/04 13:19:08  pandyas
+ * modified names for mutation identifier fields (number changed to id)
+ *
  * Revision 1.12  2007/03/26 12:02:31  pandyas
  * caMOd 2.3 enhancements for Zebrafish support
  *
@@ -28,6 +31,7 @@
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
+import gov.nih.nci.camod.domain.GeneIdentifier;
 import gov.nih.nci.camod.domain.MutationIdentifier;
 import gov.nih.nci.camod.domain.SpontaneousMutation;
 import gov.nih.nci.camod.service.impl.SpontaneousMutationManagerSingleton;
@@ -57,7 +61,11 @@ public class SpontaneousMutationPopulateAction extends BaseAction {
             request.setAttribute("aSpontaneousMutationID", aSpontaneousMutationID);
             spontaneousMutationForm.setName(theSpontaneousMutation.getName());
             spontaneousMutationForm.setComments(theSpontaneousMutation.getComments());
-            spontaneousMutationForm.setGeneId(theSpontaneousMutation.getGeneId());
+            
+            // Set GeneIdentifier attribute 
+            if (theSpontaneousMutation.getGeneIdentifier() != null) {
+                spontaneousMutationForm.setGeneIdentifier(theSpontaneousMutation.getGeneIdentifier().getEntrezGeneID());
+            }            
 
             // Set GeneticAlteration attributes 
             if (theSpontaneousMutation.getGeneticAlteration() != null) {

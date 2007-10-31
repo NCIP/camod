@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TargetedModificationData.java,v 1.9 2007-07-31 12:01:41 pandyas Exp $
+ * $Id: TargetedModificationData.java,v 1.10 2007-10-31 17:59:14 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2007/07/31 12:01:41  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.8  2007/04/04 13:23:37  pandyas
  * modified names for mutation identifier fields (number changed to id)
  *
@@ -34,9 +37,9 @@ public interface TargetedModificationData extends TransgeneData {
 	
 	public void setOtherModificationType(String otherModificationType);
 	
-	public String getGeneId();
+	public String getGeneIdentifier();
 	
-	public void setGeneId(String geneId);
+	public void setGeneIdentifier(String geneIdentifier);
 	
 	public String getEsCellLineName();
 	

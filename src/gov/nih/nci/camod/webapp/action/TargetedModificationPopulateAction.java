@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TargetedModificationPopulateAction.java,v 1.17 2007-07-31 12:02:55 pandyas Exp $
+ * $Id: TargetedModificationPopulateAction.java,v 1.18 2007-10-31 18:03:30 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2007/07/31 12:02:55  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.16  2007/04/04 13:19:07  pandyas
  * modified names for mutation identifier fields (number changed to id)
  *
@@ -37,6 +40,7 @@ package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.Conditionality;
+import gov.nih.nci.camod.domain.GeneIdentifier;
 import gov.nih.nci.camod.domain.Image;
 import gov.nih.nci.camod.domain.ModificationType;
 import gov.nih.nci.camod.domain.MutationIdentifier;
@@ -101,10 +105,10 @@ public class TargetedModificationPopulateAction extends BaseAction
             {
                 ModificationType theModificationType = (ModificationType) theModificationTypeList.get(i);
                 //If one of the selections was 'Other', populate other field correctly
-                if (theModificationType.getNameUnctrlVocab() != null)
+                if (theModificationType.getNameAlternEntry() != null)
                 {
                     theModTypes[i] = Constants.Dropdowns.OTHER_OPTION;
-                    theTargetedModificationForm.setOtherModificationType(theModificationType.getNameUnctrlVocab());
+                    theTargetedModificationForm.setOtherModificationType(theModificationType.getNameAlternEntry());
                 }
                 else
                 {
@@ -116,7 +120,12 @@ public class TargetedModificationPopulateAction extends BaseAction
 
             theTargetedModificationForm.setBlastocystName(theTargetedModification.getBlastocystName());
             theTargetedModificationForm.setComments(theTargetedModification.getComments());
-            theTargetedModificationForm.setGeneId(theTargetedModification.getGeneId());
+            
+            // Set GeneIdentifier attribute 
+            if (theTargetedModification.getGeneIdentifier() != null) {
+            	theTargetedModificationForm.setGeneIdentifier(theTargetedModification.getGeneIdentifier().getEntrezGeneID());
+            } 
+            
             theTargetedModificationForm.setEsCellLineName(theTargetedModification.getEsCellLineName());
 
             // Construct Sequence
