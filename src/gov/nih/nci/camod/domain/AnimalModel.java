@@ -1,5 +1,8 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.23  2007/07/31 12:03:37  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.22  2007/03/19 18:56:11  pandyas
  * Object Model changes for caMOD 2.3 - dee design doc for details
  *
@@ -28,7 +31,7 @@
  * Cleanup
  *
  * 
- * $Id: AnimalModel.java,v 1.23 2007-07-31 12:03:37 pandyas Exp $
+ * $Id: AnimalModel.java,v 1.24 2007-10-31 15:05:12 pandyas Exp $
  */
 package gov.nih.nci.camod.domain;
 
@@ -56,7 +59,7 @@ public class AnimalModel extends AbstractCancerModel {
 
 	private Set<MicroArrayData> microArrayDataCollection = new HashSet<MicroArrayData>();
 
-	private Set<Graft> graftCollection = new HashSet<Graft>();
+	private Set<Transplantation> transplantationCollection = new HashSet<Transplantation>();
 
 	private Set<Therapy> therapyCollection = new HashSet<Therapy>();
 
@@ -81,6 +84,8 @@ public class AnimalModel extends AbstractCancerModel {
 	private Set<Log> logCollection = new HashSet<Log>();
 
 	private Phenotype phenotype;
+	
+    private String comments;	
 	
 	/**
 	 * @return Returns the genotypeCollection.
@@ -401,22 +406,22 @@ public class AnimalModel extends AbstractCancerModel {
 	}
 
 	/**
-	 * @return Returns the graftCollection.
+	 * @return Returns the transplantationCollection.
 	 */
-	public Set<Graft> getGraftCollection() {
-		return graftCollection;
+	public Set<Transplantation> getTransplantationCollection() {
+		return transplantationCollection;
 	}
 
 	/**
-	 * @param graftCollection
-	 *            The graftCollection to set.
+	 * @param transplantationCollection
+	 *            The transplantationCollection to set.
 	 */
-	public void setGraftCollection(Set<Graft> graftCollection) {
-		this.graftCollection = graftCollection;
+	public void setTransplantationCollection(Set<Transplantation> transplantationCollection) {
+		this.transplantationCollection = transplantationCollection;
 	}
 
-	public void addGraft(Graft graft) {
-		graftCollection.add(graft);
+	public void addTransplantation(Transplantation transplantation) {
+		transplantationCollection.add(transplantation);
 	}
 
 	/**
@@ -526,6 +531,22 @@ public class AnimalModel extends AbstractCancerModel {
 	public void addLog(Log log) {
 		logCollection.add(log);
 	}
+	
+    /**
+     * @return Returns the comments. Comment is a reserved word so 
+     * we must use the plural form comments.
+     */
+    public String getComments() {
+        return comments;
+    }
+
+    /**
+     * @param comments
+     *            The comments to set.
+     */
+    public void setComments(String comments) {
+        this.comments = comments;
+    }	
 
 	/**
 	 * @see java.lang.Object#toString()
