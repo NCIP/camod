@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelPopulateAction.java,v 1.25 2007-09-12 19:36:40 pandyas Exp $
+ * $Id: AnimalModelPopulateAction.java,v 1.26 2007-10-31 18:07:36 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.25  2007/09/12 19:36:40  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.24  2007/07/31 12:02:38  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -106,10 +109,10 @@ public class AnimalModelPopulateAction extends BaseAction {
 
 		// If uncontrolledVocab is filled in 'Other' was selected, Set 'Other'
 		// explicitly
-		if (am.getStrain().getNameUnctrlVocab() != null) {
+		if (am.getStrain().getNameAlternEntry() != null) {
 			modelCharForm.setEthinicityStrain(Constants.Dropdowns.OTHER_OPTION);
 			modelCharForm.setOtherEthnicityStrain(am.getStrain()
-					.getNameUnctrlVocab());
+					.getNameAlternEntry());
 
 		}
 		// If uncontrolledVocab is empty, just get strain field
@@ -167,6 +170,11 @@ public class AnimalModelPopulateAction extends BaseAction {
 							e);
 			modelCharForm.setReleaseDate("immediate");
 		}
+		
+		// Populate comment if not null
+		if(am.getComments() != null){
+			modelCharForm.setComments(am.getComments());
+		}		
 
 		// Prepopulate all dropdown fields, set the global Constants
 		this.dropdown(request, response, modelCharForm);

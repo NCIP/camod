@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ChemicalDrugPopulateAction.java,v 1.18 2006-11-09 17:24:43 pandyas Exp $
+ * $Id: ChemicalDrugPopulateAction.java,v 1.19 2007-10-31 18:08:17 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2006/11/09 17:24:43  pandyas
+ * Commented out debug code
+ *
  * Revision 1.17  2006/05/23 17:01:14  pandyas
  * fixed save of ageOfTreatmentUntis - made code consistent
  *
@@ -91,10 +94,10 @@ public class ChemicalDrugPopulateAction extends BaseAction
             }            
 
             // Set the other name and/or selected name from database
-            if (ce.getEnvironmentalFactor().getNameUnctrlVocab() != null)
+            if (ce.getEnvironmentalFactor().getNameAlternEntry() != null)
             {
                 chemicalDrugForm.setName(Constants.Dropdowns.OTHER_OPTION);
-                chemicalDrugForm.setOtherName(ce.getEnvironmentalFactor().getNameUnctrlVocab());
+                chemicalDrugForm.setOtherName(ce.getEnvironmentalFactor().getNameAlternEntry());
             }
             else
             {
@@ -103,10 +106,10 @@ public class ChemicalDrugPopulateAction extends BaseAction
 
             // Set the other flag or the selected administrative route from
             // database
-            if (ce.getTreatment().getAdminRouteUnctrlVocab() != null)
+            if (ce.getTreatment().getAdminRouteAlternEntry() != null)
             {
                 chemicalDrugForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
-                chemicalDrugForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteUnctrlVocab());
+                chemicalDrugForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteAlternEntry());
             }
             else
             {
@@ -122,6 +125,11 @@ public class ChemicalDrugPopulateAction extends BaseAction
             {
                 chemicalDrugForm.setNscNumber(ce.getEnvironmentalFactor().getNscNumber().toString());
             }
+            
+            if (ce.getEnvironmentalFactor().getComments() != null)
+            {
+                chemicalDrugForm.setComments(ce.getEnvironmentalFactor().getComments());
+            }            
         }
         return mapping.findForward("submitChemicalDrug");
     }
