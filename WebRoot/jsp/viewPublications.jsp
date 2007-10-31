@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewPublications.jsp,v 1.28 2007-06-25 16:37:53 pandyas Exp $
+ * $Id: viewPublications.jsp,v 1.29 2007-10-31 19:33:32 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.28  2007/06/25 16:37:53  pandyas
+ * Fixed code to check for empty ZFIN and J numbers and only display MTB or MGI when a J Number exists
+ *
  * Revision 1.27  2007/05/16 18:20:12  pandyas
  * Modified column header for J Number, MGI, MTB, and ZFIN publication links
  * Modified code to get the ZFIN code to work
@@ -72,54 +75,37 @@
 
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
 	<tr><td valign="top">
-		<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%">
-		<tr><td>
-			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
+<!-- -->
 
-			<tr>
-				<td class="formTitle" height="20" colspan="9">
-					Publications - Model:
-					<camod:highlight>
-						<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>&nbsp;
-						<c:if test="${mdl.externalSource == 'Jax MTB'}">
+
+	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left" width="100%">
+	<tr>
+		<td class="formTitle" height="20" colspan="2">Publications - Model:
+			<camod:highlight><c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
+					<c:if test="${mdl.externalSource == 'Jax MTB'}">
 							<IMG src="/camod/images/mtb_logo.jpg" >
 						</c:if>							
 					</camod:highlight>
-				</td>				
-			</tr>			
+		</td>
+	</tr>			
 			
-			<tr>
-				<td class="greySubTitleLeft" width="10%">Publication Status</td>
-				<td class="greySubTitleLeft" width="20%">First Author</td>
-				<td class="greySubTitleLeft" width="15%">References</td>
-				<td class="greySubTitleLeft" width="25%">Title</td>
-				<td class="greySubTitleLeft" width="10%">Journal</td>
-				<td class="greySubTitleLeft" width="5%">Year</td>
-				<td class="greySubTitleLeft" width="10%">Volume</td>
-				<td class="greySubTitleLeft" width="10%">Pages</td>
-				<td class="greySubTitle" width="10%">Abstract in PubMed</td>
-			</tr>
-			
-			<c:forEach var="p" items="${pubColl}" varStatus="stat">
-			<tr>
-				<c:choose>
-					<c:when test = "${stat.count % 2 == 0}">
-						<c:set var="tdClass" value="resultsBoxWhite"/>
-					</c:when>
-					<c:otherwise>
-						<c:set var="tdClass" value="resultsBoxGrey"/>
-					</c:otherwise>
-				</c:choose>
-				
-				<td class="<c:out value="${tdClass}"/>" width="10%">
-					<camod:highlight><c:out value="${p.publicationStatus.name}"/>&nbsp;</camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="15%">
-					<camod:highlight><c:out value="${p.authors}" escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>
-				
-				<!-- Two choose required so we can check for emtpy ZFIN or J Numbers-->
-				<td class="<c:out value="${tdClass}"/>" width="15%" align="center">
+
+	<c:forEach var="p" items="${pubColl}" varStatus="stat">
+
+		<tr>
+			<td class="GreyBoxTop"><b>Publication Status:</b></td>
+			<td class="GreyBoxTopRightEnd"><c:out value="${p.publicationStatus.name}" escapeXml="false"/>&nbsp;</td>
+		</tr>
+			       
+		<tr>
+			<td class="WhiteBox"><b>First Author:</b></td>
+			<td class="WhiteBoxRightEnd"><c:out value="${p.authors}" escapeXml="false"/>&nbsp;</td>
+		</tr>
+
+		<tr>
+			<td class="GreyBox"><b>References:</b></td>
+				<!-- Two choose required so we can check for emtpy ZFIN or J Numbers-->			
+				<td class="GreyBoxRightEnd">
 					<c:choose>
 						<c:when test="${not empty p.zfinPubId}">
 								<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-pubview2.apg&OID=<c:out value="${p.zfinPubId}"/>">ZFIN</a>
@@ -137,35 +123,60 @@
 							</c:when>				
 						<c:otherwise>&nbsp;						
 						</c:otherwise>
-					</c:choose>					
-				</td>	
-							
-				<td class="<c:out value="${tdClass}"/>" width="30%">
-					<camod:highlight><c:out value="${p.title}" escapeXml="false" />&nbsp;</camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="10%">
-					<camod:highlight><c:out value="${p.journal}" escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="5%">
-					<camod:highlight><c:out value="${p.year}"/>&nbsp;</camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="10%">
-					<camod:highlight><c:out value="${p.volume}"/>&nbsp;</camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="10%">
-					<camod:highlight><c:out value="${p.startPage}"/> - </camod:highlight>
-					<camod:highlight><c:out value="${p.endPage}"/> </camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>End" width="10%">
+					</c:choose>
+			</td>					
+		</tr>
+			       
+		<tr>
+			<td class="WhiteBox"><b>First Author:</b></td>
+			<td class="WhiteBoxRightEnd"><c:out value="${p.authors}" escapeXml="false"/>&nbsp;</td>
+		</tr>
+		
+		<tr>
+			<td class="GreyBox"><b>Title:</b></td>
+			<td class="GreyBoxRightEnd"><camod:highlight><c:out value="${p.title}" escapeXml="false"/>&nbsp;</camod:highlight></td>
+		</tr>
+			       
+		<tr>
+			<td class="WhiteBox"><b>Journal:</b></td>
+			<td class="WhiteBoxRightEnd"><camod:highlight><c:out value="${p.journal}" escapeXml="false"/>&nbsp;</camod:highlight></td>
+		</tr>	
+		
+		<tr>
+			<td class="GreyBox"><b>Year:</b></td>
+			<td class="GreyBoxRightEnd"><camod:highlight><c:out value="${p.year}" escapeXml="false"/>&nbsp;</camod:highlight></td>
+		</tr>
+			       
+		<tr>
+			<td class="WhiteBox"><b>Volume:</b></td>
+			<td class="WhiteBoxRightEnd"><camod:highlight><c:out value="${p.volume}" escapeXml="false"/>&nbsp;</camod:highlight></td>
+		</tr>				
+
+		<tr>
+			<td class="GreyBox"><b>Pages:</b></td>
+			<td class="GreyBoxRightEnd"><camod:highlight><c:out value="${p.startPage}"/> - </camod:highlight>
+					<camod:highlight><c:out value="${p.endPage}"/></camod:highlight></td>
+		</tr>
+			       
+		<tr>
+			<td class="WhiteBox"><b>Abstract in PubMed:</b></td>
+			<td class="WhiteBoxRightEnd">
 					<a target="_pubmed" href=" http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=retrieve&db=pubmed&dopt=abstract&list_uids=<c:out value="${p.pmid}"/>">
 					<IMG src="/camod/images/pubmed_70.gif" align="middle">
 					</a>
-				</td>					
-			</tr>
-			</c:forEach>
-			
-			</TABLE>
-		</td></tr></TABLE>
+			</td>
+		</tr>
+				
+		<tr>
+			<td class="GreyBox"><b>Comment:</b></td>
+			<td class="GreyBoxRightEnd"><camod:highlight><c:out value="${p.comments}" escapeXml="false"/>&nbsp;</camod:highlight></td>
+		</tr>
+
+		<tr><td>&nbsp;</td></tr>
+	</c:forEach>
+	</TABLE>
+
+<!-- -->
 	</td></tr></TABLE>
 </tr></td></TABLE>
 
