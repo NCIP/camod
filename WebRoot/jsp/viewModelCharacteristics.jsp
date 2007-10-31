@@ -1,8 +1,11 @@
 <%
  /*
-  *   $Id: viewModelCharacteristics.jsp,v 1.48 2007-09-17 14:24:22 pandyas Exp $
+  *   $Id: viewModelCharacteristics.jsp,v 1.49 2007-10-31 19:32:10 pandyas Exp $
   *   
   *   $Log: not supported by cvs2svn $
+  *   Revision 1.48  2007/09/17 14:24:22  pandyas
+  *   took out extra space
+  *
   *   Revision 1.47  2007/09/06 19:15:59  pandyas
   *   Modified DisplayName to displayName
   *
@@ -276,7 +279,14 @@
 				    </a>
 				</c:if>					
 			</td>
-		</tr>		               
+		</tr>	
+		
+			<tr>
+				<td class="resultsBoxWhite" width="25%"><b>Comment</b></td>
+				<td class="resultsBoxWhiteEnd">
+					<camod:highlight><c:out value="${mdl.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
+				</td>
+			</tr>			               
 
 		<c:if test="${not empty mdl.animalAvailabilityCollection}">
 		<tr><td>&nbsp;</td></tr>
@@ -320,7 +330,7 @@
 									</c:when>
 									<c:otherwise>							    
 									    <!-- Investigator: Populate the PI name in distributor column -->
-										<c:if test="${not empty av.stockNumber}">
+										<c:if test="${not empty av.principalInvestigator}">
 										    <a href="mailto:<c:out value="${av.principalInvestigator.emailAddress}"/>">
 										</c:if>
 										<c:out value="${av.principalInvestigator.displayName}" escapeXml="false"/>
