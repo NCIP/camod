@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SurgeryPopulateAction.java,v 1.9 2006-04-17 19:09:40 pandyas Exp $
+ * $Id: SurgeryPopulateAction.java,v 1.10 2007-10-31 18:34:29 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2006/04/17 19:09:40  pandyas
+ * caMod 2.1 OM changes
+ *
  * 
  */
 
@@ -50,9 +53,9 @@ public class SurgeryPopulateAction extends BaseAction {
 
 
 			// Set the otherName and/or the selected name attribute
-			if (ce.getEnvironmentalFactor().getNameUnctrlVocab() != null) {
+			if (ce.getEnvironmentalFactor().getNameAlternEntry() != null) {
 				surgeryForm.setName(Constants.Dropdowns.OTHER_OPTION);
-				surgeryForm.setOtherName(ce.getEnvironmentalFactor().getNameUnctrlVocab());
+				surgeryForm.setOtherName(ce.getEnvironmentalFactor().getNameAlternEntry());
 			} else {
 				surgeryForm.setName(ce.getEnvironmentalFactor().getName());
 			}
@@ -63,6 +66,11 @@ public class SurgeryPopulateAction extends BaseAction {
 			surgeryForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
             surgeryForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit());            
 			surgeryForm.setRegimen(ce.getTreatment().getRegimen());
+			
+            if (ce.getEnvironmentalFactor().getComments() != null)
+            {
+            	surgeryForm.setComments(ce.getEnvironmentalFactor().getComments());
+            } 			
 
 		}
 

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: RadiationPopulateAction.java,v 1.14 2006-11-09 17:31:03 pandyas Exp $
+ * $Id: RadiationPopulateAction.java,v 1.15 2007-10-31 18:33:41 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2006/11/09 17:31:03  pandyas
+ * Commented out debug code
+ *
  * Revision 1.13  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -69,9 +72,9 @@ public class RadiationPopulateAction extends BaseAction {
             request.setAttribute("aCarcinogenExposureID", aCarcinogenExposureID);            
 
 			// Set the otherName and/or the selected name attribute
-			if (ce.getEnvironmentalFactor().getNameUnctrlVocab() != null) {
+			if (ce.getEnvironmentalFactor().getNameAlternEntry() != null) {
 				radiationForm.setName(Constants.Dropdowns.OTHER_OPTION);
-				radiationForm.setOtherName(ce.getEnvironmentalFactor().getNameUnctrlVocab());
+				radiationForm.setOtherName(ce.getEnvironmentalFactor().getNameAlternEntry());
 			} else {
 				radiationForm.setName(ce.getEnvironmentalFactor().getName());
 			}
@@ -79,9 +82,9 @@ public class RadiationPopulateAction extends BaseAction {
 			// Set the other administrative route and/or the selected
 			// administrative
 			// route
-			if (ce.getTreatment().getAdminRouteUnctrlVocab() != null) {
+			if (ce.getTreatment().getAdminRouteAlternEntry() != null) {
 				radiationForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
-				radiationForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteUnctrlVocab());
+				radiationForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteAlternEntry());
 			} else {
 				radiationForm.setAdministrativeRoute(ce.getTreatment().getAdministrativeRoute());
 			}
@@ -94,13 +97,18 @@ public class RadiationPopulateAction extends BaseAction {
 			radiationForm.setRegimen(ce.getTreatment().getRegimen());
 			radiationForm.setAdministrativeRoute(ce.getTreatment().getAdministrativeRoute());
             
-            if (ce.getTreatment().getAdminRouteUnctrlVocab() != null) {
+            if (ce.getTreatment().getAdminRouteAlternEntry() != null) {
                 radiationForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
-                radiationForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteUnctrlVocab());
+                radiationForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteAlternEntry());
             }
             
 			radiationForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
-            radiationForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit());            
+            radiationForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit()); 
+            
+            if (ce.getEnvironmentalFactor().getComments() != null)
+            {
+            	radiationForm.setComments(ce.getEnvironmentalFactor().getComments());
+            }              
 
 		}
 
