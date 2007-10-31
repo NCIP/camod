@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SpontaneousMutationAction.java,v 1.12 2007-09-12 19:36:40 pandyas Exp $
+ * $Id: SpontaneousMutationAction.java,v 1.13 2007-10-31 17:13:01 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2007/09/12 19:36:40  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.11  2007/07/23 17:38:26  pandyas
  * Fixed typo in word occurred
  *
@@ -67,8 +70,8 @@ public class SpontaneousMutationAction extends BaseAction {
                 + spontaneousMutationForm.getZfinId()         
                 + "\n\t getObservation: "
                 + spontaneousMutationForm.getObservation() + "\n\t getMethodofObservation: "
-                + spontaneousMutationForm.getMethodOfObservation() +  "\n\t getGeneId: "                       
-                + spontaneousMutationForm.getGeneId() +  "\n\t getComments: "
+                + spontaneousMutationForm.getMethodOfObservation() +  "\n\t getGeneIdentifier: "                       
+                + spontaneousMutationForm.getGeneIdentifier() +  "\n\t getComments: "
                 + spontaneousMutationForm.getComments()
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));      
         
@@ -153,8 +156,8 @@ public class SpontaneousMutationAction extends BaseAction {
                 + spontaneousMutationForm.getZfinId()  
                 + "\n\t getObservation: " + spontaneousMutationForm.getObservation() + "\n\t getMethodofObservation: "
                 + spontaneousMutationForm.getMethodOfObservation() + "\n\t getComments: "
-                + spontaneousMutationForm.getComments()+  "\n\t getGeneId: "                       
-                + spontaneousMutationForm.getGeneId() 
+                + spontaneousMutationForm.getComments()+  "\n\t getGeneIdentifier: "                       
+                + spontaneousMutationForm.getGeneIdentifier() 
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
         try {

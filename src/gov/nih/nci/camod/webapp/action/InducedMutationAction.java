@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: InducedMutationAction.java,v 1.15 2007-09-12 19:36:40 pandyas Exp $
+ * $Id: InducedMutationAction.java,v 1.16 2007-10-31 17:11:18 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2007/09/12 19:36:40  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.14  2007/07/23 17:40:43  pandyas
  * Fixed typo in word occurred
  *
@@ -69,7 +72,7 @@ public final class InducedMutationAction extends BaseAction {
         		+ "\n\t getType: "  + inducedMutationForm.getType() 
                 + "\n\t getOtherType: " + inducedMutationForm.getOtherType()
                 + "\n\t getCasNumber: " + inducedMutationForm.getCasNumber() 
-                + "\n\t getGeneId: " + inducedMutationForm.getGeneId() + "\n\t getName: " + inducedMutationForm.getName()
+                + "\n\t getGeneIdentifier: " + inducedMutationForm.getGeneIdentifier() + "\n\t getName: " + inducedMutationForm.getName()
                 + "\n\t getDescription: " + inducedMutationForm.getDescription() 
                 + "\n\t getObservation: " + inducedMutationForm.getObservation() 
                 + "\n\t getMethodObservation: " + inducedMutationForm.getMethodOfObservation() 
@@ -158,7 +161,7 @@ public final class InducedMutationAction extends BaseAction {
         log.debug("<InducedMutationAction save> following Characteristics:" + "\n\t getType: "  + inducedMutationForm.getType() 
                 + "\n\t getOtherType: " + inducedMutationForm.getOtherType()
                 + "\n\t getCasNumber: " + inducedMutationForm.getCasNumber() 
-                + "\n\t getGeneId: " + inducedMutationForm.getGeneId() + "\n\t getName: " + inducedMutationForm.getName()
+                + "\n\t getGeneId: " + inducedMutationForm.getGeneIdentifier() + "\n\t getName: " + inducedMutationForm.getName()
                 + "\n\t getDescription: " + inducedMutationForm.getDescription() 
                 + "\n\t getObservation: " + inducedMutationForm.getObservation() 
                 + "\n\t getMethodObservation: " + inducedMutationForm.getMethodOfObservation() 

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TargetedModificationAction.java,v 1.18 2007-09-12 19:36:40 pandyas Exp $
+ * $Id: TargetedModificationAction.java,v 1.19 2007-10-31 17:13:25 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2007/09/12 19:36:40  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.17  2007/07/31 12:13:42  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -71,8 +74,8 @@ public final class TargetedModificationAction extends BaseAction {
         log.debug("<TargetedModificationAction save> following Characteristics:" + "\n\t getName: "
                 + targetedModificationForm.getName() + "\n\t getModificationType: "
                 + targetedModificationForm.getModificationType() + "\n\t getOtherModificationType: "
-                + targetedModificationForm.getOtherModificationType() + "\n\t getGeneId: "
-                + targetedModificationForm.getGeneId() + "\n\t getEsCellLineName: "
+                + targetedModificationForm.getOtherModificationType() + "\n\t getGeneIdentifier: "
+                + targetedModificationForm.getGeneIdentifier() + "\n\t getEsCellLineName: "
                 + targetedModificationForm.getEsCellLineName() + "\n\t getBlastocystName: "
                 + targetedModificationForm.getBlastocystName() + "\n\t getConditionedBy: "
                 + targetedModificationForm.getConditionedBy() + "\n\t getDescription: "
@@ -164,8 +167,8 @@ public final class TargetedModificationAction extends BaseAction {
         log.debug("<TargetedModificationAction save> following Characteristics:" + "\n\t getName: "
                 + targetedModificationForm.getName() + "\n\t getModificationType: "
                 + targetedModificationForm.getModificationType() + "\n\t getOtherModificationType: "
-                + targetedModificationForm.getOtherModificationType() + "\n\t getGeneId: "
-                + targetedModificationForm.getGeneId() + "\n\t getEsCellLineName: "
+                + targetedModificationForm.getOtherModificationType() + "\n\t getGeneIdentifier: "
+                + targetedModificationForm.getGeneIdentifier() + "\n\t getEsCellLineName: "
                 + targetedModificationForm.getEsCellLineName() + "\n\t getBlastocystName: "
                 + targetedModificationForm.getBlastocystName() + "\n\t getConditionedBy: "
                 + targetedModificationForm.getConditionedBy() + "\n\t getDescription: "
