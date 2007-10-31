@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.39 2007-09-14 18:53:37 pandyas Exp $
+ *  $Id: ViewModelAction.java,v 1.40 2007-10-31 18:39:30 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.39  2007/09/14 18:53:37  pandyas
+ *  Fixed Bug #8954:  link to invivo detail page does not work
+ *
  *  Revision 1.38  2007/09/12 19:36:40  pandyas
  *  modified debug statements for build to stage tier
  *
@@ -121,20 +124,20 @@ import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.CarcinogenExposure;
 import gov.nih.nci.camod.domain.Comments;
 import gov.nih.nci.camod.domain.EngineeredGene;
+import gov.nih.nci.camod.domain.GeneIdentifier;
 import gov.nih.nci.camod.domain.GenomicSegment;
-import gov.nih.nci.camod.domain.Graft;
+import gov.nih.nci.camod.domain.Transplantation;
 import gov.nih.nci.camod.domain.InducedMutation;
 import gov.nih.nci.camod.domain.Person;
 import gov.nih.nci.camod.domain.SpontaneousMutation;
 import gov.nih.nci.camod.domain.TargetedModification;
 import gov.nih.nci.camod.domain.Therapy;
 import gov.nih.nci.camod.domain.Transgene;
-import gov.nih.nci.camod.domain.Graft;
 import gov.nih.nci.camod.service.AgentManager;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.service.CommentsManager;
 import gov.nih.nci.camod.service.PersonManager;
-import gov.nih.nci.camod.service.GraftManager;
+import gov.nih.nci.camod.service.TransplantationManager;
 import gov.nih.nci.camod.service.impl.QueryManagerSingleton;
 import gov.nih.nci.camod.util.EvsTreeUtil;
 import gov.nih.nci.common.domain.DatabaseCrossReference;
@@ -294,16 +297,16 @@ public class ViewModelAction extends BaseAction
                 tmCnt++;
                 // now go to caBIO and query the gene object....
                 TargetedModification tm = (TargetedModification) eg;
-                String geneId = tm.getGeneId();
-                if (geneId != null)
+                GeneIdentifier geneIdentifier = tm.getGeneIdentifier();
+                if (geneIdentifier != null)
                 {
-                    log.debug("Connecting to caBIO to look up gene " + geneId);
+                    log.debug("Connecting to caBIO to look up gene " + geneIdentifier);
                     // the geneId is available
                     try
                     {
                       ApplicationService appService = EvsTreeUtil.getApplicationService();
                         DatabaseCrossReference dcr = new DatabaseCrossReferenceImpl(); 
-                        dcr.setCrossReferenceId(geneId);
+                        dcr.setCrossReferenceId(geneIdentifier.getId().toString());
 
                         dcr.setType("gov.nih.nci.cabio.domain.Gene");
                         dcr.setDataSourceName("LOCUS_LINK_ID");
@@ -320,7 +323,7 @@ public class ViewModelAction extends BaseAction
                         if (geneCount > 0)
                         {
                             myGene = (Gene) resultList.get(0);
-                            log.debug("Gene:" + geneId + " ==>" + myGene);
+                            log.debug("Gene:" + geneIdentifier + " ==>" + myGene);
                             tmGeneMap.put(tm.getId(), myGene);
                         }
                     }
@@ -390,7 +393,7 @@ public class ViewModelAction extends BaseAction
                 String theType = ce.getEnvironmentalFactor().getType();
                 if (theType == null || theType.length() == 0)
                 {
-                    theType = ce.getEnvironmentalFactor().getTypeUnctrlVocab();
+                    theType = ce.getEnvironmentalFactor().getTypeAlternEntry();
                     if (theType == null || theType.length() == 0)
                     {
                         theType = "Not specified";
@@ -548,9 +551,9 @@ public class ViewModelAction extends BaseAction
                     {
                         yeastResults.put(a.getId(), yeastStages);
                     }
-                    // now get invivo/Graft data
-                    List graftResults = QueryManagerSingleton.instance().getInvivoResults(a, true);
-                    invivoResults.put(a.getId(), graftResults);
+                    // now get invivo/Transplantation data
+                    List transplantationResults = QueryManagerSingleton.instance().getInvivoResults(a, true);
+                    invivoResults.put(a.getId(), transplantationResults);
                 }
             }
         }
@@ -708,15 +711,15 @@ public class ViewModelAction extends BaseAction
      * @return
      * @throws Exception
      */
-    public ActionForward populateGraft(ActionMapping mapping,
+    public ActionForward populateTransplantation(ActionMapping mapping,
                                                      ActionForm form,
                                                      HttpServletRequest request,
                                                      HttpServletResponse response) throws Exception
     {
         setCancerModel(request);
-        setComments(request, Constants.Pages.GRAFT);
+        setComments(request, Constants.Pages.TRANSPLANTATION);
 
-        return mapping.findForward("viewGraft");
+        return mapping.findForward("viewTransplantation");
     }
 
     /**
@@ -734,25 +737,25 @@ public class ViewModelAction extends BaseAction
      * @return
      * @throws Exception
      */
-    public ActionForward populateGraftDetails(ActionMapping mapping,
+    public ActionForward populateTransplantationDetails(ActionMapping mapping,
                                                   ActionForm form,
                                                   HttpServletRequest request,
                                                   HttpServletResponse response) throws Exception
     {
-        String modelID = request.getParameter("xModelID");
+        String modelID = request.getParameter("tModelID");
         request.getSession().setAttribute(Constants.MODELID, modelID);
         String nsc = request.getParameter("nsc");
         if (nsc != null && nsc.length() == 0)
             return mapping.findForward("viewModelCharacteristics");
-        log.debug("<populateGraftDetails> modelID:" + modelID);
-        log.debug("<populateGraftDetails> nsc:" + nsc);
-        GraftManager mgr = (GraftManager) getBean("graftManager");
+        log.debug("<populateTransplantationDetails> modelID:" + modelID);
+        log.debug("<populateTransplantationDetails> nsc:" + nsc);
+        TransplantationManager mgr = (TransplantationManager) getBean("transplantationManager");
 
-        Graft x = mgr.get(modelID);
+        Transplantation x = mgr.get(modelID);
 
-        request.getSession().setAttribute(Constants.GRAFTMODEL, x);
+        request.getSession().setAttribute(Constants.TRANSPLANTATIONMODEL, x);
         request.getSession().setAttribute(Constants.NSC_NUMBER, nsc);
-        request.getSession().setAttribute(Constants.GRAFTRESULTLIST, x.getInvivoResultCollectionByNSC(nsc));
+        request.getSession().setAttribute(Constants.TRANSPLANTATIONRESULTLIST, x.getInvivoResultCollectionByNSC(nsc));
         return mapping.findForward("viewInvivoDetails");
     }
 }
