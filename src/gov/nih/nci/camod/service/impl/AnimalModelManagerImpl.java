@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.85 2007-09-12 19:36:03 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.86 2007-10-31 18:56:38 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.85  2007/09/12 19:36:03  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.84  2007/07/31 12:02:28  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -262,7 +265,7 @@ import gov.nih.nci.camod.domain.TargetedModification;
 import gov.nih.nci.camod.domain.Therapy;
 import gov.nih.nci.camod.domain.Transgene;
 import gov.nih.nci.camod.domain.TransientInterference;
-import gov.nih.nci.camod.domain.Graft;
+import gov.nih.nci.camod.domain.Transplantation;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.util.DuplicateUtil;
 import gov.nih.nci.camod.util.MailUtil;
@@ -292,7 +295,7 @@ import gov.nih.nci.camod.webapp.form.TargetedModificationData;
 import gov.nih.nci.camod.webapp.form.TherapyData;
 import gov.nih.nci.camod.webapp.form.TransientInterferenceData;
 import gov.nih.nci.camod.webapp.form.ViralTreatmentData;
-import gov.nih.nci.camod.webapp.form.GraftData;
+import gov.nih.nci.camod.webapp.form.TransplantationData;
 import gov.nih.nci.common.persistence.Persist;
 import gov.nih.nci.common.persistence.Search;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
@@ -680,6 +683,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 				.getModelDescriptor());
 		inAnimalModel.setExperimentDesign(inModelCharacteristicsData
 				.getExperimentDesign());
+		inAnimalModel.setComments(inModelCharacteristicsData.getComments());
 
 		// Create/reuse the strain object - This method does not set strain when
 		// 'other' is selected (lookup)
@@ -689,7 +693,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 				inModelCharacteristicsData.getScientificName());
 
 		log.debug("\n theNewStrain: " + theNewStrain.getName() + ": "
-				+ theNewStrain.getNameUnctrlVocab());
+				+ theNewStrain.getNameAlternEntry());
 		// other option selected
 		if (inModelCharacteristicsData.getEthinicityStrain().equals(
 				Constants.Dropdowns.OTHER_OPTION)) {
@@ -784,22 +788,22 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 		return inAnimalModel;
 	}
 
-    public void addGraft(AnimalModel inAnimalModel,
-                             GraftData inGraftData) throws Exception
+    public void addTransplantation(AnimalModel inAnimalModel,
+    		TransplantationData inTransplantationData) throws Exception
     {
 
-        System.out.println("<AnimalModelManagerImpl populate> Entering addGraft() ");
+        System.out.println("<AnimalModelManagerImpl populate> Entering addTransplantation() ");
 
-        log.debug("Entering saveGraft");
+        log.debug("Entering saveTransplantation");
 
-        Graft theGraft = GraftManagerSingleton.instance().create(inGraftData, inAnimalModel);
+        Transplantation theTransplantation = TransplantationManagerSingleton.instance().create(inTransplantationData, inAnimalModel);
 
-        inAnimalModel.addGraft(theGraft);
+        inAnimalModel.addTransplantation(theTransplantation);
         save(inAnimalModel);
 
-        System.out.println("<AnimalModelManagerImpl populate> Exiting addGraft() ");
+        System.out.println("<AnimalModelManagerImpl populate> Exiting addTransplantation() ");
 
-        log.debug("Exiting saveGraft");
+        log.debug("Exiting saveTransplantation");
     }
 
     /**
