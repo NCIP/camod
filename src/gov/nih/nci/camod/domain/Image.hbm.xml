@@ -40,6 +40,11 @@
         	column="url" 
         	type="string"/>
         	
+        <!-- comments -->
+        <property name="comments" 
+        	column="comments" 
+        	type="string"/>	        	
+        	
         <!-- stainingMethod (many-to-one unidirectional) -->
         <many-to-one
         	name="stainingMethod"

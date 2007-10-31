@@ -1,7 +1,10 @@
 /*
- * $Id: Publication.java,v 1.11 2007-05-07 16:51:17 pandyas Exp $
+ * $Id: Publication.java,v 1.12 2007-10-31 15:54:46 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2007/05/07 16:51:17  pandyas
+ * Added zfinPubId to object and mapping for pulications from zfin.org
+ *
  * Revision 1.10  2006/04/19 17:37:37  pandyas
  * Removed TODO text
  *
@@ -34,6 +37,7 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
     private String jaxJNumber;
     private String zfinPubId;    
     private PublicationStatus publicationStatus;
+    private String comments;
 
     
     /**
@@ -223,6 +227,23 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
     {
         this.jaxJNumber = jaxJNumber;
     }
+    
+    /**
+     * @return Returns the comments. Comment is a reserved word so 
+     * we must use the plural form comments.
+     */
+    public String getComments() {
+        return comments;
+    }
+
+    /**
+     * @param comments
+     *            The comments to set.
+     */
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+    
     /**
      * @see java.lang.Object#toString()
      */

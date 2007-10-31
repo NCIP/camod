@@ -79,6 +79,11 @@
         <property name="zfinPubId" 
         	column="zfin_pub_id" 
         	type="string"/> 
+        	
+        <!-- comments -->
+        <property name="comments" 
+        	column="comments" 
+        	type="string"/>	        	
         	        	
         <!-- publicationStatus (many-to-one unidirectional) -->
         <many-to-one

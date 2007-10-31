@@ -37,6 +37,11 @@
         	column="exp_level_desc_id"
         	class="ExpressionLevelDesc"/>
         	
+        <!-- comments -->
+        <property name="comments" 
+        	column="comments" 
+        	type="string"/>	        	
+        	
       	
 	</class>
 </hibernate-mapping>

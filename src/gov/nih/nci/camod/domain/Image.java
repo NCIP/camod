@@ -1,8 +1,11 @@
 /*
  * 
- * $Id: Image.java,v 1.12 2007-07-31 12:03:28 pandyas Exp $
+ * $Id: Image.java,v 1.13 2007-10-31 15:54:19 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2007/07/31 12:03:28  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.11  2006/08/17 18:36:34  pandyas
  * Defect# 410: Externalize properties files - Code changes to get properties
  *
@@ -49,6 +52,8 @@ public class Image extends BaseObject implements Comparable, Serializable, Dupli
     private String url;
 
     private StainingMethod stainingMethod;
+    
+    private String comments;    
 
     private AbstractCancerModel cancerModel;
 
@@ -103,6 +108,22 @@ public class Image extends BaseObject implements Comparable, Serializable, Dupli
     {
         this.stainingMethod = stainingMethod;
     }
+    
+    /**
+     * @return Returns the comments. Comment is a reserved word so 
+     * we must use the plural form comments.
+     */
+    public String getComments() {
+        return comments;
+    }
+
+    /**
+     * @param comments
+     *            The comments to set.
+     */
+    public void setComments(String comments) {
+        this.comments = comments;
+    }    
 
     /**
      * @return Returns the cancerModel.
