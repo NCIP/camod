@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: PublicationPopulateAction.java,v 1.15 2007-05-07 16:52:08 pandyas Exp $
+ * $Id: PublicationPopulateAction.java,v 1.16 2007-10-31 18:32:44 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2007/05/07 16:52:08  pandyas
+ * Added code to save, edit and populate zfinPubId from Publication object for pulications from zfin.org
+ *
  * Revision 1.14  2006/04/17 19:09:41  pandyas
  * caMod 2.1 OM changes
  *
@@ -74,6 +77,10 @@ public class PublicationPopulateAction extends BaseAction {
 			if (thePublication.getEndPage() != null) {
 				pubForm.setEndPage(thePublication.getEndPage().toString());
 			}
+			
+			if (thePublication.getComments() != null && thePublication.getComments().length() >0) {
+				pubForm.setComments(thePublication.getComments());
+			}			
 			// Populate either the JNumber or zfin id - only one is inserted during submission
             if (thePublication.getJaxJNumber() != null) {
                 pubForm.setJaxJNumber(thePublication.getJaxJNumber());
