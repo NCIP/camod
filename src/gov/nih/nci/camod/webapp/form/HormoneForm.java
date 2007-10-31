@@ -2,9 +2,12 @@
  *
  * @author pandyas
  * 
- * $Id: HormoneForm.java,v 1.7 2006-04-17 19:09:19 pandyas Exp $
+ * $Id: HormoneForm.java,v 1.8 2007-10-31 17:23:23 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2006/04/17 19:09:19  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.6  2005/10/20 20:34:30  pandyas
  * added javadocs
  *
@@ -32,6 +35,7 @@ public class HormoneForm extends BaseForm implements Serializable, HormoneData {
     protected String ageAtTreatment;
     protected String ageAtTreatmentUnit;
     protected String type;	
+	protected String comments;    
 	
 	public String getDosageUnit() {
 		return dosageUnit;
@@ -159,6 +163,14 @@ public class HormoneForm extends BaseForm implements Serializable, HormoneData {
      */
     public void setType(String type) {
         this.type = type;
-    }    
+    }
+
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
+	}    
 
 }

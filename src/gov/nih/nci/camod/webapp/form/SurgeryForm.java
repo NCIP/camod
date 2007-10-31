@@ -1,7 +1,10 @@
 /*
- * $Id: SurgeryForm.java,v 1.5 2006-04-17 19:09:19 pandyas Exp $
+ * $Id: SurgeryForm.java,v 1.6 2007-10-31 17:25:39 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/04/17 19:09:19  pandyas
+ * caMod 2.1 OM changes
+ *
  */
 package gov.nih.nci.camod.webapp.form;
 
@@ -10,9 +13,12 @@ import java.io.Serializable;
 /**
  * @author pandyas
  * 
- * $Id: SurgeryForm.java,v 1.5 2006-04-17 19:09:19 pandyas Exp $
+ * $Id: SurgeryForm.java,v 1.6 2007-10-31 17:25:39 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/04/17 19:09:19  pandyas
+ * caMod 2.1 OM changes
+ *
  * 
  */
 public class SurgeryForm extends BaseForm implements Serializable, SurgeryData {
@@ -31,6 +37,7 @@ public class SurgeryForm extends BaseForm implements Serializable, SurgeryData {
     protected String ageAtTreatment;
     protected String ageAtTreatmentUnit;    
     protected String type;
+	protected String comments;    
 
 
     public String getAgeAtTreatmentUnit() {
@@ -115,4 +122,18 @@ public class SurgeryForm extends BaseForm implements Serializable, SurgeryData {
     public void setType(String type) {
         this.type = type;
     }
+
+	/**
+	 * @return the comments
+	 */
+	public String getComments() {
+		return comments;
+	}
+
+	/**
+	 * @param comments the comments to set
+	 */
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
 }

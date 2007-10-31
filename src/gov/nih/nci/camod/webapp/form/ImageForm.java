@@ -1,7 +1,10 @@
 /*
- * $Id: ImageForm.java,v 1.11 2007-07-31 12:02:02 pandyas Exp $
+ * $Id: ImageForm.java,v 1.12 2007-10-31 17:24:03 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2007/07/31 12:02:02  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.10  2007/04/20 17:51:03  pandyas
  * Modified to add Staining Method tree to Image submission
  *
@@ -14,9 +17,12 @@
  */
 package gov.nih.nci.camod.webapp.form;
 /**
- * $Id: ImageForm.java,v 1.11 2007-07-31 12:02:02 pandyas Exp $
+ * $Id: ImageForm.java,v 1.12 2007-10-31 17:24:03 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2007/07/31 12:02:02  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.10  2007/04/20 17:51:03  pandyas
  * Modified to add Staining Method tree to Image submission
  *
@@ -50,6 +56,7 @@ public class ImageForm extends BaseForm implements Serializable, ImageData {
     protected String imageId;
     protected String imageUrl;
     protected String thumbUrl;
+	protected String comments;
 
     public String getDescription() {
         return description;
@@ -172,4 +179,20 @@ public class ImageForm extends BaseForm implements Serializable, ImageData {
 	public void setUrl(String url) {
 		this.url = url;
 	}
+
+	/**
+	 * @return the comments
+	 */
+	public String getComments() {
+		return comments;
+	}
+
+	/**
+	 * @param comments the comments to set
+	 */
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
+
 }

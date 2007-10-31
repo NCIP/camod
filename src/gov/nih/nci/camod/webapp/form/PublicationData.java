@@ -1,7 +1,10 @@
 /*
- * $Id: PublicationData.java,v 1.4 2007-05-07 16:52:08 pandyas Exp $
+ * $Id: PublicationData.java,v 1.5 2007-10-31 17:29:04 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2007/05/07 16:52:08  pandyas
+ * Added code to save, edit and populate zfinPubId from Publication object for pulications from zfin.org
+ *
  * Revision 1.3  2006/04/17 19:09:19  pandyas
  * caMod 2.1 OM changes
  *
@@ -82,5 +85,9 @@ public interface PublicationData
     
 	public String getZfinPubId(); 
 
-	public void setZfinPubId(String zfinPubId);    
+	public void setZfinPubId(String zfinPubId); 
+	
+	public String getComments();
+
+	public void setComments(String comments);	
 }

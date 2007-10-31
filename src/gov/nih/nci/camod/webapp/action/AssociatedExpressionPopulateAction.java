@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AssociatedExpressionPopulateAction.java,v 1.11 2007-09-12 19:36:40 pandyas Exp $
+ * $Id: AssociatedExpressionPopulateAction.java,v 1.12 2007-10-31 17:31:14 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2007/09/12 19:36:40  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.10  2007/06/26 16:14:58  pandyas
  * Fixed save when organ cleared from text entry and by use of the clear button for trees
  *
@@ -70,6 +73,10 @@ public class AssociatedExpressionPopulateAction extends BaseAction {
             if (request.getParameter("aEngineeredTransgeneID") != null) {
                 request.setAttribute("aEngineeredTransgeneID", request.getParameter("aEngineeredTransgeneID"));
             }
+            
+            if(theExpressionFeature.getComments() != null){
+            	associatedExpressionForm.setComments(theExpressionFeature.getComments());
+            }
 
             ExpressionLevelDesc expLevelDesc = theExpressionFeature.getExpressionLevelDesc();
             Organ organ = theExpressionFeature.getOrgan();
@@ -90,6 +97,8 @@ public class AssociatedExpressionPopulateAction extends BaseAction {
             //associatedExpressionForm.setOrganTissueName(organ.getEVSPreferredDescription());
             associatedExpressionForm.setOrganTissueName(organ.getName());
             }
+            
+        
         }
 
         // setup dropdown menus

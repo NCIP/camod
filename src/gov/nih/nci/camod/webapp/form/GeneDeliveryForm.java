@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GeneDeliveryForm.java,v 1.12 2006-04-17 19:09:19 pandyas Exp $
+ * $Id: GeneDeliveryForm.java,v 1.13 2007-10-31 17:22:45 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2006/04/17 19:09:19  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.11  2005/10/20 20:22:54  pandyas
  * added javadocs
  *
@@ -33,6 +36,7 @@ public class GeneDeliveryForm extends BaseForm implements Serializable, GeneDeli
 	protected String organ;
 	protected String organTissueName;
 	protected String organTissueCode;
+	protected String comments;
 
 	
 	/**
@@ -146,6 +150,12 @@ public class GeneDeliveryForm extends BaseForm implements Serializable, GeneDeli
 	
 	public void setOrganTissueCode( String organTissueCode ) {
 		this.organTissueCode = organTissueCode;
+	}
+	public String getComments() {
+		return comments;
+	}
+	public void setComments(String comments) {
+		this.comments = comments;
 	}
 	
 

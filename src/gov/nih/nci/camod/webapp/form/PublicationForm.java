@@ -1,7 +1,10 @@
 /*
- * $Id: PublicationForm.java,v 1.10 2007-05-17 17:58:04 pandyas Exp $
+ * $Id: PublicationForm.java,v 1.11 2007-10-31 17:25:02 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2007/05/17 17:58:04  pandyas
+ * Updated reset method in form to include new attrubutes
+ *
  * Revision 1.9  2007/05/07 16:52:07  pandyas
  * Added code to save, edit and populate zfinPubId from Publication object for pulications from zfin.org
  *
@@ -19,9 +22,12 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  * 
- * $Id: PublicationForm.java,v 1.10 2007-05-17 17:58:04 pandyas Exp $
+ * $Id: PublicationForm.java,v 1.11 2007-10-31 17:25:02 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2007/05/17 17:58:04  pandyas
+ * Updated reset method in form to include new attrubutes
+ *
  * Revision 1.9  2007/05/07 16:52:07  pandyas
  * Added code to save, edit and populate zfinPubId from Publication object for pulications from zfin.org
  *
@@ -57,6 +63,7 @@ public class PublicationForm extends BaseForm implements PublicationData, Serial
     protected String aPubID;
     protected String aCellID;
     protected String aTherapyID;
+	protected String comments;
 
 
     /**
@@ -289,5 +296,13 @@ public class PublicationForm extends BaseForm implements PublicationData, Serial
 
 	public void setZfinPubId(String zfinPubId) {
 		this.zfinPubId = zfinPubId;
+	}
+
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
 	}
 }

@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: ClinicalMarkerForm.java,v 1.7 2006-04-17 19:09:19 pandyas Exp $
+ * $Id: ClinicalMarkerForm.java,v 1.8 2007-10-31 17:22:07 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2006/04/17 19:09:19  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.6  2005/11/07 19:13:54  pandyas
  * modified for clinical marker screen
  *
@@ -40,6 +43,7 @@ public class ClinicalMarkerForm extends BaseForm implements Serializable, Clinic
     protected String name;
     protected String otherName;
     protected String value;
+	protected String comments;
 
 
     /**
@@ -107,4 +111,20 @@ public class ClinicalMarkerForm extends BaseForm implements Serializable, Clinic
     {
         this.value = value;
     }
+
+	/**
+	 * @return the comments
+	 */
+	public String getComments() {
+		return comments;
+	}
+
+	/**
+	 * @param comments the comments to set
+	 */
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
+
 }

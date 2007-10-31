@@ -1,8 +1,11 @@
 /**
  *
- * $Id: ChemicalDrugForm.java,v 1.7 2006-05-23 16:58:52 pandyas Exp $
+ * $Id: ChemicalDrugForm.java,v 1.8 2007-10-31 17:21:43 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2006/05/23 16:58:52  pandyas
+ * fixed save of ageOfTreatmentUntis
+ *
  * Revision 1.6  2006/04/17 19:09:19  pandyas
  * caMod 2.1 OM changes
  *
@@ -40,6 +43,7 @@ public class ChemicalDrugForm extends BaseForm implements Serializable, Chemical
     protected String ageAtTreatment;
     protected String ageAtTreatmentUnit;    
     protected String type;
+	protected String comments;    
 
     
     /**
@@ -213,5 +217,19 @@ public class ChemicalDrugForm extends BaseForm implements Serializable, Chemical
     public void setType(String type) {
         this.type = type;
     }
+
+	/**
+	 * @return the comments
+	 */
+	public String getComments() {
+		return comments;
+	}
+
+	/**
+	 * @param comments the comments to set
+	 */
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
 
 }

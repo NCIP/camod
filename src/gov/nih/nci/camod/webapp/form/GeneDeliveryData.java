@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: GeneDeliveryData.java,v 1.3 2005-10-20 20:02:59 pandyas Exp $
+ * $Id: GeneDeliveryData.java,v 1.4 2007-10-31 17:27:53 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2005/10/20 20:02:59  pandyas
+ * EVSTree (organ) functions properly
+ *
  * Revision 1.2  2005/10/19 18:07:56  pandyas
  * added age and gender to genedelivery
  *
@@ -43,6 +46,10 @@ public interface GeneDeliveryData  extends TreatmentData, AgeGenderData {
 	public void setOrganTissueName( String organTissueName );
 	
 	public String getOrganTissueCode();
+	
+	public String getComments();
+	
+	public void setComments(String comments); 	
 	
 	public void setOrganTissueCode( String organTissueCode );	
     

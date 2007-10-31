@@ -2,9 +2,12 @@
  *
  * @author pandyas
  * 
- * $Id: ViralTreatmentForm.java,v 1.6 2006-04-17 19:09:19 pandyas Exp $
+ * $Id: ViralTreatmentForm.java,v 1.7 2007-10-31 17:26:00 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2006/04/17 19:09:19  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.5  2005/10/20 20:36:15  pandyas
  * added javadocs
  *
@@ -33,6 +36,7 @@ public class ViralTreatmentForm extends BaseForm implements Serializable, ViralT
 	protected String ageAtTreatment;
     protected String ageAtTreatmentUnit;    
 	protected String type;
+	protected String comments;	
 
 	
 	public String getAgeAtTreatmentUnit() {
@@ -146,5 +150,19 @@ public class ViralTreatmentForm extends BaseForm implements Serializable, ViralT
 	 */
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	/**
+	 * @return the comments
+	 */
+	public String getComments() {
+		return comments;
+	}
+
+	/**
+	 * @param comments the comments to set
+	 */
+	public void setComments(String comments) {
+		this.comments = comments;
 	}
 }

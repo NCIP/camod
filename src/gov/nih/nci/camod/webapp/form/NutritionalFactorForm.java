@@ -2,9 +2,12 @@
  *
  * @author pandyas
  * 
- * $Id: NutritionalFactorForm.java,v 1.6 2006-04-17 19:09:19 pandyas Exp $
+ * $Id: NutritionalFactorForm.java,v 1.7 2007-10-31 17:24:45 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2006/04/17 19:09:19  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.5  2005/10/20 20:34:59  pandyas
  * added javadocs
  *
@@ -34,6 +37,7 @@ public class NutritionalFactorForm extends BaseForm implements Serializable, Nut
     protected String ageAtTreatment;
     protected String ageAtTreatmentUnit;
     protected String type;
+	protected String comments;    
 
 
     public String getAgeAtTreatmentUnit()
@@ -157,4 +161,18 @@ public class NutritionalFactorForm extends BaseForm implements Serializable, Nut
     {
         this.type = type;
     }
+
+	/**
+	 * @return the comments
+	 */
+	public String getComments() {
+		return comments;
+	}
+
+	/**
+	 * @param comments the comments to set
+	 */
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
 }

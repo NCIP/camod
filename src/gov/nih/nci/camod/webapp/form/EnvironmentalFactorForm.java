@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: EnvironmentalFactorForm.java,v 1.9 2006-04-17 19:09:19 pandyas Exp $
+ * $Id: EnvironmentalFactorForm.java,v 1.10 2007-10-31 17:22:25 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2006/04/17 19:09:19  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.8  2005/10/20 20:33:24  pandyas
  * javadocs
  *
@@ -36,6 +39,7 @@ public class EnvironmentalFactorForm extends BaseForm implements Serializable, E
     protected String ageAtTreatment;
     protected String ageAtTreatmentUnit;
     protected String type;
+	protected String comments;    
 
     /**
      * @return Returns the name.
@@ -186,4 +190,20 @@ public class EnvironmentalFactorForm extends BaseForm implements Serializable, E
     public void setType(String type) {
         this.type = type;
     }
+
+	/**
+	 * @return the comments
+	 */
+	public String getComments() {
+		return comments;
+	}
+
+	/**
+	 * @param comments the comments to set
+	 */
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
+
 }

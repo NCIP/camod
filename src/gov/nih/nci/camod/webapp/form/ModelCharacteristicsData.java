@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: ModelCharacteristicsData.java,v 1.6 2007-03-26 12:03:10 pandyas Exp $
+ *  $Id: ModelCharacteristicsData.java,v 1.7 2007-10-31 17:28:41 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.6  2007/03/26 12:03:10  pandyas
+ *  caMOd 2.3 enhancements for Zebrafish support
+ *
  *  Revision 1.5  2006/10/17 16:10:47  pandyas
  *  modified during development of caMOD 2.2 - various
  *
@@ -111,6 +114,10 @@ public interface ModelCharacteristicsData {
 	public String getDevelopmentalStage();
 	
 	public void setDevelopmentalStage(String developmentalStage);
+	
+	public String getComments();
+	
+	public void setComments(String comments);	
 	    
 
 }

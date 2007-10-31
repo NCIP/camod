@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AssociatedExpressionData.java,v 1.2 2006-04-17 19:09:19 pandyas Exp $
+ * $Id: AssociatedExpressionData.java,v 1.3 2007-10-31 17:27:03 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2006/04/17 19:09:19  pandyas
+ * caMod 2.1 OM changes
+ *
  * 
  */
 
@@ -34,5 +37,9 @@ public interface AssociatedExpressionData {
 	public String getOrganTissueName();
 	
 	public void setOrganTissueName(String organTissueName);
+	
+	public String getComments();
+	
+	public void setComments(String comments);	
 	
 }

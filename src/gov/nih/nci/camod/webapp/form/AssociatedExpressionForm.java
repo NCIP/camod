@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AssociatedExpressionForm.java,v 1.5 2006-04-17 19:09:19 pandyas Exp $
+ * $Id: AssociatedExpressionForm.java,v 1.6 2007-10-31 17:21:21 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/04/17 19:09:19  pandyas
+ * caMod 2.1 OM changes
+ *
  * 
  */
 
@@ -29,6 +32,7 @@ public class AssociatedExpressionForm extends BaseForm implements Serializable, 
 	protected String organ;
 	protected String organTissueName;
 	protected String organTissueCode;
+	protected String comments;	
 	
 	public String getEngineeredGeneID() {
 		return engineeredGeneID;
@@ -77,5 +81,11 @@ public class AssociatedExpressionForm extends BaseForm implements Serializable, 
 	}
 	public void setOrganTissueName(String organTissueName) {
 		this.organTissueName = organTissueName;
+	}
+	public String getComments() {
+		return comments;
+	}
+	public void setComments(String comments) {
+		this.comments = comments;
 	}	
 }

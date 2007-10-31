@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ModelCharacteristicsForm.java,v 1.10 2007-03-26 12:03:10 pandyas Exp $
+ * $Id: ModelCharacteristicsForm.java,v 1.11 2007-10-31 17:24:29 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2007/03/26 12:03:10  pandyas
+ * caMOd 2.3 enhancements for Zebrafish support
+ *
  * Revision 1.9  2006/10/17 16:10:47  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -58,6 +61,7 @@ public class ModelCharacteristicsForm extends BaseForm implements ModelCharacter
     protected String genotype;
     protected String nomenclature;
     protected String developmentalStage;
+	protected String comments;    
 
 
     public ModelCharacteristicsForm() {
@@ -213,5 +217,13 @@ public class ModelCharacteristicsForm extends BaseForm implements ModelCharacter
 
 	public void setDevelopmentalStage(String developmentalStage) {
 		this.developmentalStage = developmentalStage;
+	}
+
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
 	}     
 }

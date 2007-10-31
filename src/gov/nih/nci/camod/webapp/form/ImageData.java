@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ImageData.java,v 1.7 2007-07-31 12:01:41 pandyas Exp $
+ * $Id: ImageData.java,v 1.8 2007-10-31 17:28:21 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2007/07/31 12:01:41  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.6  2007/04/20 17:51:04  pandyas
  * Modified to add Staining Method tree to Image submission
  *
@@ -66,5 +69,9 @@ public interface ImageData
     public String getStainingMethodName();
 
     public void setStainingMethodName(String stainingMethodName);
+    
+	public String getComments(); 
+
+	public void setComments(String comments);
 
 }
