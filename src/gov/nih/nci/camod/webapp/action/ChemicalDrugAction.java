@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ChemicalDrugAction.java,v 1.18 2007-09-12 19:36:40 pandyas Exp $
+ * $Id: ChemicalDrugAction.java,v 1.19 2007-10-31 17:09:11 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2007/09/12 19:36:40  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.17  2006/11/09 17:24:18  pandyas
  * Commented out debug code
  *
@@ -83,6 +86,7 @@ public class ChemicalDrugAction extends BaseAction {
 				+ "\n\t regimen: " + chemicalDrugForm.getRegimen() + "\n\t dosage: " + chemicalDrugForm.getDosage()
 				+ "\n\t dosageUnit: " + chemicalDrugForm.getDosageUnit() + "\n\t ageAtTreatment: "
 				+ chemicalDrugForm.getAgeAtTreatment() + "\n\t ageAtTreatmentUnit: " + chemicalDrugForm.getAgeAtTreatmentUnit()
+				+ "\n\t Comments: " + chemicalDrugForm.getComments()
 				+ "\n\t administrativeRoute: " + chemicalDrugForm.getAdministrativeRoute());
 
         CarcinogenExposureManager carcinogenExposureManager = (CarcinogenExposureManager) getBean("carcinogenExposureManager");
@@ -149,7 +153,8 @@ public class ChemicalDrugAction extends BaseAction {
 				+ "\n\t dosageUnit: " + chemicalDrugForm.getDosageUnit() 
 				+ "\n\t ageAtTreatment: " + chemicalDrugForm.getAgeAtTreatment() 
                 + "\n\t getAgeAtTreatmentUnit: " + chemicalDrugForm.getAgeAtTreatmentUnit()
-                + "\n\t nscNumber: " + chemicalDrugForm.getNscNumber() + "\n\t CasNumber: "
+                + "\n\t nscNumber: " + chemicalDrugForm.getNscNumber() 
+                + "\n\t Comments: " + chemicalDrugForm.getComments()+ "\n\t CasNumber: "
 				+ chemicalDrugForm.getCasNumber());
 
         /* Grab the current modelID from the session */
