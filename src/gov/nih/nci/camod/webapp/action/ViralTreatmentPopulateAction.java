@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ViralTreatmentPopulateAction.java,v 1.13 2006-11-09 17:32:48 pandyas Exp $
+ * $Id: ViralTreatmentPopulateAction.java,v 1.14 2007-10-31 18:40:16 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2006/11/09 17:32:48  pandyas
+ * Commented out debug code
+ *
  * Revision 1.12  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -66,9 +69,9 @@ public class ViralTreatmentPopulateAction extends BaseAction {
             request.setAttribute("aCarcinogenExposureID", aCarcinogenExposureID);
 
 			// Set the otherName and/or the selected name attribute
-			if (ce.getEnvironmentalFactor().getNameUnctrlVocab() != null) {
+			if (ce.getEnvironmentalFactor().getNameAlternEntry() != null) {
 				viralTreatmentForm.setName(Constants.Dropdowns.OTHER_OPTION);
-				viralTreatmentForm.setOtherName(ce.getEnvironmentalFactor().getNameUnctrlVocab());
+				viralTreatmentForm.setOtherName(ce.getEnvironmentalFactor().getNameAlternEntry());
 			} else {
 				viralTreatmentForm.setName(ce.getEnvironmentalFactor().getName());
 			}
@@ -84,10 +87,15 @@ public class ViralTreatmentPopulateAction extends BaseAction {
 			viralTreatmentForm.setRegimen(ce.getTreatment().getRegimen());
 			viralTreatmentForm.setAdministrativeRoute(ce.getTreatment().getAdministrativeRoute());
 
-            if (ce.getTreatment().getAdminRouteUnctrlVocab() != null) {
+            if (ce.getTreatment().getAdminRouteAlternEntry() != null) {
                 viralTreatmentForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
-                viralTreatmentForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteUnctrlVocab());
+                viralTreatmentForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteAlternEntry());
             }
+            
+            if (ce.getEnvironmentalFactor().getComments() != null)
+            {
+            	viralTreatmentForm.setComments(ce.getEnvironmentalFactor().getComments());
+            }             
 		}
 
 		// Prepopulate all dropdown fields, set the global Constants to the
