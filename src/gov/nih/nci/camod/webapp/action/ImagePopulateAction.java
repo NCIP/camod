@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ImagePopulateAction.java,v 1.21 2007-09-12 19:36:40 pandyas Exp $
+ * $Id: ImagePopulateAction.java,v 1.22 2007-10-31 17:11:43 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.21  2007/09/12 19:36:40  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.20  2007/07/31 12:02:55  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -63,7 +66,7 @@ public class ImagePopulateAction extends BaseAction {
 			request.setAttribute(Constants.Parameters.DELETED, "true");
 		} else {
 			imageForm.setImageId(aImageID);
-
+		
 			if (theImage != null) {
 				imageForm.setTitle(theImage.getTitle());
 				imageForm.setUrl(theImage.getUrl());
@@ -76,8 +79,8 @@ public class ImagePopulateAction extends BaseAction {
 				if( theImage.getStainingMethod() != null )
                 {
 					// Older models have uncontrolled vocab with concept code = null
-					if(theImage.getStainingMethod().getNameUnctrlVocab() != null){
-	                    imageForm.setStainingMethod(theImage.getStainingMethod().getNameUnctrlVocab());                    
+					if(theImage.getStainingMethod().getNameAlternEntry() != null){
+	                    imageForm.setStainingMethod(theImage.getStainingMethod().getNameAlternEntry());                    
 					} else {
 	                    // since we are always querying from concept code (save and edit),
 	                    // simply display EVSPreferredDescription
@@ -91,6 +94,10 @@ public class ImagePopulateAction extends BaseAction {
                 
                 imageForm.setThumbUrl(theImage.getThumbUrl());
                 imageForm.setImageUrl(theImage.getImageUrl());
+                
+                if(theImage.getComments() != null && theImage.getComments().length() >0){
+                	imageForm.setComments(theImage.getComments());
+                }
 			}
 		}
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STAININGDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
