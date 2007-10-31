@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: InducedMutationData.java,v 1.5 2007-04-04 13:23:37 pandyas Exp $
+ * $Id: InducedMutationData.java,v 1.6 2007-10-31 17:57:26 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2007/04/04 13:23:37  pandyas
+ * modified names for mutation identifier fields (number changed to id)
+ *
  * Revision 1.4  2007/03/26 12:03:10  pandyas
  * caMOd 2.3 enhancements for Zebrafish support
  *
@@ -29,9 +32,9 @@ public interface InducedMutationData {
 	
 	public void setCasNumber(String casNumber);
 	
-	public String getGeneId();
+	public String getGeneIdentifier();
 	
-	public void setGeneId(String geneId);
+	public void setGeneIdentifier(String geneIdentifier);
 	
 	public String getName();
 	

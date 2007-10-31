@@ -1,7 +1,10 @@
 /*
- * $Id: InducedMutationForm.java,v 1.9 2007-04-04 13:23:37 pandyas Exp $
+ * $Id: InducedMutationForm.java,v 1.10 2007-10-31 18:01:31 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2007/04/04 13:23:37  pandyas
+ * modified names for mutation identifier fields (number changed to id)
+ *
  * Revision 1.8  2007/03/26 12:03:10  pandyas
  * caMOd 2.3 enhancements for Zebrafish support
  *
@@ -26,7 +29,7 @@ public class InducedMutationForm extends BaseForm implements Serializable, Induc
 	protected String type;
 	protected String otherType;
 	protected String casNumber;
-	protected String geneId;
+	protected String geneIdentifier;
 	protected String name;
 	protected String description;
 	protected String observation;
@@ -72,18 +75,7 @@ public class InducedMutationForm extends BaseForm implements Serializable, Induc
 	public void setCasNumber(String casNumber) {
 		this.casNumber = casNumber;
 	}	
-	/**
-	 * @return Returns the geneId.
-	 */
-	public String getGeneId() {
-		return geneId;
-	}
-	/**
-	 * @param geneId The geneId to set.
-	 */
-	public void setGeneId(String geneId) {
-		this.geneId = geneId;
-	}	
+	
 	/**
 	 * @return Returns the name.
 	 */
@@ -164,5 +156,17 @@ public class InducedMutationForm extends BaseForm implements Serializable, Induc
 	}
 	public void setZfinId(String zfinId) {
 		this.zfinId = zfinId;
+	}
+	/**
+	 * @return the geneIdentifier
+	 */
+	public String getGeneIdentifier() {
+		return geneIdentifier;
+	}
+	/**
+	 * @param geneIdentifier the geneIdentifier to set
+	 */
+	public void setGeneIdentifier(String geneIdentifier) {
+		this.geneIdentifier = geneIdentifier;
 	}	
 }

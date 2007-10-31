@@ -1,7 +1,10 @@
 /*
- * $Id: TargetedModificationForm.java,v 1.14 2007-07-31 12:02:03 pandyas Exp $
+ * $Id: TargetedModificationForm.java,v 1.15 2007-10-31 18:01:31 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2007/07/31 12:02:03  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.13  2007/04/04 13:23:37  pandyas
  * modified names for mutation identifier fields (number changed to id)
  *
@@ -20,9 +23,12 @@ import org.apache.struts.upload.FormFile;
 
 /**
  * 
- * $Id: TargetedModificationForm.java,v 1.14 2007-07-31 12:02:03 pandyas Exp $
+ * $Id: TargetedModificationForm.java,v 1.15 2007-10-31 18:01:31 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2007/07/31 12:02:03  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.13  2007/04/04 13:23:37  pandyas
  * modified names for mutation identifier fields (number changed to id)
  *
@@ -42,7 +48,7 @@ public class TargetedModificationForm extends BaseForm implements Serializable, 
     protected String name;
     protected String[] modificationType;
     protected String otherModificationType;
-    protected String geneId;
+	protected String geneIdentifier;
     protected String esCellLineName;
     protected String blastocystName;
     protected String conditionedBy;
@@ -106,22 +112,6 @@ public class TargetedModificationForm extends BaseForm implements Serializable, 
     public void setOtherModificationType(String otherModificationType)
     {
         this.otherModificationType = otherModificationType;
-    }
-
-    /**
-     * @return Returns the geneId.
-     */
-    public String getGeneId()
-    {
-        return geneId;
-    }
-
-    /**
-     * @param geneId The geneId to set.
-     */
-    public void setGeneId(String geneId)
-    {
-        this.geneId = geneId;
     }
 
     /**
@@ -310,5 +300,19 @@ public class TargetedModificationForm extends BaseForm implements Serializable, 
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	/**
+	 * @return the geneIdentifier
+	 */
+	public String getGeneIdentifier() {
+		return geneIdentifier;
+	}
+
+	/**
+	 * @param geneIdentifier the geneIdentifier to set
+	 */
+	public void setGeneIdentifier(String geneIdentifier) {
+		this.geneIdentifier = geneIdentifier;
 	}
 }

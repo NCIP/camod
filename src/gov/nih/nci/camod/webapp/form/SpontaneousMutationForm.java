@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SpontaneousMutationForm.java,v 1.7 2007-04-04 13:23:37 pandyas Exp $
+ * $Id: SpontaneousMutationForm.java,v 1.8 2007-10-31 18:01:31 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2007/04/04 13:23:37  pandyas
+ * modified names for mutation identifier fields (number changed to id)
+ *
  * Revision 1.6  2007/03/26 12:03:10  pandyas
  * caMOd 2.3 enhancements for Zebrafish support
  *
@@ -36,7 +39,7 @@ public class SpontaneousMutationForm extends BaseForm implements Serializable, S
     protected String comments;
     protected String observation;
     protected String methodOfObservation;
-    protected String geneId;
+	protected String geneIdentifier;
 
     /**
      * @return Returns the name.
@@ -102,22 +105,6 @@ public class SpontaneousMutationForm extends BaseForm implements Serializable, S
         this.methodOfObservation = methodOfObservation;
     }
 
-    /**
-     * @return Returns the geneId.
-     */
-    public String getGeneId()
-    {
-        return geneId;
-    }
-
-    /**
-     * @param geneId The geneId to set.
-     */
-    public void setGeneId(String geneId)
-    {
-        this.geneId = geneId;
-    }
-
 	public String getMgiId() {
 		return mgiId;
 	}
@@ -140,5 +127,19 @@ public class SpontaneousMutationForm extends BaseForm implements Serializable, S
 
 	public void setZfinId(String zfinId) {
 		this.zfinId = zfinId;
+	}
+
+	/**
+	 * @return the geneIdentifier
+	 */
+	public String getGeneIdentifier() {
+		return geneIdentifier;
+	}
+
+	/**
+	 * @param geneIdentifier the geneIdentifier to set
+	 */
+	public void setGeneIdentifier(String geneIdentifier) {
+		this.geneIdentifier = geneIdentifier;
 	}
 }
