@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: DrugScreenSearchAction.java,v 1.11 2007-09-12 19:36:40 pandyas Exp $
+ * $Id: DrugScreenSearchAction.java,v 1.12 2007-10-31 18:42:56 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2007/09/12 19:36:40  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.10  2007/08/07 18:28:24  pandyas
  * Renamed to GRAFT as per VCDE comments
  *
@@ -136,9 +139,9 @@ public final class DrugScreenSearchAction extends BaseAction {
 							yeastResults.put(a.getId(), yeastStages);
 						}
 						if (theForm.isDoInvivo()) {
-							// now get invivo/Graft data
-							List graftResults = QueryManagerSingleton.instance().getInvivoResults(a, false);
-							invivoResults.put(a.getId(), graftResults);
+							// now get invivo/Transplantation data
+							List transplantationResults = QueryManagerSingleton.instance().getInvivoResults(a, false);
+							invivoResults.put(a.getId(), transplantationResults);
 						}
 					}
 				}
