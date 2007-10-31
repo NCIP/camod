@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ImageAction.java,v 1.17 2007-09-12 19:36:40 pandyas Exp $
+ * $Id: ImageAction.java,v 1.18 2007-10-31 17:10:37 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2007/09/12 19:36:40  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.16  2007/07/31 12:13:41  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -67,7 +70,8 @@ public final class ImageAction extends BaseAction {
                 + imageForm.getUrl() + "\n\t getTitle: " + imageForm.getTitle()
                 + "\n\t getDescription: " + imageForm.getDescription()
                 + "\n\t getStainingMethodName() : " + imageForm.getStainingMethodName()                
-                + "\n\t getStainingMethodCode(): " + imageForm.getStainingMethodCode()  + "\n" 
+                + "\n\t getStainingMethodCode(): " + imageForm.getStainingMethodCode()  
+                + "\n\t Comments(): " + imageForm.getComments() + "\n" 
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
         String theForward = "AnimalModelTreePopulateAction";
@@ -167,7 +171,8 @@ public final class ImageAction extends BaseAction {
                 + imageForm.getUrl() + "\n\t getTitle: " + imageForm.getTitle()
                 + "\n\t getDescription: " + imageForm.getDescription()
                 + "\n\t getStainingMethodName() : " + imageForm.getStainingMethodName()                   
-                + "\n\t getStainingMethodCode(): " + imageForm.getStainingMethodCode()     + "\n"            
+                + "\n\t getStainingMethodCode(): " + imageForm.getStainingMethodCode()     
+                + "\n\t Comments(): " + imageForm.getComments()+ "\n"            
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
         String theForward = "AnimalModelTreePopulateAction";

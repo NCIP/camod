@@ -1,7 +1,10 @@
 /**
- * $Id: HormoneAction.java,v 1.10 2006-04-17 19:09:40 pandyas Exp $
+ * $Id: HormoneAction.java,v 1.11 2007-10-31 17:10:24 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2006/04/17 19:09:40  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.9  2005/11/09 00:17:26  georgeda
  * Fixed delete w/ constraints
  *
@@ -64,7 +67,8 @@ public class HormoneAction extends BaseAction {
 
 		System.out.println("<HormoneAction editing> editing... " + "\n\t name: " + hormoneForm.getName()
 				+ "\n\t otherName: " + hormoneForm.getOtherName() + "\n\t regimen: " + hormoneForm.getRegimen()
-				+ "\n\t dosage: " + hormoneForm.getDosage() + "\n\t dosageUnit: " + hormoneForm.getDosageUnit());
+				+ "\n\t dosage: " + hormoneForm.getDosage()  + "\n\t Comments: " + hormoneForm.getComments()
+				+ "\n\t dosageUnit: " + hormoneForm.getDosageUnit());
 
         CarcinogenExposureManager carcinogenExposureManager = (CarcinogenExposureManager) getBean("carcinogenExposureManager");
         String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
@@ -129,7 +133,8 @@ public class HormoneAction extends BaseAction {
 
 		System.out.println("<HormoneAction save> Adding... " + "\n\t name: " + hormoneForm.getName()
                         + "\n\t otherName: " + hormoneForm.getOtherName() + "\n\t regimen: " + hormoneForm.getRegimen()
-                        + "\n\t dosage: " + hormoneForm.getDosage() + "\n\t dosageUnit: " + hormoneForm.getDosageUnit());
+                        + "\n\t dosage: " + hormoneForm.getDosage()  + "\n\t Comments: " + hormoneForm.getComments()
+                        + "\n\t dosageUnit: " + hormoneForm.getDosageUnit());
 
 
 		AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");

@@ -1,7 +1,10 @@
 /**
- * $Id: GrowthFactorAction.java,v 1.13 2006-10-27 16:34:55 pandyas Exp $
+ * $Id: GrowthFactorAction.java,v 1.14 2007-10-31 17:10:13 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2006/10/27 16:34:55  pandyas
+ * fixed printout on error - typo
+ *
  * Revision 1.12  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -78,7 +81,8 @@ public class GrowthFactorAction extends BaseAction {
 				+ "\n\t otherName: " + growthFactorForm.getOtherName() + "\n\t type: " + growthFactorForm.getType()
 				+ "\n\t regimen: " + growthFactorForm.getRegimen() + "\n\t dosage: " + growthFactorForm.getDosage()
 				+ "\n\t dosageUnit: " + growthFactorForm.getDosageUnit() + "\n\t ageAtTreatment: "
-				+ growthFactorForm.getAgeAtTreatment() + "\n\t ageAtTreatmentUnit: " + growthFactorForm.getAgeAtTreatmentUnit());
+				+ growthFactorForm.getAgeAtTreatment() + "\n\t Comments: " + growthFactorForm.getComments()
+				+ "\n\t ageAtTreatmentUnit: " + growthFactorForm.getAgeAtTreatmentUnit());
 
         CarcinogenExposureManager carcinogenExposureManager = (CarcinogenExposureManager) getBean("carcinogenExposureManager");
         String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
@@ -153,6 +157,7 @@ public class GrowthFactorAction extends BaseAction {
 				+ "\n\t dosageUnit: " + growthFactorForm.getDosageUnit() + "\n\t administrativeRoute: "
 				+ growthFactorForm.getAdministrativeRoute() + "\n\t ageAtTreatment: "
 				+ growthFactorForm.getAgeAtTreatment() + "\n\t ageAtTreatmentUnit: " + growthFactorForm.getAgeAtTreatmentUnit()
+				+ "\n\t Comments: " + growthFactorForm.getComments()
 				+ "\n\t user: " + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
 		AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");

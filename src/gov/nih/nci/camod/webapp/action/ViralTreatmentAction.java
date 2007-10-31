@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ViralTreatmentAction.java,v 1.15 2006-11-09 17:32:21 pandyas Exp $
+ * $Id: ViralTreatmentAction.java,v 1.16 2007-10-31 17:13:50 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2006/11/09 17:32:21  pandyas
+ * Commented out debug code
+ *
  * Revision 1.14  2006/10/27 16:33:28  pandyas
  * fixed printout on error - typo
  *
@@ -81,7 +84,9 @@ public class ViralTreatmentAction extends BaseAction {
 				+ "\n\t regimen: " + viralTreatmentForm.getRegimen() + "\n\t dosage: " + viralTreatmentForm.getDosage()
                 + "\n\t dosageUnit: " + viralTreatmentForm.getDosageUnit()
 				+ "\n\t doseUnit: " + viralTreatmentForm.getDosageUnit() + "\n\t ageAtTreatment: "
-				+ viralTreatmentForm.getAgeAtTreatment() + "\n\t ageAtTreatmentUnit: " + viralTreatmentForm.getAgeAtTreatmentUnit());
+				+ viralTreatmentForm.getAgeAtTreatment() + "\n\t Comments: " + viralTreatmentForm.getComments()
+				+ "\n\t ageAtTreatmentUnit: " 
+				+ viralTreatmentForm.getAgeAtTreatmentUnit());
 
         CarcinogenExposureManager carcinogenExposureManager = (CarcinogenExposureManager) getBean("carcinogenExposureManager");
         String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
@@ -150,7 +155,8 @@ public class ViralTreatmentAction extends BaseAction {
 				+ "\n\t regimen: " + viralTreatmentForm.getRegimen() + "\n\t dosage: " + viralTreatmentForm.getDosage()
 				+ "\n\t dosageUnit: " + viralTreatmentForm.getDosageUnit()
                 + "\n\t doseUnit: " + viralTreatmentForm.getDosageUnit() + "\n\t ageAtTreatment: "
-				+ viralTreatmentForm.getAgeAtTreatment() + "\n\t ageAtTreatmentUnit: " + viralTreatmentForm.getAgeAtTreatmentUnit());
+				+ viralTreatmentForm.getAgeAtTreatment()  + "\n\t Comments: " + viralTreatmentForm.getComments()
+				+ "\n\t ageAtTreatmentUnit: " + viralTreatmentForm.getAgeAtTreatmentUnit());
 
 		AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
 		AnimalModel animalModel = animalModelManager.get(modelID);

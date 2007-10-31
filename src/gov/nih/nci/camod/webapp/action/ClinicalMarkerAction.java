@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: ClinicalMarkerAction.java,v 1.9 2007-09-12 19:36:40 pandyas Exp $
+ * $Id: ClinicalMarkerAction.java,v 1.10 2007-10-31 17:09:27 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2007/09/12 19:36:40  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.8  2006/11/09 17:25:32  pandyas
  * minor format change
  *
@@ -71,7 +74,10 @@ public class ClinicalMarkerAction extends BaseAction
         // Create a form to edit
         ClinicalMarkerForm clinicalMarkerForm = (ClinicalMarkerForm) form;
 
-        log.debug("<HistopathologyAction saveClinicalMarker> following Characteristics:" + "\n\t ParentHistopathID: " + clinicalMarkerForm.getHistopathologyID() + "\n\t ClinicalMarkerID: " + aClinicalMarkerID + "\n\t Name: " + clinicalMarkerForm.getName() + "\n\t otherName: " + clinicalMarkerForm.getOtherName() + "\n\t Value: " + clinicalMarkerForm.getValue() + "\n\t user: " + (String) request.getSession().getAttribute(
+        log.debug("<HistopathologyAction saveClinicalMarker> following Characteristics:" + "\n\t ParentHistopathID: " + clinicalMarkerForm.getHistopathologyID() 
+        		+ "\n\t ClinicalMarkerID: " + aClinicalMarkerID + "\n\t Name: " + clinicalMarkerForm.getName() + "\n\t otherName: " + clinicalMarkerForm.getOtherName() + "\n\t Value: " + clinicalMarkerForm.getValue() 
+        		 + "\n\t Comments: " + clinicalMarkerForm.getComments() 
+        		+ "\n\t user: " + (String) request.getSession().getAttribute(
                                                                                                                                                                                                                                                                                                                                                                                                                                       "camod.loggedon.username"));
 
         ClinicalMarkerManager theClinicalMarkerManager = (ClinicalMarkerManager) getBean("clinicalMarkerManager");
@@ -150,7 +156,8 @@ public class ClinicalMarkerAction extends BaseAction
 
         System.out.println("<ClinicalMarkerAction save> following Characteristics:" + "\n\t ParentHistopathID: " 
                            + aHistopathologyID + "\n\t Name: " + clinicalMarkerForm.getName() + "\n\t otherName: " 
-                           + clinicalMarkerForm.getOtherName() + "\n\t Value: " + clinicalMarkerForm.getValue() 
+                           + clinicalMarkerForm.getOtherName() + "\n\t Value: " + clinicalMarkerForm.getValue()
+                           + "\n\t Comments: " + clinicalMarkerForm.getComments()
                            + "\n\t user: " + (String) request.getSession().getAttribute(
                                                                                                                                                                                                                                                                                                                                                            "camod.loggedon.username"));
 

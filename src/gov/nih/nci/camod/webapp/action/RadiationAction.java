@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: RadiationAction.java,v 1.14 2006-10-27 16:31:51 pandyas Exp $
+ * $Id: RadiationAction.java,v 1.15 2007-10-31 17:12:46 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2006/10/27 16:31:51  pandyas
+ * fixed printout on error - typo
+ *
  * Revision 1.13  2006/04/17 19:09:41  pandyas
  * caMod 2.1 OM changes
  *
@@ -144,7 +147,8 @@ public class RadiationAction extends BaseAction {
                 + "\n\t administrativeRoute: " + radiationForm.getAdministrativeRoute()
 				+ "\n\t regimen: " + radiationForm.getRegimen() + "\n\t ageAtTreatment: "
 				+ radiationForm.getAgeAtTreatment() + radiationForm.getAgeAtTreatmentUnit()
-                + "\n\t type: " + radiationForm.getType() + "\n\t user: "
+                + "\n\t type: " + radiationForm.getType() 
+                + "\n\t Comments: " + radiationForm.getComments()+ "\n\t user: "
 				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
 
 		/* Grab the current modelID from the session */

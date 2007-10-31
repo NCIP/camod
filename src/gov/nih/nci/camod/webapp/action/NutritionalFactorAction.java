@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: NutritionalFactorAction.java,v 1.13 2006-10-27 16:34:38 pandyas Exp $
+ * $Id: NutritionalFactorAction.java,v 1.14 2007-10-31 17:12:01 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2006/10/27 16:34:38  pandyas
+ * fixed printout on error - typo
+ *
  * Revision 1.12  2006/04/17 19:09:41  pandyas
  * caMod 2.1 OM changes
  *
@@ -74,7 +77,8 @@ public class NutritionalFactorAction extends BaseAction {
 				+ nutritForm.getDosage()  + "\n\t dosageUnit: " + nutritForm.getDosageUnit()
                 + "\n\t regimen: " + nutritForm.getRegimen() + "\n\t ageAtTreatment: "
                 + nutritForm.getAgeAtTreatmentUnit()
-				+ nutritForm.getAgeAtTreatment() + "\n\t type: " + nutritForm.getType() + "\n\t user: "
+				+ nutritForm.getAgeAtTreatment() + "\n\t type: " + nutritForm.getType() 
+				+ "\n\t Comments: " + nutritForm.getComments()+ "\n\t user: "
 				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
 
         CarcinogenExposureManager carcinogenExposureManager = (CarcinogenExposureManager) getBean("carcinogenExposureManager");
@@ -137,7 +141,8 @@ public class NutritionalFactorAction extends BaseAction {
 				+ nutritForm.getName() + "\n\t otherName: " + nutritForm.getOtherName() + "\n\t dosage: "
 				+ nutritForm.getDosage()  + "\n\t dosageUnit: " + nutritForm.getDosageUnit()
                 + "\n\t regimen: " + nutritForm.getRegimen() + "\n\t ageAtTreatment: "
-				+ nutritForm.getAgeAtTreatment() + "\n\t type: " + nutritForm.getType() + "\n\t user: "
+				+ nutritForm.getAgeAtTreatment() + "\n\t type: " + nutritForm.getType() 
+				+ "\n\t Comments: " + nutritForm.getComments()+ "\n\t user: "
 				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
 
 		/* Grab the current modelID from the session */

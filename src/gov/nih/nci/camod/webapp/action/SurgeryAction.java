@@ -1,7 +1,10 @@
 /**
- * $Id: SurgeryAction.java,v 1.12 2006-11-09 17:31:59 pandyas Exp $
+ * $Id: SurgeryAction.java,v 1.13 2007-10-31 17:13:12 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2006/11/09 17:31:59  pandyas
+ * Commented out debug code
+ *
  * Revision 1.11  2006/10/27 16:34:15  pandyas
  * fixed printout on error - typo
  *
@@ -73,7 +76,8 @@ public class SurgeryAction extends BaseAction {
 
 		System.out.println("<SurgeryAction editing> editing... " + "\n\t name: " + surgeryForm.getName()
 				+ "\n\t otherName: " + surgeryForm.getOtherName() + "\n\t type: " + surgeryForm.getType()
-				+ "\n\t regimen: " + surgeryForm.getRegimen() + "\n\t ageAtTreatmentUnit: " + surgeryForm.getAgeAtTreatmentUnit());
+				+ "\n\t regimen: " + surgeryForm.getRegimen() + "\n\t Comments: " + surgeryForm.getComments()
+				+ "\n\t ageAtTreatmentUnit: " + surgeryForm.getAgeAtTreatmentUnit());
 
         CarcinogenExposureManager carcinogenExposureManager = (CarcinogenExposureManager) getBean("carcinogenExposureManager");
         String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
@@ -139,7 +143,8 @@ public class SurgeryAction extends BaseAction {
 
 		System.out.println("<SurgeryAction save> Adding... " + "\n\t name: " + surgeryForm.getName()
 				+ "\n\t otherName: " + surgeryForm.getOtherName() + "\n\t type: " + surgeryForm.getType()
-				+ "\n\t regimen: " + surgeryForm.getRegimen() + "\n\t ageAtTreatmentUnit: " + surgeryForm.getAgeAtTreatmentUnit());
+				+ "\n\t regimen: " + surgeryForm.getRegimen() + "\n\t Comments: " + surgeryForm.getComments()
+				+ "\n\t ageAtTreatmentUnit: " + surgeryForm.getAgeAtTreatmentUnit());
 
 		/* Create all the manager objects needed for Screen */
 		AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");

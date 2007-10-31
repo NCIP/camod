@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GeneDeliveryAction.java,v 1.20 2007-09-12 19:36:40 pandyas Exp $
+ * $Id: GeneDeliveryAction.java,v 1.21 2007-10-31 17:10:01 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.20  2007/09/12 19:36:40  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.19  2007/07/23 17:40:42  pandyas
  * Fixed typo in word occurred
  *
@@ -84,7 +87,8 @@ public final class GeneDeliveryAction extends BaseAction {
                 + "\n\t Regimen: " + geneDeliveryForm.getRegimen() 
                 + "\n\t organTissueCode: " + geneDeliveryForm.getOrganTissueCode() 
                 + "\n\t organTissueName: "  + geneDeliveryForm.getOrganTissueName() 
-                + "\n\t organ: "  + geneDeliveryForm.getOrgan()                 
+                + "\n\t organ: "  + geneDeliveryForm.getOrgan() 
+                + "\n\t Comments: "  + geneDeliveryForm.getComments()                 
                 + "\n\t user: "  + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
         String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
@@ -157,7 +161,8 @@ public final class GeneDeliveryAction extends BaseAction {
                 + "\n\t organ: " + geneDeliveryForm.getOrgan()                
                 + "\n\t organTissueCode: " + geneDeliveryForm.getOrganTissueCode() 
                 + "\n\t organTissueName: " + geneDeliveryForm.getOrganTissueName() 
-                + "\n\t organ: "  + geneDeliveryForm.getOrgan()                     
+                + "\n\t organ: "  + geneDeliveryForm.getOrgan()   
+                + "\n\t Comments: "  + geneDeliveryForm.getComments()                  
                 + "\n\t user: " + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
         String theForward = "AnimalModelTreePopulateAction";

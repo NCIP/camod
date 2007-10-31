@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TherapyAction.java,v 1.18 2007-09-12 19:36:40 pandyas Exp $
+ * $Id: TherapyAction.java,v 1.19 2007-10-31 17:13:34 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2007/09/12 19:36:40  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.17  2007/05/16 12:29:24  pandyas
  * Added developmental stage evs tree to Therapy when species is Zebrafsih
  *
@@ -93,7 +96,6 @@ public final class TherapyAction extends BaseAction {
 				+ therapyForm.getAgeAtTreatment() + "\n\t administrativeRoute: " + therapyForm.getAdministrativeRoute()
 				+ "\n\t biomarker: " + therapyForm.getBiomarker() 
 				+ "\n\t experiment: " + therapyForm.getExperiment() + "\n\t results: "
-				+ therapyForm.getResults() + "\n\t comments: " + therapyForm.getComments() 
                 + "\n\t TumorResponse: " + therapyForm.getTumorResponse() 
         		+ "\n\t DevelopmentalStage: " + therapyForm.getDevelopmentalStage() 
         		+ "\n\t DevelopmentalStageCode: " + therapyForm.getDevelopmentalStageCode() 

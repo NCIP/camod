@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: PublicationAction.java,v 1.14 2006-04-17 19:09:40 pandyas Exp $
+ * $Id: PublicationAction.java,v 1.15 2007-10-31 17:12:35 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2006/04/17 19:09:40  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.13  2005/11/14 14:21:06  georgeda
  * Handle delete of child publications
  *
@@ -203,8 +206,10 @@ public final class PublicationAction extends BaseAction {
 				+ pubForm.getVolume() + "\n\t PMID: " + pubForm.getPmid() + "\n\t Start Page: "
 				+ pubForm.getStartPage() + "\n\t End Page: " + pubForm.getEndPage() + "\n\t Title: "
 				+ pubForm.getTitle() + "\n\t journal: " + pubForm.getJournal() + "\n\t FirstTimeReported: "
-				+ pubForm.getFirstTimeReported() + "\n\t ACellID: " + pubForm.getACellID() + "\n\t ATherapyID: "
-				+ pubForm.getATherapyID() + "\n\t APubID: " + pubForm.getAPubID() + "\n\t user: "
+				+ pubForm.getFirstTimeReported() + "\n\t ACellID: " + pubForm.getACellID() 
+				+ "\n\t Comments: " + pubForm.getComments() + "\n\t ATherapyID: "
+				+ pubForm.getATherapyID() + "\n\t APubID: " + pubForm.getAPubID() 
+				+ "\n\t user: "
 				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
 
 		String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
@@ -288,8 +293,10 @@ public final class PublicationAction extends BaseAction {
 				+ "\n\t Aurthur: " + pubForm.getAuthors() + "\n\t Year: " + pubForm.getYear() + "\n\t Volume: "
 				+ pubForm.getVolume() + "\n\t PMID: " + pubForm.getPmid() + "\n\t Start Page: "
 				+ pubForm.getStartPage() + "\n\t End Page: " + pubForm.getEndPage() + "\n\t Title: "
-				+ pubForm.getTitle() + "\n\t journal: " + pubForm.getJournal() + "\n\t FirstTimeReported: "
-				+ pubForm.getFirstTimeReported() + "\n\t user: "
+				+ pubForm.getTitle() + "\n\t journal: " + pubForm.getJournal() 
+				+ "\n\t Comments: " + pubForm.getComments() + "\n\t FirstTimeReported: "
+				+ pubForm.getFirstTimeReported() 
+				 + "\n\t Comments: " + pubForm.getComments() + "\n\t user: "
 				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
 
 		/* Grab the current modelID from the session */
