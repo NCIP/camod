@@ -1,7 +1,10 @@
 /*
- * $Id: PublicationManagerImpl.java,v 1.14 2007-05-07 16:52:06 pandyas Exp $
+ * $Id: PublicationManagerImpl.java,v 1.15 2007-10-31 19:07:45 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2007/05/07 16:52:06  pandyas
+ * Added code to save, edit and populate zfinPubId from Publication object for pulications from zfin.org
+ *
  * Revision 1.13  2006/05/22 17:08:13  pandyas
  * Modified jNumber save due to testing
  *
@@ -96,6 +99,7 @@ public class PublicationManagerImpl extends BaseManager implements PublicationMa
         inPublication.setTitle(inPublicationData.getTitle());
         inPublication.setJournal(inPublicationData.getJournal());
         inPublication.setVolume(inPublicationData.getVolume());
+        inPublication.setComments(inPublicationData.getComments());
 
         String strPub = inPublicationData.getPmid();
 

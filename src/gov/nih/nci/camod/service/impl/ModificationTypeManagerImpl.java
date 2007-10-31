@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ModificationTypeManagerImpl.java,v 1.6 2007-09-12 19:36:03 pandyas Exp $
+ * $Id: ModificationTypeManagerImpl.java,v 1.7 2007-10-31 19:07:00 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2007/09/12 19:36:03  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.5  2006/04/20 18:11:51  pandyas
  * Cleaned up modificationType save of Other in DB
  *
@@ -88,7 +91,7 @@ public class ModificationTypeManagerImpl extends BaseManager implements Modifica
         }
         else
         {
-            theQBEModType.setNameUnctrlVocab(inOtherName);
+            theQBEModType.setNameAlternEntry(inOtherName);
         }
 
         ModificationType theModificationType = null;
@@ -111,7 +114,7 @@ public class ModificationTypeManagerImpl extends BaseManager implements Modifica
                 }
                 else
                 {
-                    theQBEModType.setNameUnctrlVocab(inOtherName);
+                    theQBEModType.setNameAlternEntry(inOtherName);
                 }
 
             }

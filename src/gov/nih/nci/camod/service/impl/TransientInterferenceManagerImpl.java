@@ -1,9 +1,12 @@
 /**
  * @pandyas
  * 
- * $Id: TransientInterferenceManagerImpl.java,v 1.5 2007-09-12 19:36:03 pandyas Exp $
+ * $Id: TransientInterferenceManagerImpl.java,v 1.6 2007-10-31 19:11:42 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2007/09/12 19:36:03  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.4  2007/04/04 13:18:06  pandyas
  * Modified name for conditioning regimen and target site
  *
@@ -171,8 +174,7 @@ public class TransientInterferenceManagerImpl extends BaseManager implements
 				Constants.Dropdowns.OTHER_OPTION)) {
 			log.debug("source equals other");
 			inTransInt.setSource(null);
-			inTransInt
-					.setSourceUnctrVocab(inTransIntData
+			inTransInt.setSourceAlternEntry(inTransIntData
 							.getOtherSource());
 
 			log.debug("Sending Notification eMail - new Source added");
@@ -182,7 +184,7 @@ public class TransientInterferenceManagerImpl extends BaseManager implements
 			log.debug("source not other or null");
 			inTransInt.setSource(inTransIntData
 					.getSource());
-			inTransInt.setSourceUnctrVocab(null);
+			inTransInt.setSourceAlternEntry(null);
 		}
 
 		// Save Type
@@ -215,7 +217,7 @@ public class TransientInterferenceManagerImpl extends BaseManager implements
 			log.debug("DeliveryMethod equals other");
 			inTransInt.setDeliveryMethod(null);
 			inTransInt
-					.setDeliveryMethodUnctrlVocab(inTransIntData
+					.setDeliveryMethodAlternEntry(inTransIntData
 							.getOtherDeliveryMethod());
 
 			log.debug("Sending Notification eMail - new DeliveryMethod added");
@@ -226,7 +228,7 @@ public class TransientInterferenceManagerImpl extends BaseManager implements
 			inTransInt
 					.setDeliveryMethod(inTransIntData
 							.getDeliveryMethod());
-			inTransInt.setDeliveryMethodUnctrlVocab(null);
+			inTransInt.setDeliveryMethodAlternEntry(null);
 		}
 
 		// Save visualizationLigands
@@ -235,7 +237,7 @@ public class TransientInterferenceManagerImpl extends BaseManager implements
 			log.debug("visualizationLigands equals other");
 			inTransInt.setVisualLigand(null);
 			inTransInt
-					.setVisualLigandUnctrlVocab(inTransIntData
+					.setVisualLigandAlternEntry(inTransIntData
 							.getOtherVisualLigand());
 
 			log.debug("Sending Notification eMail - new VisualLigands added");
@@ -245,7 +247,7 @@ public class TransientInterferenceManagerImpl extends BaseManager implements
 			log.debug("visualLigands not other or null");
 			inTransInt.setVisualLigand(inTransIntData
 					.getVisualLigand());
-			inTransInt.setVisualLigandUnctrlVocab(null);
+			inTransInt.setVisualLigandAlternEntry(null);
 		}
 
 		// Save Comment

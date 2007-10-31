@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyManagerImpl.java,v 1.25 2007-09-12 19:36:03 pandyas Exp $
+ * $Id: HistopathologyManagerImpl.java,v 1.26 2007-10-31 19:05:38 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.25  2007/09/12 19:36:03  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.24  2007/06/18 15:05:29  pandyas
  * Fixed save for other in disease
  *
@@ -232,7 +235,7 @@ public class HistopathologyManagerImpl extends BaseManager implements
                 log.debug("Concept code set to 000000");
                 inHistopathology.getDisease().setConceptCode(
                          Constants.Dropdowns.CONCEPTCODEZEROS);              
-                inHistopathology.getDisease().setNameUnctrlVocab(
+                inHistopathology.getDisease().setNameAlternEntry(
                          inHistopathologyData.getOtherTumorClassification());
                 inHistopathology.getDisease().setName(null);            	
             } else {
@@ -271,7 +274,7 @@ public class HistopathologyManagerImpl extends BaseManager implements
                     log.debug("Concept code set to 000000");
                     inHistopathology.getDisease().setConceptCode(
                              Constants.Dropdowns.CONCEPTCODEZEROS);              
-                    inHistopathology.getDisease().setNameUnctrlVocab(
+                    inHistopathology.getDisease().setNameAlternEntry(
                              inHistopathologyData.getOtherTumorClassification());
                     inHistopathology.getDisease().setName(null);
                } else {           
@@ -446,6 +449,7 @@ public class HistopathologyManagerImpl extends BaseManager implements
 					+ inRecipients[i]);
 		}
 
+		// don't change property name - unless you change all tiers
 		String inSubject = camodProperties
 				.getProperty("model.new_unctrl_vocab_subject");
 

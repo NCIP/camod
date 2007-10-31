@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: StrainManagerImpl.java,v 1.6 2007-09-12 19:36:03 pandyas Exp $
+ * $Id: StrainManagerImpl.java,v 1.7 2007-10-31 19:10:20 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2007/09/12 19:36:03  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.5  2007/08/07 18:29:29  pandyas
  * Renamed to GRAFT as per VCDE comments
  *
@@ -135,7 +138,7 @@ public class StrainManagerImpl extends BaseManager implements StrainManager
         }
         else
         {
-            theQBEStrain.setNameUnctrlVocab(inOtherStrainName);
+            theQBEStrain.setNameAlternEntry(inOtherStrainName);
         }
 
         Strain theStrain = null;
@@ -159,7 +162,7 @@ public class StrainManagerImpl extends BaseManager implements StrainManager
                 }
                 else
                 {
-                    theQBEStrain.setNameUnctrlVocab(inOtherStrainName);
+                    theQBEStrain.setNameAlternEntry(inOtherStrainName);
                 }
             }
         }
@@ -192,7 +195,7 @@ public class StrainManagerImpl extends BaseManager implements StrainManager
      *                
      * This method is used to send in the newly created Species
      * when the user specifies other for species and Not Specified
-     * for strain in the graftManagerImpl.  Reuse object if other text
+     * for strain in the transplantationManagerImpl.  Reuse object if other text
      * is exactly the same (rare occurrance).               
      */
     public Strain getOrCreate(String inStrainName,
@@ -217,7 +220,7 @@ public class StrainManagerImpl extends BaseManager implements StrainManager
         }
         else
         {
-            theQBEStrain.setNameUnctrlVocab(inOtherStrainName);
+            theQBEStrain.setNameAlternEntry(inOtherStrainName);
         }
 
         Strain theStrain = null;
@@ -241,7 +244,7 @@ public class StrainManagerImpl extends BaseManager implements StrainManager
                 }
                 else
                 {
-                    theQBEStrain.setNameUnctrlVocab(inOtherStrainName);
+                    theQBEStrain.setNameAlternEntry(inOtherStrainName);
                 }
             }
         }

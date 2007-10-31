@@ -1,7 +1,10 @@
 /*
- * $Id: GenomicSegmentManagerImpl.java,v 1.32 2007-09-12 19:36:04 pandyas Exp $
+ * $Id: GenomicSegmentManagerImpl.java,v 1.33 2007-10-31 19:04:57 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.32  2007/09/12 19:36:04  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.31  2007/08/15 16:00:56  pandyas
  * Bug #8351:  Construct Sequence info not shown in edit mode and on search page
  *
@@ -154,7 +157,7 @@ public class GenomicSegmentManagerImpl extends BaseManager implements
 
 		if (inGenomicSegmentData.getOtherSegmentName() != null) {
 			theSegmentType.setName(null);
-			theSegmentType.setNameUnctrlVocab(inGenomicSegmentData
+			theSegmentType.setNameAlternEntry(inGenomicSegmentData
 					.getOtherSegmentName());
 
 			log

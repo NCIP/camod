@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.81 2007-10-18 18:34:24 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.82 2007-10-31 19:08:24 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.81  2007/10/18 18:34:24  pandyas
+ * Forced the stmt.close() for all methods using the ResultSet
+ *
  * Revision 1.80  2007/10/03 17:07:26  pandyas
  * Explicitly called and closed Statement for two methods (getIds and
  * getQueryOnlyPrincipalInvestigators) which displyed the following error:
@@ -493,15 +496,15 @@ public class QueryManagerImpl extends BaseManager
 
 		try {
 			// Format the query
-			String theSQLQuery = "SELECT ef.name, ef.name_unctrl_vocab "
+			String theSQLQuery = "SELECT ef.name, ef.name_altern_entry "
 					+ "FROM environmental_factor ef "
 					+ "WHERE ef.type LIKE ? "
 					+ "  AND ef.name IS NOT null "
 					+ "  UNION "
-					+ "SELECT ef.name_unctrl_vocab "
+					+ "SELECT ef.name_altern_entry "
 					+ "FROM environmental_factor ef "
-					+ "WHERE ef.TYPE_UNCTRL_VOCAB LIKE ? "
-					+ "  AND ef.name_unctrl_vocab IS NOT null "
+					+ "WHERE ef.TYPE_altern_entry LIKE ? "
+					+ "  AND ef.name_altern_entry IS NOT null "
 					+ "AND am.abs_cancer_model_id = ce.abs_cancer_model_id AND am.state = 'Edited-approved') ORDER BY ef.name asc ";
 
 			Object[] theParams = new Object[1];
@@ -557,7 +560,7 @@ public class QueryManagerImpl extends BaseManager
 
 		try {
 			// Format the query
-			String theSQLQuery = "SELECT ef.type, ef.type_unctrl_vocab "
+			String theSQLQuery = "SELECT ef.type, ef.type_altern_entry "
 				+ "FROM environmental_factor ef ";			
 
 			// Format the query			
@@ -658,9 +661,9 @@ public class QueryManagerImpl extends BaseManager
 
 		try {
 			// Format the query
-			String theSQLQuery = "SELECT ef.name, ef.name_unctrl_vocab "
+			String theSQLQuery = "SELECT ef.name, ef.name_altern_entry "
 					+ "FROM environmental_factor ef "
-					+ "WHERE (ef.type = ? OR ef.type_unctrl_vocab = ?)"
+					+ "WHERE (ef.type = ? OR ef.type_altern_entry = ?)"
 					+ "  AND ef.environmental_factor_id IN (SELECT ce.environmental_factor_id "
 					+ "     FROM carcinogen_exposure ce, abs_cancer_model am "
 					+ "			WHERE ef.environmental_factor_id = ce.environmental_factor_id "
@@ -1376,7 +1379,7 @@ public class QueryManagerImpl extends BaseManager
                                                     String inModelId) throws PersistenceException
     {
 
-        String theSQLString = "SELECT distinct xeno_inv.invivo_result_id FROM graft_invivo_result xeno_inv " + "WHERE xeno_inv.invivo_result_id IN (SELECT ir.invivo_result_id FROM invivo_result ir, agent ag " + "     WHERE ir.agent_id = ag.agent_id and ag.nsc_number = ?) and xeno_inv.abs_cancer_model_id = ?";
+        String theSQLString = "SELECT distinct trans_inv.invivo_result_id FROM transplantation_invivo_result trans_inv " + "WHERE trans_inv.invivo_result_id IN (SELECT ir.invivo_result_id FROM invivo_result ir, agent ag " + "     WHERE ir.agent_id = ag.agent_id and ag.nsc_number = ?) and trans_inv.abs_cancer_model_id = ?";
 
         Object[] theParams = new Object[2];
         theParams[0] = inNSCNumber;
@@ -1464,11 +1467,11 @@ public class QueryManagerImpl extends BaseManager
     }
 
     /**
-     * Get the invivo (Xenograft) data (from DTP) for a given Agent.nscNumber
+     * Get the invivo (Transplant) data (from DTP) for a given Agent.nscNumber
      * (drug)
      * 
      * @param agent
-     *            refers to the compound that was used in the xenograft
+     *            refers to the compound that was used in the Transplant
      *            experiment
      * 
      * @return the results (list of abs_cancer_model_id, model_descriptor, and #
@@ -1517,7 +1520,7 @@ public class QueryManagerImpl extends BaseManager
                 results.add(item);
                 cc++;
             }
-            log.debug("Got " + cc + " xenograft models");
+            log.debug("Got " + cc + " Transplant models");
         }
         catch (Exception e)
         {
@@ -1553,7 +1556,7 @@ public class QueryManagerImpl extends BaseManager
      */
     private String getStrainIdsForSpecies(String inSpecies) throws PersistenceException
     {
-        String theSQLString = "SELECT distinct strain.strain_id FROM strain WHERE strain.species_id IN (SELECT species.species_id FROM species WHERE species.scientific_name like ? or species.scientific_name_unctrl_vocab like ?) ";
+        String theSQLString = "SELECT distinct strain.strain_id FROM strain WHERE strain.species_id IN (SELECT species.species_id FROM species WHERE species.scientific_name like ? or species.scientific_name_altern_entry like ?) ";
 
         System.out.println("SQL: " + theSQLString);
         Object[] theParams = new Object[2];
@@ -1634,13 +1637,13 @@ public class QueryManagerImpl extends BaseManager
     }
 
     /**
-     * Get the model id's for any model that has a graft
+     * Get the model id's for any model that has a Transplantation
      *  
      * @return a list of matching model ids
      * 
      * @throws PersistenceException
      */
-    private String getModelIdsForGraft() throws PersistenceException
+    private String getModelIdsForTransplantation() throws PersistenceException
     {
 
         String theSQLString = "SELECT distinct par_abs_can_model_id FROM abs_cancer_model ";
@@ -1951,8 +1954,8 @@ public class QueryManagerImpl extends BaseManager
 		
 		String theSQLString = "SELECT distinct ce.abs_cancer_model_id FROM carcinogen_exposure ce "
 				+ "WHERE ce.environmental_factor_id IN (SELECT ef.environmental_factor_id FROM carcinogen_exposure ce, environmental_factor ef"
-				+ "     WHERE ce.environmental_factor_id = ef.environmental_factor_id AND (ef.name = ? OR ef.name_unctrl_vocab = ?)  " 
-				+ "AND (ef.type = ? OR ef.type_unctrl_vocab = ?) )";
+				+ "     WHERE ce.environmental_factor_id = ef.environmental_factor_id AND (ef.name = ? OR ef.name_altern_entry = ?)  " 
+				+ "AND (ef.type = ? OR ef.type_altern_entry = ?) )";
 
 		Object[] theParams = new Object[4];
 		theParams[0] = inName;
@@ -1977,7 +1980,7 @@ public class QueryManagerImpl extends BaseManager
 			log.debug("In getModelIdsForAnEnvironmentalFactorByType");
 			String theSQLString = "SELECT distinct ce.abs_cancer_model_id FROM carcinogen_exposure ce "
 					+ "WHERE ce.environmental_factor_id IN (SELECT ef.environmental_factor_id FROM carcinogen_exposure ce, environmental_factor ef"
-					+ "     WHERE ce.environmental_factor_id = ef.environmental_factor_id AND (ef.type = ? OR ef.type_unctrl_vocab = ?) )";
+					+ "     WHERE ce.environmental_factor_id = ef.environmental_factor_id AND (ef.type = ? OR ef.type_altern_entry = ?) )";
 
 			Object[] theParams = new Object[2];
 			theParams[0] = inType;
@@ -2292,7 +2295,7 @@ public class QueryManagerImpl extends BaseManager
 			}
 		}
 
-		// Only call if some of the data is set : TODO: clean this up
+		// Only call if some of the data is set 
 		if ((inSearchData.getGeneName() != null
 				&& inSearchData.getGeneName().trim().length() > 0 && (inSearchData
 				.isEngineeredTransgene() || inSearchData
@@ -2358,12 +2361,12 @@ public class QueryManagerImpl extends BaseManager
 					+ getModelIdsForTransientInterference() + ")";
 		}
 
-		// Search for xenograft
-		if (inSearchData.isSearchGraft()) {
-			log.debug("In Search inSearchData.isSearchGraft(): "
-					+ inSearchData.isSearchGraft());
+		// Search for Transplantation
+		if (inSearchData.isSearchTransplantation()) {
+			log.debug("In Search inSearchData.isSearchTransplantation(): "
+					+ inSearchData.isSearchTransplantation());
 			theWhereClause += " AND abs_cancer_model_id IN ("
-					+ getModelIdsForGraft() + ")";
+					+ getModelIdsForTransplantation() + ")";
 		}
 		
 		// Search for Transient Interference
@@ -2613,7 +2616,6 @@ public class QueryManagerImpl extends BaseManager
     }
 
 
-    // TODO: optimize query - added extra join for species/strain
     //no nscNumber in environmental_factor to test if this is correct
     public List getModelsForThisCompound(Long nscNumber) throws PersistenceException
     {
@@ -2625,9 +2627,9 @@ public class QueryManagerImpl extends BaseManager
             String theSQLString = "select acm.abs_cancer_model_id, " + "\n" 
             + "       acm.model_descriptor," + "\n"
             + "       sp.common_name," + "\n"
-            + "       sp.common_name_unctrl_vocab," + "\n"
+            + "       sp.common_name_altern_entry," + "\n"
             + "       st.name," + "\n"
-            + "       st.name_unctrl_vocab" + "\n"            
+            + "       st.name_altern_entry" + "\n"            
             + "  from abs_cancer_model acm," + "\n" 
             + "       therapy t,"   + "\n" 
             + "       strain st,"   + "\n" 

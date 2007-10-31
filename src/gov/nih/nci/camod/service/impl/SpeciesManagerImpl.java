@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SpeciesManagerImpl.java,v 1.5 2007-09-12 19:36:03 pandyas Exp $
+ * $Id: SpeciesManagerImpl.java,v 1.6 2007-10-31 19:09:28 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2007/09/12 19:36:03  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.4  2006/05/03 20:03:41  pandyas
  * Removed commonName method since it is not used
  *
@@ -105,7 +108,7 @@ public class SpeciesManagerImpl extends BaseManager implements SpeciesManager
      * @exception Exception
      *                when anything goes wrong.
      *                
-     * Note:  Free text entered for otherSpecies will be saved as CommonNameUnctrlVocab               
+     * Note:  Free text entered for otherSpecies will be saved as CommonNameAlternEntry               
      */
     public Species getOrCreate(String inScientificName,
                                String inOtherName) throws Exception
@@ -122,7 +125,7 @@ public class SpeciesManagerImpl extends BaseManager implements SpeciesManager
         }
         else
         {
-            theQBESpecies.setScientificNameUnctrlVocab(inOtherName);
+            theQBESpecies.setScientificNameAlternEntry(inOtherName);
         }
 
         Species theSpecies = null;
@@ -145,7 +148,7 @@ public class SpeciesManagerImpl extends BaseManager implements SpeciesManager
                 }
                 else
                 {
-                    theQBESpecies.setScientificNameUnctrlVocab(inOtherName);
+                    theQBESpecies.setScientificNameAlternEntry(inOtherName);
                 }
 
             }

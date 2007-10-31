@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: TherapyManagerImpl.java,v 1.26 2007-09-12 19:36:03 pandyas Exp $
+ * $Id: TherapyManagerImpl.java,v 1.27 2007-10-31 19:11:04 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.26  2007/09/12 19:36:03  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.25  2007/05/16 12:29:10  pandyas
  * Added developmental stage evs tree to Therapy when species is Zebrafsih
  *
@@ -208,7 +211,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
 				Constants.Dropdowns.OTHER_OPTION)) {
 			log.debug("admin route equals other");
 			// Do not save 'Other' in the database
-			theTherapy.getTreatment().setAdminRouteUnctrlVocab(
+			theTherapy.getTreatment().setAdminRouteAlternEntry(
 					inTherapyData.getOtherAdministrativeRoute());
 
 			log
