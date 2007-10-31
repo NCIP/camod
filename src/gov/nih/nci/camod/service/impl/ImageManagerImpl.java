@@ -1,7 +1,10 @@
 /*
- * $Id: ImageManagerImpl.java,v 1.27 2007-09-12 19:36:03 pandyas Exp $
+ * $Id: ImageManagerImpl.java,v 1.28 2007-10-31 19:06:10 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.27  2007/09/12 19:36:03  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.26  2007/08/01 18:11:46  pandyas
  * Fixed image upload issue - the code was not saving the constructs in the correct folder so the image was not viewable in the edit mode.
  *
@@ -127,6 +130,8 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
             log.debug("populateImage inImageData.getStainingMethodCode(): " +inImageData.getStainingMethodCode());
             log.debug("populateImage inImageData.getStainingMethodName(): " +inImageData.getStainingMethodName());            
             inImage.setStainingMethod(stainingMethod);
+            
+            inImage.setComments(inImageData.getComments());
 
 		} else {
 			// null staining method - covers editing
