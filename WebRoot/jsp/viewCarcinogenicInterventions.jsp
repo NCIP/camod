@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewCarcinogenicInterventions.jsp,v 1.34 2007-08-27 15:34:57 pandyas Exp $
+ * $Id: viewCarcinogenicInterventions.jsp,v 1.35 2007-10-31 19:33:58 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.34  2007/08/27 15:34:57  pandyas
+ * Reverted back to EVSPreferredDescription since this was fixed
+ *
  * Revision 1.33  2007/06/19 20:41:06  pandyas
  * The EVSPreferredDescription does not return results for Zebrafish vocabulary so the code was changed (This impacts organ.EVSPreferredDescription,  disease.EVSPreferredDescription, and developmentalStage) for all screens with trees
  *
@@ -57,6 +60,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="gov.nih.nci.camod.domain.AnimalModel" %>	
 
+<%@ page buffer="64kb"%>
+
 <bean:define id="mdl" name="animalmodel"/>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
@@ -68,7 +73,7 @@
 		<tr><td>
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">
 			<tr>
-				<td class="formTitle" height="20" colspan="6">
+				<td class="formTitle" height="20" colspan="7">
 					Carcinogenic Agents - Model:
 					<camod:highlight>
 						<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
@@ -89,7 +94,7 @@
 				<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">
 	
 				<tr>
-					<td class="formTitleBlue" height="20" colspan="6">Chemical / Drug</td>				
+					<td class="formTitleBlue" height="20" colspan="7">Chemical / Drug</td>				
 				</tr>
 				<!--   Start of if externalSource is Jax MTB -->
 				<c:if test="${mdl.externalSource == 'Jax MTB'}">
@@ -109,11 +114,11 @@
 					</c:choose>
 				<tr>
 					<td class="<c:out value="${tdClass}"/>" width="17%">
-						<camod:highlight><c:out value="${cd.environmentalFactor.typeUnctrlVocab}" escapeXml="false"/></camod:highlight>
+						<camod:highlight><c:out value="${cd.environmentalFactor.typeAlternEntry}" escapeXml="false"/></camod:highlight>
 					</td>
 	
 					<td class="<c:out value="${tdClass}"/>" width="20%">
-						<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}" escapeXml="false"/></camod:highlight>
+						<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
 					</td>
 				</tr>
 				</c:forEach>			
@@ -128,7 +133,8 @@
 					<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
 					<td class="greySubTitleLeft" width="17%">Administrative Route</td>
 					<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
-					<td class="greySubTitle" width="17%">Gender</td>				
+					<td class="greySubTitle" width="17%">Gender</td>
+					<td class="greySubTitle" width="17%">Comment</td>									
 				</tr>
 				
 				<c:forEach var="cd" items="${cdList}" varStatus="stat">
@@ -144,7 +150,7 @@
 					<td class="<c:out value="${tdClass}"/>" width="17%">
 						<c:choose>
 							<c:when test="${empty cd.environmentalFactor.name}">
-								<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}" escapeXml="false"/></camod:highlight>
+								<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
 							</c:when>
 							<c:otherwise>
 								<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
@@ -172,7 +178,7 @@
 					<td class="<c:out value="${tdClass}"/>" width="17%">
 						<c:choose>
 							<c:when test="${empty cd.treatment.administrativeRoute}">
-								<camod:highlight><c:out value="${cd.treatment.adminRouteUnctrlVocab}" escapeXml="false"/></camod:highlight>
+								<camod:highlight><c:out value="${cd.treatment.adminRouteAlternEntry}" escapeXml="false"/></camod:highlight>
 							</c:when>
 							<c:otherwise>
 								<camod:highlight><c:out value="${cd.treatment.administrativeRoute}" escapeXml="false"/></camod:highlight>
@@ -182,9 +188,14 @@
 					<td class="<c:out value="${tdClass}"/>" width="17%">
 						<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}"/></camod:highlight>
 					</td>
-					<td class="<c:out value="${tdClass}"/>End" width="17%">
+					<td class="<c:out value="${tdClass}"/>" width="17%">
 						<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}" escapeXml="false"/>&nbsp;</camod:highlight>
 					</td>
+
+					<td class="<c:out value="${tdClass}"/>End" width="17%">
+						<camod:highlight><c:out value="${cd.environmentalFactor.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>
+					
 				</tr>
 				</c:forEach>
 				<!--   End of if externalSource is empty (caMOD data) -->
@@ -200,7 +211,7 @@
 			<c:if test="${not empty cdList}">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
 			<tr>
-				<td class="formTitleBlue" height="20" colspan="6">Growth Factor</td>				
+				<td class="formTitleBlue" height="20" colspan="7">Growth Factor</td>				
 			</tr>
 			
 			<!--   Start of if externalSource is Jax MTB -->
@@ -221,11 +232,11 @@
 				</c:choose>
 			<tr>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.typeUnctrlVocab}" escapeXml="false"/></camod:highlight>
+					<camod:highlight><c:out value="${cd.environmentalFactor.typeAlternEntry}" escapeXml="false"/></camod:highlight>
 				</td>
 
 				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}" escapeXml="false"/></camod:highlight>
+					<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
 				</td>
 			</tr>
 			</c:forEach>			
@@ -240,7 +251,8 @@
 				<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>	
 				<td class="greySubTitleLeft" width="17%">Administrative Route</td>
 				<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
-				<td class="greySubTitle" width="17%">Gender</td>					
+				<td class="greySubTitle" width="17%">Gender</td>
+				<td class="greySubTitle" width="17%">Comment</td>					
 			</tr>
 			<c:forEach var="cd" items="${cdList}" varStatus="stat">
 				<c:choose>
@@ -255,7 +267,7 @@
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:choose>
 						<c:when test="${empty cd.environmentalFactor.name}">
-							<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}" escapeXml="false"/></camod:highlight>
+							<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
 						</c:when>
 						<c:otherwise>
 							<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
@@ -271,7 +283,7 @@
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:choose>
 						<c:when test="${empty cd.treatment.administrativeRoute}">
-							<camod:highlight><c:out value="${cd.treatment.adminRouteUnctrlVocab}" escapeXml="false"/></camod:highlight>
+							<camod:highlight><c:out value="${cd.treatment.adminRouteAlternEntry}" escapeXml="false"/></camod:highlight>
 						</c:when>
 						<c:otherwise>
 							<camod:highlight><c:out value="${cd.treatment.administrativeRoute}" escapeXml="false"/></camod:highlight>
@@ -281,9 +293,12 @@
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}" escapeXml="false"/></camod:highlight>
 				</td>
-				<td class="<c:out value="${tdClass}"/>End" width="17%">
+				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}"/>&nbsp;</camod:highlight>
 				</td>
+				<td class="<c:out value="${tdClass}"/>End" width="17%">
+						<camod:highlight><c:out value="${cd.environmentalFactor.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
+				</td>				
 			</tr>
 			</c:forEach>
 			<!--   End of if externalSource is empty (caMOD data) -->
@@ -299,7 +314,7 @@
 			<c:if test="${not empty cdList}">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
 			<tr>
-				<td class="formTitleBlue" height="20" colspan="6">Hormone</td>				
+				<td class="formTitleBlue" height="20" colspan="7">Hormone</td>				
 			</tr>
 			
 			<!--   Start of if externalSource is Jax MTB -->
@@ -320,11 +335,11 @@
 				</c:choose>
 			<tr>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.typeUnctrlVocab}" escapeXml="false"/></camod:highlight>
+					<camod:highlight><c:out value="${cd.environmentalFactor.typeAlternEntry}" escapeXml="false"/></camod:highlight>
 				</td>
 
 				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}" escapeXml="false"/></camod:highlight>
+					<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
 				</td>
 			</tr>
 			</c:forEach>			
@@ -340,6 +355,7 @@
 				<td class="greySubTitleLeft" width="17%">Administrative Route</td>
 				<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
 				<td class="greySubTitle" width="17%">Gender</td>
+				<td class="greySubTitle" width="17%">Comment</td>
 			</tr>
 			<c:forEach var="cd" items="${cdList}" varStatus="stat">
 				<c:choose>
@@ -354,7 +370,7 @@
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:choose>
 						<c:when test="${empty cd.environmentalFactor.name}">
-							<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}" escapeXml="false"/></camod:highlight>
+							<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
 						</c:when>
 						<c:otherwise>
 							<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
@@ -370,7 +386,7 @@
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:choose>
 						<c:when test="${empty cd.treatment.administrativeRoute}">
-							<camod:highlight><c:out value="${cd.treatment.adminRouteUnctrlVocab}" escapeXml="false"/></camod:highlight>
+							<camod:highlight><c:out value="${cd.treatment.adminRouteAlternEntry}" escapeXml="false"/></camod:highlight>
 						</c:when>
 						<c:otherwise>
 							<camod:highlight><c:out value="${cd.treatment.administrativeRoute}" escapeXml="false"/></camod:highlight>
@@ -380,9 +396,12 @@
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}" escapeXml="false"/></camod:highlight>
 				</td>
-				<td class="<c:out value="${tdClass}"/>End" width="17%">
+				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
+				<td class="<c:out value="${tdClass}"/>End" width="17%">
+						<camod:highlight><c:out value="${cd.environmentalFactor.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
+				</td>				
 			</tr>
 			</c:forEach>
 			<!--   End of if externalSource is empty (caMOD data) -->
@@ -398,7 +417,7 @@
 			<c:if test="${not empty cdList}">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
 			<tr>
-				<td class="formTitleBlue" height="20" colspan="6">Radiation</td>				
+				<td class="formTitleBlue" height="20" colspan="7">Radiation</td>				
 			</tr>
 			
 			<!--   Start of if externalSource is Jax MTB -->
@@ -419,11 +438,11 @@
 				</c:choose>
 			<tr>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.typeUnctrlVocab}" escapeXml="false"/></camod:highlight>
+					<camod:highlight><c:out value="${cd.environmentalFactor.typeAlternEntry}" escapeXml="false"/></camod:highlight>
 				</td>
 
 				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}" escapeXml="false"/></camod:highlight>
+					<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
 				</td>
 			</tr>
 			</c:forEach>			
@@ -438,7 +457,8 @@
 				<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>	
 				<td class="greySubTitleLeft" width="17%">Administrative Route</td>
 				<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
-				<td class="greySubTitle" width="17%">Gender</td>	
+				<td class="greySubTitle" width="17%">Gender</td>
+				<td class="greySubTitle" width="17%">Comment</td>	
 			</tr>
 			<c:forEach var="cd" items="${cdList}" varStatus="stat">
 				<c:choose>
@@ -453,7 +473,7 @@
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:choose>
 						<c:when test="${empty cd.environmentalFactor.name}">
-							<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}" escapeXml="false"/></camod:highlight>
+							<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
 						</c:when>
 						<c:otherwise>
 							<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
@@ -469,7 +489,7 @@
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:choose>
 						<c:when test="${empty cd.treatment.administrativeRoute}">
-							<camod:highlight><c:out value="${cd.treatment.adminRouteUnctrlVocab}" escapeXml="false"/></camod:highlight>
+							<camod:highlight><c:out value="${cd.treatment.adminRouteAlternEntry}" escapeXml="false"/></camod:highlight>
 						</c:when>
 						<c:otherwise>
 							<camod:highlight><c:out value="${cd.treatment.administrativeRoute}" escapeXml="false"/></camod:highlight>
@@ -479,9 +499,12 @@
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}" escapeXml="false"/></camod:highlight>
 				</td>
-				<td class="<c:out value="${tdClass}"/>End" width="17%">
+				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
+				<td class="<c:out value="${tdClass}"/>End" width="17%">
+						<camod:highlight><c:out value="${cd.environmentalFactor.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
+				</td>				
 			</tr>
 			</c:forEach>
 			<!--   End of if externalSource is empty (caMOD data) -->
@@ -517,11 +540,11 @@
 				</c:choose>
 			<tr>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.typeUnctrlVocab}" escapeXml="false"/></camod:highlight>
+					<camod:highlight><c:out value="${cd.environmentalFactor.typeAlternEntry}" escapeXml="false"/></camod:highlight>
 				</td>
 
 				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}" escapeXml="false"/></camod:highlight>
+					<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
 				</td>
 			</tr>
 			</c:forEach>			
@@ -531,14 +554,15 @@
 			<!--   Start of if externalSource is empty (caMOD data) -->	
 			<c:if test="${empty mdl.externalSource}">
 			<tr>
-				<td class="formTitleBlue" height="20" colspan="4">Surgery</td>
+				<td class="formTitleBlue" height="20" colspan="5">Surgery</td>
 			</tr>			
 						
 			<tr>
 				<td class="greySubTitleLeft" width="30%">Surgery</td>
 				<td class="greySubTitleLeft" width="30%">Treatment Regimen</td>
 				<td class="greySubTitleLeft" width="20%">Age at Treatment</td>
-				<td class="greySubTitle" width="20%">Gender</td>				
+				<td class="greySubTitle" width="20%">Gender</td>
+				<td class="greySubTitle" width="17%">Comment</td>				
 			</tr>
 			
 			<c:forEach var="cd" items="${cdList}" varStatus="stat">
@@ -554,7 +578,7 @@
 				<td class="<c:out value="${tdClass}"/>" width="30%">
 					<c:choose>
 						<c:when test="${empty cd.environmentalFactor.name}">
-							<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}" escapeXml="false"/></camod:highlight>
+							<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
 						</c:when>
 						<c:otherwise>
 							<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
@@ -567,9 +591,12 @@
 				<td class="<c:out value="${tdClass}"/>" width="20%">
 					<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}" escapeXml="false"/></camod:highlight>
 				</td>
-				<td class="<c:out value="${tdClass}"/>End" width="20%">
+				<td class="<c:out value="${tdClass}"/>" width="20%">
 					<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
+				<td class="<c:out value="${tdClass}"/>End" width="17%">
+						<camod:highlight><c:out value="${cd.environmentalFactor.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
+				</td>				
 			</tr>
 			</c:forEach>
 			<!--   End of if externalSource is empty (caMOD data) -->
@@ -584,7 +611,7 @@
 			<c:if test="${not empty cdList}">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
 			<tr>
-				<td class="formTitleBlue" height="20" colspan="6">Viral Treatment</td>
+				<td class="formTitleBlue" height="20" colspan="7">Viral Treatment</td>
 			</tr>
 			
 			<!--   Start of if externalSource is Jax MTB -->
@@ -605,11 +632,11 @@
 				</c:choose>
 			<tr>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.typeUnctrlVocab}" escapeXml="false"/></camod:highlight>
+					<camod:highlight><c:out value="${cd.environmentalFactor.typeAlternEntry}" escapeXml="false"/></camod:highlight>
 				</td>
 
 				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}" escapeXml="false"/></camod:highlight>
+					<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
 				</td>
 			</tr>
 			</c:forEach>			
@@ -625,7 +652,8 @@
 				<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
 				<td class="greySubTitleLeft" width="17%">Administrative Route</td>
 				<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
-				<td class="greySubTitle" width="17%">Gender</td>				
+				<td class="greySubTitle" width="17%">Gender</td>
+				<td class="greySubTitle" width="17%">Comment</td>				
 			</tr>
 			
 			<c:forEach var="cd" items="${cdList}" varStatus="stat">
@@ -641,7 +669,7 @@
 				<td class="<c:out value="${tdClass}"/>" width="20%">
 					<c:choose>
 						<c:when test="${empty cd.environmentalFactor.name}">
-							<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}" escapeXml="false"/></camod:highlight>
+							<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
 						</c:when>
 						<c:otherwise>
 							<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
@@ -657,7 +685,7 @@
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:choose>
 						<c:when test="${empty cd.treatment.administrativeRoute}">
-							<camod:highlight><c:out value="${cd.treatment.adminRouteUnctrlVocab}" escapeXml="false"/></camod:highlight>
+							<camod:highlight><c:out value="${cd.treatment.adminRouteAlternEntry}" escapeXml="false"/></camod:highlight>
 						</c:when>
 						<c:otherwise>
 							<camod:highlight><c:out value="${cd.treatment.administrativeRoute}" escapeXml="false"/></camod:highlight>
@@ -667,9 +695,12 @@
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}" escapeXml="false"/></camod:highlight>
 				</td>
-				<td class="<c:out value="${tdClass}"/>End" width="17%">
+				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
+				<td class="<c:out value="${tdClass}"/>End" width="17%">
+						<camod:highlight><c:out value="${cd.environmentalFactor.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
+				</td>				
 			</tr>
 			</c:forEach>
 			<!--   End of if externalSource is empty (caMOD data) -->
@@ -685,7 +716,7 @@
 			<c:if test="${not empty cdList}">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
 			<tr>
-				<td class="formTitleBlue" height="20" colspan="6">Environment</td>				
+				<td class="formTitleBlue" height="20" colspan="7">Environment</td>				
 			</tr>
 			
 			<tr>
@@ -694,7 +725,8 @@
 				<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
 				<td class="greySubTitleLeft" width="17%">Administrative Route</td>
 				<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
-				<td class="greySubTitle" width="17%">Gender</td>				
+				<td class="greySubTitle" width="17%">Gender</td>
+				<td class="greySubTitle" width="17%">Comment</td>				
 			</tr>
 			
 			<c:forEach var="cd" items="${cdList}" varStatus="stat">
@@ -710,7 +742,7 @@
 				<td class="<c:out value="${tdClass}"/>" width="20%">
 					<c:choose>
 						<c:when test="${empty cd.environmentalFactor.name}">
-							<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}"  escapeXml="false"/></camod:highlight>
+							<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}"  escapeXml="false"/></camod:highlight>
 						</c:when>
 						<c:otherwise>
 							<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
@@ -726,7 +758,7 @@
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:choose>
 						<c:when test="${empty cd.treatment.administrativeRoute}">
-							<camod:highlight><c:out value="${cd.treatment.adminRouteUnctrlVocab}" escapeXml="false"/></camod:highlight>
+							<camod:highlight><c:out value="${cd.treatment.adminRouteAlternEntry}" escapeXml="false"/></camod:highlight>
 						</c:when>
 						<c:otherwise>
 							<camod:highlight><c:out value="${cd.treatment.administrativeRoute}" escapeXml="false"/></camod:highlight>
@@ -736,9 +768,12 @@
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}" escapeXml="false"/></camod:highlight>
 				</td>
-				<td class="<c:out value="${tdClass}"/>End" width="17%">
+				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
+				<td class="<c:out value="${tdClass}"/>End" width="17%">
+						<camod:highlight><c:out value="${cd.environmentalFactor.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
+				</td>				
 			</tr>
 			</c:forEach>
 			</TABLE>		
@@ -751,7 +786,7 @@
 			<c:if test="${not empty cdList}">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
 			<tr>
-				<td class="formTitleBlue" height="20" colspan="6">Gene Delivery</td>				
+				<td class="formTitleBlue" height="20" colspan="7">Gene Delivery</td>				
 			</tr>
 			<tr>
 				<td class="greySubTitleLeft" width="17%">Viral Vector</td>
@@ -760,6 +795,7 @@
 				<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>	
 				<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
 				<td class="greySubTitle" width="17%">Gender</td>
+				<td class="greySubTitle" width="17%">Comment</td>
 			</tr>
 			<c:forEach var="cd" items="${cdList}" varStatus="stat">
 				<c:choose>
@@ -774,7 +810,7 @@
 				<td class="<c:out value="${tdClass}"/>" width="30%">
 					<c:choose>
 						<c:when test="${empty cd.viralVector}">
-							<camod:highlight><c:out value="${cd.viralVectorUnctrlVocab}" escapeXml="false"/></camod:highlight>
+							<camod:highlight><c:out value="${cd.viralVectorAlternEntry}" escapeXml="false"/></camod:highlight>
 						</c:when>
 						<c:otherwise>
 							<camod:highlight><c:out value="${cd.viralVector}" escapeXml="false"/></camod:highlight>
@@ -793,9 +829,12 @@
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}" escapeXml="false"/></camod:highlight>
 				</td>
-				<td class="<c:out value="${tdClass}"/>End" width="17%">
+				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
+				<td class="<c:out value="${tdClass}"/>End" width="17%">
+						<camod:highlight><c:out value="${cd.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
+				</td>				
 			</tr>
 			</c:forEach>
 			</TABLE>
@@ -808,14 +847,15 @@
 			<c:if test="${not empty cdList}">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
 			<tr>
-				<td class="formTitleBlue" height="20" colspan="5">Nutrition</td>				
+				<td class="formTitleBlue" height="20" colspan="6">Nutrition</td>				
 			</tr>
 			<tr>
 				<td class="greySubTitleLeft" width="20%">Nutritional Component / Diet</td>
 				<td class="greySubTitleLeft" width="20%">Dose</td>
 				<td class="greySubTitleLeft" width="20%">Treatment Regimen</td>
 				<td class="greySubTitleLeft" width="20%">Age at Treatment</td>
-				<td class="greySubTitle" width="20%">Gender</td>				
+				<td class="greySubTitle" width="20%">Gender</td>
+				<td class="greySubTitle" width="17%">Comment</td>				
 			</tr>
 			
 			<c:forEach var="cd" items="${cdList}" varStatus="stat">
@@ -831,7 +871,7 @@
 				<td class="<c:out value="${tdClass}"/>" width="20%">
 					<c:choose>
 						<c:when test="${empty cd.environmentalFactor.name}">
-							<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}" escapeXml="false"/></camod:highlight>
+							<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
 						</c:when>
 						<c:otherwise>
 							<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
@@ -847,9 +887,12 @@
 				<td class="<c:out value="${tdClass}"/>" width="20%">
 					<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}" escapeXml="false"/></camod:highlight>
 				</td>
-				<td class="<c:out value="${tdClass}"/>End" width="20%">
+				<td class="<c:out value="${tdClass}"/>" width="20%">
 					<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
+				<td class="<c:out value="${tdClass}"/>End" width="17%">
+						<camod:highlight><c:out value="${cd.environmentalFactor.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
+				</td>				
 			</tr>
 			</c:forEach>
 			</TABLE>
@@ -863,7 +906,7 @@
 			<c:if test="${not empty cdList}">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
 			<tr>
-				<td class="formTitleBlue" height="20" colspan="6">Antibody</td>
+				<td class="formTitleBlue" height="20" colspan="7">Antibody</td>
 			</tr>
 			
 			<tr>
@@ -882,11 +925,11 @@
 				</c:choose>
 			<tr>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.typeUnctrlVocab}" escapeXml="false"/></camod:highlight>
+					<camod:highlight><c:out value="${cd.environmentalFactor.typeAlternEntry}" escapeXml="false"/></camod:highlight>
 				</td>
 
 				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}" escapeXml="false"/></camod:highlight>
+					<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
 				</td>
 			</tr>
 			</c:forEach>
@@ -900,7 +943,7 @@
 			<c:if test="${not empty cdList}">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
 			<tr>
-				<td class="formTitleBlue" height="20" colspan="6">Bacteria</td>
+				<td class="formTitleBlue" height="20" colspan="7">Bacteria</td>
 			</tr>
 			
 			<tr>
@@ -919,11 +962,11 @@
 				</c:choose>
 			<tr>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.typeUnctrlVocab}" escapeXml="false"/></camod:highlight>
+					<camod:highlight><c:out value="${cd.environmentalFactor.typeAlternEntry}" escapeXml="false"/></camod:highlight>
 				</td>
 
 				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}" escapeXml="false"/></camod:highlight>
+					<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
 				</td>
 			</tr>
 			</c:forEach>
@@ -938,7 +981,7 @@
 			<c:if test="${not empty cdList}">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
 			<tr>
-				<td class="formTitleBlue" height="20" colspan="6">Plasmid</td>
+				<td class="formTitleBlue" height="20" colspan="7">Plasmid</td>
 			</tr>
 			
 			<tr>
@@ -957,11 +1000,11 @@
 				</c:choose>
 			<tr>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.typeUnctrlVocab}" escapeXml="false"/></camod:highlight>
+					<camod:highlight><c:out value="${cd.environmentalFactor.typeAlternEntry}" escapeXml="false"/></camod:highlight>
 				</td>
 
 				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}" escapeXml="false"/></camod:highlight>
+					<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
 				</td>
 			</tr>
 			</c:forEach>
@@ -975,7 +1018,7 @@
 			<c:if test="${not empty cdList}">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
 			<tr>
-				<td class="formTitleBlue" height="20" colspan="6">Transposon</td>
+				<td class="formTitleBlue" height="20" colspan="7">Transposon</td>
 			</tr>
 			
 			<tr>
@@ -994,11 +1037,11 @@
 				</c:choose>
 			<tr>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.typeUnctrlVocab}" escapeXml="false"/></camod:highlight>
+					<camod:highlight><c:out value="${cd.environmentalFactor.typeAlternEntry}" escapeXml="false"/></camod:highlight>
 				</td>
 
 				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}" escapeXml="false"/></camod:highlight>
+					<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
 				</td>
 			</tr>
 			</c:forEach>

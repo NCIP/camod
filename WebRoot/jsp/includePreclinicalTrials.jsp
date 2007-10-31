@@ -1,6 +1,9 @@
 <%
  /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.26  2007/07/31 12:00:10  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.25  2007/06/19 20:34:00  pandyas
  * Users not logged in can not access the session property to check the model species.  Therefore, we must show the attribute for all models.
  *
@@ -57,7 +60,7 @@
  * Defect #86.  Removed unneeded field.
  *
  *
- * $Id: includePreclinicalTrials.jsp,v 1.26 2007-07-31 12:00:10 pandyas Exp $
+ * $Id: includePreclinicalTrials.jsp,v 1.27 2007-10-31 19:33:58 pandyas Exp $
  */
 %>
 <tr>
@@ -82,7 +85,7 @@
 	<td class="resultsBoxWhiteEnd" width="75%">
 		<c:choose>
 			<c:when test="${empty t.treatment.administrativeRoute}">
-				<camod:highlight><c:out value="${t.treatment.adminRouteUnctrlVocab}" escapeXml="false"/></camod:highlight>
+				<camod:highlight><c:out value="${t.treatment.adminRouteAlternEntry}" escapeXml="false"/></camod:highlight>
 			</c:when>
 			<c:otherwise>
 				<camod:highlight><c:out value="${t.treatment.administrativeRoute}" escapeXml="false"/></camod:highlight>

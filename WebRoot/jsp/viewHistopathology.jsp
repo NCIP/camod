@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.44  2007/09/17 17:05:08  pandyas
+ * Need EVSPreferredDescription for metastasis at end of page
+ *
  * Revision 1.43  2007/08/27 15:29:04  pandyas
  * Allows Age of Tumor Detection  to display the character <165
  *
@@ -75,7 +78,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: viewHistopathology.jsp,v 1.44 2007-09-17 17:05:08 pandyas Exp $
+ * $Id: viewHistopathology.jsp,v 1.45 2007-10-31 19:33:58 pandyas Exp $
  *
  */   
 %>
@@ -143,7 +146,7 @@
 								<td width="50%">
 									<c:choose>
 										<c:when test="${empty h.disease.name}">
-											<camod:highlight><c:out value="${h.disease.nameUnctrlVocab}" escapeXml="false"/></camod:highlight>
+											<camod:highlight><c:out value="${h.disease.nameAlternEntry}" escapeXml="false"/></camod:highlight>
 										</c:when>
 										<c:otherwise>
 											<camod:highlight><c:out value="${h.disease.EVSPreferredDescription}" escapeXml="false"/></camod:highlight>
@@ -310,15 +313,16 @@
 					<td class="resultsBoxWhiteEnd" width="75%">
 						<table summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="90%">
 						    <tr>
-							    <td class="formTitle" width="65%"><b>Clinical Marker Name</b></td>
-							    <td class="formTitle" width="35%"><b>Value</b></td>
+							    <td class="formTitle" width="55%"><b>Clinical Marker Name</b></td>
+							    <td class="formTitle" width="25%"><b>Value</b></td>
+								<td class="formTitle" width="20%">Comment</td>							    
 						    </tr>
 						    <c:forEach var="c" items="${cmColl}">
 							    	<tr>
 					        		<td class="WhiteBox">
 											<c:choose>
 												<c:when test="${empty c.name}">
-													<camod:highlight><c:out value="${c.nameUnctrlVocab}" escapeXml="false"/></camod:highlight>
+													<camod:highlight><c:out value="${c.nameAlternEntry}" escapeXml="false"/></camod:highlight>
 												</c:when>
 												<c:otherwise>
 													<camod:highlight><c:out value="${c.name}" escapeXml="false"/></camod:highlight>
@@ -326,6 +330,7 @@
 											</c:choose>					                
 					                </td>
 					                <td class="WhiteBoxRightEnd"><c:out value="${c.value}" escapeXml="false"/>&nbsp;</td>
+					                <td class="WhiteBoxRightEnd"><c:out value="${c.comments}" escapeXml="false"/>&nbsp;</td>					                
 							    </tr>
 						    </c:forEach>
 					    </table>

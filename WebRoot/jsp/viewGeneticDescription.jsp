@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.56 2007-08-27 15:34:58 pandyas Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.57 2007-10-31 19:33:58 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.56  2007/08/27 15:34:58  pandyas
+ * Reverted back to EVSPreferredDescription since this was fixed
+ *
  * Revision 1.55  2007/08/14 17:08:41  pandyas
  * Bug #8404:  The following fields do not display correctly the entered value for the "other" field:  Genetic description - targeted modification type
  *
@@ -213,7 +216,7 @@
 							<c:choose>
 								<c:when test="${empty eg.environmentalFactor.name}">
 									<camod:highlight>
-										<c:out value="${eg.environmentalFactor.nameUnctrlVocab}" escapeXml="false"/>&nbsp;
+										<c:out value="${eg.environmentalFactor.nameAlternEntry}" escapeXml="false"/>&nbsp;
 									</camod:highlight>
 								</c:when>
 								<c:otherwise>
@@ -413,19 +416,20 @@
 				<c:if test="${not empty tg.expressionFeatureCollection}">
 					<table summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
 						<tr>
-							<td class="formTitle" width="65%"><b>Organ</b></td>
-							<td class="formTitle" width="35%"><b>Expression Level</b></td>
+							<td class="formTitle" width="65%"><b>Organ (Expression Level)</b></td>
+							<td class="formTitle" width="35%"><b>Comment</b></td>
 						</tr>
 						<c:forEach var="el" items="${tg.expressionFeatureCollection}">
 							<tr>
 								<td class="WhiteBox">
 									<camod:highlight>
 										<c:out value="${el.organ.EVSPreferredDescription}" escapeXml="false"/>&nbsp;
+										(<c:out value="${el.expressionLevelDesc.expressionLevel}" escapeXml="false"/>)&nbsp;
 									</camod:highlight>		
 								</td>
 								<td class="WhiteBoxRightEnd">
 									<camod:highlight>
-										<c:out value="${el.expressionLevelDesc.expressionLevel}" escapeXml="false"/>&nbsp;
+										<c:out value="${el.comments}" escapeXml="false"/>&nbsp;
 									</camod:highlight>		
 								</td>
 							</tr>
@@ -541,7 +545,7 @@
 						<c:choose>
 							<c:when test="${empty gs.segmentType.name}">
 								<camod:highlight>
-									<c:out value="${gs.segmentType.nameUnctrlVocab}" escapeXml="false"/>&nbsp;
+									<c:out value="${gs.segmentType.nameAlternEntry}" escapeXml="false"/>&nbsp;
 								</camod:highlight>
 							</c:when>
 							<c:otherwise>
@@ -720,7 +724,7 @@
 				<c:forEach var="modType" items="${tm.modificationTypeCollection}">
 					<c:choose> 
 						<c:when test="${empty modType.name}">
-							<camod:highlight><c:out value="${modType.nameUnctrlVocab}" escapeXml="false"/></camod:highlight>
+							<camod:highlight><c:out value="${modType.nameAlternEntry}" escapeXml="false"/></camod:highlight>
 						</c:when>
 						<c:otherwise>
 							<camod:highlight><c:out value="${modType.name}" escapeXml="false"/></camod:highlight>
@@ -730,14 +734,14 @@
             </td>
         </tr>
        <tr>
-            <td class="GreyBox"><b>Gene ID</b></td>
+            <td class="GreyBox"><b>Gene Identifier</b></td>
             <td class="GreyBoxRightEnd">
             	<c:choose>
-					<c:when test="${empty tm.geneId}">
+					<c:when test="${empty tm.geneIdentifier}">
 						&nbsp;
 					</c:when>
 					<c:otherwise>
-			            <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=search&db=gene&term=<c:out value="${tm.geneId}"/>" target="blank"><c:out value="${tm.geneId}"/></a>
+			            <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=search&db=gene&term=<c:out value="${tm.geneIdentifier}"/>" target="blank"><c:out value="${tm.geneId}"/></a>
 					</c:otherwise>
 				</c:choose>            	
             </td>
@@ -978,7 +982,7 @@
 				<c:choose>
 					<c:when test="${empty im.environmentalFactor.name}">
 						<camod:highlight>
-							<c:out value="${im.environmentalFactor.nameUnctrlVocab}" escapeXml="false"/>&nbsp;
+							<c:out value="${im.environmentalFactor.nameAlternEntry}" escapeXml="false"/>&nbsp;
 						</camod:highlight>
 					</c:when>
 					<c:otherwise>
@@ -996,7 +1000,7 @@
 				<c:choose>
 					<c:when test="${empty im.environmentalFactor.type}">
 						<camod:highlight>
-							<c:out value="${im.environmentalFactor.typeUnctrlVocab}" escapeXml="false"/>&nbsp;
+							<c:out value="${im.environmentalFactor.typeAlternEntry}" escapeXml="false"/>&nbsp;
 						</camod:highlight>
 					</c:when>
 					<c:otherwise>
@@ -1018,14 +1022,14 @@
         </tr>
 				
         <tr>
-            <td class="WhiteBox"><b>Gene ID</b></td>
+            <td class="WhiteBox"><b>Gene Identifier</b></td>
             <td class="WhiteBoxRightEnd">
             	<c:choose>
-					<c:when test="${empty im.geneId}">
+					<c:when test="${empty im.geneIdentifier}">
 						&nbsp;
 					</c:when>
 					<c:otherwise>
-			            <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=search&db=gene&term=<c:out value="${im.geneId}"/>" target="blank"><c:out value="${im.geneId}"/></a>
+			            <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=search&db=gene&term=<c:out value="${im.geneIdentifier}"/>" target="blank"><c:out value="${im.geneId}"/></a>
 					</c:otherwise>
 				</c:choose>            	
             </td>
@@ -1164,14 +1168,14 @@
 			</td>
 		</tr>
         <tr>
-            <td class="GreyBox"><b>Gene ID</b></td>
+            <td class="GreyBox"><b>Gene Identifier</b></td>
             <td class="GreyBoxRightEnd">
             	<c:choose>
-					<c:when test="${empty sm.geneId}">
+					<c:when test="${empty sm.geneIdentifier}">
 						&nbsp;
 					</c:when>
 					<c:otherwise>
-			            <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=search&db=gene&term=<c:out value="${sm.geneId}"/>" target="blank"><c:out value="${sm.geneId}"/></a>
+			            <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=search&db=gene&term=<c:out value="${sm.geneIdentifier}"/>" target="blank"><c:out value="${sm.geneId}"/></a>
 					</c:otherwise>
 				</c:choose>            	
             </td>
