@@ -1,5 +1,8 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2006/04/27 15:01:04  pandyas
+ * Added displayName for left menu bar
+ *
  * Revision 1.8  2006/04/17 19:13:46  pandyas
  * caMod 2.1 OM changes and added log/id header
  *
@@ -10,7 +13,7 @@
  * Cleanup
  *
  * 
- * $Id: ClinicalMarker.java,v 1.9 2006-04-27 15:01:04 pandyas Exp $
+ * $Id: ClinicalMarker.java,v 1.10 2007-10-31 15:26:26 pandyas Exp $
  */
 package gov.nih.nci.camod.domain;
 
@@ -25,8 +28,9 @@ public class ClinicalMarker extends BaseObject implements Comparable, Serializab
     private static final long serialVersionUID = 3259615453799404851L;
 
     private String name;
-    private String nameUnctrlVocab;    
+    private String nameAlternEntry;    
     private String value;
+    private String comments;    
 
     /**
      * @return Returns the name.
@@ -44,22 +48,7 @@ public class ClinicalMarker extends BaseObject implements Comparable, Serializab
     {
         this.name = name;
     }
-    /**
-     * @return Returns the nameUnctrlVocab.
-     */
-    public String getNameUnctrlVocab()
-    {
-        return nameUnctrlVocab;
-    }
 
-    /**
-     * @param nameUnctrlVocab
-     *            The nameUnctrlVocab to set.
-     */
-    public void setNameUnctrlVocab(String nameUnctrlVocab)
-    {
-        this.nameUnctrlVocab = nameUnctrlVocab;
-    } 
     
     /**
      * @return Returns the display name.
@@ -67,9 +56,9 @@ public class ClinicalMarker extends BaseObject implements Comparable, Serializab
     public String getDisplayName()
     {
         String theDisplayName = name;
-        if (theDisplayName == null && nameUnctrlVocab != null)
+        if (theDisplayName == null && nameAlternEntry != null)
         {
-            theDisplayName = "Other - " + nameUnctrlVocab;
+            theDisplayName = "Other - " + nameAlternEntry;
         }
 
         return theDisplayName;
@@ -90,6 +79,23 @@ public class ClinicalMarker extends BaseObject implements Comparable, Serializab
     {
         this.value = value;
     }
+    
+    /**
+     * @return Returns the comments. Comment is a reserved word so 
+     * we must use the plural form comments.
+     */
+    public String getComments() {
+        return comments;
+    }
+
+    /**
+     * @param comments
+     *            The comments to set.
+     */
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+    
 
     /**
      * @see java.lang.Object#toString()
@@ -134,5 +140,19 @@ public class ClinicalMarker extends BaseObject implements Comparable, Serializab
 
         return super.compareTo(o);
     }
+
+	/**
+	 * @return the nameAlternEntry
+	 */
+	public String getNameAlternEntry() {
+		return nameAlternEntry;
+	}
+
+	/**
+	 * @param nameAlternEntry the nameAlternEntry to set
+	 */
+	public void setNameAlternEntry(String nameAlternEntry) {
+		this.nameAlternEntry = nameAlternEntry;
+	}
 
 }
