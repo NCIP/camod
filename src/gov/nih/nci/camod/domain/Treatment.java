@@ -1,7 +1,10 @@
 /*
- * $Id: Treatment.java,v 1.9 2006-04-17 19:13:46 pandyas Exp $
+ * $Id: Treatment.java,v 1.10 2007-10-31 15:55:38 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2006/04/17 19:13:46  pandyas
+ * caMod 2.1 OM changes and added log/id header
+ *
  */
 package gov.nih.nci.camod.domain;
 
@@ -25,7 +28,7 @@ public class Treatment extends BaseObject implements Serializable, Duplicatable
     private String dosage;
     private String dosageUnit;    
     private String administrativeRoute;
-    private String adminRouteUnctrlVocab;
+    private String adminRouteAlternEntry;
     private String ageAtTreatment;
     private String ageAtTreatmentUnit;    
     private SexDistribution sexDistribution;
@@ -64,23 +67,6 @@ public class Treatment extends BaseObject implements Serializable, Duplicatable
     public void setAdministrativeRoute(String administrativeRoute)
     {
         this.administrativeRoute = administrativeRoute;
-    }
-
-    /**
-     * @return Returns the adminRouteUnctrlVocab.
-     */
-    public String getAdminRouteUnctrlVocab()
-    {
-        return adminRouteUnctrlVocab;
-    }
-
-    /**
-     * @param adminRouteUnctrlVocab
-     *            The adminRouteUnctrlVocab to set.
-     */
-    public void setAdminRouteUnctrlVocab(String adminRouteUnctrlVocab)
-    {
-        this.adminRouteUnctrlVocab = adminRouteUnctrlVocab;
     }
 
     /**
@@ -271,4 +257,18 @@ public class Treatment extends BaseObject implements Serializable, Duplicatable
             return false;
         return true;
     }
+
+	/**
+	 * @return the adminRouteAlternEntry
+	 */
+	public String getAdminRouteAlternEntry() {
+		return adminRouteAlternEntry;
+	}
+
+	/**
+	 * @param adminRouteAlternEntry the adminRouteAlternEntry to set
+	 */
+	public void setAdminRouteAlternEntry(String adminRouteAlternEntry) {
+		this.adminRouteAlternEntry = adminRouteAlternEntry;
+	}
 }
