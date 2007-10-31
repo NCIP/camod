@@ -5,7 +5,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="gov.nih.nci.camod.domain.AnimalModel" %>	
 
-<bean:define id="mdl" name="graftmodel"/>
+<bean:define id="mdl" name="transplantationmodel"/>
 <bean:define id="nsc" name="nsc"/>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
@@ -19,8 +19,8 @@
 
 			<tr>
 				<td class="formTitle" height="20" colspan="9">
-					Graft - Model:
-					<c:out value="${xm.modelDescriptor}" escapeXml="false"/>
+					Transplantation - Model:
+					<c:out value="${tm.modelDescriptor}" escapeXml="false"/>
 				</td>				
 			</tr>			
 			
@@ -55,7 +55,7 @@
 
 			<c:set var="tdClass" value="resultsBoxGrey"/>
 			
-			<c:forEach var="r" items="${graftresultlist}" varStatus="stat">
+			<c:forEach var="r" items="${transplantationresultlist}" varStatus="stat">
 				<c:if test="${r.agent.nscNumber == nsc}">
 				
 				<c:choose>
