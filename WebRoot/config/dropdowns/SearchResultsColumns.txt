@@ -9,7 +9,6 @@ Drug / Compound Name
 Gender
 Gene
 Gene Name
-Graft Type
 Growth Factor
 Image Title
 Microarray
@@ -30,6 +29,7 @@ Submitted Date
 Targeted Gene / Locus
 Transcriptional 1
 Transgene
+Transplantation Type
 Tumor incidence over lifetime
 Tumor Sites
 Type of Modification

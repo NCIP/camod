@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: SearchPopulateGraftTest.java,v 1.2 2007-08-08 16:03:17 pandyas Exp $
+ * $Id: SearchPopulateGraftTest.java,v 1.3 2007-11-01 13:53:51 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2007/08/08 16:03:17  pandyas
+ * Removed reference to transplant - as per VCDE changes
+ *
  * Revision 1.1  2007/07/31 12:00:41  pandyas
  * VCDE silver level  changes
  * Modified all names used for a new attribute
@@ -42,7 +45,7 @@
  */
 package web.search;
 
-import gov.nih.nci.camod.webapp.form.GraftForm;
+import gov.nih.nci.camod.webapp.form.TransplantationForm;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -54,10 +57,10 @@ import com.meterware.httpunit.WebResponse;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-public class SearchPopulateGraftTest extends BaseModelNeededTest
+public class SearchPopulateTransplantationTest extends BaseModelNeededTest
 {
 
-    public SearchPopulateGraftTest(String arg0)
+    public SearchPopulateTransplantationTest(String arg0)
     {
         super(arg0);
     }
@@ -82,37 +85,37 @@ public class SearchPopulateGraftTest extends BaseModelNeededTest
 
     public static Test suite()
     {
-        TestSuite suite = new TestSuite(SearchPopulateGraftTest.class);
+        TestSuite suite = new TestSuite(SearchPopulateTransplantationTest.class);
         return suite;
     }
 
-    public void testPopulateGraftWithOthers() throws Exception
+    public void testPopulateTransplantationWithOthers() throws Exception
     {
 
         navigateToModelForEditing(myModelName);
 
-        // Adding a Graft
+        // Adding a Transplantation
         WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-                                                                                  "Enter Graft");
+                                                                                  "Enter Transplantation");
 
-        assertNotNull("Unable to find link to enter a Graft", theLink);
+        assertNotNull("Unable to find link to enter a Transplantation", theLink);
         WebResponse theCurrentPage = theLink.click();
-        assertCurrentPageContains("if graft type is not listed");
+        assertCurrentPageContains("if transplantation type is not listed");
         
         // Fill in the values and hit submit; Should fail the first time and the
         // populate will fill in the ethnicity strain values        
-        WebForm theWebForm = theCurrentPage.getFormWithName("graftForm");
+        WebForm theWebForm = theCurrentPage.getFormWithName("transplantationForm");
         
         theWebForm.setParameter("donorScientificName", "Mus musculus");
         theCurrentPage = theWebForm.submit();
-        assertCurrentPageContains("if graft type is not listed");
+        assertCurrentPageContains("if transplantation type is not listed");
         // Set the ethnicity strain and submit again
-        theWebForm = theCurrentPage.getFormWithName("graftForm");
+        theWebForm = theCurrentPage.getFormWithName("transplantationForm");
         //theWebForm.setParameter("donorEthinicityStrain", "129");
         //theCurrentPage = theWebForm.submit();
         
-        GraftForm theForm = new GraftForm();
-        theForm.setGraftName("TESTGRAFT");
+        TransplantationForm theForm = new TransplantationForm();
+        theForm.setTransplantationName("TESTTransplantation");
         theForm.setOrgan("Heart");
         theForm.setOrganTissueName("Heart");
         theForm.setOrganTissueCode("C22498");
@@ -143,20 +146,20 @@ public class SearchPopulateGraftTest extends BaseModelNeededTest
         //for debugging validation failures
         TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
 
-        assertCurrentPageContains("You have successfully added a Graft to this model!");
+        assertCurrentPageContains("You have successfully added a Transplantation to this model!");
 
         // Verify that populate method returns complete and correct data
         navigateToModelForEditing(myModelName);
 
-        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "TESTGRAFT");
-        assertNotNull("Unable to find link to verify Graft", theLink);
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "TESTTransplantation");
+        assertNotNull("Unable to find link to verify Transplantation", theLink);
         theCurrentPage = theLink.click();
-        assertCurrentPageContains("if graft type is not listed");
-        theWebForm = theCurrentPage.getFormWithName("graftForm");
+        assertCurrentPageContains("if transplantation type is not listed");
+        theWebForm = theCurrentPage.getFormWithName("transplantationForm");
 
         //Add parameters found behind but not populate screen
         theParamsToSkip = new ArrayList<String>();
-        theParamsToSkip.add("aGraftID");
+        theParamsToSkip.add("aTransplantationID");
         theParamsToSkip.add("submitAction");
         theParamsToSkip.add("otherHostEthinicityStrain");
         theParamsToSkip.add("modificationDescription");
@@ -164,21 +167,21 @@ public class SearchPopulateGraftTest extends BaseModelNeededTest
         verifyValuesOnPopulatePage(theWebForm, theParamsToSkip);
     }
 
-    public void testSearchForGraft() throws Exception
+    public void testSearchForTransplantation() throws Exception
     {
 
         navigateToModelForEditing(myModelName);
 
-        // Adding a Graft
+        // Adding a Transplantation
         WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-                                                                                  "Enter Graft");
-        assertNotNull("Unable to find link to enter a Graft", theLink);
+                                                                                  "Enter Transplantation");
+        assertNotNull("Unable to find link to enter a Transplantation", theLink);
         WebResponse theCurrentPage = theLink.click();
-        assertCurrentPageContains("if graft type is not listed");
-        WebForm theWebForm = theCurrentPage.getFormWithName("graftForm");
+        assertCurrentPageContains("if transplantation type is not listed");
+        WebForm theWebForm = theCurrentPage.getFormWithName("transplantationForm");
         
         // select from species list, then get strain list without violating validation
-        theWebForm.setParameter("name", "Test Graft");
+        theWebForm.setParameter("name", "Test Transplantation");
         theWebForm.setParameter("donorScientificName", "Mus musculus");
         theWebForm.setParameter("sourceType", "Cell Line");
         
@@ -187,7 +190,7 @@ public class SearchPopulateGraftTest extends BaseModelNeededTest
         TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
         //theWebForm.setParameter("donorEthinicityStrain", "129");        
 
-        GraftForm theForm = new GraftForm();
+        TransplantationForm theForm = new TransplantationForm();
         theForm.setOrgan("Heart");
         theForm.setOrganTissueName("Heart");
         theForm.setOrganTissueCode("C22498");
@@ -213,29 +216,29 @@ public class SearchPopulateGraftTest extends BaseModelNeededTest
         //for debugging validation failures
         //TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
 
-        assertCurrentPageContains("You have successfully added a Graft to this model!");
+        assertCurrentPageContains("You have successfully added a Transplantation to this model!");
 
         TestUtil.moveModelToEditedApproved(myModelName);
 
-        navigateToSpecificSearchPage(myModelName, "GRAFT");
+        navigateToSpecificSearchPage(myModelName, "Transplantation");
 
         verifyValuesOnPage(theWebForm, theParamsToSkip);
     }
 
-    public void testSearchForGraftWithOthers() throws Exception
+    public void testSearchForTransplantationWithOthers() throws Exception
     {
 
         navigateToModelForEditing(myModelName);
 
-        // Adding a Graft
+        // Adding a Transplantation
         WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-                                                                                  "Enter Graft");
-        assertNotNull("Unable to find link to enter a Graft", theLink);
+                                                                                  "Enter Transplantation");
+        assertNotNull("Unable to find link to enter a Transplantation", theLink);
         WebResponse theCurrentPage = theLink.click();
-        assertCurrentPageContains("if graft type is not listed");
-        WebForm theWebForm = theCurrentPage.getFormWithName("graftForm");
+        assertCurrentPageContains("if transplantation type is not listed");
+        WebForm theWebForm = theCurrentPage.getFormWithName("transplantationForm");
 
-        GraftForm theForm = new GraftForm();
+        TransplantationForm theForm = new TransplantationForm();
         theForm.setOrgan("Heart");
         theForm.setOrganTissueName("Heart");
         theForm.setOrganTissueCode("C22498");
@@ -261,11 +264,11 @@ public class SearchPopulateGraftTest extends BaseModelNeededTest
         theCurrentPage = theWebForm.submit();
         TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
 
-        assertCurrentPageContains("You have successfully added a Graft to this model!");
+        assertCurrentPageContains("You have successfully added a Transplantation to this model!");
 
         TestUtil.moveModelToEditedApproved(myModelName);
 
-        navigateToSpecificSearchPage(myModelName, "GRAFT");
+        navigateToSpecificSearchPage(myModelName, "Transplantation");
 
         verifyValuesOnPage(theWebForm, theParamsToSkip);
     }

@@ -58,8 +58,8 @@
     <!-- genomicSegmentManager -->
     <bean id="genomicSegmentManager" class="gov.nih.nci.camod.service.impl.GenomicSegmentManagerImpl"/>
     
-    <!-- GraftManager -->
-    <bean id="graftManager" class="gov.nih.nci.camod.service.impl.GraftManagerImpl"/>
+    <!-- TransplantationManager -->
+    <bean id="transplantationManager" class="gov.nih.nci.camod.service.impl.TransplantationManagerImpl"/>
     
     <!-- histopathologyManager -->
     <bean id="histopathologyManager" class="gov.nih.nci.camod.service.impl.HistopathologyManagerImpl"/>    

@@ -27,7 +27,7 @@ public class AllSearchTests extends TestCase {
         suite.addTest(SearchPopulatePublicationTest.suite());
         suite.addTest(SearchPopulateTherapyTest.suite());        
         suite.addTest(SearchPopulateTransIntTest.suite());
-        suite.addTest(SearchPopulateGraftTest.suite());
+        suite.addTest(SearchPopulateTransplantationTest.suite());
 
         return suite;
     }	

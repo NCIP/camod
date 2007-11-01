@@ -444,40 +444,40 @@ public class AnimalModelTest extends TestCase {
   }
 
   /**
-   * Test of getXenograftCollection method, of class gov.nih.nci.camod.domain.AnimalModel.
+   * Test of getTransplantationCollection method, of class gov.nih.nci.camod.domain.AnimalModel.
    
-  public void testGetXenograftCollection() {
-    System.out.println("testGetXenograftCollection");
+  public void testGetTransplantationCollection() {
+    System.out.println("testGetTransplantationCollection");
     
     // TODO add your test code below by replacing the default call to fail.
     fail("The test case is empty.");
   }*/
 
   /**
-   * Test of getXenograftCollectionSorted method, of class gov.nih.nci.camod.domain.AnimalModel.
+   * Test of getTransplantationCollectionSorted method, of class gov.nih.nci.camod.domain.AnimalModel.
    
-  public void testGetXenograftCollectionSorted() {
-    System.out.println("testGetXenograftCollectionSorted");
+  public void testGetTransplantationCollectionSorted() {
+    System.out.println("testGetTransplantationCollectionSorted");
     
     // TODO add your test code below by replacing the default call to fail.
     fail("The test case is empty.");
   }*/
 
   /**
-   * Test of setXenograftCollection method, of class gov.nih.nci.camod.domain.AnimalModel.
+   * Test of setTransplantationCollection method, of class gov.nih.nci.camod.domain.AnimalModel.
    */
-  public void testSetXenograftCollection() {
-    System.out.println("testSetXenograftCollection");
+  public void testSetTransplantationCollection() {
+    System.out.println("testSetTransplantationCollection");
     
     // TODO add your test code below by replacing the default call to fail.
     fail("The test case is empty.");
   }
 
   /**
-   * Test of addXenograft method, of class gov.nih.nci.camod.domain.AnimalModel.
+   * Test of addTransplantation method, of class gov.nih.nci.camod.domain.AnimalModel.
    */
-  public void testAddXenograft() {
-    System.out.println("testAddXenograft");
+  public void testAddTransplantation() {
+    System.out.println("testAddTransplantation");
     
     // TODO add your test code below by replacing the default call to fail.
     fail("The test case is empty.");
