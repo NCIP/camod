@@ -37,7 +37,7 @@
         <mapping resource="gov/nih/nci/camod/domain/Organization.hbm.xml"/>
         <mapping resource="gov/nih/nci/camod/domain/TumorCode.hbm.xml"/>
         <mapping resource="gov/nih/nci/camod/domain/AbstractCancerModel.hbm.xml"/>
-        <mapping resource="gov/nih/nci/camod/domain/Graft.hbm.xml"/>
+        <mapping resource="gov/nih/nci/camod/domain/Transplantation.hbm.xml"/>
         <mapping resource="gov/nih/nci/camod/domain/YeastModel.hbm.xml"/>
         <mapping resource="gov/nih/nci/camod/domain/AnimalModel.hbm.xml"/>
         <mapping resource="gov/nih/nci/camod/domain/Party.hbm.xml"/>
@@ -62,6 +62,7 @@
         <mapping resource="gov/nih/nci/camod/domain/GeneFunction.hbm.xml"/>
         <mapping resource="gov/nih/nci/camod/domain/GeneDelivery.hbm.xml"/>
         <mapping resource="gov/nih/nci/camod/domain/EngineeredGene.hbm.xml"/>
+		<mapping resource="gov/nih/nci/camod/domain/GeneIdentifier.hbm.xml"/>        
         <mapping resource="gov/nih/nci/camod/domain/ExpressionFeature.hbm.xml"/>
         <mapping resource="gov/nih/nci/camod/domain/Transgene.hbm.xml"/>
         <mapping resource="gov/nih/nci/camod/domain/Conditionality.hbm.xml"/>
