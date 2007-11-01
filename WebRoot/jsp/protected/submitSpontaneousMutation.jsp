@@ -76,12 +76,12 @@
 	<tr>
                
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Gene ID ( Entrez ):</label></td>
+		<td class="formLabel"><label for="field1">Entrez Gene ID:</label></td>
 		<td class="formField">
 			<input type=button value="Find Gene ID" onClick="myRef = window.open('http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=gene','mywin',
 			'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>		
 			<label for="field1">&nbsp;&nbsp;</label>
-			<html:text styleClass="formFieldUnSized" property="geneId" size="20" />	
+			<html:text styleClass="formFieldUnSized" property="geneIdentifier" size="20" />	
 	</tr>	
 	
 	<tr>

@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: submitInducedMutation.jsp,v 1.33 2007-04-09 12:35:02 pandyas Exp $
+ * $Id: submitInducedMutation.jsp,v 1.34 2007-11-01 15:30:08 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.33  2007/04/09 12:35:02  pandyas
+ * modified after caMOD 2.3 unit testing
+ *
  * Revision 1.32  2007/04/04 13:24:28  pandyas
  * modified names for mutation identifier fields (number changed to id)
  *
@@ -141,13 +144,13 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Gene ID ( Entrez ):</label>
+		<td class="formLabel"><label for="field1">Entrez Gene ID:</label>
 		</td>
 		<td class="formField">
 		<input type=button value="Find Gene ID" onClick="myRef = window.open('http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=gene','mywin',
 		'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>		
 		<label for="field1">&nbsp;&nbsp;</label>
-		<html:text styleClass="formFieldUnSized" property="geneId" size="20" />		
+		<html:text styleClass="formFieldUnSized" property="geneIdentifier" size="20" />		
 		</td>
 	</tr>
 	
