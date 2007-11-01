@@ -186,6 +186,15 @@
 			<html:text styleClass="formFieldUnSized" size="10" property="endPage" />
 		</td>
 	</tr>
+	
+	<tr>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field1">Comment:</label>
+		</td>
+			<td class="formField">
+					<html:textarea styleClass="formFieldSized" property="comments" cols="32" rows="4"/>			
+			</td>
+	</tr>		
 
 	<tr>
 		<td align="right" colspan="3">
