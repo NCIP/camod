@@ -104,20 +104,20 @@ public class TaxonTest extends TestCase {
   }
 
   /**
-   * Test of getEthnicityStrainUnctrlVocab method, of class gov.nih.nci.camod.domain.Taxon.
+   * Test of getEthnicityStrainAlternEntry method, of class gov.nih.nci.camod.domain.Taxon.
    */
-  public void testGetEthnicityStrainUnctrlVocab() {
-    System.out.println("testGetEthnicityStrainUnctrlVocab");
+  public void testGetEthnicityStrainAlternEntry() {
+    System.out.println("testGetEthnicityStrainAlternEntry");
     
     // TODO add your test code below by replacing the default call to fail.
     fail("The test case is empty.");
   }
 
   /**
-   * Test of setEthnicityStrainUnctrlVocab method, of class gov.nih.nci.camod.domain.Taxon.
+   * Test of setEthnicityStrainAlternEntry method, of class gov.nih.nci.camod.domain.Taxon.
    */
-  public void testSetEthnicityStrainUnctrlVocab() {
-    System.out.println("testSetEthnicityStrainUnctrlVocab");
+  public void testSetEthnicityStrainAlternEntry() {
+    System.out.println("testSetEthnicityStrainAlternEntry");
     
     // TODO add your test code below by replacing the default call to fail.
     fail("The test case is empty.");

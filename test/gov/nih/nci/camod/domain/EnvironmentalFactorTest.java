@@ -84,20 +84,20 @@ public class EnvironmentalFactorTest extends TestCase {
   }
 
   /**
-   * Test of getNameUnctrlVocab method, of class gov.nih.nci.camod.domain.EnvironmentalFactor.
+   * Test of getNameAlternEntry method, of class gov.nih.nci.camod.domain.EnvironmentalFactor.
    */
-  public void testGetNameUnctrlVocab() {
-    System.out.println("testGetNameUnctrlVocab");
+  public void testGetNameAlternEntry() {
+    System.out.println("testGetNameAlternEntry");
     
     // TODO add your test code below by replacing the default call to fail.
     fail("The test case is empty.");
   }
 
   /**
-   * Test of setNameUnctrlVocab method, of class gov.nih.nci.camod.domain.EnvironmentalFactor.
+   * Test of setNameAlternEntry method, of class gov.nih.nci.camod.domain.EnvironmentalFactor.
    */
-  public void testSetNameUnctrlVocab() {
-    System.out.println("testSetNameUnctrlVocab");
+  public void testSetNameAlternEntry() {
+    System.out.println("testSetNameAlternEntry");
     
     // TODO add your test code below by replacing the default call to fail.
     fail("The test case is empty.");
@@ -124,20 +124,20 @@ public class EnvironmentalFactorTest extends TestCase {
   }
 
   /**
-   * Test of getTypeUnctrlVocab method, of class gov.nih.nci.camod.domain.EnvironmentalFactor.
+   * Test of getTypeAlternEntry method, of class gov.nih.nci.camod.domain.EnvironmentalFactor.
    */
-  public void testGetTypeUnctrlVocab() {
-    System.out.println("testGetTypeUnctrlVocab");
+  public void testGetTypeAlternEntry() {
+    System.out.println("testGetTypeAlternEntry");
     
     // TODO add your test code below by replacing the default call to fail.
     fail("The test case is empty.");
   }
 
   /**
-   * Test of setTypeUnctrlVocab method, of class gov.nih.nci.camod.domain.EnvironmentalFactor.
+   * Test of setTypeAlternEntry method, of class gov.nih.nci.camod.domain.EnvironmentalFactor.
    */
-  public void testSetTypeUnctrlVocab() {
-    System.out.println("testSetTypeUnctrlVocab");
+  public void testSetTypeAlternEntry() {
+    System.out.println("testSetTypeAlternEntry");
     
     // TODO add your test code below by replacing the default call to fail.
     fail("The test case is empty.");

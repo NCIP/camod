@@ -124,20 +124,20 @@ public class GeneDeliveryTest extends TestCase {
   }
 
   /**
-   * Test of getViralVectorUnctrlVocab method, of class gov.nih.nci.camod.domain.GeneDelivery.
+   * Test of getViralVectorAlternEntry method, of class gov.nih.nci.camod.domain.GeneDelivery.
    */
-  public void testGetViralVectorUnctrlVocab() {
-    System.out.println("testGetViralVectorUnctrlVocab");
+  public void testGetViralVectorAlternEntry() {
+    System.out.println("testGetViralVectorAlternEntry");
     
     // TODO add your test code below by replacing the default call to fail.
     fail("The test case is empty.");
   }
 
   /**
-   * Test of setViralVectorUnctrlVocab method, of class gov.nih.nci.camod.domain.GeneDelivery.
+   * Test of setViralVectorAlternEntry method, of class gov.nih.nci.camod.domain.GeneDelivery.
    */
-  public void testSetViralVectorUnctrlVocab() {
-    System.out.println("testSetViralVectorUnctrlVocab");
+  public void testSetViralVectorAlternEntry() {
+    System.out.println("testSetViralVectorAlternEntry");
     
     // TODO add your test code below by replacing the default call to fail.
     fail("The test case is empty.");

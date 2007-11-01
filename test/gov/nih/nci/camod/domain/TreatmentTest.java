@@ -74,20 +74,20 @@ public class TreatmentTest extends TestCase {
   }
 
   /**
-   * Test of getAdminRouteUnctrlVocab method, of class gov.nih.nci.camod.domain.Treatment.
+   * Test of getAdminRouteAlternEntry method, of class gov.nih.nci.camod.domain.Treatment.
    */
-  public void testGetAdminRouteUnctrlVocab() {
-    System.out.println("testGetAdminRouteUnctrlVocab");
+  public void testGetAdminRouteAlternEntry() {
+    System.out.println("testGetAdminRouteAlternEntry");
     
     // TODO add your test code below by replacing the default call to fail.
     fail("The test case is empty.");
   }
 
   /**
-   * Test of setAdminRouteUnctrlVocab method, of class gov.nih.nci.camod.domain.Treatment.
+   * Test of setAdminRouteAlternEntry method, of class gov.nih.nci.camod.domain.Treatment.
    */
-  public void testSetAdminRouteUnctrlVocab() {
-    System.out.println("testSetAdminRouteUnctrlVocab");
+  public void testSetAdminRouteAlternEntry() {
+    System.out.println("testSetAdminRouteAlternEntry");
     
     // TODO add your test code below by replacing the default call to fail.
     fail("The test case is empty.");

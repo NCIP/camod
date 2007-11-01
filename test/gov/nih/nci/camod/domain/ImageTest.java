@@ -134,20 +134,20 @@ public class ImageTest extends TestCase {
   }
 
   /**
-   * Test of getStainingUnctrlVocab method, of class gov.nih.nci.camod.domain.Image.
+   * Test of getStainingAlternEntry method, of class gov.nih.nci.camod.domain.Image.
    */
-  public void testGetStainingUnctrlVocab() {
-    System.out.println("testGetStainingUnctrlVocab");
+  public void testGetStainingAlternEntry() {
+    System.out.println("testGetStainingAlternEntry");
     
     // TODO add your test code below by replacing the default call to fail.
     fail("The test case is empty.");
   }
 
   /**
-   * Test of setStainingUnctrlVocab method, of class gov.nih.nci.camod.domain.Image.
+   * Test of setStainingAlternEntry method, of class gov.nih.nci.camod.domain.Image.
    */
-  public void testSetStainingUnctrlVocab() {
-    System.out.println("testSetStainingUnctrlVocab");
+  public void testSetStainingAlternEntry() {
+    System.out.println("testSetStainingAlternEntry");
     
     // TODO add your test code below by replacing the default call to fail.
     fail("The test case is empty.");

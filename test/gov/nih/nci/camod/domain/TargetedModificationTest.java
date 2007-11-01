@@ -74,20 +74,20 @@ public class TargetedModificationTest extends TestCase {
   }
 
   /**
-   * Test of getModTypeUnctrlVocab method, of class gov.nih.nci.camod.domain.TargetedModification.
+   * Test of getModTypeAlternEntry method, of class gov.nih.nci.camod.domain.TargetedModification.
    */
-  public void testGetModTypeUnctrlVocab() {
-    System.out.println("testGetModTypeUnctrlVocab");
+  public void testGetModTypeAlternEntry() {
+    System.out.println("testGetModTypeAlternEntry");
     
     // TODO add your test code below by replacing the default call to fail.
     fail("The test case is empty.");
   }
 
   /**
-   * Test of setModTypeUnctrlVocab method, of class gov.nih.nci.camod.domain.TargetedModification.
+   * Test of setModTypeAlternEntry method, of class gov.nih.nci.camod.domain.TargetedModification.
    */
-  public void testSetModTypeUnctrlVocab() {
-    System.out.println("testSetModTypeUnctrlVocab");
+  public void testSetModTypeAlternEntry() {
+    System.out.println("testSetModTypeAlternEntry");
     
     // TODO add your test code below by replacing the default call to fail.
     fail("The test case is empty.");

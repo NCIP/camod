@@ -54,20 +54,20 @@ public class SegmentTypeTest extends TestCase {
   }
 
   /**
-   * Test of getNameUnctrlVocab method, of class gov.nih.nci.camod.domain.SegmentType.
+   * Test of getNameAlternEntry method, of class gov.nih.nci.camod.domain.SegmentType.
    */
-  public void testGetNameUnctrlVocab() {
-    System.out.println("testGetNameUnctrlVocab");
+  public void testGetNameAlternEntry() {
+    System.out.println("testGetNameAlternEntry");
     
     // TODO add your test code below by replacing the default call to fail.
     fail("The test case is empty.");
   }
 
   /**
-   * Test of setNameUnctrlVocab method, of class gov.nih.nci.camod.domain.SegmentType.
+   * Test of setNameAlternEntry method, of class gov.nih.nci.camod.domain.SegmentType.
    */
-  public void testSetNameUnctrlVocab() {
-    System.out.println("testSetNameUnctrlVocab");
+  public void testSetNameAlternEntry() {
+    System.out.println("testSetNameAlternEntry");
     
     // TODO add your test code below by replacing the default call to fail.
     fail("The test case is empty.");
