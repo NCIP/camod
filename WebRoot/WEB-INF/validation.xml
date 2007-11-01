@@ -1340,8 +1340,8 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
-			<field property="geneId" depends="maxlength">
-				<arg0 key="TargetedModificationForm.geneId" />
+			<field property="geneIdentifier" depends="maxlength">
+				<arg0 key="TargetedModificationForm.geneIdentifier" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -1473,8 +1473,8 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
-			<field property="geneId" depends="maxlength">
-				<arg0 key="InducedMutationForm.geneId" />
+			<field property="geneIdentifier" depends="maxlength">
+				<arg0 key="InducedMutationForm.geneIdentifier" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -1557,8 +1557,8 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
-			<field property="geneId" depends="maxlength">
-				<arg0 key="SpontaneousMutationForm.geneId" />
+			<field property="geneIdentifier" depends="maxlength">
+				<arg0 key="SpontaneousMutationForm.geneIdentifier" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -2102,10 +2102,10 @@
 			</field>
 		</form>
 
-		<form name="graftForm">
+		<form name="transplantationForm">
 			<field property="name"
 				depends="required,maxlength">
-				<arg0 key="GraftForm.name" />
+				<arg0 key="TransplantationForm.name" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -2114,7 +2114,7 @@
 				</var>
 			</field>
 			<field property="atccNumber" depends="maxlength">
-				<arg0 key="GraftForm.atccNumber" />
+				<arg0 key="TransplantationForm.atccNumber" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -2124,7 +2124,7 @@
 			</field>
 			<field property="parentalCellLineName"
 				depends="maxlength">
-				<arg0 key="GraftForm.parentalCellLineName" />
+				<arg0 key="TransplantationForm.parentalCellLineName" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -2133,10 +2133,10 @@
 				</var>
 			</field>
 			<field property="cellAmount" depends="integer">
-				<arg0 key="GraftForm.cellAmount" />
+				<arg0 key="TransplantationForm.cellAmount" />
 			</field>
 			<field property="growthPeriod" depends="maxlength">
-				<arg0 key="GraftForm.growthPeriod" />
+				<arg0 key="TransplantationForm.growthPeriod" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -2146,7 +2146,7 @@
 			</field>
 			<field property="modificationDescription"
 				depends="maxlength">
-				<arg0 key="GraftForm.modificationDescription" />
+				<arg0 key="TransplantationForm.modificationDescription" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -2155,7 +2155,7 @@
 				</var>
 			</field>
 			<field property="geneticManipulation" depends="maxlength">
-				<arg0 key="GraftForm.geneticManipulation" />
+				<arg0 key="TransplantationForm.geneticManipulation" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -2164,15 +2164,15 @@
 				</var>
 			</field>
 			<field property="donorScientificName" depends="required">
-				<arg0 key="GraftForm.donorScientificName" />
+				<arg0 key="TransplantationForm.donorScientificName" />
 			</field>
 			<field property="donorEthinicityStrain"
 				depends="required">
-				<arg0 key="GraftForm.donorEthinicityStrain" />
+				<arg0 key="TransplantationForm.donorEthinicityStrain" />
 			</field>
 			<field property="otherDonorEthinicityStrain"
 				depends="validwhen,maxlength">
-				<arg0 key="GraftForm.otherDonorEthinicityStrain" />
+				<arg0 key="TransplantationForm.otherDonorEthinicityStrain" />
 				<var>
 					<var-name>test</var-name>
 					<var-value>
@@ -2189,11 +2189,11 @@
 				</var>
 			</field>
 			<field property="sourceType" depends="required">
-				<arg0 key="GraftForm.sourceType" />
+				<arg0 key="TransplantationForm.sourceType" />
 			</field>
 			<field property="otherSourceType"
 				depends="validwhen, maxlength">
-				<arg0 key="GraftForm.otherSourceType" />
+				<arg0 key="TransplantationForm.otherSourceType" />
 				<var>
 					<var-name>test</var-name>
 					<var-value>
@@ -2210,7 +2210,7 @@
 			</field>
 			<field property="otherAdministrativeSite"
 				depends="validwhen, maxlength">
-				<arg0 key="GraftForm.otherAdministrativeSite" />
+				<arg0 key="TransplantationForm.otherAdministrativeSite" />
 				<var>
 					<var-name>test</var-name>
 					<var-value>
@@ -2227,7 +2227,7 @@
 			</field>
 			<field property="otherConditioningRegimen"
 				depends="validwhen, maxlength">
-				<arg0 key="GraftForm.otherConditioningRegimen" />
+				<arg0 key="TransplantationForm.otherConditioningRegimen" />
 				<var>
 					<var-name>test</var-name>
 					<var-value>
