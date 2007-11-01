@@ -60,14 +60,14 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel">Principal Investigator:
-		</td>
-		<td class="formField">
-				<html:select styleClass="formFieldSized" size="1" property="stockNumber">
+			<td class="formLabel"><label for="field1">Principal Investigator:</label></td>
+			<td class="formField">
+				<html:select styleClass="formFieldSized" size="1" property="principalInvestigator">
 					<html:optionsCollection name="<%= Dropdowns.PRINCIPALINVESTIGATORDROP %>" />	
 				</html:select>
-		</td>
-	</tr>		
+			</td>
+		</tr>
+			
         
 	<tr>
 		<td align="right" colspan="3">
