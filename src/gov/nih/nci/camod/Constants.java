@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.107 2007-10-18 18:25:30 pandyas Exp $
+ * $Id: Constants.java,v 1.108 2007-11-01 13:37:03 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.107  2007/10/18 18:25:30  pandyas
+ * Added constants to prevent cross--site scripting attacks
+ *
  * Revision 1.106  2007/10/17 18:29:07  pandyas
  * Added constants to prevent cross--site scripting attacks
  *
@@ -488,7 +491,7 @@ public class Constants {
 
         public static final String SOURCETYPEDROP = "SourceTypes.txt";
 
-        public static final String GRAFTADMINSITESDROP = "GraftAdministrativeSites.txt";
+        public static final String TRANSPLANTADMINSITESDROP = "TransplantAdministrativeSites.txt";
 
         public static final String INDUCEDMUTATIONDROP = "InducedMutations.txt";
 
@@ -522,7 +525,7 @@ public class Constants {
         
         public static final String EXTERNALSOURCEQUERYDROP = "externalsourcequerydrop.db";    
         
-        // CI on advanced search taken from DB type and type_unctrl_vocab columns
+        // CI on advanced search taken from DB type and type_altern_entry columns
         public static final String CARCINOGENICAGENTSQUERYDROP = "carcinogenicagentsquerydrop.db"; 
         
         // Environmental Factor name field populated based on agent type slected in adv search
@@ -530,7 +533,7 @@ public class Constants {
         
 
         // These two are used to display the species and strain currently in the
-        // AnimalModelCharacteristics - Graft screen
+        // AnimalModelCharacteristics - Transplantation screen
         public static final String MODELSPECIES = "modelspecies";
 
         public static final String MODELSTRAIN = "modelstrain";
@@ -658,7 +661,7 @@ public class Constants {
 
         public static final String GENETIC_DESCRIPTION = "Genetic Description Page";
 
-        public static final String GRAFT = "Graft Page";
+        public static final String TRANSPLANTATION = "Transplantation Page";
         
         public static final String TRANSIENT_INTERFERENCE = "Transient Interference Page";
     }
@@ -681,12 +684,12 @@ public class Constants {
     // Used to compare AMMODELSPECIESCOMMONNAME to Zebrafish in EvsTreeUtil.java
     public static final String ZEBRAFISH = "Zebrafish";
     
-    // This constants stores the donor species common name for the Graft screens 
-    // set in GraftPopulateAction
+    // This constants stores the donor species common name for the Transplantation screens 
+    // set in TransplantationPopulateAction
     public static final String DONORSPECIESCOMMONNAME = "donorspeciescommonname";
     
     // This constants stores the species common name from the simple and advanced search screens 
-    // set in GraftPopulateAction
+    // set in TransplantationPopulateAction
     public static final String SEARCHSPECIESCOMMONNAME = "searchspeciescommonname";    
 
     /**
@@ -696,9 +699,9 @@ public class Constants {
 
     public static final String ANIMALMODEL = "animalmodel";
 
-    public static final String GRAFTMODEL = "graftmodel";
+    public static final String TRANSPLANTATIONMODEL = "transplantationmodel";
 
-    public static final String GRAFTRESULTLIST = "graftresultlist";
+    public static final String TRANSPLANTATIONRESULTLIST = "transplantationresultlist";
 
     /**
      * Used to store username for current user
@@ -828,7 +831,7 @@ public class Constants {
 
         public static final String VIRALTREATMENT_LIST = "viraltreatment_list";
 
-        public static final String GRAFT_LIST = "graft_list";
+        public static final String TRANSPLANTATION_LIST = "transplantation_list";
 
         public static final String SPONTANEOUSMUTATION_LIST = "spontaneousmutation_list";
 
