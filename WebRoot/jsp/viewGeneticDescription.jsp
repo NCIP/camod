@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.57 2007-10-31 19:33:58 pandyas Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.58 2007-11-05 18:43:26 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.57  2007/10/31 19:33:58  pandyas
+ * Fixed #8188 	Rename UnctrlVocab items to text entries
+ *
  * Revision 1.56  2007/08/27 15:34:58  pandyas
  * Reverted back to EVSPreferredDescription since this was fixed
  *
@@ -741,7 +744,7 @@
 						&nbsp;
 					</c:when>
 					<c:otherwise>
-			            <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=search&db=gene&term=<c:out value="${tm.geneIdentifier}"/>" target="blank"><c:out value="${tm.geneId}"/></a>
+			            <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=search&db=gene&term=<c:out value="${tm.geneIdentifier.entrezGeneID}"/>" target="blank"><c:out value="${tm.geneIdentifier.entrezGeneID}"/></a>
 					</c:otherwise>
 				</c:choose>            	
             </td>
@@ -1029,7 +1032,7 @@
 						&nbsp;
 					</c:when>
 					<c:otherwise>
-			            <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=search&db=gene&term=<c:out value="${im.geneIdentifier}"/>" target="blank"><c:out value="${im.geneId}"/></a>
+			            <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=search&db=gene&term=<c:out value="${im.geneIdentifier.entrezGeneID}"/>" target="blank"><c:out value="${im.geneIdentifier.entrezGeneID}"/></a>
 					</c:otherwise>
 				</c:choose>            	
             </td>
@@ -1175,7 +1178,7 @@
 						&nbsp;
 					</c:when>
 					<c:otherwise>
-			            <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=search&db=gene&term=<c:out value="${sm.geneIdentifier}"/>" target="blank"><c:out value="${sm.geneId}"/></a>
+			            <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=search&db=gene&term=<c:out value="${sm.geneIdentifier.entrezGeneID}"/>" target="blank"><c:out value="${sm.geneIdentifier.entrezGeneID}"/></a>
 					</c:otherwise>
 				</c:choose>            	
             </td>
