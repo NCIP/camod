@@ -1,8 +1,11 @@
 /**
  * @author schroedln
  * 
- * $Id: InducedMutationManagerImpl.java,v 1.28 2007-10-31 19:13:27 pandyas Exp $
+ * $Id: InducedMutationManagerImpl.java,v 1.29 2007-11-05 15:51:42 pandyas Exp $
  * $Log: not supported by cvs2svn $
+ * Revision 1.28  2007/10/31 19:13:27  pandyas
+ * Fixed #8290 	Rename graft object into transplantation object
+ *
  * Revision 1.27  2007/09/12 19:36:03  pandyas
  * modified debug statements for build to stage tier
  *
@@ -196,31 +199,17 @@ public class InducedMutationManagerImpl extends BaseManager implements
 
 		// GeneIdentifier
 		GeneIdentifier inGeneIdentifier = null;
-		if(inInducedMutationData.getGeneIdentifier() != null && inInducedMutationData.getGeneIdentifier().length() >0){
-			log.info("inSpontaneousMutationData.getGeneIdentifier(): " + inInducedMutationData.getGeneIdentifier());
-			// Check for exisiting GeneIdentifier
-			if (inInducedMutation.getGeneIdentifier() != null) {
-				log.info("getGeneIdentifier() != null loop");
+			log.info("inInducedMutationData.getGeneIdentifier(): " + inInducedMutationData.getGeneIdentifier());
+			if (inInducedMutation.getMutationIdentifier() != null) {
 				inGeneIdentifier = inInducedMutation.getGeneIdentifier();
-				inGeneIdentifier.setEntrezGeneID(inInducedMutationData.getGeneIdentifier());
-				inInducedMutation.setGeneIdentifier(inGeneIdentifier);
-				
-				log.info("setEntrezGeneID");			
 			} else {
 				inGeneIdentifier = new GeneIdentifier();
-				log.info("new GeneIdentifier loop");	
-				inGeneIdentifier.setEntrezGeneID(inInducedMutationData.getGeneIdentifier());
-				inInducedMutation.setGeneIdentifier(inGeneIdentifier);
-				log.info("setEntrezGeneID");			
 			}			
-		}
-
-		if (inInducedMutationData.getMgiId() != null) {
-
-			inGeneIdentifier.setEntrezGeneID(inInducedMutationData
-					.getMgiId().trim());
+			
+		if (inInducedMutationData.getGeneIdentifier() != null) {
+			inGeneIdentifier.setEntrezGeneID(inInducedMutationData.getGeneIdentifier().trim());
 			inInducedMutation.setGeneIdentifier(inGeneIdentifier);
-		}		
+		}
 
 		// Description
 		inInducedMutation
