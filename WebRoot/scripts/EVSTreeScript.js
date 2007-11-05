@@ -186,7 +186,7 @@
       targetURL = '/EVSTree/webtree/WebTreeMain.jsp?treeParams='+treeParams+'&skin='+skin;
 
       // open target window
-      windowOpen(targetURL, 810, 500, paramsHT.windowTitle);
+      windowOpen(targetURL, 1000, 1000, paramsHT.windowTitle);
     }
 
 
