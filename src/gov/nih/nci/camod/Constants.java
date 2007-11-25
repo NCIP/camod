@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.108 2007-11-01 13:37:03 pandyas Exp $
+ * $Id: Constants.java,v 1.109 2007-11-25 23:31:45 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.108  2007/11/01 13:37:03  pandyas
+ * Fixed #8290     Rename graft object into transplantation object
+ *
  * Revision 1.107  2007/10/18 18:25:30  pandyas
  * Added constants to prevent cross--site scripting attacks
  *
@@ -801,6 +804,8 @@ public class Constants {
     public static final String DRUG_SCREEN_OPTIONS = "drugScreenSearchOptions";
     
     public static final String NSC_NUMBER = "nsc";
+    
+    public static final String CAELMIR_STUDY_DATA = "caelmirStudyData";    
     
 
     // /////////////////////////////////////////////////////////////
