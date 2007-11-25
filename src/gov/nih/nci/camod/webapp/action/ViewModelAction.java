@@ -1,9 +1,13 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.40 2007-10-31 18:39:30 pandyas Exp $
+ *  $Id: ViewModelAction.java,v 1.41 2007-11-25 23:34:23 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.40  2007/10/31 18:39:30  pandyas
+ *  Fixed #8188 	Rename UnctrlVocab items to text entries
+ *  Fixed #8290 	Rename graft object into transplantation object
+ *
  *  Revision 1.39  2007/09/14 18:53:37  pandyas
  *  Fixed Bug #8954:  link to invivo detail page does not work
  *
@@ -116,6 +120,7 @@
  */
 package gov.nih.nci.camod.webapp.action;
 
+import edu.wustl.common.util.CaElmirInterfaceManager;
 import gov.nih.nci.cabio.domain.Gene;
 import gov.nih.nci.cabio.domain.impl.GeneImpl;
 import gov.nih.nci.camod.Constants;
@@ -144,9 +149,15 @@ import gov.nih.nci.common.domain.DatabaseCrossReference;
 import gov.nih.nci.common.domain.impl.DatabaseCrossReferenceImpl;
 import gov.nih.nci.system.applicationservice.ApplicationService;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -158,6 +169,9 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -583,6 +597,99 @@ public class ViewModelAction extends BaseAction
      * @return
      * @throws Exception
      */
+    public ActionForward populateCaelmirTherapyDetails(ActionMapping mapping,
+                                                       ActionForm form,
+                                                       HttpServletRequest request,
+                                                       HttpServletResponse response) throws Exception
+    {
+        log.info("<ViewModelAction>  populateCaelmirTherapyDetails");
+        
+        setCancerModel(request);
+        
+        final List caelmirStudyData = new ArrayList();
+        
+        String modelID = request.getParameter(Constants.Parameters.MODELID);
+        
+		 try {
+		        log.info("<ViewModelAction>  populateCaelmirTherapyDetails Enter try");			 
+				//Link to the inteface provided by caElmir 
+	            URL url = new URL("http://ps4288:8080/"+CaElmirInterfaceManager.getStudyInfoUrl());
+	            //set your proxy server and port
+	            System.setProperty("proxyHost","ptproxy.persistent.co.in");
+	            System.setProperty("proxyPort","8080");
+	            
+	            URLConnection urlConnection = url.openConnection();
+		        log.info("populateCaelmirTherapyDetails open connection");	            
+	            //needs to be set to True for writing to the output stream.This allows to pass data to the url.
+	            urlConnection.setDoOutput(true);
+	           
+	            JSONObject jsonObj = new JSONObject();
+	            //setting the model id.
+				jsonObj.put(CaElmirInterfaceManager.getModelIdParameter(), 536);
+				PrintWriter out = new PrintWriter(urlConnection.getOutputStream());
+				out.write(jsonObj.toString());
+				out.flush();
+				out.close();
+				
+				// start reading the responce
+	            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection
+	    				.getInputStream()));
+	    		if (bufferedReader != null) {
+	    			String resultStr = (String) bufferedReader.readLine();
+	    			JSONArray jsonArray = new JSONArray(resultStr);
+	    			String status = null;
+	    			status = ((JSONObject)jsonArray.get(0)).get(CaElmirInterfaceManager.getStatusMessageKey()).toString();
+			        log.info("populateCaelmirTherapyDetails status: " + status);
+	    			//Imporatant:first check for the status 
+	    			if(!CaElmirInterfaceManager.getSuccessKey().equals(status)) {
+	    				//prints the error message and return
+	    				System.out.println(status);
+	    				//return;
+	    			}
+	    			// start reading study data from index 1
+	    			for (int i = 1; i < jsonArray.length(); i++) {
+	    				JSONObject jobj = (JSONObject) jsonArray.get(i);
+	    				System.out.println("Study Name:"
+	    						+ jobj.getString(CaElmirInterfaceManager.getStudyName())+"\t");
+	    				System.out.println("Study Hypothesis:" + jobj.getString(CaElmirInterfaceManager.getStudyHypothesisKey())+"\t");
+	    				System.out.println("Study URL:"+jobj.getString(CaElmirInterfaceManager.getStudyUrlKey())+"\t");
+	    				System.out.println("Study Description:"+jobj.getString(CaElmirInterfaceManager.getStudyDesrciptionKey())+"\t");
+	    				
+	    				System.out.println("PI:"+jobj.getString(CaElmirInterfaceManager.getPrimaryInvestigatorKey())+"\t");
+	    				System.out.println("email:"+jobj.getString(CaElmirInterfaceManager.getEmailKey())+"\t");
+	    				System.out.println("Institution:"+jobj.getString(CaElmirInterfaceManager.getInstitutionKey())+"\t");
+	    				System.out.println("*******************************************************************");
+	    			}
+				
+	    		}    
+	        } catch (MalformedURLException me) {
+	            System.out.println("MalformedURLException: " + me);
+	        } catch (IOException ioe) {
+	            System.out.println("IOException: " + ioe);
+	        }
+        	
+     
+        
+        request.getSession().setAttribute(Constants.CAELMIR_STUDY_DATA, caelmirStudyData);
+
+        return mapping.findForward("viewTherapeuticApproaches");        
+    }
+    
+    /**
+     * Populate the session and/or request with the objects necessary to display
+     * the page.
+     * 
+     * @param mapping
+     *            the struts action mapping
+     * @param form
+     *            the web form
+     * @param request
+     *            HTTPRequest
+     * @param response
+     *            HTTPResponse
+     * @return
+     * @throws Exception
+     */
     public ActionForward populateCellLines(ActionMapping mapping,
                                            ActionForm form,
                                            HttpServletRequest request,
@@ -751,11 +858,11 @@ public class ViewModelAction extends BaseAction
         log.debug("<populateTransplantationDetails> nsc:" + nsc);
         TransplantationManager mgr = (TransplantationManager) getBean("transplantationManager");
 
-        Transplantation x = mgr.get(modelID);
+        Transplantation t = mgr.get(modelID);
 
-        request.getSession().setAttribute(Constants.TRANSPLANTATIONMODEL, x);
+        request.getSession().setAttribute(Constants.TRANSPLANTATIONMODEL, t);
         request.getSession().setAttribute(Constants.NSC_NUMBER, nsc);
-        request.getSession().setAttribute(Constants.TRANSPLANTATIONRESULTLIST, x.getInvivoResultCollectionByNSC(nsc));
+        request.getSession().setAttribute(Constants.TRANSPLANTATIONRESULTLIST, t.getInvivoResultCollectionByNSC(nsc));
         return mapping.findForward("viewInvivoDetails");
     }
 }

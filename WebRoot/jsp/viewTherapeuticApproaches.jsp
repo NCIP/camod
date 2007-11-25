@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewTherapeuticApproaches.jsp,v 1.20 2006-10-27 18:31:16 pandyas Exp $
+ * $Id: viewTherapeuticApproaches.jsp,v 1.21 2007-11-25 23:30:49 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.20  2006/10/27 18:31:16  pandyas
+ * Fixed fields in display page to allow for html markup
+ *
  * Revision 1.19  2006/04/28 19:52:30  schroedn
  * Defect #55
  * Added Keyword Highlighting to this jsp
@@ -23,6 +26,7 @@
 
 <bean:define id="mdl" name="animalmodel"/>
 <bean:define id="ta" name="therapeuticApproachesColl"/>
+<bean:define id="csd" name="caelmirStudyDataColl"/>
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 
@@ -67,6 +71,7 @@
 					<%@ include file="/jsp/includeClinicalTrials.jsp" %>
 					<%@ include file="/jsp/includeYeastData.jsp" %>
 					<%@ include file="/jsp/includeInvivoData.jsp" %>
+					<%@ include file="/jsp/includecaelmirData.jsp" %>					
 			    </TABLE>
 			</c:forEach>
 			<br/>
