@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.41 2007-11-25 23:34:23 pandyas Exp $
+ *  $Id: ViewModelAction.java,v 1.42 2007-12-04 13:49:19 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.41  2007/11/25 23:34:23  pandyas
+ *  Initial version for feature #8816  	Connection to caELMIR - retrieve data for therapy search page
+ *
  *  Revision 1.40  2007/10/31 18:39:30  pandyas
  *  Fixed #8188 	Rename UnctrlVocab items to text entries
  *  Fixed #8290 	Rename graft object into transplantation object
@@ -221,7 +224,7 @@ public class ViewModelAction extends BaseAction
 
         CommentsManager theCommentsManager = (CommentsManager) getBean("commentsManager");
 
-        log.debug("Comments id: " + theCommentsId);
+        log.info("Comments id: " + theCommentsId);
         List<Comments> theCommentsList = new ArrayList<Comments>();
         if (theCommentsId != null && theCommentsId.length() > 0)
         {
@@ -273,7 +276,7 @@ public class ViewModelAction extends BaseAction
                                                 HttpServletRequest request,
                                                 HttpServletResponse response) throws Exception
     {
-        log.debug("<populateEngineeredGene> modelID" + request.getParameter("aModelID"));
+        log.info("<populateEngineeredGene> modelID" + request.getParameter("aModelID"));
         String modelID = request.getParameter("aModelID");
 
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
@@ -314,7 +317,7 @@ public class ViewModelAction extends BaseAction
                 GeneIdentifier geneIdentifier = tm.getGeneIdentifier();
                 if (geneIdentifier != null)
                 {
-                    log.debug("Connecting to caBIO to look up gene " + geneIdentifier);
+                    log.info("Connecting to caBIO to look up gene " + geneIdentifier);
                     // the geneId is available
                     try
                     {
@@ -333,11 +336,11 @@ public class ViewModelAction extends BaseAction
 
                         
                         final int geneCount = (resultList != null) ? resultList.size() : 0;
-                        log.debug("Got " + geneCount + " Gene Objects");
+                        log.info("Got " + geneCount + " Gene Objects");
                         if (geneCount > 0)
                         {
                             myGene = (Gene) resultList.get(0);
-                            log.debug("Gene:" + geneIdentifier + " ==>" + myGene);
+                            log.info("Gene:" + geneIdentifier + " ==>" + myGene);
                             tmGeneMap.put(tm.getId(), myGene);
                         }
                     }
@@ -354,7 +357,7 @@ public class ViewModelAction extends BaseAction
             }
         }
 
-        log.debug("<populateEngineeredGene> " + "egcCnt=" + egcCnt + "tgc=" + tgCnt + "gsc=" + gsCnt + "tmc=" + tmCnt + "imc=" + imCnt);
+        log.info("<populateEngineeredGene> " + "egcCnt=" + egcCnt + "tgc=" + tgCnt + "gsc=" + gsCnt + "tmc=" + tmCnt + "imc=" + imCnt);
         request.getSession().setAttribute(Constants.ANIMALMODEL, am);
         request.getSession().setAttribute(Constants.TRANSGENE_COLL, tgc);
         request.getSession().setAttribute(Constants.GENOMIC_SEG_COLL, gsc);
@@ -403,7 +406,7 @@ public class ViewModelAction extends BaseAction
             CarcinogenExposure ce = (CarcinogenExposure) it.next();
             if (ce != null)
             {
-                log.debug("Checking agent:" + ce.getEnvironmentalFactor().getNscNumber());
+                log.info("Checking agent:" + ce.getEnvironmentalFactor().getNscNumber());
                 String theType = ce.getEnvironmentalFactor().getType();
                 if (theType == null || theType.length() == 0)
                 {
@@ -463,7 +466,7 @@ public class ViewModelAction extends BaseAction
         try
         {
             pubs = QueryManagerSingleton.instance().getAllPublications(Long.valueOf(modelID).longValue());
-            log.debug("pubs.size(): " + pubs.size());
+            log.info("pubs.size(): " + pubs.size());
         }
         catch (Exception e)
         {
@@ -521,7 +524,7 @@ public class ViewModelAction extends BaseAction
                                                        HttpServletRequest request,
                                                        HttpServletResponse response) throws Exception
     {
-        log.debug("<ViewModelAction>  populateTherapeuticApproaches");
+        log.info("<ViewModelAction>  populateTherapeuticApproaches");
         
         setCancerModel(request);
         //
@@ -540,7 +543,7 @@ public class ViewModelAction extends BaseAction
         Iterator it = therapyColl.iterator();
 
         final int cc = (therapyColl != null) ? therapyColl.size() : 0;
-        log.debug("Looking up clinical protocols for " + cc + " agents...");
+        log.info("Looking up clinical protocols for " + cc + " agents...");
 
         while (it.hasNext())
         {
@@ -578,6 +581,8 @@ public class ViewModelAction extends BaseAction
         request.getSession().setAttribute(Constants.INVIVO_DATA, invivoResults);
 
         setComments(request, Constants.Pages.THERAPEUTIC_APPROACHES);
+        
+        populateCaelmirTherapyDetails(mapping, form, request, response);
 
         return mapping.findForward("viewTherapeuticApproaches");
     }
@@ -602,7 +607,7 @@ public class ViewModelAction extends BaseAction
                                                        HttpServletRequest request,
                                                        HttpServletResponse response) throws Exception
     {
-        log.info("<ViewModelAction>  populateCaelmirTherapyDetails");
+        log.info("<ViewModelAction>  populateCaelmirTherapyDetails Enter");
         
         setCancerModel(request);
         
@@ -630,6 +635,7 @@ public class ViewModelAction extends BaseAction
 				out.write(jsonObj.toString());
 				out.flush();
 				out.close();
+				log.info("populateCaelmirTherapyDetails created JSONObject");	
 				
 				// start reading the responce
 	            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection
@@ -659,8 +665,9 @@ public class ViewModelAction extends BaseAction
 	    				System.out.println("email:"+jobj.getString(CaElmirInterfaceManager.getEmailKey())+"\t");
 	    				System.out.println("Institution:"+jobj.getString(CaElmirInterfaceManager.getInstitutionKey())+"\t");
 	    				System.out.println("*******************************************************************");
+	    				caelmirStudyData.add(jobj);
 	    			}
-				
+	    			
 	    		}    
 	        } catch (MalformedURLException me) {
 	            System.out.println("MalformedURLException: " + me);
@@ -823,9 +830,10 @@ public class ViewModelAction extends BaseAction
                                                      HttpServletRequest request,
                                                      HttpServletResponse response) throws Exception
     {
+        log.info("<populateTransplantation> Enter:");    	
         setCancerModel(request);
         setComments(request, Constants.Pages.TRANSPLANTATION);
-
+        log.info("<populateTransplantation> Exit:"); 
         return mapping.findForward("viewTransplantation");
     }
 
@@ -849,13 +857,14 @@ public class ViewModelAction extends BaseAction
                                                   HttpServletRequest request,
                                                   HttpServletResponse response) throws Exception
     {
+        log.info("<populateTransplantationDetails> Enter:");    	
         String modelID = request.getParameter("tModelID");
         request.getSession().setAttribute(Constants.MODELID, modelID);
         String nsc = request.getParameter("nsc");
         if (nsc != null && nsc.length() == 0)
             return mapping.findForward("viewModelCharacteristics");
-        log.debug("<populateTransplantationDetails> modelID:" + modelID);
-        log.debug("<populateTransplantationDetails> nsc:" + nsc);
+        log.info("<populateTransplantationDetails> modelID:" + modelID);
+        log.info("<populateTransplantationDetails> nsc:" + nsc);
         TransplantationManager mgr = (TransplantationManager) getBean("transplantationManager");
 
         Transplantation t = mgr.get(modelID);

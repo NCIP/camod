@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewTherapeuticApproaches.jsp,v 1.21 2007-11-25 23:30:49 pandyas Exp $
+ * $Id: viewTherapeuticApproaches.jsp,v 1.22 2007-12-04 13:47:24 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.21  2007/11/25 23:30:49  pandyas
+ * Initial version for feature #8816  	Connection to caELMIR - retrieve data for therapy search page
+ *
  * Revision 1.20  2006/10/27 18:31:16  pandyas
  * Fixed fields in display page to allow for html markup
  *
@@ -26,15 +29,15 @@
 
 <bean:define id="mdl" name="animalmodel"/>
 <bean:define id="ta" name="therapeuticApproachesColl"/>
-<bean:define id="csd" name="caelmirStudyDataColl"/>
+<bean:define id="csd" name="caelmirStudyData"/>
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
 	<tr><td valign="top">
-		<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%">
+		<TABLE cellpadding="0" cellspacing="0" border="1" class="contentBegins" width="100%">
 		<tr><td>
-			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
+			<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
 			<tr>
 				<td class="formTitle" height="20" colspan="9">
 					Therapeutic Approaches - Model:
@@ -71,10 +74,22 @@
 					<%@ include file="/jsp/includeClinicalTrials.jsp" %>
 					<%@ include file="/jsp/includeYeastData.jsp" %>
 					<%@ include file="/jsp/includeInvivoData.jsp" %>
-					<%@ include file="/jsp/includecaelmirData.jsp" %>					
 			    </TABLE>
 			</c:forEach>
 			<br/>
+			
+				<tr>
+				<td class="resultsBoxWhiteEnd" height="20" colspan="9">
+					<c:forEach var="ce" items="${csd}" varStatus="stat">
+					    <a href="<c:out value="#caelmir_${stat.count}"/>">
+							 <c:out value="${ce.StudyName}" escapeXml="false"/><br/>
+						</a>  
+					</c:forEach>
+				</td>
+			</tr>		
+			<br>	
+			
+			
 		</td></tr></TABLE>
 	</td></tr></TABLE>
 </td></tr></TABLE>
