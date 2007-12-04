@@ -1,6 +1,9 @@
 <%
  /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.27  2007/10/31 19:33:58  pandyas
+ * Fixed #8188 	Rename UnctrlVocab items to text entries
+ *
  * Revision 1.26  2007/07/31 12:00:10  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -60,7 +63,7 @@
  * Defect #86.  Removed unneeded field.
  *
  *
- * $Id: includePreclinicalTrials.jsp,v 1.27 2007-10-31 19:33:58 pandyas Exp $
+ * $Id: includePreclinicalTrials.jsp,v 1.28 2007-12-04 13:46:57 pandyas Exp $
  */
 %>
 <tr>
@@ -148,6 +151,7 @@
 	</td>
 </tr>
 <tr><td></td></tr>
+<tr><td></td></tr>
 
 <c:choose>
 	<c:when test="${empty t.publicationCollection}">
@@ -161,17 +165,6 @@
 	</tr>	
 	  <tr><td colspan="2">
 		<table summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
-		<tr>
-			<td class="greySubTitleLeft" width="10%">Publication Status</td>
-			<td class="greySubTitleLeft" width="20%">First Author</td>
-				<td class="greySubTitleLeft" width="15%">JAX Number</td>			
-			<td class="greySubTitleLeft" width="25%">Title</td>
-			<td class="greySubTitleLeft" width="10%">Journal</td>
-			<td class="greySubTitleLeft" width="5%">Year</td>
-			<td class="greySubTitleLeft" width="10%">Volume</td>
-			<td class="greySubTitleLeft" width="10%">Pages</td>
-			<td class="greySubTitle" width="10%">Abstract in PubMed</td>
-		</tr>
 		<c:forEach var="p" items="${t.publicationCollection}" varStatus="stat2">
 		<tr>
 			<c:choose>
@@ -182,42 +175,79 @@
 					<c:set var="tdClass" value="resultsBoxGrey"/>
 				</c:otherwise>
 			</c:choose>
-			<td class="<c:out value="${tdClass}"/>" width="10%">
-				<camod:highlight><c:out value="${p.publicationStatus.name}" escapeXml="false"/></camod:highlight>
-			</td>
-			<td class="<c:out value="${tdClass}"/>" width="15%">
-				<camod:highlight><c:out value="${p.authors}" escapeXml="false"/></camod:highlight>
-			</td>
-			<td class="<c:out value="${tdClass}"/>" width="15%">
-			<c:out value="${p.jaxJNumber}"/>&nbsp;<br/>
-				<c:if test="${not empty p.jaxJNumber}">												
-					(<a target="_blank" href="http://www.informatics.jax.org/searches/accession_report.cgi?id=<c:out value="${p.jaxJNumber}"/>">MGI</a>)
-				</c:if><br/>
-				<c:if test="${not empty p.jaxJNumber}">
-					(<a target="_blank" href="http://tumor.informatics.jax.org/mtbwi/referenceDetails.do?accId=<c:out value="${p.jaxJNumber}"/>">MTB</a>)
-				</c:if>
-			</td>			
-			<td class="<c:out value="${tdClass}"/>" width="30%">
-				<camod:highlight><c:out value="${p.title}" escapeXml="false"/></camod:highlight>
-			</td>
-			<td class="<c:out value="${tdClass}"/>" width="10%">
-				<camod:highlight><c:out value="${p.journal}" escapeXml="false"/></camod:highlight>
-			</td>
-			<td class="<c:out value="${tdClass}"/>" width="5%">
-				<camod:highlight><c:out value="${p.year}" escapeXml="false"/></camod:highlight>
-			</td>
-			<td class="<c:out value="${tdClass}"/>" width="10%">
-				<camod:highlight><c:out value="${p.volume}"/></camod:highlight>
-			</td>
-			<td class="<c:out value="${tdClass}"/>" width="10%">
-				<camod:highlight><c:out value="${p.startPage}"/> - </camod:highlight>
-				<camod:highlight><c:out value="${p.endPage}"/> </camod:highlight>
-			</td>
-			<td class="<c:out value="${tdClass}"/>End" width="10%">
-				<a target="_pubmed" href=" http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=retrieve&db=pubmed&dopt=abstract&list_uids=<c:out value="${p.pmid}"/>">
-				<IMG src="images/pubmed_70.gif" align="middle">
-				</a>
-			</td>					
+
+					<tr>
+						<td class="GreyBoxTop" width="30%"><b>Publication Status:</b></td>
+						<td class="GreyBoxTopRightEnd" width="65%"><c:out value="${p.publicationStatus.name}" escapeXml="false"/>&nbsp;</td>
+					</tr>
+						       
+					<tr>
+						<td class="WhiteBox" width="30%"><b>First Author:</b></td>
+						<td class="WhiteBoxRightEnd" width="70%"><a name="authors"><c:out value="${p.authors}" escapeXml="false"/></a>&nbsp;</td>
+					</tr>
+					<tr>
+						<td class="GreyBox" width="30%"><b>References:</b></td>
+							<!-- Two choose required so we can check for emtpy ZFIN or J Numbers-->			
+							<td class="GreyBoxRightEnd" width="70%">
+								<c:choose>
+									<c:when test="${not empty p.zfinPubId}">
+											<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-pubview2.apg&OID=<c:out value="${p.zfinPubId}"/>">ZFIN</a>
+											<br/>
+									</c:when>				
+									<c:otherwise>&nbsp;					
+									</c:otherwise>
+								</c:choose>
+								<c:choose>
+										<c:when test="${not empty p.jaxJNumber}">										
+											<c:out value="${p.jaxJNumber}"/>&nbsp;<br/>												
+												<a target="_blank" href="http://www.informatics.jax.org/searches/accession_report.cgi?id=<c:out value="${p.jaxJNumber}"/>">MGI</a>
+												<br/>
+												<a target="_blank" href="http://tumor.informatics.jax.org/mtbwi/referenceDetails.do?accId=<c:out value="${p.jaxJNumber}"/>">MTB</a>
+										</c:when>				
+									<c:otherwise>&nbsp;						
+									</c:otherwise>
+								</c:choose>
+						</td>					
+					</tr>
+			       
+					<tr>
+						<td class="WhiteBox" width="30%"><b>Title:</b></td>
+						<td class="WhiteBoxRightEnd" width="70%"><a name="authors"><c:out value="${p.title}" escapeXml="false"/></a>&nbsp;</td>
+					</tr>
+					
+					<tr>
+						<td class="GreyBox" width="30%"><b>Journal:</b></td>
+						<td class="GreyBoxRightEnd" width="70%"><camod:highlight><c:out value="${p.journal}" escapeXml="false"/>&nbsp;</camod:highlight></td>
+					</tr>
+						       
+					<tr>
+						<td class="WhiteBox" width="30%"><b>Year:</b></td>
+						<td class="WhiteBoxRightEnd" width="70%"><camod:highlight><c:out value="${p.year}" escapeXml="false"/>&nbsp;</camod:highlight></td>
+					</tr>
+					<tr>
+						<td class="GreyBox" width="30%"><b>Volume:</b></td>
+						<td class="GreyBoxRightEnd" width="70%"><camod:highlight><c:out value="${p.volume}" escapeXml="false"/>&nbsp;</camod:highlight></td>
+					</tr>
+			
+					<tr>
+						<td class="WhiteBox" width="30%"><b>Pages:</b></td>
+						<td class="WhiteBoxRightEnd" width="70%"><camod:highlight><c:out value="${p.startPage}"/> - </camod:highlight>
+								<camod:highlight><c:out value="${p.endPage}"/></camod:highlight></td>
+					</tr>
+						       
+					<tr>
+						<td class="GreyBox" width="30%"><b>Abstract in PubMed:</b></td>
+						<td class="GreyBoxRightEnd" width="70%">
+								<a target="_pubmed" href=" http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=retrieve&db=pubmed&dopt=abstract&list_uids=<c:out value="${p.pmid}"/>">
+								<IMG src="/camod/images/pubmed_70.gif" align="middle">
+								</a>
+						</td>
+					</tr>
+							
+					<tr>
+						<td class="WhiteBox" width="30%"><b>Comment:</b></td>
+						<td class="WhiteBoxRightEnd" width="70%"><camod:highlight><c:out value="${p.comments}" escapeXml="false"/>&nbsp;</camod:highlight></td>
+					</tr>					
 		</tr>
 		</c:forEach>
 		</table>

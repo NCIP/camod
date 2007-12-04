@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewCellLines.jsp,v 1.27 2007-08-27 15:34:58 pandyas Exp $
+ * $Id: viewCellLines.jsp,v 1.28 2007-12-04 13:46:57 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.27  2007/08/27 15:34:58  pandyas
+ * Reverted back to EVSPreferredDescription since this was fixed
+ *
  * Revision 1.26  2007/06/19 20:41:06  pandyas
  * The EVSPreferredDescription does not return results for Zebrafish vocabulary so the code was changed (This impacts organ.EVSPreferredDescription,  disease.EVSPreferredDescription, and developmentalStage) for all screens with trees
  *
@@ -61,7 +64,7 @@
 				    Cell Lines - Model: <c:out value="${mdl.modelDescriptor}" escapeXml="false" />
 				</td>				
 			</tr>
-			<c:forEach var="p" items="${mdl.cellLineCollection}" 
+			<c:forEach var="cl" items="${mdl.cellLineCollection}" 
 				       varStatus="stat">
 				<c:choose>
 					<c:when test = "${stat.count % 2 == 0}">
@@ -73,37 +76,37 @@
 				</c:choose>
 			<tr>
 				<td class="formTitleBlue" height="20" colspan="2">
-					<camod:highlight><c:out value="${p.name}" escapeXml="false"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${cl.name}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Name of Cell Line</b></td>
 				<td class="resultsBoxWhiteEnd">
-					<camod:highlight><c:out value="${p.name}" escapeXml="false"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${cl.name}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			<tr>
 				<td class="resultsBoxGrey" width="25%"><b>Organ / Tissue</b></td>
 				<td class="resultsBoxGreyEnd">
-					<camod:highlight><c:out value="${p.organ.EVSPreferredDescription}"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${cl.organ.EVSPreferredDescription}"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Experiment</b></td>
 				<td class="resultsBoxWhiteEnd">
-					<camod:highlight><c:out value="${p.experiment}" escapeXml="false"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${cl.experiment}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			<tr>
 				<td class="resultsBoxGrey" width="25%"><b>Results</b></td>
 				<td class="resultsBoxGreyEnd">
-					<camod:highlight><c:out value="${p.results}" escapeXml="false" />&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${cl.results}" escapeXml="false" />&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Comment</b></td>
 				<td class="resultsBoxWhiteEnd">
-					<camod:highlight><c:out value="${p.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${cl.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			<tr><td></td></tr>
@@ -111,26 +114,15 @@
 				<td class="greySubTitleLeftEnd" colspan=2><b>Publications:</b></td>
 			</tr>
 			<c:choose>
-				<c:when test="${empty p.publicationCollection}">
+				<c:when test="${empty cl.publicationCollection}">
 					<tr>
 						<td class="resultsBoxWhiteEnd" colspan=2><b>No Publications Found</b></td>
 					</tr>
 				</c:when>
 				<c:otherwise>
 				  <tr><td colspan="2">
-					<table summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
-					<tr>
-						<td class="greySubTitleLeft" width="10%">Publication Status</td>
-						<td class="greySubTitleLeft" width="15%">First Author</td>
-						<td class="greySubTitleLeft" width="15%">JAX Number</td>						
-						<td class="greySubTitleLeft" width="30%">Title</td>
-						<td class="greySubTitleLeft" width="10%">Journal</td>
-						<td class="greySubTitleLeft" width="5%">Year</td>
-						<td class="greySubTitleLeft" width="10%">Volume</td>
-						<td class="greySubTitleLeft" width="10%">Pages</td>
-						<td class="greySubTitle" width="10%">Abstract in PubMed</td>
-					</tr>
-					<c:forEach var="pub" items="${p.publicationCollection}" varStatus="stat2">
+					<table summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">
+					<c:forEach var="p" items="${cl.publicationCollection}" varStatus="stat2">
 					<tr>
 						<c:choose>
 							<c:when test = "${stat2.count % 2 == 0}">
@@ -140,42 +132,79 @@
 								<c:set var="tdClass" value="resultsBoxGrey"/>
 							</c:otherwise>
 						</c:choose>
-						<td class="<c:out value="${tdClass}"/>" width="10%">
-							<camod:highlight><c:out value="${pub.publicationStatus.name}" escapeXml="false"/></camod:highlight>
+											
+					<tr>
+						<td class="GreyBoxTop" width="30%"><b>Publication Status:</b></td>
+						<td class="GreyBoxTopRightEnd" width="65%"><c:out value="${p.publicationStatus.name}" escapeXml="false"/>&nbsp;</td>
+					</tr>
+						       
+					<tr>
+						<td class="WhiteBox" width="30%"><b>First Author:</b></td>
+						<td class="WhiteBoxRightEnd" width="70%"><a name="authors"><c:out value="${p.authors}" escapeXml="false"/></a>&nbsp;</td>
+					</tr>
+					<tr>
+						<td class="GreyBox" width="30%"><b>References:</b></td>
+							<!-- Two choose required so we can check for emtpy ZFIN or J Numbers-->			
+							<td class="GreyBoxRightEnd" width="70%">
+								<c:choose>
+									<c:when test="${not empty p.zfinPubId}">
+											<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-pubview2.apg&OID=<c:out value="${p.zfinPubId}"/>">ZFIN</a>
+											<br/>
+									</c:when>				
+									<c:otherwise>&nbsp;					
+									</c:otherwise>
+								</c:choose>
+								<c:choose>
+										<c:when test="${not empty p.jaxJNumber}">										
+											<c:out value="${p.jaxJNumber}"/>&nbsp;<br/>												
+												<a target="_blank" href="http://www.informatics.jax.org/searches/accession_report.cgi?id=<c:out value="${p.jaxJNumber}"/>">MGI</a>
+												<br/>
+												<a target="_blank" href="http://tumor.informatics.jax.org/mtbwi/referenceDetails.do?accId=<c:out value="${p.jaxJNumber}"/>">MTB</a>
+										</c:when>				
+									<c:otherwise>&nbsp;						
+									</c:otherwise>
+								</c:choose>
+						</td>					
+					</tr>
+			       
+					<tr>
+						<td class="WhiteBox" width="30%"><b>Title:</b></td>
+						<td class="WhiteBoxRightEnd" width="70%"><a name="authors"><c:out value="${p.title}" escapeXml="false"/></a>&nbsp;</td>
+					</tr>
+					
+					<tr>
+						<td class="GreyBox" width="30%"><b>Journal:</b></td>
+						<td class="GreyBoxRightEnd" width="70%"><camod:highlight><c:out value="${p.journal}" escapeXml="false"/>&nbsp;</camod:highlight></td>
+					</tr>
+						       
+					<tr>
+						<td class="WhiteBox" width="30%"><b>Year:</b></td>
+						<td class="WhiteBoxRightEnd" width="70%"><camod:highlight><c:out value="${p.year}" escapeXml="false"/>&nbsp;</camod:highlight></td>
+					</tr>
+					<tr>
+						<td class="GreyBox" width="30%"><b>Volume:</b></td>
+						<td class="GreyBoxRightEnd" width="70%"><camod:highlight><c:out value="${p.volume}" escapeXml="false"/>&nbsp;</camod:highlight></td>
+					</tr>
+			
+					<tr>
+						<td class="WhiteBox" width="30%"><b>Pages:</b></td>
+						<td class="WhiteBoxRightEnd" width="70%"><camod:highlight><c:out value="${p.startPage}"/> - </camod:highlight>
+								<camod:highlight><c:out value="${p.endPage}"/></camod:highlight></td>
+					</tr>
+						       
+					<tr>
+						<td class="GreyBox" width="30%"><b>Abstract in PubMed:</b></td>
+						<td class="GreyBoxRightEnd" width="70%">
+								<a target="_pubmed" href=" http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=retrieve&db=pubmed&dopt=abstract&list_uids=<c:out value="${p.pmid}"/>">
+								<IMG src="/camod/images/pubmed_70.gif" align="middle">
+								</a>
 						</td>
-						<td class="<c:out value="${tdClass}"/>" width="15%">
-							<camod:highlight><c:out value="${pub.authors}" escapeXml="false"/>&nbsp;</camod:highlight>
-						</td>
-						<td class="<c:out value="${tdClass}"/>" width="15%">
-							<c:out value="${pub.jaxJNumber}"/>&nbsp;<br/>
-								<c:if test="${not empty pub.jaxJNumber}">												
-									(<a target="_blank" href="http://www.informatics.jax.org/searches/accession_report.cgi?id=<c:out value="${pub.jaxJNumber}"/>">MGI</a>)
-								</c:if><br/>
-								<c:if test="${not empty pub.jaxJNumber}">
-									(<a target="_blank" href="http://tumor.informatics.jax.org/mtbwi/referenceDetails.do?accId=<c:out value="${pub.jaxJNumber}"/>">MTB</a>)
-								</c:if>							
-						</td>							
-						<td class="<c:out value="${tdClass}"/>" width="30%">
-							<camod:highlight><c:out value="${pub.title}" escapeXml="false"/>&nbsp;</camod:highlight>
-						</td>
-						<td class="<c:out value="${tdClass}"/>" width="10%">
-							<camod:highlight><c:out value="${pub.journal}" escapeXml="false"/>&nbsp;</camod:highlight>
-						</td>
-						<td class="<c:out value="${tdClass}"/>" width="5%">
-							<camod:highlight><c:out value="${pub.year}" escapeXml="false"/>&nbsp;</camod:highlight>
-						</td>
-						<td class="<c:out value="${tdClass}"/>" width="10%">
-							<camod:highlight><c:out value="${pub.volume}" escapeXml="false"/>&nbsp;</camod:highlight>
-						</td>
-						<td class="<c:out value="${tdClass}"/>" width="10%">
-							<camod:highlight><c:out value="${pub.startPage}"/> - </camod:highlight>
-							<camod:highlight><c:out value="${pub.endPage}"/> </camod:highlight>
-						</td>
-						<td class="<c:out value="${tdClass}"/>End" width="10%">
-							<a target="_pubmed" href=" http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=retrieve&db=pubmed&dopt=abstract&list_uids=<c:out value="${pub.pmid}"/>">
-							<IMG src="/camod/images/pubmed_70.gif" align="middle">
-							</a>
-						</td>
+					</tr>
+							
+					<tr>
+						<td class="WhiteBox" width="30%"><b>Comment:</b></td>
+						<td class="WhiteBoxRightEnd" width="70%"><camod:highlight><c:out value="${p.comments}" escapeXml="false"/>&nbsp;</camod:highlight></td>
+					</tr>
 					</tr>
 					</c:forEach>
 					</table>

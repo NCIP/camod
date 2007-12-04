@@ -2,9 +2,13 @@
 
 /**
  * 
- * $Id: viewPublications.jsp,v 1.29 2007-10-31 19:33:32 pandyas Exp $
+ * $Id: viewPublications.jsp,v 1.30 2007-12-04 13:46:57 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.29  2007/10/31 19:33:32  pandyas
+ * Fixed #8355 	Add comments field to every submission page
+ * Rotated screen to allow for additional field and look better
+ *
  * Revision 1.28  2007/06/25 16:37:53  pandyas
  * Fixed code to check for empty ZFIN and J numbers and only display MTB or MGI when a J Number exists
  *
@@ -71,16 +75,12 @@
 <bean:define id="pubColl" name="publications"/>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
-<tr><td>
-
-	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
-	<tr><td valign="top">
-<!-- -->
-
+	<tr><td>
 
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left" width="100%">
+
 	<tr>
-		<td class="formTitle" height="20" colspan="2">Publications - Model:
+		<td class="formTitle" height="20" colspan="3">Publications - Model:
 			<camod:highlight><c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
 					<c:if test="${mdl.externalSource == 'Jax MTB'}">
 							<IMG src="/camod/images/mtb_logo.jpg" >
@@ -88,24 +88,61 @@
 					</camod:highlight>
 		</td>
 	</tr>			
+
+<!-- Summary table start -->
+
+			<tr>
+				<td class="greySubTitleLeft" width="30%">First Author</td>
+				<td class="greySubTitleLeft" width="55%">Journal</td>
+				<td class="greySubTitleLeftEnd" width="15%">Year</td>
+			</tr>
 			
+		<logic:iterate id="p" name="pubColl" indexId="idx">			
+			<tr>
+	
+				<td class="WhiteBox" width="30%">
+				<camod:highlight>
+					<a href="<c:out value="#pub_${idx}" escapeXml="false"/>">
+						<bean:write name="p" property="authors" filter="false"/>
+					</a>
+				</camod:highlight>
+				</td>
+				
+				<td class="WhiteBoxRightEnd" width="55%">
+					<camod:highlight><c:out value="${p.journal}" escapeXml="false"/>&nbsp;</camod:highlight>
+				</td>
+				
+				<td class="WhiteBoxRightEnd" width="15%">
+					<camod:highlight><c:out value="${p.year}"/>&nbsp;</camod:highlight>
+				</td>
+			</tr>
+		</logic:iterate>
 
-	<c:forEach var="p" items="${pubColl}" varStatus="stat">
+	</TABLE>				
+</td></tr>
+</TABLE>														
+<!-- Summary table end -->
 
+<c:forEach var="p" items="${pubColl}" varStatus="stat">
+<TABLE cellpadding="5" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+	<tr><td>
+	<a name="<c:out value="pub_${count}"/>"/>&nbsp;
+	<c:set var="count" value="${count + 1}"/>	
+	<TABLE summary="" cellpadding="5" cellspacing="0" border="0" align="left" width="100%">
 		<tr>
-			<td class="GreyBoxTop"><b>Publication Status:</b></td>
-			<td class="GreyBoxTopRightEnd"><c:out value="${p.publicationStatus.name}" escapeXml="false"/>&nbsp;</td>
+			<td class="GreyBoxTop" width="30%"><b>Publication Status:</b></td>
+			<td class="GreyBoxTopRightEnd" width="65%"><c:out value="${p.publicationStatus.name}" escapeXml="false"/>&nbsp;</td>
 		</tr>
 			       
 		<tr>
-			<td class="WhiteBox"><b>First Author:</b></td>
-			<td class="WhiteBoxRightEnd"><c:out value="${p.authors}" escapeXml="false"/>&nbsp;</td>
+			<td class="WhiteBox" width="30%"><b>First Author:</b></td>
+			<td class="WhiteBoxRightEnd" width="70%"><a name="authors"><c:out value="${p.authors}" escapeXml="false"/></a>&nbsp;</td>
 		</tr>
 
 		<tr>
-			<td class="GreyBox"><b>References:</b></td>
+			<td class="GreyBox" width="30%"><b>References:</b></td>
 				<!-- Two choose required so we can check for emtpy ZFIN or J Numbers-->			
-				<td class="GreyBoxRightEnd">
+				<td class="GreyBoxRightEnd" width="70%">
 					<c:choose>
 						<c:when test="${not empty p.zfinPubId}">
 								<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-pubview2.apg&OID=<c:out value="${p.zfinPubId}"/>">ZFIN</a>
@@ -128,39 +165,34 @@
 		</tr>
 			       
 		<tr>
-			<td class="WhiteBox"><b>First Author:</b></td>
-			<td class="WhiteBoxRightEnd"><c:out value="${p.authors}" escapeXml="false"/>&nbsp;</td>
+			<td class="WhiteBox" width="30%"><b>Title:</b></td>
+			<td class="WhiteBoxRightEnd" width="70%"><a name="authors"><c:out value="${p.title}" escapeXml="false"/></a>&nbsp;</td>
 		</tr>
 		
 		<tr>
-			<td class="GreyBox"><b>Title:</b></td>
-			<td class="GreyBoxRightEnd"><camod:highlight><c:out value="${p.title}" escapeXml="false"/>&nbsp;</camod:highlight></td>
+			<td class="GreyBox" width="30%"><b>Journal:</b></td>
+			<td class="GreyBoxRightEnd" width="70%"><camod:highlight><c:out value="${p.journal}" escapeXml="false"/>&nbsp;</camod:highlight></td>
 		</tr>
 			       
 		<tr>
-			<td class="WhiteBox"><b>Journal:</b></td>
-			<td class="WhiteBoxRightEnd"><camod:highlight><c:out value="${p.journal}" escapeXml="false"/>&nbsp;</camod:highlight></td>
+			<td class="WhiteBox" width="30%"><b>Year:</b></td>
+			<td class="WhiteBoxRightEnd" width="70%"><camod:highlight><c:out value="${p.year}" escapeXml="false"/>&nbsp;</camod:highlight></td>
 		</tr>	
 		
 		<tr>
-			<td class="GreyBox"><b>Year:</b></td>
-			<td class="GreyBoxRightEnd"><camod:highlight><c:out value="${p.year}" escapeXml="false"/>&nbsp;</camod:highlight></td>
+			<td class="GreyBox" width="30%"><b>Volume:</b></td>
+			<td class="GreyBoxRightEnd" width="70%"><camod:highlight><c:out value="${p.volume}" escapeXml="false"/>&nbsp;</camod:highlight></td>
 		</tr>
-			       
-		<tr>
-			<td class="WhiteBox"><b>Volume:</b></td>
-			<td class="WhiteBoxRightEnd"><camod:highlight><c:out value="${p.volume}" escapeXml="false"/>&nbsp;</camod:highlight></td>
-		</tr>				
 
 		<tr>
-			<td class="GreyBox"><b>Pages:</b></td>
-			<td class="GreyBoxRightEnd"><camod:highlight><c:out value="${p.startPage}"/> - </camod:highlight>
+			<td class="WhiteBox" width="30%"><b>Pages:</b></td>
+			<td class="WhiteBoxRightEnd" width="70%"><camod:highlight><c:out value="${p.startPage}"/> - </camod:highlight>
 					<camod:highlight><c:out value="${p.endPage}"/></camod:highlight></td>
 		</tr>
 			       
 		<tr>
-			<td class="WhiteBox"><b>Abstract in PubMed:</b></td>
-			<td class="WhiteBoxRightEnd">
+			<td class="GreyBox" width="30%"><b>Abstract in PubMed:</b></td>
+			<td class="GreyBoxRightEnd" width="70%">
 					<a target="_pubmed" href=" http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=retrieve&db=pubmed&dopt=abstract&list_uids=<c:out value="${p.pmid}"/>">
 					<IMG src="/camod/images/pubmed_70.gif" align="middle">
 					</a>
@@ -168,17 +200,15 @@
 		</tr>
 				
 		<tr>
-			<td class="GreyBox"><b>Comment:</b></td>
-			<td class="GreyBoxRightEnd"><camod:highlight><c:out value="${p.comments}" escapeXml="false"/>&nbsp;</camod:highlight></td>
+			<td class="WhiteBox" width="30%"><b>Comment:</b></td>
+			<td class="WhiteBoxRightEnd" width="70%"><camod:highlight><c:out value="${p.comments}" escapeXml="false"/>&nbsp;</camod:highlight></td>
 		</tr>
 
-		<tr><td>&nbsp;</td></tr>
-	</c:forEach>
 	</TABLE>
-
-<!-- -->
-	</td></tr></TABLE>
-</tr></td></TABLE>
+	</td></tr>
+    <td colspan="2" align="right"><a href="#">Top</a></td>	
+</TABLE>
+	</c:forEach>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
