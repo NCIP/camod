@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewTherapeuticApproaches.jsp,v 1.22 2007-12-04 13:47:24 pandyas Exp $
+ * $Id: viewTherapeuticApproaches.jsp,v 1.23 2007-12-04 16:04:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.22  2007/12/04 13:47:24  pandyas
+ * Modified code for #8816  	Connection to caELMIR - retrieve data for therapy search page
+ *
  * Revision 1.21  2007/11/25 23:30:49  pandyas
  * Initial version for feature #8816  	Connection to caELMIR - retrieve data for therapy search page
  *
@@ -35,9 +38,9 @@
 
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
 	<tr><td valign="top">
-		<TABLE cellpadding="0" cellspacing="0" border="1" class="contentBegins" width="100%">
+		<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%">
 		<tr><td>
-			<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
+			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 			<tr>
 				<td class="formTitle" height="20" colspan="9">
 					Therapeutic Approaches - Model:
