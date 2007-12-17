@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: ViewModelSectionAction.java,v 1.1 2005-10-10 14:09:54 georgeda Exp $
+ *  $Id: ViewModelSectionAction.java,v 1.2 2007-12-17 18:03:22 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.1  2005/10/10 14:09:54  georgeda
+ *  Initial revision
+ *
  *  Revision 1.8  2005/09/22 15:17:36  georgeda
  *  More changes
  *
@@ -37,14 +40,14 @@ public class ViewModelSectionAction extends BaseAction {
 	public ActionForward execute(ActionMapping inMapping, ActionForm inForm, HttpServletRequest inRequest,
 			HttpServletResponse inResponse) throws Exception {
 
-		log.trace("Entering ViewModelSectionAction.execute");
+		log.info("Entering ViewModelSectionAction.execute");
 
 		// Get the attributes from the request
 		String theForward = inRequest.getParameter(Constants.Parameters.MODELSECTIONNAME);
 
 		log.debug("Forwarding to model section: " + theForward);
 
-		log.trace("Exiting ChangeAnimalModelStatePopulateAction.execute");
+		log.trace("Exiting ViewModelSectionAction.execute");
 
 		return inMapping.findForward(theForward);
 	}

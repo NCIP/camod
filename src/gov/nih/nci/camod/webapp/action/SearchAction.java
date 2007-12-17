@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SearchAction.java,v 1.11 2007-10-03 16:54:20 pandyas Exp $
+ * $Id: SearchAction.java,v 1.12 2007-12-17 18:03:22 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2007/10/03 16:54:20  pandyas
+ * modified debug statement
+ *
  * Revision 1.10  2007/08/27 15:39:53  pandyas
  * hide debug code printout
  *
@@ -77,7 +80,7 @@ public final class SearchAction extends BaseAction {
 			HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
-		log.debug("<SearchAction> entered ");
+		log.info("<SearchAction> entered ");
 
 		SearchForm theForm = new SearchForm();
 		SavedQuery resubmittedSavedQuery = null;

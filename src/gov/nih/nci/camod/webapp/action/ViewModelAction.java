@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.42 2007-12-04 13:49:19 pandyas Exp $
+ *  $Id: ViewModelAction.java,v 1.43 2007-12-17 18:03:22 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.42  2007/12/04 13:49:19  pandyas
+ *  Modified code for #8816  	Connection to caELMIR - retrieve data for therapy search page
+ *
  *  Revision 1.41  2007/11/25 23:34:23  pandyas
  *  Initial version for feature #8816  	Connection to caELMIR - retrieve data for therapy search page
  *
@@ -587,100 +590,107 @@ public class ViewModelAction extends BaseAction
         return mapping.findForward("viewTherapeuticApproaches");
     }
 
-    /**
-     * Populate the session and/or request with the objects necessary to display
-     * the page.
-     * 
-     * @param mapping
-     *            the struts action mapping
-     * @param form
-     *            the web form
-     * @param request
-     *            HTTPRequest
-     * @param response
-     *            HTTPResponse
-     * @return
-     * @throws Exception
-     */
-    public ActionForward populateCaelmirTherapyDetails(ActionMapping mapping,
-                                                       ActionForm form,
-                                                       HttpServletRequest request,
-                                                       HttpServletResponse response) throws Exception
-    {
-        log.info("<ViewModelAction>  populateCaelmirTherapyDetails Enter");
-        
-        setCancerModel(request);
-        
-        final List caelmirStudyData = new ArrayList();
-        
-        String modelID = request.getParameter(Constants.Parameters.MODELID);
-        
-		 try {
-		        log.info("<ViewModelAction>  populateCaelmirTherapyDetails Enter try");			 
-				//Link to the inteface provided by caElmir 
-	            URL url = new URL("http://ps4288:8080/"+CaElmirInterfaceManager.getStudyInfoUrl());
-	            //set your proxy server and port
-	            System.setProperty("proxyHost","ptproxy.persistent.co.in");
-	            System.setProperty("proxyPort","8080");
-	            
-	            URLConnection urlConnection = url.openConnection();
-		        log.info("populateCaelmirTherapyDetails open connection");	            
-	            //needs to be set to True for writing to the output stream.This allows to pass data to the url.
-	            urlConnection.setDoOutput(true);
-	           
-	            JSONObject jsonObj = new JSONObject();
-	            //setting the model id.
-				jsonObj.put(CaElmirInterfaceManager.getModelIdParameter(), 536);
-				PrintWriter out = new PrintWriter(urlConnection.getOutputStream());
-				out.write(jsonObj.toString());
-				out.flush();
-				out.close();
-				log.info("populateCaelmirTherapyDetails created JSONObject");	
-				
-				// start reading the responce
-	            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection
-	    				.getInputStream()));
-	    		if (bufferedReader != null) {
-	    			String resultStr = (String) bufferedReader.readLine();
-	    			JSONArray jsonArray = new JSONArray(resultStr);
-	    			String status = null;
-	    			status = ((JSONObject)jsonArray.get(0)).get(CaElmirInterfaceManager.getStatusMessageKey()).toString();
-			        log.info("populateCaelmirTherapyDetails status: " + status);
-	    			//Imporatant:first check for the status 
-	    			if(!CaElmirInterfaceManager.getSuccessKey().equals(status)) {
-	    				//prints the error message and return
-	    				System.out.println(status);
-	    				//return;
-	    			}
-	    			// start reading study data from index 1
-	    			for (int i = 1; i < jsonArray.length(); i++) {
-	    				JSONObject jobj = (JSONObject) jsonArray.get(i);
-	    				System.out.println("Study Name:"
-	    						+ jobj.getString(CaElmirInterfaceManager.getStudyName())+"\t");
-	    				System.out.println("Study Hypothesis:" + jobj.getString(CaElmirInterfaceManager.getStudyHypothesisKey())+"\t");
-	    				System.out.println("Study URL:"+jobj.getString(CaElmirInterfaceManager.getStudyUrlKey())+"\t");
-	    				System.out.println("Study Description:"+jobj.getString(CaElmirInterfaceManager.getStudyDesrciptionKey())+"\t");
-	    				
-	    				System.out.println("PI:"+jobj.getString(CaElmirInterfaceManager.getPrimaryInvestigatorKey())+"\t");
-	    				System.out.println("email:"+jobj.getString(CaElmirInterfaceManager.getEmailKey())+"\t");
-	    				System.out.println("Institution:"+jobj.getString(CaElmirInterfaceManager.getInstitutionKey())+"\t");
-	    				System.out.println("*******************************************************************");
-	    				caelmirStudyData.add(jobj);
-	    			}
-	    			
-	    		}    
-	        } catch (MalformedURLException me) {
-	            System.out.println("MalformedURLException: " + me);
-	        } catch (IOException ioe) {
-	            System.out.println("IOException: " + ioe);
-	        }
-        	
-     
-        
-        request.getSession().setAttribute(Constants.CAELMIR_STUDY_DATA, caelmirStudyData);
+	/**
+	 * Populate the session and/or request with the objects necessary to display
+	 * the page.
+	 * 
+	 * @param mapping
+	 *            the struts action mapping
+	 * @param form
+	 *            the web form
+	 * @param request
+	 *            HTTPRequest
+	 * @param response
+	 *            HTTPResponse
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward populateCaelmirTherapyDetails(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		log.info("<ViewModelAction>  populateCaelmirTherapyDetails Enter");
 
-        return mapping.findForward("viewTherapeuticApproaches");        
-    }
+		setCancerModel(request);
+
+		final List caelmirStudyData = new ArrayList();
+
+		String modelID = request.getParameter(Constants.Parameters.MODELID);
+
+		try {
+			log
+					.info("<ViewModelAction>  populateCaelmirTherapyDetails Enter try");
+			// Link to the inteface provided by caElmir
+			URL url = new URL("http://chichen-itza.compmed.ucdavis.edu:8080/caelmir/getStudyInfo"
+					+ CaElmirInterfaceManager.getStudyInfoUrl());
+			// set your proxy server and port
+			//System.setProperty("proxyHost", "ptproxy.persistent.co.in");
+			//System.setProperty("proxyPort", "8080");
+
+			URLConnection urlConnection = url.openConnection();
+			log.info("populateCaelmirTherapyDetails open connection");
+			// needs to be set to True for writing to the output stream.This
+			// allows to pass data to the url.
+			urlConnection.setDoOutput(true);
+
+			JSONObject jsonObj = new JSONObject();
+			// setting the model id.
+			jsonObj.put(CaElmirInterfaceManager.getModelIdParameter(), 536);
+			PrintWriter out = new PrintWriter(urlConnection.getOutputStream());
+			out.write(jsonObj.toString());
+			out.flush();
+			out.close();
+			log.info("populateCaelmirTherapyDetails created JSONObject");
+
+			// start reading the responce
+			BufferedReader bufferedReader = new BufferedReader(
+					new InputStreamReader(urlConnection.getInputStream()));
+			if (bufferedReader != null) {
+				String resultStr = (String) bufferedReader.readLine();
+				//JSONArray jsonArray = new JSONArray(resultStr);
+				JSONArray jsonArray = new JSONArray();
+				String status = null;
+				status = ((JSONObject) jsonArray.get(0)).get(
+						CaElmirInterfaceManager.getStatusMessageKey())
+						.toString();
+				log.info("populateCaelmirTherapyDetails status: " + status);
+				// Imporatant:first check for the status
+				if (!CaElmirInterfaceManager.getSuccessKey().equals(status)) {
+					// prints the error message and return
+					System.out.println(status);
+					// return;
+				}
+				// start reading study data from index 1
+				for (int i = 1; i < jsonArray.size(); i++) {
+					JSONObject jobj = (JSONObject) jsonArray.get(i);
+					System.out.println("Study Name:"+ jobj.getString(CaElmirInterfaceManager.getStudyName()) + "\t");
+					System.out.println("Study Hypothesis:"+ jobj.getString(CaElmirInterfaceManager.getStudyHypothesisKey()) + "\t");
+					System.out.println("Study URL:"	+ jobj.getString(CaElmirInterfaceManager.getStudyUrlKey()) + "\t");
+					System.out.println("Study Description:"	+ jobj.getString(CaElmirInterfaceManager
+									.getStudyDesrciptionKey()) + "\t");
+
+					System.out.println("PI:"+ jobj.getString(CaElmirInterfaceManager
+									.getPrimaryInvestigatorKey()) + "\t");
+					System.out.println("email:"	+ jobj.getString(CaElmirInterfaceManager
+									.getEmailKey()) + "\t");
+					System.out.println("Institution:"+ jobj.getString(CaElmirInterfaceManager
+									.getInstitutionKey()) + "\t");
+					System.out
+							.println("*******************************************************************");
+					caelmirStudyData.add(jobj);
+				}
+
+			}
+		} catch (MalformedURLException me) {
+			System.out.println("MalformedURLException: " + me);
+		} catch (IOException ioe) {
+			System.out.println("IOException: " + ioe);
+		}
+
+		request.getSession().setAttribute(Constants.CAELMIR_STUDY_DATA,
+				caelmirStudyData);
+
+		return mapping.findForward("viewTherapeuticApproaches");
+	}
     
     /**
      * Populate the session and/or request with the objects necessary to display

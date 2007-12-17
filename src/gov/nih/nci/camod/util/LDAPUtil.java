@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: LDAPUtil.java,v 1.11 2007-08-07 15:01:00 pandyas Exp $
+ * $Id: LDAPUtil.java,v 1.12 2007-12-17 18:03:53 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2007/08/07 15:01:00  pandyas
+ * replace log statements
+ *
  * Revision 1.10  2007/04/17 17:32:15  pandyas
  * Added debug for e-mail from LDAP - testing bug for PM e-mail
  *
@@ -16,7 +19,7 @@
  * Backed out static changes.
  *
  * Revision 1.3  2006/04/17 19:10:50  pandyas
- * Added $Id: LDAPUtil.java,v 1.11 2007-08-07 15:01:00 pandyas Exp $ and $log:$
+ * Added $Id: LDAPUtil.java,v 1.12 2007-12-17 18:03:53 pandyas Exp $ and $log:$
  *
  * 
  */
@@ -40,7 +43,7 @@ public class LDAPUtil {
     static private final Log log = LogFactory.getLog(LDAPUtil.class);
 	
     static public String getEmailAddressForUser(String inUsername) {
-        String theSearchFilter = "(" + "cn" + "=" + inUsername + "*)";
+        String theSearchFilter = "(" + "cn" + "=" + inUsername + ")";
         log.debug("LDAPUtil.getEmailAddressForUser inUsername: " + inUsername);
 
         String theEmailAddress = "";
