@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.82 2007-10-31 19:08:24 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.83 2007-12-17 17:59:52 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.82  2007/10/31 19:08:24  pandyas
+ * Fixed #8188 	Rename UnctrlVocab items to text entries
+ *
  * Revision 1.81  2007/10/18 18:34:24  pandyas
  * Forced the stmt.close() for all methods using the ResultSet
  *
@@ -1488,7 +1491,15 @@ public class QueryManagerImpl extends BaseManager
         try
         {
 
-            String theSQLString = "select acm.abs_cancer_model_id," + "\n" + "       acm.model_descriptor," + "\n" + "       st.name," + "\n" + "       acm.administrative_site," + "\n" + "       count(*)" + "\n" + "  from invivo_Result sr," + "\n" + "       agent a," + "\n" + "       GRAFT_INVIVO_RESULT ymsr," + "\n" + "       abs_cancer_model acm," + "\n" + "       treatment t," + "\n" + "       strain st," + "\n" + "       species sp" + "\n" + " where sr.agent_id = a.agent_id" + "\n" + "   and sr.invivo_result_id = ymsr.invivo_result_id" + "\n" + "   and sr.treatment_id = t.treatment_id" + "\n" + "   and ymsr.abs_cancer_model_id = acm.abs_cancer_model_id" + "\n" + "   and acm.strain_id = st.strain_id" + "\n" + "   and st.species_id = sp.species_id" + "\n";
+            String theSQLString = "select acm.abs_cancer_model_id," + "\n" + "       acm.model_descriptor," 
+            + "\n" + "       st.name," + "\n" + "       acm.administrative_site," + "\n" 
+            + "       count(*)" + "\n" + "  from invivo_Result sr," + "\n" + "       agent a," + "\n" 
+            + "       TRANSPLANTATION_INVIVO_RESULT ymsr," + "\n" + "       abs_cancer_model acm," + "\n" 
+            + "       treatment t," + "\n" + "       strain st," + "\n" + "       species sp" + "\n" 
+            + " where sr.agent_id = a.agent_id" + "\n" + "   and sr.invivo_result_id = ymsr.invivo_result_id" 
+            + "\n" + "   and sr.treatment_id = t.treatment_id" + "\n" 
+            + "   and ymsr.abs_cancer_model_id = acm.abs_cancer_model_id" + "\n" 
+            + "   and acm.strain_id = st.strain_id" + "\n" + "   and st.species_id = sp.species_id" + "\n";
 
             Long theParam;
             if (useNscNumber == true)
