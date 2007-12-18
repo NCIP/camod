@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewTherapeuticApproaches.jsp,v 1.23 2007-12-04 16:04:40 pandyas Exp $
+ * $Id: viewTherapeuticApproaches.jsp,v 1.24 2007-12-18 13:30:36 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.23  2007/12/04 16:04:40  pandyas
+ * modified for #816  	Connection to caELMIR - retrieve data for therapy search page
+ *
  * Revision 1.22  2007/12/04 13:47:24  pandyas
  * Modified code for #8816  	Connection to caELMIR - retrieve data for therapy search page
  *
@@ -77,20 +80,11 @@
 					<%@ include file="/jsp/includeClinicalTrials.jsp" %>
 					<%@ include file="/jsp/includeYeastData.jsp" %>
 					<%@ include file="/jsp/includeInvivoData.jsp" %>
-			    </TABLE>
+					<%@ include file="/jsp/includeCaelmirData.jsp" %>					
+				</TABLE>
 			</c:forEach>
-			<br/>
-			
-				<tr>
-				<td class="resultsBoxWhiteEnd" height="20" colspan="9">
-					<c:forEach var="ce" items="${csd}" varStatus="stat">
-					    <a href="<c:out value="#caelmir_${stat.count}"/>">
-							 <c:out value="${ce.StudyName}" escapeXml="false"/><br/>
-						</a>  
-					</c:forEach>
-				</td>
-			</tr>		
-			<br>	
+		
+			</br>	
 			
 			
 		</td></tr></TABLE>
