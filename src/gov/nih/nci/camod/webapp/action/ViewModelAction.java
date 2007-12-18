@@ -1,9 +1,15 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.43 2007-12-17 18:03:22 pandyas Exp $
+ *  $Id: ViewModelAction.java,v 1.44 2007-12-18 13:31:32 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.43  2007/12/17 18:03:22  pandyas
+ *  Removed * in searchFilter used for getting e-mail from LDAP
+ *  Apps Support ticket was submitted (31169 - incorrect e-mail associated with my caMOD account) stating:
+ *
+ *  Cheryl Marks submitted a ticket to NCICB Application Support in which she requested that the e-mail address associated with her account in the "User Settings" screen in caMOD be corrected. She has attempted to correct it herself, but because the program queries the LDAP Server for the e-mail address, her corrections were not retained.
+ *
  *  Revision 1.42  2007/12/04 13:49:19  pandyas
  *  Modified code for #8816  	Connection to caELMIR - retrieve data for therapy search page
  *
@@ -172,6 +178,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+import java.util.Vector;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -611,8 +618,10 @@ public class ViewModelAction extends BaseAction
 		log.info("<ViewModelAction>  populateCaelmirTherapyDetails Enter");
 
 		setCancerModel(request);
-
-		final List caelmirStudyData = new ArrayList();
+		JSONArray jsonArray = new JSONArray();
+		JSONObject jobj = new JSONObject();
+		Vector h = new Vector();
+		ArrayList caelmirStudyData = new ArrayList();
 
 		String modelID = request.getParameter(Constants.Parameters.MODELID);
 
@@ -620,7 +629,7 @@ public class ViewModelAction extends BaseAction
 			log
 					.info("<ViewModelAction>  populateCaelmirTherapyDetails Enter try");
 			// Link to the inteface provided by caElmir
-			URL url = new URL("http://chichen-itza.compmed.ucdavis.edu:8080/caelmir/getStudyInfo"
+			URL url = new URL("http://chichen-itza.compmed.ucdavis.edu:8080/"
 					+ CaElmirInterfaceManager.getStudyInfoUrl());
 			// set your proxy server and port
 			//System.setProperty("proxyHost", "ptproxy.persistent.co.in");
@@ -634,7 +643,7 @@ public class ViewModelAction extends BaseAction
 
 			JSONObject jsonObj = new JSONObject();
 			// setting the model id.
-			jsonObj.put(CaElmirInterfaceManager.getModelIdParameter(), 536);
+			jsonObj.put(CaElmirInterfaceManager.getModelIdParameter(), modelID);
 			PrintWriter out = new PrintWriter(urlConnection.getOutputStream());
 			out.write(jsonObj.toString());
 			out.flush();
@@ -646,8 +655,7 @@ public class ViewModelAction extends BaseAction
 					new InputStreamReader(urlConnection.getInputStream()));
 			if (bufferedReader != null) {
 				String resultStr = (String) bufferedReader.readLine();
-				//JSONArray jsonArray = new JSONArray(resultStr);
-				JSONArray jsonArray = new JSONArray();
+				jsonArray = new JSONArray(resultStr);
 				String status = null;
 				status = ((JSONObject) jsonArray.get(0)).get(
 						CaElmirInterfaceManager.getStatusMessageKey())
@@ -660,34 +668,26 @@ public class ViewModelAction extends BaseAction
 					// return;
 				}
 				// start reading study data from index 1
-				for (int i = 1; i < jsonArray.size(); i++) {
-					JSONObject jobj = (JSONObject) jsonArray.get(i);
-					System.out.println("Study Name:"+ jobj.getString(CaElmirInterfaceManager.getStudyName()) + "\t");
-					System.out.println("Study Hypothesis:"+ jobj.getString(CaElmirInterfaceManager.getStudyHypothesisKey()) + "\t");
-					System.out.println("Study URL:"	+ jobj.getString(CaElmirInterfaceManager.getStudyUrlKey()) + "\t");
-					System.out.println("Study Description:"	+ jobj.getString(CaElmirInterfaceManager
-									.getStudyDesrciptionKey()) + "\t");
-
-					System.out.println("PI:"+ jobj.getString(CaElmirInterfaceManager
-									.getPrimaryInvestigatorKey()) + "\t");
-					System.out.println("email:"	+ jobj.getString(CaElmirInterfaceManager
-									.getEmailKey()) + "\t");
-					System.out.println("Institution:"+ jobj.getString(CaElmirInterfaceManager
-									.getInstitutionKey()) + "\t");
-					System.out
-							.println("*******************************************************************");
-					caelmirStudyData.add(jobj);
+				for (int i = 1; i < jsonArray.length(); i++) {
+					jobj = (JSONObject) jsonArray.get(i);
+					//System.out.println("Study Name:"+ jobj.getString(CaElmirInterfaceManager.getStudyName()) + "\t");
+					//System.out.println("Study Hypothesis:"+ jobj.getString(CaElmirInterfaceManager.getStudyHypothesisKey()) + "\t");
+					//System.out.println("Study URL:"	+ jobj.getString(CaElmirInterfaceManager.getStudyUrlKey()) + "\t");
+					//System.out.println("Study Description:"	+ jobj.getString(CaElmirInterfaceManager.getStudyDesrciptionKey()) + "\t");
+					//System.out.println("PI:"+ jobj.getString(CaElmirInterfaceManager.getPrimaryInvestigatorKey()) + "\t");
+					//System.out.println("email:"	+ jobj.getString(CaElmirInterfaceManager.getEmailKey()) + "\t");
+					//System.out.println("Institution:"+ jobj.getString(CaElmirInterfaceManager.getInstitutionKey()) + "\t");
+					//caelmirStudyData.add(jobj);
 				}
-
+				
 			}
 		} catch (MalformedURLException me) {
 			System.out.println("MalformedURLException: " + me);
 		} catch (IOException ioe) {
 			System.out.println("IOException: " + ioe);
 		}
-
 		request.getSession().setAttribute(Constants.CAELMIR_STUDY_DATA,
-				caelmirStudyData);
+				jsonArray);
 
 		return mapping.findForward("viewTherapeuticApproaches");
 	}
