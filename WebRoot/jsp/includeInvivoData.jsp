@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: includeInvivoData.jsp,v 1.11 2007-10-31 19:22:55 pandyas Exp $
+ * $Id: includeInvivoData.jsp,v 1.12 2007-12-18 13:28:32 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2007/10/31 19:22:55  pandyas
+ * Fixed #8290 	Rename graft object into transplantation object
+ *
  * Revision 1.10  2007/08/07 18:23:38  pandyas
  * Removed Xeno for Graft as per VCDE comments
  *
@@ -34,7 +37,7 @@
   		<td colspan="2">
 			<table summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 				<tr>
-					<td class="formTitleBlue" colspan="3" align="center">
+					<td class="formTitleBlue" colspan="4" align="center">
 						In Vivo Screening Data
 					</td>
 				</tr>

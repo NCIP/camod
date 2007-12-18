@@ -6,7 +6,7 @@
 		<c:if test="${stg.strainCount <= 0}">
 		    <table summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 			<tr>
-				<td class="greySubTitleLeftEnd" colspan=2>
+				<td class="greySubTitleLeftEnd" colspan=4>
 				<b>Data unavailable for NCI Yeast Anticancer Drug Screen </b>
 				<br>Stage <c:out value="${stat2.count - 1}"/>
 				</td>

@@ -4,7 +4,7 @@
 <c:if test="${not empty cp && foundClinicalData == 0}">
 	<c:set var="foundClinicalData" value="1"/>
 	<tr>
-		<td class="formTitleBlue" height="20" colspan="2">
+		<td class="formTitleBlue" height="20" colspan="4">
 			Current Clinical Trials for <c:out value="${agt.name}"/>
 		</td>
 	</tr>	

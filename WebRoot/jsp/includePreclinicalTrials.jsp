@@ -1,6 +1,9 @@
 <%
  /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.28  2007/12/04 13:46:57  pandyas
+ * Rotate publication data and rename column heading
+ *
  * Revision 1.27  2007/10/31 19:33:58  pandyas
  * Fixed #8188 	Rename UnctrlVocab items to text entries
  *
@@ -63,29 +66,29 @@
  * Defect #86.  Removed unneeded field.
  *
  *
- * $Id: includePreclinicalTrials.jsp,v 1.28 2007-12-04 13:46:57 pandyas Exp $
+ * $Id: includePreclinicalTrials.jsp,v 1.29 2007-12-18 13:28:32 pandyas Exp $
  */
 %>
 <tr>
-	<td class="formTitleBlue" height="20" colspan="2">
+	<td class="formTitleBlue" height="20" colspan="4">
 		Summary of the pre-clinical study in <c:out value="${agt.name}"  escapeXml="false"/>
 	</td>
 </tr>	
 <tr>
 	<td class="resultsBoxWhite" width="25%"><b>Experiment</b></td>
-	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
+	<td class="resultsBoxWhiteEnd" width="75%" colspan="3">&nbsp;
 		<camod:highlight><c:out value="${t.experiment}" escapeXml="false"/></camod:highlight>
 	</td>
 </tr>
 <tr>
 	<td class="resultsBoxGrey" width="25%"><b>Dose</b></td>
-	<td class="resultsBoxGreyEnd" width="75%">&nbsp;
+	<td class="resultsBoxGreyEnd" width="75%" colspan="3">&nbsp;
 		<camod:highlight><c:out value="${t.treatment.dosage}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}"/></camod:highlight>
 	</td>
 </tr>
 <tr>
 	<td class="resultsBoxWhite" width="25%"><b>Administration Route</b></td>
-	<td class="resultsBoxWhiteEnd" width="75%">
+	<td class="resultsBoxWhiteEnd" width="75%" colspan="3">
 		<c:choose>
 			<c:when test="${empty t.treatment.administrativeRoute}">
 				<camod:highlight><c:out value="${t.treatment.adminRouteAlternEntry}" escapeXml="false"/></camod:highlight>
@@ -98,7 +101,7 @@
 </tr>
 <tr>
 	<td class="resultsBoxGrey" width="25%"><b>Gender</b></td>
-	<td class="resultsBoxGreyEnd" width="75%">&nbsp;
+	<td class="resultsBoxGreyEnd" width="75%" colspan="3">&nbsp;
 		<camod:highlight><c:out value="${t.treatment.sexDistribution.type}"/></camod:highlight>
 	</td>
 </tr>
@@ -106,7 +109,7 @@
 
 <tr>
 	<td class="resultsBoxWhite" width="25%"><b>Age at Treatment</b></td>
-	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
+	<td class="resultsBoxWhiteEnd" width="75%" colspan="3">&nbsp;
 		<camod:highlight><c:out value="${t.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${t.treatment.ageAtTreatmentUnit}"/></camod:highlight>
 	</td>
 </tr>
@@ -114,7 +117,7 @@
 
 	<tr>
 		<td class="resultsBoxGrey" width="25%"><b>Developmental Stage</b> <br>(applies only to Zebrafish)</td>
-		<td class="resultsBoxGreyEnd" width="75%">&nbsp;
+		<td class="resultsBoxGreyEnd" width="75%" colspan="3">&nbsp;
 			<c:out value="${t.developmentalStage.name}" escapeXml="false"/>
 		</td>
 	</tr>
@@ -122,31 +125,31 @@
 
 <tr>
 	<td class="resultsBoxWhite" width="25%"><b>Results</b></td>
-	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
+	<td class="resultsBoxWhiteEnd" width="75%" colspan="3">&nbsp;
 		<camod:highlight><c:out value="${t.results}" escapeXml="false"/></camod:highlight>
 	</td>
 </tr>
 <tr>
 	<td class="resultsBoxGrey" width="25%"><b>Toxicity Grade</b></td>
-	<td class="resultsBoxGreyEnd" width="75%">&nbsp;
+	<td class="resultsBoxGreyEnd" width="75%" colspan="3">&nbsp;
 		<camod:highlight><c:out value="${t.toxicityGrade}" escapeXml="false"/></camod:highlight>
 	</td>
 </tr>			
 <tr>
 	<td class="resultsBoxWhite" width="25%"><b>Biomarker</b></td>
-	<td class="resultsBoxWhiteEnd" width="75%">
+	<td class="resultsBoxWhiteEnd" width="75%" colspan="3">
 		<camod:highlight><c:out value="${t.biomarker}" escapeXml="false"/>&nbsp;</camod:highlight>
 	</td>
 </tr>
 <tr>
 	<td class="resultsBoxGrey" width="25%"><b>Tumor Response</b></td>
-	<td class="resultsBoxGreyEnd" width="75%">
+	<td class="resultsBoxGreyEnd" width="75%" colspan="3">
 		<camod:highlight><c:out value="${t.tumorResponse}" escapeXml="false"/>&nbsp;</camod:highlight>
 	</td>
 </tr>
 <tr>
 	<td class="resultsBoxWhite" width="25%"><b>Comment </b></td>
-	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
+	<td class="resultsBoxWhiteEnd" width="75%" colspan="3">&nbsp;
 		<camod:highlight><c:out value="${t.comments}" escapeXml="false"/></camod:highlight>
 	</td>
 </tr>
@@ -156,12 +159,12 @@
 <c:choose>
 	<c:when test="${empty t.publicationCollection}">
 		<tr>
-			<td class="resultsBoxWhiteEnd" colspan=2><b>No Publications Found</b></td>
+			<td class="resultsBoxWhiteEnd" colspan=4><b>No Publications Found</b></td>
 		</tr>
 	</c:when>
 	<c:otherwise>
 	<tr>
-		<td class="greySubTitleLeftEnd" colspan=2><b>Publications:</b></td>
+		<td class="greySubTitleLeftEnd" colspan=4><b>Publications:</b></td>
 	</tr>	
 	  <tr><td colspan="2">
 		<table summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
@@ -178,17 +181,17 @@
 
 					<tr>
 						<td class="GreyBoxTop" width="30%"><b>Publication Status:</b></td>
-						<td class="GreyBoxTopRightEnd" width="65%"><c:out value="${p.publicationStatus.name}" escapeXml="false"/>&nbsp;</td>
+						<td class="GreyBoxTopRightEnd" width="65%" colspan="3"><c:out value="${p.publicationStatus.name}" escapeXml="false"/>&nbsp;</td>
 					</tr>
 						       
 					<tr>
 						<td class="WhiteBox" width="30%"><b>First Author:</b></td>
-						<td class="WhiteBoxRightEnd" width="70%"><a name="authors"><c:out value="${p.authors}" escapeXml="false"/></a>&nbsp;</td>
+						<td class="WhiteBoxRightEnd" width="70%" colspan="3"><a name="authors"><c:out value="${p.authors}" escapeXml="false"/></a>&nbsp;</td>
 					</tr>
 					<tr>
 						<td class="GreyBox" width="30%"><b>References:</b></td>
 							<!-- Two choose required so we can check for emtpy ZFIN or J Numbers-->			
-							<td class="GreyBoxRightEnd" width="70%">
+							<td class="GreyBoxRightEnd" width="70%" colspan="3">
 								<c:choose>
 									<c:when test="${not empty p.zfinPubId}">
 											<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-pubview2.apg&OID=<c:out value="${p.zfinPubId}"/>">ZFIN</a>
@@ -212,32 +215,32 @@
 			       
 					<tr>
 						<td class="WhiteBox" width="30%"><b>Title:</b></td>
-						<td class="WhiteBoxRightEnd" width="70%"><a name="authors"><c:out value="${p.title}" escapeXml="false"/></a>&nbsp;</td>
+						<td class="WhiteBoxRightEnd" width="70%" colspan="3"><a name="authors"><c:out value="${p.title}" escapeXml="false"/></a>&nbsp;</td>
 					</tr>
 					
 					<tr>
 						<td class="GreyBox" width="30%"><b>Journal:</b></td>
-						<td class="GreyBoxRightEnd" width="70%"><camod:highlight><c:out value="${p.journal}" escapeXml="false"/>&nbsp;</camod:highlight></td>
+						<td class="GreyBoxRightEnd" width="70%" colspan="3"><camod:highlight><c:out value="${p.journal}" escapeXml="false"/>&nbsp;</camod:highlight></td>
 					</tr>
 						       
 					<tr>
 						<td class="WhiteBox" width="30%"><b>Year:</b></td>
-						<td class="WhiteBoxRightEnd" width="70%"><camod:highlight><c:out value="${p.year}" escapeXml="false"/>&nbsp;</camod:highlight></td>
+						<td class="WhiteBoxRightEnd" width="70%" colspan="3"><camod:highlight><c:out value="${p.year}" escapeXml="false"/>&nbsp;</camod:highlight></td>
 					</tr>
 					<tr>
 						<td class="GreyBox" width="30%"><b>Volume:</b></td>
-						<td class="GreyBoxRightEnd" width="70%"><camod:highlight><c:out value="${p.volume}" escapeXml="false"/>&nbsp;</camod:highlight></td>
+						<td class="GreyBoxRightEnd" width="70%" colspan="3"><camod:highlight><c:out value="${p.volume}" escapeXml="false"/>&nbsp;</camod:highlight></td>
 					</tr>
 			
 					<tr>
 						<td class="WhiteBox" width="30%"><b>Pages:</b></td>
-						<td class="WhiteBoxRightEnd" width="70%"><camod:highlight><c:out value="${p.startPage}"/> - </camod:highlight>
+						<td class="WhiteBoxRightEnd" width="70%" colspan="3"><camod:highlight><c:out value="${p.startPage}"/> - </camod:highlight>
 								<camod:highlight><c:out value="${p.endPage}"/></camod:highlight></td>
 					</tr>
 						       
 					<tr>
 						<td class="GreyBox" width="30%"><b>Abstract in PubMed:</b></td>
-						<td class="GreyBoxRightEnd" width="70%">
+						<td class="GreyBoxRightEnd" width="70%" colspan="3">
 								<a target="_pubmed" href=" http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=retrieve&db=pubmed&dopt=abstract&list_uids=<c:out value="${p.pmid}"/>">
 								<IMG src="/camod/images/pubmed_70.gif" align="middle">
 								</a>
@@ -246,7 +249,7 @@
 							
 					<tr>
 						<td class="WhiteBox" width="30%"><b>Comment:</b></td>
-						<td class="WhiteBoxRightEnd" width="70%"><camod:highlight><c:out value="${p.comments}" escapeXml="false"/>&nbsp;</camod:highlight></td>
+						<td class="WhiteBoxRightEnd" width="70%" colspan="3"><camod:highlight><c:out value="${p.comments}" escapeXml="false"/>&nbsp;</camod:highlight></td>
 					</tr>					
 		</tr>
 		</c:forEach>

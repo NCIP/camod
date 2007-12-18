@@ -2,52 +2,113 @@
 
 /**
  * 
- * $Id: includeCaelmirData.jsp,v 1.1 2007-11-25 23:31:01 pandyas Exp $
+ * $Id: includeCaelmirData.jsp,v 1.2 2007-12-18 13:28:32 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2007/11/25 23:31:01  pandyas
+ * Initial version for feature #8816  	Connection to caELMIR - retrieve data for therapy search page
+ *
  *
  */
 
 %>
 
-<!-- caELMIR study data-->
-<tr>
-	<td class="formTitleBlue" height="20" colspan="2">
-		Study Summary</td>				
-</tr>
+<%@ page import='net.sf.json.JSONArray' %>
+<%@ page import='net.sf.json.JSONObject' %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="gov.nih.nci.camod.Constants" %>
+<%@ page import="java.util.Vector" %>
 
-<c:set var="ced" value="${caelmirStudyDataColl}"/>
-<!-- c:if test="${not empty ced}" -->
-	<c:forEach var="stg" items="${ced}" varStatus="stat2">
-		<tr>
-			<td class="resultsBoxWhite" width="25%"><b>Name</b></td>
-			<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
-			<!--c:out value="${agt.nscNumber}"/>
-			<c:if test="${not empty agt.nscNumber}">
-			(<a href="#" onClick="myRef = window.open('http://dtp.nci.nih.gov/dtpstandard/servlet/ChemData?queryHOLD=&searchtype=NSC&chemnameboolean=and&outputformat=html&searchlist=<c:out value='${agt.nscNumber}'/>&Submit=Submit','mywin','left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()">Chemical Structure</a>)
-			</c:if-->
-			</td>
-		<tr>
-		<tr>
-			<td class="resultsBoxGrey" width="25%"><b>Hypothesis</b></td>
-			<td class="resultsBoxGreyEnd" width="75%">&nbsp;
-				<!--c:out value="${agt.casNumber}"/-->
-			</td>
-		<tr>				
-		<tr>
-			<td class="resultsBoxWhite" width="25%"><b>Description</b></td>
-			<td class="resultsBoxWhiteEnd" width="75%">
-				<!--c:out value="${item.name}"/-->
-			</td>
-		<tr>
-		<tr>
-			<td class="resultsBoxGrey" width="25%"><b>Principal Investigator</b></td>
-			<td class="resultsBoxGreyEnd" width="75%">
-				<!--c:out value="${cpitem.PIName}"/>&nbsp;<c:out value="${cpitem.phase}"/><br/>
-				( <c:out value="${cpitem.currentStatus}"/>)&nbsp;<c:out value="${cpitem.PIName}"/--><br/>
-			</td>
-		<tr>			
+<%@ include file="/common/taglibs.jsp"%>
 
-		<tr><td>&nbsp;</td></tr>
-	</c:forEach>
-<!-- /c:if -->
+<%  
+    JSONArray jsonArray = new JSONArray();    
+	jsonArray = (JSONArray)request.getSession().getAttribute( Constants.CAELMIR_STUDY_DATA );
+	java.util.HashMap map = new java.util.HashMap();
+	Vector h = new Vector();	
+	if ( jsonArray != null ) 
+	{	
+		System.out.println("jsonArray.length(): " + jsonArray.length());
+	    for (int i = 1; i < jsonArray.length(); i++) {
+	    	JSONObject jsonObj = (JSONObject) jsonArray.get(i);	    	
+	    	
+	    	String studyName = jsonObj.getString("studyName");
+	    	map.put("Name", studyName);	
+	    	h.add(studyName);
+	    	System.out.println("Name: " + studyName);
+	    	
+	    	String studyUrl = jsonObj.getString("studyUrl");
+	    	map.put("Url", studyUrl);
+	    	h.add(studyUrl);
+	    	System.out.println("Url: " + studyUrl);	
+	    	
+	    	String studyHypothesis = jsonObj.getString("studyHypothesis");
+	    	map.put("Hypothesis", studyHypothesis);
+	    	h.add(studyHypothesis);
+	    	System.out.println("Hypothesis: " + studyHypothesis);	    	
+
+	    	String studyDescription = jsonObj.getString("studyDescription");
+	    	map.put("Description", studyDescription);
+	    	h.add(studyDescription);
+	    	System.out.println("Description: " + studyDescription);	
+	    	
+	    	String primaryInvestigator = jsonObj.getString("primaryInvestigator");
+	    	String email = jsonObj.getString("email");
+	    	String institution = jsonObj.getString("institution");
+	    	String PI = primaryInvestigator + " " + "(" + email + ")" +  " " + institution;
+	    	map.put("PrincipalInvestigator", PI);
+	    	h.add(PI);
+	    	System.out.println("Principal Investigator: " + primaryInvestigator);  
+	    	
+  		    		    		    		
+		}
+		System.out.println("map injsp: " + map);
+		pageContext.setAttribute("map", map);
+		request.setAttribute("vector", h);
+	}	    		    	
+%>	
+
+			<tr>
+				 <td class="formTitle" height="20" colspan="4">
+				    caELMIR Study Summary
+				 </td>				
+			</tr>
+			<tr>
+				<td class="greySubTitleLeft" width="20%">Name</td>
+				<td class="greySubTitleLeft" width="20%">Hypothesis</td>
+				<td class="greySubTitleLeft" width="20%">Description</td>
+				<td class="greySubTitleLeftEnd" width="40%">Principal Investigator</td>				
+			</tr>	
+			
+				   
+			   <!--logic:iterate id="vector" name="vector" type="java.util.Vector"-->
+			   <c:forEach var='item' items='${map}'>	 
+				<tr>
+					<td class="WhiteBox">
+						<a href='<c:out value='${map["Url"]}'/>'>
+						<!--c:out value="${Name}"/-->
+						<c:out value='${map["Name"]}'/>
+					</td>
+					
+					<td class="WhiteBoxRightEnd">
+						<c:out value='${map["Hypothesis"]}'/>
+						<!--c:out value='${map["Hypothesis"]}'/-->
+					</td>
+					
+					<td class="WhiteBoxRightEnd">
+						<c:out value='${map["Description"]}'/>					
+						<!--c:out value='${map["Description"]}'/-->
+					</td>
+
+					<td class="WhiteBoxRightEnd">
+						<c:out value='${map["PrincipalInvestigator"]}'/>					
+						<!--c:out value='${map["PrincipalInvestigator"]}'/-->					
+					</td>													
+				</tr>
+				</c:forEach>
+			<!--/logic:iterate-->
+
+
+
+			
