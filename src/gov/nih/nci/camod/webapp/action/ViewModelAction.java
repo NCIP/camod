@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.44 2007-12-18 13:31:32 pandyas Exp $
+ *  $Id: ViewModelAction.java,v 1.45 2007-12-27 21:44:00 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.44  2007/12/18 13:31:32  pandyas
+ *  Added populate method for study data from caELMIRE for integration of Therapy study data
+ *
  *  Revision 1.43  2007/12/17 18:03:22  pandyas
  *  Removed * in searchFilter used for getting e-mail from LDAP
  *  Apps Support ticket was submitted (31169 - incorrect e-mail associated with my caMOD account) stating:
@@ -160,7 +163,6 @@ import gov.nih.nci.camod.util.EvsTreeUtil;
 import gov.nih.nci.common.domain.DatabaseCrossReference;
 import gov.nih.nci.common.domain.impl.DatabaseCrossReferenceImpl;
 import gov.nih.nci.system.applicationservice.ApplicationService;
-
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -179,13 +181,10 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.Vector;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
