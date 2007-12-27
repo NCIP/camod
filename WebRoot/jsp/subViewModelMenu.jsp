@@ -5,6 +5,7 @@
 <%@ page import="gov.nih.nci.camod.domain.CellLine" %>	
 <%@ page import="gov.nih.nci.camod.domain.CarcinogenExposure" %>
 <%@ page import="gov.nih.nci.camod.domain.TransientInterference" %>
+<%@ page import="gov.nih.nci.camod.domain.CaelmirStudyData" %>
 <%@ page import="gov.nih.nci.camod.Constants" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
@@ -149,6 +150,18 @@
 						}					
 				}
 			}
+			l = new ArrayList(am.getCaelmirStudyDataCollection());
+			cc = (l!=null)?l.size():0;
+			found = false;
+			if ( cc > 0 ) {
+				for (int i=0; i<cc; i++) {
+					CaelmirStudyData c = (CaelmirStudyData)l.get(i);
+						if( c.getStudyName() !=null) {
+							found = true;
+							break;
+						}					
+				}
+			}			
 			if (found) {
 		%>
 		<a href="ViewModelAction.do?unprotected_method=populateTherapeuticApproaches&aModelID=<%=mdl%>" styleClass="subMenuPrimary">THERAPEUTIC APPROACHES</a>
