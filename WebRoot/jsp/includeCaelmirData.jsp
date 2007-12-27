@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: includeCaelmirData.jsp,v 1.2 2007-12-18 13:28:32 pandyas Exp $
+ * $Id: includeCaelmirData.jsp,v 1.3 2007-12-27 01:17:47 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2007/12/18 13:28:32  pandyas
+ * Modified column config to fit with caELMIRE data for integration of Study data
+ *
  * Revision 1.1  2007/11/25 23:31:01  pandyas
  * Initial version for feature #8816  	Connection to caELMIR - retrieve data for therapy search page
  *
@@ -22,92 +25,42 @@
 
 <%@ include file="/common/taglibs.jsp"%>
 
-<%  
-    JSONArray jsonArray = new JSONArray();    
-	jsonArray = (JSONArray)request.getSession().getAttribute( Constants.CAELMIR_STUDY_DATA );
-	java.util.HashMap map = new java.util.HashMap();
-	Vector h = new Vector();	
-	if ( jsonArray != null ) 
-	{	
-		System.out.println("jsonArray.length(): " + jsonArray.length());
-	    for (int i = 1; i < jsonArray.length(); i++) {
-	    	JSONObject jsonObj = (JSONObject) jsonArray.get(i);	    	
-	    	
-	    	String studyName = jsonObj.getString("studyName");
-	    	map.put("Name", studyName);	
-	    	h.add(studyName);
-	    	System.out.println("Name: " + studyName);
-	    	
-	    	String studyUrl = jsonObj.getString("studyUrl");
-	    	map.put("Url", studyUrl);
-	    	h.add(studyUrl);
-	    	System.out.println("Url: " + studyUrl);	
-	    	
-	    	String studyHypothesis = jsonObj.getString("studyHypothesis");
-	    	map.put("Hypothesis", studyHypothesis);
-	    	h.add(studyHypothesis);
-	    	System.out.println("Hypothesis: " + studyHypothesis);	    	
-
-	    	String studyDescription = jsonObj.getString("studyDescription");
-	    	map.put("Description", studyDescription);
-	    	h.add(studyDescription);
-	    	System.out.println("Description: " + studyDescription);	
-	    	
-	    	String primaryInvestigator = jsonObj.getString("primaryInvestigator");
-	    	String email = jsonObj.getString("email");
-	    	String institution = jsonObj.getString("institution");
-	    	String PI = primaryInvestigator + " " + "(" + email + ")" +  " " + institution;
-	    	map.put("PrincipalInvestigator", PI);
-	    	h.add(PI);
-	    	System.out.println("Principal Investigator: " + primaryInvestigator);  
-	    	
-  		    		    		    		
-		}
-		System.out.println("map injsp: " + map);
-		pageContext.setAttribute("map", map);
-		request.setAttribute("vector", h);
-	}	    		    	
-%>	
-
+<bean:define id="ceData" name="caelmirStudyData" />
+		<logic:iterate id="ced" name="ceData" indexId="idx">
 			<tr>
-				 <td class="formTitle" height="20" colspan="4">
-				    caELMIR Study Summary
-				 </td>				
+				<td class="formTitleBlue" height="20" colspan="2">
+					  Summary of the caELMIR study: <c:out value="${ced.studyName}" escapeXml="false"/>
+				</td>				
 			</tr>
 			<tr>
-				<td class="greySubTitleLeft" width="20%">Name</td>
-				<td class="greySubTitleLeft" width="20%">Hypothesis</td>
-				<td class="greySubTitleLeft" width="20%">Description</td>
-				<td class="greySubTitleLeftEnd" width="40%">Principal Investigator</td>				
-			</tr>	
-			
-				   
-			   <!--logic:iterate id="vector" name="vector" type="java.util.Vector"-->
-			   <c:forEach var='item' items='${map}'>	 
-				<tr>
-					<td class="WhiteBox">
-						<a href='<c:out value='${map["Url"]}'/>'>
-						<!--c:out value="${Name}"/-->
-						<c:out value='${map["Name"]}'/>
-					</td>
-					
-					<td class="WhiteBoxRightEnd">
-						<c:out value='${map["Hypothesis"]}'/>
-						<!--c:out value='${map["Hypothesis"]}'/-->
-					</td>
-					
-					<td class="WhiteBoxRightEnd">
-						<c:out value='${map["Description"]}'/>					
-						<!--c:out value='${map["Description"]}'/-->
-					</td>
+				<td class="WhiteBox" width="30%"><b>Study Name:</b></td>
+				<td class="WhiteBoxRightEnd" width="70%">
+				
+					<A href="JavaScript:void window.open('<c:out value="${ced.url}" escapeXml="false"/>');">
+					<c:out value="${ced.studyName}" escapeXml="false"/></a>&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td class="GreyBox" width="30%"><b>Hypothesis:</b></td>
+				<td class="GreyBoxRightEnd" width="70%"><c:out value="${ced.hypothesis}" escapeXml="false"/>&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="WhiteBox" width="30%"><b>Description:</b></td>
+				<td class="WhiteBoxRightEnd" width="70%"><c:out value="${ced.description}" escapeXml="false"/>&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="GreyBox" width="30%"><b>Principal Investigator:</b></td>
+				<td class="GreyBoxRightEnd" width="70%"><c:out value="${ced.investigatorName}" escapeXml="false"/>&nbsp;
+				(<a href="mailto:<c:out value="${ced.email}"/>">  
+										<c:out value="${ced.email}" escapeXml="false"/></a>)				
+				&nbsp;<c:out value="${ced.institution}" escapeXml="false"/>
+				</td>
+			</tr>
+			<tr><td><br>
+			</td></tr>									
+		</logic:iterate>			   	 
 
-					<td class="WhiteBoxRightEnd">
-						<c:out value='${map["PrincipalInvestigator"]}'/>					
-						<!--c:out value='${map["PrincipalInvestigator"]}'/-->					
-					</td>													
-				</tr>
-				</c:forEach>
-			<!--/logic:iterate-->
+
 
 
 
