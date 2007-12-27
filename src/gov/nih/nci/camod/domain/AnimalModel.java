@@ -1,5 +1,9 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.24  2007/10/31 15:05:12  pandyas
+ * Fixed #8290 	Rename graft object into transplantation object
+ * Fixed #8355 	Add comments field to every submission page
+ *
  * Revision 1.23  2007/07/31 12:03:37  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -31,11 +35,13 @@
  * Cleanup
  *
  * 
- * $Id: AnimalModel.java,v 1.24 2007-10-31 15:05:12 pandyas Exp $
+ * $Id: AnimalModel.java,v 1.25 2007-12-27 22:34:45 pandyas Exp $
  */
 package gov.nih.nci.camod.domain;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -62,6 +68,8 @@ public class AnimalModel extends AbstractCancerModel {
 	private Set<Transplantation> transplantationCollection = new HashSet<Transplantation>();
 
 	private Set<Therapy> therapyCollection = new HashSet<Therapy>();
+	
+	private List<CaelmirStudyData> caelmirStudyDataCollection = new ArrayList<CaelmirStudyData>();	
 
 	private Set<GeneDelivery> geneDeliveryCollection = new HashSet<GeneDelivery>();
 	
@@ -563,6 +571,21 @@ public class AnimalModel extends AbstractCancerModel {
 		if (!(this.getClass().isInstance(o)))
 			return false;
 		return true;
+	}
+
+	/**
+	 * @return the caelmirStudyDataCollection
+	 */
+	public List<CaelmirStudyData> getCaelmirStudyDataCollection() {
+		return caelmirStudyDataCollection;
+	}
+
+	/**
+	 * @param caelmirStudyDataCollection the caelmirStudyDataCollection to set
+	 */
+	public void setCaelmirStudyDataCollection(
+			List<CaelmirStudyData> caelmirStudyDataCollection) {
+		this.caelmirStudyDataCollection = caelmirStudyDataCollection;
 	}
 
 }
