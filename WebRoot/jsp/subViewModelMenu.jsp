@@ -150,16 +150,18 @@
 						}					
 				}
 			}
-			l = new ArrayList(am.getCaelmirStudyDataCollection());
-			cc = (l!=null)?l.size():0;
-			found = false;
-			if ( cc > 0 ) {
-				for (int i=0; i<cc; i++) {
-					CaelmirStudyData c = (CaelmirStudyData)l.get(i);
-						if( c.getStudyName() !=null) {
-							found = true;
-							break;
-						}					
+			if (!found) {
+				l = new ArrayList(am.getCaelmirStudyDataCollection());
+				cc = (l!=null)?l.size():0;
+				found = false;
+				if ( cc > 0 ) {
+					for (int i=0; i<cc; i++) {
+						CaelmirStudyData c = (CaelmirStudyData)l.get(i);
+							if( c.getStudyName() !=null) {
+								found = true;
+								break;
+							}					
+					}
 				}
 			}			
 			if (found) {
