@@ -1,9 +1,13 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.46 2007-12-27 22:32:33 pandyas Exp $
+ *  $Id: ViewModelAction.java,v 1.47 2008-01-02 17:57:44 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.46  2007/12/27 22:32:33  pandyas
+ *  Modified  for feature #8816  	Connection to caELMIR - retrieve data for therapy search page
+ *  Also added code to display Therapy link when only caELMIR data is available for a study
+ *
  *  Revision 1.45  2007/12/27 21:44:00  pandyas
  *  re-commit - changes did not show up in project
  *
@@ -676,11 +680,14 @@ public class ViewModelAction extends BaseAction
 					System.out.println(status);
 					// return;
 				}
-				CaelmirStudyData studyData = new CaelmirStudyData();
-				
+
+                CaelmirStudyData studyData = new CaelmirStudyData();
+                
 				// start reading study data from index 1
 				for (int i = 1; i < jsonArray.length(); i++) {
 					jobj = (JSONObject) jsonArray.get(i);
+                    
+                    studyData = new CaelmirStudyData();
 					studyData.setDescription(jobj.getString(CaElmirInterfaceManager.getStudyDesrciptionKey()));
 					studyData.setEmail(jobj.getString(CaElmirInterfaceManager.getEmailKey()));
 					studyData.setHypothesis(jobj.getString(CaElmirInterfaceManager.getStudyHypothesisKey()));
@@ -688,16 +695,10 @@ public class ViewModelAction extends BaseAction
 					studyData.setInvestigatorName(jobj.getString(CaElmirInterfaceManager.getPrimaryInvestigatorKey()));
 					studyData.setStudyName(jobj.getString(CaElmirInterfaceManager.getStudyName()));
 					studyData.setUrl(jobj.getString(CaElmirInterfaceManager.getStudyUrlKey()));
-					//System.out.println("Study Name:"+ jobj.getString(CaElmirInterfaceManager.getStudyName()) + "\t");
-					//System.out.println("Study Hypothesis:"+ jobj.getString(CaElmirInterfaceManager.getStudyHypothesisKey()) + "\t");
-					//System.out.println("Study URL:"	+ jobj.getString(CaElmirInterfaceManager.getStudyUrlKey()) + "\t");
-					//System.out.println("Study Description:"	+ jobj.getString(CaElmirInterfaceManager.getStudyDesrciptionKey()) + "\t");
-					//System.out.println("PI:"+ jobj.getString(CaElmirInterfaceManager.getPrimaryInvestigatorKey()) + "\t");
-					//System.out.println("email:"	+ jobj.getString(CaElmirInterfaceManager.getEmailKey()) + "\t");
-					//System.out.println("Institution:"+ jobj.getString(CaElmirInterfaceManager.getInstitutionKey()) + "\t");
-					//caelmirStudyData.add(jobj);
-				}				
-				caelmirStudyData.add(studyData);
+
+                    caelmirStudyData.add(studyData);
+                    //log.info("studyData.toString(): " + studyData.toString());                
+				}    
 			}
 		} catch (MalformedURLException me) {
 			System.out.println("MalformedURLException: " + me);
@@ -706,10 +707,13 @@ public class ViewModelAction extends BaseAction
 		}
 		
 		// Set collection so therapy link will display if caELMIR data is available
+        // Needed for models with caELMIR data but no caMOD data 
 		theAnimalModel.setCaelmirStudyDataCollection(caelmirStudyData);
 		
 		request.getSession().setAttribute(Constants.CAELMIR_STUDY_DATA,
 				caelmirStudyData);
+        
+         //log.info("caelmirStudyData.toString(): " + caelmirStudyData.toString());
 
 		return mapping.findForward("viewTherapeuticApproaches");
 	}
