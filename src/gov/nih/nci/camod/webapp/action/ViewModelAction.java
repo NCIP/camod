@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.47 2008-01-02 17:57:44 pandyas Exp $
+ *  $Id: ViewModelAction.java,v 1.48 2008-01-10 15:55:01 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.47  2008/01/02 17:57:44  pandyas
+ *  modified for #816  	Connection to caELMIR - retrieve data for therapy search page
+ *
  *  Revision 1.46  2007/12/27 22:32:33  pandyas
  *  Modified  for feature #8816  	Connection to caELMIR - retrieve data for therapy search page
  *  Also added code to display Therapy link when only caELMIR data is available for a study
@@ -241,7 +244,7 @@ public class ViewModelAction extends BaseAction
 
         CommentsManager theCommentsManager = (CommentsManager) getBean("commentsManager");
 
-        log.info("Comments id: " + theCommentsId);
+        log.debug("Comments id: " + theCommentsId);
         List<Comments> theCommentsList = new ArrayList<Comments>();
         if (theCommentsId != null && theCommentsId.length() > 0)
         {
@@ -297,7 +300,7 @@ public class ViewModelAction extends BaseAction
                                                 HttpServletRequest request,
                                                 HttpServletResponse response) throws Exception
     {
-        log.info("<populateEngineeredGene> modelID" + request.getParameter("aModelID"));
+        log.debug("<populateEngineeredGene> modelID" + request.getParameter("aModelID"));
         String modelID = request.getParameter("aModelID");
 
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
@@ -338,7 +341,7 @@ public class ViewModelAction extends BaseAction
                 GeneIdentifier geneIdentifier = tm.getGeneIdentifier();
                 if (geneIdentifier != null)
                 {
-                    log.info("Connecting to caBIO to look up gene " + geneIdentifier);
+                    log.debug("Connecting to caBIO to look up gene " + geneIdentifier);
                     // the geneId is available
                     try
                     {
@@ -357,11 +360,11 @@ public class ViewModelAction extends BaseAction
 
                         
                         final int geneCount = (resultList != null) ? resultList.size() : 0;
-                        log.info("Got " + geneCount + " Gene Objects");
+                        log.debug("Got " + geneCount + " Gene Objects");
                         if (geneCount > 0)
                         {
                             myGene = (Gene) resultList.get(0);
-                            log.info("Gene:" + geneIdentifier + " ==>" + myGene);
+                            log.debug("Gene:" + geneIdentifier + " ==>" + myGene);
                             tmGeneMap.put(tm.getId(), myGene);
                         }
                     }
@@ -378,7 +381,7 @@ public class ViewModelAction extends BaseAction
             }
         }
 
-        log.info("<populateEngineeredGene> " + "egcCnt=" + egcCnt + "tgc=" + tgCnt + "gsc=" + gsCnt + "tmc=" + tmCnt + "imc=" + imCnt);
+        log.debug("<populateEngineeredGene> " + "egcCnt=" + egcCnt + "tgc=" + tgCnt + "gsc=" + gsCnt + "tmc=" + tmCnt + "imc=" + imCnt);
         request.getSession().setAttribute(Constants.ANIMALMODEL, am);
         request.getSession().setAttribute(Constants.TRANSGENE_COLL, tgc);
         request.getSession().setAttribute(Constants.GENOMIC_SEG_COLL, gsc);
@@ -427,7 +430,7 @@ public class ViewModelAction extends BaseAction
             CarcinogenExposure ce = (CarcinogenExposure) it.next();
             if (ce != null)
             {
-                log.info("Checking agent:" + ce.getEnvironmentalFactor().getNscNumber());
+                log.debug("Checking agent:" + ce.getEnvironmentalFactor().getNscNumber());
                 String theType = ce.getEnvironmentalFactor().getType();
                 if (theType == null || theType.length() == 0)
                 {
@@ -487,7 +490,7 @@ public class ViewModelAction extends BaseAction
         try
         {
             pubs = QueryManagerSingleton.instance().getAllPublications(Long.valueOf(modelID).longValue());
-            log.info("pubs.size(): " + pubs.size());
+            log.debug("pubs.size(): " + pubs.size());
         }
         catch (Exception e)
         {
@@ -545,7 +548,7 @@ public class ViewModelAction extends BaseAction
                                                        HttpServletRequest request,
                                                        HttpServletResponse response) throws Exception
     {
-        log.info("<ViewModelAction>  populateTherapeuticApproaches");
+        log.debug("<ViewModelAction>  populateTherapeuticApproaches");
         
         setCancerModel(request);
         //
@@ -564,7 +567,7 @@ public class ViewModelAction extends BaseAction
         Iterator it = therapyColl.iterator();
 
         final int cc = (therapyColl != null) ? therapyColl.size() : 0;
-        log.info("Looking up clinical protocols for " + cc + " agents...");
+        log.debug("Looking up clinical protocols for " + cc + " agents...");
 
         while (it.hasNext())
         {
@@ -626,7 +629,7 @@ public class ViewModelAction extends BaseAction
 	public ActionForward populateCaelmirTherapyDetails(ActionMapping mapping,
 			ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		log.info("<ViewModelAction>  populateCaelmirTherapyDetails Enter");
+		//log.debug<"<ViewModelAction>  populateCaelmirTherapyDetails Enter");
 
 		setCancerModel(request);
 		JSONArray jsonArray = new JSONArray();
@@ -639,8 +642,7 @@ public class ViewModelAction extends BaseAction
         AnimalModel theAnimalModel = theAnimalModelManager.get(modelID);  
 
 		try {
-			log
-					.info("<ViewModelAction>  populateCaelmirTherapyDetails Enter try");
+			log.debug("<ViewModelAction>  populateCaelmirTherapyDetails Enter try");
 			// Link to the inteface provided by caElmir
 			URL url = new URL("http://chichen-itza.compmed.ucdavis.edu:8080/"
 					+ CaElmirInterfaceManager.getStudyInfoUrl());
@@ -649,7 +651,7 @@ public class ViewModelAction extends BaseAction
 			//System.setProperty("proxyPort", "8080");
 
 			URLConnection urlConnection = url.openConnection();
-			log.info("populateCaelmirTherapyDetails open connection");
+			//log.debug("populateCaelmirTherapyDetails open connection");
 			// needs to be set to True for writing to the output stream.This
 			// allows to pass data to the url.
 			urlConnection.setDoOutput(true);
@@ -661,7 +663,7 @@ public class ViewModelAction extends BaseAction
 			out.write(jsonObj.toString());
 			out.flush();
 			out.close();
-			log.info("populateCaelmirTherapyDetails created JSONObject");
+			//log.debug("populateCaelmirTherapyDetails created JSONObject");
 
 			// start reading the responce
 			BufferedReader bufferedReader = new BufferedReader(
@@ -673,7 +675,7 @@ public class ViewModelAction extends BaseAction
 				status = ((JSONObject) jsonArray.get(0)).get(
 						CaElmirInterfaceManager.getStatusMessageKey())
 						.toString();
-				log.info("populateCaelmirTherapyDetails status: " + status);
+				//log.debug("populateCaelmirTherapyDetails status: " + status);
 				// Imporatant:first check for the status
 				if (!CaElmirInterfaceManager.getSuccessKey().equals(status)) {
 					// prints the error message and return
@@ -697,7 +699,7 @@ public class ViewModelAction extends BaseAction
 					studyData.setUrl(jobj.getString(CaElmirInterfaceManager.getStudyUrlKey()));
 
                     caelmirStudyData.add(studyData);
-                    //log.info("studyData.toString(): " + studyData.toString());                
+                    //log.debug("studyData.toString(): " + studyData.toString());                
 				}    
 			}
 		} catch (MalformedURLException me) {
@@ -713,7 +715,7 @@ public class ViewModelAction extends BaseAction
 		request.getSession().setAttribute(Constants.CAELMIR_STUDY_DATA,
 				caelmirStudyData);
         
-         //log.info("caelmirStudyData.toString(): " + caelmirStudyData.toString());
+         //log.debug("caelmirStudyData.toString(): " + caelmirStudyData.toString());
 
 		return mapping.findForward("viewTherapeuticApproaches");
 	}
@@ -866,10 +868,10 @@ public class ViewModelAction extends BaseAction
                                                      HttpServletRequest request,
                                                      HttpServletResponse response) throws Exception
     {
-        log.info("<populateTransplantation> Enter:");    	
+        log.debug("<populateTransplantation> Enter:");    	
         setCancerModel(request);
         setComments(request, Constants.Pages.TRANSPLANTATION);
-        log.info("<populateTransplantation> Exit:"); 
+        log.debug("<populateTransplantation> Exit:"); 
         return mapping.findForward("viewTransplantation");
     }
 
@@ -893,14 +895,14 @@ public class ViewModelAction extends BaseAction
                                                   HttpServletRequest request,
                                                   HttpServletResponse response) throws Exception
     {
-        log.info("<populateTransplantationDetails> Enter:");    	
+        log.debug("<populateTransplantationDetails> Enter:");    	
         String modelID = request.getParameter("tModelID");
         request.getSession().setAttribute(Constants.MODELID, modelID);
         String nsc = request.getParameter("nsc");
         if (nsc != null && nsc.length() == 0)
             return mapping.findForward("viewModelCharacteristics");
-        log.info("<populateTransplantationDetails> modelID:" + modelID);
-        log.info("<populateTransplantationDetails> nsc:" + nsc);
+        log.debug("<populateTransplantationDetails> modelID:" + modelID);
+        log.debug("<populateTransplantationDetails> nsc:" + nsc);
         TransplantationManager mgr = (TransplantationManager) getBean("transplantationManager");
 
         Transplantation t = mgr.get(modelID);
