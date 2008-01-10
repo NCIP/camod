@@ -14,23 +14,26 @@
 <hibernate-configuration>
     <session-factory>
         <property name="connection.datasource">java:/camod</property>
-        <property name="hibernate.show_sql">true</property>
-        <property name="dialect">org.hibernate.dialect.OracleDialect</property>        
-
-        <property name="hibernate.c3p0.min_size">5</property>
-        <property name="hibernate.c3p0.max_size">20</property>
-        <property name="hibernate.c3p0.timeout">500000</property>
-        <property name="hibernate.c3p0.max_statements">100</property>
-        <property name="hibernate.c3p0.idle_test_period">3000</property>
-        <property name="hibernate.c3p0.acquire_increment">2</property>
-        <property name="hibernate.c3p0.validate">false</property>
         <property name="hibernate.show_sql">false</property>
-        <property name="hibernate.max_fetch_depth">1</property>
-        <property name="hibernate.jdbc.use_streams_for_binary">true</property>
+        <property name="dialect">org.hibernate.dialect.OracleDialect</property> 
+        <property name="max_fetch_depth">1</property>
+        <property name="cglib.use_reflection_optimizer">false</property>
+        <property name="jdbc.batch_versioned_data">true</property>
+        <property name="jdbc.use_streams_for_binary">true</property>
+        <property name="cache.use_query_cache">false</property>
+         <property name="cache.provider_class">org.hibernate.cache.EhCacheProvider</property>
+               
+
+        <!-- property name="hibernate.c3p0.min_size">5</property -->
+        <!-- property name="hibernate.c3p0.max_size">20</property -->
+        <!-- property name="hibernate.c3p0.timeout">500000</property -->
+        <!-- property name="hibernate.c3p0.max_statements">100</property -->
+        <!-- property name="hibernate.c3p0.idle_test_period">3000</property -->
+        <!-- property name="hibernate.c3p0.acquire_increment">2</property -->
+        <!-- property name="hibernate.c3p0.validate">false</property -->
         <property name="hibernate.cache.region_prefix">hibernate.test</property>
         
-		<!-- CGLIB reflection_optimizer -->
-		<property name="hibernate.cglib.use_reflection_optimizer">false</property>        
+       
 	
         <!-- Mapping files -->
         <mapping resource="gov/nih/nci/camod/domain/GeneticAlteration.hbm.xml"/>
