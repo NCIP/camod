@@ -31,5 +31,6 @@
 			</td>
 		</tr>
 	</c:forEach>
+	    <td colspan="2" align="right"><a href="#">Top</a></td>	
 	<tr><td>&nbsp;</td></tr>
 </c:if>

@@ -1,6 +1,9 @@
 <%
  /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.29  2007/12/18 13:28:32  pandyas
+ * Modified column config to fit with caELMIRE data for integration of Study data
+ *
  * Revision 1.28  2007/12/04 13:46:57  pandyas
  * Rotate publication data and rename column heading
  *
@@ -66,7 +69,7 @@
  * Defect #86.  Removed unneeded field.
  *
  *
- * $Id: includePreclinicalTrials.jsp,v 1.29 2007-12-18 13:28:32 pandyas Exp $
+ * $Id: includePreclinicalTrials.jsp,v 1.30 2008-01-10 13:25:40 pandyas Exp $
  */
 %>
 <tr>
@@ -257,4 +260,6 @@
 		</tr></td>
 	</c:otherwise>
 </c:choose >
+
+    <td colspan="2" align="right"><a href="#">Top</a></td>	
 <tr><td>&nbsp;</td></tr>

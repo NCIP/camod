@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: includeAgentDetails.jsp,v 1.11 2007-12-27 01:18:39 pandyas Exp $
+ * $Id: includeAgentDetails.jsp,v 1.12 2008-01-10 13:25:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2007/12/27 01:18:39  pandyas
+ * Modified  format for feature #8816  	Connection to caELMIR - retrieve data for therapy search page - made tables match up with new data
+ *
  * Revision 1.10  2007/12/18 13:28:32  pandyas
  * Modified column config to fit with caELMIRE data for integration of Study data
  *
@@ -93,4 +96,5 @@
 	</ul>&nbsp;
 	</td>
 <tr>
+    <td colspan="2" align="right"><a href="#">Top</a></td>
 <tr><td>&nbsp;</td></tr>
