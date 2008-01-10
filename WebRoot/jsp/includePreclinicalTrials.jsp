@@ -1,6 +1,9 @@
 <%
  /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.30  2008/01/10 13:25:40  pandyas
+ * Added link to top of page for Therapy screen - results were getting very long
+ *
  * Revision 1.29  2007/12/18 13:28:32  pandyas
  * Modified column config to fit with caELMIRE data for integration of Study data
  *
@@ -69,7 +72,7 @@
  * Defect #86.  Removed unneeded field.
  *
  *
- * $Id: includePreclinicalTrials.jsp,v 1.30 2008-01-10 13:25:40 pandyas Exp $
+ * $Id: includePreclinicalTrials.jsp,v 1.31 2008-01-10 15:55:29 pandyas Exp $
  */
 %>
 <tr>
@@ -200,7 +203,7 @@
 											<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-pubview2.apg&OID=<c:out value="${p.zfinPubId}"/>">ZFIN</a>
 											<br/>
 									</c:when>				
-									<c:otherwise>&nbsp;					
+									<c:otherwise>					
 									</c:otherwise>
 								</c:choose>
 								<c:choose>
@@ -210,7 +213,7 @@
 												<br/>
 												<a target="_blank" href="http://tumor.informatics.jax.org/mtbwi/referenceDetails.do?accId=<c:out value="${p.jaxJNumber}"/>">MTB</a>
 										</c:when>				
-									<c:otherwise>&nbsp;						
+									<c:otherwise>						
 									</c:otherwise>
 								</c:choose>
 						</td>					
