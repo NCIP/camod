@@ -1,9 +1,12 @@
 /**
  *  @author georgeda 
  *  
- *  $Id: EvsTreeUtil.java,v 1.9 2007-08-27 15:38:08 pandyas Exp $  
+ *  $Id: EvsTreeUtil.java,v 1.10 2008-01-14 17:17:48 pandyas Exp $  
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.9  2007/08/27 15:38:08  pandyas
+ *  hide debug code printout
+ *
  *  Revision 1.8  2007/08/23 16:11:50  pandyas
  *  Removed extra code
  *
@@ -68,7 +71,7 @@ public class EvsTreeUtil
      */
     public static synchronized String getEVSPreferedDescription(String inConceptCode)
     {
-        log.debug("Entering getEVSPreferedDescription");
+        log.info("Entering getEVSPreferedDescription");
 
         String theDescription = "";
         String EVSTreeNameSpace = "";
@@ -82,23 +85,23 @@ public class EvsTreeUtil
         {
             try
             {
-                log.debug("inConceptCode: " + inConceptCode);                
+                log.info("inConceptCode: " + inConceptCode);                
                 
             	// Define parameters for Zebrafish namespace
                 // Maybe a better way to do this, but I didn't want to send in HttpServletRequest everywhere
             	if(inConceptCode.contains("ZFA:")){
-                    log.debug("Zebrafish modelSpecies");
+                    log.info("Zebrafish modelSpecies");
 
             		EVSTreeNameSpace = Constants.Evs.ZEBRAFISH_NAMESPACE;
             		DisplayNameTag = Constants.Evs.DISPLAY_NAME_TAG_LOWER_CASE;
             	//Define parameters for all NCI_Thesaurus namespace	
             	} else {
-                    log.debug("NOT Zebrafish modelSpecies");                    
+                    log.info("NOT Zebrafish modelSpecies");                    
             		EVSTreeNameSpace = Constants.Evs.NAMESPACE;
             		DisplayNameTag = Constants.Evs.DISPLAY_NAME_TAG;
             	}
             	
-            	log.debug("EVSTreeNameSpace: " + EVSTreeNameSpace);
+            	log.info("EVSTreeNameSpace: " + EVSTreeNameSpace);
       	
             	
                 ApplicationService theAppService = getApplicationService();
@@ -119,12 +122,12 @@ public class EvsTreeUtil
 
                     // Should only be one
                     List theDisplayNameList = (List) theAppService.evsSearch(theDisplayNameQuery);
-                    log.debug("theDisplayNameList.size: " + theDisplayNameList.size());
+                    log.info("theDisplayNameList.size: " + theDisplayNameList.size());
 
                     if (theDisplayNameList.size() > 0)
                     {
                         theDescription = (String) theDisplayNameList.get(0);
-                        log.debug("theDescription: " + theDescription);                        
+                        log.info("theDescription: " + theDescription);                        
 
                         // Cache for next time
                         ourDescriptions.put(inConceptCode, theDescription);
@@ -137,7 +140,7 @@ public class EvsTreeUtil
                 log.error("Exception getting preferred description: ", e);
             }
         }
-        log.trace("Exiting getEVSPreferedDescription");
+        log.info("Exiting getEVSPreferedDescription");
 
         return theDescription;
     }
