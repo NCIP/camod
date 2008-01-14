@@ -1,9 +1,12 @@
 /**
  *  @author georgeda 
  *  
- *  $Id: EvsTreeUtil.java,v 1.10 2008-01-14 17:17:48 pandyas Exp $  
+ *  $Id: EvsTreeUtil.java,v 1.11 2008-01-14 21:04:56 pandyas Exp $  
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.10  2008/01/14 17:17:48  pandyas
+ *  Added to dev instance to look at get Preferred Description error iwth caCORE
+ *
  *  Revision 1.9  2007/08/27 15:38:08  pandyas
  *  hide debug code printout
  *
@@ -105,6 +108,7 @@ public class EvsTreeUtil
       	
             	
                 ApplicationService theAppService = getApplicationService();
+                log.info("theAppService: " + theAppService.toString());
 
                 EVSQuery theConceptNameQuery = new EVSQueryImpl();
                 theConceptNameQuery.getConceptNameByCode(EVSTreeNameSpace, inConceptCode);

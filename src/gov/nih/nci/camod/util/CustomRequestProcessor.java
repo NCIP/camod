@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: CustomRequestProcessor.java,v 1.10 2007-09-12 19:36:14 pandyas Exp $
+ * $Id: CustomRequestProcessor.java,v 1.11 2008-01-14 21:03:15 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2007/09/12 19:36:14  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.9  2007/03/27 18:40:11  pandyas
  * changed log.info to log.debug to clean up output - done testing changes
  *
@@ -40,15 +43,15 @@ public class CustomRequestProcessor extends SecureRequestProcessor {
 
     public void process(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-        log.trace("Entering process");
+        log.info("Entering process");
         super.process(request, response);
-        log.trace("Exiting process");
+        log.info("Exiting process");
     }
 
     protected ActionForward processActionPerform(HttpServletRequest request, HttpServletResponse response,
             Action action, ActionForm form, ActionMapping mapping) throws IOException, ServletException {
 
-        log.trace("Entering processActionPerform");
+        log.info("Entering processActionPerform");
 
         // Check custom ActionMapping Parameter
         if (mapping.getParameter().toString().equals("method") || mapping.getParameter().toString().equals("protected")) {
@@ -57,7 +60,7 @@ public class CustomRequestProcessor extends SecureRequestProcessor {
             String user = (String) session.getAttribute(Constants.CURRENTUSER);
 
             if (user == null) {
-                log.debug("User not authorized.  Sending to login page");
+                log.info("User not authorized.  Sending to login page");
                 request.getSession().setAttribute(Constants.NOTLOGGEDIN, "true");
                 return mapping.findForward("login");
             }
@@ -77,7 +80,7 @@ public class CustomRequestProcessor extends SecureRequestProcessor {
             List theRoles = (List) request.getSession().getAttribute(Constants.CURRENTUSERROLES);
 
             if (theRoles == null || !theRoles.contains(Constants.Admin.Roles.COORDINATOR)) {
-                log.debug("Accessing page: " + thePath + " without proper role");
+                log.info("Accessing page: " + thePath + " without proper role");
 
                 return mapping.findForward("noAccess");
             }
@@ -86,40 +89,40 @@ public class CustomRequestProcessor extends SecureRequestProcessor {
         // Print the forwards and mapping
         String[] theForwards = mapping.findForwards();
         for (int i = 0, j = theForwards.length; i < j; i++) {
-            log.debug("Forward: " + theForwards[i]);
+            log.info("Forward: " + theForwards[i]);
         }
-        log.debug("Mapping: " + mapping);
+        log.info("Mapping: " + mapping);
 
         // Process the action
         ActionForward theForward = super.processActionPerform(request, response, action, form, mapping);
-        log.debug("ActionForward : " + theForward);
+        log.info("ActionForward : " + theForward);
 
-        log.trace("Exiting processActionPerform");
+        log.info("Exiting processActionPerform");
         return theForward;
     }
 
     protected ActionForward processException(HttpServletRequest request, HttpServletResponse response,
             Exception exception, ActionForm form, ActionMapping mapping) throws IOException, ServletException {
 
-        log.trace("Entering processException");
+        log.info("Entering processException");
 
         ActionForward theForward = super.processException(request, response, exception, form, mapping);
 
-        log.debug("ActionForward:" + theForward);
+        log.info("ActionForward:" + theForward);
 
-        log.trace("Exiting processException");
+        log.info("Exiting processException");
         return theForward;
     }
 
     protected boolean processValidate(HttpServletRequest request, HttpServletResponse response, ActionForm form,
             ActionMapping mapping) throws IOException, ServletException {
 
-        log.trace("Entering processValidate");
+        log.info("Entering processValidate");
 
         boolean validate = super.processValidate(request, response, form, mapping);
-        log.debug("Validate result: " + validate);
+        log.info("Validate result: " + validate);
 
-        log.trace("Exiting validate");
+        log.info("Exiting validate");
 
         return validate;
     }
@@ -127,12 +130,12 @@ public class CustomRequestProcessor extends SecureRequestProcessor {
     protected boolean processForward(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping)
             throws IOException, ServletException {
 
-        log.trace("Entering processForward");
+        log.info("Entering processForward");
 
         boolean forward = super.processForward(request, response, mapping);
-        log.debug("Forward result: " + forward);
+        log.info("Forward result: " + forward);
 
-        log.trace("Exiting processForward");
+        log.info("Exiting processForward");
 
         return forward;
     }
@@ -140,11 +143,11 @@ public class CustomRequestProcessor extends SecureRequestProcessor {
     protected void processForwardConfig(HttpServletRequest request, HttpServletResponse response, ForwardConfig config)
             throws IOException, ServletException {
 
-        log.trace("Entering processForwardConfig");
+        log.info("Entering processForwardConfig");
 
         super.processForwardConfig(request, response, config);
 
-        log.debug("The ForwardConfig: " + config);
-        log.trace("Exiting processForwardConfig");
+        log.info("The ForwardConfig: " + config);
+        log.info("Exiting processForwardConfig");
     }
 }
