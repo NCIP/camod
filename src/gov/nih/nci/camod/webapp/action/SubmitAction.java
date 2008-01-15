@@ -1,8 +1,11 @@
 /**
  *  
- *  $Id: SubmitAction.java,v 1.18 2007-09-12 19:36:40 pandyas Exp $
+ *  $Id: SubmitAction.java,v 1.19 2008-01-15 10:23:20 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.18  2007/09/12 19:36:40  pandyas
+ *  modified debug statements for build to stage tier
+ *
  *  Revision 1.17  2007/08/14 12:05:12  pandyas
  *  Implementing EVSPreferredName for Zebrafish models
  *
@@ -63,6 +66,7 @@ public class SubmitAction extends BaseAction {
                 + request.getParameter(Constants.Parameters.MODELID));
 
         String modelID = request.getParameter(Constants.Parameters.MODELID);
+        log.info("modelID: " + modelID);
 
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
 
@@ -71,7 +75,7 @@ public class SubmitAction extends BaseAction {
         try {
             AnimalModel am = animalModelManager.get(modelID);
             String speciesName = am.getStrain().getSpecies().getCommonName();
-            log.debug("setModelConstants for speciesName: " + speciesName);
+            log.info("setModelConstants for speciesName: " + speciesName);
             
             // Set animal model species up front for genetic description (mgi, zfin, or rgd id)
             request.getSession().setAttribute(Constants.AMMODELSPECIESCOMMONNAME, speciesName);            
@@ -79,18 +83,23 @@ public class SubmitAction extends BaseAction {
             request.getSession().setAttribute(Constants.MODELID, am.getId().toString());
             // Used for submitOverview to set model back to previous states
             request.getSession().setAttribute(Constants.Parameters.MODELID, am.getId().toString());
-            request.getSession().setAttribute(Constants.MODELDESCRIPTOR, am.getModelDescriptor());
-            log.debug("Constants.MODELDESCRIPTOR: " + request.getSession().getAttribute(Constants.MODELDESCRIPTOR));
-            request.getSession().setAttribute(Constants.MODELSTATUS, am.getState());
+            log.info("set Constants.Parameters.MODELID: " );
 
+            request.getSession().setAttribute(Constants.MODELDESCRIPTOR, am.getModelDescriptor());
+            log.info("Constants.MODELDESCRIPTOR: " + request.getSession().getAttribute(Constants.MODELDESCRIPTOR));
+            request.getSession().setAttribute(Constants.MODELSTATUS, am.getState());
+            log.info("set Constants.MODELSTATUS to: " + am.getState());
+            
             AnimalModelStateForm theForm = new AnimalModelStateForm();
             theForm.setModelId(am.getId().toString());
-
+            log.info("setModelId: " + am.getId().toString());
+            
             // Get the coordinator
     		Properties camodProperties = new Properties();
     		String camodPropertiesFileName = null;
 
     		camodPropertiesFileName = System.getProperty("gov.nih.nci.camod.camodProperties");
+    		log.info("camodPropertiesFileName: " + camodPropertiesFileName.toString());
     		
     		try {
 			
