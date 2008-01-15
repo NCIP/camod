@@ -1,8 +1,14 @@
 /**
  * 
- * $Id: LoginAction.java,v 1.16 2007-12-17 18:03:22 pandyas Exp $
+ * $Id: LoginAction.java,v 1.17 2008-01-15 19:31:55 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2007/12/17 18:03:22  pandyas
+ * Removed * in searchFilter used for getting e-mail from LDAP
+ * Apps Support ticket was submitted (31169 - incorrect e-mail associated with my caMOD account) stating:
+ *
+ * Cheryl Marks submitted a ticket to NCICB Application Support in which she requested that the e-mail address associated with her account in the "User Settings" screen in caMOD be corrected. She has attempted to correct it herself, but because the program queries the LDAP Server for the e-mail address, her corrections were not retained.
+ *
  * Revision 1.15  2007/09/12 19:36:40  pandyas
  * modified debug statements for build to stage tier
  *
@@ -77,8 +83,7 @@ public final class LoginAction extends BaseAction {
             HttpServletResponse response) throws IOException, ServletException {
         LoginForm loginForm = (LoginForm) form;
 
-        log.info("Logon Username: " + loginForm.getUsername());
-        log.info("System Config file is: " + System.getProperty("gov.nih.nci.security.configFile"));
+        log.debug("Logon Username: " + loginForm.getUsername());
 
         String theUsername = loginForm.getUsername().toLowerCase();
         
