@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.49 2008-01-16 18:29:57 pandyas Exp $
+ *  $Id: ViewModelAction.java,v 1.50 2008-01-16 20:09:31 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.49  2008/01/16 18:29:57  pandyas
+ *  Renamed value to Transplant for #8290
+ *
  *  Revision 1.48  2008/01/10 15:55:01  pandyas
  *  modify output for final dev deployment
  *
@@ -344,7 +347,7 @@ public class ViewModelAction extends BaseAction
                 GeneIdentifier geneIdentifier = tm.getGeneIdentifier();
                 if (geneIdentifier != null)
                 {
-                    log.debug("Connecting to caBIO to look up gene " + geneIdentifier);
+                    //log.info("Connecting to caBIO to look up gene " + geneIdentifier);
                     // the geneId is available
                     try
                     {
@@ -363,11 +366,11 @@ public class ViewModelAction extends BaseAction
 
                         
                         final int geneCount = (resultList != null) ? resultList.size() : 0;
-                        log.debug("Got " + geneCount + " Gene Objects");
+                        log.info("Got " + geneCount + " Gene Objects");
                         if (geneCount > 0)
                         {
                             myGene = (Gene) resultList.get(0);
-                            log.debug("Gene:" + geneIdentifier + " ==>" + myGene);
+                            //log.info("Gene:" + geneIdentifier + " ==>" + myGene);
                             tmGeneMap.put(tm.getId(), myGene);
                         }
                     }
