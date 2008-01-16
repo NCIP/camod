@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: StrainManagerImpl.java,v 1.7 2007-10-31 19:10:20 pandyas Exp $
+ * $Id: StrainManagerImpl.java,v 1.8 2008-01-16 18:30:21 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2007/10/31 19:10:20  pandyas
+ * Fixed #8188 	Rename UnctrlVocab items to text entries
+ *
  * Revision 1.6  2007/09/12 19:36:03  pandyas
  * modified debug statements for build to stage tier
  *
@@ -195,7 +198,7 @@ public class StrainManagerImpl extends BaseManager implements StrainManager
      *                
      * This method is used to send in the newly created Species
      * when the user specifies other for species and Not Specified
-     * for strain in the transplantationManagerImpl.  Reuse object if other text
+     * for strain in the transplantManagerImpl.  Reuse object if other text
      * is exactly the same (rare occurrance).               
      */
     public Strain getOrCreate(String inStrainName,

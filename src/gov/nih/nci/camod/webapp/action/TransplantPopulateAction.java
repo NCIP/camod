@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TransplantationPopulateAction.java,v 1.1 2007-10-31 17:48:23 pandyas Exp $
+ * $Id: TransplantPopulateAction.java,v 1.1 2008-01-16 18:29:57 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2007/10/31 17:48:23  pandyas
+ * Fixed #8290 	Rename graft object into transplant object
+ *
  * Revision 1.5  2007/09/12 19:36:40  pandyas
  * modified debug statements for build to stage tier
  *
@@ -98,11 +101,11 @@ package gov.nih.nci.camod.webapp.action;
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.Species;
-import gov.nih.nci.camod.domain.Transplantation;
+import gov.nih.nci.camod.domain.Transplant;
 import gov.nih.nci.camod.service.AnimalModelManager;
-import gov.nih.nci.camod.service.impl.TransplantationManagerSingleton;
+import gov.nih.nci.camod.service.impl.TransplantManagerSingleton;
 import gov.nih.nci.camod.service.impl.SpeciesManagerSingleton;
-import gov.nih.nci.camod.webapp.form.TransplantationForm;
+import gov.nih.nci.camod.webapp.form.TransplantForm;
 import gov.nih.nci.camod.webapp.util.DropdownOption;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 import java.util.List;
@@ -112,7 +115,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-public class TransplantationPopulateAction extends BaseAction
+public class TransplantPopulateAction extends BaseAction
 {
 
     /**
@@ -126,139 +129,139 @@ public class TransplantationPopulateAction extends BaseAction
     {
 
         // Create a form to edit
-    	TransplantationForm transplantationForm = (TransplantationForm) form;
+    	TransplantForm transplantForm = (TransplantForm) form;
 
         // Grab the current Transplantion we are working with related to this AM
         String aTransplantID = request.getParameter("aTransplantID");
 
-        Transplantation transplantation = TransplantationManagerSingleton.instance().get(aTransplantID);
+        Transplant transplant = TransplantManagerSingleton.instance().get(aTransplantID);
 
-        if (transplantation == null)
+        if (transplant == null)
         {
             request.setAttribute(Constants.Parameters.DELETED, "true");
         }
         else
         {
             request.setAttribute("aTransplantID", aTransplantID);
-            transplantationForm.setName(transplantation.getName());
+            transplantForm.setName(transplant.getName());
 
             // Set the other flag or the selected administrative site from the DB
-            if (transplantation.getAdminSiteAlternEntry() != null)
+            if (transplant.getAdminSiteAlternEntry() != null)
             {
-            	transplantationForm.setAdministrativeSite(Constants.Dropdowns.OTHER_OPTION);
-            	transplantationForm.setOtherAdministrativeSite(transplantation.getAdminSiteAlternEntry());
+            	transplantForm.setAdministrativeSite(Constants.Dropdowns.OTHER_OPTION);
+            	transplantForm.setOtherAdministrativeSite(transplant.getAdminSiteAlternEntry());
             }
             else
             {
-            	transplantationForm.setAdministrativeSite(transplantation.getAdministrativeSite());
+            	transplantForm.setAdministrativeSite(transplant.getAdministrativeSite());
             }
             
             // Set the other flag or the selected ConditioningRegimen from the DB
-            if (transplantation.getCondRegimenAlternEntry() != null)
+            if (transplant.getCondRegimenAlternEntry() != null)
             {
-            	transplantationForm.setConditioningRegimen(Constants.Dropdowns.OTHER_OPTION);
-            	transplantationForm.setOtherConditioningRegimen(transplantation.getCondRegimenAlternEntry());
+            	transplantForm.setConditioningRegimen(Constants.Dropdowns.OTHER_OPTION);
+            	transplantForm.setOtherConditioningRegimen(transplant.getCondRegimenAlternEntry());
             }
             else
             {
-            	transplantationForm.setConditioningRegimen(transplantation.getConditioningRegimen());
+            	transplantForm.setConditioningRegimen(transplant.getConditioningRegimen());
             }            
 
-            transplantationForm.setGeneticManipulation(transplantation.getGeneticManipulation());
-            transplantationForm.setModificationDescription(transplantation.getModificationDescription());
-            transplantationForm.setParentalCellLineName(transplantation.getParentalCellLineName());
-            transplantationForm.setAtccNumber(transplantation.getAtccNumber());
-            transplantationForm.setCellAmount(transplantation.getCellAmount());
-            transplantationForm.setGrowthPeriod(transplantation.getGrowthPeriod());
+            transplantForm.setGeneticManipulation(transplant.getGeneticManipulation());
+            transplantForm.setModificationDescription(transplant.getModificationDescription());
+            transplantForm.setParentalCellLineName(transplant.getParentalCellLineName());
+            transplantForm.setAtccNumber(transplant.getAtccNumber());
+            transplantForm.setCellAmount(transplant.getCellAmount());
+            transplantForm.setGrowthPeriod(transplant.getGrowthPeriod());
             
-            if(transplantation.getComments() !=null && transplantation.getComments().length()>0) {
-            transplantationForm.setComments(transplantation.getComments());
+            if(transplant.getComments() !=null && transplant.getComments().length()>0) {
+            transplantForm.setComments(transplant.getComments());
             }
-            // When populating multiple Transplantation, this constant needs to be reset for each species entry
-            request.getSession().setAttribute(Constants.DONORSPECIESCOMMONNAME, transplantation.getStrain().getSpecies().getCommonName());
-            log.debug("transplantation.getStrain().getSpecies().getCommonName(): " + transplantation.getStrain().getSpecies().getCommonName());            
+            // When populating multiple Transplant, this constant needs to be reset for each species entry
+            request.getSession().setAttribute(Constants.DONORSPECIESCOMMONNAME, transplant.getStrain().getSpecies().getCommonName());
+            log.debug("transplant.getStrain().getSpecies().getCommonName(): " + transplant.getStrain().getSpecies().getCommonName());            
             
             // Species was required in previous versions of caMod and is stored in donorSpecies column
             // The species and strain are required for 2.1 and strain_id is stored for all future versions
             // Therefore, we must search in both to populate correctly
-            if (transplantation.getDonorSpecies() != null)
+            if (transplant.getDonorSpecies() != null)
             {
                 // Populate species if uncontrolled vocab - old models
-                if (transplantation.getDonorSpecies().getScientificNameAlternEntry() != null)
+                if (transplant.getDonorSpecies().getScientificNameAlternEntry() != null)
                 {
-                	transplantationForm.setDonorScientificName(Constants.Dropdowns.OTHER_OPTION);
-                	transplantationForm.setOtherDonorScientificName(transplantation.getDonorSpecies().getScientificNameAlternEntry());
+                	transplantForm.setDonorScientificName(Constants.Dropdowns.OTHER_OPTION);
+                	transplantForm.setOtherDonorScientificName(transplant.getDonorSpecies().getScientificNameAlternEntry());
                 }
                 else
                 {
-                	transplantationForm.setDonorScientificName(transplantation.getDonorSpecies().getScientificName());
+                	transplantForm.setDonorScientificName(transplant.getDonorSpecies().getScientificName());
                 }
             }
-            else if (transplantation.getStrain() != null)
+            else if (transplant.getStrain() != null)
             {
                 //Populate strain for all new models - check for uncontrolled vocab
-                if (transplantation.getStrain().getNameAlternEntry() != null)
+                if (transplant.getStrain().getNameAlternEntry() != null)
                 {
-                	transplantationForm.setDonorEthinicityStrain(Constants.Dropdowns.OTHER_OPTION);
-                	transplantationForm.setOtherDonorEthinicityStrain(transplantation.getStrain().getNameAlternEntry());
+                	transplantForm.setDonorEthinicityStrain(Constants.Dropdowns.OTHER_OPTION);
+                	transplantForm.setOtherDonorEthinicityStrain(transplant.getStrain().getNameAlternEntry());
 
                 }
                 else
                 {
-                	transplantationForm.setDonorEthinicityStrain(transplantation.getStrain().getName());
+                	transplantForm.setDonorEthinicityStrain(transplant.getStrain().getName());
                 }
                 // Populate species if strain_id is used -  models submitted after 2.0 
                 // check for uncontrolled vocab
-                if (transplantation.getStrain().getSpecies().getScientificNameAlternEntry() != null)
+                if (transplant.getStrain().getSpecies().getScientificNameAlternEntry() != null)
                 {
-                	transplantationForm.setDonorScientificName(Constants.Dropdowns.OTHER_OPTION);
-                	transplantationForm.setOtherDonorScientificName(transplantation.getStrain().getSpecies().getScientificNameAlternEntry());
+                	transplantForm.setDonorScientificName(Constants.Dropdowns.OTHER_OPTION);
+                	transplantForm.setOtherDonorScientificName(transplant.getStrain().getSpecies().getScientificNameAlternEntry());
                 }
                 else
                 {
-                	transplantationForm.setDonorScientificName(transplantation.getStrain().getSpecies().getScientificName());
+                	transplantForm.setDonorScientificName(transplant.getStrain().getSpecies().getScientificName());
                 }
             }
 
             // since we are always querying from concept code (save and edit),
             // simply display EVSPreferredDescription
-            if (transplantation.getOrgan() != null)
+            if (transplant.getOrgan() != null)
             {            
                 // since we are always querying from concept code (save and edit),
                 // simply display EVSPreferredDescription, unless concept code is '00000'
-                if (transplantation.getOrgan().getConceptCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)) {
-                	transplantationForm.setOrgan(transplantation.getOrgan().getEVSPreferredDescription());
-                    log.debug("<TransplantationPopulateAction> setOrgan= " + transplantation.getOrgan().getName());
-                    transplantationForm.setOrganTissueCode(transplantation.getOrgan().getConceptCode());
-                    log.debug("<TransplantationPopulateAction> OrganTissueCode= " + transplantation.getOrgan().getConceptCode());           
+                if (transplant.getOrgan().getConceptCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)) {
+                	transplantForm.setOrgan(transplant.getOrgan().getEVSPreferredDescription());
+                    log.debug("<TransplantPopulateAction> setOrgan= " + transplant.getOrgan().getName());
+                    transplantForm.setOrganTissueCode(transplant.getOrgan().getConceptCode());
+                    log.debug("<TransplantPopulateAction> OrganTissueCode= " + transplant.getOrgan().getConceptCode());           
                     
                 } else {
-                	transplantationForm.setOrgan(transplantation.getOrgan().getEVSPreferredDescription());
-                    log.debug("<TransplantationPopulateAction> setOrgan= " + transplantation.getOrgan().getEVSPreferredDescription());
-                    transplantationForm.setOrganTissueCode(transplantation.getOrgan().getConceptCode());
-                    log.debug("<TransplantationPopulateAction> OrganTissueCode= " + transplantation.getOrgan().getConceptCode());
+                	transplantForm.setOrgan(transplant.getOrgan().getEVSPreferredDescription());
+                    log.debug("<TransplantPopulateAction> setOrgan= " + transplant.getOrgan().getEVSPreferredDescription());
+                    transplantForm.setOrganTissueCode(transplant.getOrgan().getConceptCode());
+                    log.debug("<TransplantPopulateAction> OrganTissueCode= " + transplant.getOrgan().getConceptCode());
                 }
             }
 
 
             // Set the other flag or the normal source type
-            if (transplantation.getSourceTypeAlternEntry() != null)
+            if (transplant.getSourceTypeAlternEntry() != null)
             {
-            	transplantationForm.setSourceType(Constants.Dropdowns.OTHER_OPTION);
-            	transplantationForm.setOtherSourceType(transplantation.getSourceTypeAlternEntry());
+            	transplantForm.setSourceType(Constants.Dropdowns.OTHER_OPTION);
+            	transplantForm.setOtherSourceType(transplant.getSourceTypeAlternEntry());
             }
             else
             {
-            	transplantationForm.setSourceType(transplantation.getSourceType());
+            	transplantForm.setSourceType(transplant.getSourceType());
             }
 
         }
 
         // Prepopulate all dropdown fields, set the global Constants to the
         // following
-        this.dropdown(request, response, transplantationForm);
+        this.dropdown(request, response, transplantForm);
 
-        return mapping.findForward("submitTransplantation");
+        return mapping.findForward("submitTransplant");
 
     }
 
@@ -278,16 +281,16 @@ public class TransplantationPopulateAction extends BaseAction
                                   HttpServletResponse response) throws Exception
     {
 
-        log.debug("<TransplantationPopulateAction dropdown> Entering dropdown() ");
+        log.debug("<TransplantPopulateAction dropdown> Entering dropdown() ");
 
-        TransplantationForm theForm = (TransplantationForm) form;
+        TransplantForm theForm = (TransplantForm) form;
 
         // setup dropdown menus
         this.dropdown(request, response, theForm);
 
-        log.debug("<TransplantationPopulateAction dropdown> before return submitTransplantation ");
+        log.debug("<TransplantPopulateAction dropdown> before return submitTransplant ");
 
-        return mapping.findForward("submitTransplantation");
+        return mapping.findForward("submitTransplant");
 
     }
 
@@ -300,16 +303,16 @@ public class TransplantationPopulateAction extends BaseAction
      */
     private void dropdown(HttpServletRequest request,
                           HttpServletResponse response,
-                          TransplantationForm inForm) throws Exception
+                          TransplantForm inForm) throws Exception
     {
 
-        log.debug("<TransplantationPopulateAction dropdown> Entering void dropdown()");
+        log.debug("<TransplantPopulateAction dropdown> Entering void dropdown()");
 
-        // Set the Species drop drop for the Transplantation form
+        // Set the Species drop drop for the Transplant form
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SPECIESQUERYDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER_OPTION);
 
-        // theSpecies will be null the first time (submitTransplantation screen) - default to full list of strains
-        // but this is needed to populate the strain on the submitTransplantation screen
+        // theSpecies will be null the first time (submitTransplant screen) - default to full list of strains
+        // but this is needed to populate the strain on the submitTransplant screen
         String theSpecies = inForm.getDonorScientificName();
         if (theSpecies == null)
         {
@@ -348,7 +351,7 @@ public class TransplantationPopulateAction extends BaseAction
         }
 
 
-        log.debug("<TransplantationPopulateAction dropdown> Exiting void dropdown()");
+        log.debug("<TransplantPopulateAction dropdown> Exiting void dropdown()");
     }
 
     /**
@@ -367,20 +370,20 @@ public class TransplantationPopulateAction extends BaseAction
                                            HttpServletResponse response) throws Exception
     {
 
-    	TransplantationForm transplantationForm = (TransplantationForm) form;
+    	TransplantForm transplantForm = (TransplantForm) form;
         String theDonorSpecies =null;
         
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STRAINDROP, transplantationForm.getDonorScientificName());
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STRAINDROP, transplantForm.getDonorScientificName());
         
-        log.debug("transplantationForm.getDonorScientificName(): " + transplantationForm.getDonorScientificName());
+        log.debug("transplantForm.getDonorScientificName(): " + transplantForm.getDonorScientificName());
         
         // Check if null - if user goes from species to empty this correctly redirects to screen  
-        if (!transplantationForm.getDonorScientificName().equals(Constants.Dropdowns.OTHER_OPTION)) {
-            if(transplantationForm.getDonorScientificName() != null && transplantationForm.getDonorScientificName().length() > 0){
+        if (!transplantForm.getDonorScientificName().equals(Constants.Dropdowns.OTHER_OPTION)) {
+            if(transplantForm.getDonorScientificName() != null && transplantForm.getDonorScientificName().length() > 0){
     	        // Set Donor species to a constant to determine which organ tree displays 
     	        // using common name because Rat has two species
     
-    	        Species species = SpeciesManagerSingleton.instance().getByName(transplantationForm.getDonorScientificName());
+    	        Species species = SpeciesManagerSingleton.instance().getByName(transplantForm.getDonorScientificName());
     	        theDonorSpecies = species.getCommonName();
     	        log.debug("<setStrainDropdown> theDonorSpecies: "+ theDonorSpecies);
             }  
@@ -388,14 +391,14 @@ public class TransplantationPopulateAction extends BaseAction
         request.getSession().setAttribute(Constants.DONORSPECIESCOMMONNAME, theDonorSpecies);
         
         // Must Reset both fields when new species is chosen or edited
-        transplantationForm.setOrganTissueCode(null);
-        transplantationForm.setOrgan(null);
+        transplantForm.setOrganTissueCode(null);
+        transplantForm.setOrgan(null);
         
         // Must Reset both fields when new species is chosen or edited
-        transplantationForm.setDonorEthinicityStrain("");
-        transplantationForm.setOtherDonorEthinicityStrain("");
+        transplantForm.setDonorEthinicityStrain("");
+        transplantForm.setOtherDonorEthinicityStrain("");
 
-        return mapping.findForward("submitTransplantation");
+        return mapping.findForward("submitTransplant");
     }
 
 }

@@ -279,14 +279,14 @@
 	    </queries>
 	</query_group>
     <query_group>
-        <description>Models with Transplantations </description>
+        <description>Models with Transplants </description>
 	    <queries>
 			<query>
-			 	<description>Models with Transplantations</description>
-			 	<key>Transplantation_Query</key>
+			 	<description>Models with Transplants</description>
+			 	<key>Transplant_Query</key>
 			 	<parameters>
 				    <parameter>
-				        <name>searchTransplantation</name>
+				        <name>searchTransplant</name>
 				        <value>true</value>
 			        </parameter>
 				</parameters>

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: DrugScreenSearchAction.java,v 1.12 2007-10-31 18:42:56 pandyas Exp $
+ * $Id: DrugScreenSearchAction.java,v 1.13 2008-01-16 18:29:57 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2007/10/31 18:42:56  pandyas
+ * Fixed #8290 	Rename graft object into transplant object
+ *
  * Revision 1.11  2007/09/12 19:36:40  pandyas
  * modified debug statements for build to stage tier
  *
@@ -139,9 +142,9 @@ public final class DrugScreenSearchAction extends BaseAction {
 							yeastResults.put(a.getId(), yeastStages);
 						}
 						if (theForm.isDoInvivo()) {
-							// now get invivo/Transplantation data
-							List transplantationResults = QueryManagerSingleton.instance().getInvivoResults(a, false);
-							invivoResults.put(a.getId(), transplantationResults);
+							// now get invivo/Transplant data
+							List transplantResults = QueryManagerSingleton.instance().getInvivoResults(a, false);
+							invivoResults.put(a.getId(), transplantResults);
 						}
 					}
 				}

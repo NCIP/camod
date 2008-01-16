@@ -42,9 +42,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.25 2007-10-31 17:42:28 pandyas Exp $
+ * $Id: SearchForm.java,v 1.26 2008-01-16 18:29:46 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.25  2007/10/31 17:42:28  pandyas
+ * Fixed #8290 	Rename graft object into transplant object
+ *
  * Revision 1.24  2007/10/26 14:02:57  pandyas
  * ready for next build
  *
@@ -160,7 +163,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
     protected boolean searchHistoMetastasis = false;
     protected boolean searchMicroArrayData = false;
     protected boolean searchImageData = false;    
-    protected boolean searchTransplantation = false;
+    protected boolean searchTransplant = false;
     protected boolean searchTransientInterference = false;
     protected boolean searchToolStrain = false; 
     
@@ -467,14 +470,14 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         this.searchImageData = searchImageData;
     }    
 
-    public boolean isSearchTransplantation()
+    public boolean isSearchTransplant()
     {
-        return searchTransplantation;
+        return searchTransplant;
     }
 
-    public void setSearchTransplantation(boolean searchTransplantation)
+    public void setSearchTransplant(boolean searchTransplant)
     {
-        this.searchTransplantation = searchTransplantation;
+        this.searchTransplant = searchTransplant;
     }
 
     /**
@@ -557,7 +560,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         targetedModification = false;
         searchHistoMetastasis = false;
         searchMicroArrayData = false;
-        searchTransplantation = false;
+        searchTransplant = false;
         searchToolStrain = false;
         externalSource = null;
         searchImageData = false;

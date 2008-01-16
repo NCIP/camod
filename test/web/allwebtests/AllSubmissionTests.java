@@ -29,7 +29,7 @@ public class AllSubmissionTests extends TestCase {
         suite.addTest(SubmitEditDeletePublicationTest.suite());
         suite.addTest(SubmitEditDeleteTherapyTest.suite());
         suite.addTest(SubmitEditDeleteTransIntTest.suite());
-        suite.addTest(SubmitEditDeleteTransplantationTest.suite());        
+        suite.addTest(SubmitEditDeleteTransplantTest.suite());        
         suite.addTest(SubmitGDTest.suite());     
         suite.addTest(SubmitPageTest.suite());
 

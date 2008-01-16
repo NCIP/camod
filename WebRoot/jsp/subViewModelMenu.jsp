@@ -206,11 +206,11 @@
 	<BR>
 	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
 		<% 
-			l = new ArrayList(am.getTransplantationCollection());
+			l = new ArrayList(am.getTransplantCollection());
 			cc = (l!=null)?l.size():0;
 			if ( cc > 0 ) {
 		%>
-		<a href="ViewModelAction.do?unprotected_method=populateTransplantation&aModelID=<%=mdl%>" styleClass="subMenuPrimary">TRANSPLANTATION</a>	
+		<a href="ViewModelAction.do?unprotected_method=populateTransplant&aModelID=<%=mdl%>" styleClass="subMenuPrimary">TRANSPLANT</a>	
 	    <%} else { %>
 			TRANSPLANT
 		<%}%>

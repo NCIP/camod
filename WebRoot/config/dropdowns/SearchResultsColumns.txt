@@ -29,7 +29,7 @@ Submitted Date
 Targeted Gene / Locus
 Transcriptional 1
 Transgene
-Transplantation Type
+Transplant Type
 Tumor incidence over lifetime
 Tumor Sites
 Type of Modification

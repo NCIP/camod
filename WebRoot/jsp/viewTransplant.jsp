@@ -17,11 +17,11 @@
 
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left" width="100%">
 	<tr>
-		<td class="formTitle" height="20" colspan="2">Transplantation - Model:
+		<td class="formTitle" height="20" colspan="2">Transplant - Model:
 		<c:out value="${mdl.modelDescriptor}" escapeXml="false"/></td>
 	</tr>
 
-	<c:forEach var="tp" items="${mdl.transplantationCollection}" 
+	<c:forEach var="tp" items="${mdl.transplantCollection}" 
 			       varStatus="stat">
 
 			<tr>
@@ -31,7 +31,7 @@
 			</tr>
 			       
 		<tr>
-			<td class="GreyBox"><b>Transplantation:</b></td>
+			<td class="GreyBox"><b>Transplant:</b></td>
 			<td class="GreyBoxRightEnd"><c:out value="${tp.name}" escapeXml="false"/>&nbsp;</td>
 		</tr>
 		<tr>		
@@ -162,7 +162,7 @@
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
 	<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
-    <% pageContext.setAttribute(Parameters.MODELSECTIONVALUE, Pages.TRANSPLANTATION); %>
+    <% pageContext.setAttribute(Parameters.MODELSECTIONVALUE, Pages.TRANSPLANT); %>
     <%@ include file="/jsp/includeComments.jsp" %>
     </TABLE>
 </TABLE>

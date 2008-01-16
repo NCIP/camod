@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.83 2007-12-17 17:59:52 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.84 2008-01-16 18:30:22 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.83  2007/12/17 17:59:52  pandyas
+ * Modified graft name to transplant as per VCDE review suggestions
+ *
  * Revision 1.82  2007/10/31 19:08:24  pandyas
  * Fixed #8188 	Rename UnctrlVocab items to text entries
  *
@@ -1382,7 +1385,7 @@ public class QueryManagerImpl extends BaseManager
                                                     String inModelId) throws PersistenceException
     {
 
-        String theSQLString = "SELECT distinct trans_inv.invivo_result_id FROM transplantation_invivo_result trans_inv " + "WHERE trans_inv.invivo_result_id IN (SELECT ir.invivo_result_id FROM invivo_result ir, agent ag " + "     WHERE ir.agent_id = ag.agent_id and ag.nsc_number = ?) and trans_inv.abs_cancer_model_id = ?";
+        String theSQLString = "SELECT distinct trans_inv.invivo_result_id FROM transplant_invivo_result trans_inv " + "WHERE trans_inv.invivo_result_id IN (SELECT ir.invivo_result_id FROM invivo_result ir, agent ag " + "     WHERE ir.agent_id = ag.agent_id and ag.nsc_number = ?) and trans_inv.abs_cancer_model_id = ?";
 
         Object[] theParams = new Object[2];
         theParams[0] = inNSCNumber;
@@ -1494,7 +1497,7 @@ public class QueryManagerImpl extends BaseManager
             String theSQLString = "select acm.abs_cancer_model_id," + "\n" + "       acm.model_descriptor," 
             + "\n" + "       st.name," + "\n" + "       acm.administrative_site," + "\n" 
             + "       count(*)" + "\n" + "  from invivo_Result sr," + "\n" + "       agent a," + "\n" 
-            + "       TRANSPLANTATION_INVIVO_RESULT ymsr," + "\n" + "       abs_cancer_model acm," + "\n" 
+            + "       TRANSPLANT_INVIVO_RESULT ymsr," + "\n" + "       abs_cancer_model acm," + "\n" 
             + "       treatment t," + "\n" + "       strain st," + "\n" + "       species sp" + "\n" 
             + " where sr.agent_id = a.agent_id" + "\n" + "   and sr.invivo_result_id = ymsr.invivo_result_id" 
             + "\n" + "   and sr.treatment_id = t.treatment_id" + "\n" 
@@ -1648,13 +1651,13 @@ public class QueryManagerImpl extends BaseManager
     }
 
     /**
-     * Get the model id's for any model that has a Transplantation
+     * Get the model id's for any model that has a Transplant
      *  
      * @return a list of matching model ids
      * 
      * @throws PersistenceException
      */
-    private String getModelIdsForTransplantation() throws PersistenceException
+    private String getModelIdsForTransplant() throws PersistenceException
     {
 
         String theSQLString = "SELECT distinct par_abs_can_model_id FROM abs_cancer_model ";
@@ -2372,12 +2375,12 @@ public class QueryManagerImpl extends BaseManager
 					+ getModelIdsForTransientInterference() + ")";
 		}
 
-		// Search for Transplantation
-		if (inSearchData.isSearchTransplantation()) {
-			log.debug("In Search inSearchData.isSearchTransplantation(): "
-					+ inSearchData.isSearchTransplantation());
+		// Search for Transplant
+		if (inSearchData.isSearchTransplant()) {
+			log.debug("In Search inSearchData.isSearchTransplant(): "
+					+ inSearchData.isSearchTransplant());
 			theWhereClause += " AND abs_cancer_model_id IN ("
-					+ getModelIdsForTransplantation() + ")";
+					+ getModelIdsForTransplant() + ")";
 		}
 		
 		// Search for Transient Interference

@@ -1,8 +1,11 @@
 <%
 		/*
-		 * $Id: subSubmitMenu.jsp,v 1.62 2007-11-01 14:27:14 pandyas Exp $
+		 * $Id: subSubmitMenu.jsp,v 1.63 2008-01-16 18:34:35 pandyas Exp $
 		 *
 		 * $Log: not supported by cvs2svn $
+		 * Revision 1.62  2007/11/01 14:27:14  pandyas
+		 * Fixed #8290     Rename graft object into transplant object
+		 *
 		 * Revision 1.61  2007/08/07 19:30:16  pandyas
 		 * Removed label containing Transplant
 		 *
@@ -66,7 +69,7 @@
 <%@ page import="gov.nih.nci.camod.domain.GeneDelivery"%>
 <%@ page import="gov.nih.nci.camod.domain.Therapy"%>
 <%@ page import="gov.nih.nci.camod.domain.CellLine"%>
-<%@ page import="gov.nih.nci.camod.domain.Transplantation"%>
+<%@ page import="gov.nih.nci.camod.domain.Transplant"%>
 <%@ page import="gov.nih.nci.camod.domain.InducedMutation"%>
 <%@ page import="gov.nih.nci.camod.domain.EngineeredGene"%>
 <%@ page import="gov.nih.nci.camod.domain.ExpressionFeature"%>
@@ -766,19 +769,19 @@
 	<div id="menu12" class="masterTitle" onclick="SwitchMenu('sub12')"
 		onmouseover="ChangeClass('menu12','masterTitleOver')"
 		onmouseout="ChangeClass('menu12','masterTitle')"><IMG height=5 alt=""
-		src="images/subMenuArrow.gif" width=5> TRANSPLANTATION</div>
+		src="images/subMenuArrow.gif" width=5> TRANSPLANT</div>
 	<span class="submasterdiv" id="sub12"> <img
 		src="images/right_arrow.gif" border="0"> 
-		<html:link styleClass="subMenuRed" action="TransplantationPopulateAction.do?method=dropdown">
-			Enter Transplantation
+		<html:link styleClass="subMenuRed" action="TransplantPopulateAction.do?method=dropdown">
+			Enter Transplant
 		</html:link><br>
-		<logic:iterate id="aTransplantation" name="transplantation_list" type="Transplantation">&nbsp;&nbsp;&nbsp;&nbsp;
+		<logic:iterate id="aTransplant" name="transplant_list" type="Transplant">&nbsp;&nbsp;&nbsp;&nbsp;
 			
 			<img src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
-				action="TransplantationPopulateAction.do?method=populate"
-				paramId="aTransplantID" paramName="aTransplantation" paramProperty="id">
-				<camod:shorten><bean:write name="aTransplantation" property="name" filter="false" /></camod:shorten>
+				action="TransplantPopulateAction.do?method=populate"
+				paramId="aTransplantID" paramName="aTransplant" paramProperty="id">
+				<camod:shorten><bean:write name="aTransplant" property="name" filter="false" /></camod:shorten>
 			</html:link>
 			<br>
 		</logic:iterate> <br>

@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: SubmitEditDeleteTransplantTest.java,v 1.1 2007-11-01 13:53:50 pandyas Exp $
+ * $Id: SubmitEditDeleteTransplantTest.java,v 1.2 2008-01-16 18:28:43 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2007/11/01 13:53:50  pandyas
+ * Fixed #8290     Rename graft object into transplantion object
+ *
  * Revision 1.2  2007/08/08 16:04:28  pandyas
  * Removed reference to transplant - as per VCDE changes
  *
@@ -32,9 +35,9 @@ import web.util.TestUtil;
 
 import com.meterware.httpunit.*;
 
-public class SubmitEditDeleteTransplantationTest extends BaseModelNeededTest {
+public class SubmitEditDeleteTransplantTest extends BaseModelNeededTest {
 
-	public SubmitEditDeleteTransplantationTest(String arg0) {
+	public SubmitEditDeleteTransplantTest(String arg0) {
 		super(arg0);
 	}
 
@@ -55,18 +58,18 @@ public class SubmitEditDeleteTransplantationTest extends BaseModelNeededTest {
 	}
 	
     public static Test suite() {
-        TestSuite suite = new TestSuite(SubmitEditDeleteTransplantationTest.class);
+        TestSuite suite = new TestSuite(SubmitEditDeleteTransplantTest.class);
         return suite;
     }
     
-    public void testTransplantation() throws Exception {
+    public void testTransplant() throws Exception {
     	navigateToModelForEditing(myModelName);
         
-        /* Find Transplantation link to Submit */
+        /* Find Transplant link to Submit */
         WebLink theLink = myWebConversation.getCurrentPage()
-                .getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Transplantation");
+                .getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Transplant");
         WebResponse theCurrentPage = theLink.click(); 
-        assertCurrentPageContains("if transplantation type is not listed");
+        assertCurrentPageContains("if Transplant type is not listed");
         WebForm theForm = theCurrentPage.getFormWithName("raftForm");
         theForm.setParameter("name", "ABCDEFG");
         theForm.setParameter("sourceType", "Cell Line");        
@@ -76,43 +79,43 @@ public class SubmitEditDeleteTransplantationTest extends BaseModelNeededTest {
         assertCurrentPageContains("if strain is not listed");
 
         // Set the donorEthnicityStrain and submit again
-        theForm = theCurrentPage.getFormWithName("transplantationForm");
+        theForm = theCurrentPage.getFormWithName("TransplantForm");
         theForm.setParameter("donorEthinicityStrain", "129");
         theCurrentPage = theForm.submit();
         TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
         
-        assertCurrentPageContains("You have successfully added a Transplantation");
+        assertCurrentPageContains("You have successfully added a Transplant");
         
         
-        /* Find Transplantation link to Edit 
+        /* Find Transplant link to Edit 
         theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "ABCDEFG");        
-        assertNotNull("Unable to find link to edit the Transplantation", theLink);        
+        assertNotNull("Unable to find link to edit the Transplant", theLink);        
         theCurrentPage = theLink.click();        
-        assertCurrentPageContains("if transplantation type is not listed");
-        theForm = theCurrentPage.getFormWithName("TransplantationForm");
+        assertCurrentPageContains("if Transplant type is not listed");
+        theForm = theCurrentPage.getFormWithName("TransplantForm");
         theForm.setParameter("name", "ABCDEFG");
         theForm.setParameter("donorScientificName", "Mus musculus"); 
         theForm.setParameter("sourceType", "Cell Line");
         theCurrentPage = theForm.submit();
         
         // Set the ethnicity strain and submit again
-        theForm = theCurrentPage.getFormWithName("TransplantationForm");
+        theForm = theCurrentPage.getFormWithName("TransplantForm");
         theForm.setParameter("donorEthinicityStrain", "129");
         theForm.setParameter("parentalCellLineName", "Parent Cell Line");
         theCurrentPage = theForm.submit();
         TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
 
-        assertCurrentPageContains("You have successfully edited a Transplantation.");      
+        assertCurrentPageContains("You have successfully edited a Transplant.");      
         */
         
-        /* Find Transplantation link to Delete 
+        /* Find Transplant link to Delete 
         theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "ABCDEFG");
-        assertNotNull("Unable to find link to delete the Transplantation", theLink);        
+        assertNotNull("Unable to find link to delete the Transplant", theLink);        
         theCurrentPage = theLink.click();        
-        assertCurrentPageContains("if transplantation type is not listed");
-        theForm = theCurrentPage.getFormWithName("transplantationForm");               
+        assertCurrentPageContains("if Transplant type is not listed");
+        theForm = theCurrentPage.getFormWithName("TransplantForm");               
         theForm.getSubmitButton( "submitAction", "Delete" ).click();              
-        assertCurrentPageContains("You have successfully deleted a Transplantation.");
+        assertCurrentPageContains("You have successfully deleted a Transplant.");
         */ 
     }    
 

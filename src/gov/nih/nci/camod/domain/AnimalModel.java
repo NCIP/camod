@@ -1,7 +1,11 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.25  2007/12/27 22:34:45  pandyas
+ * Modified  for feature #8816  	Connection to caELMIR - retrieve data for therapy search page
+ * Modified code to setCaelmirStudyDataCollection so the Therapy link will display when only caELMIR data is available for a model
+ *
  * Revision 1.24  2007/10/31 15:05:12  pandyas
- * Fixed #8290 	Rename graft object into transplantation object
+ * Fixed #8290 	Rename graft object into transplant object
  * Fixed #8355 	Add comments field to every submission page
  *
  * Revision 1.23  2007/07/31 12:03:37  pandyas
@@ -35,7 +39,7 @@
  * Cleanup
  *
  * 
- * $Id: AnimalModel.java,v 1.25 2007-12-27 22:34:45 pandyas Exp $
+ * $Id: AnimalModel.java,v 1.26 2008-01-16 18:30:38 pandyas Exp $
  */
 package gov.nih.nci.camod.domain;
 
@@ -65,7 +69,7 @@ public class AnimalModel extends AbstractCancerModel {
 
 	private Set<MicroArrayData> microArrayDataCollection = new HashSet<MicroArrayData>();
 
-	private Set<Transplantation> transplantationCollection = new HashSet<Transplantation>();
+	private Set<Transplant> transplantCollection = new HashSet<Transplant>();
 
 	private Set<Therapy> therapyCollection = new HashSet<Therapy>();
 	
@@ -414,22 +418,22 @@ public class AnimalModel extends AbstractCancerModel {
 	}
 
 	/**
-	 * @return Returns the transplantationCollection.
+	 * @return Returns the transplantCollection.
 	 */
-	public Set<Transplantation> getTransplantationCollection() {
-		return transplantationCollection;
+	public Set<Transplant> getTransplantCollection() {
+		return transplantCollection;
 	}
 
 	/**
-	 * @param transplantationCollection
-	 *            The transplantationCollection to set.
+	 * @param transplanCollection
+	 *            The transplantCollection to set.
 	 */
-	public void setTransplantationCollection(Set<Transplantation> transplantationCollection) {
-		this.transplantationCollection = transplantationCollection;
+	public void setTransplantCollection(Set<Transplant> transplantCollection) {
+		this.transplantCollection = transplantCollection;
 	}
 
-	public void addTransplantation(Transplantation transplantation) {
-		transplantationCollection.add(transplantation);
+	public void addTransplant(Transplant transplant) {
+		transplantCollection.add(transplant);
 	}
 
 	/**

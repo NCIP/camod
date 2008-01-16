@@ -1,9 +1,13 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelSearchResult.java,v 1.23 2007-10-31 15:19:53 pandyas Exp $
+ * $Id: AnimalModelSearchResult.java,v 1.24 2008-01-16 18:30:38 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.23  2007/10/31 15:19:53  pandyas
+ * Fixed #8290 	Rename graft object into transplant object
+ * Fixed #8188 	Rename UnctrlVocab items to AlternEntry
+ *
  * Revision 1.22  2007/08/14 17:03:39  pandyas
  * Bug #8414:  getEVSPreferredDiscription needs to be implemented for Zebrafish vocabulary source
  *
@@ -1098,13 +1102,13 @@ public class AnimalModelSearchResult implements Comparable
         if (myCellLine == null)
         {
             fetchAnimalModel();
-            Set<Transplantation> set = myAnimalModel.getTransplantationCollection();
-            Iterator<Transplantation> setIter = set.iterator();
+            Set<Transplant> set = myAnimalModel.getTransplantCollection();
+            Iterator<Transplant> setIter = set.iterator();
             myCellLine = "";
 
             while (setIter.hasNext())
             {
-            	Transplantation it = (Transplantation) setIter.next();
+            	Transplant it = (Transplant) setIter.next();
                 if (it.getParentalCellLineName() != null)
                 {
                     myCellLine += it.getParentalCellLineName() + "<br>";
@@ -1127,13 +1131,13 @@ public class AnimalModelSearchResult implements Comparable
         if (myDonorSpecies == null)
         {
             fetchAnimalModel();
-            Set<Transplantation> set = myAnimalModel.getTransplantationCollection();
-            Iterator<Transplantation> setIter = set.iterator();
+            Set<Transplant> set = myAnimalModel.getTransplantCollection();
+            Iterator<Transplant> setIter = set.iterator();
             myDonorSpecies = "";
 
             while (setIter.hasNext())
             {
-            	Transplantation it = (Transplantation) setIter.next();
+            	Transplant it = (Transplant) setIter.next();
                 if (it.getDonorSpecies() != null)
                 {
                     if (it.getDonorSpecies().getDisplayName() != null)
@@ -1159,13 +1163,13 @@ public class AnimalModelSearchResult implements Comparable
         if (mySourceType == null)
         {
             fetchAnimalModel();
-            Set<Transplantation> set = myAnimalModel.getTransplantationCollection();
-            Iterator<Transplantation> setIter = set.iterator();
+            Set<Transplant> set = myAnimalModel.getTransplantCollection();
+            Iterator<Transplant> setIter = set.iterator();
             mySourceType = "";
 
             while (setIter.hasNext())
             {
-            	Transplantation it = (Transplantation) setIter.next();
+            	Transplant it = (Transplant) setIter.next();
                 if (it.getSourceType() != null)
                 {
                     mySourceType += it.getSourceType() + "<br>";

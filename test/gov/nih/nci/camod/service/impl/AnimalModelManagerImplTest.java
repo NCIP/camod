@@ -154,10 +154,10 @@ public class AnimalModelManagerImplTest extends TestCase {
   }
 
   /**
-   * Test of addTransplantation method, of class gov.nih.nci.camod.service.impl.AnimalModelManagerImpl.
+   * Test of addTransplant method, of class gov.nih.nci.camod.service.impl.AnimalModelManagerImpl.
    
-  public void testAddTransplantation() {
-    System.out.println("testAddTransplantation");
+  public void testAddTransplant() {
+    System.out.println("testAddTransplant");
     
     // TODO add your test code below by replacing the default call to fail.
     fail("The test case is empty.");

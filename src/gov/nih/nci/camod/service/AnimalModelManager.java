@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelManager.java,v 1.39 2007-10-31 18:48:03 pandyas Exp $
+ * $Id: AnimalModelManager.java,v 1.40 2008-01-16 18:30:30 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.39  2007/10/31 18:48:03  pandyas
+ * Fixed #8290 	Rename graft object into transplant object
+ *
  * Revision 1.38  2007/07/31 12:03:05  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -93,6 +96,9 @@
  * Added saveXenograft and saveGeneDelivery
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.39  2007/10/31 18:48:03  pandyas
+ * Fixed #8290 	Rename graft object into transplant object
+ *
  * Revision 1.38  2007/07/31 12:03:05  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -231,7 +237,7 @@ public interface AnimalModelManager {
     
     public List searchAdmin(CurationAssignmentData inCurationAssignment) throws Exception;    
 
-    public void addTransplantation(AnimalModel inAnimalModel, TransplantationData inTransplantationData) throws Exception;
+    public void addTransplant(AnimalModel inAnimalModel, TransplantData inTransplantData) throws Exception;
 
     public void addGeneDelivery(AnimalModel inAnimalModel, GeneDeliveryData inGeneDeliveryData) throws Exception;
 

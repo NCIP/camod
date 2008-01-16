@@ -614,7 +614,7 @@ For example, Tg(Zfp38)D1Htz is a transgene containing the mouse <i>Zfp38</i> gen
 		</TD>
 
 	</TR>
-</TABLE><p align="right"><a href="#toc">Back to TOC</a></p><A name="5-6"><H3 class="subhelp">5.6. Transplantation</H3></A>
+</TABLE><p align="right"><a href="#toc">Back to TOC</a></p><A name="5-6"><H3 class="subhelp">5.6. Transplant</H3></A>
 <TABLE align="center" width="85%" cellpadding="5" cellspacing="5" border="1">
 	<TR valign="top">
 		<TD class="label">			Required Fields
@@ -624,7 +624,7 @@ For example, Tg(Zfp38)D1Htz is a transgene containing the mouse <i>Zfp38</i> gen
 	</TR>
 
 	<TR valign="top">
-		<TD class="label">			- Cell Line / Transplantation<BR>- 
+		<TD class="label">			- Cell Line / Transplant<BR>- 
       Host Species [selection list]
 		</TD>
 		<TD>			- Species<BR>- 
@@ -637,7 +637,7 @@ For example, Tg(Zfp38)D1Htz is a transgene containing the mouse <i>Zfp38</i> gen
 </TABLE>
 <TABLE align="center" width="85%" cellpadding="5" cellspacing="5" border="0">
 	<TR>
-		<TD>			Name the transplantation or cell line, select the species and the organ/tissue of the transplantation. Select the organ system first and depending on your choice the second drop-down list will display the organs/tissues of the selected organ system. Describe the method of modification and/or the genetic alterations that can be found in the transplantation/cell line. Select the host species and if applicable the host strain.
+		<TD>			Name the transplant or cell line, select the species and the organ/tissue of the transplant. Select the organ system first and depending on your choice the second drop-down list will display the organs/tissues of the selected organ system. Describe the method of modification and/or the genetic alterations that can be found in the transplantation/cell line. Select the host species and if applicable the host strain.
 		</TD>
 	</TR>
 </TABLE><p align="right"><a href="#toc">Back to TOC</a></p><A name="5-7"><H3 class="subhelp">5.7. Surgery / Other</H3></A>

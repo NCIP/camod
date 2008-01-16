@@ -168,16 +168,16 @@
         	cascade="save-update"
         	class="Phenotype"/> 
         	
-        <!-- transplantationCollection -->
-        <!-- Note: the relationship between AnimalModel and Transplantation is modeled taking
+        <!-- transplantCollection -->
+        <!-- Note: the relationship between AnimalModel and Transplant is modeled taking
              into effect the fact that both are children of the same parent, viz. AbstractCancerModel -->
-        <set name="transplantationCollection" 
+        <set name="transplantCollection" 
         	inverse="false" 
         	lazy="true" 
         	cascade="all-delete-orphan">
         	
         	<key column="par_abs_can_model_id"/>
-        	<one-to-many class="Transplantation"/>
+        	<one-to-many class="Transplant"/>
         </set> 
         
         <!-- genotypeCollection -->

@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.51 2007-10-31 18:41:26 pandyas Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.52 2008-01-16 18:29:57 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.51  2007/10/31 18:41:26  pandyas
+ *  Fixed #8290 	Rename graft object into transplant object
+ *
  *  Revision 1.50  2007/07/31 12:02:38  pandyas
  *  VCDE silver level  and caMOD 2.3 changes
  *
@@ -290,16 +293,16 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 				}
 			}
 
-			// Retrive the list of all Transplantations assoicated with
+			// Retrive the list of all Transplants assoicated with
 			// this Animal Model
-			Set transplantationSet = animalModel.getTransplantationCollection();
-            log.debug("transplantationSet: " + transplantationSet.size());
-			it = transplantationSet.iterator();
-			List<Transplantation> transplantationList = new ArrayList<Transplantation>();
+			Set transplantSet = animalModel.getTransplantCollection();
+            log.debug("transplantSet: " + transplantSet.size());
+			it = transplantSet.iterator();
+			List<Transplant> transplantList = new ArrayList<Transplant>();
 
 			while (it.hasNext()) {
-				Transplantation transplantation = (Transplantation) it.next();
-				transplantationList.add(transplantation);
+				Transplant transplant = (Transplant) it.next();
+				transplantList.add(transplant);
 			}
 
 			// Retrieve a list of all Histopathology entries associated with
@@ -482,8 +485,8 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 			request.getSession().setAttribute(
 					Constants.Submit.PUBLICATION_LIST, pubList);
 
-			request.getSession().setAttribute(Constants.Submit.TRANSPLANTATION_LIST,
-					transplantationList);
+			request.getSession().setAttribute(Constants.Submit.TRANSPLANT_LIST,
+					transplantList);
 
 			/* GeneticDescription Lists */
 			request.getSession().setAttribute(

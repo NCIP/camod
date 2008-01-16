@@ -2,11 +2,14 @@
 
 /**
  * 
- * $Id: includeInvivoData.jsp,v 1.12 2007-12-18 13:28:32 pandyas Exp $
+ * $Id: includeInvivoData.jsp,v 1.13 2008-01-16 18:33:12 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2007/12/18 13:28:32  pandyas
+ * Modified column config to fit with caELMIRE data for integration of Study data
+ *
  * Revision 1.11  2007/10/31 19:22:55  pandyas
- * Fixed #8290 	Rename graft object into transplantation object
+ * Fixed #8290 	Rename graft object into transplant object
  *
  * Revision 1.10  2007/08/07 18:23:38  pandyas
  * Removed Xeno for Graft as per VCDE comments
@@ -29,7 +32,7 @@
 
 %>
 
-<!-- invivo / Transplantation data-->
+<!-- invivo / Transplant data-->
 <c:set var="invivoColl" value="${invivoData[agentId]}"/>
 <c:if test="${not empty invivoColl}">
     <c:set var="foundInvivoData" value="1"/>
@@ -60,7 +63,7 @@
 							<c:out value="${ivd[1]}"/> in <c:out value="${ivd[2]}"/> (<c:out value="${ivd[3]}"/>)
 						</td>
 						<td align="right" class="<c:out value="${tdClass}End"/>"> &nbsp;&nbsp;
-							<a href="ViewModelAction.do?unprotected_method=populateTransplantationDetails&aModelID=<c:out value="${mdl.id}"/>&tModelID=<c:out value="${ivd[0]}"/>&nsc=<c:out value="${agt.nscNumber}"/>" styleClass="subMenuPrimary"/>
+							<a href="ViewModelAction.do?unprotected_method=populateTransplantDetails&aModelID=<c:out value="${mdl.id}"/>&tModelID=<c:out value="${ivd[0]}"/>&nsc=<c:out value="${agt.nscNumber}"/>" styleClass="subMenuPrimary"/>
 							<c:out value="${ivd[4]}"/></a>
 						</td>
 				  	</tr>
@@ -70,4 +73,4 @@
 	</tr>
 	<tr><td>&nbsp;</td></tr>
 </c:if>
-<!-- end invivo /Transplantation data-->
+<!-- end invivo /Transplant data-->

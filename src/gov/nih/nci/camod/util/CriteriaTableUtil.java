@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: CriteriaTableUtil.java,v 1.9 2007-11-01 13:37:03 pandyas Exp $
+ * $Id: CriteriaTableUtil.java,v 1.10 2008-01-16 18:30:04 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2007/11/01 13:37:03  pandyas
+ * Fixed #8290     Rename graft object into transplant object
+ *
  * Revision 1.8  2007/07/31 12:02:07  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -258,10 +261,10 @@ public class CriteriaTableUtil
             theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.isSearchTransientInterference") + "</td><td class=\"formFieldNone\">" + "Checked" + "</td></tr>";
         }
         
-        // Search for Transplantation
-        if (sData.isSearchTransplantation())
+        // Search for Transplant
+        if (sData.isSearchTransplant())
         {
-            theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.isSearchTransplantation") + "</td><td class=\"formFieldNone\">" + "Checked" + "</td></tr>";
+            theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.isSearchTransplant") + "</td><td class=\"formFieldNone\">" + "Checked" + "</td></tr>";
         }
 
         theDisplayTable += "</TABLE>";

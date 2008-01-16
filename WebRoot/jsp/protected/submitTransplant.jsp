@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: submitTransplantation.jsp,v 1.1 2007-10-31 19:25:33 pandyas Exp $
+ * $Id: submitTransplant.jsp,v 1.1 2008-01-16 18:34:35 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2007/10/31 19:25:33  pandyas
+ * Fixed #8290 	Rename graft object into transplant object
+ *
  * Revision 1.2  2007/08/22 13:59:50  pandyas
  * bug #8363: Problems with "other" filed on updated graft page on dev - filed writable when user selects a value for various dropdowns
  *
@@ -99,7 +102,7 @@
 
 <%@ page import="gov.nih.nci.camod.domain.AnimalModel" %>	
 <%@ page import="gov.nih.nci.camod.domain.Strain" %>	
-<%@ page import="gov.nih.nci.camod.webapp.form.TransplantationForm" %>	
+<%@ page import="gov.nih.nci.camod.webapp.form.TransplantForm" %>	
 <%@ page import='gov.nih.nci.camod.Constants.*' %>
 
 <%@ page import="java.util.List" %>
@@ -118,10 +121,10 @@
 	//if aTransplantID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one
 	
-	String actionName = "TransplantationAction.do?method=save";
+	String actionName = "TransplantAction.do?method=save";
 	
 	if ( aTransplantID != null && aTransplantID.length() > 0 && isDeleted == null) {
-		actionName = "TransplantationAction.do?method=edit";
+		actionName = "TransplantAction.do?method=edit";
 	}
 	else {
 	    aTransplantID = "";
@@ -135,7 +138,7 @@
 	}
 	function getOptions( control ) {
 		form = control.form;
-		form.action  = "TransplantationPopulateAction.do?method=setStrainOrganValues";
+		form.action  = "TransplantPopulateAction.do?method=setStrainOrganValues";
 		form.submit();		
 	}	
 		
@@ -161,7 +164,7 @@
 
 <html:form action="<%= actionName %>" focus="name">
 
-<!-- submitTransplantation.jsp -->
+<!-- submitTransplant.jsp -->
 <!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
@@ -176,13 +179,13 @@
 	</tr>
 	
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Transplantation
+		<td class="formTitle" height="20" colspan="3">Transplant
 			<camod:cshelp topic="xenograft_transplant_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field1">Name of Transplantation:</label>
+		<td class="formRequiredLabel"><label for="field1">Name of Transplant:</label>
 		</td>
 		<td class="formField">
 				<html:text styleClass="formFieldSized" property="name"  size="30" />
@@ -239,7 +242,7 @@
 				<c:when test="${donorspeciescommonname == 'Mouse'}">
 				<td class="formLabel"><label for="field1">Organ/Tissue:</label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />							
-					<a href="javascript:showMouseTissueTree('transplantationForm', 'organTissueCode', 'organTissueName', 'organ', true)">
+					<a href="javascript:showMouseTissueTree('transplantForm', 'organTissueCode', 'organTissueName', 'organ', true)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>
 				</td>				
 					<html:hidden property="organTissueCode"/>
@@ -252,7 +255,7 @@
 				<c:when test="${donorspeciescommonname == 'Rat'}">	
 				<td class="formLabel"><label for="field1">Organ/Tissue:</label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
-					<a href="javascript:showRatTissueTree('transplantationForm', 'organTissueCode', 'organTissueName', 'organ', true)">
+					<a href="javascript:showRatTissueTree('transplantForm', 'organTissueCode', 'organTissueName', 'organ', true)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>
 				</td>
 					<html:hidden property="organTissueCode"/>
@@ -265,7 +268,7 @@
 				<c:when test="${donorspeciescommonname == 'Zebrafish'}">
 				<td class="formLabel"><label for="field1">Organ/Tissue:</label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
-					<a href="javascript:showZebrafishTissueTree('transplantationForm', 'organTissueCode', 'organTissueName', 'organ', true)">
+					<a href="javascript:showZebrafishTissueTree('transplantForm', 'organTissueCode', 'organTissueName', 'organ', true)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>
 				</td>
 					<html:hidden property="organTissueCode"/>
@@ -278,7 +281,7 @@
 				<c:when test="${donorspeciescommonname == 'Human'}">
 				<td class="formLabel"><label for="field1">Organ/Tissue:</label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
-					<a href="javascript:showHumanTissueTree('transplantationForm', 'organTissueCode', 'organTissueName', 'organ', true)">
+					<a href="javascript:showHumanTissueTree('transplantForm', 'organTissueCode', 'organTissueName', 'organ', true)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>
 				</td>
 					<html:hidden property="organTissueCode"/>
@@ -306,7 +309,7 @@
 		<td class="formRequiredLabel"><label for="field3">Source Type:</label></td>
 		<td class="formField">
 		<br>				
-		<label for="field3">- if transplantation type is not listed, <br>then please select "Other" and then specify it below:</label>
+		<label for="field3">- if transplant type is not listed, <br>then please select "Other" and then specify it below:</label>
 		<br>
 		<br>		
 			<html:select styleClass="formFieldSized" size="1" property="sourceType" onclick="chkOtherSourceType(this);">

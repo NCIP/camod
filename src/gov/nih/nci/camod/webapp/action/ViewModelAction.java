@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.48 2008-01-10 15:55:01 pandyas Exp $
+ *  $Id: ViewModelAction.java,v 1.49 2008-01-16 18:29:57 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.48  2008/01/10 15:55:01  pandyas
+ *  modify output for final dev deployment
+ *
  *  Revision 1.47  2008/01/02 17:57:44  pandyas
  *  modified for #816  	Connection to caELMIR - retrieve data for therapy search page
  *
@@ -31,7 +34,7 @@
  *
  *  Revision 1.40  2007/10/31 18:39:30  pandyas
  *  Fixed #8188 	Rename UnctrlVocab items to text entries
- *  Fixed #8290 	Rename graft object into transplantation object
+ *  Fixed #8290 	Rename graft object into transplant object
  *
  *  Revision 1.39  2007/09/14 18:53:37  pandyas
  *  Fixed Bug #8954:  link to invivo detail page does not work
@@ -157,7 +160,7 @@ import gov.nih.nci.camod.domain.Comments;
 import gov.nih.nci.camod.domain.EngineeredGene;
 import gov.nih.nci.camod.domain.GeneIdentifier;
 import gov.nih.nci.camod.domain.GenomicSegment;
-import gov.nih.nci.camod.domain.Transplantation;
+import gov.nih.nci.camod.domain.Transplant;
 import gov.nih.nci.camod.domain.InducedMutation;
 import gov.nih.nci.camod.domain.Person;
 import gov.nih.nci.camod.domain.SpontaneousMutation;
@@ -168,7 +171,7 @@ import gov.nih.nci.camod.service.AgentManager;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.service.CommentsManager;
 import gov.nih.nci.camod.service.PersonManager;
-import gov.nih.nci.camod.service.TransplantationManager;
+import gov.nih.nci.camod.service.TransplantManager;
 import gov.nih.nci.camod.service.impl.QueryManagerSingleton;
 import gov.nih.nci.camod.util.EvsTreeUtil;
 import gov.nih.nci.common.domain.DatabaseCrossReference;
@@ -592,9 +595,9 @@ public class ViewModelAction extends BaseAction
                     {
                         yeastResults.put(a.getId(), yeastStages);
                     }
-                    // now get invivo/Transplantation data
-                    List transplantationResults = QueryManagerSingleton.instance().getInvivoResults(a, true);
-                    invivoResults.put(a.getId(), transplantationResults);
+                    // now get invivo/Transplant data
+                    List transplantResults = QueryManagerSingleton.instance().getInvivoResults(a, true);
+                    invivoResults.put(a.getId(), transplantResults);
                 }
             }
         }
@@ -863,16 +866,16 @@ public class ViewModelAction extends BaseAction
      * @return
      * @throws Exception
      */
-    public ActionForward populateTransplantation(ActionMapping mapping,
+    public ActionForward populateTransplant(ActionMapping mapping,
                                                      ActionForm form,
                                                      HttpServletRequest request,
                                                      HttpServletResponse response) throws Exception
     {
-        log.debug("<populateTransplantation> Enter:");    	
+        log.debug("<populateTransplant> Enter:");    	
         setCancerModel(request);
-        setComments(request, Constants.Pages.TRANSPLANTATION);
-        log.debug("<populateTransplantation> Exit:"); 
-        return mapping.findForward("viewTransplantation");
+        setComments(request, Constants.Pages.TRANSPLANT);
+        log.debug("<populateTransplant> Exit:"); 
+        return mapping.findForward("viewTransplant");
     }
 
     /**
@@ -890,26 +893,26 @@ public class ViewModelAction extends BaseAction
      * @return
      * @throws Exception
      */
-    public ActionForward populateTransplantationDetails(ActionMapping mapping,
+    public ActionForward populateTransplantDetails(ActionMapping mapping,
                                                   ActionForm form,
                                                   HttpServletRequest request,
                                                   HttpServletResponse response) throws Exception
     {
-        log.debug("<populateTransplantationDetails> Enter:");    	
+        log.debug("<populateTransplantDetails> Enter:");    	
         String modelID = request.getParameter("tModelID");
         request.getSession().setAttribute(Constants.MODELID, modelID);
         String nsc = request.getParameter("nsc");
         if (nsc != null && nsc.length() == 0)
             return mapping.findForward("viewModelCharacteristics");
-        log.debug("<populateTransplantationDetails> modelID:" + modelID);
-        log.debug("<populateTransplantationDetails> nsc:" + nsc);
-        TransplantationManager mgr = (TransplantationManager) getBean("transplantationManager");
+        log.debug("<populateTransplantDetails> modelID:" + modelID);
+        log.debug("<populateTransplantDetails> nsc:" + nsc);
+        TransplantManager mgr = (TransplantManager) getBean("transplantManager");
 
-        Transplantation t = mgr.get(modelID);
+        Transplant t = mgr.get(modelID);
 
-        request.getSession().setAttribute(Constants.TRANSPLANTATIONMODEL, t);
+        request.getSession().setAttribute(Constants.TRANSPLANTMODEL, t);
         request.getSession().setAttribute(Constants.NSC_NUMBER, nsc);
-        request.getSession().setAttribute(Constants.TRANSPLANTATIONRESULTLIST, t.getInvivoResultCollectionByNSC(nsc));
+        request.getSession().setAttribute(Constants.TRANSPLANTRESULTLIST, t.getInvivoResultCollectionByNSC(nsc));
         return mapping.findForward("viewInvivoDetails");
     }
 }

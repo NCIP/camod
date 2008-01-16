@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Transplantation.java,v 1.1 2007-10-31 15:58:56 pandyas Exp $
+ * $Id: Transplant.java,v 1.1 2008-01-16 18:30:38 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2007/10/31 15:58:56  pandyas
+ * Fixed #8290 	Rename graft object into transplant object
+ *
  * Revision 1.1  2007/07/31 12:03:28  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -35,7 +38,7 @@ import java.util.*;
 /**
  * @author rajputs
  */
-public class Transplantation extends AbstractCancerModel implements Comparable
+public class Transplant extends AbstractCancerModel implements Comparable
 {
     private static final long serialVersionUID = 3257445453799404851L;
 
@@ -266,7 +269,7 @@ public class Transplantation extends AbstractCancerModel implements Comparable
             return false;
         if (!(this.getClass().isInstance(o)))
             return false;
-        final Transplantation obj = (Transplantation) o;
+        final Transplant obj = (Transplant) o;
         if (HashCodeUtil.notEqual(this.getName(), obj.getName()))
             return false;
         return true;
@@ -281,9 +284,9 @@ public class Transplantation extends AbstractCancerModel implements Comparable
 
     public int compareTo(Object o)
     {
-        if ((o instanceof Transplantation) && (this.getName() != null) && (((Transplantation) o).getName() != null))
+        if ((o instanceof Transplant) && (this.getName() != null) && (((Transplant) o).getName() != null))
         {
-            int result = this.getName().compareTo(((Transplantation) o).getName());
+            int result = this.getName().compareTo(((Transplant) o).getName());
             if (result != 0)
             {
                 return result;

@@ -42,9 +42,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchData.java,v 1.13 2007-10-31 17:40:09 pandyas Exp $
+ * $Id: SearchData.java,v 1.14 2008-01-16 18:29:46 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2007/10/31 17:40:09  pandyas
+ * Fixed #8290 	Rename graft object into transplant object
+ *
  * Revision 1.12  2007/07/31 12:01:59  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -204,9 +207,9 @@ public interface SearchData {
 
 	public void setExternalSource(String externalSource);
 
-	public boolean isSearchTransplantation();
+	public boolean isSearchTransplant();
 
-	public void setSearchTransplantation(boolean b);
+	public void setSearchTransplant(boolean b);
 
 	public String getTumorClassification();
 

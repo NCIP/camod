@@ -154,8 +154,8 @@
 		    type="gov.nih.nci.camod.webapp.form.ViralTreatmentForm"/>		    
 		
 		<form-bean
-			name="transplantationForm"
-		    type="gov.nih.nci.camod.webapp.form.TransplantationForm"/>
+			name="transplantForm"
+		    type="gov.nih.nci.camod.webapp.form.TransplantForm"/>
 
 		<form-bean
 			name="searchForm"
@@ -343,8 +343,8 @@
 			path="/jsp/viewTherapeuticApproaches.jsp"></forward>
 		
 		<forward
-			name="viewTransplantation"
-			path="/jsp/viewTransplantation.jsp"></forward>
+			name="viewTransplant"
+			path="/jsp/viewTransplant.jsp"></forward>
 		
 		<forward
 			name="viewTransientInterference"
@@ -519,8 +519,8 @@
 			path="/jsp/protected/submitTherapy.jsp"></forward>
 		
 		<forward
-			name="submitTransplantation"
-			path="/jsp/protected/submitTransplantation.jsp"></forward>
+			name="submitTransplant"
+			path="/jsp/protected/submitTransplant.jsp"></forward>
 		
 		<forward
 			name="submitViralTreatment"
@@ -914,9 +914,9 @@
 			<set-property property="secure" value="false"/>
 		</action>
 		<action
-			path="/submitTransplantation"
+			path="/submitTransplant"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitTransplantation.jsp">
+			parameter="/jsp/protected/submitTransplant.jsp">
 			<set-property property="secure" value="false"/>
 		</action>
 		<action
@@ -1267,8 +1267,8 @@
     		path="/ViewModelAction.do?unprotected_method=populateEngineeredGene">
         </forward>
         <forward 
-    		name="Transplantation Page"
-    		path="/ViewModelAction.do?unprotected_method=populateTransplantation">
+    		name="Transplant Page"
+    		path="/ViewModelAction.do?unprotected_method=populateTransplant">
         </forward>
         <forward 
     		name="Transient Interference Page"
@@ -2187,11 +2187,11 @@
 		<set-property property="secure" value="false" />		
     </action>
     
-     <!-- TransplantationForm -->
+     <!-- TransplantForm -->
 
-     <action path="/TransplantationAction"
-	        type="gov.nih.nci.camod.webapp.action.TransplantationAction"
-	        name="transplantationForm"
+     <action path="/TransplantAction"
+	        type="gov.nih.nci.camod.webapp.action.TransplantAction"
+	        name="transplantForm"
 	        scope="request"
 	        parameter="method" 	     
 	        validate="true"
@@ -2199,14 +2199,14 @@
 	    <set-property property="secure" value="false" />
 	    <forward
             name="input"
-            path="/submitTransplantation.do">
+            path="/submitTransplant.do">
         </forward>    	
     </action>
 
 
-    <action path="/TransplantationPopulateAction"
-    		type="gov.nih.nci.camod.webapp.action.TransplantationPopulateAction"
-    		name="transplantationForm"    		
+    <action path="/TransplantPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.TransplantPopulateAction"
+    		name="transplantForm"    		
             scope="request"
             parameter="method"
 			validate="false">

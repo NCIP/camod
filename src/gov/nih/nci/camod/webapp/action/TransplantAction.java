@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TransplantationAction.java,v 1.1 2007-10-31 17:46:57 pandyas Exp $
+ * $Id: TransplantAction.java,v 1.1 2008-01-16 18:29:57 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2007/10/31 17:46:57  pandyas
+ * Fixed #8290 	Rename graft object into transplant object
+ *
  * Revision 1.4  2007/09/12 19:36:40  pandyas
  * modified debug statements for build to stage tier
  *
@@ -49,18 +52,18 @@ package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
-import gov.nih.nci.camod.domain.Transplantation;
+import gov.nih.nci.camod.domain.Transplant;
 import gov.nih.nci.camod.service.AnimalModelManager;
-import gov.nih.nci.camod.service.TransplantationManager;
-import gov.nih.nci.camod.webapp.form.TransplantationForm;
+import gov.nih.nci.camod.service.TransplantManager;
+import gov.nih.nci.camod.webapp.form.TransplantForm;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.*;
 
 /**
- * TransplantationAction Class
+ * TransplantAction Class
  */
-public final class TransplantationAction extends BaseAction
+public final class TransplantAction extends BaseAction
 {
 
     /**
@@ -78,10 +81,10 @@ public final class TransplantationAction extends BaseAction
                               HttpServletRequest request,
                               HttpServletResponse response) throws Exception
     {
-        log.debug("<TransplantationAction> Entering edit");
+        log.debug("<TransplantAction> Entering edit");
 
         // Create a form to edit
-        TransplantationForm transplantationForm = (TransplantationForm) form;
+        TransplantForm transplantForm = (TransplantForm) form;
 
         String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
@@ -89,56 +92,56 @@ public final class TransplantationAction extends BaseAction
         String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
         String aTransplantID = request.getParameter("aTransplantID");
 
-        log.debug("<TransplantationAction edit> following Characteristics:"
+        log.debug("<TransplantAction edit> following Characteristics:"
                     + "\n\t name: "
-                    + transplantationForm.getName()
+                    + transplantForm.getName()
                     + "\n\t atccNumber: "
-                    + transplantationForm.getAtccNumber()
+                    + transplantForm.getAtccNumber()
                     + "\n\t ParentalCellLineName: "
-                    + transplantationForm.getParentalCellLineName()
+                    + transplantForm.getParentalCellLineName()
                     + "\n\t getCellAmount: "
-                    + transplantationForm.getCellAmount()
+                    + transplantForm.getCellAmount()
                     + "\n\t getGrowthPeriod: "
-                    + transplantationForm.getGrowthPeriod()                
+                    + transplantForm.getGrowthPeriod()                
                     + "\n\t getModificationDescription: "
-                    + transplantationForm.getModificationDescription()
+                    + transplantForm.getModificationDescription()
                     + "\n\t getGeneticManipulation: "
-                    + transplantationForm.getGeneticManipulation()
+                    + transplantForm.getGeneticManipulation()
                     + "\n\t getAdministrativeSite: "
-                    + transplantationForm.getAdministrativeSite()
+                    + transplantForm.getAdministrativeSite()
                     + "\n\t getOtherAdministrativeSite: "
-                    + transplantationForm.getOtherAdministrativeSite()                
+                    + transplantForm.getOtherAdministrativeSite()                
                     + "\n\t getSourceType: "
-                    + transplantationForm.getSourceType()
+                    + transplantForm.getSourceType()
                     + "\n\t getOtherSourceType: "
-                    + transplantationForm.getOtherSourceType()
+                    + transplantForm.getOtherSourceType()
                     + "\n\t getDonorScientificName: "
-                    + transplantationForm.getDonorScientificName()
+                    + transplantForm.getDonorScientificName()
                     + "\n\t getOtherDonorScientificName: "
-                    + transplantationForm.getOtherDonorScientificName()                  
+                    + transplantForm.getOtherDonorScientificName()                  
                     + "\n\t getDonorEthinicityStrain: "
-                    + transplantationForm.getDonorEthinicityStrain()              
+                    + transplantForm.getDonorEthinicityStrain()              
                     + "\n\t getOtherDonorEthinicityStrain: "
-                    + transplantationForm.getOtherDonorEthinicityStrain()
+                    + transplantForm.getOtherDonorEthinicityStrain()
                     + "\n\t getOrganTissueName(): "
-                    + transplantationForm.getOrganTissueName()
+                    + transplantForm.getOrganTissueName()
                     + "\n\t organTissueCode: "
-                    + transplantationForm.getOrganTissueCode()
+                    + transplantForm.getOrganTissueCode()
                     + "\n\t organ(): "
-                    + transplantationForm.getOrgan() 
+                    + transplantForm.getOrgan() 
                     + "\n\t ConditioningRegimen(): "
-                    + transplantationForm.getConditioningRegimen() 
+                    + transplantForm.getConditioningRegimen() 
                     + "\n\t OtherConditioningRegimen: "
-                    + transplantationForm.getOtherConditioningRegimen()
+                    + transplantForm.getOtherConditioningRegimen()
                     + "\n\t Comments: "
-                    + transplantationForm.getComments()                    
+                    + transplantForm.getComments()                    
                     + "\n\t user: "
                     + (String) request.getSession().getAttribute(
                             "camod.loggedon.username"));
         
         try
         {
-        	TransplantationManager transplantationManager = (TransplantationManager) getBean("transplantationManager");
+        	TransplantManager transplantManager = (TransplantManager) getBean("transplantManager");
 
             // retrieve model and update w/ new values
             AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
@@ -146,36 +149,36 @@ public final class TransplantationAction extends BaseAction
 
             if ("Delete".equals(theAction))
             {
-            	transplantationManager.remove(aTransplantID, theAnimalModel);
+            	transplantManager.remove(aTransplantID, theAnimalModel);
 
                 ActionMessages msg = new ActionMessages();
-                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("transplantation.delete.successful"));
+                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("transplant.delete.successful"));
                 saveErrors(request, msg);
             }
             else
             {
-            	Transplantation theTransplantation = transplantationManager.get(aTransplantID);
+            	Transplant theTransplant = transplantManager.get(aTransplantID);
 
-                transplantationManager.update(transplantationForm, theTransplantation, theAnimalModel);
+                transplantManager.update(transplantForm, theTransplant, theAnimalModel);
 
                 // Add a message to be displayed in submitOverview.jsp
                 ActionMessages msg = new ActionMessages();
-                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("transplantation.edit.successful"));
+                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("transplant.edit.successful"));
                 saveErrors(request, msg);
             }
 
         }
         catch (Exception e)
         {
-            log.error("Exception ocurred creating Transplantation", e);
+            log.error("Exception ocurred creating Transplant", e);
 
-            // Encountered an error saving the Transplantation.
+            // Encountered an error saving the Transplant.
             ActionMessages msg = new ActionMessages();
             msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
             saveErrors(request, msg);
         }
 
-        log.debug("<TransplantationAction> Exiting edit");
+        log.debug("<TransplantAction> Exiting edit");
         return mapping.findForward("AnimalModelTreePopulateAction");
     }
 
@@ -194,35 +197,35 @@ public final class TransplantationAction extends BaseAction
                               HttpServletRequest request,
                               HttpServletResponse response) throws Exception
     {
-        log.trace("<TransplantationAction> Entering save");
+        log.trace("<TransplantAction> Entering save");
 
         // Create a form to edit
-        TransplantationForm transplantationForm = (TransplantationForm) form;
+        TransplantForm transplantForm = (TransplantForm) form;
 
         // Grab the current modelID from the session
         String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
-        log.debug("<TransplantationAction save> following Characteristics:" + "\n\t name: " 
-                 + transplantationForm.getName() 
-                 + "\n\t atccNumber: " + transplantationForm.getAtccNumber() 
-                 + "\n\t ParentalCellLineName: " + transplantationForm.getParentalCellLineName() 
-                 + "\n\t getCellAmount: " + transplantationForm.getCellAmount() + "\n\t getGrowthPeriod: " + transplantationForm.getGrowthPeriod() 
-                 + "\n\t getModificationDescription: " + transplantationForm.getModificationDescription() 
-                 + "\n\t getGeneticManipulation: " + transplantationForm.getGeneticManipulation() 
-                 + "\n\t getAdministrativeSite: " + transplantationForm.getAdministrativeSite() 
-                 + "\n\t getOtherAdministrativeSite: " + transplantationForm.getOtherAdministrativeSite() 
-                 + "\n\t getSourceType: " + transplantationForm.getSourceType() 
-                 + "\n\t getOtherSourceType: " + transplantationForm.getOtherSourceType() 
-                 + "\n\t getDonorScientificName: " + transplantationForm.getDonorScientificName() 
-                 + "\n\t getOtherDonorScientificName: " + transplantationForm.getOtherDonorScientificName() 
-                 + "\n\t getDonorEthinicityStrain: " + transplantationForm.getDonorEthinicityStrain() 
-                 + "\n\t getOtherDonorEthinicityStrain: " + transplantationForm.getOtherDonorEthinicityStrain() + transplantationForm.getOtherDonorEthinicityStrain() 
-                 + "\n\t getOrganTissueName(): " + transplantationForm.getOrganTissueName() 
-                 + "\n\t organTissueCode: " + transplantationForm.getOrganTissueCode() 
-                 + "\n\t organ(): " + transplantationForm.getOrgan() 
-                 + "\n\t ConditioningRegimen(): " + transplantationForm.getConditioningRegimen() 
-                 + "\n\t Comments: "  + transplantationForm.getComments()                  
-                 + "\n\t OtherConditioningRegimen: " + transplantationForm.getOtherConditioningRegimen()                 
+        log.debug("<TransplantAction save> following Characteristics:" + "\n\t name: " 
+                 + transplantForm.getName() 
+                 + "\n\t atccNumber: " + transplantForm.getAtccNumber() 
+                 + "\n\t ParentalCellLineName: " + transplantForm.getParentalCellLineName() 
+                 + "\n\t getCellAmount: " + transplantForm.getCellAmount() + "\n\t getGrowthPeriod: " + transplantForm.getGrowthPeriod() 
+                 + "\n\t getModificationDescription: " + transplantForm.getModificationDescription() 
+                 + "\n\t getGeneticManipulation: " + transplantForm.getGeneticManipulation() 
+                 + "\n\t getAdministrativeSite: " + transplantForm.getAdministrativeSite() 
+                 + "\n\t getOtherAdministrativeSite: " + transplantForm.getOtherAdministrativeSite() 
+                 + "\n\t getSourceType: " + transplantForm.getSourceType() 
+                 + "\n\t getOtherSourceType: " + transplantForm.getOtherSourceType() 
+                 + "\n\t getDonorScientificName: " + transplantForm.getDonorScientificName() 
+                 + "\n\t getOtherDonorScientificName: " + transplantForm.getOtherDonorScientificName() 
+                 + "\n\t getDonorEthinicityStrain: " + transplantForm.getDonorEthinicityStrain() 
+                 + "\n\t getOtherDonorEthinicityStrain: " + transplantForm.getOtherDonorEthinicityStrain() + transplantForm.getOtherDonorEthinicityStrain() 
+                 + "\n\t getOrganTissueName(): " + transplantForm.getOrganTissueName() 
+                 + "\n\t organTissueCode: " + transplantForm.getOrganTissueCode() 
+                 + "\n\t organ(): " + transplantForm.getOrgan() 
+                 + "\n\t ConditioningRegimen(): " + transplantForm.getConditioningRegimen() 
+                 + "\n\t Comments: "  + transplantForm.getComments()                  
+                 + "\n\t OtherConditioningRegimen: " + transplantForm.getOtherConditioningRegimen()                 
                  + "\n\t user: " + (String) request.getSession().getAttribute("camod.loggedon.username"));
         
         try
@@ -231,20 +234,20 @@ public final class TransplantationAction extends BaseAction
             AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
             AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
 
-            theAnimalModelManager.addTransplantation(theAnimalModel, transplantationForm);
+            theAnimalModelManager.addTransplant(theAnimalModel, transplantForm);
 
-            log.debug("New Transplantation created");
+            log.debug("New Transplant created");
 
             // Add a message to be displayed in submitOverview.jsp saying you've
             // created a new model successfully
             ActionMessages msg = new ActionMessages();
-            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("transplantation.creation.successful"));
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("transplant.creation.successful"));
             saveErrors(request, msg);
 
         }
         catch (Exception e)
         {
-            log.error("Exception ocurred creating Transplantation", e);
+            log.error("Exception ocurred creating Transplant", e);
 
             // Encountered an error saving the model.
             ActionMessages msg = new ActionMessages();
@@ -252,7 +255,7 @@ public final class TransplantationAction extends BaseAction
             saveErrors(request, msg);
         }
 
-        log.trace("<TransplantationAction> Exiting save");
+        log.trace("<TransplantAction> Exiting save");
         return mapping.findForward("AnimalModelTreePopulateAction");
     }
 }

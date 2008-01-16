@@ -1,10 +1,13 @@
 /**
  * 
- * $Id: Constants.java,v 1.109 2007-11-25 23:31:45 pandyas Exp $
+ * $Id: Constants.java,v 1.110 2008-01-16 18:30:46 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.109  2007/11/25 23:31:45  pandyas
+ * Added constant for feature #8816  	Connection to caELMIR - retrieve data for therapy search page
+ *
  * Revision 1.108  2007/11/01 13:37:03  pandyas
- * Fixed #8290     Rename graft object into transplantation object
+ * Fixed #8290     Rename graft object into transplant object
  *
  * Revision 1.107  2007/10/18 18:25:30  pandyas
  * Added constants to prevent cross--site scripting attacks
@@ -536,7 +539,7 @@ public class Constants {
         
 
         // These two are used to display the species and strain currently in the
-        // AnimalModelCharacteristics - Transplantation screen
+        // AnimalModelCharacteristics - Transplant screen
         public static final String MODELSPECIES = "modelspecies";
 
         public static final String MODELSTRAIN = "modelstrain";
@@ -664,7 +667,7 @@ public class Constants {
 
         public static final String GENETIC_DESCRIPTION = "Genetic Description Page";
 
-        public static final String TRANSPLANTATION = "Transplantation Page";
+        public static final String TRANSPLANT = "Transplant Page";
         
         public static final String TRANSIENT_INTERFERENCE = "Transient Interference Page";
     }
@@ -687,12 +690,12 @@ public class Constants {
     // Used to compare AMMODELSPECIESCOMMONNAME to Zebrafish in EvsTreeUtil.java
     public static final String ZEBRAFISH = "Zebrafish";
     
-    // This constants stores the donor species common name for the Transplantation screens 
-    // set in TransplantationPopulateAction
+    // This constants stores the donor species common name for the Transplant screens 
+    // set in TransplantPopulateAction
     public static final String DONORSPECIESCOMMONNAME = "donorspeciescommonname";
     
     // This constants stores the species common name from the simple and advanced search screens 
-    // set in TransplantationPopulateAction
+    // set in TransplantPopulateAction
     public static final String SEARCHSPECIESCOMMONNAME = "searchspeciescommonname";    
 
     /**
@@ -702,9 +705,9 @@ public class Constants {
 
     public static final String ANIMALMODEL = "animalmodel";
 
-    public static final String TRANSPLANTATIONMODEL = "transplantationmodel";
+    public static final String TRANSPLANTMODEL = "transplantmodel";
 
-    public static final String TRANSPLANTATIONRESULTLIST = "transplantationresultlist";
+    public static final String TRANSPLANTRESULTLIST = "transplantresultlist";
 
     /**
      * Used to store username for current user
@@ -836,7 +839,7 @@ public class Constants {
 
         public static final String VIRALTREATMENT_LIST = "viraltreatment_list";
 
-        public static final String TRANSPLANTATION_LIST = "transplantation_list";
+        public static final String TRANSPLANT_LIST = "transplant_list";
 
         public static final String SPONTANEOUSMUTATION_LIST = "spontaneousmutation_list";
 

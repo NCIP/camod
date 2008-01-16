@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-    Document   : Transplantation.hbm.xml
+    Document   : Transplant.hbm.xml
     Created on : May 3, 2005
     Author     : rajputs
-    Description: Hibernate mapping file for Transplantation
+    Description: Hibernate mapping file for Transplant
 -->
 
 <!DOCTYPE hibernate-mapping PUBLIC 
@@ -12,7 +12,7 @@
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="gov.nih.nci.camod.domain">
-	<subclass name="Transplantation" 
+	<subclass name="Transplant" 
     	extends="AbstractCancerModel"
     	discriminator-value="X"
         lazy="true">
@@ -95,7 +95,7 @@
         	
         <!-- invivoResultCollection (one-to-many unidirectional) -->
         <set name="invivoResultCollection" 
-        	table="transplantation_invivo_result"
+        	table="transplant_invivo_result"
         	inverse="false" 
         	lazy="true" 
         	cascade="all-delete-orphan"

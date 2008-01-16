@@ -1,9 +1,14 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.86 2007-10-31 18:56:38 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.87 2008-01-16 18:30:22 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.86  2007/10/31 18:56:38  pandyas
+ * Fixed #8290 	Rename graft object into transplant object
+ * Fixed #8355 	Add comments field to every submission page
+ * Fixed #8188 	Rename UnctrlVocab items to text entries
+ *
  * Revision 1.85  2007/09/12 19:36:03  pandyas
  * modified debug statements for build to stage tier
  *
@@ -265,7 +270,7 @@ import gov.nih.nci.camod.domain.TargetedModification;
 import gov.nih.nci.camod.domain.Therapy;
 import gov.nih.nci.camod.domain.Transgene;
 import gov.nih.nci.camod.domain.TransientInterference;
-import gov.nih.nci.camod.domain.Transplantation;
+import gov.nih.nci.camod.domain.Transplant;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.util.DuplicateUtil;
 import gov.nih.nci.camod.util.MailUtil;
@@ -295,7 +300,7 @@ import gov.nih.nci.camod.webapp.form.TargetedModificationData;
 import gov.nih.nci.camod.webapp.form.TherapyData;
 import gov.nih.nci.camod.webapp.form.TransientInterferenceData;
 import gov.nih.nci.camod.webapp.form.ViralTreatmentData;
-import gov.nih.nci.camod.webapp.form.TransplantationData;
+import gov.nih.nci.camod.webapp.form.TransplantData;
 import gov.nih.nci.common.persistence.Persist;
 import gov.nih.nci.common.persistence.Search;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
@@ -788,22 +793,22 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 		return inAnimalModel;
 	}
 
-    public void addTransplantation(AnimalModel inAnimalModel,
-    		TransplantationData inTransplantationData) throws Exception
+    public void addTransplant(AnimalModel inAnimalModel,
+    		TransplantData inTransplantData) throws Exception
     {
 
-        System.out.println("<AnimalModelManagerImpl populate> Entering addTransplantation() ");
+        System.out.println("<AnimalModelManagerImpl populate> Entering addTransplant() ");
 
-        log.debug("Entering saveTransplantation");
+        log.debug("Entering saveTransplant");
 
-        Transplantation theTransplantation = TransplantationManagerSingleton.instance().create(inTransplantationData, inAnimalModel);
+        Transplant theTransplant = TransplantManagerSingleton.instance().create(inTransplantData, inAnimalModel);
 
-        inAnimalModel.addTransplantation(theTransplantation);
+        inAnimalModel.addTransplant(theTransplant);
         save(inAnimalModel);
 
-        System.out.println("<AnimalModelManagerImpl populate> Exiting addTransplantation() ");
+        System.out.println("<AnimalModelManagerImpl populate> Exiting addTransplant() ");
 
-        log.debug("Exiting saveTransplantation");
+        log.debug("Exiting saveTransplant");
     }
 
     /**
