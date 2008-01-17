@@ -10,7 +10,7 @@ x.t("navigating","data");
 x.t("transient","interference");
 x.t("histopathology","therapy");
 x.t("images","microarray");
-x.t("availability","graft");
+x.t("availability","transplant");
 x.t("introduces","processes");
 x.t("lines","images");
 x.t("cell","lines");

@@ -1,3 +1,49 @@
+div.Anchor_Para
+{
+  color: #000000;
+  font-family: Arial;
+  font-size: 6.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  margin-bottom: 0.0pt;
+  margin-left: 18pt;
+  margin-right: 0pt;
+  margin-top: 0.0pt;
+  text-align: Left;
+  text-indent: 0pt;
+  text-transform: none;
+  vertical-align: baseline;
+}
+
+.Anchor_Para_outer
+{
+  margin-bottom: 0.0pt;
+  margin-right: 0pt;
+  margin-top: 0.0pt;
+}
+
+.Anchor_Para_inner
+{
+  color: #000000;
+  font-family: Arial;
+  font-size: 6.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  text-align: Left;
+  text-transform: none;
+  vertical-align: baseline;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+}
+
 div.Appendix
 {
   color: #000000;
@@ -454,6 +500,56 @@ div.Body_Text_Before6
   padding-bottom: 0pt;
 }
 
+div.Body_Text_Drop_Down
+{
+  color: #000000;
+  cursor: pointer;
+  cursor: hand;
+  font-family: Arial;
+  font-size: 11.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+  margin-bottom: 8.0pt;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0.0pt;
+  text-align: Left;
+  text-indent: 0pt;
+  text-transform: none;
+  vertical-align: baseline;
+}
+
+.Body_Text_Drop_Down_outer
+{
+  margin-bottom: 8.0pt;
+  margin-right: 0pt;
+  margin-top: 0.0pt;
+}
+
+.Body_Text_Drop_Down_inner
+{
+  color: #000000;
+  cursor: pointer;
+  cursor: hand;
+  font-family: Arial;
+  font-size: 11.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+  text-align: Left;
+  text-transform: none;
+  vertical-align: baseline;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+}
+
 div.Body_Text_Indent
 {
   color: #000000;
@@ -467,7 +563,7 @@ div.Body_Text_Indent
   margin-right: 0pt;
   margin-top: 0.0pt;
   text-align: Left;
-  text-indent: 0pt;
+  text-indent: -18pt;
   text-transform: none;
   vertical-align: baseline;
 }
@@ -710,6 +806,52 @@ div.Body_Text_Indent_No_Space
 }
 
 .Body_Text_Indent_No_Space_inner
+{
+  color: #000000;
+  font-family: Arial;
+  font-size: 11.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  text-align: Left;
+  text-transform: none;
+  vertical-align: baseline;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+}
+
+div.Body_Text_Newpage
+{
+  color: #000000;
+  font-family: Arial;
+  font-size: 11.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  margin-bottom: 8.0pt;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0.0pt;
+  text-align: Left;
+  text-indent: 0pt;
+  text-transform: none;
+  vertical-align: baseline;
+}
+
+.Body_Text_Newpage_outer
+{
+  margin-bottom: 8.0pt;
+  margin-right: 0pt;
+  margin-top: 0.0pt;
+}
+
+.Body_Text_Newpage_inner
 {
   color: #000000;
   font-family: Arial;
@@ -1098,6 +1240,52 @@ div.Callout
   padding-bottom: 0pt;
 }
 
+div.Callout_Large
+{
+  color: #000000;
+  font-family: Arial;
+  font-size: 11.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+  margin-bottom: 0.0pt;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0.0pt;
+  text-align: Left;
+  text-indent: 0pt;
+  text-transform: none;
+  vertical-align: baseline;
+}
+
+.Callout_Large_outer
+{
+  margin-bottom: 0.0pt;
+  margin-right: 0pt;
+  margin-top: 0.0pt;
+}
+
+.Callout_Large_inner
+{
+  color: #000000;
+  font-family: Arial;
+  font-size: 11.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+  text-align: Left;
+  text-transform: none;
+  vertical-align: baseline;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+}
+
 div.Caption
 {
   color: #000000;
@@ -1175,6 +1363,98 @@ div.Caption_Indent
   font-family: "Palatino Linotype";
   font-size: 11.0pt;
   font-style: italic;
+  font-variant: normal;
+  font-weight: normal;
+  text-align: Left;
+  text-transform: none;
+  vertical-align: baseline;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+}
+
+div.Caution_Indent
+{
+  color: #000000;
+  font-family: "Palatino Linotype";
+  font-size: 11.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  margin-bottom: 6.0pt;
+  margin-left: 86.4pt;
+  margin-right: 0pt;
+  margin-top: 3.0pt;
+  text-align: Left;
+  text-indent: -50.400000000000006pt;
+  text-transform: none;
+  vertical-align: baseline;
+}
+
+.Caution_Indent_outer
+{
+  margin-bottom: 6.0pt;
+  margin-right: 0pt;
+  margin-top: 3.0pt;
+}
+
+.Caution_Indent_inner
+{
+  color: #000000;
+  font-family: "Palatino Linotype";
+  font-size: 11.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  text-align: Left;
+  text-transform: none;
+  vertical-align: baseline;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+}
+
+div.Caution_Main_Body
+{
+  color: #000000;
+  font-family: "Palatino Linotype";
+  font-size: 11.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  margin-bottom: 10.0pt;
+  margin-left: 64.8pt;
+  margin-right: 0pt;
+  margin-top: 0.0pt;
+  text-align: Left;
+  text-indent: -51.839999999999996pt;
+  text-transform: none;
+  vertical-align: baseline;
+}
+
+.Caution_Main_Body_outer
+{
+  margin-bottom: 10.0pt;
+  margin-right: 0pt;
+  margin-top: 0.0pt;
+}
+
+.Caution_Main_Body_inner
+{
+  color: #000000;
+  font-family: "Palatino Linotype";
+  font-size: 11.0pt;
+  font-style: normal;
   font-variant: normal;
   font-weight: normal;
   text-align: Left;
@@ -1690,6 +1970,98 @@ div.Example
   padding-bottom: 0pt;
 }
 
+div.Exercise_Heading
+{
+  color: #000000;
+  font-family: "Palatino Linotype";
+  font-size: 14.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  margin-bottom: 0.0pt;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 12.0pt;
+  text-align: Left;
+  text-indent: 0pt;
+  text-transform: none;
+  vertical-align: baseline;
+}
+
+.Exercise_Heading_outer
+{
+  margin-bottom: 0.0pt;
+  margin-right: 0pt;
+  margin-top: 12.0pt;
+}
+
+.Exercise_Heading_inner
+{
+  color: #000000;
+  font-family: "Palatino Linotype";
+  font-size: 14.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  text-align: Left;
+  text-transform: none;
+  vertical-align: baseline;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+}
+
+div.Exercise_HeadingTOC
+{
+  color: #000000;
+  font-family: "Palatino Linotype";
+  font-size: 12.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  margin-bottom: 0.0pt;
+  margin-left: 36pt;
+  margin-right: 0pt;
+  margin-top: 3.0pt;
+  text-align: Left;
+  text-indent: 0pt;
+  text-transform: none;
+  vertical-align: baseline;
+}
+
+.Exercise_HeadingTOC_outer
+{
+  margin-bottom: 0.0pt;
+  margin-right: 0pt;
+  margin-top: 3.0pt;
+}
+
+.Exercise_HeadingTOC_inner
+{
+  color: #000000;
+  font-family: "Palatino Linotype";
+  font-size: 12.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  text-align: Left;
+  text-transform: none;
+  vertical-align: baseline;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+}
+
 div.Footer
 {
   color: #000000;
@@ -1902,6 +2274,52 @@ div.Heading1
 }
 
 .Heading1_inner
+{
+  color: #515186;
+  font-family: "Palatino Linotype";
+  font-size: 16.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+  text-align: Left;
+  text-transform: none;
+  vertical-align: baseline;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+}
+
+div.Heading1NOTOC
+{
+  color: #515186;
+  font-family: "Palatino Linotype";
+  font-size: 16.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+  margin-bottom: 0.0pt;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 15.0pt;
+  text-align: Left;
+  text-indent: 0pt;
+  text-transform: none;
+  vertical-align: baseline;
+}
+
+.Heading1NOTOC_outer
+{
+  margin-bottom: 0.0pt;
+  margin-right: 0pt;
+  margin-top: 15.0pt;
+}
+
+.Heading1NOTOC_inner
 {
   color: #515186;
   font-family: "Palatino Linotype";
@@ -2488,12 +2906,12 @@ div.Note
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 6.0pt;
+  margin-bottom: 2.0pt;
   margin-left: 68.4pt;
   margin-right: 0pt;
   margin-top: -5px;
   padding-bottom: 18px;
-  text-align: Left;
+  text-align: justify;
   text-indent: -25px;
   text-transform: none;
   vertical-align: baseline;
@@ -2501,7 +2919,7 @@ div.Note
 
 .Note_outer
 {
-  margin-bottom: 6.0pt;
+  margin-bottom: 2.0pt;
   margin-right: 0pt;
   margin-top: -5px;
   padding-bottom: 18px;
@@ -2515,7 +2933,7 @@ div.Note
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-align: Left;
+  text-align: justify;
   text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
@@ -2554,6 +2972,102 @@ div.Note_Drop_Down
 }
 
 .Note_Drop_Down_inner
+{
+  color: #000000;
+  font-family: "Palatino Linotype";
+  font-size: 11.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  text-align: Left;
+  text-transform: none;
+  vertical-align: baseline;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+}
+
+div.Note_Indent
+{
+  color: #000000;
+  font-family: "Palatino Linotype";
+  font-size: 11.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  margin-bottom: 6.0pt;
+  margin-left: 68.4pt;
+  margin-right: 0pt;
+  margin-top: -5px;
+  padding-bottom: 18px;
+  text-align: Left;
+  text-indent: -25px;
+  text-transform: none;
+  vertical-align: baseline;
+}
+
+.Note_Indent_outer
+{
+  margin-bottom: 6.0pt;
+  margin-right: 0pt;
+  margin-top: -5px;
+  padding-bottom: 18px;
+}
+
+.Note_Indent_inner
+{
+  color: #000000;
+  font-family: "Palatino Linotype";
+  font-size: 11.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  text-align: Left;
+  text-transform: none;
+  vertical-align: baseline;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+}
+
+div.Note_Main_Body
+{
+  color: #000000;
+  font-family: "Palatino Linotype";
+  font-size: 11.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  margin-bottom: 10.0pt;
+  margin-left: 28px;
+  margin-right: 0pt;
+  margin-top: -5px;
+  padding-bottom: 18px;
+  text-align: Left;
+  text-indent: -15px;
+  text-transform: none;
+  vertical-align: baseline;
+}
+
+.Note_Main_Body_outer
+{
+  margin-bottom: 10.0pt;
+  margin-right: 0pt;
+  margin-top: -5px;
+  padding-bottom: 18px;
+}
+
+.Note_Main_Body_inner
 {
   color: #000000;
   font-family: "Palatino Linotype";
@@ -3034,6 +3548,52 @@ div.Related_Topics
   padding-bottom: 0pt;
 }
 
+div.Roadmap
+{
+  color: #000000;
+  font-family: "Palatino Linotype";
+  font-size: 14.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+  margin-bottom: 3.0pt;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0.0pt;
+  text-align: Left;
+  text-indent: 0pt;
+  text-transform: none;
+  vertical-align: baseline;
+}
+
+.Roadmap_outer
+{
+  margin-bottom: 3.0pt;
+  margin-right: 0pt;
+  margin-top: 0.0pt;
+}
+
+.Roadmap_inner
+{
+  color: #000000;
+  font-family: "Palatino Linotype";
+  font-size: 14.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+  text-align: Left;
+  text-transform: none;
+  vertical-align: baseline;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+}
+
 div.Run-In
 {
   color: #000000;
@@ -3157,6 +3717,52 @@ div.Subhead
   font-size: 12.0pt;
   font-style: normal;
   font-weight: normal;
+  text-align: Left;
+  text-transform: none;
+  vertical-align: baseline;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+}
+
+div.Subprocedure
+{
+  color: #000000;
+  font-family: Arial;
+  font-size: 11.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+  margin-bottom: 3.0pt;
+  margin-left: 36pt;
+  margin-right: 0pt;
+  margin-top: 8.0pt;
+  text-align: Left;
+  text-indent: 0pt;
+  text-transform: none;
+  vertical-align: baseline;
+}
+
+.Subprocedure_outer
+{
+  margin-bottom: 3.0pt;
+  margin-right: 0pt;
+  margin-top: 8.0pt;
+}
+
+.Subprocedure_inner
+{
+  color: #000000;
+  font-family: Arial;
+  font-size: 11.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
   text-align: Left;
   text-transform: none;
   vertical-align: baseline;
@@ -3308,6 +3914,56 @@ div.Table_Caption_Drop_Down
   padding-bottom: 0pt;
 }
 
+div.Table_Caption_Indent_Drop_Down
+{
+  color: #000000;
+  cursor: pointer;
+  cursor: hand;
+  font-family: Arial;
+  font-size: 11.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  margin-bottom: 6.0pt;
+  margin-left: 36pt;
+  margin-right: 0pt;
+  margin-top: 3.0pt;
+  text-align: Left;
+  text-indent: 0pt;
+  text-transform: none;
+  vertical-align: baseline;
+}
+
+.Table_Caption_Indent_Drop_Down_outer
+{
+  margin-bottom: 6.0pt;
+  margin-right: 0pt;
+  margin-top: 3.0pt;
+}
+
+.Table_Caption_Indent_Drop_Down_inner
+{
+  color: #000000;
+  cursor: pointer;
+  cursor: hand;
+  font-family: Arial;
+  font-size: 11.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  text-align: Left;
+  text-transform: none;
+  vertical-align: baseline;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+}
+
 div.Table_Column_Header
 {
   color: #000000;
@@ -3366,7 +4022,7 @@ div.Table_Header
   margin-left: 3px;
   margin-right: 3px;
   margin-top: 3px;
-  text-align: left;
+  text-align: Left;
   text-indent: 0pt;
   text-transform: none;
   vertical-align: baseline;
@@ -3387,7 +4043,7 @@ div.Table_Header
   font-style: italic;
   font-variant: normal;
   font-weight: bold;
-  text-align: left;
+  text-align: Left;
   text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
@@ -3492,6 +4148,60 @@ div.Table_Listnumber_2
   padding-bottom: 0pt;
 }
 
+div.Table_Row_Heading
+{
+  border-bottom-style: none;
+  border-left-style: none;
+  border-right-style: none;
+  border-top-style: none;
+  color: #000000;
+  font-family: Arial;
+  font-size: 10.0pt;
+  font-style: italic;
+  font-variant: normal;
+  font-weight: bold;
+  margin-bottom: 3.0pt;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 3.0pt;
+  text-align: Left;
+  text-indent: 0pt;
+  text-transform: none;
+  vertical-align: baseline;
+}
+
+.Table_Row_Heading_outer
+{
+  border-bottom-style: none;
+  border-left-style: none;
+  border-right-style: none;
+  border-top-style: none;
+  margin-bottom: 3.0pt;
+  margin-right: 0pt;
+  margin-top: 3.0pt;
+}
+
+.Table_Row_Heading_inner
+{
+  color: #000000;
+  font-family: Arial;
+  font-size: 10.0pt;
+  font-style: italic;
+  font-variant: normal;
+  font-weight: bold;
+  text-align: Left;
+  text-transform: none;
+  vertical-align: baseline;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+}
+
 div.Table_Text
 {
   color: #000000;
@@ -3518,6 +4228,52 @@ div.Table_Text
 }
 
 .Table_Text_inner
+{
+  color: #000000;
+  font-family: Arial;
+  font-size: 10.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  text-align: Left;
+  text-transform: none;
+  vertical-align: baseline;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+}
+
+div.Table_Text_Indent
+{
+  color: #000000;
+  font-family: Arial;
+  font-size: 10.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  margin-bottom: 3.0pt;
+  margin-left: 18pt;
+  margin-right: 0pt;
+  margin-top: 3.0pt;
+  text-align: Left;
+  text-indent: 0pt;
+  text-transform: none;
+  vertical-align: baseline;
+}
+
+.Table_Text_Indent_outer
+{
+  margin-bottom: 3.0pt;
+  margin-right: 0pt;
+  margin-top: 3.0pt;
+}
+
+.Table_Text_Indent_inner
 {
   color: #000000;
   font-family: Arial;
@@ -3676,6 +4432,98 @@ div.TableTitle_Indent
   padding-bottom: 0pt;
 }
 
+div.Tip_Indent
+{
+  color: #000000;
+  font-family: "Palatino Linotype";
+  font-size: 11.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  margin-bottom: 6.0pt;
+  margin-left: 68.4pt;
+  margin-right: 0pt;
+  margin-top: 3.0pt;
+  text-align: Left;
+  text-indent: -32.400000000000006pt;
+  text-transform: none;
+  vertical-align: baseline;
+}
+
+.Tip_Indent_outer
+{
+  margin-bottom: 6.0pt;
+  margin-right: 0pt;
+  margin-top: 3.0pt;
+}
+
+.Tip_Indent_inner
+{
+  color: #000000;
+  font-family: "Palatino Linotype";
+  font-size: 11.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  text-align: Left;
+  text-transform: none;
+  vertical-align: baseline;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+}
+
+div.Tip_Main_Body
+{
+  color: #000000;
+  font-family: "Palatino Linotype";
+  font-size: 11.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  margin-bottom: 10.0pt;
+  margin-left: 64.8pt;
+  margin-right: 0pt;
+  margin-top: 0.0pt;
+  text-align: Left;
+  text-indent: -36pt;
+  text-transform: none;
+  vertical-align: baseline;
+}
+
+.Tip_Main_Body_outer
+{
+  margin-bottom: 10.0pt;
+  margin-right: 0pt;
+  margin-top: 0.0pt;
+}
+
+.Tip_Main_Body_inner
+{
+  color: #000000;
+  font-family: "Palatino Linotype";
+  font-size: 11.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  text-align: Left;
+  text-transform: none;
+  vertical-align: baseline;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+}
+
 div.Title
 {
   color: #515186;
@@ -3810,6 +4658,18 @@ span.Keypress
   vertical-align: baseline;
 }
 
+span.Lettered_List_Char
+{
+  color: #000000;
+  font-family: Arial;
+  font-size: 11.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  text-transform: none;
+  vertical-align: baseline;
+}
+
 span.Note
 {
   color: #000000;
@@ -3838,7 +4698,9 @@ span.Popup
 
 span.PopupTable
 {
-  color: #000000;
+  border-bottom-color: Maroon;
+  border-bottom-style: dotted;
+  color: Maroon;
   font-family: Arial;
   font-size: 10.0pt;
   font-style: normal;
@@ -3881,7 +4743,10 @@ span.URL
 {
   color: #0000ff;
   font-family: Arial;
+  font-size: 11.0pt;
+  font-style: normal;
   font-variant: normal;
+  font-weight: normal;
   text-decoration: underline;
   text-transform: none;
   vertical-align: baseline;
@@ -3910,103 +4775,17 @@ table.Table_-_Column_Header
   width: 90%;
 }
 
-table.Mapping_Table
-{
-  margin-bottom: 6.0pt;
-  margin-left: 0pt;
-  margin-right: 0pt;
-  margin-top: 6.0pt;
-  padding-bottom: 2pt;
-  padding-left: 2pt;
-  padding-right: 2pt;
-  padding-top: 2pt;
-  text-align: left;
-  width: 90%;
-}
-
-table.Table_-_No_Header
+table.Table_-_Feature_Description
 {
   margin-bottom: 12.0pt;
   margin-left: 0pt;
   margin-right: 0pt;
-  margin-top: 12.0pt;
-  padding-bottom: 4pt;
-  padding-left: 6pt;
-  padding-right: 4pt;
-  padding-top: 4pt;
-  text-align: left;
-  width: 90%;
-}
-
-table.Figure_Indent
-{
-  margin-bottom: 12.0pt;
-  margin-left: 36pt;
-  margin-right: 0pt;
-  margin-top: 12.0pt;
-  padding-bottom: 4pt;
-  padding-left: 0pt;
-  padding-right: 4pt;
-  padding-top: 0pt;
-  text-align: left;
-}
-
-table.Figure
-{
-  margin-bottom: 12.0pt;
-  margin-left: 0pt;
-  margin-right: 0pt;
-  margin-top: 12.0pt;
-  padding-bottom: 4pt;
-  padding-left: 6pt;
-  padding-right: 4pt;
-  padding-top: 4pt;
-  text-align: left;
-}
-
-table.UnstructMasterPageMaps
-{
-  margin-bottom: 6.0pt;
-  margin-left: 0pt;
-  margin-right: 0pt;
-  margin-top: 6.0pt;
-  padding-bottom: 3pt;
-  padding-left: 3pt;
-  padding-right: 3pt;
-  padding-top: 3pt;
-  text-align: left;
-}
-
-table.Table_-_Header
-{
-  margin-bottom: 12.0pt;
-  margin-left: 0pt;
-  margin-right: 0pt;
-  margin-top: 12.0pt;
+  margin-top: 3.0pt;
   padding-bottom: 4pt;
   padding-left: 6pt;
   padding-right: 4pt;
   padding-top: 4pt;
   text-align: right;
-  width: 90%;
-}
-
-table.Table_-_List
-{
-  border-bottom-style: none;
-  border-left-style: none;
-  border-right-style: none;
-  border-top-style: none;
-  margin-bottom: 0px;
-  margin-left: 40px;
-  margin-right: 0px;
-  margin-top: 0px;
-  padding-bottom: 4pt;
-  padding-left: 6pt;
-  padding-right: 4pt;
-  padding-top: 4pt;
-  text-align: right;
-  width: 90%;
 }
 
 table.Table_-_No_Border
@@ -4031,7 +4810,20 @@ table.Table_-_No_Border
   width: 90%;
 }
 
-table.Table_-_Single_Cell
+table.UnstructMasterPageMaps
+{
+  margin-bottom: 6.0pt;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 6.0pt;
+  padding-bottom: 3pt;
+  padding-left: 3pt;
+  padding-right: 3pt;
+  padding-top: 3pt;
+  text-align: left;
+}
+
+table.Figure
 {
   margin-bottom: 12.0pt;
   margin-left: 0pt;
@@ -4042,5 +4834,115 @@ table.Table_-_Single_Cell
   padding-right: 4pt;
   padding-top: 4pt;
   text-align: left;
+}
+
+table.Table_-_Header
+{
+  margin-bottom: 12.0pt;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 12.0pt;
+  padding-bottom: 4pt;
+  padding-left: 6pt;
+  padding-right: 4pt;
+  padding-top: 4pt;
+  text-align: left;
+  width: 90%;
+}
+
+table.Table_-_No_Header
+{
+  margin-bottom: 12.0pt;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 12.0pt;
+  padding-bottom: 4pt;
+  padding-left: 6pt;
+  padding-right: 4pt;
+  padding-top: 4pt;
+  text-align: left;
+  width: 90%;
+}
+
+table.Table_-_Single_Cell
+{
+  margin-bottom: 12.0pt;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 3.0pt;
+  padding-bottom: 4pt;
+  padding-left: 6pt;
+  padding-right: 4pt;
+  padding-top: 4pt;
+  text-align: left;
+}
+
+table.Table_-_List
+{
+  border-bottom-style: none;
+  border-left-style: none;
+  border-right-style: none;
+  border-top-style: none;
+  margin-bottom: 0px;
+  margin-left: 40px;
+  margin-right: 0px;
+  margin-top: 0px;
+  padding-bottom: 4pt;
+  padding-left: 6pt;
+  padding-right: 4pt;
+  padding-top: 4pt;
+  text-align: right;
+  width: 90%;
+}
+
+table.Figure_Indent
+{
+  margin-bottom: 12.0pt;
+  margin-left: 36pt;
+  margin-right: 0pt;
+  margin-top: 3.0pt;
+  padding-bottom: 4pt;
+  padding-left: 0pt;
+  padding-right: 4pt;
+  padding-top: 0pt;
+  text-align: left;
+}
+
+table.Mapping_Table
+{
+  margin-bottom: 6.0pt;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 3.0pt;
+  padding-bottom: 2pt;
+  padding-left: 2pt;
+  padding-right: 2pt;
+  padding-top: 2pt;
+  text-align: left;
+  width: 90%;
+}
+
+table.Table_-_Row_Headings
+{
+  background-color: White;
+  border-bottom-color: White;
+  border-bottom-style: none;
+  border-bottom-width: thin;
+  border-left-color: White;
+  border-left-style: none;
+  border-right-color: White;
+  border-right-style: none;
+  border-top-color: White;
+  border-top-style: none;
+  margin-bottom: 12.0pt;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 3.0pt;
+  padding-bottom: 4pt;
+  padding-left: 6pt;
+  padding-right: 4pt;
+  padding-top: 4pt;
+  text-align: left;
+  width: 90%;
 }
 
