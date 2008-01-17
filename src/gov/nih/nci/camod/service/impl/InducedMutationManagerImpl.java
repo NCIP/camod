@@ -1,8 +1,11 @@
 /**
  * @author schroedln
  * 
- * $Id: InducedMutationManagerImpl.java,v 1.30 2008-01-16 18:30:21 pandyas Exp $
+ * $Id: InducedMutationManagerImpl.java,v 1.31 2008-01-17 18:08:47 pandyas Exp $
  * $Log: not supported by cvs2svn $
+ * Revision 1.30  2008/01/16 18:30:21  pandyas
+ * Renamed value to Transplant for #8290
+ *
  * Revision 1.29  2007/11/05 15:51:42  pandyas
  * took out debug statements
  *
@@ -200,19 +203,23 @@ public class InducedMutationManagerImpl extends BaseManager implements
 		// CAS Number
 		theEnvironFactor.setCasNumber(inInducedMutationData.getCasNumber());
 
-		// GeneIdentifier
-		GeneIdentifier inGeneIdentifier = null;
-			log.info("inInducedMutationData.getGeneIdentifier(): " + inInducedMutationData.getGeneIdentifier());
-			if (inInducedMutation.getMutationIdentifier() != null) {
-				inGeneIdentifier = inInducedMutation.getGeneIdentifier();
-			} else {
-				inGeneIdentifier = new GeneIdentifier();
-			}			
-			
-		if (inInducedMutationData.getGeneIdentifier() != null) {
-			inGeneIdentifier.setEntrezGeneID(inInducedMutationData.getGeneIdentifier().trim());
-			inInducedMutation.setGeneIdentifier(inGeneIdentifier);
-		}
+         
+         // GeneIdentifier
+         GeneIdentifier inGeneIdentifier = null;
+         if (inInducedMutationData.getGeneIdentifier() != null && inInducedMutationData.getGeneIdentifier().length() >0) {        
+         log.info("inTargetedModificationData.getGeneIdentifier(): " + inInducedMutationData.getGeneIdentifier());
+             //Check for existign GeneIdentifier
+             if (inInducedMutation.getGeneIdentifier() != null) {
+                     inGeneIdentifier = inInducedMutation.getGeneIdentifier();
+                     inGeneIdentifier.setEntrezGeneID(inInducedMutationData.getGeneIdentifier().trim());
+                     inInducedMutation.setGeneIdentifier(inGeneIdentifier);                
+                       
+                 } else {
+                     inGeneIdentifier = new GeneIdentifier();
+                     inGeneIdentifier.setEntrezGeneID(inInducedMutationData.getGeneIdentifier().trim());
+                     inInducedMutation.setGeneIdentifier(inGeneIdentifier);                
+                }
+         }            
 
 		// Description
 		inInducedMutation

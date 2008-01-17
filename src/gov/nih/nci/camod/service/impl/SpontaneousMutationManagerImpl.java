@@ -1,7 +1,10 @@
 /*
- * $Id: SpontaneousMutationManagerImpl.java,v 1.17 2008-01-16 18:30:22 pandyas Exp $
+ * $Id: SpontaneousMutationManagerImpl.java,v 1.18 2008-01-17 18:08:47 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2008/01/16 18:30:22  pandyas
+ * Renamed value to Transplant for #8290
+ *
  * Revision 1.16  2007/10/31 19:13:27  pandyas
  * Fixed #8290 	Rename graft object into transplant object
  *
@@ -152,11 +155,11 @@ public class SpontaneousMutationManagerImpl extends BaseManager implements Spont
         // MGI Number
         // Check for exisiting MutationIdentifier
         MutationIdentifier inMutationIdentifier = null;
-        if (inSpontaneousMutation.getMutationIdentifier() != null)
+        if (inSpontaneousMutation.getMutationIdentifier() != null) {
             inMutationIdentifier = inSpontaneousMutation.getMutationIdentifier();
-        else
+        } else {
             inMutationIdentifier = new MutationIdentifier();
-        
+        }
 		if (inSpontaneousMutationData.getMgiId() != null) {
 
 			inMutationIdentifier.setMgiId(inSpontaneousMutationData
@@ -174,9 +177,6 @@ public class SpontaneousMutationManagerImpl extends BaseManager implements Spont
 					.getRgdId().trim());
 			inSpontaneousMutation.setMutationIdentifier(inMutationIdentifier);
 		}
-
-
-
         log.trace("Exiting populateSpontaneousMutation");
     }
 }

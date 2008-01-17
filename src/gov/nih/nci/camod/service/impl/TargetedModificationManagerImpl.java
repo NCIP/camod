@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TargetedModificationManagerImpl.java,v 1.34 2008-01-16 18:30:22 pandyas Exp $
+ * $Id: TargetedModificationManagerImpl.java,v 1.35 2008-01-17 18:08:47 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.34  2008/01/16 18:30:22  pandyas
+ * Renamed value to Transplant for #8290
+ *
  * Revision 1.33  2007/10/31 19:13:27  pandyas
  * Fixed #8290 	Rename graft object into transplant object
  *
@@ -194,33 +197,51 @@ public class TargetedModificationManagerImpl extends BaseManager implements
 
 		}
 		
-		// GeneIdentifier
-		GeneIdentifier inGeneIdentifier = null;
-		if(inTargetedModificationData.getGeneIdentifier() != null && inTargetedModificationData.getGeneIdentifier().length() >0){
-			log.info("inSpontaneousMutationData.getGeneIdentifier(): " + inTargetedModificationData.getGeneIdentifier());
-			// Check for exisiting GeneIdentifier
-			if (inTargetedModification.getGeneIdentifier() != null) {
-				log.info("getGeneIdentifier() != null loop");
-				inGeneIdentifier = inTargetedModification.getGeneIdentifier();
-				inGeneIdentifier.setEntrezGeneID(inTargetedModificationData.getGeneIdentifier());
-				inTargetedModification.setGeneIdentifier(inGeneIdentifier);
-				
-				log.info("setEntrezGeneID");			
-			} else {
-				inGeneIdentifier = new GeneIdentifier();
-				log.info("new GeneIdentifier loop");	
-				inGeneIdentifier.setEntrezGeneID(inTargetedModificationData.getGeneIdentifier());
-				inTargetedModification.setGeneIdentifier(inGeneIdentifier);
-				log.info("setEntrezGeneID");			
-			}			
-		}
+        // GeneIdentifier
+        GeneIdentifier inGeneIdentifier = null;
+        if (inTargetedModificationData.getGeneIdentifier() != null && inTargetedModificationData.getGeneIdentifier().length() >0) {        
+        log.info("inTargetedModificationData.getGeneIdentifier(): " + inTargetedModificationData.getGeneIdentifier());
+        //Check for existign GeneIdentifier
+            if (inTargetedModification.getGeneIdentifier() != null) {
+                    inGeneIdentifier = inTargetedModification.getGeneIdentifier();
+                    inGeneIdentifier.setEntrezGeneID(inTargetedModificationData.getGeneIdentifier().trim());
+                    inTargetedModification.setGeneIdentifier(inGeneIdentifier);                
+                    
+                } else {
+                    inGeneIdentifier = new GeneIdentifier();
+                    inGeneIdentifier.setEntrezGeneID(inTargetedModificationData.getGeneIdentifier().trim());
+                    inTargetedModification.setGeneIdentifier(inGeneIdentifier);                
+            }
+        }
+            
 
-		if (inTargetedModificationData.getMgiId() != null) {
+        
 
-			inGeneIdentifier.setEntrezGeneID(inTargetedModificationData
-					.getMgiId().trim());
-			inTargetedModification.setGeneIdentifier(inGeneIdentifier);
-		}		
+            // MGI Number
+            // Check for exisiting MutationIdentifier
+            MutationIdentifier inMutationIdentifier = null;
+            if (inTargetedModification.getMutationIdentifier() != null) {
+                inMutationIdentifier = inTargetedModification.getMutationIdentifier();
+            } else {
+                inMutationIdentifier = new MutationIdentifier();
+            }
+            if (inTargetedModificationData.getMgiId() != null) {
+
+                inMutationIdentifier.setMgiId(inTargetedModificationData
+                        .getMgiId().trim());
+                inTargetedModification.setMutationIdentifier(inMutationIdentifier);
+            }
+            if (inTargetedModificationData.getZfinId() != null ) {
+                inMutationIdentifier.setZfinId(inTargetedModificationData
+                        .getZfinId().trim());
+                inTargetedModification.setMutationIdentifier(inMutationIdentifier);
+            }
+            if (inTargetedModificationData.getRgdId() != null) {
+
+                inMutationIdentifier.setRgdId(inTargetedModificationData
+                        .getRgdId().trim());
+                inTargetedModification.setMutationIdentifier(inMutationIdentifier);
+            }
 
 		// Genetic Background - Donor
 		inTargetedModification.setEsCellLineName(inTargetedModificationData
@@ -295,34 +316,7 @@ public class TargetedModificationManagerImpl extends BaseManager implements
 				inTargetedModification.setImage(image);
 			}
 
-		// MGI Number
-		// Check for exisiting MutationIdentifier
-		MutationIdentifier inMutationIdentifier = null;
-		if (inTargetedModification.getMutationIdentifier() != null) {
-			inMutationIdentifier = inTargetedModification
-					.getMutationIdentifier();
-		} else {
-			inMutationIdentifier = new MutationIdentifier();
-		}
 
-		if (inTargetedModificationData.getMgiId() != null) {
-	
-			inMutationIdentifier.setMgiId(inTargetedModificationData
-					.getMgiId().trim());
-			inTargetedModification.setMutationIdentifier(inMutationIdentifier);
-		}
-		if (inTargetedModificationData.getZfinId() != null) {
-	
-			inMutationIdentifier.setZfinId(inTargetedModificationData
-					.getZfinId().trim());
-			inTargetedModification.setMutationIdentifier(inMutationIdentifier);
-		}
-		if (inTargetedModificationData.getRgdId() != null) {
-	
-			inMutationIdentifier.setRgdId(inTargetedModificationData
-					.getRgdId().trim());
-			inTargetedModification.setMutationIdentifier(inMutationIdentifier);
-		}	
 
 		inTargetedModification.setComments(inTargetedModificationData
 				.getComments());
