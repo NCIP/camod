@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: InducedMutationAction.java,v 1.16 2007-10-31 17:11:18 pandyas Exp $
+ * $Id: InducedMutationAction.java,v 1.17 2008-01-17 18:09:01 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2007/10/31 17:11:18  pandyas
+ * Modified comments for #9756  	geneID has been replaced with entrezGeneID - existing values need to be moved to new place
+ *
  * Revision 1.15  2007/09/12 19:36:40  pandyas
  * modified debug statements for build to stage tier
  *
@@ -161,7 +164,7 @@ public final class InducedMutationAction extends BaseAction {
         log.debug("<InducedMutationAction save> following Characteristics:" + "\n\t getType: "  + inducedMutationForm.getType() 
                 + "\n\t getOtherType: " + inducedMutationForm.getOtherType()
                 + "\n\t getCasNumber: " + inducedMutationForm.getCasNumber() 
-                + "\n\t getGeneId: " + inducedMutationForm.getGeneIdentifier() + "\n\t getName: " + inducedMutationForm.getName()
+                + "\n\t getGeneIdentifier: " + inducedMutationForm.getGeneIdentifier() + "\n\t getName: " + inducedMutationForm.getName()
                 + "\n\t getDescription: " + inducedMutationForm.getDescription() 
                 + "\n\t getObservation: " + inducedMutationForm.getObservation() 
                 + "\n\t getMethodObservation: " + inducedMutationForm.getMethodOfObservation() 
