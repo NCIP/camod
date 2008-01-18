@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.87 2008-01-16 18:30:22 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.88 2008-01-18 21:26:13 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.87  2008/01/16 18:30:22  pandyas
+ * Renamed value to Transplant for #8290
+ *
  * Revision 1.86  2007/10/31 18:56:38  pandyas
  * Fixed #8290 	Rename graft object into transplant object
  * Fixed #8355 	Add comments field to every submission page
@@ -332,7 +335,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      */
     public List getAll() throws Exception
     {
-        log.debug("In AnimalModelManagerImpl.getAll");
+        log.info("In AnimalModelManagerImpl.getAll");
         return super.getAll(AnimalModel.class);
     }
     
@@ -442,7 +445,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      */
     public AnimalModel get(String id) throws Exception
     {
-        log.debug("In AnimalModelManagerImpl.get");
+        log.info("In AnimalModelManagerImpl.get");
 
         AnimalModel theAnimalModel = (AnimalModel) super.get(id, AnimalModel.class);
 
