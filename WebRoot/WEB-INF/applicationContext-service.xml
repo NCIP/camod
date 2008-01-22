@@ -55,6 +55,9 @@
     <!-- geneDeliveryManager -->
     <bean id="geneDeliveryManager" class="gov.nih.nci.camod.service.impl.GeneDeliveryManagerImpl"/>
     
+    <!-- geneIdentifierManager -->
+    <bean id="geneIdentifierManager" class="gov.nih.nci.camod.service.impl.GeneIdentifierManagerImpl"/>    
+    
     <!-- genomicSegmentManager -->
     <bean id="genomicSegmentManager" class="gov.nih.nci.camod.service.impl.GenomicSegmentManagerImpl"/>
     
