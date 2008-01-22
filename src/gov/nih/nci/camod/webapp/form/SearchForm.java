@@ -42,9 +42,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.26 2008-01-16 18:29:46 pandyas Exp $
+ * $Id: SearchForm.java,v 1.27 2008-01-22 17:21:24 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.26  2008/01/16 18:29:46  pandyas
+ * Renamed value to Transplant for #8290
+ *
  * Revision 1.25  2007/10/31 17:42:28  pandyas
  * Fixed #8290 	Rename graft object into transplant object
  *
@@ -674,7 +677,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         }        
         */
         
-        // validate for species
+        /* validate for species
         if (species != null && species.length() > 0 )
         {
             //System.out.println("Enter validate for species loop");            
@@ -688,7 +691,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             }
             //System.out.println("Exit validate for species loop");             
         }
-        
+        */
         /* validate phenotype against malicious characters to prevent blind SQl injection attacks
         if (phenotype != null  )
         { 
