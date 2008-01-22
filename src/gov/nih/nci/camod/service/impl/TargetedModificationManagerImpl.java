@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TargetedModificationManagerImpl.java,v 1.35 2008-01-17 18:08:47 pandyas Exp $
+ * $Id: TargetedModificationManagerImpl.java,v 1.36 2008-01-22 15:57:12 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.35  2008/01/17 18:08:47  pandyas
+ * Modified for # 11722  	The gene identifier does not work correctly for targeted modification submission and edit
+ *
  * Revision 1.34  2008/01/16 18:30:22  pandyas
  * Renamed value to Transplant for #8290
  *
@@ -199,19 +202,21 @@ public class TargetedModificationManagerImpl extends BaseManager implements
 		
         // GeneIdentifier
         GeneIdentifier inGeneIdentifier = null;
+        if (inTargetedModification.getGeneIdentifier() != null) {
+            inGeneIdentifier = inTargetedModification.getGeneIdentifier();
+        } else {
+            inGeneIdentifier = new GeneIdentifier();
+        }        
+                
         if (inTargetedModificationData.getGeneIdentifier() != null && inTargetedModificationData.getGeneIdentifier().length() >0) {        
         log.info("inTargetedModificationData.getGeneIdentifier(): " + inTargetedModificationData.getGeneIdentifier());
-        //Check for existign GeneIdentifier
-            if (inTargetedModification.getGeneIdentifier() != null) {
-                    inGeneIdentifier = inTargetedModification.getGeneIdentifier();
-                    inGeneIdentifier.setEntrezGeneID(inTargetedModificationData.getGeneIdentifier().trim());
-                    inTargetedModification.setGeneIdentifier(inGeneIdentifier);                
-                    
-                } else {
-                    inGeneIdentifier = new GeneIdentifier();
-                    inGeneIdentifier.setEntrezGeneID(inTargetedModificationData.getGeneIdentifier().trim());
-                    inTargetedModification.setGeneIdentifier(inGeneIdentifier);                
-            }
+            //Check for existing GeneIdentifier
+            inGeneIdentifier.setEntrezGeneID(inTargetedModificationData.getGeneIdentifier().trim());
+            inTargetedModification.setGeneIdentifier(inGeneIdentifier);   
+        } else {
+            log.info("setEntrezGeneID to null");
+            inGeneIdentifier.setEntrezGeneID(null);
+            inTargetedModification.setGeneIdentifier(inGeneIdentifier);
         }
             
 

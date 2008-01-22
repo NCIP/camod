@@ -1,8 +1,11 @@
 /**
  * @author schroedln
  * 
- * $Id: InducedMutationManagerImpl.java,v 1.31 2008-01-17 18:08:47 pandyas Exp $
+ * $Id: InducedMutationManagerImpl.java,v 1.32 2008-01-22 15:57:12 pandyas Exp $
  * $Log: not supported by cvs2svn $
+ * Revision 1.31  2008/01/17 18:08:47  pandyas
+ * Modified for # 11722  	The gene identifier does not work correctly for targeted modification submission and edit
+ *
  * Revision 1.30  2008/01/16 18:30:21  pandyas
  * Renamed value to Transplant for #8290
  *
@@ -206,20 +209,22 @@ public class InducedMutationManagerImpl extends BaseManager implements
          
          // GeneIdentifier
          GeneIdentifier inGeneIdentifier = null;
+         if (inInducedMutation.getGeneIdentifier() != null) {
+             inGeneIdentifier = inInducedMutation.getGeneIdentifier();
+         } else {
+             inGeneIdentifier = new GeneIdentifier();
+         }          
+         
          if (inInducedMutationData.getGeneIdentifier() != null && inInducedMutationData.getGeneIdentifier().length() >0) {        
-         log.info("inTargetedModificationData.getGeneIdentifier(): " + inInducedMutationData.getGeneIdentifier());
+             log.info("inTargetedModificationData.getGeneIdentifier(): " + inInducedMutationData.getGeneIdentifier());
              //Check for existign GeneIdentifier
-             if (inInducedMutation.getGeneIdentifier() != null) {
-                     inGeneIdentifier = inInducedMutation.getGeneIdentifier();
-                     inGeneIdentifier.setEntrezGeneID(inInducedMutationData.getGeneIdentifier().trim());
-                     inInducedMutation.setGeneIdentifier(inGeneIdentifier);                
-                       
-                 } else {
-                     inGeneIdentifier = new GeneIdentifier();
-                     inGeneIdentifier.setEntrezGeneID(inInducedMutationData.getGeneIdentifier().trim());
-                     inInducedMutation.setGeneIdentifier(inGeneIdentifier);                
-                }
-         }            
+             inGeneIdentifier.setEntrezGeneID(inInducedMutationData.getGeneIdentifier().trim());
+             inInducedMutation.setGeneIdentifier(inGeneIdentifier);                
+         } else {
+             log.info("setEntrezGeneID to null");
+             inGeneIdentifier.setEntrezGeneID(null);
+             inInducedMutation.setGeneIdentifier(inGeneIdentifier);
+         }           
 
 		// Description
 		inInducedMutation

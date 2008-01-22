@@ -1,7 +1,10 @@
 /*
- * $Id: SpontaneousMutationManagerImpl.java,v 1.18 2008-01-17 18:08:47 pandyas Exp $
+ * $Id: SpontaneousMutationManagerImpl.java,v 1.19 2008-01-22 15:57:12 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2008/01/17 18:08:47  pandyas
+ * Modified for # 11722  	The gene identifier does not work correctly for targeted modification submission and edit
+ *
  * Revision 1.17  2008/01/16 18:30:22  pandyas
  * Renamed value to Transplant for #8290
  *
@@ -108,24 +111,22 @@ public class SpontaneousMutationManagerImpl extends BaseManager implements Spont
 
 		// GeneIdentifier
 		GeneIdentifier inGeneIdentifier = null;
+        if (inSpontaneousMutation.getGeneIdentifier() != null) {
+            inGeneIdentifier = inSpontaneousMutation.getGeneIdentifier();
+        } else {
+            inGeneIdentifier = new GeneIdentifier();
+        }        
+        
 		if(inSpontaneousMutationData.getGeneIdentifier() != null && inSpontaneousMutationData.getGeneIdentifier().length() >0){
 			log.info("inSpontaneousMutationData.getGeneIdentifier(): " + inSpontaneousMutationData.getGeneIdentifier());
-			// Check for exisiting GeneIdentifier
-			if (inSpontaneousMutation.getGeneIdentifier() != null) {
 				log.info("getGeneIdentifier() != null loop");
-				inGeneIdentifier = inSpontaneousMutation.getGeneIdentifier();
 				inGeneIdentifier.setEntrezGeneID(inSpontaneousMutationData.getGeneIdentifier());
 				inSpontaneousMutation.setGeneIdentifier(inGeneIdentifier);
-				
-				log.info("setEntrezGeneID");			
-			} else {
-				inGeneIdentifier = new GeneIdentifier();
-				log.info("new GeneIdentifier loop");	
-				inGeneIdentifier.setEntrezGeneID(inSpontaneousMutationData.getGeneIdentifier());
-				inSpontaneousMutation.setGeneIdentifier(inGeneIdentifier);
-				log.info("setEntrezGeneID");			
-			}			
-		}
+		} else {
+            log.info("setEntrezGeneID to null");
+            inGeneIdentifier.setEntrezGeneID(null);
+            inSpontaneousMutation.setGeneIdentifier(inGeneIdentifier);
+        }
 
         // Observation and Method of Observation
         // No genetic alteration in DB - data is entered from the GUI
