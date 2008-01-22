@@ -1,7 +1,10 @@
 /*
- * $Id: SpontaneousMutationManagerImpl.java,v 1.19 2008-01-22 15:57:12 pandyas Exp $
+ * $Id: SpontaneousMutationManagerImpl.java,v 1.20 2008-01-22 18:38:15 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2008/01/22 15:57:12  pandyas
+ * Modified to submit and edit gene identifier object
+ *
  * Revision 1.18  2008/01/17 18:08:47  pandyas
  * Modified for # 11722  	The gene identifier does not work correctly for targeted modification submission and edit
  *
@@ -120,7 +123,8 @@ public class SpontaneousMutationManagerImpl extends BaseManager implements Spont
 		if(inSpontaneousMutationData.getGeneIdentifier() != null && inSpontaneousMutationData.getGeneIdentifier().length() >0){
 			log.info("inSpontaneousMutationData.getGeneIdentifier(): " + inSpontaneousMutationData.getGeneIdentifier());
 				log.info("getGeneIdentifier() != null loop");
-				inGeneIdentifier.setEntrezGeneID(inSpontaneousMutationData.getGeneIdentifier());
+                inGeneIdentifier = GeneIdentifierManagerSingleton.instance().getOrCreate(inSpontaneousMutationData.getGeneIdentifier());
+				// inGeneIdentifier.setEntrezGeneID(inSpontaneousMutationData.getGeneIdentifier());
 				inSpontaneousMutation.setGeneIdentifier(inGeneIdentifier);
 		} else {
             log.info("setEntrezGeneID to null");
