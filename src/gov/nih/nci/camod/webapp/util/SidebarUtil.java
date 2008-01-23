@@ -15,7 +15,8 @@ public class SidebarUtil extends gov.nih.nci.camod.webapp.action.BaseAction {
 						jspName.equals("searchAdvanced.jsp") || 
 						jspName.equals("searchDrugScreening.jsp") || 
 						jspName.equals("searchTableOfContents.jsp") || 
-						jspName.equals("searchResultsDrugScreen.jsp") || 
+						jspName.equals("searchResultsDrugScreen.jsp") ||
+                        jspName.equals("viewInvivoDetails.jsp") ||                        
 						jspName.equals("searchResults.jsp") ||           
                         
                         jspName.equals("customizeSearchResults.jsp") || 
@@ -33,7 +34,6 @@ public class SidebarUtil extends gov.nih.nci.camod.webapp.action.BaseAction {
 			else if ( 	jspName.equals("viewModelCharacteristics.jsp") || 
 						jspName.equals("viewTransplant.jsp") || 
 						jspName.equals("viewGeneticDescription.jsp") || 
-                        jspName.equals("viewInvivoDetails.jsp") ||
 						jspName.equals("viewPublications.jsp") ||
 						jspName.equals("viewCarcinogenicInterventions.jsp")  || 
 						jspName.equals("viewHistopathology.jsp")  || 
