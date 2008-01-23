@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.58 2007-11-05 18:43:26 pandyas Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.59 2008-01-23 22:26:03 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.58  2007/11/05 18:43:26  pandyas
+ * Fixed #9756     geneID has been replaced with entrezGeneID
+ *
  * Revision 1.57  2007/10/31 19:33:58  pandyas
  * Fixed #8188 	Rename UnctrlVocab items to text entries
  *
@@ -586,24 +589,25 @@
 				<c:if test="${not empty gs.expressionFeatureCollection}">
 					<table summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
 						<tr>
-							<td class="formTitle" width="65%"><b>Organ</b></td>
-							<td class="formTitle" width="35%"><b>Expression Level</b></td>
+							<td class="formTitle" width="65%"><b>Organ (Expression Level)</b></td>
+							<td class="formTitle" width="35%"><b>Comment</b></td>
 						</tr>
 						<c:forEach var="el" items="${gs.expressionFeatureCollection}">
 							<tr>
 								<td class="WhiteBox">
 									<camod:highlight>
-										<c:out value="${el.organ.name}" escapeXml="false"/>&nbsp;
-									</camod:highlight>
+										<c:out value="${el.organ.EVSPreferredDescription}" escapeXml="false"/>&nbsp;
+										(<c:out value="${el.expressionLevelDesc.expressionLevel}" escapeXml="false"/>)&nbsp;
+									</camod:highlight>		
 								</td>
 								<td class="WhiteBoxRightEnd">
 									<camod:highlight>
-										<c:out value="${el.expressionLevelDesc.expressionLevel}" escapeXml="false"/>&nbsp;
-									</camod:highlight>
+										<c:out value="${el.comments}" escapeXml="false"/>&nbsp;
+									</camod:highlight>		
 								</td>
 							</tr>
 						</c:forEach>
-					</table>
+					</table>					
 				</c:if>
 				<c:if test="${empty gs.expressionFeatureCollection}">
 				    &nbsp;
@@ -789,27 +793,28 @@
 		<tr>
 			<td class="WhiteBox" width="35%"><b>Organ / Tissue Gene is Expressed in and Expression Level</b></td>
 			<td class="WhiteBoxRightEnd" width="65%">
-				<c:if test="${not empty tm.expressionFeatureCollection}">
+				<c:if test="${not empty tm.expressionFeatureCollection}">					
 					<table summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
 						<tr>
-							<td class="formTitle" width="65%"><b>Organ</b></td>
-							<td class="formTitle" width="35%"><b>Expression Level</b></td>
+							<td class="formTitle" width="65%"><b>Organ (Expression Level)</b></td>
+							<td class="formTitle" width="35%"><b>Comment</b></td>
 						</tr>
 						<c:forEach var="el" items="${tm.expressionFeatureCollection}">
 							<tr>
 								<td class="WhiteBox">
 									<camod:highlight>
-										<c:out value="${el.organ.name}" escapeXml="false"/>&nbsp;
-									</camod:highlight>
+										<c:out value="${el.organ.EVSPreferredDescription}" escapeXml="false"/>&nbsp;
+										(<c:out value="${el.expressionLevelDesc.expressionLevel}" escapeXml="false"/>)&nbsp;
+									</camod:highlight>		
 								</td>
 								<td class="WhiteBoxRightEnd">
 									<camod:highlight>
-										<c:out value="${el.expressionLevelDesc.expressionLevel}" escapeXml="false"/>&nbsp;
-									</camod:highlight>
+										<c:out value="${el.comments}" escapeXml="false"/>&nbsp;
+									</camod:highlight>		
 								</td>
 							</tr>
 						</c:forEach>
-					</table>
+					</table>					
 				</c:if>
 				<c:if test="${empty tm.expressionFeatureCollection}">
 				    &nbsp;
