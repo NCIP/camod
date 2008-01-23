@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: includeAgentDetails.jsp,v 1.12 2008-01-10 13:25:40 pandyas Exp $
+ * $Id: includeAgentDetails.jsp,v 1.13 2008-01-23 22:26:25 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2008/01/10 13:25:40  pandyas
+ * Added link to top of page for Therapy screen - results were getting very long
+ *
  * Revision 1.11  2007/12/27 01:18:39  pandyas
  * Modified  format for feature #8816  	Connection to caELMIR - retrieve data for therapy search page - made tables match up with new data
  *
@@ -45,7 +48,7 @@
 	<td class="resultsBoxWhiteEnd" width="75%" colspan="1">&nbsp;
 	<camod:highlight><c:out value="${agt.nscNumber}"/></camod:highlight>
 	<c:if test="${not empty agt.nscNumber}">
-	(<a href="#" onClick="myRef = window.open('http://dtp.nci.nih.gov/dtpstandard/servlet/ChemData?queryHOLD=&searchtype=NSC&chemnameboolean=and&outputformat=html&searchlist=<c:out value='${agt.nscNumber}'/>&Submit=Submit','mywin','left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()">Chemical Structure</a>)
+	(<a href="#" onClick="myRef = window.open('http://dtp.nci.nih.gov/dtpstandard/servlet/ChemData?queryHOLD=&searchtype=NSC&chemnameboolean=and&outputformat=html&searchlist=<c:out value='${agt.nscNumber}'/>&Submit=Submit','mywin','left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()">Chemical Structure</a>)
 	</c:if>
 	</td>
 <tr>
@@ -54,7 +57,7 @@
 	<td class="resultsBoxGreyEnd" width="75%" colspan="1">&nbsp;
 	<camod:highlight><c:out value="${agt.casNumber}"/></camod:highlight>
 	<c:if test="${not empty agt.casNumber}">
-	(<a href="#" onClick="myRef = window.open('http://dtp.nci.nih.gov/dtpstandard/servlet/ChemData?queryHOLD=&searchtype=CAS&chemnameboolean=and&outputformat=html&searchlist=<c:out value='${agt.casNumber}'/>&Submit=Submit','mywin','left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()">Chemical Structure</a>)
+	(<a href="#" onClick="myRef = window.open('http://dtp.nci.nih.gov/dtpstandard/servlet/ChemData?queryHOLD=&searchtype=CAS&chemnameboolean=and&outputformat=html&searchlist=<c:out value='${agt.casNumber}'/>&Submit=Submit','mywin','left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()">Chemical Structure</a>)
 	</c:if>		
 	</td>
 <tr>				

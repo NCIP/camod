@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: submitTransplant.jsp,v 1.1 2008-01-16 18:34:35 pandyas Exp $
+ * $Id: submitTransplant.jsp,v 1.2 2008-01-23 22:26:25 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2008/01/16 18:34:35  pandyas
+ * Renamed value to Transplant for #8290
+ *
  * Revision 1.1  2007/10/31 19:25:33  pandyas
  * Fixed #8290 	Rename graft object into transplant object
  *
@@ -340,7 +343,7 @@
 			</td>
 			<td class="formField">		
 				<input type=button value="Find ATTC#" onClick="myRef = window.open('http://www.atcc.org/','mywin',
-				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
+				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>
 				<html:text styleClass="formFieldUnSized" size="15" property="atccNumber"  />
 			</td>
 	</tr>	

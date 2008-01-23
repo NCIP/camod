@@ -100,7 +100,7 @@
 		
 		<td class="formField">
 			<label valign="TOP" for="field1"><a href="#" onClick="myRef = window.open('http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed','mywin',
-			'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()">Click to look up PubMed Identifier</a></label>
+			'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()">Click to look up PubMed Identifier</a></label>
 			<br><br><br>
 			<label valign="TOP" for="field1">PMID: &nbsp;</label>
 			<br>
@@ -117,7 +117,7 @@
 					</td>
 					<td class="formField">		
 						<input type=button value="Find ZFIN ID" onClick="myRef = window.open('http://zfin.org/cgi-bin/webdriver?MIval=aa-pubselect2.apg&select_from=PUBLICATION','mywin',
-						'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
+						'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>
 						<label for="field1">&nbsp;&nbsp;</label>
 						<html:text styleClass="formFieldUnSized" size="20" property="zfinPubId" />
 					</td>
@@ -130,7 +130,7 @@
 					</td>
 					<td class="formField">		
 						<input type=button value="Find J #" onClick="myRef = window.open('http://www.informatics.jax.org/searches/reference_form.shtml','mywin',
-						'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
+						'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>
 						<label for="field1">&nbsp;&nbsp;</label>
 						<html:text styleClass="formFieldUnSized" size="20" property="jaxJNumber" />
 					</td>

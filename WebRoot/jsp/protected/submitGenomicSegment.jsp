@@ -111,7 +111,7 @@
 				</td>
 				<td class="formField">
 					<input type=button value="Find MGI ID" onClick="myRef = window.open('http://www.informatics.jax.org/','mywin',
-								'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
+								'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>
 					<label for="field1">&nbsp;&nbsp;</label>
 					<html:text styleClass="formFieldUnSized" size="25" property="mgiId"  />
 				</td>
@@ -124,7 +124,7 @@
 			</td>
 			<td class="formField">
 				<input type=button value="Find ZFIN ID" onClick="myRef = window.open('http://zfin.org/','mywin',
-				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
+				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>
 				<label for="field1">&nbsp;&nbsp;</label>
 				<html:text styleClass="formFieldUnSized" size="25" property="zfinId"  />
 			</td>
@@ -138,7 +138,7 @@
 			</td>
 			<td class="formField">
 				<input type=button value="Find RGD ID" onClick="myRef = window.open('http://rgd.mcw.edu/strains/','mywin',
-				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
+				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>
 				<label for="field1">&nbsp;&nbsp;</label>
 				<html:text styleClass="formFieldUnSized" size="25" property="rgdId"  />
 			</td>

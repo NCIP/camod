@@ -88,7 +88,7 @@
 			</td>
 			<td class="formField">		
 				<input type=button value="Find NSC #" onClick="myRef = window.open('http://dtp.nci.nih.gov/dtpstandard/chemname/index.jsp?field1=','mywin',
-				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
+				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>
 				<label for="field1">&nbsp;&nbsp;</label>
 				<html:text styleClass="formFieldUnSized" size="15" property="nscNumber"  />
 			</td>
@@ -100,7 +100,7 @@
 			</td>
 			<td class="formField">		
 				<input type=button value="Find CAS #" onClick="myRef = window.open('http://chemfinder.cambridgesoft.com/','mywin',
-				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
+				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>
 				<label for="field1">&nbsp;&nbsp;</label>
 				<html:text styleClass="formFieldUnSized" size="15" property="casNumber"  />
 			</td>

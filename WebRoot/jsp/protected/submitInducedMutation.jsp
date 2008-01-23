@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: submitInducedMutation.jsp,v 1.34 2007-11-01 15:30:08 pandyas Exp $
+ * $Id: submitInducedMutation.jsp,v 1.35 2008-01-23 22:26:25 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.34  2007/11/01 15:30:08  pandyas
+ * Fixed #9756     geneID has been replaced with entrezGeneID - existing values need to be moved to new place
+ *
  * Revision 1.33  2007/04/09 12:35:02  pandyas
  * modified after caMOD 2.3 unit testing
  *
@@ -136,7 +139,7 @@
 		</td>
 		<td class="formField">
 			<input type=button value="Find CAS #" onClick="myRef = window.open('http://chemfinder.cambridgesoft.com/','mywin',
-			'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>		
+			'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>		
 			<label for="field1">&nbsp;&nbsp;</label>
 			<html:text styleClass="formFieldUnSized" property="casNumber" size="20" />		
 		</td>
@@ -148,7 +151,7 @@
 		</td>
 		<td class="formField">
 		<input type=button value="Find Gene ID" onClick="myRef = window.open('http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=gene','mywin',
-		'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>		
+		'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>		
 		<label for="field1">&nbsp;&nbsp;</label>
 		<html:text styleClass="formFieldUnSized" property="geneIdentifier" size="20" />		
 		</td>
@@ -187,7 +190,7 @@
 				</td>
 				<td class="formField">
 					<input type=button value="Find MGI ID" onClick="myRef = window.open('http://www.informatics.jax.org/','mywin',
-								'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
+								'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>
 					<label for="field1">&nbsp;&nbsp;</label>
 					<html:text styleClass="formFieldUnSized" size="25" property="mgiId"  />
 				</td>
@@ -200,7 +203,7 @@
 			</td>
 			<td class="formField">
 				<input type=button value="Find ZFIN ID" onClick="myRef = window.open('http://zfin.org/','mywin',
-				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
+				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>
 				<label for="field1">&nbsp;&nbsp;</label>
 				<html:text styleClass="formFieldUnSized" size="25" property="zfinId"  />
 			</td>
@@ -214,7 +217,7 @@
 			</td>
 			<td class="formField">
 				<input type=button value="Find RGD ID" onClick="myRef = window.open('http://rgd.mcw.edu/strains/','mywin',
-				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
+				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>
 				<label for="field1">&nbsp;&nbsp;</label>
 				<html:text styleClass="formFieldUnSized" size="25" property="rgdId"  />
 			</td>

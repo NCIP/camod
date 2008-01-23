@@ -63,7 +63,7 @@
         </td>
 		<td class="formField">
             <input type=button value="Find Info" onClick="myRef = window.open('http://mouse.ncifcrf.gov','mywin',
-				'left=20,top=20,width=800,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
+				'left=20,top=20,width=800,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>
 			<html:text styleClass="formFieldSized" size="30" property="stockNumber"  />			
 		</td>
     </tr>

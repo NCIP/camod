@@ -1,9 +1,13 @@
 <%
 
 /**
- * $Id: submitTherapy.jsp,v 1.36 2007-10-23 17:29:51 pandyas Exp $
+ * $Id: submitTherapy.jsp,v 1.37 2008-01-23 22:26:25 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.36  2007/10/23 17:29:51  pandyas
+ * Fixed bug #9611:  	"Submit" "Cancel" buttons become invisible after submission error in "Enter Terapy" page
+ * Moved </form> below last table so form displays in full
+ *
  */
 
 %> 
@@ -100,7 +104,7 @@
 			</td>
 			<td class="formField">		
 				<input type=button value="Find NSC #" onClick="myRef = window.open('http://dtp.nci.nih.gov/dtpstandard/chemname/index.jsp?field1=','mywin',
-				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
+				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>
 				<label for="field1">&nbsp;&nbsp;</label>
 				<html:text styleClass="formFieldUnSized" size="10" property="nscNumber" />
 			</td>
@@ -112,7 +116,7 @@
 			</td>
 			<td class="formField">		
 				<input type=button value="Find CAS #" onClick="myRef = window.open('http://chemfinder.cambridgesoft.com/','mywin',
-				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
+				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>
 				<label for="field1">&nbsp;&nbsp;</label>
 				<html:text styleClass="formFieldUnSized" size="10" property="casNumber" />
 			</td>
