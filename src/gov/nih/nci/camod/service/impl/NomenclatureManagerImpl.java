@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: NomenclatureManagerImpl.java,v 1.5 2007-09-12 19:36:03 pandyas Exp $
+ * $Id: NomenclatureManagerImpl.java,v 1.6 2008-01-24 16:13:29 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2007/09/12 19:36:03  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.4  2007/02/22 21:03:00  pandyas
  * Added get method to manager for save bug fix
  *
@@ -114,7 +117,7 @@ public class NomenclatureManagerImpl extends BaseManager implements Nomenclature
             // Doesn't exist. Create object with name 
             else
             {
-                log.debug("<NomenclatureManagerImpl> No matching genotype. Create new one");
+                log.debug("<NomenclatureManagerImpl> No matching Nomenclature. Create new one");
                 theNomenclature = theQBENomenclature;
                 if (inName != null)
                 {
@@ -127,7 +130,7 @@ public class NomenclatureManagerImpl extends BaseManager implements Nomenclature
             log.error("Error querying for matching Nomenclature object.  Creating new one.", e);
             theNomenclature = theQBENomenclature;
         }
-        log.debug("<NomenclatureManagerImpl> theGenotype: " + theNomenclature.toString());
+        log.debug("<NomenclatureManagerImpl> theNomenclature: " + theNomenclature.toString());
         return theNomenclature;
     }
 	
