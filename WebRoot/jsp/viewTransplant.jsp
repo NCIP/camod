@@ -17,33 +17,33 @@
 
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left" width="100%">
 	<tr>
-		<td class="formTitle" height="20" colspan="2">Transplant - Model:
+		<td class="formTitle" height="20" colspan="2">Graft - Model:
 		<c:out value="${mdl.modelDescriptor}" escapeXml="false"/></td>
 	</tr>
 
-	<c:forEach var="tp" items="${mdl.transplantCollection}" 
+	<c:forEach var="xt" items="${mdl.transplantCollection}" 
 			       varStatus="stat">
 
 			<tr>
 				<td class="formTitleBlue" height="20" colspan="2">
-				<c:out value="${tp.name}" escapeXml="false"/>
+				<c:out value="${xt.name}" escapeXml="false"/>
 				</td>
 			</tr>
 			       
 		<tr>
-			<td class="GreyBox"><b>Transplant:</b></td>
-			<td class="GreyBoxRightEnd"><c:out value="${tp.name}" escapeXml="false"/>&nbsp;</td>
+			<td class="GreyBox"><b>Graft:</b></td>
+			<td class="GreyBoxRightEnd"><c:out value="${xt.name}" escapeXml="false"/>&nbsp;</td>
 		</tr>
 		<tr>		
 			<td class="WhiteBox"><b>Donor Species</b></td>
 			<td class="WhiteBoxRightEnd">
 				<c:choose>
-					<c:when test="${not empty tp.donorSpecies}">			
-					    <c:out value="${tp.donorSpecies.displayName}" escapeXml="false"/>&nbsp;
+					<c:when test="${not empty xt.donorSpecies}">			
+					    <c:out value="${xt.donorSpecies.displayName}" escapeXml="false"/>&nbsp;
 					</c:when>
 				    <c:otherwise>
-				        <c:if test="${not empty tp.strain}">
-				        	<c:out value="${tp.strain.species.displayName}" escapeXml="false"/>&nbsp;
+				        <c:if test="${not empty xt.strain}">
+				        	<c:out value="${xt.strain.species.displayName}" escapeXml="false"/>&nbsp;
 				        </c:if>
 					</c:otherwise>
 				</c:choose>&nbsp;		
@@ -54,11 +54,11 @@
 			<td class="GreyBox"><b>Donor Strain</b></td>
 			<td class="GreyBoxRightEnd">
 				<c:choose>
-					<c:when test="${empty tp.strain.name}">
-						<c:out value="${tp.strain.nameAlternEntry}" escapeXml="false"/>
+					<c:when test="${empty xt.strain.name}">
+						<c:out value="${xt.strain.nameUnctrlVocab}" escapeXml="false"/>
 					</c:when>
 					<c:otherwise>
-						<c:out value="${tp.strain.name}" escapeXml="false"/>
+						<c:out value="${xt.strain.name}" escapeXml="false"/>
 					</c:otherwise>
 				</c:choose>&nbsp;
             </td>
@@ -66,7 +66,7 @@
 		<tr>
 			<td class="WhiteBox"><b>Organ/Tissue</b></td>
 			<td class="WhiteBoxRightEnd">
-					<c:out value="${tp.organ.EVSPreferredDescription}" escapeXml="false"/>&nbsp;
+					<c:out value="${xt.organ.EVSPreferredDescription}" escapeXml="false"/>&nbsp;
 			</td>
 		</tr>
 						
@@ -74,35 +74,35 @@
 			<td class="GreyBox"><b>Source Type</b></td>
 			<td class="GreyBoxRightEnd">
 			<c:choose>
-				<c:when test="${empty tp.sourceType}">
-					<c:out value="${tp.sourceTypeAlternEntry}" escapeXml="false"/>&nbsp;
+				<c:when test="${empty xt.sourceType}">
+					<c:out value="${xt.sourceTypeUnctrlVocab}" escapeXml="false"/>&nbsp;
 				</c:when>
 				<c:otherwise>
-					<c:out value="${tp.sourceType}" escapeXml="false"/>&nbsp;
+					<c:out value="${xt.sourceType}" escapeXml="false"/>&nbsp;
 				</c:otherwise>
 			</c:choose>
 			</td>
 		</tr>
 		<tr>
 			<td class="WhiteBox"><b>Parental Cell line:</b></td>
-			<td class="WhiteBoxRightEnd"><c:out value="${tp.parentalCellLineName}" escapeXml="false"/>&nbsp;</td>
+			<td class="WhiteBoxRightEnd"><c:out value="${xt.parentalCellLineName}" escapeXml="false"/>&nbsp;</td>
 		</tr>
 		<tr>		
 			<td class="GreyBox"><b>ATCC number of Cell Line:</b></td>
 			<td class="GreyBoxRightEnd">
-			<a target="atcc" href="http://www.atcc.org/common/catalog/numSearch/numResults.cfm?atccNum=<c:out value="${tp.atccNumber}"/>">
-			<c:out value="${tp.atccNumber}" escapeXml="false"/>&nbsp;</td> 		
+			<a target="atcc" href="http://www.atcc.org/common/catalog/numSearch/numResults.cfm?atccNum=<c:out value="${xt.atccNumber}"/>">
+			<c:out value="${xt.atccNumber}" escapeXml="false"/>&nbsp;</td> 		
 		</tr>
 
 		<tr>
 			<td class="WhiteBox"><b>Conditioning Regimen</b></td>
 			<td class="WhiteBoxRightEnd">
 			<c:choose>
-				<c:when test="${empty tp.conditioningRegimen}">
-					<c:out value="${tp.condRegimenAlternEntry}" escapeXml="false"/>&nbsp;
+				<c:when test="${empty xt.conditioningRegimen}">
+					<c:out value="${xt.condRegimenUnctrlVocab}" escapeXml="false"/>&nbsp;
 				</c:when>
 				<c:otherwise>
-					<c:out value="${tp.conditioningRegimen}" escapeXml="false"/>&nbsp;
+					<c:out value="${xt.conditioningRegimen}" escapeXml="false"/>&nbsp;
 				</c:otherwise>
 			</c:choose>
 			</td>
@@ -110,39 +110,33 @@
 
 		<tr>		
 			<td class="GreyBox"><b>Genetic Alteration:</b></td>
-			<td class="GreyBoxRightEnd"><c:out value="${tp.geneticManipulation}" escapeXml="false"/>&nbsp;</td>
+			<td class="GreyBoxRightEnd"><c:out value="${xt.geneticManipulation}" escapeXml="false"/>&nbsp;</td>
 		</tr>		
 		<tr>
 			<td class="WhiteBox"><b>Method of Modification:</b></td>
-			<td class="WhiteBoxRightEnd"><c:out value="${tp.modificationDescription}" escapeXml="false"/>&nbsp;</td>
+			<td class="WhiteBoxRightEnd"><c:out value="${xt.modificationDescription}" escapeXml="false"/>&nbsp;</td>
 		</tr>						
         <tr>
 			<td class="GreyBox"><b>Amount of Cells<b></td>
-			<td class="GreyBoxRightEnd"><c:out value="${tp.cellAmount}" escapeXml="false"/>&nbsp;</td>
+			<td class="GreyBoxRightEnd"><c:out value="${xt.cellAmount}" escapeXml="false"/>&nbsp;</td>
 		</tr>
         <tr>
 			<td class="WhiteBox"><b>Growth Period<b></td>
-			<td class="WhiteBoxRightEnd"><c:out value="${tp.growthPeriod}" escapeXml="false"/>&nbsp;</td>
+			<td class="WhiteBoxRightEnd"><c:out value="${xt.growthPeriod}" escapeXml="false"/>&nbsp;</td>
 		</tr>			
 		<tr>
 			<td class="GreyBox"><b>Site of Administration:</b></td>
 			<td class="GreyBoxRightEnd">
 			<c:choose>
-				<c:when test="${empty tp.administrativeSite}">
-					<c:out value="${tp.adminSiteAlternEntry}" escapeXml="false"/>&nbsp;
+				<c:when test="${empty xt.administrativeSite}">
+					<c:out value="${xt.adminSiteUnctrlVocab}" escapeXml="false"/>&nbsp;
 				</c:when>
 				<c:otherwise>
-					<c:out value="${tp.administrativeSite}" escapeXml="false"/>&nbsp;
+					<c:out value="${xt.administrativeSite}" escapeXml="false"/>&nbsp;
 				</c:otherwise>
 			</c:choose>
 			</td>
-		</tr>	
-			<tr>
-				<td class="resultsBoxWhite" width="25%"><b>Comment</b></td>
-				<td class="resultsBoxWhiteEnd">
-					<camod:highlight><c:out value="${tp.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>
-			</tr>			
+		</tr>		
 		<tr>		
 			<td class="WhiteBox"><b>Host Species and Strain</b></td>
 			<td class="WhiteBoxRightEnd">
