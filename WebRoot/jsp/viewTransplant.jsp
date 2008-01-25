@@ -55,7 +55,7 @@
 			<td class="GreyBoxRightEnd">
 				<c:choose>
 					<c:when test="${empty xt.strain.name}">
-						<c:out value="${xt.strain.nameUnctrlVocab}" escapeXml="false"/>
+						<c:out value="${xt.strain.nameAlternEntry}" escapeXml="false"/>
 					</c:when>
 					<c:otherwise>
 						<c:out value="${xt.strain.name}" escapeXml="false"/>
@@ -75,7 +75,7 @@
 			<td class="GreyBoxRightEnd">
 			<c:choose>
 				<c:when test="${empty xt.sourceType}">
-					<c:out value="${xt.sourceTypeUnctrlVocab}" escapeXml="false"/>&nbsp;
+					<c:out value="${xt.sourceTypeAlternEntry}" escapeXml="false"/>&nbsp;
 				</c:when>
 				<c:otherwise>
 					<c:out value="${xt.sourceType}" escapeXml="false"/>&nbsp;
@@ -99,7 +99,7 @@
 			<td class="WhiteBoxRightEnd">
 			<c:choose>
 				<c:when test="${empty xt.conditioningRegimen}">
-					<c:out value="${xt.condRegimenUnctrlVocab}" escapeXml="false"/>&nbsp;
+					<c:out value="${xt.condRegimenAlternEntry}" escapeXml="false"/>&nbsp;
 				</c:when>
 				<c:otherwise>
 					<c:out value="${xt.conditioningRegimen}" escapeXml="false"/>&nbsp;
@@ -129,7 +129,7 @@
 			<td class="GreyBoxRightEnd">
 			<c:choose>
 				<c:when test="${empty xt.administrativeSite}">
-					<c:out value="${xt.adminSiteUnctrlVocab}" escapeXml="false"/>&nbsp;
+					<c:out value="${xt.adminSiteAlternEntry}" escapeXml="false"/>&nbsp;
 				</c:when>
 				<c:otherwise>
 					<c:out value="${xt.administrativeSite}" escapeXml="false"/>&nbsp;
