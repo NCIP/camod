@@ -32,7 +32,7 @@
         <many-to-one name="geneIdentifier"
         	class="GeneIdentifier"
         	column="gene_identifier_id"
-        	cascade="all"
+        	cascade="save-update"
         	unique="true"/> 
         	
         <!-- constructSequence -->
