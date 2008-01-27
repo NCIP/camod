@@ -1,7 +1,10 @@
 /*
- * $Id: GenomicSegmentManagerImpl.java,v 1.33 2007-10-31 19:04:57 pandyas Exp $
+ * $Id: GenomicSegmentManagerImpl.java,v 1.34 2008-01-27 23:25:55 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.33  2007/10/31 19:04:57  pandyas
+ * Fixed #8188 	Rename UnctrlVocab items to text entries
+ *
  * Revision 1.32  2007/09/12 19:36:04  pandyas
  * modified debug statements for build to stage tier
  *
@@ -209,31 +212,51 @@ public class GenomicSegmentManagerImpl extends BaseManager implements
 			}
 
 		// MGI Number
-		// Check for exisiting MutationIdentifier
 		MutationIdentifier inMutationIdentifier = null;
-		if (inGenomicSegment.getMutationIdentifier() != null){
-			inMutationIdentifier = inGenomicSegment.getMutationIdentifier();
-		} else {
-			inMutationIdentifier = new MutationIdentifier();
-		}
-
-		if (inGenomicSegmentData.getMgiId() != null) {
-
+		if (inGenomicSegmentData.getMgiId() != null && inGenomicSegmentData.getMgiId().length() >0) {
+			// check for existing MutationIdentifier
+			if (inGenomicSegment.getMutationIdentifier() != null){
+				inMutationIdentifier = inGenomicSegment.getMutationIdentifier();
+			} else {
+				inMutationIdentifier = new MutationIdentifier();
+			}			
+			
 			inMutationIdentifier.setMgiId(inGenomicSegmentData
 					.getMgiId().trim());
 			inGenomicSegment.setMutationIdentifier(inMutationIdentifier);
+		} else {
+			// remove MutationIdetifier if deleted later
+			inGenomicSegment.setMutationIdentifier(inMutationIdentifier);			
 		}
-		if (inGenomicSegmentData.getZfinId() != null) {
-
+		
+		if (inGenomicSegmentData.getZfinId() != null && inGenomicSegmentData.getZfinId().length() >0) {
+			// check for existing MutationIdentifier
+			if (inGenomicSegment.getMutationIdentifier() != null){
+				inMutationIdentifier = inGenomicSegment.getMutationIdentifier();
+			} else {
+				inMutationIdentifier = new MutationIdentifier();
+			}
 			inMutationIdentifier.setZfinId(inGenomicSegmentData
 					.getZfinId().trim());
 			inGenomicSegment.setMutationIdentifier(inMutationIdentifier);
+		}else {
+			// remove MutationIdetifier if deleted later
+			inGenomicSegment.setMutationIdentifier(inMutationIdentifier);			
 		}
-		if (inGenomicSegmentData.getRgdId() != null) {
-
+		
+		if (inGenomicSegmentData.getRgdId() != null && inGenomicSegmentData.getRgdId().length() >0) {
+			// check for existing MutationIdentifier
+			if (inGenomicSegment.getMutationIdentifier() != null){
+				inMutationIdentifier = inGenomicSegment.getMutationIdentifier();
+			} else {
+				inMutationIdentifier = new MutationIdentifier();
+			}
 			inMutationIdentifier.setRgdId(inGenomicSegmentData
 					.getRgdId().trim());
 			inGenomicSegment.setMutationIdentifier(inMutationIdentifier);
+		} else {
+			// remove MutationIdetifier if deleted later
+			inGenomicSegment.setMutationIdentifier(inMutationIdentifier);			
 		}		
 		
 
