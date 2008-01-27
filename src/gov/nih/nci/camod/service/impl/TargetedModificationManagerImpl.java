@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TargetedModificationManagerImpl.java,v 1.36 2008-01-22 15:57:12 pandyas Exp $
+ * $Id: TargetedModificationManagerImpl.java,v 1.37 2008-01-27 23:27:11 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.36  2008/01/22 15:57:12  pandyas
+ * Modified to submit and edit gene identifier object
+ *
  * Revision 1.35  2008/01/17 18:08:47  pandyas
  * Modified for # 11722  	The gene identifier does not work correctly for targeted modification submission and edit
  *
@@ -202,20 +205,20 @@ public class TargetedModificationManagerImpl extends BaseManager implements
 		
         // GeneIdentifier
         GeneIdentifier inGeneIdentifier = null;
-        if (inTargetedModification.getGeneIdentifier() != null) {
-            inGeneIdentifier = inTargetedModification.getGeneIdentifier();
-        } else {
-            inGeneIdentifier = new GeneIdentifier();
-        }        
                 
         if (inTargetedModificationData.getGeneIdentifier() != null && inTargetedModificationData.getGeneIdentifier().length() >0) {        
         log.info("inTargetedModificationData.getGeneIdentifier(): " + inTargetedModificationData.getGeneIdentifier());
             //Check for existing GeneIdentifier
-            inGeneIdentifier.setEntrezGeneID(inTargetedModificationData.getGeneIdentifier().trim());
+	        if (inTargetedModification.getGeneIdentifier() != null) {
+	            inGeneIdentifier = inTargetedModification.getGeneIdentifier();
+	        } else {
+	            inGeneIdentifier = new GeneIdentifier();
+	        }
+            inGeneIdentifier = GeneIdentifierManagerSingleton.instance().getOrCreate(
+            		inTargetedModificationData.getGeneIdentifier().trim());        
             inTargetedModification.setGeneIdentifier(inGeneIdentifier);   
         } else {
             log.info("setEntrezGeneID to null");
-            inGeneIdentifier.setEntrezGeneID(null);
             inTargetedModification.setGeneIdentifier(inGeneIdentifier);
         }
             
@@ -225,27 +228,50 @@ public class TargetedModificationManagerImpl extends BaseManager implements
             // MGI Number
             // Check for exisiting MutationIdentifier
             MutationIdentifier inMutationIdentifier = null;
-            if (inTargetedModification.getMutationIdentifier() != null) {
-                inMutationIdentifier = inTargetedModification.getMutationIdentifier();
-            } else {
-                inMutationIdentifier = new MutationIdentifier();
-            }
-            if (inTargetedModificationData.getMgiId() != null) {
 
+            if (inTargetedModificationData.getMgiId() != null && inTargetedModificationData.getMgiId().length() >0) {
+                //Check for existing MutationIdentifier            	
+                if (inTargetedModification.getMutationIdentifier() != null) {
+                    inMutationIdentifier = inTargetedModification.getMutationIdentifier();
+                } else {
+                    inMutationIdentifier = new MutationIdentifier();
+                }
                 inMutationIdentifier.setMgiId(inTargetedModificationData
                         .getMgiId().trim());
                 inTargetedModification.setMutationIdentifier(inMutationIdentifier);
+            } else {
+    			// remove MutationIdetifier if deleted later            	
+            	inTargetedModification.setMutationIdentifier(inMutationIdentifier);
             }
-            if (inTargetedModificationData.getZfinId() != null ) {
+            
+            if (inTargetedModificationData.getZfinId() != null && inTargetedModificationData.getZfinId().length() >0) {
+                //Check for existing MutationIdentifier            	
+                if (inTargetedModification.getMutationIdentifier() != null) {
+                    inMutationIdentifier = inTargetedModification.getMutationIdentifier();
+                } else {
+                    inMutationIdentifier = new MutationIdentifier();
+                }            	
                 inMutationIdentifier.setZfinId(inTargetedModificationData
                         .getZfinId().trim());
                 inTargetedModification.setMutationIdentifier(inMutationIdentifier);
+            }else {
+    			// remove MutationIdetifier if deleted later            	
+            	inTargetedModification.setMutationIdentifier(inMutationIdentifier);
             }
-            if (inTargetedModificationData.getRgdId() != null) {
-
+            
+            if (inTargetedModificationData.getRgdId() != null && inTargetedModificationData.getRgdId().length() >0) {
+                //Check for existing MutationIdentifier            	
+                if (inTargetedModification.getMutationIdentifier() != null) {
+                    inMutationIdentifier = inTargetedModification.getMutationIdentifier();
+                } else {
+                    inMutationIdentifier = new MutationIdentifier();
+                }
                 inMutationIdentifier.setRgdId(inTargetedModificationData
                         .getRgdId().trim());
                 inTargetedModification.setMutationIdentifier(inMutationIdentifier);
+            } else {
+    			// remove MutationIdetifier if deleted later            	
+            	inTargetedModification.setMutationIdentifier(inMutationIdentifier);
             }
 
 		// Genetic Background - Donor

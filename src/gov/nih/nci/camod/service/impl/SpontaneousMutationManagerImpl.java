@@ -1,7 +1,10 @@
 /*
- * $Id: SpontaneousMutationManagerImpl.java,v 1.21 2008-01-23 17:04:13 pandyas Exp $
+ * $Id: SpontaneousMutationManagerImpl.java,v 1.22 2008-01-27 23:27:00 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.21  2008/01/23 17:04:13  pandyas
+ * Reversed GeneIdentifier code to remove duplicates to deploy caCORE32 changes to dev and qa tiers
+ *
  * Revision 1.19  2008/01/22 15:57:12  pandyas
  * Modified to submit and edit gene identifier object
  *
@@ -114,20 +117,21 @@ public class SpontaneousMutationManagerImpl extends BaseManager implements Spont
 
 		// GeneIdentifier
 		GeneIdentifier inGeneIdentifier = null;
-        if (inSpontaneousMutation.getGeneIdentifier() != null) {
-            inGeneIdentifier = inSpontaneousMutation.getGeneIdentifier();
-        } else {
-            inGeneIdentifier = new GeneIdentifier();
-        }        
-        
+       
 		if(inSpontaneousMutationData.getGeneIdentifier() != null && inSpontaneousMutationData.getGeneIdentifier().length() >0){
 			log.info("inSpontaneousMutationData.getGeneIdentifier(): " + inSpontaneousMutationData.getGeneIdentifier());
+				// Check for existing GeneIdentifier
+		        if (inSpontaneousMutation.getGeneIdentifier() != null) {
+		            inGeneIdentifier = inSpontaneousMutation.getGeneIdentifier();
+		        } else {
+		            inGeneIdentifier = new GeneIdentifier();
+		        } 
 				log.info("getGeneIdentifier() != null loop");
-				inGeneIdentifier.setEntrezGeneID(inSpontaneousMutationData.getGeneIdentifier());
+	            inGeneIdentifier = GeneIdentifierManagerSingleton.instance().getOrCreate(
+	            		inSpontaneousMutationData.getGeneIdentifier().trim()); 
 				inSpontaneousMutation.setGeneIdentifier(inGeneIdentifier);
 		} else {
             log.info("setEntrezGeneID to null");
-            inGeneIdentifier.setEntrezGeneID(null);
             inSpontaneousMutation.setGeneIdentifier(inGeneIdentifier);
         }
 
@@ -159,26 +163,49 @@ public class SpontaneousMutationManagerImpl extends BaseManager implements Spont
         // MGI Number
         // Check for exisiting MutationIdentifier
         MutationIdentifier inMutationIdentifier = null;
-        if (inSpontaneousMutation.getMutationIdentifier() != null) {
-            inMutationIdentifier = inSpontaneousMutation.getMutationIdentifier();
-        } else {
-            inMutationIdentifier = new MutationIdentifier();
-        }
-		if (inSpontaneousMutationData.getMgiId() != null) {
 
+		if (inSpontaneousMutationData.getMgiId() != null && inSpontaneousMutationData.getMgiId().length() >0) {
+			// Check for existing MutationIdentifier
+	        if (inSpontaneousMutation.getMutationIdentifier() != null) {
+	            inMutationIdentifier = inSpontaneousMutation.getMutationIdentifier();
+	        } else {
+	            inMutationIdentifier = new MutationIdentifier();
+	        }
 			inMutationIdentifier.setMgiId(inSpontaneousMutationData
 					.getMgiId().trim());
 			inSpontaneousMutation.setMutationIdentifier(inMutationIdentifier);
+		} else {
+			// remove MutationIdetifier if deleted later
+			inSpontaneousMutation.setMutationIdentifier(inMutationIdentifier);
 		}
-		if (inSpontaneousMutationData.getZfinId() != null ) {
+		
+		if (inSpontaneousMutationData.getZfinId() != null && inSpontaneousMutationData.getZfinId().length() >0 ) {
+			// Check for existing MutationIdentifier
+	        if (inSpontaneousMutation.getMutationIdentifier() != null) {
+	            inMutationIdentifier = inSpontaneousMutation.getMutationIdentifier();
+	        } else {
+	            inMutationIdentifier = new MutationIdentifier();
+	        }			
 			inMutationIdentifier.setZfinId(inSpontaneousMutationData
 					.getZfinId().trim());
 			inSpontaneousMutation.setMutationIdentifier(inMutationIdentifier);
+		} else {
+			// remove MutationIdetifier if deleted later			
+			inSpontaneousMutation.setMutationIdentifier(inMutationIdentifier);
 		}
-		if (inSpontaneousMutationData.getRgdId() != null) {
-
+		
+		if (inSpontaneousMutationData.getRgdId() != null && inSpontaneousMutationData.getRgdId().length() >0) {
+			// Check for existing MutationIdentifier
+	        if (inSpontaneousMutation.getMutationIdentifier() != null) {
+	            inMutationIdentifier = inSpontaneousMutation.getMutationIdentifier();
+	        } else {
+	            inMutationIdentifier = new MutationIdentifier();
+	        }
 			inMutationIdentifier.setRgdId(inSpontaneousMutationData
 					.getRgdId().trim());
+			inSpontaneousMutation.setMutationIdentifier(inMutationIdentifier);
+		} else {
+			// remove MutationIdetifier if deleted later			
 			inSpontaneousMutation.setMutationIdentifier(inMutationIdentifier);
 		}
         log.trace("Exiting populateSpontaneousMutation");

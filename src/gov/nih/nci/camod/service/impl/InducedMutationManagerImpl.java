@@ -1,8 +1,11 @@
 /**
  * @author schroedln
  * 
- * $Id: InducedMutationManagerImpl.java,v 1.32 2008-01-22 15:57:12 pandyas Exp $
+ * $Id: InducedMutationManagerImpl.java,v 1.33 2008-01-27 23:26:33 pandyas Exp $
  * $Log: not supported by cvs2svn $
+ * Revision 1.32  2008/01/22 15:57:12  pandyas
+ * Modified to submit and edit gene identifier object
+ *
  * Revision 1.31  2008/01/17 18:08:47  pandyas
  * Modified for # 11722  	The gene identifier does not work correctly for targeted modification submission and edit
  *
@@ -208,21 +211,23 @@ public class InducedMutationManagerImpl extends BaseManager implements
 
          
          // GeneIdentifier
-         GeneIdentifier inGeneIdentifier = null;
-         if (inInducedMutation.getGeneIdentifier() != null) {
-             inGeneIdentifier = inInducedMutation.getGeneIdentifier();
-         } else {
-             inGeneIdentifier = new GeneIdentifier();
-         }          
-         
+         GeneIdentifier inGeneIdentifier = null;         
          if (inInducedMutationData.getGeneIdentifier() != null && inInducedMutationData.getGeneIdentifier().length() >0) {        
              log.info("inTargetedModificationData.getGeneIdentifier(): " + inInducedMutationData.getGeneIdentifier());
-             //Check for existign GeneIdentifier
-             inGeneIdentifier.setEntrezGeneID(inInducedMutationData.getGeneIdentifier().trim());
+             //Check for existing GeneIdentifier
+             if (inInducedMutation.getGeneIdentifier() != null) {
+                 inGeneIdentifier = inInducedMutation.getGeneIdentifier();
+             } else {
+                 inGeneIdentifier = new GeneIdentifier();
+             }
+             
+             inGeneIdentifier = GeneIdentifierManagerSingleton.instance().getOrCreate(
+            		 inInducedMutationData.getGeneIdentifier().trim());
+             
+             log.info("inTargetedModificationData new inGeneIdentifier: " + inGeneIdentifier.toString());
              inInducedMutation.setGeneIdentifier(inGeneIdentifier);                
          } else {
              log.info("setEntrezGeneID to null");
-             inGeneIdentifier.setEntrezGeneID(null);
              inInducedMutation.setGeneIdentifier(inGeneIdentifier);
          }           
 
@@ -265,28 +270,51 @@ public class InducedMutationManagerImpl extends BaseManager implements
 		// MGI Number
 		// Check for exisiting MutationIdentifier
 		MutationIdentifier inMutationIdentifier = null;
-		if (inInducedMutation.getMutationIdentifier() != null) {
-			inMutationIdentifier = inInducedMutation.getMutationIdentifier();
-		} else {
-			inMutationIdentifier = new MutationIdentifier();
-		}
 
-
-		if (inInducedMutationData.getMgiId() != null) {
+		if (inInducedMutationData.getMgiId() != null && inInducedMutationData.getMgiId().length() >0) {
+			// Only create a MutationIdentifier if the value is filled in on the GUI
+			log.info("inInducedMutationData.getMgiId() != null");
+			if (inInducedMutation.getMutationIdentifier() != null) {
+				inMutationIdentifier = inInducedMutation.getMutationIdentifier();
+			} else {
+				inMutationIdentifier = new MutationIdentifier();
+			}			
 			inMutationIdentifier.setMgiId(inInducedMutationData
 					.getMgiId().trim());
 			inInducedMutation.setMutationIdentifier(inMutationIdentifier);
+		} else {
+			// remove MutationIdetifier if deleted later
+			inInducedMutation.setMutationIdentifier(inMutationIdentifier);			
 		}
-		if (inInducedMutationData.getZfinId() != null ) {
+		
+		if (inInducedMutationData.getZfinId() != null && inInducedMutationData.getZfinId().length() >0) {
+			log.info("inInducedMutationData.getZfinId() != null");			
+			if (inInducedMutation.getMutationIdentifier() != null) {
+				inMutationIdentifier = inInducedMutation.getMutationIdentifier();
+			} else {
+				inMutationIdentifier = new MutationIdentifier();
+			}
 			inMutationIdentifier.setZfinId(inInducedMutationData
 					.getZfinId().trim());
 			inInducedMutation.setMutationIdentifier(inMutationIdentifier);
+		} else {
+			// remove MutationIdetifier if deleted later
+			inInducedMutation.setMutationIdentifier(inMutationIdentifier);			
 		}
-		if (inInducedMutationData.getRgdId() != null) {
-
+		
+		if (inInducedMutationData.getRgdId() != null && inInducedMutationData.getRgdId().length() >0) {
+			log.info("inInducedMutationData.getRgdId() != null");			
+			if (inInducedMutation.getMutationIdentifier() != null) {
+				inMutationIdentifier = inInducedMutation.getMutationIdentifier();
+			} else {
+				inMutationIdentifier = new MutationIdentifier();
+			}
 			inMutationIdentifier.setRgdId(inInducedMutationData
 					.getRgdId().trim());
 			inInducedMutation.setMutationIdentifier(inMutationIdentifier);
+		} else {
+			// remove MutationIdetifier if deleted later
+			inInducedMutation.setMutationIdentifier(inMutationIdentifier);			
 		}		
 
 		// Comments
