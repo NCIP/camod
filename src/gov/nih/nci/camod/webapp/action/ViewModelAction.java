@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.50 2008-01-16 20:09:31 pandyas Exp $
+ *  $Id: ViewModelAction.java,v 1.51 2008-01-28 18:45:18 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.50  2008/01/16 20:09:31  pandyas
+ *  removed caBIO logging so the page renders when connection to caBIO fails
+ *
  *  Revision 1.49  2008/01/16 18:29:57  pandyas
  *  Renamed value to Transplant for #8290
  *
@@ -306,7 +309,7 @@ public class ViewModelAction extends BaseAction
                                                 HttpServletRequest request,
                                                 HttpServletResponse response) throws Exception
     {
-        log.debug("<populateEngineeredGene> modelID" + request.getParameter("aModelID"));
+        log.info("<populateEngineeredGene> modelID" + request.getParameter("aModelID"));
         String modelID = request.getParameter("aModelID");
 
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
@@ -347,7 +350,7 @@ public class ViewModelAction extends BaseAction
                 GeneIdentifier geneIdentifier = tm.getGeneIdentifier();
                 if (geneIdentifier != null)
                 {
-                    //log.info("Connecting to caBIO to look up gene " + geneIdentifier);
+                    log.info("Connecting to caBIO to look up gene " + geneIdentifier);
                     // the geneId is available
                     try
                     {
@@ -387,7 +390,7 @@ public class ViewModelAction extends BaseAction
             }
         }
 
-        log.debug("<populateEngineeredGene> " + "egcCnt=" + egcCnt + "tgc=" + tgCnt + "gsc=" + gsCnt + "tmc=" + tmCnt + "imc=" + imCnt);
+        log.info("<populateEngineeredGene> " + "egcCnt=" + egcCnt + "tgc=" + tgCnt + "gsc=" + gsCnt + "tmc=" + tmCnt + "imc=" + imCnt);
         request.getSession().setAttribute(Constants.ANIMALMODEL, am);
         request.getSession().setAttribute(Constants.TRANSGENE_COLL, tgc);
         request.getSession().setAttribute(Constants.GENOMIC_SEG_COLL, gsc);
