@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: BaseManager.java,v 1.8 2006-11-27 17:59:06 pandyas Exp $
+ * $Id: BaseManager.java,v 1.9 2008-01-28 18:44:55 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2006/11/27 17:59:06  pandyas
+ * modified debug statement so it does not print
+ *
  * Revision 1.7  2006/10/17 16:13:46  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -54,7 +57,7 @@ public class BaseManager implements Manager
      */
     protected List getAll(Class inClass) throws Exception
     {
-        log.trace("Entering BaseManager.getAll");
+        log.info("Entering BaseManager.getAll");
 
         List<Object> theObjects = null;
 
@@ -68,7 +71,7 @@ public class BaseManager implements Manager
             throw e;
         }
 
-        log.trace("Exiting BaseManager.getAll");
+        log.info("Exiting BaseManager.getAll");
 
         return theObjects;
     }
@@ -88,13 +91,13 @@ public class BaseManager implements Manager
     protected Object get(String inId,
                          Class inClass) throws Exception
     {
-        log.trace("Entering BaseManager.get");
+        log.info("Entering BaseManager.get");
 
         Object theObject = null;
 
         try
         {
-            log.trace("<BaseManager> Querying for id: " + inId);
+            log.info("<BaseManager> Querying for id: " + inId);
             theObject = Search.queryById(inClass, new Long(inId));
         }
         catch (PersistenceException pe)
@@ -108,7 +111,7 @@ public class BaseManager implements Manager
             throw e;
         }
 
-        log.trace("Exiting BaseManager.get");
+        log.info("Exiting BaseManager.get");
         return theObject;
     }
 
@@ -123,7 +126,7 @@ public class BaseManager implements Manager
      */
     protected void save(Object inObject) throws Exception
     {
-        log.trace("Entering BaseManager.save");
+        log.info("Entering BaseManager.save");
 
         try
         {
@@ -131,7 +134,7 @@ public class BaseManager implements Manager
             HibernateUtil.beginTransaction();
 
             // Save the object
-            log.debug("Saving object");
+            log.info("Saving object");
             Persist.save(inObject);
 
             // Commit all changes or none
@@ -165,14 +168,14 @@ public class BaseManager implements Manager
     protected void remove(String inId,
                           Class inClass) throws Exception
     {
-        log.trace("Entering BaseManager.remove");
+        log.info("Entering BaseManager.remove");
 
         try
         {
             // Begin an transaction
             HibernateUtil.beginTransaction();
 
-            log.debug("Removing object: " + inId);
+            log.info("Removing object: " + inId);
             Persist.deleteById(inClass, new Long(inId));
 
             // Commit all changes or none
@@ -181,13 +184,13 @@ public class BaseManager implements Manager
         catch (PersistenceException pe)
         {
             HibernateUtil.rollbackTransaction();
-            log.error("Unable to delete object: ", pe);
+            log.error("PersistenceException Unable to delete object: ", pe);
             throw pe;
         }
         catch (Exception e)
         {
             HibernateUtil.rollbackTransaction();
-            log.error("Unable to delete object: ", e);
+            log.error("Exception Unable to delete object: ", e);
             throw e;
         }
 

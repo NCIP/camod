@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.88 2008-01-18 21:26:13 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.89 2008-01-28 18:44:55 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.88  2008/01/18 21:26:13  pandyas
+ * enabled debug statements for dev testing
+ *
  * Revision 1.87  2008/01/16 18:30:22  pandyas
  * Renamed value to Transplant for #8290
  *
@@ -448,6 +451,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         log.info("In AnimalModelManagerImpl.get");
 
         AnimalModel theAnimalModel = (AnimalModel) super.get(id, AnimalModel.class);
+        log.info("theAnimalModel: " + theAnimalModel.toString());
 
         // Set the modified date in case we save a change
         theAnimalModel.getAvailability().setModifiedDate(new Date());
