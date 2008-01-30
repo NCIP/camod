@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.84 2008-01-16 18:30:22 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.85 2008-01-30 17:19:01 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.84  2008/01/16 18:30:22  pandyas
+ * Renamed value to Transplant for #8290
+ *
  * Revision 1.83  2007/12/17 17:59:52  pandyas
  * Modified graft name to transplant as per VCDE review suggestions
  *
@@ -308,16 +311,12 @@ import gov.nih.nci.common.persistence.hibernate.HQLParameter;
 import gov.nih.nci.common.persistence.hibernate.HibernateUtil;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.hibernate.Hibernate;
-import org.hibernate.Query;
+import org.hibernate.*;
+import org.hibernate.criterion.Expression;
 
 /**
  * Implementation of a wrapper around the HQL/JDBC interface. Used for more
@@ -335,7 +334,7 @@ public class QueryManagerImpl extends BaseManager
      */
     public List getNSCNumbers() throws PersistenceException
     {
-        log.debug("Entering QueryManagerImpl.getNSCNumbersAsStrings");
+        log.info("Entering QueryManagerImpl.getNSCNumbersAsStrings");
 
         // Format the query
         HQLParameter[] theParams = new HQLParameter[0];
@@ -343,7 +342,7 @@ public class QueryManagerImpl extends BaseManager
 
         List theList = Search.query(theHQLQuery, theParams);
 
-        log.debug("Found matching items: " + theList.size());
+        log.info("Found matching items: " + theList.size());
         log.debug("Exiting QueryManagerImpl.getNSCNumbers");
 
         return theList;
@@ -795,8 +794,10 @@ public class QueryManagerImpl extends BaseManager
     {
 
         log.debug("Entering QueryManagerImpl.getApprovedSpecies");
-        ResultSet theResultSet = null;
+        ResultSet theResultSet = null;  
+        List<String> theNames = new ArrayList<String>(); 
         List<Species> theSpeciesList = new ArrayList<Species>();
+       
         try
         {
             // Format the query - SQL allows more complex query
@@ -805,17 +806,30 @@ public class QueryManagerImpl extends BaseManager
 				+ "WHERE am.strain_id = st.strain_id "
 				+ "  AND st.species_id = sp.species_id "
 				+ " AND am.state = 'Edited-approved' ORDER BY sp.scientific_name asc ";
+            
+            log.debug("theSQLQuery: " + theSQLQuery);
 			
             Object[] theParams = new Object[0];
             theResultSet = Search.query(theSQLQuery, theParams);
 
+            // Rewrote this method during the upgrad to Hibernate
+            // Had to copy ResultSet to a list since the ResultSet was closed before the 
+            // while loop was able to get all the Species objects from the ManagerSingleton
             while (theResultSet.next())
             {
-            	// Need to return the species object instead of the names for DROPDOWN_OPTION code
-            	Species theSpecies = SpeciesManagerSingleton.instance().getByName(theResultSet.getString(1));
-            	theSpeciesList.add(theSpecies);
-            }
+                try {
+                    theNames.add(theResultSet.getString(1));
+                } catch (Exception e)  {
+                    log.error("Exception in getApprovedSpecies", e);
+                    throw new PersistenceException("Exception in getApprovedSpecies: " + e);
+                }
+            }                
 
+            for (int i = 0; i < theNames.size(); i++)
+            {
+                Species theSpecies = SpeciesManagerSingleton.instance().getByName(theNames.get(i));
+                theSpeciesList.add(theSpecies);
+            }            
             log.debug("Exiting QueryManagerImpl.getApprovedSpecies");
         }
         catch (Exception e)
@@ -827,20 +841,23 @@ public class QueryManagerImpl extends BaseManager
         {
             if (theResultSet != null)
             {
+                log.info("theResultSet != null: "  );
                 try
                 {
-                    Statement stmt = theResultSet.getStatement();
+                    Statement stmt = theResultSet.getStatement();                    
                     theResultSet.close();
                     stmt.close();
+                    
                 }
                 catch (Exception e)
                 {}
-            }
-        }
+            } 
+        } 
         return theSpeciesList;
     }
 
-
+    
+    
     /**
      * Return the list of PI's sorted by last name
      * 
@@ -1176,39 +1193,55 @@ public class QueryManagerImpl extends BaseManager
                                      Person inPerson,
                                      AnimalModel inModel) throws PersistenceException
     {
-        log.debug("Entering QueryManagerImpl.getCommentsBySectionForPerson");
+        log.info("Entering QueryManagerImpl.getCommentsBySection");
+        String theHQLQuery = null;
 
-        // If no person, only get approved items
-        String theStateHQL = "(c.state = 'Screened-approved'";
-        if (inPerson == null)
-        {
-            theStateHQL += ") ";
-        }
-        else
-        {
-            theStateHQL += "or c.submitter = :party_id) ";
-        }
-
-        String theHQLQuery = "from Comments as c where " + theStateHQL + " and c.abstractCancerModel in (" + "from AnimalModel as am where am.id = :abs_cancer_model_id) and c.modelSection in (from ModelSection where name = :name)";
-        log.debug("The HQL query: " + theHQLQuery);
-
-        Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
-        theQuery.setParameter("abs_cancer_model_id", inModel.getId());
-        theQuery.setParameter("name", inSection);
-
+        HQLParameter[] theParams = new HQLParameter[2];
+        
+        // Format the query and define the query
         // Only query for party if the passed in party wasn't null
-        if (inPerson != null)
-        {
-            theQuery.setParameter("party_id", inPerson.getId());
+        // If person is null only retrieve Screened-approved models        
+        if (inPerson != null){
+            theParams = new HQLParameter[3];
+            theParams[0] = new HQLParameter();
+            theParams[0].setName("abs_cancer_model_id");
+            theParams[0].setValue(inModel.getId());
+            theParams[0].setType(Hibernate.LONG);
+            theParams[1] = new HQLParameter();
+            theParams[1].setName("party_id");
+            theParams[1].setValue(inPerson.getId());
+            theParams[1].setType(Hibernate.LONG);
+            theParams[2] = new HQLParameter();
+            theParams[2].setName("name");
+            theParams[2].setValue(inSection);
+            theParams[2].setType(Hibernate.STRING);
+            
+            theHQLQuery = "from Comments as c where (c.state = 'Screened-approved'or c.submitter = :party_id) and c.abstractCancerModel in (" + "from AnimalModel as am where am.id = :abs_cancer_model_id) and c.modelSection in (from ModelSection where name = :name)";
+
+        } else {
+            
+	        theParams[0] = new HQLParameter();
+	        theParams[0].setName("abs_cancer_model_id");
+	        theParams[0].setValue(inModel.getId());
+	        theParams[0].setType(Hibernate.LONG);
+	        theParams[1] = new HQLParameter();
+	        theParams[1].setName("name");
+	        theParams[1].setValue(inSection);
+	        theParams[1].setType(Hibernate.STRING);
+	        
+        	theHQLQuery = "from Comments as c where c.state = 'Screened-approved' and c.abstractCancerModel in (" + "from AnimalModel as am where am.id = :abs_cancer_model_id) and c.modelSection in (from ModelSection where name = :name)";
+            
         }
-        List theComments = theQuery.list();
+        log.info("the HQL Query: " + theHQLQuery);
+        List theComments = Search.query(theHQLQuery, theParams);
 
         if (theComments == null)
         {
+        	log.info("theComments == null: " );
             theComments = new ArrayList();
         }
 
-        log.debug("Exiting QueryManagerImpl.getCommentsByStateForPerson");
+        log.info("Exiting QueryManagerImpl.getCommentsBySection");
 
         return theComments;
     }
@@ -1230,7 +1263,7 @@ public class QueryManagerImpl extends BaseManager
     public List getCommentsByStateForPerson(String inState,
                                             Person inPerson) throws PersistenceException
     {
-        log.debug("Entering QueryManagerImpl.getCommentsByStateForPerson");
+        log.info("Entering QueryManagerImpl.getCommentsByStateForPerson");
 
         String theHQLQuery = "from Comments as c where c.state = :state and c.id in (";
         Query theQuery = null;
@@ -1248,7 +1281,7 @@ public class QueryManagerImpl extends BaseManager
             theQuery.setParameter("state", inState);
         }
 
-        log.debug("The HQL query: " + theHQLQuery);
+        log.info("The HQL query: " + theHQLQuery);
 
         List theComments = theQuery.list();
 
@@ -1257,7 +1290,7 @@ public class QueryManagerImpl extends BaseManager
             theComments = new ArrayList();
         }
 
-        log.debug("Exiting QueryManagerImpl.getCommentsByStateForPerson");
+        log.info("Exiting QueryManagerImpl.getCommentsByStateForPerson");
 
         return theComments;
     }
@@ -1279,7 +1312,7 @@ public class QueryManagerImpl extends BaseManager
     public List getModelsByStateForPerson(String inState,
                                           Person inPerson) throws PersistenceException
     {
-        log.debug("Entering QueryManagerImpl.getCurrentLog");
+        log.info("Entering QueryManagerImpl.getCurrentLog");
 
         String theHQLQuery = "from AnimalModel as am where am.state = :state and am.id in (";
         Query theQuery = null;
@@ -1298,7 +1331,7 @@ public class QueryManagerImpl extends BaseManager
             theQuery.setParameter("state", inState);
         }
 
-        log.debug("<getModelsByStateForPerson> The HQL query: " + theHQLQuery);
+        log.info("<getModelsByStateForPerson> The HQL query: " + theHQLQuery);
 
         List theComments = theQuery.list();
 
@@ -1321,18 +1354,18 @@ public class QueryManagerImpl extends BaseManager
      */
     public List getModelsByUser(String inUsername) throws PersistenceException
     {
-        log.debug("Entering QueryManagerImpl.getModelsByUser");
+        log.info("Entering QueryManagerImpl.getModelsByUser");
 
         String theHQLQuery = "from AnimalModel as am where " + " am.submitter in (from Person where username = :username) or" + " am.principalInvestigator in (from Person where username = :username) " + " order by model_descriptor";
 
-        log.debug("The HQL query: " + theHQLQuery);
+        log.info("The HQL query: " + theHQLQuery);
 
         Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
 
 
         theQuery.setParameter("username", inUsername);
 
-        log.debug("Entering QueryManagerImpl.getModelsByUser here");
+        log.info("Entering QueryManagerImpl.getModelsByUser here");
         List theComments = new ArrayList();
 
         // breaks before this line
@@ -2724,6 +2757,8 @@ public class QueryManagerImpl extends BaseManager
         List<Publication> publications = new ArrayList<Publication>();
         int cc = 0;
         ResultSet theResultSet = null;
+        List<String> thePids = new ArrayList<String>();
+        
         try
         {
             String theSQLString = "select publication_id, year, authors" + "\n" + "  from publication" + "\n" + "  where publication_id in (" + "\n" + "	  select min(publication_id) publication_id" + "\n" + "	  from (" + "\n" + "		select p.pmid, p.publication_id" + "\n" + "		  from therapy th," + "\n" + "		       therapy_publication tp," + "\n" + "		       publication p" + "\n" + "		  where th.abs_cancer_model_id = ?" + "\n" + "		   and th.therapy_id = tp.therapy_id" + "\n" + "		   and tp.publication_id = p.publication_id" + "\n" + "		union" + "\n" + "		select p.pmid, p.publication_id" + "\n" + "		  from cell_line cl," + "\n" + "		       cell_line_publication cp," + "\n" + "		       publication p" + "\n" + "		 where cl.abs_cancer_model_id = ?" + "\n" + "		   and cl.cell_line_id = cp.cell_line_id" + "\n" + "		   and cp.publication_id = p.publication_id" + "\n" + "		union" + "\n" + "		select p.pmid, p.publication_id" + "\n" + "		  from abs_can_mod_publication acmp," + "\n" + "		       publication p" + "\n" + "		 where acmp.abs_cancer_model_id = ?" + "\n" + "		   and acmp.publication_id = p.publication_id )" + "\n" + "	 group by pmid )" + "\n" + " order by year desc, authors" + "\n";
@@ -2732,13 +2767,29 @@ public class QueryManagerImpl extends BaseManager
             Object[] params = new Object[3];
             params[0] = params[1] = params[2] = String.valueOf(absCancerModelId);
             theResultSet = Search.query(theSQLString, params);
+            
+            // Rewrote this method during the upgrad to Hibernate
+            // Had to copy ResultSet to a list since the ResultSet was closed before the 
+            // while loop was able to get all the Species objects from the ManagerSingleton
             while (theResultSet.next())
             {
-                String pid = theResultSet.getString(1); // the publication_id
+                try {
+                    thePids.add(theResultSet.getString(1));
+                } catch (Exception e)  {
+                    log.error("Exception in getApprovedSpecies", e);
+                    throw new PersistenceException("Exception in getApprovedSpecies: " + e);
+                }
+            }                
+
+            for (int i = 0; i < thePids.size(); i++)
+            {
+                String pid = thePids.get(i); // the publication_id
                 Publication p = (Publication) get(pid, Publication.class);
                 publications.add(p);
-                cc++;
-            }
+                cc++;     
+            }            
+            
+
             log.debug("Got " + cc + " publications");
         }
         catch (Exception e)
