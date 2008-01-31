@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: BaseManager.java,v 1.9 2008-01-28 18:44:55 pandyas Exp $
+ * $Id: BaseManager.java,v 1.10 2008-01-31 22:26:19 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2008/01/28 18:44:55  pandyas
+ * Modified to debug instability in base manager and animal model manager get method
+ *
  * Revision 1.8  2006/11/27 17:59:06  pandyas
  * modified debug statement so it does not print
  *
@@ -57,7 +60,7 @@ public class BaseManager implements Manager
      */
     protected List getAll(Class inClass) throws Exception
     {
-        log.info("Entering BaseManager.getAll");
+        log.debug("Entering BaseManager.getAll");
 
         List<Object> theObjects = null;
 
@@ -71,7 +74,7 @@ public class BaseManager implements Manager
             throw e;
         }
 
-        log.info("Exiting BaseManager.getAll");
+        log.debug("Exiting BaseManager.getAll");
 
         return theObjects;
     }
@@ -91,13 +94,13 @@ public class BaseManager implements Manager
     protected Object get(String inId,
                          Class inClass) throws Exception
     {
-        log.info("Entering BaseManager.get");
+        log.debug("Entering BaseManager.get");
 
         Object theObject = null;
 
         try
         {
-            log.info("<BaseManager> Querying for id: " + inId);
+            log.debug("<BaseManager> Querying for id: " + inId);
             theObject = Search.queryById(inClass, new Long(inId));
         }
         catch (PersistenceException pe)
@@ -111,7 +114,7 @@ public class BaseManager implements Manager
             throw e;
         }
 
-        log.info("Exiting BaseManager.get");
+        log.debug("Exiting BaseManager.get");
         return theObject;
     }
 
@@ -126,7 +129,7 @@ public class BaseManager implements Manager
      */
     protected void save(Object inObject) throws Exception
     {
-        log.info("Entering BaseManager.save");
+        log.debug("Entering BaseManager.save");
 
         try
         {
@@ -134,7 +137,7 @@ public class BaseManager implements Manager
             HibernateUtil.beginTransaction();
 
             // Save the object
-            log.info("Saving object");
+            log.debug("Saving object");
             Persist.save(inObject);
 
             // Commit all changes or none
@@ -168,14 +171,14 @@ public class BaseManager implements Manager
     protected void remove(String inId,
                           Class inClass) throws Exception
     {
-        log.info("Entering BaseManager.remove");
+        log.debug("Entering BaseManager.remove");
 
         try
         {
             // Begin an transaction
             HibernateUtil.beginTransaction();
 
-            log.info("Removing object: " + inId);
+            log.debug("Removing object: " + inId);
             Persist.deleteById(inClass, new Long(inId));
 
             // Commit all changes or none

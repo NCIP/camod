@@ -43,9 +43,14 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.85 2008-01-30 17:19:01 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.86 2008-01-31 22:21:46 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.85  2008/01/30 17:19:01  pandyas
+ * The upgraded from Hibernate 3.0.2 to 3.1.3 to resolve caCORE32 IO error forced the rewrite of a few methods.
+ * - query.list did not work so it was changed to Search.query for comments method
+ * - the ResultSet closed before calling the SingletonManager so it was changed in  one method
+ *
  * Revision 1.84  2008/01/16 18:30:22  pandyas
  * Renamed value to Transplant for #8290
  *
@@ -334,7 +339,7 @@ public class QueryManagerImpl extends BaseManager
      */
     public List getNSCNumbers() throws PersistenceException
     {
-        log.info("Entering QueryManagerImpl.getNSCNumbersAsStrings");
+        log.debug("Entering QueryManagerImpl.getNSCNumbersAsStrings");
 
         // Format the query
         HQLParameter[] theParams = new HQLParameter[0];
@@ -342,7 +347,7 @@ public class QueryManagerImpl extends BaseManager
 
         List theList = Search.query(theHQLQuery, theParams);
 
-        log.info("Found matching items: " + theList.size());
+        log.debug("Found matching items: " + theList.size());
         log.debug("Exiting QueryManagerImpl.getNSCNumbers");
 
         return theList;
@@ -841,7 +846,7 @@ public class QueryManagerImpl extends BaseManager
         {
             if (theResultSet != null)
             {
-                log.info("theResultSet != null: "  );
+                log.debug("theResultSet != null: "  );
                 try
                 {
                     Statement stmt = theResultSet.getStatement();                    
@@ -1193,7 +1198,7 @@ public class QueryManagerImpl extends BaseManager
                                      Person inPerson,
                                      AnimalModel inModel) throws PersistenceException
     {
-        log.info("Entering QueryManagerImpl.getCommentsBySection");
+        log.debug("Entering QueryManagerImpl.getCommentsBySection");
         String theHQLQuery = null;
 
         HQLParameter[] theParams = new HQLParameter[2];
@@ -1232,16 +1237,16 @@ public class QueryManagerImpl extends BaseManager
         	theHQLQuery = "from Comments as c where c.state = 'Screened-approved' and c.abstractCancerModel in (" + "from AnimalModel as am where am.id = :abs_cancer_model_id) and c.modelSection in (from ModelSection where name = :name)";
             
         }
-        log.info("the HQL Query: " + theHQLQuery);
+        log.debug("the HQL Query: " + theHQLQuery);
         List theComments = Search.query(theHQLQuery, theParams);
 
         if (theComments == null)
         {
-        	log.info("theComments == null: " );
+        	log.debug("theComments == null: " );
             theComments = new ArrayList();
         }
 
-        log.info("Exiting QueryManagerImpl.getCommentsBySection");
+        log.debug("Exiting QueryManagerImpl.getCommentsBySection");
 
         return theComments;
     }
@@ -1263,7 +1268,7 @@ public class QueryManagerImpl extends BaseManager
     public List getCommentsByStateForPerson(String inState,
                                             Person inPerson) throws PersistenceException
     {
-        log.info("Entering QueryManagerImpl.getCommentsByStateForPerson");
+        log.debug("Entering QueryManagerImpl.getCommentsByStateForPerson");
 
         String theHQLQuery = "from Comments as c where c.state = :state and c.id in (";
         Query theQuery = null;
@@ -1281,7 +1286,7 @@ public class QueryManagerImpl extends BaseManager
             theQuery.setParameter("state", inState);
         }
 
-        log.info("The HQL query: " + theHQLQuery);
+        log.debug("The HQL query: " + theHQLQuery);
 
         List theComments = theQuery.list();
 
@@ -1290,7 +1295,7 @@ public class QueryManagerImpl extends BaseManager
             theComments = new ArrayList();
         }
 
-        log.info("Exiting QueryManagerImpl.getCommentsByStateForPerson");
+        log.debug("Exiting QueryManagerImpl.getCommentsByStateForPerson");
 
         return theComments;
     }
@@ -1312,7 +1317,7 @@ public class QueryManagerImpl extends BaseManager
     public List getModelsByStateForPerson(String inState,
                                           Person inPerson) throws PersistenceException
     {
-        log.info("Entering QueryManagerImpl.getCurrentLog");
+        log.debug("Entering QueryManagerImpl.getCurrentLog");
 
         String theHQLQuery = "from AnimalModel as am where am.state = :state and am.id in (";
         Query theQuery = null;
@@ -1331,7 +1336,7 @@ public class QueryManagerImpl extends BaseManager
             theQuery.setParameter("state", inState);
         }
 
-        log.info("<getModelsByStateForPerson> The HQL query: " + theHQLQuery);
+        log.debug("<getModelsByStateForPerson> The HQL query: " + theHQLQuery);
 
         List theComments = theQuery.list();
 
@@ -1354,18 +1359,18 @@ public class QueryManagerImpl extends BaseManager
      */
     public List getModelsByUser(String inUsername) throws PersistenceException
     {
-        log.info("Entering QueryManagerImpl.getModelsByUser");
+        log.debug("Entering QueryManagerImpl.getModelsByUser");
 
         String theHQLQuery = "from AnimalModel as am where " + " am.submitter in (from Person where username = :username) or" + " am.principalInvestigator in (from Person where username = :username) " + " order by model_descriptor";
 
-        log.info("The HQL query: " + theHQLQuery);
+        log.debug("The HQL query: " + theHQLQuery);
 
         Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
 
 
         theQuery.setParameter("username", inUsername);
 
-        log.info("Entering QueryManagerImpl.getModelsByUser here");
+        log.debug("Entering QueryManagerImpl.getModelsByUser here");
         List theComments = new ArrayList();
 
         // breaks before this line

@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.52 2008-01-31 17:09:54 pandyas Exp $
+ *  $Id: ViewModelAction.java,v 1.53 2008-01-31 22:23:22 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.52  2008/01/31 17:09:54  pandyas
+ *  Modified to send new gene identifier (entrez gene id) to caBIO from new object location
+ *
  *  Revision 1.51  2008/01/28 18:45:18  pandyas
  *  Modified to debug caBIO data not returning to caMOD on dev
  *
@@ -312,7 +315,7 @@ public class ViewModelAction extends BaseAction
                                                 HttpServletRequest request,
                                                 HttpServletResponse response) throws Exception
     {
-        log.info("<populateEngineeredGene> modelID" + request.getParameter("aModelID"));
+        log.debug("<populateEngineeredGene> modelID" + request.getParameter("aModelID"));
         String modelID = request.getParameter("aModelID");
 
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
@@ -351,10 +354,10 @@ public class ViewModelAction extends BaseAction
                 // now go to caBIO and query the gene object....
                 TargetedModification tm = (TargetedModification) eg;
                 GeneIdentifier geneIdentifier = tm.getGeneIdentifier();
-                log.info("geneIdentifier.getEntrezGeneID() " + geneIdentifier.getEntrezGeneID());
+                log.debug("geneIdentifier.getEntrezGeneID() " + geneIdentifier.getEntrezGeneID());
                 if (geneIdentifier != null)
                 {
-                    log.info("Connecting to caBIO to look up gene " + geneIdentifier);
+                    log.debug("Connecting to caBIO to look up gene " + geneIdentifier);
                     // the geneId is available
                     try
                     {
@@ -373,7 +376,7 @@ public class ViewModelAction extends BaseAction
 
                         
                         final int geneCount = (resultList != null) ? resultList.size() : 0;
-                        log.info("Got " + geneCount + " Gene Objects");
+                        log.debug("Got " + geneCount + " Gene Objects");
                         if (geneCount > 0)
                         {
                             myGene = (Gene) resultList.get(0);
@@ -394,7 +397,7 @@ public class ViewModelAction extends BaseAction
             }
         }
 
-        log.info("<populateEngineeredGene> " + "egcCnt=" + egcCnt + "tgc=" + tgCnt + "gsc=" + gsCnt + "tmc=" + tmCnt + "imc=" + imCnt);
+        log.debug("<populateEngineeredGene> " + "egcCnt=" + egcCnt + "tgc=" + tgCnt + "gsc=" + gsCnt + "tmc=" + tmCnt + "imc=" + imCnt);
         request.getSession().setAttribute(Constants.ANIMALMODEL, am);
         request.getSession().setAttribute(Constants.TRANSGENE_COLL, tgc);
         request.getSession().setAttribute(Constants.GENOMIC_SEG_COLL, gsc);

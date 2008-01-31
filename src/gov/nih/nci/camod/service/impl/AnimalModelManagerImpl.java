@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.89 2008-01-28 18:44:55 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.90 2008-01-31 22:22:27 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.89  2008/01/28 18:44:55  pandyas
+ * Modified to debug instability in base manager and animal model manager get method
+ *
  * Revision 1.88  2008/01/18 21:26:13  pandyas
  * enabled debug statements for dev testing
  *
@@ -338,7 +341,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      */
     public List getAll() throws Exception
     {
-        log.info("In AnimalModelManagerImpl.getAll");
+        log.debug("In AnimalModelManagerImpl.getAll");
         return super.getAll(AnimalModel.class);
     }
     
@@ -448,10 +451,10 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      */
     public AnimalModel get(String id) throws Exception
     {
-        log.info("In AnimalModelManagerImpl.get");
+        log.debug("In AnimalModelManagerImpl.get");
 
         AnimalModel theAnimalModel = (AnimalModel) super.get(id, AnimalModel.class);
-        log.info("theAnimalModel: " + theAnimalModel.toString());
+        log.debug("theAnimalModel: " + theAnimalModel.toString());
 
         // Set the modified date in case we save a change
         theAnimalModel.getAvailability().setModifiedDate(new Date());
@@ -664,7 +667,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
 		log.debug("Entering populateAnimalModel");
 
-		// Handle the person information
+		// Handle the person debugrmation
 		if (inUsername != null) {
 			Person theSubmitter = PersonManagerSingleton.instance()
 					.getByUsername(inUsername);
@@ -686,7 +689,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
 		inAnimalModel.setPrincipalInvestigator(thePI);
 
-		// Set the animal model information
+		// Set the animal model debugrmation
 		boolean isToolStrain = inModelCharacteristicsData.getIsToolStrain()
 				.equals("yes") ? true : false;
 		inAnimalModel.setIsToolStrain(new Boolean(isToolStrain));
