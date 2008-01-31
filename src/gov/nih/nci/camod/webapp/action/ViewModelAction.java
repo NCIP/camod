@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.51 2008-01-28 18:45:18 pandyas Exp $
+ *  $Id: ViewModelAction.java,v 1.52 2008-01-31 17:09:54 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.51  2008/01/28 18:45:18  pandyas
+ *  Modified to debug caBIO data not returning to caMOD on dev
+ *
  *  Revision 1.50  2008/01/16 20:09:31  pandyas
  *  removed caBIO logging so the page renders when connection to caBIO fails
  *
@@ -348,6 +351,7 @@ public class ViewModelAction extends BaseAction
                 // now go to caBIO and query the gene object....
                 TargetedModification tm = (TargetedModification) eg;
                 GeneIdentifier geneIdentifier = tm.getGeneIdentifier();
+                log.info("geneIdentifier.getEntrezGeneID() " + geneIdentifier.getEntrezGeneID());
                 if (geneIdentifier != null)
                 {
                     log.info("Connecting to caBIO to look up gene " + geneIdentifier);
@@ -356,7 +360,7 @@ public class ViewModelAction extends BaseAction
                     {
                       ApplicationService appService = EvsTreeUtil.getApplicationService();
                         DatabaseCrossReference dcr = new DatabaseCrossReferenceImpl(); 
-                        dcr.setCrossReferenceId(geneIdentifier.getId().toString());
+                        dcr.setCrossReferenceId(geneIdentifier.getEntrezGeneID());
 
                         dcr.setType("gov.nih.nci.cabio.domain.Gene");
                         dcr.setDataSourceName("LOCUS_LINK_ID");
