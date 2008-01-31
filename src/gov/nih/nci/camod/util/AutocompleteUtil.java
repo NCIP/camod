@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: AutocompleteUtil.java,v 1.3 2006-05-18 13:06:43 guptaa Exp $
+ * $Id: AutocompleteUtil.java,v 1.4 2008-01-31 22:25:02 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/05/18 13:06:43  guptaa
+ * added disease
+ *
  * Revision 1.2  2006/05/17 21:17:03  guptaa
  * organ tree changes
  *
@@ -134,7 +137,7 @@ public class AutocompleteUtil {
 	public static synchronized SortedSet<String> getMatchingNSCNumbers(
 			String inPrefix, int inNumToReturn) throws Exception {
 		ourLog.debug("Entering getMatchingNSCNumbers");
-		ourLog.info("Prefix: (" + inPrefix + " ) - Num to return ("
+		ourLog.debug("Prefix: (" + inPrefix + " ) - Num to return ("
 				+ inNumToReturn + ")");
 
 		SortedSet<String> theReturnSet = null;
@@ -169,7 +172,7 @@ public class AutocompleteUtil {
 				theReturnSet = theMatchingSet;
 			}
 		}
-		ourLog.info("Number returned: " + theReturnSet.size());
+		ourLog.debug("Number returned: " + theReturnSet.size());
 		ourLog.debug("Exiting getMatchingNSCNumbers");
 
 		return theReturnSet;
@@ -203,7 +206,7 @@ public class AutocompleteUtil {
 		}
 		theReturnSet = new TreeSet<String>(theMatchingAnimalModelNames);
 
-		ourLog.info("Number returned: " + theReturnSet.size());
+		ourLog.debug("Number returned: " + theReturnSet.size());
 		ourLog.debug("Exiting getMatchingAnimalModelNames");
 
 		return theReturnSet;
@@ -237,7 +240,7 @@ public class AutocompleteUtil {
 		}
 		theReturnSet = new TreeSet<String>(theMatchingGeneNames);
 
-		ourLog.info("Number returned: " + theReturnSet.size());
+		ourLog.debug("Number returned: " + theReturnSet.size());
 		ourLog.debug("Exiting getMatchingGeneNames");
 
 		return theReturnSet;
@@ -258,9 +261,9 @@ public class AutocompleteUtil {
 		}
 		theReturnSet = new TreeSet<Object>(theMatchingOrganNames);
 
-		ourLog.info("Number returned: " + theReturnSet.size());
+		ourLog.debug("Number returned: " + theReturnSet.size());
 		ourLog.debug("Exiting getMatchingOrganNames");
-		ourLog.info("list values"+theReturnSet);
+		ourLog.debug("list values"+theReturnSet);
 
 		return theReturnSet;
 	}
@@ -280,9 +283,9 @@ public class AutocompleteUtil {
 		}
 		theReturnSet = new TreeSet<Object>(theMatchingTumorClassificationsNames);
 
-		ourLog.info("Number returned: " + theReturnSet.size());
+		ourLog.debug("Number returned: " + theReturnSet.size());
 		ourLog.debug("Exiting getMatchingOrganNames");
-		ourLog.info("list values"+theReturnSet);
+		ourLog.debug("list values"+theReturnSet);
 
 		return theReturnSet;
 	}
