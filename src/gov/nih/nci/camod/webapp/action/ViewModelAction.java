@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.53 2008-01-31 22:23:22 pandyas Exp $
+ *  $Id: ViewModelAction.java,v 1.54 2008-01-31 22:27:52 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.53  2008/01/31 22:23:22  pandyas
+ *  remove log printouts now that bug is resolved
+ *
  *  Revision 1.52  2008/01/31 17:09:54  pandyas
  *  Modified to send new gene identifier (entrez gene id) to caBIO from new object location
  *
@@ -405,7 +408,7 @@ public class ViewModelAction extends BaseAction
         request.getSession().setAttribute(Constants.TARGETED_MOD_GENE_MAP, tmGeneMap);
         request.getSession().setAttribute(Constants.INDUCED_MUT_COLL, imc);
         request.getSession().setAttribute(Constants.SPONTANEOUS_MUT_COLL, smc);
-        System.out.println("<populateEngineeredGene> set attributes done.");
+        log.debug("<populateEngineeredGene> set attributes done.");
 
         setComments(request, Constants.Pages.GENETIC_DESCRIPTION);
 
