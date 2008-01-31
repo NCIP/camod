@@ -21,8 +21,8 @@
                          Release Notes
     
                              caMOD
-                          Version 2.3
-                         Oct 30, 2007
+                          Version 2.4
+                           Feb 2008
 
        National Cancer Institute's Center for Bioinformatics
 
@@ -42,14 +42,13 @@
 
 
 ================================================================
-    1.0 caMOD Version 2.3 Introduction and History
+    1.0 caMOD Version 2.4 Introduction and History
 ================================================================
  
 
-    caMOD 2.3, the Cancer Models Database, is a open source data management 
+    caMOD 2.4, the Cancer Models Database, is a open source data management 
     system developed for the management and sharing of data of animal models. 
-    caMOD features controlled vocabularies from a shared, publicly accessible metadata 
-    repository (caDSR) and enterprise vocabulary services (EVS) from the National 
+    caMOD features controlled vocabularies from a shared, publicly accessible metadata repository (caDSR) and enterprise vocabulary services (EVS) from the National 
     Cancer Institute.  
 
     -- http://cancermodels.nci.nih.gov
@@ -64,8 +63,11 @@
 ================================================================
     2.0 Release History
 ================================================================
+    caMOD Version 2.4 
+    --	Feb 2008 
+
     caMOD Version 2.3 
-    --	Oct 30th 2007 
+    --	Sept 2007 
         
     caMOD Version 2.2
     --	November 30th 2006 
@@ -77,7 +79,7 @@
     --	May 30th 2006    
     
     caMOD Version 2.0
-    --	December 21st 2005    
+    --	December 21 2005    
 
     caMOD Version 1.0
     --	Fall 2001; continously updated until April 2005
@@ -86,28 +88,31 @@
     3.0 New Features and Updates
 ================================================================
 
-Expanded EVS vocabulary support
-- Render additional species-specific vocabularies (Rat anatomy, Diseases of Rats, Zebrafish anatomy, Zebrafish developmental stages, and staining methods) (gforge entry #6378, #6379, #4759, #4781)
+caELMIR Integration
 
-Add functionality for submission and search of Zebrafish and Rat models:
-- Link to zfin.org or to RGD (Rat Genome Database) for allele details on genetic description pages (gforge entry #6776)
-- Link to zfin.org or to RGD (Rat Genome Database) for publication references (gforge entry #6774)
-- Pages that use anatomy vocabulary trees need to show vocabularies depending on selected species (gforge entry #5897)
-- Add drop down list for developmental stage to therapy page for zebrafish models (gforge entry #4796)
-- Add "small molecules" to chemical class list on therapy submission page (gforge entry #4795)
-- Add page for zin.org to model availability section (gforge entry #4794)
-- Make diagnosis field on histopathology field free text and/or used Dr. Sabawaay's list for zebrafish models (gforge entry #4793)
-- Add drop down list for delivery method to morpholino submission and search page (gforge entry #4792)
-- Add drop down list for Target Site to morpholino submission and search page (gforge entry #4791)
-- Add age drop down list to model characteristics submission and search page for zebrafish entries (gforge entry #4790)
+caELMIR, the Cancer Electronic Laboratory Management Information Resource (http://caelmir.compmed.ucdavis.edu/caelmir/) is a laboratory information management tool that helps bench scientists to store, manage, and share experimental data generated during preclinical trials. The connection between caMOD and caELMIR  enables caMOD users to retrieve data generated in preclinical trials and review information about studies, experiments, protocols, and animals. The caELMIR study information is shown on the Therapeutic Approaches search page in caMOD. For additional data, the user will be directed to caELMIR. (GForge entry #8816)
 
-Other
-- Add conditioning regimen dropdown to xenograft page (gforge entry #4797)
-- Make species drop down list on simple and advanced search a dynamic drop down list depending on what model species have approved records (gforge entry #6148)
-- A new version of online help including a downloadable user guide (PDF file) has been updated. 
 
-Administration
-- Administration pages have additional filters (gforge entry #4784)
+Object Model changes as a result of the VCDE silver level compliance review:
+
+Following the recommendations made by the Vocabulary and Common Data Elements Workgroup (https://cabig.nci.nih.gov/workspaces/VCDE) during the caMOD review the following changes were made:
+- Introduction of a gene object to comply with the gene identifier standard (GForge entry #9756, #8187, #11878)
+- Rename UnctrlVocab items to Alterntext entries (GForge entry #9756)
+- Rename Graft object into Transplant object (GForge entry #8290)
+- Add Comments field to every submission page (GForge entry #8355)
+- Connect availability of model to person to resolve the available from investigator issue (GForge entry #9169)
+
+Other Changes
+- Redesigned the publication search page (GForge entry #5169, #10679)
+- Redesigned publication table on cell line and therapy search page  (GForge entry #10683)
+- Improved navigation within the therapy search page. These changes were caused by the integration of the caELMIR data and the redesign of the publication table (GForge entry #10504)
+- Updated online help including a downloadable user guide (PDF file)
+
+
+NCICB Technology Stack Requirements (GForge entry #6779, #7079, #11880)
+- Upgrade to Jboss 4.0.5 from 4.0.2 
+- Upgrade to newer version of ANT for project
+- Upgrade to use caCORE32 in caMOD and EVSTree to render vocabulary trees
 
 The caMOD 2.1 Common Data Elements (CDEs) are available via caDSR 
 (cancer Data Standard Repository) http://ncicb.nci.nih.gov/core/caDSR
@@ -117,14 +122,15 @@ The caMOD 2.1 Common Data Elements (CDEs) are available via caDSR
     4.0 Defects Fixed Since Last Release
 ================================================================
 
-Defect #5227: 	Customizing search results doesn't work when carcinogen is selected
-Defect #5236: 	Fix Jax lab availability link and data - part 2	
-Defect #5259: 	Adv search for carcinogens does not include data from Jackson Lab
-Defect #5267: 	MTB radiation data are not shown
-Defect #5284:  	Fix MGI link on genetic description pages and at the same time fix existing data
-Defect #6269:   Corrected concept codes for rat and zebrafish on existing models now that the new vocabularies are available from EVS
-Defect #7099:   Do not show human in species drop down list on model characteristics page
-   
+- ATCC link not working on transplant search page (GForge entry #11878) 
+- The left menu list needs to be changed for the viewInvivoDetails.jsp (GForge entry #11837, #9206) 
+- Comments for associated expression are not shown for targeted modification and genomic segment (GForge entry #11833) 
+- Maximize buttion in pop-up windows disabled which prevents user to see full page (GForge entry #11831)
+- Fixed LDAP search function (GForge entry #7992, #8963, #11499)
+- Data in construct description and construct title are not kept (GForge entry #11619)
+- Fixed search function for rat anatomy, rat diseases, zebrafish anatomy, zebrafish developmental stages, and staining method vocabularies displayed in EVS tree (GForge entry #6389, 7387, 7451, 7790, 9274, 9277, 9425, 10818, 11022)
+ 
+
 
 ================================================================
     5.0 Known Issues/Defects
@@ -141,8 +147,7 @@ Defect #7099:   Do not show human in species drop down list on model characteris
         sections: Libraries and Tissues (from EST data) or Protein Similarities 
         (from UniGene). caBio discontinued support for the Protein Similarities and 
         the performance for the Libraries and Tissues query did not meet minimum standards.  
-        After meeting with the caBio team, it was concluded that the development team 
-        will need to eliminate lazy fetching forlibrary and tissue attributes 
+        After meeting with the caBio team, it was concluded that the development team will need to eliminate lazy fetching for library and tissue attributes 
         if we want to improve performance.
      
     Please report any defects found to application support.
@@ -176,7 +181,9 @@ Defect #7099:   Do not show human in species drop down list on model characteris
     --  http://ncicb.nci.nih.gov/NCICB/support
 
     caMOD
-    --  http://cancermodels.nci.nih.gov/    
+    --  http://cancermodels.nci.nih.gov/
+    
+    
 </pre>
 
 											</td>
