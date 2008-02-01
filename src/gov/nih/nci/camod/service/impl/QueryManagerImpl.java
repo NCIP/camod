@@ -43,9 +43,13 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.87 2008-02-01 17:21:27 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.88 2008-02-01 17:28:20 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.87  2008/02/01 17:21:27  pandyas
+ * The Hibernate upgrade to version 3.1.3 broke the query.list method in the QueryManagerImpl
+ * Three methods were rewritten to use Search.query method instead
+ *
  * Revision 1.86  2008/01/31 22:21:46  pandyas
  * remove log printouts now that bug is resolved
  *
@@ -1271,7 +1275,7 @@ public class QueryManagerImpl extends BaseManager
     public List getCommentsByStateForPerson(String inState,
                                             Person inPerson) throws PersistenceException
     {
-        log.info("Entering QueryManagerImpl.getCommentsByStateForPerson");
+        log.debug("Entering QueryManagerImpl.getCommentsByStateForPerson");
         String theHQLQuery = null;
 
         HQLParameter[] theParams = new HQLParameter[2];     
@@ -1302,7 +1306,7 @@ public class QueryManagerImpl extends BaseManager
             theHQLQuery = "from Comments as c where c.state = :state and c.id in (select l.comments from Log as l where l.state = :state)";
         }
 
-        log.info("the HQL Query: " + theHQLQuery);
+        log.debug("the HQL Query: " + theHQLQuery);
         List theComments = Search.query(theHQLQuery, theParams);
 
         if (theComments == null)
@@ -1311,7 +1315,7 @@ public class QueryManagerImpl extends BaseManager
             theComments = new ArrayList();
         }
 
-        log.info("Exiting QueryManagerImpl.getCommentsBySection");
+        log.debug("Exiting QueryManagerImpl.getCommentsBySection");
 
         return theComments;
     }
