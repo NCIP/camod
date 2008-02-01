@@ -1,4 +1,6 @@
-<%@ INCLUDE file="/jsp/header.jsp" %><%@ INCLUDE file="/jsp/sidebar.jsp" %><!-- Main Content Begins -->
+<%@ include file="/jsp/header.jsp" %>
+<%@ include file="/jsp/sidebar.jsp"%>
+<!-- Main Content Begins -->
 	<TABLE class="contentPage" cellspacing="0" cellpadding="0" width="700" summary="" border="0">
 		<TBODY>
 			<TR>
@@ -416,4 +418,5 @@
 </TD>
 </TR>
 </TBODY>
-</TABLE>	<!-- Main Content Ends --><%@ INCLUDE file="/jsp/footer.jsp" %>
+</TABLE>	<!-- Main Content Ends -->
+<%@ include file="/jsp/footer.jsp" %>
