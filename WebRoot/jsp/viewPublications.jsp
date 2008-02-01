@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewPublications.jsp,v 1.31 2008-01-31 21:18:16 pandyas Exp $
+ * $Id: viewPublications.jsp,v 1.32 2008-02-01 16:28:47 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.31  2008/01/31 21:18:16  pandyas
+ * Removed space before J Number to line up text
+ *
  * Revision 1.30  2007/12/04 13:46:57  pandyas
  * Rotate publication data and rename column heading
  *
@@ -139,7 +142,7 @@
 			       
 		<tr>
 			<td class="WhiteBox" width="30%"><b>First Author:</b></td>
-			<td class="WhiteBoxRightEnd" width="70%"><a name="authors"><c:out value="${p.authors}" escapeXml="false"/></a>&nbsp;</td>
+			<td class="WhiteBoxRightEnd" width="70%"><c:out value="${p.authors}" escapeXml="false"/>&nbsp;</td>
 		</tr>
 
 		<tr>
@@ -169,7 +172,7 @@
 			       
 		<tr>
 			<td class="WhiteBox" width="30%"><b>Title:</b></td>
-			<td class="WhiteBoxRightEnd" width="70%"><a name="authors"><c:out value="${p.title}" escapeXml="false"/></a>&nbsp;</td>
+			<td class="WhiteBoxRightEnd" width="70%"><c:out value="${p.title}" escapeXml="false"/>&nbsp;</td>
 		</tr>
 		
 		<tr>
