@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.59 2008-01-23 22:26:03 pandyas Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.60 2008-02-01 16:29:37 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.59  2008/01/23 22:26:03  pandyas
+ * Fixed #11833  	comments for associated expression are not shown for targeted modification and genomic segment
+ *
  * Revision 1.58  2007/11/05 18:43:26  pandyas
  * Fixed #9756     geneID has been replaced with entrezGeneID
  *
@@ -731,10 +734,10 @@
 				<c:forEach var="modType" items="${tm.modificationTypeCollection}">
 					<c:choose> 
 						<c:when test="${empty modType.name}">
-							<camod:highlight><c:out value="${modType.nameAlternEntry}" escapeXml="false"/></camod:highlight>
+							<camod:highlight><c:out value="${modType.nameAlternEntry}" escapeXml="false"/></camod:highlight><br>
 						</c:when>
 						<c:otherwise>
-							<camod:highlight><c:out value="${modType.name}" escapeXml="false"/></camod:highlight>
+							<camod:highlight><c:out value="${modType.name}" escapeXml="false"/></camod:highlight><br>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
