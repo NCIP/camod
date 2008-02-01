@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.86 2008-01-31 22:21:46 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.87 2008-02-01 17:21:27 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.86  2008/01/31 22:21:46  pandyas
+ * remove log printouts now that bug is resolved
+ *
  * Revision 1.85  2008/01/30 17:19:01  pandyas
  * The upgraded from Hibernate 3.0.2 to 3.1.3 to resolve caCORE32 IO error forced the rewrite of a few methods.
  * - query.list did not work so it was changed to Search.query for comments method
@@ -1201,13 +1204,13 @@ public class QueryManagerImpl extends BaseManager
         log.debug("Entering QueryManagerImpl.getCommentsBySection");
         String theHQLQuery = null;
 
-        HQLParameter[] theParams = new HQLParameter[2];
+        HQLParameter[] theParams = new HQLParameter[3];
         
         // Format the query and define the query
         // Only query for party if the passed in party wasn't null
         // If person is null only retrieve Screened-approved models        
         if (inPerson != null){
-            theParams = new HQLParameter[3];
+
             theParams[0] = new HQLParameter();
             theParams[0].setName("abs_cancer_model_id");
             theParams[0].setValue(inModel.getId());
@@ -1224,7 +1227,7 @@ public class QueryManagerImpl extends BaseManager
             theHQLQuery = "from Comments as c where (c.state = 'Screened-approved'or c.submitter = :party_id) and c.abstractCancerModel in (" + "from AnimalModel as am where am.id = :abs_cancer_model_id) and c.modelSection in (from ModelSection where name = :name)";
 
         } else {
-            
+            theParams = new HQLParameter[2];
 	        theParams[0] = new HQLParameter();
 	        theParams[0].setName("abs_cancer_model_id");
 	        theParams[0].setValue(inModel.getId());
@@ -1268,34 +1271,47 @@ public class QueryManagerImpl extends BaseManager
     public List getCommentsByStateForPerson(String inState,
                                             Person inPerson) throws PersistenceException
     {
-        log.debug("Entering QueryManagerImpl.getCommentsByStateForPerson");
+        log.info("Entering QueryManagerImpl.getCommentsByStateForPerson");
+        String theHQLQuery = null;
 
-        String theHQLQuery = "from Comments as c where c.state = :state and c.id in (";
-        Query theQuery = null;
-        if (inPerson == null)
-        {
-            theHQLQuery += "select l.comments from Log as l where l.state = :state)";
-            theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
-            theQuery.setParameter("state", inState);
+        HQLParameter[] theParams = new HQLParameter[2];     
+
+        // Format the query and define the query
+        // Only query for party if the passed in party wasn't null
+        // If person is null only retrieve Screened-approved models        
+        if (inPerson != null){
+            theParams[0] = new HQLParameter();
+            theParams[0].setName("state");
+            theParams[0].setValue(inState);
+            theParams[0].setType(Hibernate.STRING);
+            theParams[1] = new HQLParameter();
+            theParams[1].setName("party_id");
+            theParams[1].setValue(inPerson.getId());
+            theParams[1].setType(Hibernate.LONG);
+            
+            theHQLQuery = "from Comments as c where c.state = :state and c.id in (select l.comments from Log as l where l.submitter = :party_id and l.state = :state)"; 
         }
         else
         {
-            theHQLQuery += "select l.comments from Log as l where l.submitter = :party_id and l.state = :state)";
-            theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
-            theQuery.setParameter("party_id", inPerson.getId());
-            theQuery.setParameter("state", inState);
+            theParams = new HQLParameter[1];
+            theParams[0] = new HQLParameter();
+            theParams[0].setName("state");
+            theParams[0].setValue(inState);
+            theParams[0].setType(Hibernate.STRING);
+            
+            theHQLQuery = "from Comments as c where c.state = :state and c.id in (select l.comments from Log as l where l.state = :state)";
         }
 
-        log.debug("The HQL query: " + theHQLQuery);
-
-        List theComments = theQuery.list();
+        log.info("the HQL Query: " + theHQLQuery);
+        List theComments = Search.query(theHQLQuery, theParams);
 
         if (theComments == null)
         {
+            log.debug("theComments == null: " );
             theComments = new ArrayList();
         }
 
-        log.debug("Exiting QueryManagerImpl.getCommentsByStateForPerson");
+        log.info("Exiting QueryManagerImpl.getCommentsBySection");
 
         return theComments;
     }
@@ -1319,31 +1335,47 @@ public class QueryManagerImpl extends BaseManager
     {
         log.debug("Entering QueryManagerImpl.getCurrentLog");
 
-        String theHQLQuery = "from AnimalModel as am where am.state = :state and am.id in (";
-        Query theQuery = null;
+        //String theHQLQuery = "from AnimalModel as am where am.state = :state and am.id in (";
+        String theHQLQuery = null;
 
-        if (inPerson == null)
-        {
-            theHQLQuery += "select l.abstractCancerModel from Log as l where l.state = :state)";
-            theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
-            theQuery.setParameter("state", inState);
+        HQLParameter[] theParams = new HQLParameter[2];
+        
+        // Format the query and define the query
+        // Only query for party if the passed in party wasn't null
+        // If person is null only retrieve Screened-approved models 
+        if (inPerson != null){
+            theParams[0] = new HQLParameter();
+            theParams[0].setName("state");
+            theParams[0].setValue(inState);
+            theParams[0].setType(Hibernate.STRING);
+            theParams[1] = new HQLParameter();
+            theParams[1].setName("party_id");
+            theParams[1].setValue(inPerson.getId());
+            theParams[1].setType(Hibernate.LONG);
+            
+           theHQLQuery = "from AnimalModel as am where am.state = :state and am.id in (select l.abstractCancerModel from Log as l where l.submitter = :party_id and l.state = :state)";          
+        } else {
+            theParams = new HQLParameter[1];            
+            theParams[0] = new HQLParameter();
+            theParams[0].setName("state");
+            theParams[0].setValue(inState);
+            theParams[0].setType(Hibernate.STRING);
+            
+            theHQLQuery = "from AnimalModel as am where am.state = :state and am.id in (select l.abstractCancerModel from Log as l where l.state = :state)";
+            
         }
-        else
-        {
-            theHQLQuery += "select l.abstractCancerModel from Log as l where l.submitter = :party_id and l.state = :state)";
-            theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
-            theQuery.setParameter("party_id", inPerson.getId());
-            theQuery.setParameter("state", inState);
-        }
-
-        log.debug("<getModelsByStateForPerson> The HQL query: " + theHQLQuery);
-
-        List theComments = theQuery.list();
+        
+        log.debug("the HQL Query: " + theHQLQuery);
+        List theComments = Search.query(theHQLQuery, theParams);
 
         if (theComments == null)
         {
+            log.debug("theComments == null: " );
             theComments = new ArrayList();
         }
+
+        log.debug("Exiting QueryManagerImpl.getCommentsBySection");
+
         return theComments;
     }
 
