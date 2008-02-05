@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.54 2008-01-31 22:27:52 pandyas Exp $
+ *  $Id: ViewModelAction.java,v 1.55 2008-02-05 17:09:34 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.54  2008/01/31 22:27:52  pandyas
+ *  remove log printouts now that bug is resolved
+ *
  *  Revision 1.53  2008/01/31 22:23:22  pandyas
  *  remove log printouts now that bug is resolved
  *
@@ -357,7 +360,7 @@ public class ViewModelAction extends BaseAction
                 // now go to caBIO and query the gene object....
                 TargetedModification tm = (TargetedModification) eg;
                 GeneIdentifier geneIdentifier = tm.getGeneIdentifier();
-                log.debug("geneIdentifier.getEntrezGeneID() " + geneIdentifier.getEntrezGeneID());
+                //log.debug("geneIdentifier.getEntrezGeneID() " + geneIdentifier.getEntrezGeneID());
                 if (geneIdentifier != null)
                 {
                     log.debug("Connecting to caBIO to look up gene " + geneIdentifier);
