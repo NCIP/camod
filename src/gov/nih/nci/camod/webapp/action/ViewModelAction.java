@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.55 2008-02-05 17:09:34 pandyas Exp $
+ *  $Id: ViewModelAction.java,v 1.56 2008-02-05 17:10:09 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.55  2008/02/05 17:09:34  pandyas
+ *  Removed debug statement for build to dev
+ *
  *  Revision 1.54  2008/01/31 22:27:52  pandyas
  *  remove log printouts now that bug is resolved
  *
@@ -363,7 +366,7 @@ public class ViewModelAction extends BaseAction
                 //log.debug("geneIdentifier.getEntrezGeneID() " + geneIdentifier.getEntrezGeneID());
                 if (geneIdentifier != null)
                 {
-                    log.debug("Connecting to caBIO to look up gene " + geneIdentifier);
+                    //log.debug("Connecting to caBIO to look up gene " + geneIdentifier);
                     // the geneId is available
                     try
                     {
@@ -382,7 +385,7 @@ public class ViewModelAction extends BaseAction
 
                         
                         final int geneCount = (resultList != null) ? resultList.size() : 0;
-                        log.debug("Got " + geneCount + " Gene Objects");
+                        //log.debug("Got " + geneCount + " Gene Objects");
                         if (geneCount > 0)
                         {
                             myGene = (Gene) resultList.get(0);
