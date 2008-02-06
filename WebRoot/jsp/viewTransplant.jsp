@@ -17,7 +17,7 @@
 
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left" width="100%">
 	<tr>
-		<td class="formTitle" height="20" colspan="2">Graft - Model:
+		<td class="formTitle" height="20" colspan="2">Transplant - Model:
 		<c:out value="${mdl.modelDescriptor}" escapeXml="false"/></td>
 	</tr>
 
@@ -31,7 +31,7 @@
 			</tr>
 			       
 		<tr>
-			<td class="GreyBox"><b>Graft:</b></td>
+			<td class="GreyBox"><b>Transplant:</b></td>
 			<td class="GreyBoxRightEnd"><c:out value="${xt.name}" escapeXml="false"/>&nbsp;</td>
 		</tr>
 		<tr>		
