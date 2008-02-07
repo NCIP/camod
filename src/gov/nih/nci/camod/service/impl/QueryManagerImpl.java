@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.88 2008-02-01 17:28:20 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.89 2008-02-07 02:19:29 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.88  2008/02/01 17:28:20  pandyas
+ * Removed log for build
+ *
  * Revision 1.87  2008/02/01 17:21:27  pandyas
  * The Hibernate upgrade to version 3.1.3 broke the query.list method in the QueryManagerImpl
  * Three methods were rewritten to use Search.query method instead
@@ -1787,11 +1790,15 @@ public class QueryManagerImpl extends BaseManager
      */
     private String getModelIdsForCellLine(String inCellLineName) throws PersistenceException
     {
-
-        String theSQLString = "SELECT distinct cell.abs_cancer_model_id FROM cell_line cell " + "WHERE cell.cell_line_id IN (SELECT c.cell_line_id FROM cell_line c " + "  WHERE upper(c.name) LIKE ?)";
-
+        String theSQLString = "SELECT distinct abs_cancer_model_id " + "FROM cell_line c " + "WHERE upper(c.name) LIKE ?";
+    	
+        String theSQLCellLine = "%";
+        if (inCellLineName != null && inCellLineName.trim().length() > 0)
+        {
+        	theSQLCellLine = "%" + inCellLineName.trim().toUpperCase() + "%";
+        }    	
         Object[] theParams = new Object[1];
-        theParams[0] = "%" + inCellLineName + "%";
+        theParams[0] = "%" + theSQLCellLine + "%";
         return getIds(theSQLString, theParams);
 
     }
