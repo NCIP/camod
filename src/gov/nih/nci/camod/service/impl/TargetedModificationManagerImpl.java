@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TargetedModificationManagerImpl.java,v 1.37 2008-01-27 23:27:11 pandyas Exp $
+ * $Id: TargetedModificationManagerImpl.java,v 1.38 2008-02-08 16:46:42 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.37  2008/01/27 23:27:11  pandyas
+ * Modifed to clear Gene Identifer when removed from GUI
+ *
  * Revision 1.36  2008/01/22 15:57:12  pandyas
  * Modified to submit and edit gene identifier object
  *
@@ -207,7 +210,7 @@ public class TargetedModificationManagerImpl extends BaseManager implements
         GeneIdentifier inGeneIdentifier = null;
                 
         if (inTargetedModificationData.getGeneIdentifier() != null && inTargetedModificationData.getGeneIdentifier().length() >0) {        
-        log.info("inTargetedModificationData.getGeneIdentifier(): " + inTargetedModificationData.getGeneIdentifier());
+        log.debug("inTargetedModificationData.getGeneIdentifier(): " + inTargetedModificationData.getGeneIdentifier());
             //Check for existing GeneIdentifier
 	        if (inTargetedModification.getGeneIdentifier() != null) {
 	            inGeneIdentifier = inTargetedModification.getGeneIdentifier();
@@ -218,7 +221,7 @@ public class TargetedModificationManagerImpl extends BaseManager implements
             		inTargetedModificationData.getGeneIdentifier().trim());        
             inTargetedModification.setGeneIdentifier(inGeneIdentifier);   
         } else {
-            log.info("setEntrezGeneID to null");
+            log.debug("setEntrezGeneID to null");
             inTargetedModification.setGeneIdentifier(inGeneIdentifier);
         }
             

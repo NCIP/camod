@@ -2,9 +2,12 @@
  *
  * @author pandyas
  * 
- * $Id: AvailabilityInvestigatorPopulateAction.java,v 1.9 2007-10-31 17:54:57 pandyas Exp $
+ * $Id: AvailabilityInvestigatorPopulateAction.java,v 1.10 2008-02-08 16:47:53 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2007/10/31 17:54:57  pandyas
+ * Fixed #9169  	Connect availability of model to person to resolve the available from investigator issue
+ *
  * Revision 1.8  2007/09/12 19:36:40  pandyas
  * modified debug statements for build to stage tier
  *
@@ -85,7 +88,7 @@ public class AvailabilityInvestigatorPopulateAction extends BaseAction {
                     if (avilablity.getStockNumber() != null){
                     	if(avilablity.getStockNumber().equals("-1")) {
 
-                        log.info("Old 2-tier format.  Setting the stock number to the PI");
+                        log.debug("Old 2-tier format.  Setting the stock number to the PI");
 
                         // Get the PI from the model
                         String theModelID = "" + request.getSession().getAttribute(Constants.MODELID);
@@ -101,7 +104,7 @@ public class AvailabilityInvestigatorPopulateAction extends BaseAction {
                     // AnimalAvailability table
                     availabilityForm.setPrincipalInvestigator(avilablity
             					.getPrincipalInvestigator().getUsername());
-            		log.info("am.getPrincipalInvestigator().getUsername(): " + avilablity
+            		log.debug("am.getPrincipalInvestigator().getUsername(): " + avilablity
             					.getPrincipalInvestigator().getUsername());
                         
                     }

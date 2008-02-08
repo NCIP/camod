@@ -1,7 +1,10 @@
 /*
- * $Id: SpontaneousMutationManagerImpl.java,v 1.22 2008-01-27 23:27:00 pandyas Exp $
+ * $Id: SpontaneousMutationManagerImpl.java,v 1.23 2008-02-08 16:46:19 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.22  2008/01/27 23:27:00  pandyas
+ * Modifed to clear Gene Identifer when removed from GUI
+ *
  * Revision 1.21  2008/01/23 17:04:13  pandyas
  * Reversed GeneIdentifier code to remove duplicates to deploy caCORE32 changes to dev and qa tiers
  *
@@ -119,19 +122,19 @@ public class SpontaneousMutationManagerImpl extends BaseManager implements Spont
 		GeneIdentifier inGeneIdentifier = null;
        
 		if(inSpontaneousMutationData.getGeneIdentifier() != null && inSpontaneousMutationData.getGeneIdentifier().length() >0){
-			log.info("inSpontaneousMutationData.getGeneIdentifier(): " + inSpontaneousMutationData.getGeneIdentifier());
+			log.debug("inSpontaneousMutationData.getGeneIdentifier(): " + inSpontaneousMutationData.getGeneIdentifier());
 				// Check for existing GeneIdentifier
 		        if (inSpontaneousMutation.getGeneIdentifier() != null) {
 		            inGeneIdentifier = inSpontaneousMutation.getGeneIdentifier();
 		        } else {
 		            inGeneIdentifier = new GeneIdentifier();
 		        } 
-				log.info("getGeneIdentifier() != null loop");
+				log.debug("getGeneIdentifier() != null loop");
 	            inGeneIdentifier = GeneIdentifierManagerSingleton.instance().getOrCreate(
 	            		inSpontaneousMutationData.getGeneIdentifier().trim()); 
 				inSpontaneousMutation.setGeneIdentifier(inGeneIdentifier);
 		} else {
-            log.info("setEntrezGeneID to null");
+            log.debug("setEntrezGeneID to null");
             inSpontaneousMutation.setGeneIdentifier(inGeneIdentifier);
         }
 

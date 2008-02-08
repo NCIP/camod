@@ -1,8 +1,14 @@
 /**
  * 
- * $Id: SearchAction.java,v 1.12 2007-12-17 18:03:22 pandyas Exp $
+ * $Id: SearchAction.java,v 1.13 2008-02-08 16:48:24 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2007/12/17 18:03:22  pandyas
+ * Removed * in searchFilter used for getting e-mail from LDAP
+ * Apps Support ticket was submitted (31169 - incorrect e-mail associated with my caMOD account) stating:
+ *
+ * Cheryl Marks submitted a ticket to NCICB Application Support in which she requested that the e-mail address associated with her account in the "User Settings" screen in caMOD be corrected. She has attempted to correct it herself, but because the program queries the LDAP Server for the e-mail address, her corrections were not retained.
+ *
  * Revision 1.11  2007/10/03 16:54:20  pandyas
  * modified debug statement
  *
@@ -80,7 +86,7 @@ public final class SearchAction extends BaseAction {
 			HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
-		log.info("<SearchAction> entered ");
+		log.debug("<SearchAction> entered ");
 
 		SearchForm theForm = new SearchForm();
 		SavedQuery resubmittedSavedQuery = null;

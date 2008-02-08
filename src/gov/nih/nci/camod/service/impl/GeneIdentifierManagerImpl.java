@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GeneIdentifierManagerImpl.java,v 1.1 2008-01-22 18:38:15 pandyas Exp $
+ * $Id: GeneIdentifierManagerImpl.java,v 1.2 2008-02-08 16:45:28 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2008/01/22 18:38:15  pandyas
+ * Modified GeneIdentifier object to make lookup - restrict duplicates
+ *
  *  
  */
 
@@ -23,7 +26,7 @@ public class GeneIdentifierManagerImpl extends BaseManager implements GeneIdenti
     public GeneIdentifier getOrCreate(String inEntrezGeneId) throws Exception
     {
 
-        log.info("<GeneIdentifierManagerImpl> Entering getOrCreate(String)");
+        log.debug("<GeneIdentifierManagerImpl> Entering getOrCreate(String)");
 
         GeneIdentifier theQBEGeneIdentifier = new GeneIdentifier();
         theQBEGeneIdentifier.setEntrezGeneID(inEntrezGeneId);
@@ -55,7 +58,7 @@ public class GeneIdentifierManagerImpl extends BaseManager implements GeneIdenti
             log.error("Error querying for matching GeneIdentifier object.  Creating new one.", e);
             theGeneIdentifier = theQBEGeneIdentifier;
         }
-        log.info("<GeneIdentifierManagerImpl> theGeneIdentifier: " + theGeneIdentifier.toString());
+        log.debug("<GeneIdentifierManagerImpl> theGeneIdentifier: " + theGeneIdentifier.toString());
         return theGeneIdentifier;
     }
 }

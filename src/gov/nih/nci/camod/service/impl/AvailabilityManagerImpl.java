@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AvailabilityManagerImpl.java,v 1.13 2007-10-31 18:59:28 pandyas Exp $
+ * $Id: AvailabilityManagerImpl.java,v 1.14 2008-02-08 16:45:15 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2007/10/31 18:59:28  pandyas
+ * Fixed #9756  	geneID has been replaced with entrezGeneID - existing values need to be moved to new place
+ *
  * Revision 1.12  2007/09/14 19:19:54  pandyas
  * Need to trim the stock number from the GUI for animal availability so display works correctly
  *
@@ -155,10 +158,10 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
             /* Convert the PI name from dropdown to PI_id stored in DB */
             Person thePI = PersonManagerSingleton.instance().getByUsername(inAvailabilityData.getPrincipalInvestigator());
 
-            log.info("thePI : " + thePI.toString());
+            log.debug("thePI : " + thePI.toString());
 
             inAvailability.setPrincipalInvestigator(thePI);
-            log.info("thePI.getId().toString(): " + thePI.getId().toString());
+            log.debug("thePI.getId().toString(): " + thePI.getId().toString());
         }
         else
         {

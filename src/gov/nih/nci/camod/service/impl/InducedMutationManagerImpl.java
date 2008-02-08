@@ -1,8 +1,11 @@
 /**
  * @author schroedln
  * 
- * $Id: InducedMutationManagerImpl.java,v 1.33 2008-01-27 23:26:33 pandyas Exp $
+ * $Id: InducedMutationManagerImpl.java,v 1.34 2008-02-08 16:45:59 pandyas Exp $
  * $Log: not supported by cvs2svn $
+ * Revision 1.33  2008/01/27 23:26:33  pandyas
+ * Modifed to clear Gene Identifer when removed from GUI
+ *
  * Revision 1.32  2008/01/22 15:57:12  pandyas
  * Modified to submit and edit gene identifier object
  *
@@ -213,7 +216,7 @@ public class InducedMutationManagerImpl extends BaseManager implements
          // GeneIdentifier
          GeneIdentifier inGeneIdentifier = null;         
          if (inInducedMutationData.getGeneIdentifier() != null && inInducedMutationData.getGeneIdentifier().length() >0) {        
-             log.info("inTargetedModificationData.getGeneIdentifier(): " + inInducedMutationData.getGeneIdentifier());
+             log.debug("inTargetedModificationData.getGeneIdentifier(): " + inInducedMutationData.getGeneIdentifier());
              //Check for existing GeneIdentifier
              if (inInducedMutation.getGeneIdentifier() != null) {
                  inGeneIdentifier = inInducedMutation.getGeneIdentifier();
@@ -224,10 +227,10 @@ public class InducedMutationManagerImpl extends BaseManager implements
              inGeneIdentifier = GeneIdentifierManagerSingleton.instance().getOrCreate(
             		 inInducedMutationData.getGeneIdentifier().trim());
              
-             log.info("inTargetedModificationData new inGeneIdentifier: " + inGeneIdentifier.toString());
+             log.debug("inTargetedModificationData new inGeneIdentifier: " + inGeneIdentifier.toString());
              inInducedMutation.setGeneIdentifier(inGeneIdentifier);                
          } else {
-             log.info("setEntrezGeneID to null");
+             log.debug("setEntrezGeneID to null");
              inInducedMutation.setGeneIdentifier(inGeneIdentifier);
          }           
 
@@ -273,7 +276,7 @@ public class InducedMutationManagerImpl extends BaseManager implements
 
 		if (inInducedMutationData.getMgiId() != null && inInducedMutationData.getMgiId().length() >0) {
 			// Only create a MutationIdentifier if the value is filled in on the GUI
-			log.info("inInducedMutationData.getMgiId() != null");
+			log.debug("inInducedMutationData.getMgiId() != null");
 			if (inInducedMutation.getMutationIdentifier() != null) {
 				inMutationIdentifier = inInducedMutation.getMutationIdentifier();
 			} else {
@@ -288,7 +291,7 @@ public class InducedMutationManagerImpl extends BaseManager implements
 		}
 		
 		if (inInducedMutationData.getZfinId() != null && inInducedMutationData.getZfinId().length() >0) {
-			log.info("inInducedMutationData.getZfinId() != null");			
+			log.debug("inInducedMutationData.getZfinId() != null");			
 			if (inInducedMutation.getMutationIdentifier() != null) {
 				inMutationIdentifier = inInducedMutation.getMutationIdentifier();
 			} else {
@@ -303,7 +306,7 @@ public class InducedMutationManagerImpl extends BaseManager implements
 		}
 		
 		if (inInducedMutationData.getRgdId() != null && inInducedMutationData.getRgdId().length() >0) {
-			log.info("inInducedMutationData.getRgdId() != null");			
+			log.debug("inInducedMutationData.getRgdId() != null");			
 			if (inInducedMutation.getMutationIdentifier() != null) {
 				inMutationIdentifier = inInducedMutation.getMutationIdentifier();
 			} else {
