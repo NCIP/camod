@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.60 2008-02-01 16:29:37 pandyas Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.61 2008-02-08 16:37:15 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.60  2008/02/01 16:29:37  pandyas
+ * Added break to modification type display box
+ *
  * Revision 1.59  2008/01/23 22:26:03  pandyas
  * Fixed #11833  	comments for associated expression are not shown for targeted modification and genomic segment
  *
@@ -1026,7 +1029,7 @@
         <tr>
             <td class="GreyBox"><b>CAS Number</b></td>
             <td class="GreyBoxRightEnd">            	     
-				<c:if test="${not empty im.environmentalFactor.type}">
+				<c:if test="${not empty im.environmentalFactor.casNumber}">
 			            <a href="http://dtp.nci.nih.gov/dtpstandard/servlet/ChemData?queryHOLD=&searchtype=CAS&chemnameboolean=and&outputformat=html&searchlist=<c:out value="${im.environmentalFactor.casNumber}"/>&Submit=Submit" target="blank"><c:out value="${im.environmentalFactor.casNumber}"/></a>
 				</c:if>&nbsp;
             </td>
