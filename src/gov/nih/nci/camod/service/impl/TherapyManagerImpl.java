@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: TherapyManagerImpl.java,v 1.27 2007-10-31 19:11:04 pandyas Exp $
+ * $Id: TherapyManagerImpl.java,v 1.28 2008-02-11 18:00:08 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.27  2007/10/31 19:11:04  pandyas
+ * Fixed #8188 	Rename UnctrlVocab items to text entries
+ *
  * Revision 1.26  2007/09/12 19:36:03  pandyas
  * modified debug statements for build to stage tier
  *
@@ -303,12 +306,16 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
 			} catch (NumberFormatException e) {
 				log.error("Bad NSC number: " + theNscNumber);
 			}
+		} else {
+			theAgent.setNscNumber(null);
 		}
 		log.debug("populateTherapy setNscNumber");
 
 		String theCasNumber = inTherapyData.getCasNumber().trim();
 		if (theCasNumber != null && theCasNumber.length() > 0) {
 			theAgent.setCasNumber(theCasNumber);
+		} else {
+			theAgent.setCasNumber(null);
 		}
 		log.debug("populateTherapy setCasNumber");
 
