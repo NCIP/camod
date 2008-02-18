@@ -42,9 +42,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: NameValueList.java,v 1.2 2007-10-18 18:26:36 pandyas Exp $
+ * $Id: NameValueList.java,v 1.3 2008-02-18 16:19:58 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2007/10/18 18:26:36  pandyas
+ * Added to prevent cross--site scripting attacks
+ *
  *
  */
 package gov.nih.nci.camod.util;
@@ -85,12 +88,11 @@ public class NameValueList
         // Put in order of most entered
         approvedSpeciesList.add(new NameValue("Mus musculus","Mus musculus"));  
         approvedSpeciesList.add(new NameValue("Rattus norvegicus","Rattus norvegicus"));
-        approvedSpeciesList.add(new NameValue("Rattus ratus","Rattus ratus"));
+        approvedSpeciesList.add(new NameValue("Rattus rattus","Rattus rattus"));
         approvedSpeciesList.add(new NameValue("Danio rerio","Danio rerio"));  
-        
+        approvedSpeciesList.add(new NameValue("Mesocricetus auratus","Mesocricetus auratus"));        
         approvedSpeciesList.add(new NameValue("Felis catus","Felis catus"));
         approvedSpeciesList.add(new NameValue("Bos taurus","Bos taurus"));  
-        approvedSpeciesList.add(new NameValue("Mesocricetus auratus","Mesocricetus auratus")); 
         approvedSpeciesList.add(new NameValue("Canis familiaris","Canis familiaris"));         
         approvedSpeciesList.add(new NameValue("Homo sapiens","Homo sapiens")); 
         approvedSpeciesList.add(new NameValue("Meriones unguiculatus","Meriones unguiculatus")); 
