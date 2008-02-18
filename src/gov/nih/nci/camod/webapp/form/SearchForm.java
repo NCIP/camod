@@ -42,9 +42,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.28 2008-02-15 16:06:37 pandyas Exp $
+ * $Id: SearchForm.java,v 1.29 2008-02-18 15:36:37 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.28  2008/02/15 16:06:37  pandyas
+ * Added code for SQL injection - App Scan report
+ *
  * Revision 1.27  2008/01/22 17:21:24  pandyas
  * valid species - comment out
  *
@@ -709,7 +712,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         
         
         // validate geneName against malicious characters to prevent blind SQl injection attacks
-        if (geneName != null && geneName.length() > 0 )
+        if (geneName != null  )
         { 
             //System.out.println("Enter validate for geneName loop");
             if (!isLetterOrDigit(geneName))
@@ -793,7 +796,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         }          
         
         // validate therpy compound/drug against malicious characters to prevent blind SQl injection attacks
-        if (therapeuticApproach != null  && therapeuticApproach.length() > 0 )
+        if (therapeuticApproach != null   )
         { 
             //System.out.println("Enter validate for therapeuticApproach loop");
             if (!isLetterOrDigit(therapeuticApproach))
