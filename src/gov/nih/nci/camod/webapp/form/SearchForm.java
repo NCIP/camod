@@ -42,9 +42,13 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.30 2008-02-20 21:51:47 pandyas Exp $
+ * $Id: SearchForm.java,v 1.31 2008-02-21 21:52:26 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.30  2008/02/20 21:51:47  pandyas
+ * Added code to eliminate blind SQL injection in carcinogenicIntervention parameter on Adv Search screen:
+ * "Filter out hazardous characters from user input (High) Parameter: carcinogenicIntervention - Blind SQL Injection"
+ *
  * Revision 1.29  2008/02/18 15:36:37  pandyas
  * Modified for annoying functionality with clear button not working
  *
@@ -622,6 +626,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         // Identify the request parameter containing the method name
         String parameter = mapping.getParameter();
         
+/*
         // validate keyword against malicious characters to prevent blind SQl injection attacks
         if (keyword != null && keyword.length() > 0 )
         { 
@@ -826,7 +831,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             }
             System.out.println("Exit validate for externalSource loop");             
         } 
-        
+*/        
         if (parameter != null) {
             // Identify the method name to be dispatched to.
             String method = request.getParameter(parameter);
