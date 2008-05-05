@@ -42,9 +42,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.31 2008-02-21 21:52:26 pandyas Exp $
+ * $Id: SearchForm.java,v 1.32 2008-05-05 15:07:00 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.31  2008/02/21 21:52:26  pandyas
+ * Final version for production
+ *
  * Revision 1.30  2008/02/20 21:51:47  pandyas
  * Added code to eliminate blind SQL injection in carcinogenicIntervention parameter on Adv Search screen:
  * "Filter out hazardous characters from user input (High) Parameter: carcinogenicIntervention - Blind SQL Injection"
@@ -626,7 +629,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         // Identify the request parameter containing the method name
         String parameter = mapping.getParameter();
         
-/*
+
         // validate keyword against malicious characters to prevent blind SQl injection attacks
         if (keyword != null && keyword.length() > 0 )
         { 
@@ -666,6 +669,21 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             }
         }
         
+        // validate for species
+        if (species != null && species.length() > 0 )
+        {
+            System.out.println("Enter validate for species loop");            
+            NameValueList.generateApprovedSpeciesList();
+            request.getSession().setAttribute(Constants.Dropdowns.SEARCHSPECIESDROP, NameValueList.getApprovedSpeciesList());
+
+            if (!isValidValue(species,Constants.Dropdowns.SEARCHSPECIESDROP,request))
+            {
+                // populate the validation message
+                errors.add("species", new ActionMessage("error.species.validValue"));               
+            }
+            System.out.println("Exit validate for species loop");             
+        }        
+        
         // validate organ; against malicious characters to prevent blind SQl injection attacks
         if (organ != null  && organ.length() > 0)
         { 
@@ -691,20 +709,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         }        
         
         
-        // validate for species
-        if (species != null && species.length() > 0 )
-        {
-            System.out.println("Enter validate for species loop");            
-            NameValueList.generateApprovedSpeciesList();
-            request.getSession().setAttribute(Constants.Dropdowns.SEARCHSPECIESDROP, NameValueList.getApprovedSpeciesList());
 
-            if (!isValidValue(species,Constants.Dropdowns.SEARCHSPECIESDROP,request))
-            {
-                // populate the validation message
-                errors.add("species", new ActionMessage("error.species.validValue"));               
-            }
-            System.out.println("Exit validate for species loop");             
-        }
         
         // validate phenotype against malicious characters to prevent blind SQl injection attacks
         if (phenotype != null  && phenotype.length() > 0)
@@ -831,7 +836,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             }
             System.out.println("Exit validate for externalSource loop");             
         } 
-*/        
+        
         if (parameter != null) {
             // Identify the method name to be dispatched to.
             String method = request.getParameter(parameter);
@@ -859,13 +864,16 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
      */
     private boolean isValidValue(String input , String source , HttpServletRequest request)
     {
-        System.out.println("In SearchForm.isValidValue input " + input); 
-        System.out.println("In SearchForm.isValidValue source " + source.toString());         
+        System.out.println("In SearchForm.isValidValue input " + "'" + input + "'"); 
+        System.out.println("In SearchForm.isValidValue source " + source.toString());
+        String trimInput = input.trim();
+        System.out.println("In SearchForm.isValidValue input " + "'" + trimInput + "'"); 
+        
         // validate for intentCode
         List dropDownList = (List) request.getSession().getAttribute(source);        
         NameValue nv = null ;
         boolean validValue = true ;
-        if (input != null && input.length() > 0 && dropDownList != null )
+        if (trimInput != null && trimInput.length() > 0 && dropDownList != null )
         {
             // assign the value to false
             validValue = false ;
@@ -873,10 +881,10 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             for (int i = 0 ; i < dropDownList.size() ; i++ )
             {               
                 nv  = (NameValue) dropDownList.get(i);
-                System.out.println("isValidValue loop nv: " + nv.getValue());                
+                System.out.println("isValidValue loop nv: " + "'" + nv.getValue() + "'");                
                 if (nv.getValue().equals(input))
                 {
-                    System.out.println("nv.getValue().equals(input)");                  	
+                    System.out.println("nv.getValue().equals(trimInput)");                  	
                     validValue = true ;
                     break ;
                 }
