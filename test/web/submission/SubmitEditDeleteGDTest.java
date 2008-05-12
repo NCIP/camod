@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SubmitGDTest.java,v 1.8 2006-10-11 15:47:41 pandyas Exp $
+ * $Id: SubmitEditDeleteGDTest.java,v 1.1 2008-05-12 16:29:06 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2006/10/11 15:47:41  pandyas
+ * changes while testing 2.1.1
+ *
  * Revision 1.7  2006/04/27 15:08:52  pandyas
  * Modified while testing caMod 2.1
  *
@@ -34,10 +37,10 @@ import com.meterware.httpunit.WebLink;
 import com.meterware.httpunit.WebResponse;
 
 /** This is a simple example of using HttpUnit to read and understand web pages. * */
-public class SubmitGDTest extends BaseModelNeededTest
+public class SubmitEditDeleteGDTest extends BaseModelNeededTest
 {
 
-    public SubmitGDTest(String testName)
+    public SubmitEditDeleteGDTest(String testName)
     {
         super(testName);
     }

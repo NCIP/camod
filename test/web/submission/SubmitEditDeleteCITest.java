@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SubmitCITest.java,v 1.7 2006-04-27 15:08:52 pandyas Exp $
+ * $Id: SubmitEditDeleteCITest.java,v 1.1 2008-05-12 16:29:06 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2006/04/27 15:08:52  pandyas
+ * Modified while testing caMod 2.1
+ *
  * Revision 1.6  2006/04/17 19:37:34  pandyas
  * caMod 2.1 OM changes
  *
@@ -22,9 +25,9 @@ import web.base.BaseModelNeededTest;
 import com.meterware.httpunit.*;
 
 /** This is a simple example of using HttpUnit to read and understand web pages. * */
-public class SubmitCITest extends BaseModelNeededTest {
+public class SubmitEditDeleteCITest extends BaseModelNeededTest {
 
-    public SubmitCITest(String testName) {
+    public SubmitEditDeleteCITest(String testName) {
         super(testName);
     }
 
