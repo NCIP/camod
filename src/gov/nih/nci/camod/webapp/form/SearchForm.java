@@ -42,9 +42,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.32 2008-05-05 15:07:00 pandyas Exp $
+ * $Id: SearchForm.java,v 1.33 2008-05-12 16:33:52 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.32  2008/05/05 15:07:00  pandyas
+ * NCI security scan changes
+ *
  * Revision 1.31  2008/02/21 21:52:26  pandyas
  * Final version for production
  *
@@ -685,30 +688,12 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         }        
         
         // validate organ; against malicious characters to prevent blind SQl injection attacks
-        if (organ != null  && organ.length() > 0)
-        { 
-            System.out.println("Enter validate for organ loop");
-            if (!isLetterOrDigit(organ))
-            {
-               // populate the validation message
-               errors.add("organ", new ActionMessage("error.organ.validValue"));
-            } 
-            System.out.println("Exit validate for organ loop");
-        }
+        // organ for some trees returns Rat_Abdominal_Cavity_NOS values which fails 
+        // isLetterOrDigit testing - need exception for organ
         
         // validate tumorClassification against malicious characters to prevent blind SQl injection attacks
-        if (tumorClassification != null && tumorClassification.length() > 0)
-        { 
-            System.out.println("Enter validate for tumorClassification loop");
-            if (!isLetterOrDigit(tumorClassification))
-            {
-               // populate the validation message
-               errors.add("tumorClassification", new ActionMessage("error.tumorClassification.validValue"));
-            } 
-            System.out.println("Exit validate for tumorClassification loop");
-        }        
-        
-        
+        // tumorClassification for some trees returns Rat_Cardiovascular_System_Neoplasms values which fails 
+        // isLetterOrDigit testing - need exception for tumorClassification
 
         
         // validate phenotype against malicious characters to prevent blind SQl injection attacks
