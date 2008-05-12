@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchSimple.jsp,v 1.51 2007-10-18 18:28:28 pandyas Exp $
+ * $Id: searchSimple.jsp,v 1.52 2008-05-12 15:29:10 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.51  2007/10/18 18:28:28  pandyas
+ * Moved error message up on page
+ *
  * Revision 1.50  2007/10/17 18:24:17  pandyas
  * Added error message tag for cross--site scripting attacks messages
  *
@@ -189,7 +192,7 @@
 		
 		<tr>
 		    <td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Model Name / Model Descriptor </label>
+			<td class="formLabel"><label for="field1">Model Name / Model Descriptor:</label>
 			</td>
 			<td class="formField">			
 				<html:text styleClass="formFieldSized" styleId="modelDescriptor" property="modelDescriptor" size="30"/>
@@ -200,7 +203,7 @@
 		</tr>
 		<tr>
 			<td class="formRequiredNotice" width="0">&nbsp;</td>
-			<td class="formLabel"><label for="field2">Principal Investigator's Name</label></td>
+			<td class="formLabel"><label for="field2">Principal Investigator's Name:</label></td>
 			
 			<td class="formField">				
 				<html:select styleClass="formFieldSized" size="1" property="piName" >
@@ -212,7 +215,7 @@
 		
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field3">Species</label></td>
+			<td class="formLabel"><label for="field3">Species:</label></td>
 			<td class="formField">				
 				<html:select styleClass="formFieldSized" size="1" property="species" onchange="getOrganTree(this);">
 					<html:optionsCollection name="<%= Dropdowns.APPROVEDSPECIESDROP %>" />										

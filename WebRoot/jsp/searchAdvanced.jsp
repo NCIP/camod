@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.69 2007-10-17 18:24:17 pandyas Exp $
+ * $Id: searchAdvanced.jsp,v 1.70 2008-05-12 15:29:21 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.69  2007/10/17 18:24:17  pandyas
+ * Added error message tag for cross--site scripting attacks messages
+ *
  * Revision 1.68  2007/09/20 15:24:45  pandyas
  * Bug # 7751: Modified text next to tool strain on advanced search
  *
@@ -260,7 +263,7 @@
 		
 		<tr>
 		    <td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Model Name /Model Descriptor:</label> </td>
+			<td class="formLabel"><label for="field1">Model Name / Model Descriptor:</label> </td>
 			<td class="formField">
 				<html:text styleClass="formFieldSized" styleId="modelDescriptor" property="modelDescriptor" size="30"/>
 				<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="modelDescriptor" target="modelDescriptor"
