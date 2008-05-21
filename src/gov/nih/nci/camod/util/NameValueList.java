@@ -42,9 +42,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: NameValueList.java,v 1.4 2008-05-05 15:07:45 pandyas Exp $
+ * $Id: NameValueList.java,v 1.5 2008-05-21 19:04:36 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2008/05/05 15:07:45  pandyas
+ * NCI security scan changes - could not get value to work without spaces - trim did not work so added another entry to validate
+ *
  * Revision 1.3  2008/02/18 16:19:58  pandyas
  * Fixed typo in rat scientific name
  *
@@ -71,9 +74,43 @@ public class NameValueList
     private static List carcinogenicInterventionList = new ArrayList();
 
     // stores a list of external Sources
-    private static List externalSourceList = new ArrayList();    
+    private static List externalSourceList = new ArrayList(); 
     
+    // stores a list of Table of Content query names
+    private static List tableOfContentsList = new ArrayList();    
     
+
+    
+    public static void generateTableOfContentsList() {
+
+    	tableOfContentsList = new ArrayList();
+    	tableOfContentsList.add(new NameValue("Cardiovascular_System_Query","Cardiovascular_System_Query"));
+    	tableOfContentsList.add(new NameValue("Digestive_System_Query","Digestive_System_Query"));    	
+    	tableOfContentsList.add(new NameValue("Endocrine_Gland_Query","Endocrine_Gland_Query"));
+    	tableOfContentsList.add(new NameValue("Integument_System_Query","Integument_System_Query"));
+    	tableOfContentsList.add(new NameValue("Lymphohematopoietic_System_Query","Lymphohematopoietic_System_Query"));
+    	tableOfContentsList.add(new NameValue("Musculoskeletal_System_Query","Musculoskeletal_System_Query"));
+    	tableOfContentsList.add(new NameValue("Nervous_System_Query","Nervous_System_Query"));
+    	tableOfContentsList.add(new NameValue("Reproductive_System_Query","Reproductive_System_Query"));
+    	tableOfContentsList.add(new NameValue("Respratory_System_Query","Respratory_System_Query"));
+    	tableOfContentsList.add(new NameValue("Special_Sensory_Organs_Query","Special_Sensory_Organs_Query"));
+    	tableOfContentsList.add(new NameValue("Urinary_System_Query","Urinary_System_Query"));
+    	tableOfContentsList.add(new NameValue("Head_or_Neck_Query","Head_or_Neck_Query"));
+    	tableOfContentsList.add(new NameValue("Prostate_Lesion_Query","Prostate_Lesion_Query"));
+    	tableOfContentsList.add(new NameValue("Mammary_Gland_Query","Mammary_Gland_Query"));
+    	tableOfContentsList.add(new NameValue("Brain_Tumor_Query","Brain_Tumor_Query"));
+    	tableOfContentsList.add(new NameValue("Liver_Tumor_Query","Liver_Tumor_Query"));
+    	tableOfContentsList.add(new NameValue("Metastases_Query","Metastases_Query"));
+    	tableOfContentsList.add(new NameValue("Rattus_Norvegicus_Query","Rattus_Norvegicus_Query"));
+    	tableOfContentsList.add(new NameValue("Rattus_Rattus_Query","Rattus_Rattus_Query"));
+    	tableOfContentsList.add(new NameValue("Transplant_Query","Transplant_Query"));
+    	
+    }
+
+    public static List getTableOfContentsList()  {
+    	generateTableOfContentsList();
+        return  tableOfContentsList ;
+    }    
     
     public static void generateExternalSourceList() {
 
