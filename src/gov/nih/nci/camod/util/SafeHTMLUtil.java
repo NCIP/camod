@@ -1,13 +1,19 @@
 /**
  * 
- * $Id: SafeHTMLUtil.java,v 1.1 2008-05-21 19:04:36 pandyas Exp $
+ * $Id: SafeHTMLUtil.java,v 1.2 2008-05-21 19:33:27 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2008/05/21 19:04:36  pandyas
+ * Modified advanced search to prevent SQL injection
+ * Concolidated all utility methods in new class
+ * Re: Apps Scan run 05/15/2008
+ *
  * 
  *  Author for class name and clean():  Ryan Landy
  *  Utility to clean malicious characters from code to prevent 
  *  SQL injection attacks
  *  Addeed utility methods from other sources to one central class
+ *  htmlparser.jar  version 1.6  	release June 10, 2006
  */
 
 package gov.nih.nci.camod.util;
