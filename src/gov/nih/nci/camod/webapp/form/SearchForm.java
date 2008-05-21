@@ -42,9 +42,13 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.33 2008-05-12 16:33:52 pandyas Exp $
+ * $Id: SearchForm.java,v 1.34 2008-05-21 19:07:33 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.33  2008/05/12 16:33:52  pandyas
+ * REmoved test for letter or digit for organ and tumorClassification - EVS returns results with special characters therefore this can not be validated against malicious characters (special characters) for the security scan
+ * We need to obtain an exception
+ *
  * Revision 1.32  2008/05/05 15:07:00  pandyas
  * NCI security scan changes
  *
@@ -139,6 +143,8 @@ package gov.nih.nci.camod.webapp.form;
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.util.NameValue;
 import gov.nih.nci.camod.util.NameValueList;
+import gov.nih.nci.camod.util.SafeHTMLUtil;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -251,6 +257,10 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
     public void setOrgan(String organ)
     {
         this.organ = organ;
+        // Clean the parameter
+        if (this.organ != null && !this.organ.equals(""))  {
+                this.organ = SafeHTMLUtil.clean(this.organ);
+        }
     }
     
     public String getPiName() {
@@ -542,6 +552,10 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
     public void setTumorClassification(String tumorClassification)
     {
         this.tumorClassification = tumorClassification;
+        // Clean the parameter
+        if (this.tumorClassification != null && !this.tumorClassification.equals(""))  {
+                this.tumorClassification = SafeHTMLUtil.clean(this.tumorClassification);
+        }        
     }
     
     /**
@@ -637,7 +651,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         if (keyword != null && keyword.length() > 0 )
         { 
             System.out.println("Enter validate for keyword loop");
-            if (!isLetterOrDigit(keyword))
+            if (!SafeHTMLUtil.isLetterOrDigit(keyword))
             {
                // populate the validation message
                errors.add("keyword", new ActionMessage("error.keyword.validValue"));
@@ -649,7 +663,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         if (modelDescriptor != null  && modelDescriptor.length() > 0)
         { 
             System.out.println("Enter validate for modelDescriptor loop");
-            if (!isLetterOrDigit(modelDescriptor))
+            if (!SafeHTMLUtil.isLetterOrDigit(modelDescriptor))
             {
                // populate the validation message
                errors.add("modelDescriptor", new ActionMessage("error.modelDescriptor.validValue"));
@@ -665,7 +679,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             piNameList = (List)request.getSession().getAttribute(Constants.Dropdowns.PRINCIPALINVESTIGATORQUERYDROP);
             request.getSession().setAttribute(Constants.Dropdowns.SEARCHPIDROP, piNameList);            
             
-            if (!isValidStringValue(piName,Constants.Dropdowns.SEARCHPIDROP,request))
+            if (!SafeHTMLUtil.isValidStringValue(piName,Constants.Dropdowns.SEARCHPIDROP,request))
             {
                // populate the validation message
                errors.add("piName", new ActionMessage("error.piName.validValue"));
@@ -679,7 +693,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             NameValueList.generateApprovedSpeciesList();
             request.getSession().setAttribute(Constants.Dropdowns.SEARCHSPECIESDROP, NameValueList.getApprovedSpeciesList());
 
-            if (!isValidValue(species,Constants.Dropdowns.SEARCHSPECIESDROP,request))
+            if (!SafeHTMLUtil.isValidValue(species,Constants.Dropdowns.SEARCHSPECIESDROP,request))
             {
                 // populate the validation message
                 errors.add("species", new ActionMessage("error.species.validValue"));               
@@ -688,19 +702,27 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         }        
         
         // validate organ; against malicious characters to prevent blind SQl injection attacks
-        // organ for some trees returns Rat_Abdominal_Cavity_NOS values which fails 
-        // isLetterOrDigit testing - need exception for organ
+        if (organ != null  )
+        { 
+            System.out.println("Enter validate for organ loop: " + organ);
+            setOrgan(organ);
+            System.out.println("Exit validate for organ loop: + organ");
+        }
         
         // validate tumorClassification against malicious characters to prevent blind SQl injection attacks
-        // tumorClassification for some trees returns Rat_Cardiovascular_System_Neoplasms values which fails 
-        // isLetterOrDigit testing - need exception for tumorClassification
+        if (tumorClassification != null )
+        { 
+            System.out.println("Enter validate for tumorClassification loop: " + tumorClassification);
+            setTumorClassification(tumorClassification);
+            System.out.println("Exit validate for tumorClassification loop: " + tumorClassification);
+        }        
 
         
         // validate phenotype against malicious characters to prevent blind SQl injection attacks
         if (phenotype != null  && phenotype.length() > 0)
         { 
             System.out.println("Enter validate for phenotype loop");
-            if (!isLetterOrDigit(phenotype))
+            if (!SafeHTMLUtil.isLetterOrDigit(phenotype))
             {
                // populate the validation message
                errors.add("phenotype", new ActionMessage("error.phenotype.validValue"));
@@ -713,7 +735,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         if (geneName != null  )
         { 
             System.out.println("Enter validate for geneName loop");
-            if (!isLetterOrDigit(geneName))
+            if (!SafeHTMLUtil.isLetterOrDigit(geneName))
             {
                // populate the validation message
                errors.add("geneName", new ActionMessage("error.geneName.validValue"));
@@ -722,16 +744,21 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         }  
         
         // validate genomicSegDesignator against malicious characters to prevent blind SQl injection attacks
-        if (genomicSegDesignator != null  && genomicSegDesignator.length() > 0)
-        { 
-            System.out.println("Enter validate for genomicSegDesignator loop");
-            if (!isLetterOrDigit(genomicSegDesignator))
+        if (genomicSegDesignator != null && genomicSegDesignator.length() > 0 )
+        {
+            List genomicSegDesigList = new ArrayList();
+            genomicSegDesigList = (List)request.getSession().getAttribute(Constants.Dropdowns.CLONEDESIGNATORQUERYDROP);
+            request.getSession().setAttribute(Constants.Dropdowns.SEARCHGENOMICSEGMENT, genomicSegDesigList);            
+            
+            if (!SafeHTMLUtil.isValidStringValue(genomicSegDesignator,Constants.Dropdowns.SEARCHGENOMICSEGMENT,request))
             {
                // populate the validation message
                errors.add("genomicSegDesignator", new ActionMessage("error.genomicSegDesignator.validValue"));
-            } 
-            System.out.println("Exit validate for genomicSegDesignator loop");
+               return errors;
+            }
+            System.out.println("Exit validate for genomicSegDesignator loop");                 
         }        
+        
         
         
         // validate for inducedMutationAgent
@@ -741,7 +768,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             NameValueList.generateInducedMutationAgentList();
             request.getSession().setAttribute(Constants.Dropdowns.SEARCHINDUCEDMUTATIONDROP, NameValueList.getInducedMutationAgentList());
 
-            if (!isValidValue(inducedMutationAgent,Constants.Dropdowns.SEARCHINDUCEDMUTATIONDROP,request) || !isLetterOrDigit(inducedMutationAgent))
+            if (!SafeHTMLUtil.isValidValue(inducedMutationAgent,Constants.Dropdowns.SEARCHINDUCEDMUTATIONDROP,request) || !SafeHTMLUtil.isLetterOrDigit(inducedMutationAgent))
             {
                 // populate the validation message
                 errors.add("inducedMutationAgent", new ActionMessage("error.inducedMutationAgent.validValue"));
@@ -756,8 +783,8 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             NameValueList.generateCarcinogenicInterventionList();
             request.getSession().setAttribute(Constants.Dropdowns.SEARCHCARCINOGENEXPOSUREDROP, NameValueList.getCarcinogenicInterventionList());
 
-	            if (!isValidValue(carcinogenicIntervention,Constants.Dropdowns.SEARCHCARCINOGENEXPOSUREDROP,request) 
-	            		|| !isLetterOrDigitNotChemicalDrug(carcinogenicIntervention))
+	            if (!SafeHTMLUtil.isValidValue(carcinogenicIntervention,Constants.Dropdowns.SEARCHCARCINOGENEXPOSUREDROP,request) 
+	            		|| !SafeHTMLUtil.isLetterOrDigitNotChemicalDrug(carcinogenicIntervention))
 	            {
 	                   // populate the validation message
 	                   errors.add("carcinogenicIntervention", new ActionMessage("error.carcinogenicIntervention.validValue"));
@@ -772,7 +799,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
                 agentNameList = (List)request.getSession().getAttribute(Constants.Dropdowns.ENVIRONMENTALFACTORNAMESDROP);
                 request.getSession().setAttribute(Constants.Dropdowns.SEARCHENVIRONFACTORDROP, agentNameList);            
                 
-                if (!isValidStringValue(agentName,Constants.Dropdowns.SEARCHENVIRONFACTORDROP,request))
+                if (!SafeHTMLUtil.isValidStringValue(agentName,Constants.Dropdowns.SEARCHENVIRONFACTORDROP,request))
                 {
                    // populate the validation message
                    errors.add("agentName", new ActionMessage("error.agentName.validValue"));
@@ -783,27 +810,38 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             
         }  
 
-        // validate cellLine against malicious characters to prevent blind SQl injection attacks
-        if (cellLine != null  && cellLine.length() > 0 )
-        { 
-            System.out.println("Enter validate for cellLine loop");
-            if (!isLetterOrDigit(cellLine))
+        
+        // validate for cellLine            
+        if (cellLine != null && cellLine.length() > 0 )
+        {
+            List cellLineList = new ArrayList();
+            cellLineList = (List)request.getSession().getAttribute(Constants.Dropdowns.CELLLINENAMEQUERYDROP);
+            request.getSession().setAttribute(Constants.Dropdowns.SEARCHCELLLINE, cellLineList);            
+            
+            if (!SafeHTMLUtil.isValidStringValue(cellLine,Constants.Dropdowns.SEARCHCELLLINE,request))
             {
                // populate the validation message
                errors.add("cellLine", new ActionMessage("error.cellLine.validValue"));
-            } 
-            System.out.println("Exit validate for cellLine loop");
-        }          
+               return errors;
+            }
+            System.out.println("Exit validate for cellLine loop");                 
+        }        
+        
+         
         
         // validate therpy compound/drug against malicious characters to prevent blind SQl injection attacks
         if (therapeuticApproach != null   )
         { 
-            System.out.println("Enter validate for therapeuticApproach loop");
-            if (!isLetterOrDigit(therapeuticApproach))
+            List drugNameList = new ArrayList();
+            drugNameList = (List)request.getSession().getAttribute(Constants.Dropdowns.THERAPEUTICAPPROACHDRUGQUERYDROP);
+            request.getSession().setAttribute(Constants.Dropdowns.SEARCHTHERAPEUTICDRUGNAME, drugNameList);            
+            
+            if (!SafeHTMLUtil.isValidStringValue(cellLine,Constants.Dropdowns.SEARCHTHERAPEUTICDRUGNAME,request))
             {
                // populate the validation message
                errors.add("therapeuticApproach", new ActionMessage("error.therapeuticApproach.validValue"));
-            } 
+               return errors;
+            }
             System.out.println("Exit validate for therapeuticApproach loop");
         }
         
@@ -814,7 +852,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             NameValueList.generateExternalSourceList();
             request.getSession().setAttribute(Constants.Dropdowns.SEARCHEXTERNALSOURCEDROP, NameValueList.getExternalSourceList());
 
-            if (!isValidValue(externalSource,Constants.Dropdowns.SEARCHEXTERNALSOURCEDROP,request))
+            if (!SafeHTMLUtil.isValidValue(externalSource,Constants.Dropdowns.SEARCHEXTERNALSOURCEDROP,request))
             {
                 // populate the validation message
                 errors.add("externalSource", new ActionMessage("error.externalSource.validValue"));
@@ -837,146 +875,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             }        
         }       
         return errors;               
-    }
-
-
-    /**
-     * a utlity method to check the valid value againts the dropdown
-     * @param input - the data to be validated
-     * @param source - the source against which the input to be validated
-     * @param request - http request
-     * @return boolean
-     */
-    private boolean isValidValue(String input , String source , HttpServletRequest request)
-    {
-        System.out.println("In SearchForm.isValidValue input " + "'" + input + "'"); 
-        System.out.println("In SearchForm.isValidValue source " + source.toString());
-        String trimInput = input.trim();
-        System.out.println("In SearchForm.isValidValue input " + "'" + trimInput + "'"); 
-        
-        // validate for intentCode
-        List dropDownList = (List) request.getSession().getAttribute(source);        
-        NameValue nv = null ;
-        boolean validValue = true ;
-        if (trimInput != null && trimInput.length() > 0 && dropDownList != null )
-        {
-            // assign the value to false
-            validValue = false ;
-            
-            for (int i = 0 ; i < dropDownList.size() ; i++ )
-            {               
-                nv  = (NameValue) dropDownList.get(i);
-                System.out.println("isValidValue loop nv: " + "'" + nv.getValue() + "'");                
-                if (nv.getValue().equals(input))
-                {
-                    System.out.println("nv.getValue().equals(trimInput)");                  	
-                    validValue = true ;
-                    break ;
-                }
-            }
-        }
-        System.out.println("In SearchForm.isValidValue validValue " + validValue);         
-        return validValue ;
-    }
-    
-    private boolean isValidStringValue(String input , String source , HttpServletRequest request)
-    {
-        System.out.println("In SearchForm.isValidStringValue input " + input); 
-        System.out.println("In SearchForm.isValidStringValue source " + source.toString());         
-        // validate for intentCode
-        List dropDownList = (List) request.getSession().getAttribute(source);        
-        String nv = null ;
-        boolean validValue = true ;
-        if (input != null && input.length() > 0 && dropDownList != null )
-        {
-            // assign the value to false
-            validValue = false ;
-             
-            for (int i = 0 ; i < dropDownList.size() ; i++ )
-            {               
-                nv  =  (String)dropDownList.get(i); 
-                System.out.println("isValidStringValue loop nv: " + nv);                
-                if (nv.equals(input))
-                {
-                    validValue = true ;
-                    break ;
-                }
-            }
-        }
-        System.out.println("In SearchForm.isValidStringValue validValue " + validValue);         
-        return validValue ;
-    }    
-
-    // This method needs testing for sucessful searches
-    private boolean isLetterOrDigit(String input)
-    {  
-        System.out.println("In SearchForm.isLetterOrDigit input " + input);     	
-        for (int i = 0; i < input.length(); i++)
-        {
-                if (!Character.isLetterOrDigit(input.charAt(i)))
-                return false;
-        }
-        return true;
-    }
-    
-    // This method needs testing for sucessful searches
-    private boolean isLetterOrDigitNotChemicalDrug(String input)
-    {  
-        System.out.println("In SearchForm.isLetterOrDigitNotChemicalDrug input " + input);          
-        // validate for intentCode
-        boolean validValue = true ;
-        if (input != null && !input.equals("Chemical / Drug") && !input.equals("Growth Factor") )
-        {
-            for (int i = 0; i < input.length(); i++)
-            {        	
-	            if (!Character.isLetterOrDigit(input.charAt(i)))
-	                return false;
-            }
-        } else if (input.equals("Chemical / Drug")){
-        	input = "ChemicalDrug";
-        	System.out.println("In SearchForm.isLetterOrDigitNotChemicalDrug input " + input);  
-            for (int i = 0; i < input.length(); i++)
-            {        	
-	            if (!Character.isLetterOrDigit(input.charAt(i)))
-	                return false;
-            }        	
-        } else if (input.equals("Growth Factor")){
-        	input = "GrowthFactor";
-        	System.out.println("In SearchForm.isLetterOrDigitNotChemicalDrug input " + input);  
-            for (int i = 0; i < input.length(); i++)
-            {        	
-	            if (!Character.isLetterOrDigit(input.charAt(i)))
-	                return false;
-            }
-        	
-        }
-        System.out.println("In SearchForm.isLetterOrDigitNotChemicalDrug validValue " + validValue);         
-        return true; 
-    }    
-    
-    // This method needs testing for sucessful searches
-    private boolean isJavaIdentifierPart(String input)
-    { 
-        System.out.println("In SearchForm.isJavaIdentifierPart input " + input);     	
-        for (int i = 0; i < input.length(); i++)
-        {
-                if (!Character.isJavaIdentifierPart(input.charAt(i)))
-                return false;
-        }
-        return true;
-    }  
-    
-    // This method needs testing for sucessful searches
-    private String trimInput(String input)
-    { 
-        System.out.println("In SearchForm.trimInput input " + input);     	
-        for (int i = 0; i < input.length(); i++)
-        {
-                input = input.trim();
-        }
-        System.out.println("Exiting SearchForm.trimInput input " + input);        
-        return input;
-    }     
+    } 
     
   
 }
