@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.70 2008-05-12 15:29:21 pandyas Exp $
+ * $Id: searchAdvanced.jsp,v 1.71 2008-05-21 19:09:17 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.70  2008/05/12 15:29:21  pandyas
+ * minor format change to be consistent
+ *
  * Revision 1.69  2007/10/17 18:24:17  pandyas
  * Added error message tag for cross--site scripting attacks messages
  *
@@ -392,7 +395,6 @@
 								<html:optionsCollection name="<%= Constants.Dropdowns.ZEBRAFISHDIAGNOSISDROP %>" />										
 							</html:select>					
 						</td>
-					</tr>	
 				</c:when>							
 				<c:otherwise>
 					<td class="formLabel"><label for="field2">Diagnosis:</label>&nbsp;				
@@ -406,7 +408,7 @@
 						</td>				
 				</c:otherwise>
 	    	</c:choose>
-	</tr>
+		</tr>
 		
 
 		<tr>
@@ -457,7 +459,9 @@
 				<label for="field1">Genomic Segment Designator:</label>
 			</td>
 			<td class="formField">			
-					<html:text styleClass="formFieldSized" property="genomicSegDesignator" size="30"/>
+				<html:select styleClass="formFieldSized" size="1" property="genomicSegDesignator" >
+					<html:options name="<%= Dropdowns.CLONEDESIGNATORQUERYDROP %>" />												
+				</html:select>
 			</td>
 		</tr>
 		<tr>
@@ -504,8 +508,9 @@
 		    <td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field3">Cell Line:</label></td>
 			<td class="formField">			
-					<html:text styleClass="formFieldSized" property="cellLine" size="30"/>
-			</td>
+				<html:select styleClass="formFieldSized" size="1" property="cellLine" >
+					<html:options name="<%= Dropdowns.CELLLINENAMEQUERYDROP %>" />												
+				</html:select>			
 		</tr>
 
 		<tr>
@@ -525,7 +530,9 @@
 		    <td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field3">Compound/Drug:</label></td>
 			<td class="formField">			
-					<html:text styleClass="formFieldSized" property="therapeuticApproach" size="30"/>
+				<html:select styleClass="formFieldSized" size="1" property="therapeuticApproach" >
+					<html:options name="<%= Dropdowns.THERAPEUTICAPPROACHDRUGQUERYDROP %>" />												
+				</html:select>
 			</td>
 		</tr>
 

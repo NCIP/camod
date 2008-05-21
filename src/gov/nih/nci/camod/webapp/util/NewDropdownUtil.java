@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: NewDropdownUtil.java,v 1.55 2007-10-18 18:28:04 pandyas Exp $
+ * $Id: NewDropdownUtil.java,v 1.56 2008-05-21 19:07:43 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.55  2007/10/18 18:28:04  pandyas
+ * Modified to prevent cross--site scripting attacks
+ *
  * Revision 1.54  2007/10/17 18:36:55  pandyas
  * Trying to set constanst for PI list to use in validation of searchForm
  *
@@ -236,8 +239,22 @@ public class NewDropdownUtil
         {
             theReturnList = getQueryOnlyEnvironmentalFactorList(inRequest, inFilter);
         }   
+        // Dropdown list for Cell Line names 
+        else if (inDropdownKey.equals(Constants.Dropdowns.CELLLINENAMEQUERYDROP))
+        {
+            theReturnList = getCellLineNameList(inRequest);
+        } 
         
-        
+        // Dropdown list for Therapeutic Approaches Drug / Compound names 
+        else if (inDropdownKey.equals(Constants.Dropdowns.THERAPEUTICAPPROACHDRUGQUERYDROP))
+        {
+            theReturnList = getTherapeuticDrugNameList(inRequest);
+        }         
+        // Dropdown list for Genomic Segment Designator 
+        else if (inDropdownKey.equals(Constants.Dropdowns.CLONEDESIGNATORQUERYDROP))
+        {
+            theReturnList = getGenomicSegmentDesignatorList(inRequest);
+        }        
         else if (inDropdownKey.equals(Constants.Dropdowns.PRINCIPALINVESTIGATORDROP))
         {
             theReturnList = getPrincipalInvestigatorList(inRequest, inFilter);
@@ -678,6 +695,57 @@ public class NewDropdownUtil
         return theEnvFactorList;
     }
 
+    /**
+     * Returns a list of all cell lines
+     * 
+     * @return cell line list
+     * @throws Exception
+     */
+    private static List getCellLineNameList(HttpServletRequest inRequest) throws Exception
+    {
+       	log.debug("<NewDropdownUtil> In getCellLineNameList: ");
+       	
+       	List cellLineList = QueryManagerSingleton.instance().getCellLineNames();       	
+        
+        Collections.sort(cellLineList);
+        
+        return cellLineList;
+    } 
+ 
+    /**
+     * Returns a list of all agent names for therapeutic approaches only
+     * 
+     * @return agent names list
+     * @throws Exception
+     */
+    private static List getTherapeuticDrugNameList(HttpServletRequest inRequest) throws Exception
+    {
+       	log.info("<NewDropdownUtil> In getTherapeuticDrigNameList: ");
+       	
+       	List therapeuticDrugList = QueryManagerSingleton.instance().getTherapeuticDrugNames();       	
+        
+        Collections.sort(therapeuticDrugList);
+        
+        return therapeuticDrugList;
+    } 
+    
+    /**
+     * Returns a list of all clone designators (genomic segment designators)
+     * 
+     * @return clone designators list
+     * @throws Exception
+     */
+    private static List getGenomicSegmentDesignatorList(HttpServletRequest inRequest) throws Exception
+    {
+       	log.debug("<NewDropdownUtil> In getGenomicSegmentDesignatorList: ");
+       	
+       	List genSegDesList = QueryManagerSingleton.instance().getGenomicSegmentDesignators();       	
+        
+        Collections.sort(genSegDesList);
+        
+        return genSegDesList;
+    }    
+    
     /**
      * Returns a list of all Principal Investigators
      * 

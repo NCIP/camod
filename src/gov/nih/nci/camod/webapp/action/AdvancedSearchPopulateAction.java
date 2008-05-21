@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AdvancedSearchPopulateAction.java,v 1.18 2007-09-12 19:36:40 pandyas Exp $
+ * $Id: AdvancedSearchPopulateAction.java,v 1.19 2008-05-21 19:06:29 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2007/09/12 19:36:40  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.17  2007/06/21 20:07:56  pandyas
  * Moved definition for Zebrafish diagnosis drop down to populate method - called from left menu link
  *
@@ -134,6 +137,12 @@ public class AdvancedSearchPopulateAction extends BaseAction {
         }
         
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.ZEBRAFISHDIAGNOSISDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER_OPTION);        
+        
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.CELLLINENAMEQUERYDROP, Constants.Dropdowns.ADD_BLANK);        
+        
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.CLONEDESIGNATORQUERYDROP, Constants.Dropdowns.ADD_BLANK);        
+
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.THERAPEUTICAPPROACHDRUGQUERYDROP, Constants.Dropdowns.ADD_BLANK);        
         
         return mapping.findForward("next");
     }
