@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.110 2008-01-16 18:30:46 pandyas Exp $
+ * $Id: Constants.java,v 1.111 2008-05-21 19:04:58 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.110  2008/01/16 18:30:46  pandyas
+ * Renamed value to Transplant for #8290
+ *
  * Revision 1.109  2007/11/25 23:31:45  pandyas
  * Added constant for feature #8816  	Connection to caELMIR - retrieve data for therapy search page
  *
@@ -528,14 +531,23 @@ public class Constants {
         public static final String PRINCIPALINVESTIGATORQUERYDROP = "principalinvestigatorquerydrop.db";
 
         public static final String INDUCEDMUTATIONAGENTQUERYDROP = "inducedmutationagentquerydrop.db";
-        
+                     
         public static final String EXTERNALSOURCEQUERYDROP = "externalsourcequerydrop.db";    
         
         // CI on advanced search taken from DB type and type_altern_entry columns
         public static final String CARCINOGENICAGENTSQUERYDROP = "carcinogenicagentsquerydrop.db"; 
         
         // Environmental Factor name field populated based on agent type slected in adv search
-        public static final String ENVIRONMENTALFACTORNAMESDROP = "environmentalfactornames.db";         
+        public static final String ENVIRONMENTALFACTORNAMESDROP = "environmentalfactornames.db"; 
+        
+        // Cell line name field selected in adv search
+        public static final String CELLLINENAMEQUERYDROP = "celllinenamequerydrop.db"; 
+        
+        // clone Designator (Genomic Segment Designator on GUI) from Engineered Gene table selected in adv search
+        public static final String CLONEDESIGNATORQUERYDROP = "clonedesignatorquerydrop.db";
+        
+        // Compound / Drug field selected in adv search from agent (name) table
+        public static final String THERAPEUTICAPPROACHDRUGQUERYDROP = "therapeuticapproachdrugquerydrop.db";        
         
 
         // These two are used to display the species and strain currently in the
@@ -574,13 +586,17 @@ public class Constants {
 
         public static final String DEVELOPMENTALSTAGETHERAPYDROP = "DevelopmentalStageTherapy.txt";
         
-        // Used for validation of searchForm to prevent cross-site scripting attacks
+        // Used for validation of searchForm to prevent cross-site scripting and SQL injection attacks
         public static final String SEARCHSPECIESDROP = "searchspecies"; 
         public static final String SEARCHEXTERNALSOURCEDROP = "searchexternalsource";   
         public static final String SEARCHINDUCEDMUTATIONDROP = "searchinducedmutation";  
         public static final String SEARCHCARCINOGENEXPOSUREDROP = "searchcarcinogenexposure";  
-        public static final String SEARCHENVIRONFACTORDROP = "searchenvironfactor";           
-        public static final String SEARCHPIDROP = "searchpi";          
+        public static final String SEARCHENVIRONFACTORDROP = "searchenvironfactor";
+        public static final String SEARCHCELLLINE = "searchcellline";
+        public static final String SEARCHGENOMICSEGMENT = "searchgenomicsegment";        
+        public static final String SEARCHPIDROP = "searchpi";    
+        public static final String SEARCHTOCDROP = "searchtableofcontents";
+        public static final String SEARCHTHERAPEUTICDRUGNAME = "searchtherapeuticdrugname";        
       
     }
 

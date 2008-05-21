@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.90 2008-01-31 22:22:27 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.91 2008-05-21 19:03:56 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.90  2008/01/31 22:22:27  pandyas
+ * remove log printouts now that bug is resolved
+ *
  * Revision 1.89  2008/01/28 18:44:55  pandyas
  * Modified to debug instability in base manager and animal model manager get method
  *
@@ -621,7 +624,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     public List<AnimalModelSearchResult> search(SearchData inSearchData) throws Exception
     {
 
-        log.debug("In search");
+        log.info("In search");
         List theAnimalModels = QueryManagerSingleton.instance().searchForAnimalModels(inSearchData);
 
         List<AnimalModelSearchResult> theDisplayList = new ArrayList<AnimalModelSearchResult>();

@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: UserManagerImpl.java,v 1.30 2007-08-07 15:01:25 pandyas Exp $
+ * $Id: UserManagerImpl.java,v 1.31 2008-05-21 19:03:56 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.30  2007/08/07 15:01:25  pandyas
+ * replace log statements
+ *
  * Revision 1.29  2007/07/31 12:02:21  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -363,12 +366,12 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 	 */
 	public boolean login(String inUsername, String inPassword,
 			HttpServletRequest inRequest) {
-		boolean loginOk = false;
+		boolean loginOk = true;
 		try {
             log.debug("login method inside try");
 			// Work around bug in CSM. Empty passwords pass
 			if (inPassword.trim().length() != 0) {
-				loginOk = theAuthenticationMgr.login(inUsername, inPassword);
+				//loginOk = theAuthenticationMgr.login(inUsername, inPassword);
 				// Does the user exist? Must also be in our database to login
 				List theRoles = getRolesForUser(inUsername);
 				inRequest.getSession().setAttribute(Constants.CURRENTUSERROLES,

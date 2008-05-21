@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyManagerImpl.java,v 1.26 2007-10-31 19:05:38 pandyas Exp $
+ * $Id: HistopathologyManagerImpl.java,v 1.27 2008-05-21 19:03:56 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.26  2007/10/31 19:05:38  pandyas
+ * Fixed #8188 	Rename UnctrlVocab items to text entries
+ *
  * Revision 1.25  2007/09/12 19:36:03  pandyas
  * modified debug statements for build to stage tier
  *
@@ -181,10 +184,10 @@ public class HistopathologyManagerImpl extends BaseManager implements
 			HistopathologyData inHistopathologyData,
 			Histopathology inHistopathology) throws Exception {
 		
-		log.debug("<HistopathologyManagerImpl> Entering populateOrgan");
+		log.info("<HistopathologyManagerImpl> Entering populateOrgan");
 		// Update loop handeled separately for conceptCode = 00000
 		if (inHistopathologyData.getOrganTissueCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)){
-            log.debug("Organ update loop for text: " + inHistopathologyData.getOrgan()); 
+            log.info("Organ update loop for text: " + inHistopathologyData.getOrgan()); 
             inHistopathology.setOrgan(new Organ());
             inHistopathology.getOrgan().setName(inHistopathologyData.getOrgan());	
             inHistopathology.getOrgan().setConceptCode(
@@ -192,20 +195,21 @@ public class HistopathologyManagerImpl extends BaseManager implements
 		} else {			
 	        // Using trees loop, new save loop and update loop
 			if (inHistopathologyData.getOrganTissueCode() != null && inHistopathologyData.getOrganTissueCode().length() > 0) {
-	            log.debug("OrganTissueCode: " + inHistopathologyData.getOrganTissueCode());
-	            log.debug("OrganTissueName: " + inHistopathologyData.getOrganTissueName()); 
+	            log.info("OrganTissueCode: " + inHistopathologyData.getOrganTissueCode());
+	            log.info("OrganTissueName: " + inHistopathologyData.getOrganTissueName()); 
+	            log.info("Organ: " + inHistopathologyData.getOrgan()); 	            
 	            
-	            log.debug("OrganTissueCode() != null - getOrCreate method used");
+	            log.info("OrganTissueCode() != null - getOrCreate method used");
 	            // when using tree, organTissueName populates the organ name entry
 	            Organ theNewOrgan = OrganManagerSingleton.instance().getOrCreate(
 	                    inHistopathologyData.getOrganTissueCode(),
 	                    inHistopathologyData.getOrganTissueName());
 	            
-	            log.debug("theNewOrgan: " + theNewOrgan);
+	            log.info("theNewOrgan: " + theNewOrgan);
 	            inHistopathology.setOrgan(theNewOrgan); 
 			} else {
 				// text entry loop = new save
-	            log.debug("Organ (text): " + inHistopathologyData.getOrgan()); 
+	            log.info("Organ (text): " + inHistopathologyData.getOrgan()); 
 	            inHistopathology.setOrgan(new Organ());
 	            inHistopathology.getOrgan().setName(inHistopathologyData.getOrgan());                
 	            inHistopathology.getOrgan().setConceptCode(
@@ -219,27 +223,27 @@ public class HistopathologyManagerImpl extends BaseManager implements
                                         HistopathologyData inHistopathologyData,
                                         Histopathology inHistopathology) throws Exception { 
             
-            log.debug("<HistopathologyManagerImpl> Entering populateDisease"); 
-            log.debug("DiagnosisCode: " + inHistopathologyData.getDiagnosisCode());
-            log.debug("DiagnosisName: " + inHistopathologyData.getDiagnosisName()); 
-            log.debug("TumorClassification: " + inHistopathologyData.getTumorClassification()); 
+            log.info("<HistopathologyManagerImpl> Entering populateDisease"); 
+            log.info("DiagnosisCode: " + inHistopathologyData.getDiagnosisCode());
+            log.info("DiagnosisName: " + inHistopathologyData.getDiagnosisName()); 
+            log.info("TumorClassification: " + inHistopathologyData.getTumorClassification()); 
             
 		// Update loop handeled separately for conceptCode = 00000
 		if (inHistopathologyData.getDiagnosisCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)){
-            log.debug("<HistopathologyManagerImpl> CONCEPTCODEZEROS loop");             
-            log.debug("TumorClassification: " + inHistopathologyData.getTumorClassification());            
-            log.debug("otherTumorClassification: " + inHistopathologyData.getOtherTumorClassification());
+            log.info("<HistopathologyManagerImpl> CONCEPTCODEZEROS loop");             
+            log.info("TumorClassification: " + inHistopathologyData.getTumorClassification());            
+            log.info("otherTumorClassification: " + inHistopathologyData.getOtherTumorClassification());
             
             if (inHistopathologyData.getOtherTumorClassification() != null){
                 inHistopathology.setDisease(new Disease());
-                log.debug("Concept code set to 000000");
+                log.info("Concept code set to 000000");
                 inHistopathology.getDisease().setConceptCode(
                          Constants.Dropdowns.CONCEPTCODEZEROS);              
                 inHistopathology.getDisease().setNameAlternEntry(
                          inHistopathologyData.getOtherTumorClassification());
                 inHistopathology.getDisease().setName(null);            	
             } else {
-	            log.debug("inHistopathologyData.getDiagnosisCode() is null: ");
+	            log.info("inHistopathologyData.getDiagnosisCode() is null: ");
 	            inHistopathology.setDisease(new Disease()); 
 	            inHistopathology.getDisease().setName(inHistopathologyData.getTumorClassification());
 	            inHistopathology.getDisease().setConceptCode(Constants.Dropdowns.CONCEPTCODEZEROS);				

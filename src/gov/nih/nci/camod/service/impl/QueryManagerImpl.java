@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.89 2008-02-07 02:19:29 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.90 2008-05-21 19:03:56 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.89  2008/02/07 02:19:29  pandyas
+ * Fixed cell line advanced search - the % % were not being properly added to search string
+ *
  * Revision 1.88  2008/02/01 17:28:20  pandyas
  * Removed log for build
  *
@@ -625,6 +628,159 @@ public class QueryManagerImpl extends BaseManager
 		}
 		return theEFAgentTypesList;
 	}	
+
+	/**
+	 * Return the list of Cell Line Names
+	 * 
+	 * @return a sorted list of unique names
+	 * @throws PersistenceException
+	 */
+	public List getCellLineNames() throws PersistenceException {
+
+		log.info("Entering QueryManagerImpl.getCellLineNames");
+		
+		ResultSet theResultSet = null;
+		List<String> theCellLineList = new ArrayList<String>();
+
+		try {
+			// Format the query
+			String theSQLQuery = "SELECT distinct cl.name "
+				+ "FROM cell_line cl, abs_cancer_model am "
+				+ "			WHERE cl.abs_cancer_model_id = am.abs_cancer_model_id "
+				+ "     	AND am.state = 'Edited-approved'";			
+
+			// Format the query			
+			Object[] theParams = new Object[0];
+			theResultSet = Search.query(theSQLQuery, theParams);
+
+			while (theResultSet.next()) {
+				String theCellLine = theResultSet.getString(1);
+				theCellLineList.add(theCellLine);				
+			}
+
+			Collections.sort(theCellLineList);
+
+			log.info("Exiting QueryManagerImpl.getCellLineNames");
+		} catch (Exception e) {
+			log.error("Exception in getCellLineNames", e);
+			throw new PersistenceException("Exception in getCellLineNames: "
+					+ e);
+		} finally {
+			if (theResultSet != null) {
+				try {
+                    Statement stmt = theResultSet.getStatement();
+                    theResultSet.close();
+                    stmt.close();
+				} catch (Exception e) {
+				}
+			}
+		}
+		return theCellLineList;
+	}	
+
+	/**
+	 * Return the list of Cell Line Names
+	 * 
+	 * @return a sorted list of unique names
+	 * @throws PersistenceException
+	 */
+	public List getTherapeuticDrugNames() throws PersistenceException {
+
+		log.info("Entering QueryManagerImpl.getTherapeuticDrugNames");
+		
+		ResultSet theResultSet = null;
+		List<String> theTherapeuticDrugList = new ArrayList<String>();
+
+		try {
+			// Format the query
+			String theSQLQuery = "SELECT distinct a.name "
+				+ "FROM agent a, abs_cancer_model am, therapy t "
+				+ "			WHERE a.agent_id = t.agent_id "
+				+ "			AND t.abs_cancer_model_id = am.abs_cancer_model_id "
+				+ "     	AND am.state = 'Edited-approved'";			
+
+			// Format the query			
+			Object[] theParams = new Object[0];
+			theResultSet = Search.query(theSQLQuery, theParams);
+
+			while (theResultSet.next()) {
+				String theDrugName = theResultSet.getString(1);
+				theTherapeuticDrugList.add(theDrugName);				
+			}
+
+			Collections.sort(theTherapeuticDrugList);
+
+			log.info("Exiting QueryManagerImpl.getTherapeuticDrugNames");
+		} catch (Exception e) {
+			log.error("Exception in getCellLineNames", e);
+			throw new PersistenceException("Exception in getTherapeuticDrugNames: "
+					+ e);
+		} finally {
+			if (theResultSet != null) {
+				try {
+                    Statement stmt = theResultSet.getStatement();
+                    theResultSet.close();
+                    stmt.close();
+				} catch (Exception e) {
+				}
+			}
+		}
+		return theTherapeuticDrugList;
+	}		
+	
+	/**
+	 * Return the list of Clone Designators (Engineered Gene table) for Genomic Segment Designator
+	 * 
+	 * @return a sorted list of unique names
+	 * @throws PersistenceException
+	 */
+	public List getGenomicSegmentDesignators() throws PersistenceException {
+
+		log.info("Entering QueryManagerImpl.getGenomicSegmentDesignators");
+		
+		ResultSet theResultSet = null;
+		List<String> theGenSegDesList = new ArrayList<String>();
+
+		try {
+			// Format the query
+			String theSQLQuery = "SELECT distinct eg.clone_designator "
+				+ "FROM engineered_gene eg, abs_cancer_model am "
+				+ "			WHERE eg.abs_cancer_model_id = am.abs_cancer_model_id "
+				+ "     	AND am.state = 'Edited-approved'";			
+
+			log.info("After SQLQuery");
+			
+			// Format the query			
+			Object[] theParams = new Object[0];
+			theResultSet = Search.query(theSQLQuery, theParams);
+
+			while (theResultSet.next()) {
+				String theGenSegDesignator = theResultSet.getString(1);
+				log.info("theGenSegDesignator: " + theGenSegDesignator);				
+				if(theGenSegDesignator != null && theGenSegDesignator.length() > 0){
+					theGenSegDesList.add(theGenSegDesignator);
+				}
+			}
+			Collections.sort(theGenSegDesList);
+
+			log.info("Exiting QueryManagerImpl.getGenomicSegmentDesignators");
+		} catch (Exception e) {
+			log.error("Exception in getGenomicSegmentDesignators", e);
+			throw new PersistenceException("Exception in getGenomicSegmentDesignators: "
+					+ e);
+		} finally {
+			if (theResultSet != null) {
+				try {
+                    Statement stmt = theResultSet.getStatement();
+                    theResultSet.close();
+                    stmt.close();
+				} catch (Exception e) {
+				}
+			}
+		}
+		return theGenSegDesList;
+	}	
+	
 	
 	/**
 	 * Return the list of environmental factor names
@@ -1790,7 +1946,7 @@ public class QueryManagerImpl extends BaseManager
      */
     private String getModelIdsForCellLine(String inCellLineName) throws PersistenceException
     {
-        String theSQLString = "SELECT distinct abs_cancer_model_id " + "FROM cell_line c " + "WHERE upper(c.name) LIKE ?";
+        String theSQLString = "SELECT distinct abs_cancer_model_id " + "FROM cell_line c " + "WHERE upper(c.name) = ?";
     	
         String theSQLCellLine = "%";
         if (inCellLineName != null && inCellLineName.trim().length() > 0)
@@ -2109,7 +2265,7 @@ public class QueryManagerImpl extends BaseManager
     public List searchForAnimalModels(SearchData inSearchData) throws Exception
     {
 
-        log.debug("Entering searchForAnimalModels");
+        log.info("Entering searchForAnimalModels");
 
         List theAnimalModels = null;
 
@@ -2123,7 +2279,7 @@ public class QueryManagerImpl extends BaseManager
         }
         else
         {
-            log.debug("Doing a criteria search");
+            log.info("Doing a criteria search");
             theAnimalModels = criteriaSearch(theFromClause, theOrderByClause, inSearchData);
         }
 
@@ -2594,14 +2750,14 @@ public class QueryManagerImpl extends BaseManager
                                 SearchData inSearchData) throws Exception
     {
         String theWhereClause = buildCriteriaSearchWhereClause(inSearchData);
-
+        log.info("theWhereClause: " + theWhereClause);
         List theAnimalModels = null;
 
         try
         {
             String theHQLQuery = inFromClause + theWhereClause + inOrderByClause;
 
-            log.debug("HQL Query: " + theHQLQuery);
+            log.info("HQL Query: " + theHQLQuery);
 
             Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
             theAnimalModels = theQuery.list();
