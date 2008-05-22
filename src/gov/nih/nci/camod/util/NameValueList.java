@@ -42,9 +42,14 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: NameValueList.java,v 1.5 2008-05-21 19:04:36 pandyas Exp $
+ * $Id: NameValueList.java,v 1.6 2008-05-22 18:21:06 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2008/05/21 19:04:36  pandyas
+ * Modified advanced search to prevent SQL injection
+ * Concolidated all utility methods in new class
+ * Re: Apps Scan run 05/15/2008
+ *
  * Revision 1.4  2008/05/05 15:07:45  pandyas
  * NCI security scan changes - could not get value to work without spaces - trim did not work so added another entry to validate
  *
@@ -131,8 +136,6 @@ public class NameValueList
         approvedSpeciesList.add(new NameValue("Rattus rattus","Rattus rattus"));
         approvedSpeciesList.add(new NameValue("Danio rerio","Danio rerio"));  
         approvedSpeciesList.add(new NameValue("Mesocricetus auratus","Mesocricetus auratus"));
-        // added space after trying to trim without success
-        approvedSpeciesList.add(new NameValue("Mesocricetus auratus ","Mesocricetus auratus "));
         approvedSpeciesList.add(new NameValue("Felis catus","Felis catus"));
         approvedSpeciesList.add(new NameValue("Bos taurus","Bos taurus"));  
         approvedSpeciesList.add(new NameValue("Canis familiaris","Canis familiaris"));         
@@ -179,7 +182,8 @@ public class NameValueList
         
         carcinogenicInterventionList.add(new NameValue("Bacteria","Bacteria"));
         carcinogenicInterventionList.add(new NameValue("Plasmid","Plasmid")); 
-        carcinogenicInterventionList.add(new NameValue("Transposon","Transposon"));
+        carcinogenicInterventionList.add(new NameValue("Signaling Molecule","Signaling Molecule"));        
+        carcinogenicInterventionList.add(new NameValue("Transposon","Transposon"));        
         
     }
 
