@@ -43,9 +43,13 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.90 2008-05-21 19:03:56 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.91 2008-05-22 18:19:16 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.90  2008/05/21 19:03:56  pandyas
+ * Modified advanced search to prevent SQL injection
+ * Re: Apps Scan run 05/15/2008
+ *
  * Revision 1.89  2008/02/07 02:19:29  pandyas
  * Fixed cell line advanced search - the % % were not being properly added to search string
  *
@@ -983,7 +987,7 @@ public class QueryManagerImpl extends BaseManager
             Object[] theParams = new Object[0];
             theResultSet = Search.query(theSQLQuery, theParams);
 
-            // Rewrote this method during the upgrad to Hibernate
+            // Rewrote this method during the upgrade to Hibernate
             // Had to copy ResultSet to a list since the ResultSet was closed before the 
             // while loop was able to get all the Species objects from the ManagerSingleton
             while (theResultSet.next())
@@ -1946,7 +1950,7 @@ public class QueryManagerImpl extends BaseManager
      */
     private String getModelIdsForCellLine(String inCellLineName) throws PersistenceException
     {
-        String theSQLString = "SELECT distinct abs_cancer_model_id " + "FROM cell_line c " + "WHERE upper(c.name) = ?";
+        String theSQLString = "SELECT distinct abs_cancer_model_id " + "FROM cell_line c " + "WHERE upper(c.name) like ?";
     	
         String theSQLCellLine = "%";
         if (inCellLineName != null && inCellLineName.trim().length() > 0)
@@ -2972,7 +2976,7 @@ public class QueryManagerImpl extends BaseManager
             params[0] = params[1] = params[2] = String.valueOf(absCancerModelId);
             theResultSet = Search.query(theSQLString, params);
             
-            // Rewrote this method during the upgrad to Hibernate
+            // Rewrote this method during the upgrade to Hibernate
             // Had to copy ResultSet to a list since the ResultSet was closed before the 
             // while loop was able to get all the Species objects from the ManagerSingleton
             while (theResultSet.next())
