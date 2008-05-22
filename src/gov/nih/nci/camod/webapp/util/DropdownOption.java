@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: DropdownOption.java,v 1.4 2005-11-03 19:08:42 georgeda Exp $
+ * $Id: DropdownOption.java,v 1.5 2008-05-22 18:24:30 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2005/11/03 19:08:42  georgeda
+ * Made constructor public
+ *
  * Revision 1.3  2005/10/24 13:28:39  georgeda
  * Cleanup changes
  *
@@ -62,4 +65,14 @@ public class DropdownOption implements Comparable {
 
 		return theDropdownOption.myValue.equals(this.myValue);
 	}
+	
+    /**
+     * @see java.lang.Object#toString()
+     */
+    public String toString()
+    {
+        String result = super.toString() + " - ";
+        result += this.getLabel() + " - " + this.getValue();
+        return result;
+    }	
 }
