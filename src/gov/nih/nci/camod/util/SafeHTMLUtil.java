@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SafeHTMLUtil.java,v 1.2 2008-05-21 19:33:27 pandyas Exp $
+ * $Id: SafeHTMLUtil.java,v 1.3 2008-05-22 18:22:28 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2008/05/21 19:33:27  pandyas
+ * Added htmlparser.jar version for future reference
+ *
  * Revision 1.1  2008/05/21 19:04:36  pandyas
  * Modified advanced search to prevent SQL injection
  * Concolidated all utility methods in new class
@@ -126,11 +129,11 @@ public class SafeHTMLUtil {
     }
     
     // This method needs testing for sucessful searches
-    // This is a special case where one of the agent names contains a special character "/"
-    //  i.e. Chemical / Drug is a valid selection option
-    public static boolean isLetterOrDigitNotChemicalDrug(String input)
+    // This is a special case where one of the agent names contains a special character "/" or space
+    //  i.e. Chemical / Drug, Growth Factor, and Signaling Molecule are valid selection options
+    public static boolean isLetterOrDigitWithExceptions(String input)
     {  
-        System.out.println("In SearchForm.isLetterOrDigitNotChemicalDrug input " + input);          
+        System.out.println("In SearchForm.isLetterOrDigitWithExceptions input " + input);          
         // validate for intentCode
         boolean validValue = true ;
         if (input != null && !input.equals("Chemical / Drug") && !input.equals("Growth Factor") )
@@ -142,7 +145,7 @@ public class SafeHTMLUtil {
             }
         } else if (input.equals("Chemical / Drug")){
         	input = "ChemicalDrug";
-        	System.out.println("In SearchForm.isLetterOrDigitNotChemicalDrug input " + input);  
+        	System.out.println("In SearchForm.isLetterOrDigitWithExceptions input " + input);  
             for (int i = 0; i < input.length(); i++)
             {        	
 	            if (!Character.isLetterOrDigit(input.charAt(i)))
@@ -150,15 +153,23 @@ public class SafeHTMLUtil {
             }        	
         } else if (input.equals("Growth Factor")){
         	input = "GrowthFactor";
-        	System.out.println("In SearchForm.isLetterOrDigitNotChemicalDrug input " + input);  
+        	System.out.println("In SearchForm.isLetterOrDigitWithExceptions input " + input);  
             for (int i = 0; i < input.length(); i++)
             {        	
 	            if (!Character.isLetterOrDigit(input.charAt(i)))
 	                return false;
-            }
-        	
+            }        	
+        } else if (input.equals("Signaling Molecule")){
+        	input = "SignalingMolecule";
+        	System.out.println("In SearchForm.isLetterOrDigitWithExceptions input " + input);  
+            for (int i = 0; i < input.length(); i++)
+            {        	
+	            if (!Character.isLetterOrDigit(input.charAt(i)))
+	                return false;
+            }        	
         }
-        System.out.println("In SearchForm.isLetterOrDigitNotChemicalDrug validValue " + validValue);         
+        
+        System.out.println("In SearchForm.isLetterOrDigitWithExceptions validValue " + validValue);         
         return true; 
     }    
     
