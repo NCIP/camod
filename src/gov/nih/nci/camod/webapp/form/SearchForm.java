@@ -42,9 +42,14 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.34 2008-05-21 19:07:33 pandyas Exp $
+ * $Id: SearchForm.java,v 1.35 2008-05-22 18:24:09 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.34  2008/05/21 19:07:33  pandyas
+ * Modified advanced search to prevent SQL injection
+ * Consolidated all utility methods in new class
+ * Re: Apps Scan run 05/15/2008
+ *
  * Revision 1.33  2008/05/12 16:33:52  pandyas
  * REmoved test for letter or digit for organ and tumorClassification - EVS returns results with special characters therefore this can not be validated against malicious characters (special characters) for the security scan
  * We need to obtain an exception
@@ -702,15 +707,15 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         }        
         
         // validate organ; against malicious characters to prevent blind SQl injection attacks
-        if (organ != null  )
+        if (organ != null  && organ.length() > 0)
         { 
             System.out.println("Enter validate for organ loop: " + organ);
             setOrgan(organ);
-            System.out.println("Exit validate for organ loop: + organ");
+            System.out.println("Exit validate for organ loop: " + organ);
         }
         
         // validate tumorClassification against malicious characters to prevent blind SQl injection attacks
-        if (tumorClassification != null )
+        if (tumorClassification != null && tumorClassification.length() > 0)
         { 
             System.out.println("Enter validate for tumorClassification loop: " + tumorClassification);
             setTumorClassification(tumorClassification);
@@ -784,7 +789,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             request.getSession().setAttribute(Constants.Dropdowns.SEARCHCARCINOGENEXPOSUREDROP, NameValueList.getCarcinogenicInterventionList());
 
 	            if (!SafeHTMLUtil.isValidValue(carcinogenicIntervention,Constants.Dropdowns.SEARCHCARCINOGENEXPOSUREDROP,request) 
-	            		|| !SafeHTMLUtil.isLetterOrDigitNotChemicalDrug(carcinogenicIntervention))
+	            		|| !SafeHTMLUtil.isLetterOrDigitWithExceptions(carcinogenicIntervention))
 	            {
 	                   // populate the validation message
 	                   errors.add("carcinogenicIntervention", new ActionMessage("error.carcinogenicIntervention.validValue"));
