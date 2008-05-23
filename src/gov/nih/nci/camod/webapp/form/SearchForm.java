@@ -42,9 +42,14 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.35 2008-05-22 18:24:09 pandyas Exp $
+ * $Id: SearchForm.java,v 1.36 2008-05-23 14:15:19 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.35  2008/05/22 18:24:09  pandyas
+ * Modified advanced search and TOC to prevent SQL injection
+ * Minor modifications
+ * Re: Apps Scan run 05/15/2008
+ *
  * Revision 1.34  2008/05/21 19:07:33  pandyas
  * Modified advanced search to prevent SQL injection
  * Consolidated all utility methods in new class
@@ -242,6 +247,10 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
     public void setKeyword(String keyword)
     {
         this.keyword = keyword;
+        // Clean the parameter
+        if (this.keyword != null && !this.keyword.equals(""))  {
+                this.keyword = SafeHTMLUtil.cleanKeyword(this.keyword);
+        }        
     }
 
     public String getModelDescriptor()
@@ -252,6 +261,10 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
     public void setModelDescriptor(String modelDescriptor)
     {
         this.modelDescriptor = modelDescriptor;
+        // Clean the parameter
+        if (this.modelDescriptor != null && !this.modelDescriptor.equals(""))  {
+                this.modelDescriptor = SafeHTMLUtil.cleanModelDescriptor(this.modelDescriptor);
+        }        
     }
 
     public String getOrgan()
@@ -345,6 +358,10 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
     public void setPhenotype(String phenotype)
     {
         this.phenotype = phenotype;
+        // Clean the parameter
+        if (this.phenotype != null && !this.phenotype.equals(""))  {
+                this.phenotype = SafeHTMLUtil.cleanPhenotype(this.phenotype);
+        }        
     }
 
     public String getDisease()
@@ -445,6 +462,10 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
     public void setGeneName(String geneName)
     {
         this.geneName = geneName;
+        // Clean the parameter
+        if (this.geneName != null && !this.geneName.equals(""))  {
+                this.geneName = SafeHTMLUtil.cleanGeneName(this.geneName);
+        }         
     }
 
     public String getGenomicSegDesignator()
@@ -656,11 +677,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         if (keyword != null && keyword.length() > 0 )
         { 
             System.out.println("Enter validate for keyword loop");
-            if (!SafeHTMLUtil.isLetterOrDigit(keyword))
-            {
-               // populate the validation message
-               errors.add("keyword", new ActionMessage("error.keyword.validValue"));
-            } 
+            setKeyword(keyword); 
             System.out.println("Exit validate for keyword loop");         
         }
         
@@ -668,11 +685,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         if (modelDescriptor != null  && modelDescriptor.length() > 0)
         { 
             System.out.println("Enter validate for modelDescriptor loop");
-            if (!SafeHTMLUtil.isLetterOrDigit(modelDescriptor))
-            {
-               // populate the validation message
-               errors.add("modelDescriptor", new ActionMessage("error.modelDescriptor.validValue"));
-            } 
+            setModelDescriptor(modelDescriptor); 
             System.out.println("Exit validate for modelDescriptor loop");
         }
         
@@ -727,11 +740,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         if (phenotype != null  && phenotype.length() > 0)
         { 
             System.out.println("Enter validate for phenotype loop");
-            if (!SafeHTMLUtil.isLetterOrDigit(phenotype))
-            {
-               // populate the validation message
-               errors.add("phenotype", new ActionMessage("error.phenotype.validValue"));
-            } 
+            setPhenotype(phenotype);
             System.out.println("Exit validate for phenotype loop");
         }  
         
@@ -740,11 +749,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         if (geneName != null  )
         { 
             System.out.println("Enter validate for geneName loop");
-            if (!SafeHTMLUtil.isLetterOrDigit(geneName))
-            {
-               // populate the validation message
-               errors.add("geneName", new ActionMessage("error.geneName.validValue"));
-            } 
+            setGeneName(geneName); 
             System.out.println("Exit validate for geneName loop");
         }  
         
