@@ -42,9 +42,14 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.36 2008-05-23 14:15:19 pandyas Exp $
+ * $Id: SearchForm.java,v 1.37 2008-05-23 16:03:00 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.36  2008/05/23 14:15:19  pandyas
+ * Modified advanced search and TOC to prevent SQL injection
+ * Added specific clean methods for text entry fields
+ * Re: Apps Scan run 05/15/2008
+ *
  * Revision 1.35  2008/05/22 18:24:09  pandyas
  * Modified advanced search and TOC to prevent SQL injection
  * Minor modifications
@@ -392,6 +397,10 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
     public void setOrganTissueCode(String organTissueCode)
     {
         this.organTissueCode = organTissueCode;
+        // Clean the parameter
+        if (this.organTissueCode != null && !this.organTissueCode.equals(""))  {
+                this.organTissueCode = SafeHTMLUtil.clean(this.organTissueCode);
+        }        
     }
 
     public String getOrganTissueName()
@@ -726,6 +735,14 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             setOrgan(organ);
             System.out.println("Exit validate for organ loop: " + organ);
         }
+        
+        // validate organ; against malicious characters to prevent blind SQl injection attacks
+        if (organTissueCode != null  && organTissueCode.length() > 0)
+        { 
+            System.out.println("Enter validate for organTissueCode loop: " + organ);
+            setOrganTissueCode(organTissueCode);           
+            System.out.println("Exit validate for organTissueCode loop: " + organ);
+        }        
         
         // validate tumorClassification against malicious characters to prevent blind SQl injection attacks
         if (tumorClassification != null && tumorClassification.length() > 0)
