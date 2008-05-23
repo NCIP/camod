@@ -42,9 +42,19 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.36 2008-05-23 14:15:19 pandyas Exp $
+ * $Id: SearchForm.java,v 1.38 2008-05-23 16:05:39 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.37  2008/05/23 16:03:00  pandyas
+ * Modified advanced search and TOC to prevent SQL injection
+ * Added validation for organTissueCode
+ * Re: Apps Scan run 05/15/2008
+ *
+ * Revision 1.36  2008/05/23 14:15:19  pandyas
+ * Modified advanced search and TOC to prevent SQL injection
+ * Added specific clean methods for text entry fields
+ * Re: Apps Scan run 05/15/2008
+ *
  * Revision 1.35  2008/05/22 18:24:09  pandyas
  * Modified advanced search and TOC to prevent SQL injection
  * Minor modifications
@@ -392,6 +402,10 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
     public void setOrganTissueCode(String organTissueCode)
     {
         this.organTissueCode = organTissueCode;
+        // Clean the parameter
+        if (this.organTissueCode != null && !this.organTissueCode.equals(""))  {
+                this.organTissueCode = SafeHTMLUtil.clean(this.organTissueCode);
+        }        
     }
 
     public String getOrganTissueName()
@@ -412,6 +426,10 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
     public void setDiagnosisCode(String diagnosisCode)
     {
         this.diagnosisCode = diagnosisCode;
+        // Clean the parameter
+        if (this.diagnosisCode != null && !this.diagnosisCode.equals(""))  {
+                this.diagnosisCode = SafeHTMLUtil.clean(this.diagnosisCode);
+        }         
     }
 
     public String getDiagnosisName()
@@ -727,14 +745,29 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             System.out.println("Exit validate for organ loop: " + organ);
         }
         
+        // validate organ; against malicious characters to prevent blind SQl injection attacks
+        if (organTissueCode != null  && organTissueCode.length() > 0)
+        { 
+            System.out.println("Enter validate for organTissueCode loop: " + organTissueCode);
+            setOrganTissueCode(organTissueCode);           
+            System.out.println("Exit validate for organTissueCode loop: " + organTissueCode);
+        }        
+        
         // validate tumorClassification against malicious characters to prevent blind SQl injection attacks
         if (tumorClassification != null && tumorClassification.length() > 0)
         { 
             System.out.println("Enter validate for tumorClassification loop: " + tumorClassification);
             setTumorClassification(tumorClassification);
             System.out.println("Exit validate for tumorClassification loop: " + tumorClassification);
-        }        
-
+        }  
+        
+        // validate tumorClassification against malicious characters to prevent blind SQl injection attacks
+        if (diagnosisCode != null && diagnosisCode.length() > 0)
+        { 
+            System.out.println("Enter validate for diagnosisCode loop: " + diagnosisCode);
+            setDiagnosisCode(diagnosisCode);
+            System.out.println("Exit validate for diagnosisCode loop: " + diagnosisCode);
+        }
         
         // validate phenotype against malicious characters to prevent blind SQl injection attacks
         if (phenotype != null  && phenotype.length() > 0)
