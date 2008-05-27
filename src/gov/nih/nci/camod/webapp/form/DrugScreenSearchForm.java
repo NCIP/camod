@@ -1,9 +1,14 @@
 /*
- * $Id: DrugScreenSearchForm.java,v 1.2 2006-04-17 19:09:19 pandyas Exp $
+ * $Id: DrugScreenSearchForm.java,v 1.3 2008-05-27 14:35:32 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2006/04/17 19:09:19  pandyas
+ * caMod 2.1 OM changes
+ *
  */
 package gov.nih.nci.camod.webapp.form;
+
+import gov.nih.nci.camod.util.SafeHTMLUtil;
 
 import java.io.Serializable;
 
@@ -53,5 +58,9 @@ public class DrugScreenSearchForm extends BaseForm implements Serializable {
 	}
 	public void setNSCNumber(String number) {
 		NSCNumber = number;
+        // Clean the parameter
+        if (this.NSCNumber != null && !this.NSCNumber.equals(""))  {
+                this.NSCNumber = SafeHTMLUtil.cleanModelDescriptor(this.NSCNumber);
+        } 		
 	}
 }

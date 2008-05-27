@@ -1,13 +1,18 @@
 /**
  * 
- * $Id: UserSettingsForm.java,v 1.3 2006-04-17 19:09:19 pandyas Exp $
+ * $Id: UserSettingsForm.java,v 1.4 2008-05-27 14:35:32 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/04/17 19:09:19  pandyas
+ * caMod 2.1 OM changes
+ *
  * 
  */
 
 
 package gov.nih.nci.camod.webapp.form;
+
+import gov.nih.nci.camod.util.SafeHTMLUtil;
 
 import java.io.Serializable;
 import javax.servlet.http.HttpServletRequest;
@@ -42,6 +47,10 @@ public class UserSettingsForm extends BaseForm implements UserSettingsData, Seri
      */
     public void setUsername(String username) {
         this.username = username;
+        // Clean the parameter
+        if (this.username != null && !this.username.equals(""))  {
+                this.username = SafeHTMLUtil.clean(this.username);
+        }         
     }
 
     /**
@@ -104,6 +113,10 @@ public class UserSettingsForm extends BaseForm implements UserSettingsData, Seri
      */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+        // Clean the parameter
+        if (this.firstName != null && !this.firstName.equals(""))  {
+                this.firstName = SafeHTMLUtil.clean(this.firstName);
+        }        
     }
 
     /**
@@ -134,6 +147,10 @@ public class UserSettingsForm extends BaseForm implements UserSettingsData, Seri
      */
     public void setLastName(String lastName) {
         this.lastName = lastName;
+        // Clean the parameter
+        if (this.lastName != null && !this.lastName.equals(""))  {
+                this.lastName = SafeHTMLUtil.clean(this.lastName);
+        }         
     }
 
     /**
@@ -164,6 +181,10 @@ public class UserSettingsForm extends BaseForm implements UserSettingsData, Seri
      */
     public void setPiFirstName(String piFirstName) {
         this.piFirstName = piFirstName;
+        // Clean the parameter
+        if (this.piFirstName != null && !this.piFirstName.equals(""))  {
+                this.piFirstName = SafeHTMLUtil.clean(this.piFirstName);
+        }        
     }
 
     /**
@@ -179,6 +200,10 @@ public class UserSettingsForm extends BaseForm implements UserSettingsData, Seri
      */
     public void setPiLastName(String piLastName) {
         this.piLastName = piLastName;
+        // Clean the parameter
+        if (this.piLastName != null && !this.piLastName.equals(""))  {
+                this.piLastName = SafeHTMLUtil.clean(this.piLastName);
+        }        
     }
 
     /**
@@ -194,6 +219,10 @@ public class UserSettingsForm extends BaseForm implements UserSettingsData, Seri
      */
     public void setPiUsername(String piUsername) {
         this.piUsername = piUsername;
+        // Clean the parameter
+        if (this.piUsername != null && !this.piUsername.equals(""))  {
+                this.piUsername = SafeHTMLUtil.clean(this.piUsername);
+        }        
     }
 
     public String getPiEmail() {

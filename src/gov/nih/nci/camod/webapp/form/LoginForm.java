@@ -1,9 +1,14 @@
 /*
- * $Id: LoginForm.java,v 1.3 2006-04-17 19:09:19 pandyas Exp $
+ * $Id: LoginForm.java,v 1.4 2008-05-27 14:35:32 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/04/17 19:09:19  pandyas
+ * caMod 2.1 OM changes
+ *
  */
 package gov.nih.nci.camod.webapp.form;
+
+import gov.nih.nci.camod.util.SafeHTMLUtil;
 
 import java.io.Serializable;
 import javax.servlet.http.HttpServletRequest;
@@ -33,6 +38,10 @@ public class LoginForm extends BaseForm implements Serializable {
 	 */
 	public void setUsername(String username) {
 		this.username = username;
+        // Clean the parameter
+        if (this.username != null && !this.username.equals(""))  {
+                this.username = SafeHTMLUtil.clean(this.username);
+        }		
 	}
 	/**
 	 * @param password The password to set.
