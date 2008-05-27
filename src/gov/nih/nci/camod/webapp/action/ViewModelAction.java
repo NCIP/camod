@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.56 2008-02-05 17:10:09 pandyas Exp $
+ *  $Id: ViewModelAction.java,v 1.57 2008-05-27 14:36:40 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.56  2008/02/05 17:10:09  pandyas
+ *  Removed debug statement for build to dev
+ *
  *  Revision 1.55  2008/02/05 17:09:34  pandyas
  *  Removed debug statement for build to dev
  *
@@ -195,6 +198,7 @@ import gov.nih.nci.camod.service.PersonManager;
 import gov.nih.nci.camod.service.TransplantManager;
 import gov.nih.nci.camod.service.impl.QueryManagerSingleton;
 import gov.nih.nci.camod.util.EvsTreeUtil;
+import gov.nih.nci.camod.util.SafeHTMLUtil;
 import gov.nih.nci.common.domain.DatabaseCrossReference;
 import gov.nih.nci.common.domain.impl.DatabaseCrossReferenceImpl;
 import gov.nih.nci.system.applicationservice.ApplicationService;
@@ -307,11 +311,28 @@ public class ViewModelAction extends BaseAction
                                                       HttpServletRequest request,
                                                       HttpServletResponse response) throws Exception
     {
-        setCancerModel(request);
-        setComments(request, Constants.Pages.MODEL_CHARACTERISTICS);
+    	log.info("mapping: " + mapping);
+    	log.info("form: " + form);
+    	log.info("request: " + request);
+    	log.info("response: " + response);
+        request.getSession(true);    	
         
-        // Call method so therapy link displays for models with caELMIR-only data
-        populateCaelmirTherapyDetails(mapping, form, request, response);
+        try {
+        	// get and clean header to prevent SQL injection
+            String sID = request.getHeader("HTTP header");
+            log.info("sID: " + sID);
+            sID = SafeHTMLUtil.clean(sID);
+        	
+	        setCancerModel(request);
+	        setComments(request, Constants.Pages.MODEL_CHARACTERISTICS);
+	        
+	        // Call method so therapy link displays for models with caELMIR-only data
+	        populateCaelmirTherapyDetails(mapping, form, request, response);
+        } 
+        catch (Exception e)
+        {
+            log.error("Error in populateModelCharacteristics", e);
+        }
         
         return mapping.findForward("viewModelCharacteristics");
     }
