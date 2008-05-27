@@ -18,9 +18,7 @@
 				<td class="resultsBoxWhiteEnd">
 
 					<a name="top"></a>
-					<h2><!--<a href="index.html"><img src="home.gif" alt="HOME" 
-					width="40" height="38" border="0" align="right" hspace="5"></a> --> 
-					Web Accessibility Feedback Form</h2>
+					<h2>Web Accessibility Feedback Form</h2>
 
 
 
@@ -79,13 +77,6 @@
 					valign="top" nowrap align="right"><label for="email">E-mail 
 					(required):</label></td><td valign="top"><input type=text 
 					name="email" size=30 id="email">
-					<!--<tr>
-													<td 
-					valign="top" nowrap><label for="nihemp">Are you an NIH 
-					Employee?</label></td><td valign="top"> <input type=radio 
-					name="nihEmployee" value="Yes" id="nihemp">Yes  <input type=radio 
-					name="nihEmployee" value="No" id="nihemp">No  </td>
-												</tr>-->
 					<input type ="hidden" name="IC" value="NCI"></td>
 
 												</tr>
