@@ -1,8 +1,12 @@
 /**
  * 
- * $Id: ViewTOCSearchResultsAction.java,v 1.4 2008-05-21 19:06:53 pandyas Exp $
+ * $Id: ViewTOCSearchResultsAction.java,v 1.5 2008-05-27 14:52:52 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2008/05/21 19:06:53  pandyas
+ * Modified TOC action to prevent SQL injection
+ * Re: Apps Scan run 05/15/2008
+ *
  * Revision 1.3  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -35,6 +39,12 @@ public class ViewTOCSearchResultsAction extends BaseAction {
         String theForward = "next";
 
         try {
+        	
+            // Get and clean method to prevent SQL injection
+            String methodName = request.getParameter("aTOCQueryKey");
+            log.info("methodName: " + methodName);
+            methodName = SafeHTMLUtil.clean(methodName);
+            log.info("methodName: " + methodName);        	
 
             String theKey = (String) request.getParameter(Constants.Parameters.TOCQUERYKEY);
             log.info("theKey: " + theKey);
