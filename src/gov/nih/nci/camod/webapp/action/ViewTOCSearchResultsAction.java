@@ -1,8 +1,13 @@
 /**
  * 
- * $Id: ViewTOCSearchResultsAction.java,v 1.5 2008-05-27 14:52:52 pandyas Exp $
+ * $Id: ViewTOCSearchResultsAction.java,v 1.6 2008-05-27 14:58:04 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2008/05/27 14:52:52  pandyas
+ * Modified to prevent SQL injection
+ * Cleaned parameter name before proceeding
+ * Re: Apps Scan run 05/23/2008
+ *
  * Revision 1.4  2008/05/21 19:06:53  pandyas
  * Modified TOC action to prevent SQL injection
  * Re: Apps Scan run 05/15/2008
@@ -61,33 +66,24 @@ public class ViewTOCSearchResultsAction extends BaseAction {
             
             // Handle external linkage
             if (request.getSession().getAttribute(Constants.TOCSearch.TOC_QUERY_RESULTS) == null) {
-                log.info("if block: " );            	
-
+ 
                 // Get the TOC manager workflow
                 TOCManager theTOCManager = new TOCManager(getServlet().getServletContext().getRealPath("/")
                         + Constants.TOCSearch.TOC_QUERY_FILE);
-                
-                log.info("theTOCManager: " + theTOCManager.toString());                 
 
-                List theResults = theTOCManager.process();
-                
-                log.info("theResults: " + theResults.toString());                 
-
+                List theResults = theTOCManager.process(); 
                 request.getSession().setAttribute(Constants.TOCSearch.TOC_QUERY_RESULTS, theResults);
             }
 
             List theGroupList = (List) request.getSession().getAttribute(Constants.TOCSearch.TOC_QUERY_RESULTS);
-            log.info("theGroupList: " + theGroupList);            
 
             for (int i = 0; i < theGroupList.size(); i++) {
                 TOCQueryGroup theQueryGroup = (TOCQueryGroup) theGroupList.get(i);
                 List theQueryList = theQueryGroup.getQueries();
                 for (int j = 0; j < theQueryList.size(); j++) {
-                    TOCQuery theQuery = (TOCQuery) theQueryList.get(j);
-                    log.info("theQuery: " + theQuery.toString());                    
+                    TOCQuery theQuery = (TOCQuery) theQueryList.get(j);              
 
-                    if (theQuery.getKey().equals(theKey)) {
-                        log.info("theQuery.getKey(): " + theQuery.getKey());                    	
+                    if (theQuery.getKey().equals(theKey)) {                   	
                         request.getSession().setAttribute(Constants.SEARCH_RESULTS, theQuery.getResults());
                         break;
                     }
