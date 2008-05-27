@@ -1,8 +1,13 @@
 /**
  * 
- * $Id: SafeHTMLUtil.java,v 1.4 2008-05-23 14:14:54 pandyas Exp $
+ * $Id: SafeHTMLUtil.java,v 1.5 2008-05-27 14:33:21 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2008/05/23 14:14:54  pandyas
+ * Modified advanced search and TOC to prevent SQL injection
+ * Added specific clean methods for text entry fields
+ * Re: Apps Scan run 05/15/2008
+ *
  * Revision 1.3  2008/05/22 18:22:28  pandyas
  * Modified advanced search and TOC to prevent SQL injection
  * Modified method name
@@ -75,21 +80,14 @@ public class SafeHTMLUtil {
         return clean;       
     }    
 
-    // clean method that allows <, >, #, ;, &, (, ), /, :, ', 
+    // clean method that only cleans {, }, script, %, \, \\ 
     public static String cleanModelDescriptor(String s)    {
         System.out.println("In SafeHTMLUtil.cleanModelDescriptor String: " + s); 
-        String clean = Translate.decode(s).replace("<", "").replace(">", "");
+        String clean = Translate.decode(s).replace("{", "").replace("}", "");
         clean = StringUtils.replace(clean, "script", "");
         clean = StringUtils.replace(clean, "%", "");
-        //clean = StringUtils.replace(clean, "#", "");
-        //clean = StringUtils.replace(clean, ";", "");
-        clean = StringUtils.replace(clean, "'", "");
         clean = StringUtils.replace(clean, "\"", "");
         clean = StringUtils.replace(clean, "$", "");
-        //clean = StringUtils.replace(clean, "&", "");
-        //clean = StringUtils.replace(clean, "(", "");
-        //clean = StringUtils.replace(clean, ")", "");
-        //clean = StringUtils.replace(clean, "/", "");
         clean = StringUtils.replace(clean, "\\", "");
         if(clean.length()==0){
                 clean = "empty";
@@ -97,7 +95,7 @@ public class SafeHTMLUtil {
         return clean;       
     }    
 
-    // clean method that allows &
+    // clean method that allows ', &
     public static String cleanPhenotype(String s)    {
         System.out.println("In SafeHTMLUtil.cleanPhenotype String: " + s); 
         String clean = Translate.decode(s).replace("<", "").replace(">", "");
@@ -105,7 +103,7 @@ public class SafeHTMLUtil {
         clean = StringUtils.replace(clean, "%", "");
         clean = StringUtils.replace(clean, "#", "");
         clean = StringUtils.replace(clean, ";", "");
-        clean = StringUtils.replace(clean, "'", "");
+        //clean = StringUtils.replace(clean, "'", "");
         clean = StringUtils.replace(clean, "\"", "");
         clean = StringUtils.replace(clean, "$", "");
         //clean = StringUtils.replace(clean, "&", "");
@@ -122,8 +120,8 @@ public class SafeHTMLUtil {
     // clean method that allows <, >, (, ), /
     public static String cleanGeneName(String s)    {
         System.out.println("In SafeHTMLUtil.cleanGeneName String: " + s); 
-        String clean = Translate.decode(s).replace("<", "").replace(">", "");
-        clean = StringUtils.replace(clean, "script", "");
+        String clean = Translate.decode(s).replace("[", "").replace("]", "");
+        clean = StringUtils.replace(clean, "script", "");       
         clean = StringUtils.replace(clean, "%", "");
         clean = StringUtils.replace(clean, "#", "");
         clean = StringUtils.replace(clean, ";", "");
@@ -131,9 +129,6 @@ public class SafeHTMLUtil {
         clean = StringUtils.replace(clean, "\"", "");
         clean = StringUtils.replace(clean, "$", "");
         clean = StringUtils.replace(clean, "&", "");
-        //clean = StringUtils.replace(clean, "(", "");
-        //clean = StringUtils.replace(clean, ")", "");
-        //clean = StringUtils.replace(clean, "/", "");
         clean = StringUtils.replace(clean, "\\", "");
         if(clean.length()==0){
                 clean = "empty";
@@ -141,7 +136,27 @@ public class SafeHTMLUtil {
         return clean;       
     }
     
- 
+    // allows &, ", /, ?, and . that are used in redirects
+    public static String cleanRedirect(String s)    {
+        System.out.println("In SafeHTMLUtil.clean String: " + s); 
+        String clean = Translate.decode(s).replace("<", "").replace(">", "");
+        clean = StringUtils.replace(clean, "script", "");
+        clean = StringUtils.replace(clean, "probe", "");         
+        clean = StringUtils.replace(clean, "%", "");
+        clean = StringUtils.replace(clean, "#", "");
+        clean = StringUtils.replace(clean, ";", "");
+        clean = StringUtils.replace(clean, "'", "");
+        clean = StringUtils.replace(clean, "\"", "");
+        clean = StringUtils.replace(clean, "$", "");
+        clean = StringUtils.replace(clean, "(", "");
+        clean = StringUtils.replace(clean, ")", "");
+        clean = StringUtils.replace(clean, "/", "");
+        clean = StringUtils.replace(clean, "\\", "");
+        if(clean.length()==0){
+                clean = "empty";
+        }
+        return clean;       
+    } 
     
     /**
      * A utlity method to check the valid value againts the dropdown options
