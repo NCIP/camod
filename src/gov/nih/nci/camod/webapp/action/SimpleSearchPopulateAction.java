@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SimpleSearchPopulateAction.java,v 1.13 2007-09-12 19:36:40 pandyas Exp $
+ * $Id: SimpleSearchPopulateAction.java,v 1.14 2008-05-27 14:37:02 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2007/09/12 19:36:40  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.12  2007/05/21 17:33:55  pandyas
  * Modified simple and adv search species drop down to pull from DB (approved model species only)
  *
@@ -36,6 +39,7 @@ import gov.nih.nci.camod.domain.SavedQueryAttribute;
 import gov.nih.nci.camod.domain.Species;
 import gov.nih.nci.camod.service.SavedQueryManager;
 import gov.nih.nci.camod.service.impl.SpeciesManagerSingleton;
+import gov.nih.nci.camod.util.SafeHTMLUtil;
 import gov.nih.nci.camod.webapp.form.SearchForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 
@@ -59,7 +63,14 @@ public class SimpleSearchPopulateAction extends BaseAction {
     public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.trace("In AdvancedSearchPopulateAction.populate");
+        log.info("In SimpleSearchPopulateAction.populate");
+        
+        // Get and clean method to prevent SQL injection
+        String methodName = request.getParameter("unprotected_method");
+        log.info("methodName: " + methodName);
+        methodName = SafeHTMLUtil.clean(methodName);
+        log.info("methodName: " + methodName);
+        
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.PRINCIPALINVESTIGATORQUERYDROP,
                 Constants.Dropdowns.ADD_BLANK);
 

@@ -1,8 +1,13 @@
 /**
  * 
- * $Id: LoginAction.java,v 1.18 2008-05-23 16:00:28 pandyas Exp $
+ * $Id: LoginAction.java,v 1.19 2008-05-27 14:37:02 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2008/05/23 16:00:28  pandyas
+ * Modified JSESSIONID in App Scan testing
+ * This is an attempt to create a new JSESSIONID if App Scan removes it
+ * Re: Apps Scan run 05/15/2008
+ *
  * Revision 1.17  2008/01/15 19:31:55  pandyas
  * Modified debug statements to build to dev tier
  *
@@ -89,24 +94,19 @@ public final class LoginAction extends BaseAction {
 
         log.info("Logon Username: " + loginForm.getUsername());
 
-        String theUsername = loginForm.getUsername().toLowerCase();
-        
-        log.info("request.getQueryString(): " + request.getQueryString());
+        String theUsername = loginForm.getUsername().toLowerCase();        
         log.info("request.getRequestedSessionId(): " + request.getRequestedSessionId());        
         
         // check login credentials using Authentication Mangager
         boolean loginOK = UserManagerSingleton.instance().login(theUsername, loginForm.getPassword(), request);
-        log.info("request.getQueryString(): " + request.getQueryString());
 
         String forward = "failure";
 
         if (loginOK) {
             log.info("Successful login");
-            log.info("request.getQueryString(): " + request.getQueryString());
             log.info("request.getRequestedSessionId(): " + request.getRequestedSessionId());
             request.getSession(true);
             log.info("request.getRequestedSessionId(): " + request.getRequestedSessionId());
-
             
             forward = "success";
             request.getSession().setAttribute(Constants.CURRENTUSER, theUsername);

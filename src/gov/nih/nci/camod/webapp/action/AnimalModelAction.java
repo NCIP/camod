@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelAction.java,v 1.26 2007-10-31 17:08:23 pandyas Exp $
+ * $Id: AnimalModelAction.java,v 1.27 2008-05-27 14:37:02 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.26  2007/10/31 17:08:23  pandyas
+ * Modified commetns for #8188 	Rename UnctrlVocab items to text entries
+ *
  * Revision 1.25  2007/09/12 19:36:40  pandyas
  * modified debug statements for build to stage tier
  *
@@ -51,6 +54,7 @@ import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.service.CurationManager;
 import gov.nih.nci.camod.service.impl.CurationManagerImpl;
+import gov.nih.nci.camod.util.SafeHTMLUtil;
 import gov.nih.nci.camod.webapp.form.ModelCharacteristicsForm;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
@@ -421,6 +425,11 @@ public final class AnimalModelAction extends BaseAction {
 		AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
 
 		try {
+	        // Get and clean method to prevent SQL injection
+	        String methodName = request.getParameter("method");
+	        log.info("methodName: " + methodName);
+	        methodName = SafeHTMLUtil.clean(methodName);
+	        log.info("methodName: " + methodName);			
 
 			List amList = animalModelManager.getAllByUser((String) request
 					.getSession().getAttribute(Constants.CURRENTUSER));
