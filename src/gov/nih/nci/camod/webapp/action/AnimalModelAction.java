@@ -1,8 +1,13 @@
 /**
  * 
- * $Id: AnimalModelAction.java,v 1.27 2008-05-27 14:37:02 pandyas Exp $
+ * $Id: AnimalModelAction.java,v 1.28 2008-06-03 00:27:28 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.27  2008/05/27 14:37:02  pandyas
+ * Modified to prevent SQL injection
+ * Cleaned method name before proceeding
+ * Re: Apps Scan run 05/23/2008
+ *
  * Revision 1.26  2007/10/31 17:08:23  pandyas
  * Modified commetns for #8188 	Rename UnctrlVocab items to text entries
  *
@@ -135,6 +140,12 @@ public final class AnimalModelAction extends BaseAction {
 		String theForward = "AnimalModelTreePopulateAction";
 
 		try {
+			
+	        // Get and clean method to prevent Cross-Site Scripting
+	        String methodName = request.getParameter("method");
+	        log.info("methodName: " + methodName);
+	        methodName = SafeHTMLUtil.clean(methodName);
+	        log.info("methodName: " + methodName);			
 
 			// Get the user
 			String theUsername = (String) request.getSession().getAttribute(
@@ -267,6 +278,12 @@ public final class AnimalModelAction extends BaseAction {
 		String theForward = "AnimalModelTreePopulateAction";
 
 		try {
+			
+	        // Get and clean method to prevent Cross-Site Scripting
+	        String methodName = request.getParameter("method");
+	        log.info("methodName: " + methodName);
+	        methodName = SafeHTMLUtil.clean(methodName);
+	        log.info("methodName: " + methodName);				
 
 			AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
 
@@ -333,6 +350,12 @@ public final class AnimalModelAction extends BaseAction {
 		String theForward = "duplicatesuccessful";
 
 		try {
+			
+	        // Get and clean method to prevent Cross-Site Scripting
+	        String methodName = request.getParameter("method");
+	        log.info("methodName: " + methodName);
+	        methodName = SafeHTMLUtil.clean(methodName);
+	        log.info("methodName: " + methodName);				
 
 			String modelID = request.getParameter("aModelID");
 
@@ -380,6 +403,13 @@ public final class AnimalModelAction extends BaseAction {
 
 		String theForward = "modeldeleted";
 		try {
+			
+	        // Get and clean method to prevent Cross-Site Scripting
+	        String methodName = request.getParameter("method");
+	        log.info("methodName: " + methodName);
+	        methodName = SafeHTMLUtil.clean(methodName);
+	        log.info("methodName: " + methodName);	
+	        
 			// Retrieve the parameter passed by the URL
 			String modelID = request.getParameter("aModelID");
 
@@ -425,11 +455,11 @@ public final class AnimalModelAction extends BaseAction {
 		AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
 
 		try {
-	        // Get and clean method to prevent SQL injection
+	        // Get and clean method to prevent Cross-Site Scripting
 	        String methodName = request.getParameter("method");
 	        log.info("methodName: " + methodName);
 	        methodName = SafeHTMLUtil.clean(methodName);
-	        log.info("methodName: " + methodName);			
+	        log.info("methodName: " + methodName);				
 
 			List amList = animalModelManager.getAllByUser((String) request
 					.getSession().getAttribute(Constants.CURRENTUSER));
