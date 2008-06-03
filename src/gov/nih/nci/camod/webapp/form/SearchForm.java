@@ -42,9 +42,14 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.38 2008-05-23 16:05:39 pandyas Exp $
+ * $Id: SearchForm.java,v 1.39 2008-06-03 00:28:00 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.38  2008/05/23 16:05:39  pandyas
+ * Modified advanced search and TOC to prevent SQL injection
+ * Added validation for diagnosisCode (just in case)
+ * Re: Apps Scan run 05/15/2008
+ *
  * Revision 1.37  2008/05/23 16:03:00  pandyas
  * Modified advanced search and TOC to prevent SQL injection
  * Added validation for organTissueCode
@@ -691,7 +696,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         String parameter = mapping.getParameter();
         
 
-        // validate keyword against malicious characters to prevent blind SQl injection attacks
+        // validate keyword against malicious characters to prevent blind SQL injection attacks
         if (keyword != null && keyword.length() > 0 )
         { 
             System.out.println("Enter validate for keyword loop");
@@ -699,7 +704,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             System.out.println("Exit validate for keyword loop");         
         }
         
-        // validate modelDescriptor against malicious characters to prevent blind SQl injection attacks
+        // validate modelDescriptor against malicious characters to prevent blind SQL injection attacks
         if (modelDescriptor != null  && modelDescriptor.length() > 0)
         { 
             System.out.println("Enter validate for modelDescriptor loop");
@@ -737,7 +742,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             System.out.println("Exit validate for species loop");             
         }        
         
-        // validate organ; against malicious characters to prevent blind SQl injection attacks
+        // validate organ; against malicious characters to prevent blind SQL injection attacks
         if (organ != null  && organ.length() > 0)
         { 
             System.out.println("Enter validate for organ loop: " + organ);
@@ -745,7 +750,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             System.out.println("Exit validate for organ loop: " + organ);
         }
         
-        // validate organ; against malicious characters to prevent blind SQl injection attacks
+        // validate organ; against malicious characters to prevent blind SQL injection attacks
         if (organTissueCode != null  && organTissueCode.length() > 0)
         { 
             System.out.println("Enter validate for organTissueCode loop: " + organTissueCode);
@@ -753,7 +758,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             System.out.println("Exit validate for organTissueCode loop: " + organTissueCode);
         }        
         
-        // validate tumorClassification against malicious characters to prevent blind SQl injection attacks
+        // validate tumorClassification against malicious characters to prevent blind SQL injection attacks
         if (tumorClassification != null && tumorClassification.length() > 0)
         { 
             System.out.println("Enter validate for tumorClassification loop: " + tumorClassification);
@@ -761,7 +766,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             System.out.println("Exit validate for tumorClassification loop: " + tumorClassification);
         }  
         
-        // validate tumorClassification against malicious characters to prevent blind SQl injection attacks
+        // validate tumorClassification against malicious characters to prevent blind SQL injection attacks
         if (diagnosisCode != null && diagnosisCode.length() > 0)
         { 
             System.out.println("Enter validate for diagnosisCode loop: " + diagnosisCode);
@@ -769,7 +774,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             System.out.println("Exit validate for diagnosisCode loop: " + diagnosisCode);
         }
         
-        // validate phenotype against malicious characters to prevent blind SQl injection attacks
+        // validate phenotype against malicious characters to prevent blind SQL injection attacks
         if (phenotype != null  && phenotype.length() > 0)
         { 
             System.out.println("Enter validate for phenotype loop");
@@ -778,7 +783,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         }  
         
         
-        // validate geneName against malicious characters to prevent blind SQl injection attacks
+        // validate geneName against malicious characters to prevent blind SQL injection attacks
         if (geneName != null  )
         { 
             System.out.println("Enter validate for geneName loop");
@@ -786,7 +791,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             System.out.println("Exit validate for geneName loop");
         }  
         
-        // validate genomicSegDesignator against malicious characters to prevent blind SQl injection attacks
+        // validate genomicSegDesignator against malicious characters to prevent blind SQL injection attacks
         if (genomicSegDesignator != null && genomicSegDesignator.length() > 0 )
         {
             List genomicSegDesigList = new ArrayList();
@@ -872,7 +877,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         
          
         
-        // validate therpy compound/drug against malicious characters to prevent blind SQl injection attacks
+        // validate therpy compound/drug against malicious characters to prevent blind SQL injection attacks
         if (therapeuticApproach != null   )
         { 
             List drugNameList = new ArrayList();
