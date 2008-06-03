@@ -1,8 +1,13 @@
 /**
  * 
- * $Id: LoginAction.java,v 1.19 2008-05-27 14:37:02 pandyas Exp $
+ * $Id: LoginAction.java,v 1.20 2008-06-03 00:29:38 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2008/05/27 14:37:02  pandyas
+ * Modified to prevent SQL injection
+ * Cleaned method name before proceeding
+ * Re: Apps Scan run 05/23/2008
+ *
  * Revision 1.18  2008/05/23 16:00:28  pandyas
  * Modified JSESSIONID in App Scan testing
  * This is an attempt to create a new JSESSIONID if App Scan removes it
@@ -62,17 +67,14 @@ import gov.nih.nci.camod.service.SavedQueryManager;
 import gov.nih.nci.camod.service.ResultSettingsManager;
 import gov.nih.nci.camod.service.impl.UserManagerSingleton;
 import gov.nih.nci.camod.webapp.form.LoginForm;
-
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -90,12 +92,29 @@ public final class LoginAction extends BaseAction {
      */
     public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws IOException, ServletException {
+    	log.info("Enter LoginAction.execute");
         LoginForm loginForm = (LoginForm) form;
 
-        log.info("Logon Username: " + loginForm.getUsername());
-
         String theUsername = loginForm.getUsername().toLowerCase();        
-        log.info("request.getRequestedSessionId(): " + request.getRequestedSessionId());        
+        //String cookie = request.getCookie("JSESSIONID");
+       
+        
+        //  Example to secure a cookie, i.e. instruct the browser to
+        //  Send the cookie using a secure protocol
+        //Cookie cookie = new Cookie("JSESSIONID", "sensitive");
+        //cookie.setSecure(true);
+        //response.addCookie(cookie); 
+
+        Cookie[] cookieArray = request.getCookies(); 
+        for(int i = 0; i < cookieArray.length; i++){
+        	log.info("Cookie name: " + cookieArray[i].getName());
+        	log.info("Cookie value: " + cookieArray[i].getValue()); 
+        	log.info("Cookie MaxAge: " + cookieArray[i].getMaxAge());         	
+        	if(cookieArray[i].getName().equals("JSESSIONID")) {
+        	cookieArray[i].setSecure(true); 
+        	log.info("Secured JSESSIONID");
+        	}       	
+        }       
         
         // check login credentials using Authentication Mangager
         boolean loginOK = UserManagerSingleton.instance().login(theUsername, loginForm.getPassword(), request);
@@ -104,9 +123,17 @@ public final class LoginAction extends BaseAction {
 
         if (loginOK) {
             log.info("Successful login");
-            log.info("request.getRequestedSessionId(): " + request.getRequestedSessionId());
+            
+            // to get rid of JSESSIONID and create a new one
+            response.setHeader("Set-Cookie","name=JSESSIONID; expires=date");
             request.getSession(true);
-            log.info("request.getRequestedSessionId(): " + request.getRequestedSessionId());
+            
+
+            Cookie[] cookieArray2 = request.getCookies(); 
+            for(int i = 0; i < cookieArray2.length; i++){
+            	log.info("Cookie name: " + cookieArray2[i].getName());
+            	log.info("Cookie value: " + cookieArray2[i].getValue()); 
+            }            
             
             forward = "success";
             request.getSession().setAttribute(Constants.CURRENTUSER, theUsername);
