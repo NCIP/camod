@@ -1,8 +1,13 @@
 /**
  * 
- * $Id: UserSettingsForm.java,v 1.4 2008-05-27 14:35:32 pandyas Exp $
+ * $Id: UserSettingsForm.java,v 1.5 2008-06-05 14:23:18 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2008/05/27 14:35:32  pandyas
+ * Modified to prevent SQL injection
+ * Added code to clean user input before using text
+ * Re: Apps Scan run 05/23/2008
+ *
  * Revision 1.3  2006/04/17 19:09:19  pandyas
  * caMod 2.1 OM changes
  *
@@ -83,6 +88,10 @@ public class UserSettingsForm extends BaseForm implements UserSettingsData, Seri
      */
     public void setAffiliation(String affiliation) {
         this.affiliation = affiliation;
+        // Clean the parameter
+        if (this.affiliation != null && !this.affiliation.equals(""))  {
+                this.affiliation = SafeHTMLUtil.clean(this.affiliation);
+        }        
     }
 
     /**
