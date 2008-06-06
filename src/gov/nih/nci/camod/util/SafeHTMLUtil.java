@@ -1,8 +1,13 @@
 /**
  * 
- * $Id: SafeHTMLUtil.java,v 1.5 2008-05-27 14:33:21 pandyas Exp $
+ * $Id: SafeHTMLUtil.java,v 1.6 2008-06-06 17:40:16 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2008/05/27 14:33:21  pandyas
+ * Modified to prevent SQL injection
+ * Added and modified clean methods
+ * Re: Apps Scan run 05/23/2008
+ *
  * Revision 1.4  2008/05/23 14:14:54  pandyas
  * Modified advanced search and TOC to prevent SQL injection
  * Added specific clean methods for text entry fields
@@ -39,7 +44,7 @@ import org.htmlparser.util.Translate;
 public class SafeHTMLUtil {
 	
     public static String clean(String s)    {
-        System.out.println("In SafeHTMLUtil.clean String: " + s); 
+        //System.out.println("In SafeHTMLUtil.clean String: " + s); 
         String clean = Translate.decode(s).replace("<", "").replace(">", "");
         clean = StringUtils.replace(clean, "script", "");
         clean = StringUtils.replace(clean, "%", "");
@@ -61,7 +66,7 @@ public class SafeHTMLUtil {
  
     // clean method that allows the apostrophe (')
     public static String cleanKeyword(String s)    {
-        System.out.println("In SafeHTMLUtil.clean String: " + s); 
+        //System.out.println("In SafeHTMLUtil.clean String: " + s); 
         String clean = Translate.decode(s).replace("<", "").replace(">", "");
         clean = StringUtils.replace(clean, "script", "");
         clean = StringUtils.replace(clean, "%", "");
@@ -97,16 +102,14 @@ public class SafeHTMLUtil {
 
     // clean method that allows ', &
     public static String cleanPhenotype(String s)    {
-        System.out.println("In SafeHTMLUtil.cleanPhenotype String: " + s); 
+        //System.out.println("In SafeHTMLUtil.cleanPhenotype String: " + s); 
         String clean = Translate.decode(s).replace("<", "").replace(">", "");
         clean = StringUtils.replace(clean, "script", "");
         clean = StringUtils.replace(clean, "%", "");
         clean = StringUtils.replace(clean, "#", "");
         clean = StringUtils.replace(clean, ";", "");
-        //clean = StringUtils.replace(clean, "'", "");
         clean = StringUtils.replace(clean, "\"", "");
         clean = StringUtils.replace(clean, "$", "");
-        //clean = StringUtils.replace(clean, "&", "");
         clean = StringUtils.replace(clean, "(", "");
         clean = StringUtils.replace(clean, ")", "");
         clean = StringUtils.replace(clean, "/", "");
@@ -119,7 +122,7 @@ public class SafeHTMLUtil {
     
     // clean method that allows <, >, (, ), /
     public static String cleanGeneName(String s)    {
-        System.out.println("In SafeHTMLUtil.cleanGeneName String: " + s); 
+        //System.out.println("In SafeHTMLUtil.cleanGeneName String: " + s); 
         String clean = Translate.decode(s).replace("[", "").replace("]", "");
         clean = StringUtils.replace(clean, "script", "");       
         clean = StringUtils.replace(clean, "%", "");
@@ -138,7 +141,7 @@ public class SafeHTMLUtil {
     
     // allows &, ", /, ?, and . that are used in redirects
     public static String cleanRedirect(String s)    {
-        System.out.println("In SafeHTMLUtil.clean String: " + s); 
+        //System.out.println("In SafeHTMLUtil.clean String: " + s); 
         String clean = Translate.decode(s).replace("<", "").replace(">", "");
         clean = StringUtils.replace(clean, "script", "");
         clean = StringUtils.replace(clean, "probe", "");         
@@ -168,10 +171,9 @@ public class SafeHTMLUtil {
      */
     public static boolean isValidValue(String input, String source, HttpServletRequest request)
     {
-        System.out.println("In SafeHTMLUtil.isValidValue input " + "'" + input + "'"); 
-        System.out.println("In SafeHTMLUtil.isValidValue source " + source.toString());
+        //System.out.println("In SafeHTMLUtil.isValidValue input " + "'" + input + "'"); 
         String trimInput = input.trim();
-        System.out.println("In SafeHTMLUtil.isValidValue input " + "'" + trimInput + "'"); 
+        //System.out.println("In SafeHTMLUtil.isValidValue input " + "'" + trimInput + "'"); 
         
         // validate for intentCode
         List dropDownList = (List) request.getSession().getAttribute(source);        
@@ -185,16 +187,16 @@ public class SafeHTMLUtil {
             for (int i = 0 ; i < dropDownList.size() ; i++ )
             {               
                 nv  = (NameValue) dropDownList.get(i);
-                System.out.println("isValidValue loop nv: " + "'" + nv.getValue() + "'");                
+                //System.out.println("isValidValue loop nv: " + "'" + nv.getValue() + "'");                
                 if (nv.getValue().equals(input))
                 {
-                    System.out.println("nv.getValue().equals(trimInput)");                  	
+                    //System.out.println("nv.getValue().equals(trimInput)");                  	
                     validValue = true ;
                     break ;
                 }
             }
         }
-        System.out.println("In SafeHTMLUtil.isValidValue validValue " + validValue);         
+        //System.out.println("In SafeHTMLUtil.isValidValue validValue " + validValue);         
         return validValue ;
     }
     
@@ -208,8 +210,8 @@ public class SafeHTMLUtil {
      */    
     public static boolean isValidStringValue(String input , String source , HttpServletRequest request)
     {
-        System.out.println("In SearchForm.isValidStringValue input " + input); 
-        System.out.println("In SearchForm.isValidStringValue source " + source.toString());         
+        //System.out.println("In SearchForm.isValidStringValue input " + input); 
+        //System.out.println("In SearchForm.isValidStringValue source " + source.toString());         
         // validate for intentCode
         List dropDownList = (List) request.getSession().getAttribute(source);        
         String nv = null ;
@@ -222,7 +224,7 @@ public class SafeHTMLUtil {
             for (int i = 0 ; i < dropDownList.size() ; i++ )
             {               
                 nv  =  (String)dropDownList.get(i); 
-                System.out.println("isValidStringValue loop nv: " + nv);                
+                //System.out.println("isValidStringValue loop nv: " + nv);                
                 if (nv.equals(input))
                 {
                     validValue = true ;
@@ -230,7 +232,7 @@ public class SafeHTMLUtil {
                 }
             }
         }
-        System.out.println("In SearchForm.isValidStringValue validValue " + validValue);         
+        //System.out.println("In SearchForm.isValidStringValue validValue " + validValue);         
         return validValue ;
     }
     
@@ -239,7 +241,7 @@ public class SafeHTMLUtil {
     //  i.e. Chemical / Drug, Growth Factor, and Signaling Molecule are valid selection options
     public static boolean isLetterOrDigitWithExceptions(String input)
     {  
-        System.out.println("In SearchForm.isLetterOrDigitWithExceptions input " + input);          
+        //System.out.println("In SearchForm.isLetterOrDigitWithExceptions input " + input);          
         // validate for intentCode
         boolean validValue = true ;
         if (input != null && !input.equals("Chemical / Drug") && !input.equals("Growth Factor") )
@@ -251,7 +253,7 @@ public class SafeHTMLUtil {
             }
         } else if (input.equals("Chemical / Drug")){
         	input = "ChemicalDrug";
-        	System.out.println("In SearchForm.isLetterOrDigitWithExceptions input " + input);  
+        	//System.out.println("In SearchForm.isLetterOrDigitWithExceptions input " + input);  
             for (int i = 0; i < input.length(); i++)
             {        	
 	            if (!Character.isLetterOrDigit(input.charAt(i)))
@@ -259,7 +261,7 @@ public class SafeHTMLUtil {
             }        	
         } else if (input.equals("Growth Factor")){
         	input = "GrowthFactor";
-        	System.out.println("In SearchForm.isLetterOrDigitWithExceptions input " + input);  
+        	//System.out.println("In SearchForm.isLetterOrDigitWithExceptions input " + input);  
             for (int i = 0; i < input.length(); i++)
             {        	
 	            if (!Character.isLetterOrDigit(input.charAt(i)))
@@ -267,7 +269,7 @@ public class SafeHTMLUtil {
             }        	
         } else if (input.equals("Signaling Molecule")){
         	input = "SignalingMolecule";
-        	System.out.println("In SearchForm.isLetterOrDigitWithExceptions input " + input);  
+        	//System.out.println("In SearchForm.isLetterOrDigitWithExceptions input " + input);  
             for (int i = 0; i < input.length(); i++)
             {        	
 	            if (!Character.isLetterOrDigit(input.charAt(i)))
@@ -275,14 +277,14 @@ public class SafeHTMLUtil {
             }        	
         }
         
-        System.out.println("In SearchForm.isLetterOrDigitWithExceptions validValue " + validValue);         
+        //System.out.println("In SearchForm.isLetterOrDigitWithExceptions validValue " + validValue);         
         return true; 
     }    
     
     // This method needs testing for sucessful searches
     public static boolean isJavaIdentifierPart(String input)
     { 
-        System.out.println("In SearchForm.isJavaIdentifierPart input " + input);     	
+        //System.out.println("In SearchForm.isJavaIdentifierPart input " + input);     	
         for (int i = 0; i < input.length(); i++)
         {
                 if (!Character.isJavaIdentifierPart(input.charAt(i)))
@@ -294,12 +296,12 @@ public class SafeHTMLUtil {
     // This method needs testing for sucessful searches
     public static String trimInput(String input)
     { 
-        System.out.println("In SearchForm.trimInput input " + input);     	
+        //System.out.println("In SearchForm.trimInput input " + input);     	
         for (int i = 0; i < input.length(); i++)
         {
                 input = input.trim();
         }
-        System.out.println("Exiting SearchForm.trimInput input " + input);        
+        //System.out.println("Exiting SearchForm.trimInput input " + input);        
         return input;
     }     
     
@@ -307,7 +309,7 @@ public class SafeHTMLUtil {
     // This method needs testing for sucessful searches
     public static boolean isLetterOrDigit(String input)
     {  
-        System.out.println("In SearchForm.isLetterOrDigit input " + input);     	
+        //System.out.println("In SearchForm.isLetterOrDigit input " + input);     	
         for (int i = 0; i < input.length(); i++)
         {
                 if (!Character.isLetterOrDigit(input.charAt(i)))
