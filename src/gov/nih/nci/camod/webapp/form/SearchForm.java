@@ -42,9 +42,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.39 2008-06-03 00:28:00 pandyas Exp $
+ * $Id: SearchForm.java,v 1.40 2008-06-10 16:50:57 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.39  2008/06/03 00:28:00  pandyas
+ * Fixed typo in SQL word
+ *
  * Revision 1.38  2008/05/23 16:05:39  pandyas
  * Modified advanced search and TOC to prevent SQL injection
  * Added validation for diagnosisCode (just in case)
@@ -742,54 +745,13 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             System.out.println("Exit validate for species loop");             
         }        
         
-        // validate organ; against malicious characters to prevent blind SQL injection attacks
-        if (organ != null  && organ.length() > 0)
-        { 
-            System.out.println("Enter validate for organ loop: " + organ);
-            setOrgan(organ);
-            System.out.println("Exit validate for organ loop: " + organ);
-        }
-        
-        // validate organ; against malicious characters to prevent blind SQL injection attacks
-        if (organTissueCode != null  && organTissueCode.length() > 0)
-        { 
-            System.out.println("Enter validate for organTissueCode loop: " + organTissueCode);
-            setOrganTissueCode(organTissueCode);           
-            System.out.println("Exit validate for organTissueCode loop: " + organTissueCode);
-        }        
-        
         // validate tumorClassification against malicious characters to prevent blind SQL injection attacks
         if (tumorClassification != null && tumorClassification.length() > 0)
         { 
             System.out.println("Enter validate for tumorClassification loop: " + tumorClassification);
             setTumorClassification(tumorClassification);
             System.out.println("Exit validate for tumorClassification loop: " + tumorClassification);
-        }  
-        
-        // validate tumorClassification against malicious characters to prevent blind SQL injection attacks
-        if (diagnosisCode != null && diagnosisCode.length() > 0)
-        { 
-            System.out.println("Enter validate for diagnosisCode loop: " + diagnosisCode);
-            setDiagnosisCode(diagnosisCode);
-            System.out.println("Exit validate for diagnosisCode loop: " + diagnosisCode);
-        }
-        
-        // validate phenotype against malicious characters to prevent blind SQL injection attacks
-        if (phenotype != null  && phenotype.length() > 0)
-        { 
-            System.out.println("Enter validate for phenotype loop");
-            setPhenotype(phenotype);
-            System.out.println("Exit validate for phenotype loop");
-        }  
-        
-        
-        // validate geneName against malicious characters to prevent blind SQL injection attacks
-        if (geneName != null  )
-        { 
-            System.out.println("Enter validate for geneName loop");
-            setGeneName(geneName); 
-            System.out.println("Exit validate for geneName loop");
-        }  
+        } 
         
         // validate genomicSegDesignator against malicious characters to prevent blind SQL injection attacks
         if (genomicSegDesignator != null && genomicSegDesignator.length() > 0 )
@@ -805,9 +767,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
                return errors;
             }
             System.out.println("Exit validate for genomicSegDesignator loop");                 
-        }        
-        
-        
+        }           
         
         // validate for inducedMutationAgent
         if (inducedMutationAgent != null && inducedMutationAgent.length() > 0 )
@@ -816,7 +776,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             NameValueList.generateInducedMutationAgentList();
             request.getSession().setAttribute(Constants.Dropdowns.SEARCHINDUCEDMUTATIONDROP, NameValueList.getInducedMutationAgentList());
 
-            if (!SafeHTMLUtil.isValidValue(inducedMutationAgent,Constants.Dropdowns.SEARCHINDUCEDMUTATIONDROP,request) || !SafeHTMLUtil.isLetterOrDigit(inducedMutationAgent))
+            if (!SafeHTMLUtil.isValidValue(inducedMutationAgent,Constants.Dropdowns.SEARCHINDUCEDMUTATIONDROP,request) | !SafeHTMLUtil.isLetterOrDigit(inducedMutationAgent))
             {
                 // populate the validation message
                 errors.add("inducedMutationAgent", new ActionMessage("error.inducedMutationAgent.validValue"));
@@ -832,7 +792,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             request.getSession().setAttribute(Constants.Dropdowns.SEARCHCARCINOGENEXPOSUREDROP, NameValueList.getCarcinogenicInterventionList());
 
 	            if (!SafeHTMLUtil.isValidValue(carcinogenicIntervention,Constants.Dropdowns.SEARCHCARCINOGENEXPOSUREDROP,request) 
-	            		|| !SafeHTMLUtil.isLetterOrDigitWithExceptions(carcinogenicIntervention))
+	            		| !SafeHTMLUtil.isLetterOrDigitWithExceptions(carcinogenicIntervention))
 	            {
 	                   // populate the validation message
 	                   errors.add("carcinogenicIntervention", new ActionMessage("error.carcinogenicIntervention.validValue"));
@@ -907,6 +867,99 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             }
             System.out.println("Exit validate for externalSource loop");             
         } 
+        
+        // validate for searchTherapeuticApproaches
+        if (searchTherapeuticApproaches == true | searchTherapeuticApproaches == false )
+        {
+           
+        } else {
+            System.out.println("Enter validate for searchTherapeuticApproaches loop");            
+            // populate the validation message
+            errors.add("searchTherapeuticApproaches", new ActionMessage("error.invalidParameter.validValue"));
+            System.out.println("Exit validate for searchTherapeuticApproaches loop");          	
+        }
+
+        // validate for engineeredTransgene
+        if (engineeredTransgene == true | engineeredTransgene == false )
+        {
+             
+        } else {
+            System.out.println("Enter validate for engineeredTransgene loop");            
+            // populate the validation message
+            errors.add("engineeredTransgene", new ActionMessage("error.invalidParameter.validValue"));
+            System.out.println("Exit validate for engineeredTransgene loop");        	
+        }
+
+        // validate for targetedModification
+        if (targetedModification == true | targetedModification == false )
+        {
+           
+        } else {
+            System.out.println("Enter validate for targetedModification loop");            
+            // populate the validation message
+            errors.add("targetedModification", new ActionMessage("error.invalidParameter.validValue"));
+        System.out.println("Exit validate for targetedModification loop");          	
+        }
+
+        // validate for searchHistoMetastasis
+        if (searchHistoMetastasis == true | searchHistoMetastasis == false )
+        {
+        } else {
+            System.out.println("Enter validate for searchHistoMetastasis loop");            
+                // populate the validation message
+                errors.add("searchHistoMetastasis", new ActionMessage("error.invalidParameter.validValue"));
+            System.out.println("Exit validate for searchHistoMetastasis loop");             
+        } 
+
+        // validate for searchMicroArrayData
+        if (searchMicroArrayData == true | searchMicroArrayData == false )
+        {
+        } else {
+            System.out.println("Enter validate for searchMicroArrayData loop");            
+                // populate the validation message
+                errors.add("searchMicroArrayData", new ActionMessage("error.invalidParameter.validValue"));
+            System.out.println("Exit validate for searchMicroArrayData loop");             
+        } 
+
+        // validate for searchImageData
+        if (searchImageData == true | searchImageData == false )
+        {
+        } else {
+            System.out.println("Enter validate for searchImageData loop");            
+                // populate the validation message
+                errors.add("searchImageData", new ActionMessage("error.invalidParameter.validValue"));
+            System.out.println("Exit validate for searchImageData loop");             
+        } 
+
+        // validate for searchTransplant
+        if (searchTransplant == true | searchTransplant == false )
+        {
+        } else {
+            System.out.println("Enter validate for searchTransplant loop");            
+                // populate the validation message
+                errors.add("searchTransplant", new ActionMessage("error.invalidParameter.validValue"));
+            System.out.println("Exit validate for searchTransplant loop");             
+        }
+
+        // validate for searchTransientInterference
+        if (searchTransplant == true | searchTransplant == false )
+        {
+        } else {
+            System.out.println("Enter validate for searchTransientInterference loop");            
+                // populate the validation message
+                errors.add("searchTransientInterference", new ActionMessage("error.invalidParameter.validValue"));
+            System.out.println("Exit validate for searchTransientInterference loop");             
+        } 
+
+        // validate for searchToolStrain
+        if (searchToolStrain == true | searchToolStrain == false )
+        {
+        } else {
+            System.out.println("Enter validate for searchToolStrain loop");            
+                // populate the validation message
+                errors.add("searchToolStrain", new ActionMessage("error.invalidParameter.validValue"));
+            System.out.println("Exit validate for searchToolStrain loop");             
+        }        
         
         if (parameter != null) {
             // Identify the method name to be dispatched to.
