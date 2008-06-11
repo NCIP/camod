@@ -1,8 +1,13 @@
 /**
  * 
- * $Id: AnimalModelAction.java,v 1.28 2008-06-03 00:27:28 pandyas Exp $
+ * $Id: AnimalModelAction.java,v 1.29 2008-06-11 17:43:23 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.28  2008/06/03 00:27:28  pandyas
+ * Modified to prevent SQL injection
+ * Cleaned parameter named "method"  before proceeding
+ * Re: Apps Scan run 05/29/2008
+ *
  * Revision 1.27  2008/05/27 14:37:02  pandyas
  * Modified to prevent SQL injection
  * Cleaned method name before proceeding
@@ -93,48 +98,27 @@ public final class AnimalModelAction extends BaseAction {
 
 		log
 				.info("<AnimalModelAction saveNewModel> New Model Being created with following Characteristics:"
-						+ "\n\t description: "
-						+ theModelChar.getDescription()
-						+ "\n\t breedingNotes: "
-						+ theModelChar.getBreedingNotes()
-						+ "\n\t PI: "
-						+ theModelChar.getPrincipalInvestigator()
-						+ "\n\t experimentDesign: "
-						+ theModelChar.getExperimentDesign()
-						+ "\n\t isToolStrain: "
-						+ theModelChar.getIsToolStrain()
-						+ "\n\t modelDescriptor: "
-						+ theModelChar.getModelDescriptor()
-						+ "\n\t name: "
-						+ theModelChar.getName()
-						+ "\n\t releaseDate: "
-						+ theModelChar.getReleaseDate()
-						+ "\n\t scientificName: "
-						+ theModelChar.getScientificName()
-						+ "\n\t ethinicityStrain: "
-						+ theModelChar.getEthinicityStrain()
-						+ "\n\t otherEthnicityStrain: "
-						+ theModelChar.getOtherEthnicityStrain()
-						+ "\n\t summary: "
-						+ theModelChar.getSummary()
-						+ "\n\t genotype: "
-						+ theModelChar.getGenotype()
-						+ "\n\t nomenclature: "
-						+ theModelChar.getNomenclature()						
-						+ "\n\t type: "
-						+ theModelChar.getType()
-						+ "\n\t url: "
-						+ theModelChar.getUrl()
-						+ "\n\t calendarReleaseDate: "
-						+ theModelChar.getCalendarReleaseDate()
-						+ "\n\t Genotype: "
-						+ theModelChar.getGenotype()
-						+ "\n\t Nomenclature: "
-						+ theModelChar.getNomenclature()
-						+ "\n\t Comment: "
-						+ theModelChar.getComments()						
-						+ "\n\t currentUser: "
-						+ (String) request.getSession().getAttribute(
+						+ "\n\t description: "						+ theModelChar.getDescription()
+						+ "\n\t breedingNotes: "						+ theModelChar.getBreedingNotes()
+						+ "\n\t PI: "						+ theModelChar.getPrincipalInvestigator()
+						+ "\n\t experimentDesign: "						+ theModelChar.getExperimentDesign()
+						+ "\n\t isToolStrain: "						+ theModelChar.getIsToolStrain()
+						+ "\n\t modelDescriptor: "						+ theModelChar.getModelDescriptor()
+						+ "\n\t name: "						+ theModelChar.getName()
+						+ "\n\t releaseDate: "						+ theModelChar.getReleaseDate()
+						+ "\n\t scientificName: "						+ theModelChar.getScientificName()
+						+ "\n\t ethinicityStrain: "						+ theModelChar.getEthinicityStrain()
+						+ "\n\t otherEthnicityStrain: "						+ theModelChar.getOtherEthnicityStrain()
+						+ "\n\t summary: "						+ theModelChar.getSummary()
+						+ "\n\t genotype: "						+ theModelChar.getGenotype()
+						+ "\n\t nomenclature: "						+ theModelChar.getNomenclature()						
+						+ "\n\t type: "						+ theModelChar.getType()
+						+ "\n\t url: "						+ theModelChar.getUrl()
+						+ "\n\t calendarReleaseDate: "						+ theModelChar.getCalendarReleaseDate()
+						+ "\n\t Genotype: "						+ theModelChar.getGenotype()
+						+ "\n\t Nomenclature: "						+ theModelChar.getNomenclature()
+						+ "\n\t Comment: "						+ theModelChar.getComments()						
+						+ "\n\t currentUser: "						+ (String) request.getSession().getAttribute(
 								"camod.loggedon.username"));
 
 		String theForward = "AnimalModelTreePopulateAction";
