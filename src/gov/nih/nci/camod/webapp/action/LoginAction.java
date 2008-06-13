@@ -1,8 +1,13 @@
 /**
  * 
- * $Id: LoginAction.java,v 1.20 2008-06-03 00:29:38 pandyas Exp $
+ * $Id: LoginAction.java,v 1.21 2008-06-13 17:35:00 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.20  2008/06/03 00:29:38  pandyas
+ * Modified to prevent SQL injection
+ * Trying to secure JSESSIONID to prevent modification
+ * Re: Apps Scan run 05/29/2008
+ *
  * Revision 1.19  2008/05/27 14:37:02  pandyas
  * Modified to prevent SQL injection
  * Cleaned method name before proceeding
@@ -92,27 +97,21 @@ public final class LoginAction extends BaseAction {
      */
     public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws IOException, ServletException {
-    	log.info("Enter LoginAction.execute");
+    	log.debug("Enter LoginAction.execute");
         LoginForm loginForm = (LoginForm) form;
 
-        String theUsername = loginForm.getUsername().toLowerCase();        
-        //String cookie = request.getCookie("JSESSIONID");
-       
+        String theUsername = loginForm.getUsername().toLowerCase();       
         
         //  Example to secure a cookie, i.e. instruct the browser to
         //  Send the cookie using a secure protocol
-        //Cookie cookie = new Cookie("JSESSIONID", "sensitive");
-        //cookie.setSecure(true);
-        //response.addCookie(cookie); 
-
         Cookie[] cookieArray = request.getCookies(); 
         for(int i = 0; i < cookieArray.length; i++){
-        	log.info("Cookie name: " + cookieArray[i].getName());
-        	log.info("Cookie value: " + cookieArray[i].getValue()); 
-        	log.info("Cookie MaxAge: " + cookieArray[i].getMaxAge());         	
-        	if(cookieArray[i].getName().equals("JSESSIONID")) {
+        	log.debug("Cookie name: " + cookieArray[i].getName());
+        	log.debug("Cookie value: " + cookieArray[i].getValue()); 
+        	log.debug("Cookie MaxAge: " + cookieArray[i].getMaxAge());         	
+        	if(cookieArray[i].getName().equals("JSESSIONID") | cookieArray[i].getValue().equals("JSESSIONID")) {
         	cookieArray[i].setSecure(true); 
-        	log.info("Secured JSESSIONID");
+        	log.debug("Secured JSESSIONID");
         	}       	
         }       
         
@@ -122,18 +121,7 @@ public final class LoginAction extends BaseAction {
         String forward = "failure";
 
         if (loginOK) {
-            log.info("Successful login");
-            
-            // to get rid of JSESSIONID and create a new one
-            response.setHeader("Set-Cookie","name=JSESSIONID; expires=date");
-            request.getSession(true);
-            
-
-            Cookie[] cookieArray2 = request.getCookies(); 
-            for(int i = 0; i < cookieArray2.length; i++){
-            	log.info("Cookie name: " + cookieArray2[i].getName());
-            	log.info("Cookie value: " + cookieArray2[i].getValue()); 
-            }            
+            log.info("Successful login");            
             
             forward = "success";
             request.getSession().setAttribute(Constants.CURRENTUSER, theUsername);
