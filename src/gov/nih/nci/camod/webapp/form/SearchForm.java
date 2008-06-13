@@ -42,9 +42,14 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.40 2008-06-10 16:50:57 pandyas Exp $
+ * $Id: SearchForm.java,v 1.41 2008-06-13 17:33:57 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.40  2008/06/10 16:50:57  pandyas
+ * Modified to prevent SQL injection
+ * Cleaned parameter name before proceeding
+ * Re: Apps Scan run 06/09/2008
+ *
  * Revision 1.39  2008/06/03 00:28:00  pandyas
  * Fixed typo in SQL word
  *
@@ -306,6 +311,10 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
     public void setPiName(String piName)
     {
         this.piName = piName;
+        // Clean the parameter
+        if (this.piName != null && !this.piName.equals(""))  {
+                this.piName = SafeHTMLUtil.clean(this.piName);
+        }        
     }
 
     public String getSpecies()
@@ -390,6 +399,10 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
     public void setDisease(String disease)
     {
         this.disease = disease;
+        // Clean the parameter
+        if (this.disease != null && !this.disease.equals(""))  {
+                this.disease = SafeHTMLUtil.clean(this.disease);
+        }        
     }
 
     public String getCellLine()
@@ -424,6 +437,10 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
     public void setOrganTissueName(String organTissueName)
     {
         this.organTissueName = organTissueName;
+        // Clean the parameter
+        if (this.organTissueName != null && !this.organTissueName.equals(""))  {
+                this.organTissueName = SafeHTMLUtil.clean(this.organTissueName);
+        }        
     }
 
     public String getDiagnosisCode()
@@ -448,6 +465,10 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
     public void setDiagnosisName(String diagnosisName)
     {
         this.diagnosisName = diagnosisName;
+        // Clean the parameter
+        if (this.diagnosisName != null && !this.diagnosisName.equals(""))  {
+                this.diagnosisName = SafeHTMLUtil.clean(this.diagnosisName);
+        }        
     }
 
     public String getInducedMutationAgent()
