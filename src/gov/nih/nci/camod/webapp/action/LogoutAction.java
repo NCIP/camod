@@ -1,8 +1,13 @@
 /**
  * 
- * $Id: LogoutAction.java,v 1.8 2008-06-13 17:58:18 pandyas Exp $
+ * $Id: LogoutAction.java,v 1.9 2008-06-16 13:12:22 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2008/06/13 17:58:18  pandyas
+ * Modified to prevent Security issues
+ * Invalidate relevant session identifiers when a user signs out
+ * Re: Apps Scan run 06/12/2008
+ *
  * Revision 1.7  2008/06/13 17:35:00  pandyas
  * Modified to prevent Security issues
  * Invalidate relevant session identifiers when a user signs out
@@ -45,11 +50,6 @@ public class LogoutAction extends BaseAction {
 	{
 		System.out.println( "<LogoutAction execute> Logging Off" );
 		
-		// Clean name and password in the input/output form bean
-        LoginForm loginForm = (LoginForm) form;
-        loginForm.setUsername(null);
-        loginForm.setPassword(null);
-		
         // Original code before security scan changes
 		request.getSession().setAttribute( "camod.loggedon.username", null );
 		//If we wanted to remove everything from the session that might be stored for the
@@ -69,6 +69,7 @@ public class LogoutAction extends BaseAction {
                 // Setting value to null did not pass the Security Scan - next two attempts below          
                 // Set Cookie to expire at some past date to get rid of it
                 response.setHeader("Set-Cookie","name=JSESSIONID; expires=Wednesday, 13-Jun-08 13:00:00 GMT");
+                request.getSession().removeAttribute("JSESSIONID");
             log.info("removed value for JSESSIONID and JSESSIONID");
             } 
              
