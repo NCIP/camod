@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SafeHTMLUtil.java,v 1.6 2008-06-06 17:40:16 pandyas Exp $
+ * $Id: SafeHTMLUtil.java,v 1.7 2008-06-23 18:10:08 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2008/06/06 17:40:16  pandyas
+ * comment out logging
+ *
  * Revision 1.5  2008/05/27 14:33:21  pandyas
  * Modified to prevent SQL injection
  * Added and modified clean methods
@@ -58,6 +61,7 @@ public class SafeHTMLUtil {
         clean = StringUtils.replace(clean, ")", "");
         clean = StringUtils.replace(clean, "/", "");
         clean = StringUtils.replace(clean, "\\", "");
+        clean = StringUtils.replace(clean, "javascript", "");        
         if(clean.length()==0){
                 clean = "empty";
         }
