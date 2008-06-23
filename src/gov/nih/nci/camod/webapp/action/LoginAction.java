@@ -1,8 +1,13 @@
 /**
  * 
- * $Id: LoginAction.java,v 1.21 2008-06-13 17:35:00 pandyas Exp $
+ * $Id: LoginAction.java,v 1.22 2008-06-23 18:07:06 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.21  2008/06/13 17:35:00  pandyas
+ * Modified to prevent Security issues
+ * Invalidate relevant session identifiers when a user signs out
+ * Re: Apps Scan run 06/12/2008
+ *
  * Revision 1.20  2008/06/03 00:29:38  pandyas
  * Modified to prevent SQL injection
  * Trying to secure JSESSIONID to prevent modification
@@ -80,6 +85,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -100,21 +107,25 @@ public final class LoginAction extends BaseAction {
     	log.debug("Enter LoginAction.execute");
         LoginForm loginForm = (LoginForm) form;
 
-        String theUsername = loginForm.getUsername().toLowerCase();       
+        String theUsername = loginForm.getUsername().toLowerCase(); 
+        
+        Cookie validUserCookie = new Cookie("validUserKey", "123456789");
+        response.addCookie(validUserCookie);        
+        
         
         //  Example to secure a cookie, i.e. instruct the browser to
         //  Send the cookie using a secure protocol
         Cookie[] cookieArray = request.getCookies(); 
         for(int i = 0; i < cookieArray.length; i++){
-        	log.debug("Cookie name: " + cookieArray[i].getName());
-        	log.debug("Cookie value: " + cookieArray[i].getValue()); 
-        	log.debug("Cookie MaxAge: " + cookieArray[i].getMaxAge());         	
-        	if(cookieArray[i].getName().equals("JSESSIONID") | cookieArray[i].getValue().equals("JSESSIONID")) {
+        	log.info("Cookie name: " + cookieArray[i].getName());
+        	log.info("Cookie value: " + cookieArray[i].getValue()); 
+        	log.info("Cookie MaxAge: " + cookieArray[i].getMaxAge());         	
+        	if(cookieArray[i].getName().startsWith("JSESSIONID=")) {
         	cookieArray[i].setSecure(true); 
-        	log.debug("Secured JSESSIONID");
+        	log.info("Secured JSESSIONID");
         	}       	
-        }       
-        
+        } 
+
         // check login credentials using Authentication Mangager
         boolean loginOK = UserManagerSingleton.instance().login(theUsername, loginForm.getPassword(), request);
 
@@ -176,4 +187,18 @@ public final class LoginAction extends BaseAction {
         // Forward control to the specified success URI
         return mapping.findForward(forward);
     }
+
+    // Simple code for the retrieval of a cookie value given a cookie name by looping through the 
+    // array of available Cookie objects, returning the value of any Cookie whose name matches the input. 
+    // If there is no match, the designated default value is returned.
+    public static String getCookieValue(Cookie[] cookies,
+        String cookieName,
+        String defaultValue) {
+			for(int i=0; i<cookies.length; i++) {
+				Cookie cookie = cookies[i];
+				if (cookieName.equals(cookie.getName()))
+				return(cookie.getValue());
+			}
+		return(defaultValue);
+    }    
 }

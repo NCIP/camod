@@ -1,8 +1,13 @@
 /**
  * 
- * $Id: LogoutAction.java,v 1.9 2008-06-16 13:12:22 pandyas Exp $
+ * $Id: LogoutAction.java,v 1.10 2008-06-23 18:07:06 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2008/06/16 13:12:22  pandyas
+ * Modified to prevent Security issues
+ * Invalidate relevant session identifiers when a user signs out
+ * Re: Apps Scan run 06/12/2008
+ *
  * Revision 1.8  2008/06/13 17:58:18  pandyas
  * Modified to prevent Security issues
  * Invalidate relevant session identifiers when a user signs out
@@ -56,23 +61,27 @@ public class LogoutAction extends BaseAction {
 		// user, we could simply invalidate the session instead
 		request.getSession().invalidate();
 		
-		// Remove user login
-		request.getSession().removeAttribute("camod.loggedon.username");		
+		//	Remove attribute set in LoginAction
+		HttpSession session = request.getSession(true);
+        session.removeAttribute("validUserKey");
         
-        // explicitly remove the JSESSIONID to prevent security issue
-		// Trying to: Invalidate relevant session identifiers when a user signs out
+		// Remove user login key set in LoginAction
+		request.getSession().removeAttribute("validUserKey");
+    	log.info("Removed Cookie named validUserCookie" );		
+        
+        //  Example to secure a cookie, i.e. instruct the browser to
+        //  Send the cookie using a secure protocol
         Cookie[] cookieArray = request.getCookies(); 
-        for(int i = 0; i < cookieArray.length; i++){         
-            if(cookieArray[i].getName().equals("JSESSIONID") || cookieArray[i].getValue().equals("JSESSIONID")) {
-                cookieArray[i].setMaxAge(0);
-                response.setHeader("JSESSIONID", null);
-                // Setting value to null did not pass the Security Scan - next two attempts below          
-                // Set Cookie to expire at some past date to get rid of it
-                response.setHeader("Set-Cookie","name=JSESSIONID; expires=Wednesday, 13-Jun-08 13:00:00 GMT");
-                request.getSession().removeAttribute("JSESSIONID");
-            log.info("removed value for JSESSIONID and JSESSIONID");
-            } 
-             
+        for(int i = 0; i < cookieArray.length; i++){  
+        	log.info("Cookie name: " + cookieArray[i].getName());
+        	log.info("Cookie value: " + cookieArray[i].getValue()); 
+        	log.info("Cookie MaxAge: " + cookieArray[i].getMaxAge());          	
+        	if(cookieArray[i].getName().equals("validUserKey")) {       		
+            	cookieArray[i].setValue("000000"); 
+            	log.info("Set validUserKey to 00000");
+            	log.info("Cookie name: " + cookieArray[i].getName());
+            	log.info("Cookie value: " + cookieArray[i].getValue());             	
+        	}
         }
 		return mapping.findForward( "loggedOut" );
 	}
