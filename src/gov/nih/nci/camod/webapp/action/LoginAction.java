@@ -1,8 +1,13 @@
 /**
  * 
- * $Id: LoginAction.java,v 1.22 2008-06-23 18:07:06 pandyas Exp $
+ * $Id: LoginAction.java,v 1.23 2008-06-30 15:31:03 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.22  2008/06/23 18:07:06  pandyas
+ * Modified to prevent Security issues
+ * Invalidate relevant session identifiers when a user signs out
+ * Re: Apps Scan run 06/17/2008
+ *
  * Revision 1.21  2008/06/13 17:35:00  pandyas
  * Modified to prevent Security issues
  * Invalidate relevant session identifiers when a user signs out
@@ -117,12 +122,12 @@ public final class LoginAction extends BaseAction {
         //  Send the cookie using a secure protocol
         Cookie[] cookieArray = request.getCookies(); 
         for(int i = 0; i < cookieArray.length; i++){
-        	log.info("Cookie name: " + cookieArray[i].getName());
-        	log.info("Cookie value: " + cookieArray[i].getValue()); 
-        	log.info("Cookie MaxAge: " + cookieArray[i].getMaxAge());         	
+        	log.debug("Cookie name: " + cookieArray[i].getName());
+        	log.debug("Cookie value: " + cookieArray[i].getValue()); 
+        	log.debug("Cookie MaxAge: " + cookieArray[i].getMaxAge());         	
         	if(cookieArray[i].getName().startsWith("JSESSIONID=")) {
         	cookieArray[i].setSecure(true); 
-        	log.info("Secured JSESSIONID");
+        	log.debug("Secured JSESSIONID");
         	}       	
         } 
 
