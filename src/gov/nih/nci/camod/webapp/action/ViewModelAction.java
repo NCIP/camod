@@ -1,9 +1,14 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.58 2008-06-30 15:29:05 pandyas Exp $
+ *  $Id: ViewModelAction.java,v 1.59 2008-06-30 18:18:28 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.58  2008/06/30 15:29:05  pandyas
+ *  Modified to prevent Cross-Site Scripting
+ *  Cleaned parameter name before proceeding
+ *  Fixed code added in previous version
+ *
  *  Revision 1.57  2008/05/27 14:36:40  pandyas
  *  Modified to prevent SQL injection
  *  Cleaned HTTP Header before proceeding
@@ -319,12 +324,14 @@ public class ViewModelAction extends BaseAction
         request.getSession(true);    	
         
         try {
-        	// get and clean header to prevent SQL injection/Cross-Site Scripting
-            String sID = request.getHeader("HTTP header");
-            if (!sID.equals(null)){
+        	/* get and clean header to prevent SQL injection/Cross-Site Scripting
+        	 * Taken out when it caused null pointer error
+            if (! request.getHeader("HTTP header").equals(null)){
+            	String sID = request.getHeader("HTTP header");
 	            log.info("sID: " + sID);
 	            sID = SafeHTMLUtil.clean(sID);
             }
+            */
         	
 	        setCancerModel(request);
 	        setComments(request, Constants.Pages.MODEL_CHARACTERISTICS);
