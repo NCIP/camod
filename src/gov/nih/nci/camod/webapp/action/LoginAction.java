@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: LoginAction.java,v 1.23 2008-06-30 15:31:03 pandyas Exp $
+ * $Id: LoginAction.java,v 1.24 2008-06-30 15:31:58 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.23  2008/06/30 15:31:03  pandyas
+ * Clean up debug statements for buld to stage
+ *
  * Revision 1.22  2008/06/23 18:07:06  pandyas
  * Modified to prevent Security issues
  * Invalidate relevant session identifiers when a user signs out
@@ -192,18 +195,5 @@ public final class LoginAction extends BaseAction {
         // Forward control to the specified success URI
         return mapping.findForward(forward);
     }
-
-    // Simple code for the retrieval of a cookie value given a cookie name by looping through the 
-    // array of available Cookie objects, returning the value of any Cookie whose name matches the input. 
-    // If there is no match, the designated default value is returned.
-    public static String getCookieValue(Cookie[] cookies,
-        String cookieName,
-        String defaultValue) {
-			for(int i=0; i<cookies.length; i++) {
-				Cookie cookie = cookies[i];
-				if (cookieName.equals(cookie.getName()))
-				return(cookie.getValue());
-			}
-		return(defaultValue);
-    }    
+  
 }
