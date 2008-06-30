@@ -1,9 +1,14 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.57 2008-05-27 14:36:40 pandyas Exp $
+ *  $Id: ViewModelAction.java,v 1.58 2008-06-30 15:29:05 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.57  2008/05/27 14:36:40  pandyas
+ *  Modified to prevent SQL injection
+ *  Cleaned HTTP Header before proceeding
+ *  Re: Apps Scan run 05/23/2008
+ *
  *  Revision 1.56  2008/02/05 17:10:09  pandyas
  *  Removed debug statement for build to dev
  *
@@ -311,17 +316,15 @@ public class ViewModelAction extends BaseAction
                                                       HttpServletRequest request,
                                                       HttpServletResponse response) throws Exception
     {
-    	log.info("mapping: " + mapping);
-    	log.info("form: " + form);
-    	log.info("request: " + request);
-    	log.info("response: " + response);
         request.getSession(true);    	
         
         try {
-        	// get and clean header to prevent SQL injection
+        	// get and clean header to prevent SQL injection/Cross-Site Scripting
             String sID = request.getHeader("HTTP header");
-            log.info("sID: " + sID);
-            sID = SafeHTMLUtil.clean(sID);
+            if (!sID.equals(null)){
+	            log.info("sID: " + sID);
+	            sID = SafeHTMLUtil.clean(sID);
+            }
         	
 	        setCancerModel(request);
 	        setComments(request, Constants.Pages.MODEL_CHARACTERISTICS);
