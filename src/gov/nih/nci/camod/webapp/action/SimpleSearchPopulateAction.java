@@ -1,8 +1,13 @@
 /**
  * 
- * $Id: SimpleSearchPopulateAction.java,v 1.14 2008-05-27 14:37:02 pandyas Exp $
+ * $Id: SimpleSearchPopulateAction.java,v 1.15 2008-07-02 17:43:51 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2008/05/27 14:37:02  pandyas
+ * Modified to prevent SQL injection
+ * Cleaned method name before proceeding
+ * Re: Apps Scan run 05/23/2008
+ *
  * Revision 1.13  2007/09/12 19:36:40  pandyas
  * modified debug statements for build to stage tier
  *
@@ -67,9 +72,9 @@ public class SimpleSearchPopulateAction extends BaseAction {
         
         // Get and clean method to prevent SQL injection
         String methodName = request.getParameter("unprotected_method");
-        log.info("methodName: " + methodName);
+        log.debug("methodName: " + methodName);
         methodName = SafeHTMLUtil.clean(methodName);
-        log.info("methodName: " + methodName);
+        log.debug("methodName: " + methodName);
         
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.PRINCIPALINVESTIGATORQUERYDROP,
                 Constants.Dropdowns.ADD_BLANK);
