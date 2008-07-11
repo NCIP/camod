@@ -10,19 +10,17 @@ public class SidebarUtil extends gov.nih.nci.camod.webapp.action.BaseAction {
 		{			
 			System.out.println("<sidebar.jsp> String jspName=" + jspName );
 			
-			if( 		jspName.equals("searchSimple.jsp") || 
+			if(			jspName.equals("customizeSearchResults.jsp") || 
+	                    jspName.equals("savedSearchQueries.jsp") || 
+	                    jspName.equals("searchQueryHistory.jsp") || 	
+						jspName.equals("searchSimple.jsp") || 
 						jspName.equals("searchHelp.jsp") || 
 						jspName.equals("searchAdvanced.jsp") || 
 						jspName.equals("searchDrugScreening.jsp") || 
 						jspName.equals("searchTableOfContents.jsp") || 
 						jspName.equals("searchResultsDrugScreen.jsp") ||
                         jspName.equals("viewInvivoDetails.jsp") ||                        
-						jspName.equals("searchResults.jsp") ||           
-                        
-                        jspName.equals("customizeSearchResults.jsp") || 
-                        jspName.equals("savedSearchQueries.jsp") || 
-                        jspName.equals("searchQueryHistory.jsp") || 						                        
-                        
+						jspName.equals("searchResults.jsp") ||                                  					                                                
                         jspName.equals("expDesignStage0.jsp") ||
 						jspName.equals("expDesignStage1.jsp") ||
 						jspName.equals("expDesignStage2.jsp") ||
