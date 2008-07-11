@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: savedSearchQueries.jsp,v 1.5 2006-08-15 14:52:37 pandyas Exp $
+ * $Id: savedSearchQueries.jsp,v 1.6 2008-07-11 17:40:27 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/08/15 14:52:37  pandyas
+ * updated on-line help from Robohelp to ePublisher - modified links
+ *
  * Revision 1.4  2006/08/13 18:21:23  pandyas
  * updated on-line help from Robohelp to ePublisher - modified links
  *
@@ -25,11 +28,12 @@
 
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
+<%@ include file="/common/taglibs.jsp"%>
 
 <%@ page import="gov.nih.nci.camod.service.SavedQueryManager" %>
 <%@ page import="gov.nih.nci.camod.domain.SavedQuery" %>	
 <%@ page import="gov.nih.nci.camod.domain.SavedQueryAttribute" %>	
-
+<%@ page import="java.util.List" %>
 
 <%  
 	List userQueryList = (List) request.getSession().getAttribute( Constants.USERSAVEDQUERYLIST );
@@ -46,7 +50,7 @@
 
 <!-- savedSearchQueries.jsp -->
 <!-- Main Content Begins -->
-<DIV id="masterdiv">
+<DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 	
@@ -143,6 +147,5 @@
 				
 	</TABLE>
 </tr></td></TABLE>
-</DIV>	
 
 <%@ include file="/jsp/footer.jsp" %>

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SaveQueryAction.java,v 1.3 2006-05-10 15:37:11 schroedn Exp $
+ * $Id: SaveQueryAction.java,v 1.4 2008-07-11 17:38:46 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/05/10 15:37:11  schroedn
+ * Fixed Dup_Name bug
+ *
  * Revision 1.2  2006/05/10 14:15:39  schroedn
  * New Features - Changes from code review
  *
@@ -62,10 +65,16 @@ public class SaveQueryAction extends BaseAction
     {
 
         log.debug("Entering SaveQueryAction.save");
-
+        System.out.println("Entering SaveQueryAction.save");
+        
         SaveQueryForm theForm = (SaveQueryForm) form;
         SavedQueryManager savedQueryManager = (SavedQueryManager) getBean("savedQueryManager");
         
+        System.out.println("SaveQueryForm\n" + 
+        							"Page=" + theForm.getPage() + "\n" +
+        							"QueryName=" + theForm.getQueryName() + "\n" +
+        							"SaveAsNew=" + theForm.getSaveAsNew() + "\n" );
+                
         List results = (List) request.getSession().getAttribute(Constants.SEARCH_RESULTS);
         request.getSession().setAttribute(Constants.NOSAVEOPTION, "true");
         
@@ -77,7 +86,8 @@ public class SaveQueryAction extends BaseAction
             {
                 // Update Saved Query
                 log.debug("Updating SavedQuery");
-
+                System.out.println("Updating SavedQuery");
+                
                 request.getSession().setAttribute(Constants.DUP_NAME, "false");
 
                 String aSavedQueryId = (String) request.getSession().getAttribute(Constants.ASAVEDQUERYID);
@@ -98,20 +108,29 @@ public class SaveQueryAction extends BaseAction
             if (theForm.getSaveAsNew().equals("yes"))
             {
                 log.debug("Saving new SavedQuery");
-
-                // Create NEW Saved Query               
+        		System.out.println("Saving new SavedQuery");
+                
+        		// Create NEW Saved Query               
                 SavedQuery theQueryToSave = new SavedQuery();
 
                 boolean duplicateName = false;
                 request.getSession().setAttribute(Constants.DUP_NAME, "false");
-
-                List allSaved = savedQueryManager.getSavedQueriesByUsername((String) request.getSession().getAttribute( Constants.CURRENTUSER ) );
+                
+                System.out.println("CURRENTUSER=" + (String) request.getSession().getAttribute( Constants.CURRENTUSER ) );
+                
+                //HERE!@
+                List allSaved = savedQueryManager.getSavedQueriesByUsername((String) request.getSession().getAttribute( Constants.CURRENTUSER ));
+                
+                //Search for duplicate query names
                 for (int i = 0; i < allSaved.size(); i++)
                 {
                     SavedQuery theSavedQuery = (SavedQuery) allSaved.get(i);
+                    System.out.println( "SavedQueries= (" + i + ") " +theSavedQuery.getQueryName() );
+                   
                     if (theForm.getQueryName().equals(theSavedQuery.getQueryName()))
                     {
                         log.debug( "Query name is a duplicate" );
+                        System.out.println( "Query name is a duplicate" );
                         
                         duplicateName = true;
                         request.getSession().setAttribute(Constants.DUP_NAME, "true");
@@ -123,10 +142,12 @@ public class SaveQueryAction extends BaseAction
 
                 if (duplicateName == false)
                 {
+                	System.out.println("No Duplicate found");
+                	
                     theQueryToSave.setQueryName(theForm.getQueryName());
                     theQueryToSave.setIsSaved(1l);
 
-                    theQueryToSave.setElapsedTime((Long) request.getSession().getAttribute(Constants.ELAPSED_TIME));
+                    theQueryToSave.setElapsedTime( 3 ); //(Long) request.getSession().getAttribute(Constants.ELAPSED_TIME));
                     theQueryToSave.setExecuteTime((Date) request.getSession().getAttribute(Constants.EXECUTE_TIME));
                     theQueryToSave.setNumberResults(results.size());
 
