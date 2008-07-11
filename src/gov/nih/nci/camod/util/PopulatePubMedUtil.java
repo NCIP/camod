@@ -1,10 +1,13 @@
 /**
  * 
- * $Id: PopulatePubMedUtil.java,v 1.6 2006-11-09 17:34:56 pandyas Exp $
+ * $Id: PopulatePubMedUtil.java,v 1.7 2008-07-11 17:34:31 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2006/11/09 17:34:56  pandyas
+ * Commented out debug code
+ *
  * Revision 1.5  2006/04/17 19:10:50  pandyas
- * Added $Id: PopulatePubMedUtil.java,v 1.6 2006-11-09 17:34:56 pandyas Exp $ and $log:$
+ * Added $Id: PopulatePubMedUtil.java,v 1.7 2008-07-11 17:34:31 schroedn Exp $ and $log:$
  *
  * 
  */
@@ -14,9 +17,15 @@ package gov.nih.nci.camod.util;
 
 import gov.nih.nci.camod.domain.Publication;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.StringTokenizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /*
  * PopulatePubMed.java
@@ -24,11 +33,14 @@ import java.util.StringTokenizer;
  * @author  Dana Zhang
  * @version 1.0
  * 
- * $Id: PopulatePubMedUtil.java,v 1.6 2006-11-09 17:34:56 pandyas Exp $
+ * $Id: PopulatePubMedUtil.java,v 1.7 2008-07-11 17:34:31 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2006/11/09 17:34:56  pandyas
+ * Commented out debug code
+ *
  * Revision 1.5  2006/04/17 19:10:50  pandyas
- * Added $Id: PopulatePubMedUtil.java,v 1.6 2006-11-09 17:34:56 pandyas Exp $ and $log:$
+ * Added $Id: PopulatePubMedUtil.java,v 1.7 2008-07-11 17:34:31 schroedn Exp $ and $log:$
  *
  */
 
@@ -288,8 +300,11 @@ public class PopulatePubMedUtil implements Runnable{
         return pageArray;
     }
     private static  String getPublicationTitle(String pubmedAbstract){// to get the title of the record
-        System.out.println("<PopulatePubMed.java getPublicationTitle> Entering..." );
-	
+       
+    	System.out.println("<PopulatePubMed.java getPublicationTitle> Entering..." );
+        System.out.println("pubmedAbstract=" + pubmedAbstract );
+        String pubMedAbstract = pubmedAbstract;
+        
         String endPage = null;
         String startPage = null;
         String[] pageArray = null;
@@ -353,9 +368,34 @@ public class PopulatePubMedUtil implements Runnable{
         	System.out.println( "Exception=" + e );
         }
         
+        titleCol = titleCol.replaceAll("\n", "");       
+        System.out.println("<PopulatePubMed.java getPublicationTitle> *title=" + titleCol );
+       
+        //Re-Written title retrieval
+        //Gforge Bug #12064 - schroedln 4/15/08
+        pubMedAbstract = pubMedAbstract.replaceAll("\n", "NEWLINE" );
+					    
+	    String patternStr = "NEWLINENEWLINE";
+	    String[] fields = pubMedAbstract.split(patternStr);
+	    	    
+	    System.out.println( "Title: " + fields[1].replaceAll("NEWLINE", " " ) );
+        
+	    titleCol = fields[1].replaceAll("NEWLINE", " " );	    
+	    //end of re-written title retrieval
+	    
         return titleCol;
     }
-    
+
+    // Returns a version of the input where all line terminators
+    // are replaced with a space.
+    public static String removeLineTerminators(String inputStr) {
+        String patternStr = "(?m)$^|[\\r\\n]+\\z";
+        String replaceStr = " ";
+        Pattern pattern = Pattern.compile(patternStr);
+        Matcher matcher = pattern.matcher(inputStr);
+        return matcher.replaceAll(replaceStr);
+    }
+
     private String getPublicationVolume(String pubmedAbstract){// volume of the publication
         System.out.println("<PopulatePubMed.java getPublicationVolume> Entering..." );
         String volumeString = null;
