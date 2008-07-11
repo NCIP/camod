@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: sidebar.jsp,v 1.17 2006-12-28 18:27:37 pandyas Exp $
+ * $Id: sidebar.jsp,v 1.18 2008-07-11 17:31:56 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2006/12/28 18:27:37  pandyas
+ * Renamed folder !SSL!( from robohelp) to caMOD (folder name not used in ePublisher)
+ *
  * Revision 1.16  2006/10/17 16:08:28  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -48,10 +51,12 @@
 		String pageName = sidebar.findSubMenu( request, jspName );
 		
 		if ( ! pageName.equals("redirect") ) { 
+			System.out.println( "subMenu PageName=" + pageName );
 			%><jsp:include page="<%=pageName%>" /><%
 		} else
 			response.sendRedirect( "login.jsp" );
 	%>
+
 
     <TR>
 	<TD class=subMenuPrimaryTitle height=22>QUICK LINKS <!-- anchor to skip sub menu --><A
@@ -93,7 +98,15 @@
 		onmouseout="changeMenuStyle(this,'subMenuSecondaryTitle'),hideCursor()"
 		height=20><A class=subMenuSecondary
 		href="http://ncicb.nci.nih.gov/NCICB/support" target="_blank">NCICB SUPPORT</A></TD></TR>
-      <TR>
+    <TR>
+	<TD class=subMenuSecondaryTitle
+		onmouseover="changeMenuStyle(this,'subMenuSecondaryTitleOver'),showCursor()"
+		onclick="document.location.href='#'"
+		onmouseout="changeMenuStyle(this,'subMenuSecondaryTitle'),hideCursor()"
+		height=20><A class=subMenuSecondary
+		href="WebHelp/caMOD/UserGuide.pdf" target="_blank">USER GUIDE</A></TD>
+	</TR>		
+    <TR>
 	<TD class=subMenuSecondaryTitle
 		onmouseover="changeMenuStyle(this,'subMenuSecondaryTitleOver'),showCursor()"
 		onclick="document.location.href='#'"
