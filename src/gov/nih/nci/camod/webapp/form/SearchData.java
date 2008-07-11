@@ -42,9 +42,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchData.java,v 1.14 2008-01-16 18:29:46 pandyas Exp $
+ * $Id: SearchData.java,v 1.15 2008-07-11 17:18:19 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2008/01/16 18:29:46  pandyas
+ * Renamed value to Transplant for #8290
+ *
  * Revision 1.13  2007/10/31 17:40:09  pandyas
  * Fixed #8290 	Rename graft object into transplant object
  *
@@ -89,6 +92,10 @@ public interface SearchData {
 
 	public void setModelDescriptor(String m);
 
+	public String getPmid();
+	
+	public void setPmid(String p);
+	
 	public String getOrgan();
 
 	public void setOrgan(String o);
