@@ -17,6 +17,7 @@ Model Id
 Name of Cell line
 Name of inducing agent
 Organ / Tissue
+PMID number
 Principal Investigator
 Publications
 Segment Type
