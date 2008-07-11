@@ -12,6 +12,18 @@
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
 <SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>	
 
+<script type="text/javascript">
+<!--
+
+function trim(str)
+{
+    // str. remove whitespaces from left. remove whitespaces from right
+    return str.replace(/^\s+/g, "").replace(/\s+$/g, "");
+}
+
+//-->
+</script>
+
 <c:set var="actionName" value="PublicationAction.do?method=save" />
 
 <c:if test="${not empty publicationForm.APubID}">
@@ -105,7 +117,7 @@
 			<label valign="TOP" for="field1">PMID: &nbsp;</label>
 			<br>
 			<html:text styleClass="formFieldUnSized" size="20" property="pmid" />
-			<html:submit property="<%=Constants.Parameters.ACTION%>" styleClass="actionButton" >Fill in Fields</html:submit>		
+			<html:submit property="<%=Constants.Parameters.ACTION%>" onclick="javascript:pmid.value=trim(pmid.value)" >Fill in Fields</html:submit>		
 		</td>
 	</tr>
 
@@ -143,7 +155,7 @@
 		<td class="formRequiredLabel"><label for="field1">Title of Publication:<br/><br/>
 			Note: Either the PMID or the Title of Publication must be entered.</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" size="50" property="title" />
+			<html:textarea styleClass="formFieldSized" property="title" cols="32" rows="4"/>
 		</td>
 	</tr>
 
