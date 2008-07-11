@@ -1,7 +1,10 @@
 /*
- * $Id: Treatment.java,v 1.10 2007-10-31 15:55:38 pandyas Exp $
+ * $Id: Treatment.java,v 1.11 2008-07-11 17:27:39 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2007/10/31 15:55:38  pandyas
+ * Fixed #8188 	Rename UnctrlVocab items to AlternEntry
+ *
  * Revision 1.9  2006/04/17 19:13:46  pandyas
  * caMod 2.1 OM changes and added log/id header
  *
@@ -113,33 +116,35 @@ public class Treatment extends BaseObject implements Serializable, Duplicatable
      */
     public String getDosageUnit()
     {
-        String tmpDosage = dosageUnit;
-
-        //Trim leading Zeros
-        if (tmpDosage == null)
-        {
-            return null;
-        }
-
-        char[] chars = tmpDosage.toCharArray();
-        int index = 0;
-        for (; index < tmpDosage.length(); index++)
-        {
-            if (chars[index] != '0')
-            {
-                break;
-            }
-        }
-        tmpDosage = (index == 0) ? tmpDosage : tmpDosage.substring(index);
-
-        //if mg/kg is contained in string, replace it with mg/kg/injections
-        // Compile regular expression
-        Pattern pattern = Pattern.compile("mg/kg");
-
-        // Replace all occurrences of pattern in input
-        Matcher matcher = pattern.matcher(tmpDosage);
-        tmpDosage = matcher.replaceAll("mg/kg/injections");
-        return tmpDosage;
+    	return dosageUnit;
+    	
+//        String tmpDosage = dosageUnit;
+//
+//        //Trim leading Zeros
+//        if (tmpDosage == null)
+//        {
+//            return null;
+//        }
+//
+//        char[] chars = tmpDosage.toCharArray();
+//        int index = 0;
+//        for (; index < tmpDosage.length(); index++)
+//        {
+//            if (chars[index] != '0')
+//            {
+//                break;
+//            }
+//        }
+//        tmpDosage = (index == 0) ? tmpDosage : tmpDosage.substring(index);
+//
+//        //if mg/kg is contained in string, replace it with mg/kg/injections
+//        // Compile regular expression
+//        Pattern pattern = Pattern.compile("mg/kg");
+//
+//        // Replace all occurrences of pattern in input
+//        Matcher matcher = pattern.matcher(tmpDosage);
+//        tmpDosage = matcher.replaceAll("mg/kg/injections");
+//        return tmpDosage;
     }
 
     /**
