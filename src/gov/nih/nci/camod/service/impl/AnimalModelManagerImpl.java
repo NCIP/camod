@@ -1,9 +1,13 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.91 2008-05-21 19:03:56 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.92 2008-07-11 17:44:42 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.91  2008/05/21 19:03:56  pandyas
+ * Modified advanced search to prevent SQL injection
+ * Re: Apps Scan run 05/15/2008
+ *
  * Revision 1.90  2008/01/31 22:22:27  pandyas
  * remove log printouts now that bug is resolved
  *
@@ -499,6 +503,9 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
         theDuplicatedModel.getAvailability().setModifiedDate(null);
         theDuplicatedModel.getAvailability().setEnteredDate(new Date());
+        
+        theDuplicatedModel.setState("Incomplete");
+        
         log.debug("In AnimalModelManagerImpl.duplicate state" + theDuplicatedModel.getState());
 
         save(theDuplicatedModel);
