@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ViewTOCSearchResultsAction.java,v 1.6 2008-05-27 14:58:04 pandyas Exp $
+ * $Id: ViewTOCSearchResultsAction.java,v 1.7 2008-07-15 15:18:26 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2008/05/27 14:58:04  pandyas
+ * Removed debug statements
+ *
  * Revision 1.5  2008/05/27 14:52:52  pandyas
  * Modified to prevent SQL injection
  * Cleaned parameter name before proceeding
@@ -40,56 +43,54 @@ public class ViewTOCSearchResultsAction extends BaseAction {
             HttpServletResponse response) throws Exception {
 
         log.info("In ViewTOCSearchResultsAction.execute");
-
+        ActionErrors errors = new ActionErrors();
+        
         String theForward = "next";
+        
+        String theKey = (String) request.getParameter(Constants.Parameters.TOCQUERYKEY);
+        log.info("theKey: " + theKey);        
 
         try {
-        	
-            // Get and clean method to prevent SQL injection
-            String methodName = request.getParameter("aTOCQueryKey");
-            log.info("methodName: " + methodName);
-            methodName = SafeHTMLUtil.clean(methodName);
-            log.info("methodName: " + methodName);        	
-
-            String theKey = (String) request.getParameter(Constants.Parameters.TOCQUERYKEY);
-            log.info("theKey: " + theKey);
+            // This is meant to prevent SQL injection into the key value of the TOC queries
+        	// Security scan failed so this is checked first and the query will not run unless clean
+            if (theKey != null && theKey.length() > 0)
+            { 
+	            NameValueList.generateTableOfContentsList();
+	            request.getSession().setAttribute(Constants.Dropdowns.SEARCHTOCDROP, NameValueList.getTableOfContentsList());
+	            if (!SafeHTMLUtil.isValidValue(theKey,Constants.Dropdowns.SEARCHTOCDROP,request))
+	            {
+	                // set theForward to failure - fail gracefully but do not let query continue
+	                theForward = "failure";
+	            } else {	            
+		            log.debug("theKey is a valid value - continue with querry: " + theKey); 
             
-            NameValueList.generateTableOfContentsList();
-            request.getSession().setAttribute(Constants.Dropdowns.SEARCHTOCDROP, NameValueList.getTableOfContentsList());
+		            // Handle external linkage
+		            if (request.getSession().getAttribute(Constants.TOCSearch.TOC_QUERY_RESULTS) == null) {
+		 
+		                // Get the TOC manager workflow
+		                TOCManager theTOCManager = new TOCManager(getServlet().getServletContext().getRealPath("/")
+		                        + Constants.TOCSearch.TOC_QUERY_FILE);
+		
+		                List theResults = theTOCManager.process(); 
+		                request.getSession().setAttribute(Constants.TOCSearch.TOC_QUERY_RESULTS, theResults);
+		            }
 
-            if (!SafeHTMLUtil.isValidValue(theKey,Constants.Dropdowns.SEARCHTOCDROP,request))
-            {
-               // set theForward to failure - fail gracefully but do not let query continue
-               // This is meant to prevent SQL injection into the key value of the TOC queries
-            	theForward = "failure";
-            }            
-            
-            // Handle external linkage
-            if (request.getSession().getAttribute(Constants.TOCSearch.TOC_QUERY_RESULTS) == null) {
- 
-                // Get the TOC manager workflow
-                TOCManager theTOCManager = new TOCManager(getServlet().getServletContext().getRealPath("/")
-                        + Constants.TOCSearch.TOC_QUERY_FILE);
+		            List theGroupList = (List) request.getSession().getAttribute(Constants.TOCSearch.TOC_QUERY_RESULTS);
 
-                List theResults = theTOCManager.process(); 
-                request.getSession().setAttribute(Constants.TOCSearch.TOC_QUERY_RESULTS, theResults);
-            }
-
-            List theGroupList = (List) request.getSession().getAttribute(Constants.TOCSearch.TOC_QUERY_RESULTS);
-
-            for (int i = 0; i < theGroupList.size(); i++) {
-                TOCQueryGroup theQueryGroup = (TOCQueryGroup) theGroupList.get(i);
-                List theQueryList = theQueryGroup.getQueries();
-                for (int j = 0; j < theQueryList.size(); j++) {
-                    TOCQuery theQuery = (TOCQuery) theQueryList.get(j);              
-
-                    if (theQuery.getKey().equals(theKey)) {                   	
-                        request.getSession().setAttribute(Constants.SEARCH_RESULTS, theQuery.getResults());
-                        break;
-                    }
-                }
-            }
-            
+		            for (int i = 0; i < theGroupList.size(); i++) {
+		                TOCQueryGroup theQueryGroup = (TOCQueryGroup) theGroupList.get(i);
+		                List theQueryList = theQueryGroup.getQueries();
+		                for (int j = 0; j < theQueryList.size(); j++) {
+		                    TOCQuery theQuery = (TOCQuery) theQueryList.get(j);              
+		
+		                    if (theQuery.getKey().equals(theKey)) {                   	
+		                        request.getSession().setAttribute(Constants.SEARCH_RESULTS, theQuery.getResults());
+		                        break;
+		                    }
+		                }
+		            }
+	            }  // end of SafeHTMLUtil.isValidValue
+          }   // end of theKey != null         
         } catch (Exception e) {
 
             theForward = "failure";
@@ -102,4 +103,7 @@ public class ViewTOCSearchResultsAction extends BaseAction {
         }
         return mapping.findForward(theForward);
     }
+    
+
+        
 }
