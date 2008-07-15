@@ -1,8 +1,12 @@
 /**
  * 
- * $Id: ViewTOCSearchResultsAction.java,v 1.7 2008-07-15 15:18:26 pandyas Exp $
+ * $Id: ViewTOCSearchResultsAction.java,v 1.8 2008-07-15 15:18:48 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2008/07/15 15:18:26  pandyas
+ * Modified to prevent SQL injection
+ * Scan conducted on July 14 2008
+ *
  * Revision 1.6  2008/05/27 14:58:04  pandyas
  * Removed debug statements
  *
@@ -43,7 +47,6 @@ public class ViewTOCSearchResultsAction extends BaseAction {
             HttpServletResponse response) throws Exception {
 
         log.info("In ViewTOCSearchResultsAction.execute");
-        ActionErrors errors = new ActionErrors();
         
         String theForward = "next";
         
