@@ -43,7 +43,7 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.92 2008-07-11 17:24:30 schroedn Exp $
+ * $Id: QueryManagerImpl.java,v 1.93 2008-07-17 18:50:36 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
  * Revision 1.91  2008/05/22 18:19:16  pandyas
@@ -1925,7 +1925,7 @@ public class QueryManagerImpl extends BaseManager
         return getIds(theSQLString, theParams);
 
     }
-    
+
     /**
      * Get the model id's for any model that has associated transient interface data
      * 
@@ -2271,18 +2271,6 @@ public class QueryManagerImpl extends BaseManager
 		return getIds(theSQLString, theParams);
 	}
 
-	private String getModelIdsForPMID( String PMID ) 
-		throws PersistenceException {
-	
-		String theSQLString = "SELECT distinct ac.abs_cancer_model_id FROM abs_cancer_model ac "
-			+ "WHERE ac.ABS_CANCER_MODEL_ID IN (select ap.ABS_CANCER_MODEL_ID from PUBLICATION p, ABS_CAN_MOD_PUBLICATION ap"
-			+ "     WHERE p.PUBLICATION_ID = ap.PUBLICATION_ID AND p.PMID = ? )";
-
-		Object[] theParams = new Object[1];
-		theParams[0] = PMID;	
-		return getIds(theSQLString, theParams);
-	}
-	
     public List searchForAnimalModels(SearchData inSearchData) throws Exception
     {
 
@@ -2290,7 +2278,7 @@ public class QueryManagerImpl extends BaseManager
 
         List theAnimalModels = null;
 
-        String theFromClause = "from AnimalModel as am where am.state = 'Edited-approved' AND am.availability.releaseDate <= sysdate ";
+        String theFromClause = "from AnimalModel as am where am.state = 'Edited-approved' AND am.availability.releaseDate < sysdate ";
         String theOrderByClause = " ORDER BY am.modelDescriptor asc";
 
         if (inSearchData.getKeyword() != null && inSearchData.getKeyword().length() > 0)
@@ -2340,7 +2328,7 @@ public class QueryManagerImpl extends BaseManager
 
         log.debug("Entering countMatchingAnimalModels");
 
-        String theFromClause = "select count (am) from AnimalModel as am where am.state = 'Edited-approved' AND am.availability.releaseDate <= sysdate ";
+        String theFromClause = "select count (am) from AnimalModel as am where am.state = 'Edited-approved' AND am.availability.releaseDate < sysdate ";
         List theCountResults = null;
 
         if (inSearchData.getKeyword() != null && inSearchData.getKeyword().trim().length() > 0)
@@ -2496,6 +2484,7 @@ public class QueryManagerImpl extends BaseManager
         // PI criteria
         if (inSearchData.getPiName() != null && inSearchData.getPiName().length() > 0)
         {
+
             StringTokenizer theTokenizer = new StringTokenizer(inSearchData.getPiName());
             String theLastName = theTokenizer.nextToken(",").trim();
             String theFirstName = theTokenizer.nextToken().trim();
@@ -2509,16 +2498,11 @@ public class QueryManagerImpl extends BaseManager
 
             theWhereClause += " AND upper(am.modelDescriptor) like '%" + inSearchData.getModelDescriptor().toUpperCase().trim() + "%'";
         }
-		
-		// PMID criteria
-		if (inSearchData.getPmid() != null && inSearchData.getPmid().trim().length() > 0) 
-		{
-			theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForPMID( inSearchData.getPmid().trim() ) + ")";
-        }
-		
+
         // Species criteria
         if (inSearchData.getSpecies() != null && inSearchData.getSpecies().length() > 0)
         {
+
             theWhereClause += " AND am.strain IN (" + getStrainIdsForSpecies(inSearchData.getSpecies()) + ")";
         }
 
@@ -2780,17 +2764,11 @@ public class QueryManagerImpl extends BaseManager
 
         try
         {
-            String theHQLQuery = inFromClause + theWhereClause + inOrderByClause;   
-            log.debug("HQL Query: " + theHQLQuery);
+            String theHQLQuery = inFromClause + theWhereClause + inOrderByClause;
 
             log.info("HQL Query: " + theHQLQuery);
 
-            System.out.println( "*** Query: " + theHQLQuery );
-            
             Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
-
-            System.out.println( "**** HQL Query: " + theQuery.getQueryString() );
-            
             theAnimalModels = theQuery.list();
         }
         catch (Exception e)
@@ -2996,17 +2974,7 @@ public class QueryManagerImpl extends BaseManager
         
         try
         {
-            String theSQLString = "select publication_id, year, authors" + "\n" + "  from publication" + "\n" + "  where publication_id in (" + "\n" +
-            					  "	  select min(publication_id) publication_id" + "\n" + "	  from (" + "\n" + "		select p.pmid, p.publication_id" + "\n" + 
-            					  "		  from therapy th," + "\n" + "		       therapy_publication tp," + "\n" + "		       publication p" + "\n" + 
-            					  "		  where th.abs_cancer_model_id = ?" + "\n" + "		   and th.therapy_id = tp.therapy_id" + "\n" +
-            					  "		   and tp.publication_id = p.publication_id" + "\n" + "		union" + "\n" + "		select p.pmid, p.publication_id" + "\n" 
-            					  + "		  from cell_line cl," + "\n" + "		       cell_line_publication cp," + "\n" + "		       publication p" + "\n" 
-            					  + "		 where cl.abs_cancer_model_id = ?" + "\n" + "		   and cl.cell_line_id = cp.cell_line_id" + "\n"
-            					  + "		   and cp.publication_id = p.publication_id" + "\n" + "		union" + "\n" + "		select p.pmid, p.publication_id" + "\n" 
-            					  + "		  from abs_can_mod_publication acmp," + "\n" + "		       publication p" + "\n" + "		 where acmp.abs_cancer_model_id = ?" 
-            					  + "\n" + "		   and acmp.publication_id = p.publication_id )" + "\n" + "	 group by pmid )" + "\n" + " order by year desc, authors" + "\n";
-            
+            String theSQLString = "select publication_id, year, authors" + "\n" + "  from publication" + "\n" + "  where publication_id in (" + "\n" + "	  select min(publication_id) publication_id" + "\n" + "	  from (" + "\n" + "		select p.pmid, p.publication_id" + "\n" + "		  from therapy th," + "\n" + "		       therapy_publication tp," + "\n" + "		       publication p" + "\n" + "		  where th.abs_cancer_model_id = ?" + "\n" + "		   and th.therapy_id = tp.therapy_id" + "\n" + "		   and tp.publication_id = p.publication_id" + "\n" + "		union" + "\n" + "		select p.pmid, p.publication_id" + "\n" + "		  from cell_line cl," + "\n" + "		       cell_line_publication cp," + "\n" + "		       publication p" + "\n" + "		 where cl.abs_cancer_model_id = ?" + "\n" + "		   and cl.cell_line_id = cp.cell_line_id" + "\n" + "		   and cp.publication_id = p.publication_id" + "\n" + "		union" + "\n" + "		select p.pmid, p.publication_id" + "\n" + "		  from abs_can_mod_publication acmp," + "\n" + "		       publication p" + "\n" + "		 where acmp.abs_cancer_model_id = ?" + "\n" + "		   and acmp.publication_id = p.publication_id )" + "\n" + "	 group by pmid )" + "\n" + " order by year desc, authors" + "\n";
 
             log.debug("getAllPublications - SQL: " + theSQLString);
             Object[] params = new Object[3];
@@ -3059,11 +3027,11 @@ public class QueryManagerImpl extends BaseManager
         return publications;
     }
 
-    
+
     public List getSavedQueriesByParty(String inUsername) throws PersistenceException
     {
 
-    	log.trace("Entering QueryManagerImpl.getModelsByUser");
+        log.trace("Entering QueryManagerImpl.getModelsByUser");
 
         String theHQLQuery = "from SavedQuery as sq where " + " sq.user in (from Person where username = :username) " + " and sq.isSaved = :savedValue " + " order by query_name";
 
@@ -3071,17 +3039,14 @@ public class QueryManagerImpl extends BaseManager
 
         org.hibernate.Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
         theQuery.setParameter("username", inUsername);
-        theQuery.setParameter("savedValue", new Long(1));
-        
-        //System.out.println("Search Query=" + theQuery.getQueryString() );
-        
+        theQuery.setParameter("savedValue", "1");
+
         List theSavedQueries = theQuery.list();
 
         if (theSavedQueries == null)
         {
             theSavedQueries = new ArrayList();
         }
-        
         return theSavedQueries;
     }
 
@@ -3093,12 +3058,10 @@ public class QueryManagerImpl extends BaseManager
         String theHQLQuery = "from SavedQuery as sq where " + " sq.user in (from Person where username = :username) " + " and sq.isSaved = :savedValue " + " order by query_execute_timestamp DESC";
 
         log.debug("The HQL query: " + theHQLQuery);
-        
+
         org.hibernate.Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
         theQuery.setParameter("username", inUsername);
-        theQuery.setParameter("savedValue", new Long(0));
-        
-       // System.out.println("Search Query=" + theQuery.getQueryString() );
+        theQuery.setParameter("savedValue", "0");
 
         List theSavedQueries = theQuery.list();
 
