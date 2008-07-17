@@ -42,7 +42,7 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchData.java,v 1.15 2008-07-11 17:18:19 schroedn Exp $
+ * $Id: SearchData.java,v 1.16 2008-07-17 17:54:25 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
  * Revision 1.14  2008/01/16 18:29:46  pandyas
@@ -92,10 +92,6 @@ public interface SearchData {
 
 	public void setModelDescriptor(String m);
 
-	public String getPmid();
-	
-	public void setPmid(String p);
-	
 	public String getOrgan();
 
 	public void setOrgan(String o);
