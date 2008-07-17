@@ -2,7 +2,7 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.72 2008-07-11 17:10:25 schroedn Exp $
+ * $Id: searchAdvanced.jsp,v 1.73 2008-07-17 17:24:09 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
  * Revision 1.71  2008/05/21 19:09:17  pandyas
@@ -279,14 +279,6 @@
 			</td>
 		</tr>
 		
-		<tr>
-		    <td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">PMID:</label> </td>
-			<td class="formField">
-				<html:text styleClass="formFieldSized" styleId="modelDescriptor" property="pmid" size="30"/>	
-			</td>
-		</tr>
-				
 		<tr>
 			<td class="formRequiredNotice" width="0">&nbsp;</td>
 			<td class="formLabel"><label for="field2">PI's Name:</label></td>
