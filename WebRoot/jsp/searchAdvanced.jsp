@@ -2,9 +2,14 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.71 2008-05-21 19:09:17 pandyas Exp $
+ * $Id: searchAdvanced.jsp,v 1.73 2008-07-17 17:24:09 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.71  2008/05/21 19:09:17  pandyas
+ * Modified advanced search to prevent SQL injection
+ * Converted text entry to dropdown lists for easier validation
+ * Re: Apps Scan run 05/15/2008
+ *
  * Revision 1.70  2008/05/12 15:29:21  pandyas
  * minor format change to be consistent
  *
