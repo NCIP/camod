@@ -1,9 +1,16 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.59 2008-06-30 18:18:28 pandyas Exp $
+ *  $Id: ViewModelAction.java,v 1.61 2008-07-21 18:08:31 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.60  2008/07/17 19:05:26  pandyas
+ *  Modified to clean header to prevent SQL injection/Cross-Site Scripting
+ *  Scan performed on July 16, 2008 by IRT
+ *
+ *  Revision 1.59  2008/06/30 18:18:28  pandyas
+ *  Removed code originally added for security scan when it caused null pointer errors
+ *
  *  Revision 1.58  2008/06/30 15:29:05  pandyas
  *  Modified to prevent Cross-Site Scripting
  *  Cleaned parameter name before proceeding
@@ -325,13 +332,21 @@ public class ViewModelAction extends BaseAction
         
         try {
         	/* get and clean header to prevent SQL injection/Cross-Site Scripting
-        	 * Taken out when it caused null pointer error
-            if (! request.getHeader("HTTP header").equals(null)){
+        	 */
+            if (request.getHeader("HTTP header") != null){
             	String sID = request.getHeader("HTTP header");
 	            log.info("sID: " + sID);
 	            sID = SafeHTMLUtil.clean(sID);
             }
-            */
+            
+	        // Get and clean method to prevent Cross-Site Scripting - another attempt
+	        String methodName = request.getParameter("unprotected_method");
+	        log.info("methodName: " + methodName);
+	        if (!methodName.equals("populateModelCharacteristics")){
+		        methodName = SafeHTMLUtil.clean(methodName);
+		        log.info("methodName: " + methodName);
+	        }            
+            
         	
 	        setCancerModel(request);
 	        setComments(request, Constants.Pages.MODEL_CHARACTERISTICS);

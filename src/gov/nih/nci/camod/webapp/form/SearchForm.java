@@ -42,9 +42,14 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.41 2008-06-13 17:33:57 pandyas Exp $
+ * $Id: SearchForm.java,v 1.43 2008-07-17 17:56:23 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.41  2008/06/13 17:33:57  pandyas
+ * Modified to prevent SQL injection
+ * Cleaned parameter name before proceeding
+ * Re: Apps Scan run 06/12/2008
+ *
  * Revision 1.40  2008/06/10 16:50:57  pandyas
  * Modified to prevent SQL injection
  * Cleaned parameter name before proceeding
