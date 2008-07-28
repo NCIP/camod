@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ViewTOCSearchResultsAction.java,v 1.8 2008-07-15 15:18:48 pandyas Exp $
+ * $Id: ViewTOCSearchResultsAction.java,v 1.9 2008-07-28 17:20:47 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2008/07/15 15:18:48  pandyas
+ * minor change
+ *
  * Revision 1.7  2008/07/15 15:18:26  pandyas
  * Modified to prevent SQL injection
  * Scan conducted on July 14 2008
@@ -34,6 +37,7 @@ import gov.nih.nci.camod.util.NameValueList;
 import gov.nih.nci.camod.util.SafeHTMLUtil;
 import gov.nih.nci.camod.webapp.form.SearchForm;
 
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -51,7 +55,23 @@ public class ViewTOCSearchResultsAction extends BaseAction {
         String theForward = "next";
         
         String theKey = (String) request.getParameter(Constants.Parameters.TOCQUERYKEY);
-        log.info("theKey: " + theKey);        
+        log.info("theKey: " + theKey);
+        
+        // clean specific header that is used in SQL injection
+        if (request.getHeader("X-Forwarded-For") != null){
+        	String sID = request.getHeader("X-Forwarded-For");
+            log.info("sID: " + sID);
+            sID = SafeHTMLUtil.clean(sID);
+        }
+       
+        // get all header names and clean them to prevent SQL injection
+        Enumeration headerNames = request.getHeaderNames();
+        while(headerNames.hasMoreElements()){
+        	String sID = headerNames.nextElement().toString();
+            log.info("sID: " + sID);
+            sID = SafeHTMLUtil.clean(sID);
+        	log.info("cleaned header: " + sID);            	
+        }        
 
         try {
             // This is meant to prevent SQL injection into the key value of the TOC queries

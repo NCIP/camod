@@ -1,9 +1,13 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.61 2008-07-21 18:08:31 pandyas Exp $
+ *  $Id: ViewModelAction.java,v 1.62 2008-07-28 17:19:02 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.61  2008/07/21 18:08:31  pandyas
+ *  Modified to prevent SQL injection
+ *  Scan performed on July 21, 2008
+ *
  *  Revision 1.60  2008/07/17 19:05:26  pandyas
  *  Modified to clean header to prevent SQL injection/Cross-Site Scripting
  *  Scan performed on July 16, 2008 by IRT
@@ -230,6 +234,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -333,11 +338,23 @@ public class ViewModelAction extends BaseAction
         try {
         	/* get and clean header to prevent SQL injection/Cross-Site Scripting
         	 */
-            if (request.getHeader("HTTP header") != null){
-            	String sID = request.getHeader("HTTP header");
+        	String sID = null;
+            if (request.getHeader("X-Forwarded-For") != null){
+            	sID = request.getHeader("X-Forwarded-For");
 	            log.info("sID: " + sID);
 	            sID = SafeHTMLUtil.clean(sID);
             }
+           
+            // get all headers and clean them to prevent SQL injection
+            Enumeration headerNames = request.getHeaderNames();
+            while(headerNames.hasMoreElements()){
+            	sID = headerNames.nextElement().toString();            	
+                log.info("sID: " + sID);                
+                String sIDs = request.getHeader(sID);
+	            sID = SafeHTMLUtil.clean(sID);                
+            	log.info("cleaned header: " + sIDs);           	
+            }
+            
             
 	        // Get and clean method to prevent Cross-Site Scripting - another attempt
 	        String methodName = request.getParameter("unprotected_method");
