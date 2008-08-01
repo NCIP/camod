@@ -1,8 +1,13 @@
 /**
  * 
- * $Id: SafeHTMLUtil.java,v 1.7 2008-06-23 18:10:08 pandyas Exp $
+ * $Id: SafeHTMLUtil.java,v 1.8 2008-07-21 18:24:28 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2008/06/23 18:10:08  pandyas
+ * Modified to prevent Cross-Site Scripting
+ * Cleaned parameter name before proceeding - added filter for 'javascript'
+ * Re: Apps Scan run 06/17/2008
+ *
  * Revision 1.6  2008/06/06 17:40:16  pandyas
  * comment out logging
  *
@@ -50,6 +55,7 @@ public class SafeHTMLUtil {
         //System.out.println("In SafeHTMLUtil.clean String: " + s); 
         String clean = Translate.decode(s).replace("<", "").replace(">", "");
         clean = StringUtils.replace(clean, "script", "");
+        clean = StringUtils.replace(clean, "%27", "");        
         clean = StringUtils.replace(clean, "%", "");
         clean = StringUtils.replace(clean, "#", "");
         clean = StringUtils.replace(clean, ";", "");
