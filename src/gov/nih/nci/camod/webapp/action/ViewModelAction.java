@@ -1,9 +1,13 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.62 2008-07-28 17:19:02 pandyas Exp $
+ *  $Id: ViewModelAction.java,v 1.63 2008-08-01 14:15:10 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.62  2008/07/28 17:19:02  pandyas
+ *  Modifed to prevent SQL inject - added HTTP Header
+ *  App scan performed on July 24, 2008
+ *
  *  Revision 1.61  2008/07/21 18:08:31  pandyas
  *  Modified to prevent SQL injection
  *  Scan performed on July 21, 2008
@@ -336,27 +340,22 @@ public class ViewModelAction extends BaseAction
         request.getSession(true);    	
         
         try {
-        	/* get and clean header to prevent SQL injection/Cross-Site Scripting
-        	 */
-        	String sID = null;
+        	// get and clean header to prevent SQL injection
+           	String sID = null;
             if (request.getHeader("X-Forwarded-For") != null){
             	sID = request.getHeader("X-Forwarded-For");
 	            log.info("sID: " + sID);
 	            sID = SafeHTMLUtil.clean(sID);
             }
-           
-            // get all headers and clean them to prevent SQL injection
-            Enumeration headerNames = request.getHeaderNames();
-            while(headerNames.hasMoreElements()){
-            	sID = headerNames.nextElement().toString();            	
-                log.info("sID: " + sID);                
-                String sIDs = request.getHeader(sID);
-	            sID = SafeHTMLUtil.clean(sID);                
-            	log.info("cleaned header: " + sIDs);           	
-            }
             
+            // get and clean Referer header to prevent SQL injection
+            if (request.getHeader("Referer") != null){
+            	sID = request.getHeader("Referer");
+	            log.info("sID: " + sID);
+	            sID = SafeHTMLUtil.clean(sID);
+            }            
             
-	        // Get and clean method to prevent Cross-Site Scripting - another attempt
+	        // Get and clean method to prevent Cross-Site Scripting 
 	        String methodName = request.getParameter("unprotected_method");
 	        log.info("methodName: " + methodName);
 	        if (!methodName.equals("populateModelCharacteristics")){
