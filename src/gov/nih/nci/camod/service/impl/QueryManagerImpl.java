@@ -43,9 +43,14 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.91 2008-05-22 18:19:16 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.93 2008-07-17 18:50:36 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.91  2008/05/22 18:19:16  pandyas
+ * Modified advanced search for Cell Line to prevent SQL injection
+ * Modified query to return correct results
+ * Re: Apps Scan run 05/15/2008
+ *
  * Revision 1.90  2008/05/21 19:03:56  pandyas
  * Modified advanced search to prevent SQL injection
  * Re: Apps Scan run 05/15/2008
