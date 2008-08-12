@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.52 2008-01-16 18:29:57 pandyas Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.53 2008-08-12 19:40:30 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.52  2008/01/16 18:29:57  pandyas
+ *  Renamed value to Transplant for #8290
+ *
  *  Revision 1.51  2007/10/31 18:41:26  pandyas
  *  Fixed #8290 	Rename graft object into transplant object
  *
@@ -278,12 +281,6 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 						mmhccList.add(availability);
 					}
 					if (availability.getAnimalDistributor().getName().equals(
-							"IMSR")) {
-
-						//System.out.println("\tAdded IMSR Repository Availability = "+ availability);
-						imsrList.add(availability);
-					}
-					if (availability.getAnimalDistributor().getName().equals(
 					"ZFIN")) {
 
 						//System.out.println("\tAdded ZFIN Repository Availability = "+ availability);
@@ -517,8 +514,6 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 					jacksonLabList);
 			request.getSession().setAttribute(Constants.Submit.MMHCC_LIST,
 					mmhccList);
-			request.getSession().setAttribute(Constants.Submit.IMSR_LIST,
-					imsrList);
 			request.getSession().setAttribute(Constants.Submit.ZFIN_LIST,
 					zfinList);			
 
