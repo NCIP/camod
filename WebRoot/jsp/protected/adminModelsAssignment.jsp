@@ -1,8 +1,15 @@
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
 
+<SCRIPT LANGUAGE="JavaScript">	
+	function blankCurrentState() {
+        document.curationAssignmentForm.currentState.value = '';
+    }    			
+</SCRIPT>
+
 <!-- adminModelsAssignment.jsp -->
 <!-- Main Content Begins -->
+<html:form action="SearchAdminAssignmentAction.do" >
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>	
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" width="100%">
@@ -23,7 +30,6 @@
 		<tr>
 		    <td class="formTitle" height="20" colspan="4">Models Assignment &nbsp;<camod:cshelp topic="models_assignment_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>		
 		</tr>
-		<html:form action="AdminModelsAssignmentPopulateAction">
 		    
 			    <td class=resultsBoxGreyNoEnd>			
 			        <html:select property="currentState">
@@ -43,8 +49,8 @@
 	 </TABLE>
 	<br>	
 
-    <c:if test="${not empty adminModelSearchResults}">
-	<display:table id="row" name="${sessionScope.adminModelSearchResults}"
+    <c:if test="${not empty adminModelAssignSearchResults}">
+	<display:table id="row" name="${sessionScope.adminModelAssignSearchResults}"
       pagesize = "15"
 	  cellpadding="5" 
 	  cellspacing="0" 
@@ -69,6 +75,10 @@
     </td></tr>
    
 </TABLE>	
+
+<SCRIPT LANGUAGE="JavaScript">
+	blankCurrentState();
+</SCRIPT>
 
 <%@ include file="/jsp/footer.jsp" %>
 

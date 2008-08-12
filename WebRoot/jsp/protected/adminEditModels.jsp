@@ -1,8 +1,11 @@
 <%
 /*
- * $Id: adminEditModels.jsp,v 1.10 2007-09-07 16:44:08 pandyas Exp $
+ * $Id: adminEditModels.jsp,v 1.11 2008-08-12 19:24:54 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2007/09/07 16:44:08  pandyas
+ * Removed duplicate on adminEditModels as per Ulli request
+ *
  * Revision 1.9  2007/09/07 16:10:55  pandyas
  * Modified button label for model id search in admin edit models filter
  *
@@ -45,10 +48,14 @@
 <SCRIPT LANGUAGE="JavaScript">	
 	function blankModelId() {
         document.curationAssignmentForm.modelId.value = '';
-    }			
+    }
+    
+	function blankCurrentState() {
+        document.curationAssignmentForm.currentState.value = '';
+    }    			
 </SCRIPT>
 
-<html:form action="SearchAdminAction.do" focus="modelId" onsubmit="transferFields()">
+<html:form action="SearchAdminAction.do" focus="modelId">
 
 <!-- adminEditModels.jsp -->
 <!-- Main Content Begins -->
@@ -213,7 +220,11 @@
 	</c:if>
     </td></tr>
    
-</TABLE>	
+</TABLE>
+
+<SCRIPT LANGUAGE="JavaScript">
+	blankCurrentState()();
+</SCRIPT>	
 
 <%@ include file="/jsp/footer.jsp" %>
 
