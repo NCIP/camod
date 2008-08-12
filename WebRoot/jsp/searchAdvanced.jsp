@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.73 2008-07-17 17:24:09 pandyas Exp $
+ * $Id: searchAdvanced.jsp,v 1.74 2008-08-12 19:21:02 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.73  2008/07/17 17:24:09  pandyas
+ * Reverted code back to version for security scan fixes
+ *
  * Revision 1.71  2008/05/21 19:09:17  pandyas
  * Modified advanced search to prevent SQL injection
  * Converted text entry to dropdown lists for easier validation
@@ -189,16 +192,9 @@
     }
 	
 	function checkFields() {
+		toggleField(document.searchForm.searchEngineeredTransgene[0], document.searchForm.transgeneName);
 		
-		theTargModFlag = document.searchForm.targetedModification[0];
-		theEndTransGeneFlag = document.searchForm.engineeredTransgene[0];
-		
-		if (theTargModFlag.checked == true || theEndTransGeneFlag.checked == true) {
-		    enableField(document.searchForm.geneName);
-		}
-		else {
-		    disableField(document.searchForm.geneName);
-		}
+		toggleField(document.searchForm.searchTargetedModification[0], document.searchForm.geneName);				
 		
 		toggleField(document.searchForm.searchTherapeuticApproaches[0], document.searchForm.therapeuticApproach);
 	}
@@ -432,31 +428,49 @@
 			<td class="formTitleBlue" height="10" colspan="3">Genetic Description:</td>
 		</tr>
 
-		<tr>
-		    <td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field3">Gene Name:</label></td>
-			<td class="formField">
-			    <html:text styleClass="formFieldSized" styleId="geneName" property="geneName" size="30"/>
-				<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="geneName" target="geneName"
-  				parameters="geneName={geneName}" className="autocomplete" minimumCharacters="1" />	
-			</td>
-		</tr>
+
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel">
-				<label for="field1">&nbsp;</label>
-			</td>
+			<td class="formLabel">Models with Transgene</td>
 			<td class="formField">
-                <html:checkbox property="engineeredTransgene" onclick="checkFields()" />
-                <!-- NOTE: Needed to workaround struts bug -->
-                <input type="hidden" name="engineeredTransgene" value="false">
-			    <label for="box1">Transgene</label>			
-			    </br>
-                <html:checkbox property="targetedModification" onclick="checkFields()" />
-                <input type="hidden" name="targetedModification" value="false">
-			    <label for="box1">Targeted Modification</label>			
+			    <html:checkbox property="searchEngineeredTransgene" onclick="checkFields()" />
+			    <!-- NOTE: Needed to work around struts bug -->
+			    <input type="hidden" name="searchEngineeredTransgene" value="false">	
+				<label for="box1">Check here to search for models with <br>trangene data</label>
 			</td>
 		</tr>
+
+		<tr>
+		    <td class="formRequiredNotice" width="5">&nbsp;</td>
+			<td class="formLabel"><label for="field3">Transgene Name:</label></td>
+			<td class="formField">			
+				<html:select styleClass="formFieldSized" size="1" property="transgeneName" >
+					<html:options name="<%= Dropdowns.TRANSGENENAMEQUERYDROP %>" />												
+				</html:select>
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="formRequiredNotice" width="5">&nbsp;</td>
+			<td class="formLabel">Models with Targeted Modification</td>
+			<td class="formField">
+			    <html:checkbox property="searchTargetedModification" onclick="checkFields()" />
+			    <!-- NOTE: Needed to work around struts bug -->
+			    <input type="hidden" name="searchTargetedModification" value="false">	
+				<label for="box1">Check here to search for models with <br>targeted modification data</label>
+			</td>
+		</tr>
+
+		<tr>
+		    <td class="formRequiredNotice" width="5">&nbsp;</td>
+			<td class="formLabel"><label for="field3">Targeted Modification Gene Name:</label></td>
+			<td class="formField">			
+				<html:select styleClass="formFieldSized" size="1" property="geneName" >
+					<html:options name="<%= Dropdowns.TARGETEDMODNAMEQUERYDROP %>" />												
+				</html:select>
+			</td>
+		</tr>		
+	
 
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
