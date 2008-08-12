@@ -42,9 +42,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchData.java,v 1.17 2008-08-12 19:40:32 pandyas Exp $
+ * $Id: SearchData.java,v 1.18 2008-08-12 20:14:28 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2008/08/12 19:40:32  pandyas
+ * Fixed #15053  	Search for models with transgenic or targeted modification on advanced search page confusing
+ *
  * Revision 1.16  2008/07/17 17:54:25  pandyas
  * Reverted code back to version for security scan fixes
  *
@@ -95,6 +98,10 @@ public interface SearchData {
 
 	public void setModelDescriptor(String m);
 
+	public String getPmid();
+	
+	public void setPmid(String p);
+	
 	public String getOrgan();
 
 	public void setOrgan(String o);
