@@ -1,8 +1,12 @@
 <%
  /*
-  *   $Id: viewModelCharacteristics.jsp,v 1.49 2007-10-31 19:32:10 pandyas Exp $
+  *   $Id: viewModelCharacteristics.jsp,v 1.50 2008-08-12 19:19:17 pandyas Exp $
   *   
   *   $Log: not supported by cvs2svn $
+  *   Revision 1.49  2007/10/31 19:32:10  pandyas
+  *   Fixed #8355 	Add comments field to every submission page
+  *   Fixed #9169  	Connect availability of model to person to resolve the available from investigator issue
+  *
   *   Revision 1.48  2007/09/17 14:24:22  pandyas
   *   took out extra space
   *
@@ -366,11 +370,6 @@
 									</c:otherwise>							
 								</c:choose>
 							</c:when>						
-							<c:when test = "${dist.id == 4}">
-								<!-- IMSR -->
-									<a target="_distributor" href="http://www.informatics.jax.org/imsr/index.jsp">						
-									<c:out value="${dist.name}" escapeXml="false"/>
-								</c:when>
 							<c:when test = "${dist.id == 5}">
 								<!-- ZFIN Repo -->
 								<c:choose>

@@ -1,8 +1,11 @@
 <%
 		/*
-		 * $Id: subSubmitMenu.jsp,v 1.63 2008-01-16 18:34:35 pandyas Exp $
+		 * $Id: subSubmitMenu.jsp,v 1.64 2008-08-12 19:21:45 pandyas Exp $
 		 *
 		 * $Log: not supported by cvs2svn $
+		 * Revision 1.63  2008/01/16 18:34:35  pandyas
+		 * Renamed value to Transplant for #8290
+		 *
 		 * Revision 1.62  2007/11/01 14:27:14  pandyas
 		 * Fixed #8290     Rename graft object into transplant object
 		 *
@@ -728,21 +731,6 @@
 			<img src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
 				action="InvestigatorPopulateAction.do?method=populate"
-				paramId="aAvailabilityID" paramName="aAvailability"
-				paramProperty="id">
-				<camod:shorten><bean:write name="aAvailability" property="displayName" filter="false" /></camod:shorten>
-			</html:link>
-			<br>
-		</logic:iterate> 
-	
-		<img src="images/right_arrow.gif" border="0"> 	
-		<html:link 	styleClass="subMenuRed" action="IMSRPopulateAction.do?method=dropdown&lab=IMSR">Available from IMSR</html:link><br>
-		<logic:iterate id="aAvailability" name="imsr_list"
-			type="AnimalAvailability">&nbsp;&nbsp;&nbsp;&nbsp;
-			
-			<img src="images/aquadot.jpg" border="0">
-			<html:link styleClass="subMenuBlue"
-				action="IMSRPopulateAction.do?method=populate"
 				paramId="aAvailabilityID" paramName="aAvailability"
 				paramProperty="id">
 				<camod:shorten><bean:write name="aAvailability" property="displayName" filter="false" /></camod:shorten>
