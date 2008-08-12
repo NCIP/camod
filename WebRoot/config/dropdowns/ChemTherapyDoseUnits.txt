@@ -9,14 +9,15 @@ Dilution factor 10^2
 Dilution factor 10^3
 grams/kg/injection
 International Units/animal/injection
+mg/kg
 mg/kg/body weight
-mg/mouse/injection
+mg/animal/injection
 micrograms per hour
 micrograms/kg/injection
 micrograms/ml/duration (cell culture)
-micrograms/mouse/injection
-microliter/mouse/injection
+micrograms/animal/injection
+microliter/animal/injection
 micromoles per kilogram
-ml/mouse/injection
-nanoliters/mouse/injection
+ml/animal/injection
+nanoliters/animal/injection
 units of radiation
