@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: CurationAssignmentForm.java,v 1.5 2007-08-07 15:39:35 pandyas Exp $
+ * $Id: CurationAssignmentForm.java,v 1.6 2008-08-12 19:40:33 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2007/08/07 15:39:35  pandyas
+ * Fixed clear button on adminEditModels.jsp
+ *
  * Revision 1.4  2007/08/06 17:27:03  pandyas
  * working on reest button on adminEdit screen
  *
@@ -42,10 +45,8 @@ public class CurationAssignmentForm extends BaseForm implements Serializable, Cu
      */
     public CurationAssignmentForm() {
     }
-
-    // Previous developer preferred the use of "my"
-    protected String myCurrentState;
-    // Added later in my preferred format
+    // current state for admin edit models screen and model assignment screens
+    protected String currentState;
     protected String externalSource;
     protected String modelDescriptor;
     protected String modelId; 
@@ -54,72 +55,123 @@ public class CurationAssignmentForm extends BaseForm implements Serializable, Cu
     protected String species;
     protected String principalInvestigator;
 
-    public String getCurrentState() {
-        return myCurrentState;
-    }
 
-    public void setCurrentState(String inCurrentState) {
-        myCurrentState = inCurrentState;
-    }
-
-	public String getExternalSource() {
-		return externalSource;
+    
+	/**
+	 * @return the currentState
+	 */
+	public String getCurrentState() {
+		return currentState;
 	}
 
-	public void setExternalSource(String externalSource) {
-		this.externalSource = externalSource;
+	/**
+	 * @param currentState the currentState to set
+	 */
+	public void setCurrentState(String currentState) {
+		this.currentState = currentState;
 	}
 
+	/**
+	 * @return the editor
+	 */
 	public String getEditor() {
 		return editor;
 	}
 
+	/**
+	 * @param editor the editor to set
+	 */
 	public void setEditor(String editor) {
 		this.editor = editor;
 	}
 
+	/**
+	 * @return the externalSource
+	 */
+	public String getExternalSource() {
+		return externalSource;
+	}
+
+	/**
+	 * @param externalSource the externalSource to set
+	 */
+	public void setExternalSource(String externalSource) {
+		this.externalSource = externalSource;
+	}
+
+	/**
+	 * @return the modelDescriptor
+	 */
 	public String getModelDescriptor() {
 		return modelDescriptor;
 	}
 
+	/**
+	 * @param modelDescriptor the modelDescriptor to set
+	 */
 	public void setModelDescriptor(String modelDescriptor) {
 		this.modelDescriptor = modelDescriptor;
 	}
 
+	/**
+	 * @return the modelId
+	 */
 	public String getModelId() {
 		return modelId;
 	}
 
+	/**
+	 * @param modelId the modelId to set
+	 */
 	public void setModelId(String modelId) {
 		this.modelId = modelId;
 	}
 
-	public String getScreener() {
-		return screener;
-	}
-
-	public void setScreener(String screener) {
-		this.screener = screener;
-	}
-	
+	/**
+	 * @return the principalInvestigator
+	 */
 	public String getPrincipalInvestigator() {
 		return principalInvestigator;
 	}
 
+	/**
+	 * @param principalInvestigator the principalInvestigator to set
+	 */
 	public void setPrincipalInvestigator(String principalInvestigator) {
 		this.principalInvestigator = principalInvestigator;
 	}
 
+	/**
+	 * @return the screener
+	 */
+	public String getScreener() {
+		return screener;
+	}
+
+	/**
+	 * @param screener the screener to set
+	 */
+	public void setScreener(String screener) {
+		this.screener = screener;
+	}
+
+	/**
+	 * @return the species
+	 */
 	public String getSpecies() {
 		return species;
 	}
 
+	/**
+	 * @param species the species to set
+	 */
 	public void setSpecies(String species) {
 		this.species = species;
 	}
-    
+
+	// Resets all fields on edit model and model assignment screens
     public void allFieldsReset() {
-        myCurrentState = null;
+        currentState = null;
         externalSource = null;
         modelDescriptor = null; 
         modelId = null;
@@ -127,6 +179,6 @@ public class CurationAssignmentForm extends BaseForm implements Serializable, Cu
         editor = null;
         species = null;
         principalInvestigator = null;       
-    } 
+    }
     
 }
