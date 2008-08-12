@@ -425,10 +425,6 @@
 		<forward
 			name="submitHormone"
 			path="/jsp/protected/submitHormone.jsp"></forward>
-		
-		<forward
-			name="submitIMSR"
-			path="/jsp/protected/submitIMSR.jsp"></forward>
 			
 		<forward
 			name="submitImages"
@@ -787,12 +783,6 @@
 			parameter="/jsp/protected/submitMMHCCRepo.jsp">
 			<set-property property="secure" value="false"/>
 		</action>
-		<action
-			path="/submitIMSR"
-			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitIMSR.jsp">
-			<set-property property="secure" value="false"/>
-        </action>
 		<action
 			path="/submitZFIN"
 			type="org.apache.struts.actions.ForwardAction"
@@ -1377,34 +1367,7 @@
 			validate="false">
 		<set-property property="secure" value="false" />
     </action>
-    
-     <action path="/IMSRAction"
-	        type="gov.nih.nci.camod.webapp.action.AvailabilityAction"
-	        name="availabilityForm"
-	        scope="request"
-	        parameter="method" 	     
-	        validate="true"
-	        input="input">
-	    <set-property property="secure" value="false" />
-	    <forward
-            name="input"
-            path="/submitIMSR.do">
-        </forward>	
-     </action>    
-    
-   <action path="/IMSRPopulateAction"
-    		type="gov.nih.nci.camod.webapp.action.AvailabilityPopulateAction"
-    		name="availabilityForm"    		
-            scope="request"
-            parameter="method"            
-			validate="false">
-		 <set-property property="secure" value="false" />
-         <forward 
-    		name="next"
-    		path="/submitIMSR.do">
-    	 </forward>		
-     </action> 
-     
+ 
      <action path="/ZFINAction"
 	        type="gov.nih.nci.camod.webapp.action.AvailabilityAction"
 	        name="availabilityForm"
@@ -2227,19 +2190,6 @@
      </action>
      
      <action 
-         path="/AdminModelsAssignmentPopulateAction"
-         type="gov.nih.nci.camod.webapp.action.AdminModelsAssignmentPopulateAction"
-         name="curationAssignmentForm"
-         parameter="protected">
-         <set-property property="secure" value="false" />
-         <forward
-            redirect="true"
-			name="next"
-			path="/adminModelsAssignment.do">
-		</forward>
-     </action>
-
-     <action 
          path="/AdminEditModelsPopulateAction"
          type="gov.nih.nci.camod.webapp.action.AdminModelsAssignmentPopulateAction"
          name="curationAssignmentForm"
@@ -2270,6 +2220,31 @@
             path="/adminEditModels.do">
         </forward>   	
     </action>
+    
+    <action path="/SearchAdminAssignmentAction"
+	        type="gov.nih.nci.camod.webapp.action.SearchAdminAssignmentAction"
+	        name="curationAssignmentForm"
+         	parameter="protected"
+	        validate="false">         	
+	    <set-property property="secure" value="false" />  
+         <forward
+            redirect="true"
+			name="next"
+			path="/adminModelsAssignment.do">
+		</forward>   	
+    </action>  
+    
+    <action path="/AdminModelsAssignmentPopulateAction"
+         type="gov.nih.nci.camod.webapp.action.AdminModelsAssignmentPopulateAction"
+         name="curationAssignmentForm"
+         parameter="protected">
+         <set-property property="secure" value="false" />
+         <forward
+            redirect="true"
+			name="next"
+			path="/adminModelsAssignment.do">
+		</forward>
+     </action>  
      
      
      <action 
