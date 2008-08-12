@@ -1,9 +1,13 @@
 /**
  * @author pandyas
  * 
- * $Id: CarcinogenExposureManagerImpl.java,v 1.9 2007-10-31 19:01:53 pandyas Exp $
+ * $Id: CarcinogenExposureManagerImpl.java,v 1.10 2008-08-12 19:49:16 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2007/10/31 19:01:53  pandyas
+ * Fixed #8355 	Add comments field to every submission page
+ * Fixed #8188 	Rename UnctrlVocab items to text entries
+ *
  * Revision 1.8  2007/09/14 13:56:05  pandyas
  * Cleaned up name for class
  *
@@ -127,6 +131,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
         CarcinogenExposure theCarcinogenExposure = new CarcinogenExposure();
 
         populateName(inAnimalModel, inChemicalDrugData, theCarcinogenExposure, "Chemical / Drug");
+        populateInducedMutationTrigger(theCarcinogenExposure);
         populateAgeGender(inChemicalDrugData, theCarcinogenExposure);
         populateTreatment(inChemicalDrugData, theCarcinogenExposure);
         populateDose(inChemicalDrugData, theCarcinogenExposure);
@@ -185,6 +190,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
         CarcinogenExposure theCarcinogenExposure = new CarcinogenExposure();
 
         populateName(inAnimalModel, inEnvironmentalFactorData, theCarcinogenExposure, "Environment");
+        populateInducedMutationTrigger(theCarcinogenExposure);        
         populateAgeGender(inEnvironmentalFactorData, theCarcinogenExposure);
         populateTreatment(inEnvironmentalFactorData, theCarcinogenExposure);
         populateDose(inEnvironmentalFactorData, theCarcinogenExposure);
@@ -236,6 +242,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
 
         CarcinogenExposure theCarcinogenExposure = new CarcinogenExposure();
         populateName(inAnimalModel, inGrowthFactorData, theCarcinogenExposure, "Growth Factor");
+        populateInducedMutationTrigger(theCarcinogenExposure);        
         populateAgeGender(inGrowthFactorData, theCarcinogenExposure);
         populateTreatment(inGrowthFactorData, theCarcinogenExposure);
         populateDose(inGrowthFactorData, theCarcinogenExposure);
@@ -288,6 +295,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
 
         CarcinogenExposure theCarcinogenExposure = new CarcinogenExposure();
         populateName(inAnimalModel, inHormoneData, theCarcinogenExposure, "Hormone");
+        populateInducedMutationTrigger(theCarcinogenExposure);        
         populateAgeGender(inHormoneData, theCarcinogenExposure);
         populateTreatment(inHormoneData, theCarcinogenExposure);
         populateDose(inHormoneData, theCarcinogenExposure);
@@ -340,6 +348,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
 
         CarcinogenExposure theCarcinogenExposure = new CarcinogenExposure();
         populateName(inAnimalModel, inNutritionalFactorData, theCarcinogenExposure, "Nutrition");
+        populateInducedMutationTrigger(theCarcinogenExposure);        
         populateTreatment(inNutritionalFactorData, theCarcinogenExposure);
         populateAgeGender(inNutritionalFactorData, theCarcinogenExposure);
         populateDose(inNutritionalFactorData, theCarcinogenExposure);
@@ -389,8 +398,8 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
         log.debug("In CarcinogenExposureManagerImpl.create");
 
         CarcinogenExposure theCarcinogenExposure = new CarcinogenExposure();
-
         populateName(inAnimalModel, inRadiationData, theCarcinogenExposure, "Radiation");
+        populateInducedMutationTrigger(theCarcinogenExposure);        
         populateAgeGender(inRadiationData, theCarcinogenExposure);
         populateTreatment(inRadiationData, theCarcinogenExposure);
         populateDose(inRadiationData, theCarcinogenExposure);
@@ -443,6 +452,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
 
         CarcinogenExposure theCarcinogenExposure = new CarcinogenExposure();
         populateName(inAnimalModel, inSurgeryData, theCarcinogenExposure, "Other");
+        populateInducedMutationTrigger(theCarcinogenExposure);        
         populateTreatment(inSurgeryData, theCarcinogenExposure);
         populateAgeGender(inSurgeryData, theCarcinogenExposure);
 
@@ -581,6 +591,20 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
 
     }
 
+    private void populateInducedMutationTrigger(CarcinogenExposure theCarcinogenExposure)
+    {
+
+		log.debug("In CarcinogenExposureManagerImpl.populateAgeGender");
+		
+        EnvironmentalFactor theEF = theCarcinogenExposure.getEnvironmentalFactor();
+        if (theEF == null)
+        {
+            theEF = new EnvironmentalFactor();
+            theCarcinogenExposure.setEnvironmentalFactor(theEF);
+        }
+        //theEF.setInducedMutationTrigger(false);
+
+    }    
 
     private void populateAgeGender(AgeGenderData inAgeGenderData,
                                    CarcinogenExposure theCarcinogenExposure)
