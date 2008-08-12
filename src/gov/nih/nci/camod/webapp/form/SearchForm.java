@@ -42,9 +42,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.44 2008-08-12 19:40:32 pandyas Exp $
+ * $Id: SearchForm.java,v 1.45 2008-08-12 20:16:02 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.44  2008/08/12 19:40:32  pandyas
+ * Fixed #15053  	Search for models with transgenic or targeted modification on advanced search page confusing
+ *
  * Revision 1.43  2008/07/17 17:56:23  pandyas
  * Reverted code back to version for security scan fixes
  *
@@ -200,7 +203,8 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
     private static final long serialVersionUID = 3257045453799404851L;
     
     protected String keyword;
-    protected String piName;
+    protected String piName;    
+    protected String pmid;
     protected String modelDescriptor;
     protected String organ;
     protected String species;
@@ -256,6 +260,16 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         return chemicalDrug;
     }
 
+    public void setPmid(String pmid)
+    {
+    	this.pmid = pmid;
+    }
+    
+    public String getPmid()
+    {
+    	return pmid;
+    }
+    
     public void setChemicalDrug(String chemicalDrug)
     {
         this.chemicalDrug = chemicalDrug;
