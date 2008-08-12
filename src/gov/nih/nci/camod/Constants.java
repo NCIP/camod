@@ -1,8 +1,12 @@
 /**
  * 
- * $Id: Constants.java,v 1.111 2008-05-21 19:04:58 pandyas Exp $
+ * $Id: Constants.java,v 1.112 2008-08-12 19:53:24 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.111  2008/05/21 19:04:58  pandyas
+ * Modified advanced search to prevent SQL injection
+ * Re: Apps Scan run 05/15/2008
+ *
  * Revision 1.110  2008/01/16 18:30:46  pandyas
  * Renamed value to Transplant for #8290
  *
@@ -505,6 +509,9 @@ public class Constants {
         public static final String INDUCEDMUTATIONDROP = "InducedMutations.txt";
 
         public static final String EXPRESSIONLEVELDROP = "expressionlevel.db";
+        
+        // Constant for the trangene or targeted modification gene name for the Genetic Description advanced search
+        public static final String GENETICDESCRIPTIONDROP = "geneticescriptiondrop.db";        
 
         // Morpholino/siRNA screen dropdowns
         public static final String MORPHOSOURCEDROP = "MorpholinoSources.txt";
@@ -539,6 +546,12 @@ public class Constants {
         
         // Environmental Factor name field populated based on agent type slected in adv search
         public static final String ENVIRONMENTALFACTORNAMESDROP = "environmentalfactornames.db"; 
+        
+        // Gene Name for the Targeted Modification selected from the adv search
+        public static final String TARGETEDMODNAMEQUERYDROP = "targetedmodnamequerydrop.db";    
+        
+        // Gene Name for the Transgene selected from the adv search
+        public static final String TRANSGENENAMEQUERYDROP = "transgenenamequerydrop.db";          
         
         // Cell line name field selected in adv search
         public static final String CELLLINENAMEQUERYDROP = "celllinenamequerydrop.db"; 
@@ -596,7 +609,11 @@ public class Constants {
         public static final String SEARCHGENOMICSEGMENT = "searchgenomicsegment";        
         public static final String SEARCHPIDROP = "searchpi";    
         public static final String SEARCHTOCDROP = "searchtableofcontents";
-        public static final String SEARCHTHERAPEUTICDRUGNAME = "searchtherapeuticdrugname";        
+        public static final String SEARCHTHERAPEUTICDRUGNAME = "searchtherapeuticdrugname";  
+        
+        // Used for values selected for the advanced search for Genetic Description
+        public static final String ENGINEEREDTRANSGENE = "engineeredTransgene";
+        public static final String TARGETEDMODIFICATION = "targetedModification";
       
     }
 
@@ -783,6 +800,8 @@ public class Constants {
     public static final String ADMIN_COMMENTS_SEARCH_RESULTS = "adminCommentsSearchResults";
 
     public static final String ADMIN_MODEL_SEARCH_RESULTS = "adminModelSearchResults";
+    
+    public static final String ADMIN_MODEL_ASSIGN_SEARCH_RESULTS = "adminModelAssignSearchResults";    
 
     public static final String ADMIN_ROLES_SEARCH_RESULTS = "adminRolesSearchResults";
 
@@ -899,7 +918,6 @@ public class Constants {
         public static final String INVESTIGATOR_LIST = "investigator_list";
         public static final String JACKSONLAB_LIST = "jacksonlab_list";
         public static final String MMHCC_LIST = "mmhcc_list";
-        public static final String IMSR_LIST = "imsr_list";
         public static final String ZFIN_LIST = "zfin_list";
         
         /**
