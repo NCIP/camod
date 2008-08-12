@@ -2,9 +2,14 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.62 2008-02-11 17:15:10 pandyas Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.63 2008-08-12 19:19:54 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.62  2008/02/11 17:15:10  pandyas
+ * Fixed #12355  	Models with "Targeted" Genomic segment are showing "random" and models with " random" genomic segment is showing "targeted".
+ *
+ * Changed to model the engineered gene sub-section which was working correctly
+ *
  * Revision 1.61  2008/02/08 16:37:15  pandyas
  * Fixed ##12318  The CAS number does not display when Inducing Agent Category is "Other" on Induced Mutation search screen
  *
@@ -921,12 +926,7 @@
 		    	    </camod:highlight>
 	            </td>
 	        </tr>
-	        <tr>
-	            <td valign="top" class="WhiteBox" width="35%"><b>Sequence ID</b></td>
-	            <td class="WhiteBoxRightEnd" width="65%">
-						&nbsp;
-	            </td>
-	        </tr>
+
 	        <tr>
 	            <td class="WhiteBox" width="35%"><b>Database Links</b></td>
 	            <td class="WhiteBoxRightEnd" width="65%">&nbsp;
