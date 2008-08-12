@@ -1,9 +1,12 @@
 /**
  * @author schroedlni
  * 
- * $Id: SavedQueryManagerImpl.java,v 1.10 2008-01-16 18:30:22 pandyas Exp $
+ * $Id: SavedQueryManagerImpl.java,v 1.11 2008-08-12 19:45:50 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2008/01/16 18:30:22  pandyas
+ * Renamed value to Transplant for #8290
+ *
  * Revision 1.9  2007/10/31 19:13:27  pandyas
  * Fixed #8290 	Rename graft object into transplant object
  *
@@ -42,6 +45,7 @@
 
 package gov.nih.nci.camod.service.impl;
 
+import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.SavedQuery;
 import gov.nih.nci.camod.domain.SavedQueryAttribute;
 import gov.nih.nci.camod.service.SavedQueryManager;
@@ -166,25 +170,33 @@ public class SavedQueryManagerImpl extends BaseManager implements
 				inSearchForm.setPhenotype(theSavedQueryAttribute
 						.getAttributeValue());
 			}
+			
+			if (theSavedQueryAttribute
+					.getAttributeName().equals(theBundle
+									.getString("criteria.isSearchEngineeredTransgene"))) {
+				if (theSavedQueryAttribute.getAttributeValue().equals("true")) {
+					inSearchForm.setSearchEngineeredTransgene(true);
+				}
+			}			
 
 			if (theSavedQueryAttribute.getAttributeName().equals(
-					theBundle.getString("criteria.GeneName"))) {
-				inSearchForm.setGeneName(theSavedQueryAttribute
+					theBundle.getString("criteria.TransgeneName"))) {
+				inSearchForm.setTransgeneName(theSavedQueryAttribute
 						.getAttributeValue());
 			}
 			
-			if (theSavedQueryAttribute.getAttributeName().equals(
-					theBundle.getString("criteria.isEngineeredTransgene"))) {
+			if (theSavedQueryAttribute
+					.getAttributeName().equals(theBundle
+									.getString("criteria.isSearchTargetedModification"))) {
 				if (theSavedQueryAttribute.getAttributeValue().equals("true")) {
-					inSearchForm.setEngineeredTransgene(true);
+					inSearchForm.setSearchTargetedModification(true);
 				}
 			}			
 			
 			if (theSavedQueryAttribute.getAttributeName().equals(
-					theBundle.getString("criteria.isTargetedModification"))) {
-				if (theSavedQueryAttribute.getAttributeValue().equals("true")) {
-					inSearchForm.setTargetedModification(true);
-				}
+					theBundle.getString("criteria.GeneName"))) {
+				inSearchForm.setGeneName(theSavedQueryAttribute
+						.getAttributeValue());
 			}			
 
 			if (theSavedQueryAttribute.getAttributeName().equals(
@@ -444,19 +456,19 @@ public class SavedQueryManagerImpl extends BaseManager implements
 		// ///////////////////////////////////////
 
 		// is it an Engineered Transgene
-		if (inSearchData.isEngineeredTransgene() == true) {
+		if (inSearchData.isSearchEngineeredTransgene() == true) {
 			SavedQueryAttribute sqa = new SavedQueryAttribute();
 			sqa.setAttributeName(theBundle
-					.getString("criteria.isEngineeredTransgene"));
+					.getString("criteria.isSearchEngineeredTransgene"));
 			sqa.setAttributeValue("true");
 			criteriaList.add(sqa);
 		}
 
 		// is it an Targeted Modification
-		if (inSearchData.isTargetedModification() == true) {
+		if (inSearchData.isSearchTargetedModification() == true) {
 			SavedQueryAttribute sqa = new SavedQueryAttribute();
 			sqa.setAttributeName(theBundle
-					.getString("criteria.isTargetedModification"));
+					.getString("criteria.isSearchTargetedModification"));
 			sqa.setAttributeValue("true");
 			criteriaList.add(sqa);
 		}

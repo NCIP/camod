@@ -1,8 +1,13 @@
 /**
  * 
- * $Id: AdvancedSearchPopulateAction.java,v 1.19 2008-05-21 19:06:29 pandyas Exp $
+ * $Id: AdvancedSearchPopulateAction.java,v 1.20 2008-08-12 19:44:01 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2008/05/21 19:06:29  pandyas
+ * Modified advanced search to prevent SQL injection
+ * Converted text entry to dropdown lists for easier validation
+ * Re: Apps Scan run 05/15/2008
+ *
  * Revision 1.18  2007/09/12 19:36:40  pandyas
  * modified debug statements for build to stage tier
  *
@@ -135,6 +140,11 @@ public class AdvancedSearchPopulateAction extends BaseAction {
         	NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.ENVIRONMENTALFACTORNAMESDROP, 
         			Constants.Dropdowns.ADD_BLANK);   	
         }
+
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.TARGETEDMODNAMEQUERYDROP, Constants.Dropdowns.ADD_BLANK); 
+        
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.TRANSGENENAMEQUERYDROP, Constants.Dropdowns.ADD_BLANK);         
+  
         
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.ZEBRAFISHDIAGNOSISDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER_OPTION);        
         

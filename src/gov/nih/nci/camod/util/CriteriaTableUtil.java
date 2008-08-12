@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: CriteriaTableUtil.java,v 1.10 2008-01-16 18:30:04 pandyas Exp $
+ * $Id: CriteriaTableUtil.java,v 1.11 2008-08-12 19:44:53 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2008/01/16 18:30:04  pandyas
+ * Renamed value to Transplant for #8290
+ *
  * Revision 1.9  2007/11/01 13:37:03  pandyas
  * Fixed #8290     Rename graft object into transplant object
  *
@@ -162,25 +165,24 @@ public class CriteriaTableUtil
             }
         }        
 
-        // Only call if some of the data is set : 
-        if (sData.getGeneName() != null)
+        if (sData.isSearchEngineeredTransgene())
         {
-            if (sData.getGeneName().trim().length() > 0)
+            theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.isSearchEngineeredTransgene") + "</td><td class=\"formFieldNone\">" + sData.isSearchEngineeredTransgene() + "</td></tr>";
+        }
+
+        if (sData.isSearchTargetedModification())
+        {
+            theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.isSearchTargetedModification") + "</td><td class=\"formFieldNone\">" + sData.isSearchTargetedModification() + "</td></tr>";
+
+        }
+        
+        if (sData.getTransgeneName() != null)
+        {
+            if (sData.getTransgeneName().trim().length() > 0)
             {
-                theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.GeneName") + "</td><td class=\"formFieldNone\">" + sData.getGeneName() + "</td></tr>";
+                theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.TransgeneName") + "</td><td class=\"formFieldNone\">" + sData.getTransgeneName() + "</td></tr>";
             }
-        }
-
-        if (sData.isEngineeredTransgene())
-        {
-            theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.isEngineeredTransgene") + "</td><td class=\"formFieldNone\">" + sData.isEngineeredTransgene() + "</td></tr>";
-        }
-
-        if (sData.isTargetedModification())
-        {
-            theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.isTargetedModification") + "</td><td class=\"formFieldNone\">" + sData.isTargetedModification() + "</td></tr>";
-
-        }
+        }         
 
         if (sData.getGenomicSegDesignator() != null)
         {
@@ -189,6 +191,14 @@ public class CriteriaTableUtil
                 theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.GenomicSegDesignator") + "</td><td class=\"formFieldNone\">" + sData.getGenomicSegDesignator() + "</td></tr>";
             }
         }
+        
+        if (sData.getGeneName() != null)
+        {
+            if (sData.getGeneName().trim().length() > 0)
+            {
+                theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.GeneName") + "</td><td class=\"formFieldNone\">" + sData.getGeneName() + "</td></tr>";
+            }
+        }        
 
         if (sData.getInducedMutationAgent() != null)
         {

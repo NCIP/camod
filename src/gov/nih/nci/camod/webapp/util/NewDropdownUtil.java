@@ -1,8 +1,13 @@
 /**
  * 
- * $Id: NewDropdownUtil.java,v 1.56 2008-05-21 19:07:43 pandyas Exp $
+ * $Id: NewDropdownUtil.java,v 1.57 2008-08-12 19:40:31 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.56  2008/05/21 19:07:43  pandyas
+ * Modified advanced search to prevent SQL injection
+ * Converted text entry to dropdown lists for easier validation
+ * Re: Apps Scan run 05/15/2008
+ *
  * Revision 1.55  2007/10/18 18:28:04  pandyas
  * Modified to prevent cross--site scripting attacks
  *
@@ -238,7 +243,18 @@ public class NewDropdownUtil
         else if (inDropdownKey.equals(Constants.Dropdowns.ENVIRONMENTALFACTORNAMESDROP))
         {
             theReturnList = getQueryOnlyEnvironmentalFactorList(inRequest, inFilter);
-        }   
+        }  
+        // Dropdown list for Targeted Modification names
+        else if (inDropdownKey.equals(Constants.Dropdowns.TARGETEDMODNAMEQUERYDROP))
+        {
+            theReturnList = getGeneNameList(inRequest);
+        } 
+        // Dropdown list for Trangene names
+        else if (inDropdownKey.equals(Constants.Dropdowns.TRANSGENENAMEQUERYDROP))
+        {
+            theReturnList = getTransgeneNameList(inRequest);
+        }         
+        
         // Dropdown list for Cell Line names 
         else if (inDropdownKey.equals(Constants.Dropdowns.CELLLINENAMEQUERYDROP))
         {
@@ -720,7 +736,7 @@ public class NewDropdownUtil
      */
     private static List getTherapeuticDrugNameList(HttpServletRequest inRequest) throws Exception
     {
-       	log.info("<NewDropdownUtil> In getTherapeuticDrigNameList: ");
+       	log.debug("<NewDropdownUtil> In getTherapeuticDrugNameList: ");
        	
        	List therapeuticDrugList = QueryManagerSingleton.instance().getTherapeuticDrugNames();       	
         
@@ -744,6 +760,44 @@ public class NewDropdownUtil
         Collections.sort(genSegDesList);
         
         return genSegDesList;
+    }
+    
+    /**
+     * Returns a list of all gene names (targeted modification selected
+     * for the Genetic Description on the advanced search)
+     * 
+     * @return gene name list
+     * @throws Exception
+     */
+    private static List getGeneNameList(HttpServletRequest inRequest) throws Exception
+    {
+    	log.debug("<getGeneNameList>"  );
+        
+        List theGeneNameList = QueryManagerSingleton.instance().getGeneNames();
+        
+        //set for search validation to prevent cross-site scripting attacks in searchForm
+        inRequest.getSession().setAttribute(Constants.Dropdowns.TARGETEDMODNAMEQUERYDROP, theGeneNameList);
+        addBlank(theGeneNameList);
+        return theGeneNameList;
+    } 
+    
+    /**
+     * Returns a list of all gene names (transgene selected
+     * for the Genetic Description on the advanced search)
+     * 
+     * @return transgene name list
+     * @throws Exception
+     */
+    private static List getTransgeneNameList(HttpServletRequest inRequest) throws Exception
+    {
+    	log.debug("<getTransgeneNameList>  " );
+        
+        List theTransgeneNameList = QueryManagerSingleton.instance().getTransgeneNames();
+        
+        //set for search validation to prevent cross-site scripting attacks in searchForm
+        inRequest.getSession().setAttribute(Constants.Dropdowns.TRANSGENENAMEQUERYDROP, theTransgeneNameList);
+        addBlank(theTransgeneNameList);
+        return theTransgeneNameList;
     }    
     
     /**

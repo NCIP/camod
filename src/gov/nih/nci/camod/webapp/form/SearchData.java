@@ -42,9 +42,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchData.java,v 1.16 2008-07-17 17:54:25 pandyas Exp $
+ * $Id: SearchData.java,v 1.17 2008-08-12 19:40:32 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2008/07/17 17:54:25  pandyas
+ * Reverted code back to version for security scan fixes
+ *
  * Revision 1.14  2008/01/16 18:29:46  pandyas
  * Renamed value to Transplant for #8290
  *
@@ -166,21 +169,25 @@ public interface SearchData {
 
 	public String getInducedMutationAgent();
 
-	public boolean isEngineeredTransgene();
-
-	public void setEngineeredTransgene(boolean b);
-
-	public boolean isTargetedModification();
-
-	public void setTargetedModification(boolean b);
-
 	public void setGeneName(String s);
 
 	public String getGeneName();
+	
+	public String getTransgeneName(); 
+
+	public void setTransgeneName(String transgeneName);	
 
 	public void setGenomicSegDesignator(String s);
 
 	public String getGenomicSegDesignator();
+	
+	public boolean isSearchEngineeredTransgene();
+	
+	public void setSearchEngineeredTransgene(boolean searchEngineeredTransgene);
+
+	public boolean isSearchTargetedModification(); 
+
+	public void setSearchTargetedModification(boolean searchTargetedModification);	
 
 	public boolean isSearchTherapeuticApproaches();
 
