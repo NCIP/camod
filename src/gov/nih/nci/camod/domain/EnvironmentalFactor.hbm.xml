@@ -24,6 +24,10 @@
 	        <generator class="native"/>
 	    </id>	
 	    
+        <!-- isInducedMutationTrigger -->	
+        <property name="isInducedMutationTrigger" 
+        	column="is_induced_mutation_trigger" 
+        	type="boolean"/ 	    
 	    
         <!-- type -->
         <property name="type" 

@@ -1,7 +1,10 @@
 /*
- * $Id: EnvironmentalFactor.java,v 1.15 2007-10-31 15:33:31 pandyas Exp $
+ * $Id: EnvironmentalFactor.java,v 1.16 2008-08-12 19:51:00 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2007/10/31 15:33:31  pandyas
+ * Fixed #8188 	Rename UnctrlVocab items to AlternEntry
+ *
  * Revision 1.14  2006/05/04 15:42:03  pandyas
  * Modified/Added to support Morpholino object data in the application
  *
@@ -29,7 +32,8 @@ public class EnvironmentalFactor extends BaseObject implements Comparable, Seria
     private String nameAlternEntry;
     private String casNumber;
     private Long nscNumber;
-    private String comments;    
+    private String comments;  
+    private boolean isInducedMutationTrigger;
     
 
     /**
@@ -207,6 +211,15 @@ public class EnvironmentalFactor extends BaseObject implements Comparable, Seria
 		this.typeAlternEntry = typeAlternEntry;
 	}
 
+	/**	
+	public boolean isInducedMutationTrigger() {
+		return isInducedMutationTrigger;
+	}
+
+	public void setInducedMutationTrigger(boolean isInducedMutationTrigger) {
+		this.isInducedMutationTrigger = isInducedMutationTrigger;
+	}
+   */
 
 
 }
