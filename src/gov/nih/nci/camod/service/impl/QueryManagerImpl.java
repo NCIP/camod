@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.93 2008-07-17 18:50:36 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.94 2008-08-12 19:47:20 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.93  2008/07/17 18:50:36  pandyas
+ * Reverted code back to version for security scan fixes
+ *
  * Revision 1.91  2008/05/22 18:19:16  pandyas
  * Modified advanced search for Cell Line to prevent SQL injection
  * Modified query to return correct results
@@ -669,7 +672,7 @@ public class QueryManagerImpl extends BaseManager
 
 			Collections.sort(theCellLineList);
 
-			log.info("Exiting QueryManagerImpl.getCellLineNames");
+			log.debug("Exiting QueryManagerImpl.getCellLineNames");
 		} catch (Exception e) {
 			log.error("Exception in getCellLineNames", e);
 			throw new PersistenceException("Exception in getCellLineNames: "
@@ -688,14 +691,14 @@ public class QueryManagerImpl extends BaseManager
 	}	
 
 	/**
-	 * Return the list of Cell Line Names
+	 * Return the list of Drug Names
 	 * 
 	 * @return a sorted list of unique names
 	 * @throws PersistenceException
 	 */
 	public List getTherapeuticDrugNames() throws PersistenceException {
 
-		log.info("Entering QueryManagerImpl.getTherapeuticDrugNames");
+		log.debug("Entering QueryManagerImpl.getTherapeuticDrugNames");
 		
 		ResultSet theResultSet = null;
 		List<String> theTherapeuticDrugList = new ArrayList<String>();
@@ -719,9 +722,9 @@ public class QueryManagerImpl extends BaseManager
 
 			Collections.sort(theTherapeuticDrugList);
 
-			log.info("Exiting QueryManagerImpl.getTherapeuticDrugNames");
+			log.debug("Exiting QueryManagerImpl.getTherapeuticDrugNames");
 		} catch (Exception e) {
-			log.error("Exception in getCellLineNames", e);
+			log.error("Exception in getTherapeuticDrugNames", e);
 			throw new PersistenceException("Exception in getTherapeuticDrugNames: "
 					+ e);
 		} finally {
@@ -745,7 +748,7 @@ public class QueryManagerImpl extends BaseManager
 	 */
 	public List getGenomicSegmentDesignators() throws PersistenceException {
 
-		log.info("Entering QueryManagerImpl.getGenomicSegmentDesignators");
+		log.debug("Entering QueryManagerImpl.getGenomicSegmentDesignators");
 		
 		ResultSet theResultSet = null;
 		List<String> theGenSegDesList = new ArrayList<String>();
@@ -757,7 +760,7 @@ public class QueryManagerImpl extends BaseManager
 				+ "			WHERE eg.abs_cancer_model_id = am.abs_cancer_model_id "
 				+ "     	AND am.state = 'Edited-approved'";			
 
-			log.info("After SQLQuery");
+			log.debug("After SQLQuery");
 			
 			// Format the query			
 			Object[] theParams = new Object[0];
@@ -765,14 +768,14 @@ public class QueryManagerImpl extends BaseManager
 
 			while (theResultSet.next()) {
 				String theGenSegDesignator = theResultSet.getString(1);
-				log.info("theGenSegDesignator: " + theGenSegDesignator);				
+				log.debug("theGenSegDesignator: " + theGenSegDesignator);				
 				if(theGenSegDesignator != null && theGenSegDesignator.length() > 0){
 					theGenSegDesList.add(theGenSegDesignator);
 				}
 			}
 			Collections.sort(theGenSegDesList);
 
-			log.info("Exiting QueryManagerImpl.getGenomicSegmentDesignators");
+			log.debug("Exiting QueryManagerImpl.getGenomicSegmentDesignators");
 		} catch (Exception e) {
 			log.error("Exception in getGenomicSegmentDesignators", e);
 			throw new PersistenceException("Exception in getGenomicSegmentDesignators: "
@@ -852,7 +855,10 @@ public class QueryManagerImpl extends BaseManager
 					+ "  AND ef.environmental_factor_id IN (SELECT ce.environmental_factor_id "
 					+ "     FROM carcinogen_exposure ce, abs_cancer_model am "
 					+ "			WHERE ef.environmental_factor_id = ce.environmental_factor_id "
+					//+ "     	AND ef.is_induced_mutation_trigger = 0 "
 					+ "     	AND am.abs_cancer_model_id = ce.abs_cancer_model_id AND am.state = 'Edited-approved')";
+			
+			log.debug("theSQLQuery: " + theSQLQuery.toString());
 
 			Object[] theParams = new Object[2];
 			theParams[0] = inType;
@@ -895,6 +901,120 @@ public class QueryManagerImpl extends BaseManager
  		Collections.sort(theEFNameList);
 		return theEFNameList;
 	}
+	
+	/**
+	 * Return the list of gene names (targeted modification)
+	 * 
+	 * @return a sorted list of unique gene names
+	 * @throws PersistenceException
+	 */
+	public List getGeneNames()
+			throws PersistenceException {
+
+		log.debug("Entering QueryManagerImpl.getGeneNames");
+		log.debug("<getGeneNames>  " );
+
+		ResultSet theResultSet = null;
+		List<String> theGeneNameList = new ArrayList<String>();
+
+		try {
+			String theSQLQuery = "SELECT distinct eg.name "
+					+ "FROM engineered_gene eg, abs_cancer_model ac "
+					+ "WHERE eg.engineered_gene_type = 'TM' " 
+					+ "AND ac.state = 'Edited-approved'	";
+			
+			log.debug("theSQLQuery: " + theSQLQuery.toString());
+
+			// Format the query - use a bind variable for the first pass when list is empty only
+			Object[] theParams = new Object[0];
+			theResultSet = Search.query(theSQLQuery, theParams);
+
+
+			while (theResultSet.next()) {
+				String theGeneName = theResultSet.getString(1);
+				if(theGeneName != null && theGeneName.length() > 0){
+					theGeneNameList.add(theGeneName);
+				}
+			}
+			
+			Collections.sort(theGeneNameList, String.CASE_INSENSITIVE_ORDER);
+
+			log.debug("Exiting QueryManagerImpl.getGeneNames");
+		} catch (Exception e) {
+			log.error("Exception in getGeneNames", e);
+			throw new PersistenceException(
+					"Exception in getGeneNames: " + e);
+		} finally {
+			if (theResultSet != null) {
+				try {
+                    Statement stmt = theResultSet.getStatement();
+                    theResultSet.close();
+                    stmt.close();
+				} catch (Exception e) {
+				}
+			}
+		}
+		return theGeneNameList;
+	}
+	
+	/**
+	 * Return the list of gene names (transgene)
+	 * 
+	 * @param inType
+	 *            the type of genetic description (transgene)
+	 * 
+	 * @return a sorted list of unique transgene names
+	 * @throws PersistenceException
+	 */
+	public List getTransgeneNames()
+			throws PersistenceException {
+
+		log.debug("Entering QueryManagerImpl.getTransgeneNames");
+		log.debug("<getTransgeneNames> : " );
+
+		ResultSet theResultSet = null;
+		List<String> theGeneNameList = new ArrayList<String>();
+
+		try {
+			// Set engineered_gene_type = ? for first pass when list is empty 
+			String	theSQLQuery = "SELECT distinct eg.name "
+				+ "FROM engineered_gene eg, abs_cancer_model ac "
+				+ "WHERE eg.engineered_gene_type = 'T' " 
+				+ "AND ac.state = 'Edited-approved'	";	
+			
+			log.debug("theSQLQuery: " + theSQLQuery.toString());
+
+			// Format the query 
+			Object[] theParams = new Object[0];
+			theResultSet = Search.query(theSQLQuery, theParams);
+
+
+			while (theResultSet.next()) {
+				String theGeneName = theResultSet.getString(1);
+				if(theGeneName != null && theGeneName.length() > 0){
+					theGeneNameList.add(theGeneName);
+				}
+			}
+			
+			Collections.sort(theGeneNameList, String.CASE_INSENSITIVE_ORDER);
+
+			log.debug("Exiting QueryManagerImpl.getGeneNames");
+		} catch (Exception e) {
+			log.error("Exception in getGeneNames", e);
+			throw new PersistenceException(
+					"Exception in getGeneNames: " + e);
+		} finally {
+			if (theResultSet != null) {
+				try {
+                    Statement stmt = theResultSet.getStatement();
+                    theResultSet.close();
+                    stmt.close();
+				} catch (Exception e) {
+				}
+			}
+		}
+		return theGeneNameList;
+	}	
 
     /**
      * Return the list of environmental factor names which were used to induce a
@@ -912,8 +1032,13 @@ public class QueryManagerImpl extends BaseManager
         try
         {
 
-            // Format the query
-            String theSQLQuery = "SELECT distinct ef.name FROM environmental_factor ef, engineered_gene eg " + "WHERE ef.name IS NOT null AND ef.environmental_factor_id = eg.environmental_factor_id";
+            /* Format the query */
+			String theSQLQuery = "SELECT distinct ef.name "
+				+ "FROM environmental_factor ef, engineered_gene eg "
+				+ "WHERE ef.name IS NOT null"
+				+ "  AND ef.environmental_factor_id = eg.environmental_factor_id ";
+				//+ "     	AND ef.is_induced_mutation_trigger = 1"; 
+			           
 
             Object[] theParams = new Object[0];
             theResultSet = Search.query(theSQLQuery, theParams);
@@ -1814,7 +1939,7 @@ public class QueryManagerImpl extends BaseManager
     {
         String theSQLString = "SELECT distinct strain.strain_id FROM strain WHERE strain.species_id IN (SELECT species.species_id FROM species WHERE species.scientific_name like ? or species.scientific_name_altern_entry like ?) ";
 
-        System.out.println("SQL: " + theSQLString);
+        log.debug("getStrainIdsForSpecies theSQLString: " + theSQLString);
         Object[] theParams = new Object[2];
         theParams[0] = inSpecies;
         theParams[1] = theParams[0];
@@ -2099,7 +2224,7 @@ public class QueryManagerImpl extends BaseManager
      * 
      */
     
-    private String getModelIdsForEngineeredGenes(String inGeneName,
+    private String getModelIdsForEngineeredGenes(String inGeneName, String inTransgeneName,
                                                  boolean isEngineeredTransgene,
                                                  boolean isTargetedModification,
                                                  String inGenomicSegDesignator,
@@ -2112,19 +2237,27 @@ public class QueryManagerImpl extends BaseManager
 
         String OR = " ";
 
-        if (isEngineeredTransgene == true && inGeneName.trim().length() > 0)
+        if (isEngineeredTransgene == true)
         {
-            theSQLString += OR + " eg.engineered_gene_id IN (SELECT distinct engineered_gene_id " 
-                         + " FROM engineered_gene WHERE upper(name) LIKE ? AND engineered_gene_type = 'T')";
-            OR = " OR ";
-            theList.add("%" + inGeneName.trim().toUpperCase() + "%");
+        	if(inTransgeneName != null && inTransgeneName.trim().length() > 0){
+	            theSQLString += OR + " eg.engineered_gene_id IN (SELECT distinct engineered_gene_id " 
+	                         + " FROM engineered_gene WHERE upper(name) LIKE ? AND engineered_gene_type = 'T')";
+	            OR = " OR ";
+	            theList.add("%" + inTransgeneName.trim().toUpperCase() + "%");
+        	} else {
+                theSQLString += OR + " eg.engineered_gene_type = 'T'";
+        	}
         }
-        if (isTargetedModification == true && inGeneName.trim().length() > 0)
+        if (isTargetedModification == true )
         {
+        	if(inGeneName != null && inGeneName.trim().length() > 0){
             theSQLString += OR + " eg.engineered_gene_id IN (SELECT distinct engineered_gene_id " 
                          + " FROM engineered_gene WHERE upper(name) LIKE ? AND engineered_gene_type = 'TM')";
             OR = " OR ";
             theList.add("%" + inGeneName.trim().toUpperCase() + "%");
+        	} else {
+                theSQLString += OR + " eg.engineered_gene_type = 'TM'";        		
+        	}
         }
         if (inInducedMutationAgent != null && inInducedMutationAgent.trim().length() > 0)
         {
@@ -2263,11 +2396,13 @@ public class QueryManagerImpl extends BaseManager
 			throws PersistenceException {
 
 		String theSQLString = "SELECT distinct ce.abs_cancer_model_id FROM carcinogen_exposure ce "
-				+ "WHERE ce.environmental_factor_id IN (SELECT ef.environmental_factor_id FROM carcinogen_exposure ce, environmental_factor ef"
-				+ "     WHERE ce.environmental_factor_id = ef.environmental_factor_id AND upper(ef.name) like ?)";
+			+ "WHERE ce.environmental_factor_id IN (SELECT ef.environmental_factor_id FROM carcinogen_exposure ce, environmental_factor ef"
+			+ "     WHERE ce.environmental_factor_id = ef.environmental_factor_id AND upper(ef.name) LIKE ? OR upper(ef.name_altern_entry) LIKE ? )";
+		
 
-		Object[] theParams = new Object[1];
-		theParams[0] = inKeyword;
+		Object[] theParams = new Object[2];
+		theParams[0] = "%"+inKeyword.toUpperCase()+ "%";
+		theParams[1] = "%"+inKeyword.toUpperCase()+ "%";		
 		return getIds(theSQLString, theParams);
 	}
 
@@ -2283,7 +2418,7 @@ public class QueryManagerImpl extends BaseManager
 
         if (inSearchData.getKeyword() != null && inSearchData.getKeyword().length() > 0)
         {
-            log.debug("Doing a keyword search: " + inSearchData.getKeyword());
+            log.info("Doing a keyword search: " + inSearchData.getKeyword());
             theAnimalModels = keywordSearch(theFromClause, theOrderByClause, inSearchData.getKeyword());
         }
         else
@@ -2291,8 +2426,7 @@ public class QueryManagerImpl extends BaseManager
             log.info("Doing a criteria search");
             theAnimalModels = criteriaSearch(theFromClause, theOrderByClause, inSearchData);
         }
-
-        log.debug("Exiting searchForAnimalModels");
+        log.info("Exiting searchForAnimalModels");
 
         return theAnimalModels;
     }
@@ -2555,11 +2689,9 @@ public class QueryManagerImpl extends BaseManager
 			}
 		}
 
-		// Only call if some of the data is set 
-		if ((inSearchData.getGeneName() != null
-				&& inSearchData.getGeneName().trim().length() > 0 && (inSearchData
-				.isEngineeredTransgene() || inSearchData
-				.isTargetedModification()))
+		// call if any of the data is set for Genetic Desription section
+		if (inSearchData.isSearchEngineeredTransgene()
+				|| inSearchData.isSearchTargetedModification()
 				|| (inSearchData.getGenomicSegDesignator() != null && inSearchData
 						.getGenomicSegDesignator().trim().length() > 0)
 				|| (inSearchData.getInducedMutationAgent() != null && inSearchData
@@ -2567,9 +2699,9 @@ public class QueryManagerImpl extends BaseManager
 
 			// Search for engineered genes
 			theWhereClause += " AND abs_cancer_model_id IN ("
-					+ getModelIdsForEngineeredGenes(inSearchData.getGeneName(),
-							inSearchData.isEngineeredTransgene(), inSearchData
-									.isTargetedModification(), inSearchData
+					+ getModelIdsForEngineeredGenes(inSearchData.getGeneName(), inSearchData.getTransgeneName(),
+							inSearchData.isSearchEngineeredTransgene(), inSearchData
+									.isSearchTargetedModification(), inSearchData
 									.getGenomicSegDesignator(), inSearchData
 									.getInducedMutationAgent()) + ")";
 		}
@@ -2644,7 +2776,7 @@ public class QueryManagerImpl extends BaseManager
 			theWhereClause += " AND abs_cancer_model_id IN ("
 					+ getModelIdsForToolStrain() + ")";
 		}		
-
+		log.info("QueryMgrImpl theWhereClause: " + theWhereClause.toString());
         return theWhereClause;
 
     }
@@ -2896,7 +3028,8 @@ public class QueryManagerImpl extends BaseManager
             + "       species sp,"   + "\n"             
             + "       agent a" + "\n" 
             + " where acm.abs_cancer_model_id = t.abs_cancer_model_id" + "\n" 
-            + "   and acm.abs_cancer_model_type = 'AM'" + "\n" 
+            + "   and acm.abs_cancer_model_type = 'AM'" + "\n"
+            + "   and acm.state = 'Edited-approved'" + "\n"            
             + "   and t.agent_id = a.agent_id" + "\n" 
             + "   and acm.strain_id = st.strain_id" + "\n" 
             + "   and st.species_id = sp.species_id" + "\n"             
