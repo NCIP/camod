@@ -43,9 +43,13 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.94 2008-08-12 19:47:20 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.95 2008-08-13 16:45:04 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.94  2008/08/12 19:47:20  pandyas
+ * Fixed #15053  	Search for models with transgenic or targeted modification on advanced search page confusing
+ * Fixed #15041  	Why does keyword search not pick up MTB records?
+ *
  * Revision 1.93  2008/07/17 18:50:36  pandyas
  * Reverted code back to version for security scan fixes
  *
@@ -855,7 +859,7 @@ public class QueryManagerImpl extends BaseManager
 					+ "  AND ef.environmental_factor_id IN (SELECT ce.environmental_factor_id "
 					+ "     FROM carcinogen_exposure ce, abs_cancer_model am "
 					+ "			WHERE ef.environmental_factor_id = ce.environmental_factor_id "
-					//+ "     	AND ef.is_induced_mutation_trigger = 0 "
+					+ "     	AND ef.is_induced_mutation_trigger = 0 "
 					+ "     	AND am.abs_cancer_model_id = ce.abs_cancer_model_id AND am.state = 'Edited-approved')";
 			
 			log.debug("theSQLQuery: " + theSQLQuery.toString());
@@ -1036,8 +1040,8 @@ public class QueryManagerImpl extends BaseManager
 			String theSQLQuery = "SELECT distinct ef.name "
 				+ "FROM environmental_factor ef, engineered_gene eg "
 				+ "WHERE ef.name IS NOT null"
-				+ "  AND ef.environmental_factor_id = eg.environmental_factor_id ";
-				//+ "     	AND ef.is_induced_mutation_trigger = 1"; 
+				+ "  AND ef.environmental_factor_id = eg.environmental_factor_id "
+				+ "     	AND ef.is_induced_mutation_trigger = 1"; 
 			           
 
             Object[] theParams = new Object[0];

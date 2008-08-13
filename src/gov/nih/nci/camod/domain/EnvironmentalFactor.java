@@ -1,7 +1,10 @@
 /*
- * $Id: EnvironmentalFactor.java,v 1.16 2008-08-12 19:51:00 pandyas Exp $
+ * $Id: EnvironmentalFactor.java,v 1.17 2008-08-13 16:43:46 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2008/08/12 19:51:00  pandyas
+ * Fixed #12825  	induced mutation entries need to be flagged (requires OM change) and searches for induced mutation and carcinogenic interventions need to be fixed
+ *
  * Revision 1.15  2007/10/31 15:33:31  pandyas
  * Fixed #8188 	Rename UnctrlVocab items to AlternEntry
  *
@@ -33,7 +36,7 @@ public class EnvironmentalFactor extends BaseObject implements Comparable, Seria
     private String casNumber;
     private Long nscNumber;
     private String comments;  
-    private boolean isInducedMutationTrigger;
+    private Boolean isInducedMutationTrigger;
     
 
     /**
@@ -211,15 +214,19 @@ public class EnvironmentalFactor extends BaseObject implements Comparable, Seria
 		this.typeAlternEntry = typeAlternEntry;
 	}
 
-	/**	
-	public boolean isInducedMutationTrigger() {
+    /**
+     * @return Returns the isInducedMutationTrigger.
+     */
+	public Boolean getIsInducedMutationTrigger() {
 		return isInducedMutationTrigger;
 	}
 
-	public void setInducedMutationTrigger(boolean isInducedMutationTrigger) {
+    /**
+     * @param isInducedMutationTrigger
+     *            The isInducedMutationTrigger to set.
+     */    
+	public void setInducedMutationTrigger(Boolean isInducedMutationTrigger) {
 		this.isInducedMutationTrigger = isInducedMutationTrigger;
 	}
-   */
-
-
+   
 }
