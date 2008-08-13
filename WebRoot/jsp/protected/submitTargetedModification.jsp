@@ -92,7 +92,7 @@
 			<br><br>
 			-If the category you are looking for is not listed, <br>select "Other" and enter the category in the text field below.
 			<br>
-			-To select multiple modification types using a PC, <br>hold down the 'Control Key' while clicking the option with <br>the mouse.  Use the 'Shift Key' if you are using a Macintosh.
+			-To select multiple modification types using a PC, <br>hold down the 'Control Key' while clicking the option with <br>the mouse.  Use the 'Command Key' if you are using a Macintosh.
 		</td>
 	</tr>
 
