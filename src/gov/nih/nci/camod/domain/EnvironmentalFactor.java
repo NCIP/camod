@@ -1,7 +1,10 @@
 /*
- * $Id: EnvironmentalFactor.java,v 1.17 2008-08-13 16:43:46 pandyas Exp $
+ * $Id: EnvironmentalFactor.java,v 1.18 2008-08-13 16:55:28 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2008/08/13 16:43:46  pandyas
+ * uncommented code to build to dev
+ *
  * Revision 1.16  2008/08/12 19:51:00  pandyas
  * Fixed #12825  	induced mutation entries need to be flagged (requires OM change) and searches for induced mutation and carcinogenic interventions need to be fixed
  *
@@ -225,7 +228,7 @@ public class EnvironmentalFactor extends BaseObject implements Comparable, Seria
      * @param isInducedMutationTrigger
      *            The isInducedMutationTrigger to set.
      */    
-	public void setInducedMutationTrigger(Boolean isInducedMutationTrigger) {
+	public void setIsInducedMutationTrigger(Boolean isInducedMutationTrigger) {
 		this.isInducedMutationTrigger = isInducedMutationTrigger;
 	}
    
