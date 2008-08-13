@@ -1,7 +1,10 @@
 /*
- * $Id: EnvironmentalFactor.java,v 1.18 2008-08-13 16:55:28 pandyas Exp $
+ * $Id: EnvironmentalFactor.java,v 1.19 2008-08-13 18:44:51 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2008/08/13 16:55:28  pandyas
+ * minor code change to build to dev
+ *
  * Revision 1.17  2008/08/13 16:43:46  pandyas
  * uncommented code to build to dev
  *
@@ -39,7 +42,7 @@ public class EnvironmentalFactor extends BaseObject implements Comparable, Seria
     private String casNumber;
     private Long nscNumber;
     private String comments;  
-    private Boolean isInducedMutationTrigger;
+    //private Boolean isInducedMutationTrigger;
     
 
     /**
@@ -216,20 +219,20 @@ public class EnvironmentalFactor extends BaseObject implements Comparable, Seria
 	public void setTypeAlternEntry(String typeAlternEntry) {
 		this.typeAlternEntry = typeAlternEntry;
 	}
-
+    
     /**
      * @return Returns the isInducedMutationTrigger.
-     */
-	public Boolean getIsInducedMutationTrigger() {
-		return isInducedMutationTrigger;
-	}
-
+     
+    public Boolean getIsInducedMutationTrigger() {
+        return isInducedMutationTrigger;
+    }
+    */
     /**
      * @param isInducedMutationTrigger
      *            The isInducedMutationTrigger to set.
-     */    
-	public void setIsInducedMutationTrigger(Boolean isInducedMutationTrigger) {
-		this.isInducedMutationTrigger = isInducedMutationTrigger;
-	}
-   
+     
+    public void setIsInducedMutationTrigger(Boolean isInducedMutationTrigger) {
+        this.isInducedMutationTrigger = isInducedMutationTrigger;
+    }    
+    */
 }
