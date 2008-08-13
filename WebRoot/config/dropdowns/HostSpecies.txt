@@ -8,6 +8,6 @@ Guinea pig (Cavia porcellus),Cavia porcellus
 Cattle (Bos taurus),Bos taurus
 Dog (Canis familiaris),Canis familiaris
 Goat (Capra hircus),Capra hircus
-Horse (Equus Caballus),Equus Caballus
+Horse (Equus caballus),Equus caballus
 Human (Homo sapiens),Homo sapiens
 Sheep (Ovis aries),Ovis aries

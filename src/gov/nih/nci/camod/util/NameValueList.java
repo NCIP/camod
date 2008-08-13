@@ -42,9 +42,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: NameValueList.java,v 1.6 2008-05-22 18:21:06 pandyas Exp $
+ * $Id: NameValueList.java,v 1.7 2008-08-13 18:40:28 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2008/05/22 18:21:06  pandyas
+ * Cleaned up data for species.scientific_name so validation would identify valid species selections for prevention of SQL injection - removed hard-coded efforts
+ *
  * Revision 1.5  2008/05/21 19:04:36  pandyas
  * Modified advanced search to prevent SQL injection
  * Concolidated all utility methods in new class
@@ -143,7 +146,7 @@ public class NameValueList
         approvedSpeciesList.add(new NameValue("Meriones unguiculatus","Meriones unguiculatus")); 
         approvedSpeciesList.add(new NameValue("Cavia porcellus","Cavia porcellus")); 
         approvedSpeciesList.add(new NameValue("Capra hircus","Capra hircus"));         
-        approvedSpeciesList.add(new NameValue("Equus Caballus","Equus Caballus")); 
+        approvedSpeciesList.add(new NameValue("Equus caballus","Equus caballus")); 
         approvedSpeciesList.add(new NameValue("Ovis aries","Ovis aries")); 
         approvedSpeciesList.add(new NameValue("Sus scrofa","Sus scrofa"));         
         approvedSpeciesList.add(new NameValue("Saccharomyces cerevisiae","Saccharomyces cerevisiae"));     
