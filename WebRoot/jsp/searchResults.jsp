@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchResults.jsp,v 1.29 2007-09-11 15:55:30 pandyas Exp $
+ * $Id: searchResults.jsp,v 1.30 2008-08-14 17:10:53 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.29  2007/09/11 15:55:30  pandyas
+ * Comment out debug
+ *
  * Revision 1.28  2007/09/06 19:09:33  pandyas
  * Slight modification to force the newest jsp to build
  *
@@ -259,7 +262,6 @@
 				     
 					<%
 					    for (int i = 0; i < resultColumns.length; i++) {
-					    	//System.out.println( "selectedColumnsToDisplay[" + i + "] = " + resultColumns[i] );
 					    	
 							if( resultColumns[i].equals("Model Id") ) { %>
 							     <display:column title="Model Id" sortable="true" headerClass="sortable" >

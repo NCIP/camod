@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.46  2008/01/31 23:38:20  pandyas
+ * remove log printouts now that bug is resolved
+ *
  * Revision 1.45  2007/10/31 19:33:58  pandyas
  * Fixed #8188 	Rename UnctrlVocab items to text entries
  *
@@ -81,7 +84,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: viewHistopathology.jsp,v 1.46 2008-01-31 23:38:20 pandyas Exp $
+ * $Id: viewHistopathology.jsp,v 1.47 2008-08-14 17:11:33 pandyas Exp $
  *
  */   
 %>
@@ -119,7 +122,6 @@
 <%      
 	final List histopathColl = new ArrayList(((AnimalModel)mdl).getHistopathologyCollection());
 	final int cc = (histopathColl!=null)?histopathColl.size():0;
-	//System.out.println("Histopathology rowCount==>" + cc);
 %>
 		<% if ( cc > 0 ) { %>
 		    <tr>

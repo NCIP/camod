@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.64 2008-08-14 17:01:42 pandyas Exp $
+ *  $Id: ViewModelAction.java,v 1.65 2008-08-14 17:07:03 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.64  2008/08/14 17:01:42  pandyas
+ *  modified debug line to use log
+ *
  *  Revision 1.63  2008/08/01 14:15:10  pandyas
  *  Modifed to prevent SQL inject - added HTTP Header clean
  *  App scan performed on July 30, 2008
@@ -769,9 +772,8 @@ public class ViewModelAction extends BaseAction
 				//log.debug("populateCaelmirTherapyDetails status: " + status);
 				// Imporatant:first check for the status
 				if (!CaElmirInterfaceManager.getSuccessKey().equals(status)) {
-					// prints the error message and return
-					System.out.println(status);
-					// return;
+					// prints the status
+					log.info(status);
 				}
 
                 CaelmirStudyData studyData = new CaelmirStudyData();
@@ -789,8 +791,7 @@ public class ViewModelAction extends BaseAction
 					studyData.setStudyName(jobj.getString(CaElmirInterfaceManager.getStudyName()));
 					studyData.setUrl(jobj.getString(CaElmirInterfaceManager.getStudyUrlKey()));
 
-                    caelmirStudyData.add(studyData);
-                    //log.debug("studyData.toString(): " + studyData.toString());                
+                    caelmirStudyData.add(studyData);                
 				}    
 			}
 		} catch (MalformedURLException me) {
