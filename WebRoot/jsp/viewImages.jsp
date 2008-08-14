@@ -60,8 +60,14 @@
 						</td>
 					<tr>
 					<tr>
-						<td class="resultsBoxGrey" width="25%"><b>Comment</b></td>
-						<td class="resultsBoxGreyEnd">
+						<td class="resultsBoxGrey" width="15%"><b>Alternate URL</b></td>
+						<td class="resultsBoxGreyEnd" width="85%">
+						<c:out value="${p.altern_url}"/>&nbsp;
+						</td>
+					<tr>					
+					<tr>
+						<td class="resultsBoxWhite" width="25%"><b>Comment</b></td>
+						<td class="resultsBoxWhiteEnd">
 							<c:out value="${p.comments}"escapeXml="false"/>&nbsp;
 						</td>
 					</tr>					

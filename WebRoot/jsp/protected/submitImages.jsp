@@ -108,8 +108,17 @@
 			<html:text styleClass="formFieldSized" disabled="true" property="stainingMethod" size="30"  />
 			<a href="javascript: clearField(document.forms[0].stainingMethod, document.forms[0].stainingMethodCode);"><img border="0" src="/camod/images/clear.gif"></a>
 		</td>
-	</tr>		
-
+	</tr>	
+		
+	<tr>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field1">Alternate URL:</label>
+		</td>
+			<td class="formField">
+					<html:text styleClass="formFieldSized" property="altern_url" size="30"/>			
+			</td>
+	</tr>	
+	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Comment:</label>

@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewPublications.jsp,v 1.32 2008-02-01 16:28:47 pandyas Exp $
+ * $Id: viewPublications.jsp,v 1.33 2008-08-14 06:33:29 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.32  2008/02/01 16:28:47  pandyas
+ * Removed authors anchor inside detail sections
+ *
  * Revision 1.31  2008/01/31 21:18:16  pandyas
  * Removed space before J Number to line up text
  *
@@ -154,9 +157,17 @@
 								<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-pubview2.apg&OID=<c:out value="${p.zfinPubId}"/>">ZFIN</a>
 								<br/>
 						</c:when>				
-						<c:otherwise>					
+						<c:otherwise>&nbsp;					
 						</c:otherwise>
 					</c:choose>
+					<c:choose>
+						<c:when test="${not empty p.rgdPubID}">
+								<a target="_blank" href="http://rgd.mcw.edu/tools/references/references_view.cgi?id=<c:out value="${p.rgdPubID}"/>">RGD</a>
+								<br/>
+						</c:when>				
+						<c:otherwise>&nbsp;					
+						</c:otherwise>
+					</c:choose>					
 					<c:choose>
 							<c:when test="${not empty p.jaxJNumber}">										
 								<c:out value="${p.jaxJNumber}"/><br/>												
