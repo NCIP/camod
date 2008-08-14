@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: PublicationPopulateAction.java,v 1.16 2007-10-31 18:32:44 pandyas Exp $
+ * $Id: PublicationPopulateAction.java,v 1.17 2008-08-14 06:18:41 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2007/10/31 18:32:44  pandyas
+ * Fixed #8355 	Add comments field to every submission page
+ *
  * Revision 1.15  2007/05/07 16:52:08  pandyas
  * Added code to save, edit and populate zfinPubId from Publication object for pulications from zfin.org
  *
@@ -86,6 +89,11 @@ public class PublicationPopulateAction extends BaseAction {
                 pubForm.setJaxJNumber(thePublication.getJaxJNumber());
             } else if(thePublication.getZfinPubId() != null) {
             	pubForm.setZfinPubId(thePublication.getZfinPubId());            	
+            }
+            
+            if ( thePublication.getRgdPubID() != null )
+            {
+            	pubForm.setRgdPubID( thePublication.getRgdPubID() );
             }
             
 			if (thePublication.getPmid() != null) {
