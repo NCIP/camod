@@ -2,9 +2,14 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.75 2008-08-12 20:13:31 pandyas Exp $
+ * $Id: searchAdvanced.jsp,v 1.76 2008-08-14 19:03:04 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.75  2008/08/12 20:13:31  pandyas
+ * Code was rolled back to continue work on security scan fixes.  Code added back in jsp again.  Originally From:
+ * Revision 1.72  2008/07/11 17:10:25  schroedn
+ *  Bug 11007 Added search for PMID numbers
+ *
  * Revision 1.74  2008/08/12 19:21:02  pandyas
  * Fixed #15053  	Search for models with transgenic or targeted modification on advanced search page confusing
  *
@@ -277,15 +282,7 @@
   				parameters="modelDescriptor={modelDescriptor}" className="autocomplete" minimumCharacters="1" />	
 			</td>
 		</tr>
-		
-		<tr>
-		    <td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">PMID:</label> </td>
-			<td class="formField">
-				<html:text styleClass="formFieldSized" styleId="modelDescriptor" property="pmid" size="30"/>	
-			</td>
-		</tr>
-				
+					
 		<tr>
 			<td class="formRequiredNotice" width="0">&nbsp;</td>
 			<td class="formLabel"><label for="field2">PI's Name:</label></td>
@@ -434,7 +431,19 @@
 					<html:text styleClass="formFieldSized" property="phenotype" size="30"/>
 			</td>
 		</tr>
-
+		
+		<tr>
+			<td class="formTitleBlue" height="10" colspan="3">Publication:</td>
+		</tr>
+		
+		<tr>
+		    <td class="formRequiredNotice" width="5">&nbsp;</td>
+			<td class="formLabel"><label for="field1">PubMed Identifier:</label> </td>
+			<td class="formField">
+				<html:text styleClass="formFieldSized" property="pmid" size="30"/>	
+			</td>
+		</tr>
+		
 		<tr>
 			<td class="formTitleBlue" height="10" colspan="3">Genetic Description:</td>
 		</tr>
