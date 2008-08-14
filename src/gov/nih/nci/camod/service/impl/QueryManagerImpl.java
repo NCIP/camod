@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.98 2008-08-14 17:18:45 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.99 2008-08-14 19:01:16 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.98  2008/08/14 17:18:45  pandyas
+ * remove debug lines
+ *
  * Revision 1.97  2008/08/14 16:37:55  pandyas
  * modified debug line to use log
  *
@@ -3185,7 +3188,7 @@ public class QueryManagerImpl extends BaseManager
 
         org.hibernate.Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
         theQuery.setParameter("username", inUsername);
-        theQuery.setParameter("savedValue", "1");
+        theQuery.setParameter("savedValue", new Long(1));
 
         List theSavedQueries = theQuery.list();
 
@@ -3207,7 +3210,7 @@ public class QueryManagerImpl extends BaseManager
 
         org.hibernate.Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
         theQuery.setParameter("username", inUsername);
-        theQuery.setParameter("savedValue", "0");
+        theQuery.setParameter("savedValue",  new Long(0));
 
         List theSavedQueries = theQuery.list();
 
