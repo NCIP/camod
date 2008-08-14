@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: SirnaPopulateAction.java,v 1.4 2007-10-31 18:34:06 pandyas Exp $
+ * $Id: SirnaPopulateAction.java,v 1.5 2008-08-14 16:57:17 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2007/10/31 18:34:06  pandyas
+ * Fixed #8188 	Rename UnctrlVocab items to text entries
+ *
  * Revision 1.3  2007/09/12 19:36:39  pandyas
  * modified debug statements for build to stage tier
  *
@@ -50,7 +53,6 @@ public class SirnaPopulateAction extends BaseAction
 
         // Grab the current TransientInterferece we are working with related to this animalModel        
         String aTransIntID = request.getParameter("aTransIntID");
-        System.out.println("aTransIntID: = " + aTransIntID);
 
         TransientInterference transientInterference = TransientInterferenceManagerSingleton.instance().get(aTransIntID);
 

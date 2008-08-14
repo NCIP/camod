@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyAction.java,v 1.18 2007-09-12 19:36:40 pandyas Exp $
+ * $Id: HistopathologyAction.java,v 1.19 2008-08-14 16:53:04 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2007/09/12 19:36:40  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.17  2007/07/23 17:40:43  pandyas
  * Fixed typo in word occurred
  *
@@ -186,7 +189,6 @@ public class HistopathologyAction extends BaseAction {
         // Grab the current aAssocMetastasisID we are working with related to
         // this animalModel
         String aAssociatedMetastasisID = request.getParameter("aAssociatedMetastasisID");
-        System.out.println("aAssocMetastasisID: " + aAssociatedMetastasisID);
 
         // Create a form to edit
         AssociatedMetastasisForm assocMetastasisForm = (AssociatedMetastasisForm) form;
