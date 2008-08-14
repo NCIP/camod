@@ -59,7 +59,7 @@
 		<td class="formRequiredLabel"><label for="field1">URL for Microarray data not stored in caArray:</label>
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" size="30" property="otherLocationURL" />			
+			<html:text styleClass="formFieldSized" size="30" property="url" />			
 		</td>
 	</tr>
 

@@ -1,7 +1,10 @@
 /*
- * $Id: MicroArrayData.java,v 1.8 2006-04-19 17:37:37 pandyas Exp $
+ * $Id: MicroArrayData.java,v 1.9 2008-08-14 20:09:18 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2006/04/19 17:37:37  pandyas
+ * Removed TODO text
+ *
  * Revision 1.7  2006/04/17 19:13:46  pandyas
  * caMod 2.1 OM changes and added log/id header
  *
@@ -20,27 +23,27 @@ public class MicroArrayData extends BaseObject implements Comparable, Serializab
 {
     private static final long serialVersionUID = 3259195453799404851L;
 
-    private String otherLocationURL;
+    private String url;
     private Long experimentId;
     private String experimentName;
     private AbstractCancerModel cancerModel;
 
 
     /**
-     * @return Returns the otherLocationURL.
+     * @return Returns the url.
      */
-    public String getOtherLocationURL()
+    public String getUrl()
     {
-        return otherLocationURL;
+        return url;
     }
 
     /**
-     * @param otherLocationURL
+     * @param url
      *            The otherLocationURL to set.
      */
-    public void setOtherLocationURL(String otherLocationURL)
+    public void setUrl(String url)
     {
-        this.otherLocationURL = otherLocationURL;
+        this.url = url;
     }
 
     /**

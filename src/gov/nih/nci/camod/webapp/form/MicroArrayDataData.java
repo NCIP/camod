@@ -6,8 +6,8 @@ public interface MicroArrayDataData {
 	public void setExperimentName(String experimentName);
 	public String getExperimentId();
 	public void setExperimentId(String experimentId);
-	public String getOtherLocationURL();
-	public void setOtherLocationURL(String otherLocationURL);
+	public String getUrl();
+	public void setUrl(String url);
 
 }
 

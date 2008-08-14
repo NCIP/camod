@@ -34,7 +34,7 @@
 							<td class="resultsBoxGreyEnd">
 				                <ul>
 				                	<li>
-				                	<a href='<c:out value="${ma.otherLocationURL}"/>'><c:out value="${ma.experimentName}"/></a>
+				                	<a href='<c:out value="${ma.url}"/>'><c:out value="${ma.experimentName}"/></a>
 							        </li>
 				                </ul>
 							</td>

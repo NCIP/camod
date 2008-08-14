@@ -1,7 +1,10 @@
 /*
- * $Id: MicroArrayDataForm.java,v 1.5 2008-08-14 06:29:33 schroedn Exp $
+ * $Id: MicroArrayDataForm.java,v 1.6 2008-08-14 20:09:18 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2008/08/14 06:29:33  schroedn
+ * microarray url feature added
+ *
  * Revision 1.4  2006/04/17 19:09:19  pandyas
  * caMod 2.1 OM changes
  *
@@ -12,9 +15,12 @@ import java.io.Serializable;
 
 /**
  * 
- * $Id: MicroArrayDataForm.java,v 1.5 2008-08-14 06:29:33 schroedn Exp $
+ * $Id: MicroArrayDataForm.java,v 1.6 2008-08-14 20:09:18 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2008/08/14 06:29:33  schroedn
+ * microarray url feature added
+ *
  * Revision 1.4  2006/04/17 19:09:19  pandyas
  * caMod 2.1 OM changes
  *
@@ -32,7 +38,7 @@ public class MicroArrayDataForm extends BaseForm implements Serializable, MicroA
 	
 	protected String experimentName;
 	protected String experimentId;
-	protected String otherLocationURL;
+	protected String url;
 	
 	/**
 	 * @return Returns the experimentName.
@@ -59,16 +65,16 @@ public class MicroArrayDataForm extends BaseForm implements Serializable, MicroA
 		this.experimentId = experimentId;
 	}
 	/**
-	 * @return Returns the otherLocationURL.
+	 * @return Returns the url.
 	 */
-	public String getOtherLocationURL() {
-		return otherLocationURL;
+	public String getUrl() {
+		return url;
 	}
 	/**
 	 * @param otherLocationURL The otherLocationURL to set.
 	 */
-	public void setOtherLocationURL(String otherLocationURL) {
-		this.otherLocationURL = otherLocationURL;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 }

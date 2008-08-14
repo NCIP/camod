@@ -35,7 +35,7 @@
         	type="long"/>
         	
         <!-- otherLocationURL -->
-        <property name="otherLocationURL" 
+        <property name="url" 
         	column="url" 
         	type="string"/>
         	

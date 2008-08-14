@@ -872,8 +872,8 @@
 		</form>
 
 		<form name="microArrayDataForm">
-			<field property="otherLocationURL" depends="required, maxlength">
-				<arg0 key="MicroArrayDataForm.otherLocationURL" />
+			<field property="url" depends="required, maxlength">
+				<arg0 key="MicroArrayDataForm.url" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>

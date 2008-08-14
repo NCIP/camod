@@ -1,7 +1,10 @@
 /*
- * $Id: MicroArrayDataManagerImpl.java,v 1.7 2008-08-14 06:28:21 schroedn Exp $
+ * $Id: MicroArrayDataManagerImpl.java,v 1.8 2008-08-14 20:09:18 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2008/08/14 06:28:21  schroedn
+ * Microarraydata url
+ *
  * Revision 1.6  2006/04/19 17:38:26  pandyas
  * Removed TODO text
  *
@@ -119,7 +122,7 @@ public class MicroArrayDataManagerImpl extends BaseManager implements MicroArray
 		log.debug("Entering populateMicroArrayData");
 
 		inMicroArrayData.setExperimentName(inMicroArrayDataData.getExperimentName());
-		inMicroArrayData.setOtherLocationURL(inMicroArrayDataData.getOtherLocationURL());
+		inMicroArrayData.setUrl(inMicroArrayDataData.getUrl());
 
 		log.debug("Exiting populateMicroArrayData");
 	}

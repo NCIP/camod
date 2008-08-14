@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: MicroArrayDataAction.java,v 1.6 2008-08-14 19:01:41 schroedn Exp $
+ * $Id: MicroArrayDataAction.java,v 1.7 2008-08-14 20:09:18 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2008/08/14 19:01:41  schroedn
+ * removed sys.out
+ *
  * Revision 1.5  2008/08/14 06:17:03  schroedn
  * Microarray - added new field for other urls
  *
@@ -63,7 +66,7 @@ public final class MicroArrayDataAction extends BaseAction {
 		
 		log.debug("<MicroArrayDataAction save> following Characteristics:" 
 				+ "\n\t CellLineName: " + microArrayDataForm.getExperimentName() 
-				+ "\n\t Experiment: " + microArrayDataForm.getOtherLocationURL()				
+				+ "\n\t Experiment: " + microArrayDataForm.getUrl()				
 				+ "\n\t user: " + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
 		String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
@@ -132,7 +135,7 @@ public final class MicroArrayDataAction extends BaseAction {
 
 		log.debug("<MicroArrayDataAction save> following Characteristics:" 
 				+ "\n\t CellLineName: " + microArrayDataForm.getExperimentName() 
-				+ "\n\t Experiment: " + microArrayDataForm.getOtherLocationURL()				
+				+ "\n\t Experiment: " + microArrayDataForm.getUrl()				
 				+ "\n\t user: " + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
 		String theForward = "AnimalModelTreePopulateAction";

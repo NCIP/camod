@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: MicroArrayDataPopulateAction.java,v 1.3 2008-08-14 06:16:52 schroedn Exp $
+ * $Id: MicroArrayDataPopulateAction.java,v 1.4 2008-08-14 20:09:18 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2008/08/14 06:16:52  schroedn
+ * Microarray - added new field for other urls
+ *
  * Revision 1.2  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -58,7 +61,7 @@ public class MicroArrayDataPopulateAction extends BaseAction {
 			request.setAttribute("aMicroArrayDataID", aMicroArrayID);
 			
 			microArrayForm.setExperimentName(microArray.getExperimentName());
-			microArrayForm.setOtherLocationURL(microArray.getOtherLocationURL());			
+			microArrayForm.setUrl(microArray.getUrl());			
 		}
 		
 		return mapping.findForward("submitMicroarrayData");
