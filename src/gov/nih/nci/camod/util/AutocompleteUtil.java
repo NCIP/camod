@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: AutocompleteUtil.java,v 1.4 2008-01-31 22:25:02 pandyas Exp $
+ * $Id: AutocompleteUtil.java,v 1.5 2008-08-14 17:12:48 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2008/01/31 22:25:02  pandyas
+ * modified log printouts for dev build
+ *
  * Revision 1.3  2006/05/18 13:06:43  guptaa
  * added disease
  *
@@ -294,26 +297,7 @@ public class AutocompleteUtil {
 		try {
 			SortedSet<Object> theMatchingNSCNumbers = AutocompleteUtil
 					.getMatchingTumorClassifications("a", 10);
-			System.out.println(new Date() + " - Number matched for p: "
-					+ theMatchingNSCNumbers.size());
-			/*
-			theMatchingNSCNumbers = AutocompleteUtil.getMatchingGeneNames(
-					"p53", 10);
-			System.out.println(new Date() + " - Number matched for p53: "
-					+ theMatchingNSCNumbers.size());
-			theMatchingNSCNumbers = AutocompleteUtil.getMatchingGeneNames("d",
-					10);
-			System.out.println(new Date() + " - Number matched for d: "
-					+ theMatchingNSCNumbers.size());
-			theMatchingNSCNumbers = AutocompleteUtil.getMatchingGeneNames("55",
-					10000);
-			System.out.println(new Date() + " - Number matched for 55: "
-					+ theMatchingNSCNumbers.size());
-			theMatchingNSCNumbers = AutocompleteUtil.getMatchingGeneNames("y",
-					10000);
-			System.out.println(new Date() + " - Number matched for y: "
-					+ theMatchingNSCNumbers.size());
-			*/
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

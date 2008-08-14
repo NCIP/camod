@@ -46,6 +46,9 @@
  * $Id$
  *
  * $Log$
+ * Revision 1.9  2007/09/12 19:36:46  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.8  2006/11/09 17:17:28  pandyas
  * Commented out debug code
  *
@@ -325,7 +328,6 @@ public class AutocompleteServlet extends BaseAjaxServlet {
 				.getMatchingOrgans(inOrgan, inNumToReturn);
 
 		List<AjaxTagValuePair> theOrganList = new ArrayList<AjaxTagValuePair>();
-		//System.out.println("the matching list" + theMatchingOrgans);
 		Iterator iterate = theMatchingOrgans.iterator();
 		while (iterate.hasNext()) {
 			Organ organ = (Organ) iterate.next();
@@ -355,7 +357,6 @@ public class AutocompleteServlet extends BaseAjaxServlet {
 		.getMatchingTumorClassifications(inTumorClassification, inNumToReturn);
 		
 		List<AjaxTagValuePair> theTumorList = new ArrayList<AjaxTagValuePair>();
-		//System.out.println("the matching list" + theMatchingTumorClassifications);
 		Iterator iterate = theMatchingTumorClassifications.iterator();
 		while (iterate.hasNext()) {
 			Disease disease = (Disease) iterate.next();

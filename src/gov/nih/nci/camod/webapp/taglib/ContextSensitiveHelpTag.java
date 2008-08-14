@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ContextSensitiveHelpTag.java,v 1.11 2006-11-09 18:44:36 pandyas Exp $
+ * $Id: ContextSensitiveHelpTag.java,v 1.12 2008-08-14 17:08:49 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2006/11/09 18:44:36  pandyas
+ * Commented out debug code
+ *
  * Revision 1.10  2006/10/27 13:04:13  pandyas
  * Added Constants.OnlineHelp.SKIP to remove onclick from ToolTips
  *
@@ -188,9 +191,6 @@ public class ContextSensitiveHelpTag implements Tag, Serializable {
 			try {
 				// Get the text
 				ResourceBundle theBundle = ResourceBundle.getBundle(myBundle);
-				//System.out.println("getBundle(myBundle)");
-
-				//System.out.println("myTopic:  " + myTopic);
 
 				// Process optional attributes
 				if (myTopic != null) {
@@ -210,7 +210,6 @@ public class ContextSensitiveHelpTag implements Tag, Serializable {
 					}
 				} else if (myHref != null) {
 					 theHref = "href=\"" + myHref + "\"";
-					 //System.out.println("href:  "+ theHref);
 				}
 
 				String theText = theBundle.getString(myKey);
@@ -222,8 +221,6 @@ public class ContextSensitiveHelpTag implements Tag, Serializable {
 									+ "," + theStyleClass
 									+ ")\" onMouseOut=\"htm();\"><img src=\""
 									+ myImage + "\" border=\"0\"/>" + "</a>");
-
-					//System.out.println("myPageContext with image:  ");
 
 				} else {
 					myPageContext.getOut().write(

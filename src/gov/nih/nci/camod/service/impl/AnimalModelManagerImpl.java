@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.94 2008-08-14 16:32:05 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.95 2008-08-14 17:18:21 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.94  2008/08/14 16:32:05  pandyas
+ * remove debug lines
+ *
  * Revision 1.93  2008/08/14 06:25:35  schroedn
  * Added Microarray
  *
@@ -1103,8 +1106,6 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
         TargetedModification theTargetedModification = TargetedModificationManagerSingleton.instance().create(inAnimalModel,
                                                                                                               inTargetedModificationData,
-                                                                                                              request);
-        // System.out.println(theGene.getName() );
 
         inAnimalModel.addEngineeredGene(theTargetedModification);
         save(inAnimalModel);
@@ -1120,7 +1121,6 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         log.debug("Entering addGeneticDescription (GenomicSegment)");
 
         GenomicSegment theGenomicSegment = GenomicSegmentManagerSingleton.instance().create(inAnimalModel, inGenomicSegmentData, request);
-        // System.out.println(theGenomicSegment.getName() );
 
         inAnimalModel.addEngineeredGene(theGenomicSegment);
         save(inAnimalModel);

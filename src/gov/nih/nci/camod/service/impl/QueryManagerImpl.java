@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.97 2008-08-14 16:37:55 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.98 2008-08-14 17:18:45 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.97  2008/08/14 16:37:55  pandyas
+ * modified debug line to use log
+ *
  * Revision 1.96  2008/08/13 17:41:38  pandyas
  * commented out is_induced_mutation_trigger until the database is updated with either 0 or 1 -  m ust be careful to write SQL
  *
@@ -3329,8 +3332,6 @@ public class QueryManagerImpl extends BaseManager
 		try {
 			List theList = QueryManagerSingleton.instance()
 					.getMatchingTumorClassifications("a");
-			System.out.println("Number matched: " + theList.size());
-			System.out.println(theList.get(0));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.55 2008-08-14 16:45:17 pandyas Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.56 2008-08-14 17:20:46 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.55  2008/08/14 16:45:17  pandyas
+ *  remove debug lines
+ *
  *  Revision 1.54  2008/08/14 07:05:56  schroedn
  *  added microarray
  *
@@ -283,26 +286,22 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 					if (availability.getAnimalDistributor().getName().equals(
 							"Jackson Laboratory")) {
 
-						//System.out.println("\tAdded Jackson Laboratory Availability = "+ availability);
 						jacksonLabList.add(availability);
 					}
 					if (availability.getAnimalDistributor().getName().equals(
 							"Investigator")) {
 
-						//System.out.println("\tAdded Investigator Availability = "+ availability);
 						investigatorList.add(availability);
 					}
 
 					if (availability.getAnimalDistributor().getName().equals(
 							"MMHCC Repository")) {
 
-						//System.out.println("\tAdded MMHCC Repository Availability = "+ availability);
 						mmhccList.add(availability);
 					}
 					if (availability.getAnimalDistributor().getName().equals(
 					"ZFIN")) {
 
-						//System.out.println("\tAdded ZFIN Repository Availability = "+ availability);
 						zfinList.add(availability);
 					}					
 					
@@ -363,25 +362,20 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 			List associatedExpressionList = new ArrayList();
 
 			while (it.hasNext()) {
-				//System.out.println("<AnimalModelTreePopulateAction> inside while EG loop ...");
 				EngineeredGene engineeredGene = (EngineeredGene) it.next();
 				if (engineeredGene instanceof InducedMutation) {
-					//System.out.println("Added InducedMutation to left menu ...");
 					inducedList.add((InducedMutation) engineeredGene);
 				}
 
 				else if (engineeredGene instanceof TargetedModification) {
-					//System.out.println("Added TargetedModification to left menu ...");
 					targetedList.add((TargetedModification) engineeredGene);
 				}
 
 				else if (engineeredGene instanceof GenomicSegment) {
-					//System.out.println("Added GenomicSegment to left menu ...");
 					segmentList.add((GenomicSegment) engineeredGene);
 				}
 
 				else if (engineeredGene instanceof Transgene) {
-					//System.out.println("Added Transgene to left menu ...");
 					engineeredList.add((Transgene) engineeredGene);
 				} else {
 
@@ -399,16 +393,13 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 			it = tySet.iterator();
 			List<Therapy> therapyList = new ArrayList<Therapy>();
 
-			//System.out.println("<AnimalModelTreePopulateAction> Building Tree ...");
 
 			if (tySet == null || tySet.size() == 0) {
-				//System.out.println("<AnimalModelTreePopulateAction populate> no Therapy to add!");
 			} else {
 				while (it.hasNext()) {
 					Therapy ty = (Therapy) it.next();
 					Agent agent = ty.getAgent();
 					if (agent != null) {
-						// System.out.println("\tAdded therapy to therapyList");
 						therapyList.add(ty);
 					}
 				}
@@ -431,44 +422,35 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 			List<CarcinogenExposure> nutritionalFactorList = new ArrayList<CarcinogenExposure>();
 
 			if (ceSet.size() == 0) {
-				//System.out.println("<AnimalModelTreePopulateAction populate> no CarcinogenExposure to add!");
 			} else {
 				while (it.hasNext()) {
 					CarcinogenExposure ce = (CarcinogenExposure) it.next();
 					EnvironmentalFactor ef = ce.getEnvironmentalFactor();
 					if (ef != null) {
 						if (ef.getType().equals("Other")) {
-							//System.out.println("\tAdded CarcinogenExposure to surgeryList");
 							surgeryList.add(ce);
 						}
 						if (ef.getType().equals("Hormone")) {
-							//System.out.println(" CarcinogenExposure to hormoneList");
 							hormoneList.add(ce);
 						} // end of if
 						if (ef.getType().equals("Growth Factor")) {
-							//System.out.println("\tAdded CarcinogenExposure to growthFactorList");
 							growthFactorList.add(ce);
 						} // end of if
 						if (ef.getType().equals("Viral")) {
-							//System.out.println("\tAdded CarcinogenExposure to viraltreatmentList");
 							viraltreatmentList.add(ce);
 						} // end of if
 						if (ef.getType().equals("Chemical / Drug")) {
-							//System.out.println("\tAdded CarcinogenExposure to chemicaldrugList");
 							chemicaldrugList.add(ce);
 						} // end of if
 						if (ef.getType().equals("Environment")) {
-							//System.out.println("\tAdded CarcinogenExposure to environFactorList");
 							environFactorList.add(ce);
 						} // end of if
 
 						if (ef.getType().equals("Nutrition")) {
-							//System.out.println("\tAdded CarcinogenExposure to nutritionalFactorList");
 							nutritionalFactorList.add(ce);
 						} // end of if
 
 						if (ef.getType().equals("Radiation")) {
-							//System.out.println("\tAdded CarcinogenExposure to radiationList");
 							radiationList.add(ce);
 						} // end of if
 					}
@@ -555,8 +537,6 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 			request.getSession().setAttribute(Constants.Submit.SIRNA_LIST,
 					sirnaList);
 			
-			System.out
-			.println("<AnimalModelTreePopulateAction populate> Exiting... ");			
 
 		} // end of try
 		catch (Exception e) {

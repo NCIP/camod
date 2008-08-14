@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: NewDropdownUtil.java,v 1.57 2008-08-12 19:40:31 pandyas Exp $
+ * $Id: NewDropdownUtil.java,v 1.58 2008-08-14 17:09:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.57  2008/08/12 19:40:31  pandyas
+ * Fixed #15053  	Search for models with transgenic or targeted modification on advanced search page confusing
+ *
  * Revision 1.56  2008/05/21 19:07:43  pandyas
  * Modified advanced search to prevent SQL injection
  * Converted text entry to dropdown lists for easier validation
@@ -32,7 +35,7 @@
  * #494 - Advanced search for Carcinogens for Jackson Lab data
  *
  * Revision 1.48  2006/11/09 17:15:56  pandyas
- * Commented out System.out.println
+ * Commented out debug
  *
  * Revision 1.47  2006/10/17 16:10:31  pandyas
  * modified during development of caMOD 2.2 - various
@@ -60,7 +63,7 @@
  * caMod 2.1 OM changes
  *
  * Revision 1.39  2005/11/29 20:47:21  georgeda
- * Removed system.out
+ * Removed debug
  *
  * Revision 1.38  2005/11/16 21:36:40  georgeda
  * Defect #47, Clean up EF querying
@@ -583,7 +586,6 @@ public class NewDropdownUtil
 
                         if (strain.getName() != null && !strainNames.contains(strain.getName()))
                         {
-                            //System.out.println("strain.getName(): " + strain.getName());
                             strainNames.add(strain.getName());
                         }
                     }

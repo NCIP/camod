@@ -1,8 +1,14 @@
 /**
  * 
- * $Id: LDAPUtil.java,v 1.12 2007-12-17 18:03:53 pandyas Exp $
+ * $Id: LDAPUtil.java,v 1.13 2008-08-14 17:14:26 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2007/12/17 18:03:53  pandyas
+ * Removed * in searchFilter used for getting e-mail from LDAP
+ * Apps Support ticket was submitted (31169 - incorrect e-mail associated with my caMOD account) stating:
+ *
+ * Cheryl Marks submitted a ticket to NCICB Application Support in which she requested that the e-mail address associated with her account in the "User Settings" screen in caMOD be corrected. She has attempted to correct it herself, but because the program queries the LDAP Server for the e-mail address, her corrections were not retained.
+ *
  * Revision 1.11  2007/08/07 15:01:00  pandyas
  * replace log statements
  *
@@ -19,7 +25,7 @@
  * Backed out static changes.
  *
  * Revision 1.3  2006/04/17 19:10:50  pandyas
- * Added $Id: LDAPUtil.java,v 1.12 2007-12-17 18:03:53 pandyas Exp $ and $log:$
+ * Added $Id: LDAPUtil.java,v 1.13 2008-08-14 17:14:26 pandyas Exp $ and $log:$
  *
  * 
  */
@@ -116,6 +122,6 @@ public class LDAPUtil {
     }
     
     public static void main(String[] args) {
-        System.out.println("Email address: " + LDAPUtil.getEmailAddressForUser("georgeda"));
+        //System.out.println("Email address: " + LDAPUtil.getEmailAddressForUser("georgeda"));
     }
 }
