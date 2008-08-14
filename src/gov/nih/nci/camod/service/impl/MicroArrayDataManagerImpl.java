@@ -1,15 +1,22 @@
 /*
- * $Id: MicroArrayDataManagerImpl.java,v 1.6 2006-04-19 17:38:26 pandyas Exp $
+ * $Id: MicroArrayDataManagerImpl.java,v 1.7 2008-08-14 06:28:21 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2006/04/19 17:38:26  pandyas
+ * Removed TODO text
+ *
  * Revision 1.5  2006/04/17 19:11:05  pandyas
  * caMod 2.1 OM changes
  *
  */
 package gov.nih.nci.camod.service.impl;
 
+import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.domain.CellLine;
 import gov.nih.nci.camod.domain.MicroArrayData;
 import gov.nih.nci.camod.service.MicroArrayDataManager;
+import gov.nih.nci.camod.webapp.form.CellLineData;
+import gov.nih.nci.camod.webapp.form.MicroArrayDataData;
 
 import java.util.List;
 
@@ -50,6 +57,18 @@ public class MicroArrayDataManagerImpl extends BaseManager implements MicroArray
         return (MicroArrayData) super.get(id, MicroArrayData.class);
     }
 
+	public MicroArrayData create(MicroArrayDataData inMicroArrayData) throws Exception {
+		log.debug("Entering MicroArrayDataImpl.create");
+
+		MicroArrayData theMicroArrayData = new MicroArrayData();
+		populateMicroArrayData(inMicroArrayData, theMicroArrayData);
+		
+		log.debug("Exiting MicroArrayDataImpl.create");
+
+		return theMicroArrayData;
+	}
+
+	
     /**
      * Save MicroArrayData
      * 
@@ -74,9 +93,34 @@ public class MicroArrayDataManagerImpl extends BaseManager implements MicroArray
      * @exception Exception
      *                when anything goes wrong.
      */
-    public void remove(String id) throws Exception
+    public void remove(String inId, AnimalModel inAnimalModel) throws Exception
     {
         log.debug("In MicroArrayDataManagerImpl.save");
-        super.remove(id, MicroArrayData.class);
-    }
+		inAnimalModel.getMicroArrayDataCollection().remove(get(inId));
+		super.save(inAnimalModel);
+    }   
+    
+	public void update(MicroArrayDataData inMicroArrayDataData, MicroArrayData inMicroArrayData)
+		throws Exception {
+		
+		log.debug("Entering MicroArrayDataManagerImpl.update");
+			
+		// Populate w/ the new values and save
+		populateMicroArrayData(inMicroArrayDataData, inMicroArrayData);
+		
+		save(inMicroArrayData);
+		
+		log.debug("Exiting MicroArrayDataManagerImpl.update");
+	}   
+	
+	// Common method used to populate a CellLine object
+	private void populateMicroArrayData(MicroArrayDataData inMicroArrayDataData,
+			MicroArrayData inMicroArrayData) throws Exception {
+		log.debug("Entering populateMicroArrayData");
+
+		inMicroArrayData.setExperimentName(inMicroArrayDataData.getExperimentName());
+		inMicroArrayData.setOtherLocationURL(inMicroArrayDataData.getOtherLocationURL());
+
+		log.debug("Exiting populateMicroArrayData");
+	}
 }
