@@ -1,9 +1,12 @@
 /**
  *  @author georgeda 
  *  
- *  $Id: EvsTreeUtil.java,v 1.12 2008-01-15 19:31:28 pandyas Exp $  
+ *  $Id: EvsTreeUtil.java,v 1.13 2008-08-14 06:27:33 schroedn Exp $  
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.12  2008/01/15 19:31:28  pandyas
+ *  Modified debug statements to build to dev tier
+ *
  *  Revision 1.11  2008/01/14 21:04:56  pandyas
  *  Enabled logging for dev tier instability issue testing
  *
@@ -95,20 +98,21 @@ public class EvsTreeUtil
                 
             	// Define parameters for Zebrafish namespace
                 // Maybe a better way to do this, but I didn't want to send in HttpServletRequest everywhere
-            	if(inConceptCode.contains("ZFA:")){
-                    log.debug("Zebrafish modelSpecies");
+                if( inConceptCode != null ){
+                    if(inConceptCode.contains("ZFA:")){
+                        log.debug("Zebrafish modelSpecies");
 
-            		EVSTreeNameSpace = Constants.Evs.ZEBRAFISH_NAMESPACE;
-            		DisplayNameTag = Constants.Evs.DISPLAY_NAME_TAG_LOWER_CASE;
-            	//Define parameters for all NCI_Thesaurus namespace	
-            	} else {
-                    log.debug("NOT Zebrafish modelSpecies");                    
-            		EVSTreeNameSpace = Constants.Evs.NAMESPACE;
-            		DisplayNameTag = Constants.Evs.DISPLAY_NAME_TAG;
-            	}
+                		EVSTreeNameSpace = Constants.Evs.ZEBRAFISH_NAMESPACE;
+                		DisplayNameTag = Constants.Evs.DISPLAY_NAME_TAG_LOWER_CASE;
+                	//Define parameters for all NCI_Thesaurus namespace	
+                	} else {
+                        log.debug("NOT Zebrafish modelSpecies");                    
+                		EVSTreeNameSpace = Constants.Evs.NAMESPACE;
+                		DisplayNameTag = Constants.Evs.DISPLAY_NAME_TAG;
+                	}                	
+                }
             	
-            	log.debug("EVSTreeNameSpace: " + EVSTreeNameSpace);
-      	
+            	log.debug("EVSTreeNameSpace: " + EVSTreeNameSpace);    	
             	
                 ApplicationService theAppService = getApplicationService();
                 log.debug("theAppService: " + theAppService.toString());
