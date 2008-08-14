@@ -1,5 +1,8 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2007/07/31 12:03:28  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.9  2006/01/18 14:23:31  georgeda
  * TT# 376 - Updated to use new Java 1.5 features
  *
@@ -7,7 +10,7 @@
  * Cleanup
  *
  * 
- * $Id: Comments.java,v 1.10 2007-07-31 12:03:28 pandyas Exp $
+ * $Id: Comments.java,v 1.11 2008-08-14 17:25:00 pandyas Exp $
  */
 package gov.nih.nci.camod.domain;
 
@@ -110,20 +113,38 @@ public class Comments extends BaseObject implements Serializable, Curateable, Du
         return true;
     }
 
-	public AbstractCancerModel getAbstractCancerModel() {
-		return abstractCancerModel;
-	}
+    /**
+     * @return Returns the abstractCancerModel.
+     */
+    public AbstractCancerModel getAbstractCancerModel()
+    {
+        return abstractCancerModel;
+    }
 
-	public void setAbstractCancerModel(AbstractCancerModel abstractCancerModel) {
-		this.abstractCancerModel = abstractCancerModel;
-	}
+    /**
+     * @param abstractCancerModel The abstractCancerModel to set.
+     */
+    public void setAbstractCancerModel(AbstractCancerModel abstractCancerModel)
+    {
+        this.abstractCancerModel = abstractCancerModel;
+    }
 
-	public String getRemark() {
-		return remark;
-	}
+    /**
+     * @return Returns the remark.
+     */
+    public String getRemark()
+    {
+        return remark;
+    }
 
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
+    /**
+     * @param remark The remark to set.
+     */
+    public void setRemark(String remark)
+    {
+        this.remark = remark;
+    }
+
+
 
 }
