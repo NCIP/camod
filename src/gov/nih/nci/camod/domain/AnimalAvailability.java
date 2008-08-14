@@ -1,5 +1,8 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2008/08/14 17:17:40  pandyas
+ * Clean up unused imports
+ *
  * Revision 1.15  2007/10/31 14:51:11  pandyas
  * Fixed #9169  	Connect availability of model to person to resolve the available from investigator issue
  *
@@ -28,7 +31,7 @@
  * Cleanup
  *
  * 
- * $Id: AnimalAvailability.java,v 1.16 2008-08-14 17:17:40 pandyas Exp $
+ * $Id: AnimalAvailability.java,v 1.17 2008-08-14 17:22:38 pandyas Exp $
  */
 package gov.nih.nci.camod.domain;
 
@@ -99,30 +102,6 @@ public class AnimalAvailability extends BaseObject implements Comparable, Serial
         this.stockNumber = stockNumber;
     }
 
-/*    
-    public Person getPrincipalInvestigator()
-    {
-        Person thePerson = null;
-
-        // Hack to work around old ca-mod data. -1 indicates that this comes
-        // from the 2-tier.
-        if (stockNumber != null && !"-1".equals(stockNumber))
-        {
-
-            try
-            {
-            	log.debug("Unable to get Person for thePerson.getUsername(): " + thePerson.getUsername());
-                thePerson = PersonManagerSingleton.instance().get(stockNumber);
-            }
-            catch (Exception e)
-            {
-                log.debug("Unable to get Person for stock number");
-            }
-        }
-
-        return thePerson;
-    }
-*/
     /**
      * @return Returns the cancerModel.
      */
