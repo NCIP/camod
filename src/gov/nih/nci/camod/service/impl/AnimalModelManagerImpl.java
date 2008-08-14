@@ -1,9 +1,13 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.92 2008-07-11 17:44:42 schroedn Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.93 2008-08-14 06:25:35 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.92  2008/07/11 17:44:42  schroedn
+ * Bug 5200
+ * Status of duplicate model
+ *
  * Revision 1.91  2008/05/21 19:03:56  pandyas
  * Modified advanced search to prevent SQL injection
  * Re: Apps Scan run 05/15/2008
@@ -275,6 +279,7 @@ import gov.nih.nci.camod.domain.Histopathology;
 import gov.nih.nci.camod.domain.Image;
 import gov.nih.nci.camod.domain.InducedMutation;
 import gov.nih.nci.camod.domain.Log;
+import gov.nih.nci.camod.domain.MicroArrayData;
 import gov.nih.nci.camod.domain.Nomenclature;
 import gov.nih.nci.camod.domain.Person;
 import gov.nih.nci.camod.domain.Phenotype;
@@ -305,6 +310,7 @@ import gov.nih.nci.camod.webapp.form.HistopathologyData;
 import gov.nih.nci.camod.webapp.form.HormoneData;
 import gov.nih.nci.camod.webapp.form.ImageData;
 import gov.nih.nci.camod.webapp.form.InducedMutationData;
+import gov.nih.nci.camod.webapp.form.MicroArrayDataData;
 import gov.nih.nci.camod.webapp.form.ModelCharacteristicsData;
 import gov.nih.nci.camod.webapp.form.NutritionalFactorData;
 import gov.nih.nci.camod.webapp.form.PublicationData;
@@ -315,8 +321,8 @@ import gov.nih.nci.camod.webapp.form.SurgeryData;
 import gov.nih.nci.camod.webapp.form.TargetedModificationData;
 import gov.nih.nci.camod.webapp.form.TherapyData;
 import gov.nih.nci.camod.webapp.form.TransientInterferenceData;
-import gov.nih.nci.camod.webapp.form.ViralTreatmentData;
 import gov.nih.nci.camod.webapp.form.TransplantData;
+import gov.nih.nci.camod.webapp.form.ViralTreatmentData;
 import gov.nih.nci.common.persistence.Persist;
 import gov.nih.nci.common.persistence.Search;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
@@ -327,7 +333,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Set;
+import java.util.StringTokenizer;
+import java.util.TreeMap;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
@@ -495,7 +508,11 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     public AnimalModel duplicate(AnimalModel inAnimalModel) throws Exception
     {
         log.debug("In AnimalModelManagerImpl.duplicate");
-
+        
+        System.out.println("In AnimalModelManagerImpl.duplicate");
+        
+        System.out.println("Calling DuplicateUtil...");
+        
         AnimalModel theDuplicatedModel = (AnimalModel) DuplicateUtil.duplicateBean(inAnimalModel);
 
         String theNewModelDescriptor = theDuplicatedModel.getModelDescriptor() + " (Copy) ";
@@ -507,7 +524,9 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         theDuplicatedModel.setState("Incomplete");
         
         log.debug("In AnimalModelManagerImpl.duplicate state" + theDuplicatedModel.getState());
-
+        
+        System.out.println("In AnimalModelManagerImpl.duplicate state" + theDuplicatedModel.getState());
+        
         save(theDuplicatedModel);
 
         return theDuplicatedModel;
@@ -1036,6 +1055,18 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         log.debug("<AnimalModelManagerImpl> Exiting addCellLine");
     }
 
+    public void addMicroArrayData( AnimalModel inAnimalModel, 
+    								MicroArrayDataData inMicroArrayData ) throws Exception
+    {
+    	log.debug("<AnimalModelManagerImpl> Entering addMicroArrayData");
+    	
+        MicroArrayData theMicroArrayData = MicroArrayDataManagerSingleton.instance().create(inMicroArrayData);
+        inAnimalModel.addMicroArrayData( theMicroArrayData );
+        save(inAnimalModel);
+    	
+    	log.debug("<AnimalModelManagerImpl> Exiting addMicroArrayData");
+    }
+    
     /**
      * Add a SpontaneousMutation
      */
