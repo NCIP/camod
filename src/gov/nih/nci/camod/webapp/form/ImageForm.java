@@ -1,7 +1,10 @@
 /*
- * $Id: ImageForm.java,v 1.13 2008-08-14 06:29:18 schroedn Exp $
+ * $Id: ImageForm.java,v 1.14 2008-08-14 19:00:47 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2008/08/14 06:29:18  schroedn
+ * Image url feature added
+ *
  * Revision 1.12  2007/10/31 17:24:03  pandyas
  * Fixed #8355 	Add comments field to every submission page
  *
@@ -20,9 +23,12 @@
  */
 package gov.nih.nci.camod.webapp.form;
 /**
- * $Id: ImageForm.java,v 1.13 2008-08-14 06:29:18 schroedn Exp $
+ * $Id: ImageForm.java,v 1.14 2008-08-14 19:00:47 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2008/08/14 06:29:18  schroedn
+ * Image url feature added
+ *
  * Revision 1.12  2007/10/31 17:24:03  pandyas
  * Fixed #8355 	Add comments field to every submission page
  *
@@ -59,7 +65,7 @@ public class ImageForm extends BaseForm implements Serializable, ImageData {
     protected String stainingMethod;    
     protected String stainingMethodName;
     protected String stainingMethodCode;    
-    protected String altern_url;
+    protected String urlAlternEntry;
     protected String imageId;
     protected String imageUrl;
     protected String thumbUrl;
@@ -201,12 +207,12 @@ public class ImageForm extends BaseForm implements Serializable, ImageData {
 		this.comments = comments;
 	}
 
-	public String getAltern_url() {
-		return altern_url;
+	public String getUrlAlternEntry() {
+		return urlAlternEntry;
 	}
 
-	public void setAltern_url(String altern_url) {
-		this.altern_url = altern_url;
+	public void setUrlAlternEntry(String urlAlternEntry) {
+		this.urlAlternEntry = urlAlternEntry;
 	}
 
 

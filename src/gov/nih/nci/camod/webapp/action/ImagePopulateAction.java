@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ImagePopulateAction.java,v 1.23 2008-08-14 06:18:10 schroedn Exp $
+ * $Id: ImagePopulateAction.java,v 1.24 2008-08-14 19:00:57 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.23  2008/08/14 06:18:10  schroedn
+ * Added a url field
+ *
  * Revision 1.22  2007/10/31 17:11:43  pandyas
  * Modified comments for #8188 	Rename UnctrlVocab items to text entries
  *
@@ -56,7 +59,7 @@ public class ImagePopulateAction extends BaseAction {
 	public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		System.out.println("<ImagePopulateAction populate> Entering populate() ");
+		log.debug("<ImagePopulateAction populate> Entering populate() ");
 
         
 		ImageForm imageForm = (ImageForm) form;
@@ -65,10 +68,10 @@ public class ImagePopulateAction extends BaseAction {
 
 		Image theImage = ImageManagerSingleton.instance().get(aImageID);
   
-        System.out.println("<ImageAction save> following Characteristics:" + "\n\t getUrl: "
+        log.debug("<ImageAction save> following Characteristics:" + "\n\t getUrl: "
                 + theImage.getUrl() + "\n\t getTitle: " + theImage.getTitle()
                 + "\n\t getDescription: " + theImage.getDescription() 
-                + "\n\t Altern_URL: " + theImage.getAltern_url() 
+                + "\n\t UrlAlternEntry: " + theImage.getUrlAlternEntry() 
                 + "\n\t Comments(): " + theImage.getComments() );
         
 		// Handle back arrow
@@ -104,7 +107,7 @@ public class ImagePopulateAction extends BaseAction {
                 
                 imageForm.setThumbUrl(theImage.getThumbUrl());
                 imageForm.setImageUrl(theImage.getImageUrl());
-                imageForm.setAltern_url( theImage.getAltern_url() );
+                imageForm.setUrlAlternEntry( theImage.getUrlAlternEntry() );
                 
                 if(theImage.getComments() != null && theImage.getComments().length() >0){
                 	imageForm.setComments(theImage.getComments());
@@ -118,7 +121,7 @@ public class ImagePopulateAction extends BaseAction {
 	public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		System.out.println("<ImagePopulateAction dropdown> Entering dropdown()");
+		log.debug("<ImagePopulateAction dropdown> Entering dropdown()");
 		
         //NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STAININGDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
 		

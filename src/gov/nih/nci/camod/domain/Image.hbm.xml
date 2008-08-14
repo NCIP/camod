@@ -41,7 +41,7 @@
         	type="string"/>
         	
         <!-- altern_url -->
-        <property name="altern_url" 
+        <property name="urlAlternEntry" 
         	column="url_altern_entry" 
         	type="string"/>        	       	
         	

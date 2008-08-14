@@ -115,7 +115,7 @@
 		<td class="formLabel"><label for="field1">Alternate URL:</label>
 		</td>
 			<td class="formField">
-					<html:text styleClass="formFieldSized" property="altern_url" size="30"/>			
+					<html:text styleClass="formFieldSized" property="urlAlternEntry" size="30"/>			
 			</td>
 	</tr>	
 	

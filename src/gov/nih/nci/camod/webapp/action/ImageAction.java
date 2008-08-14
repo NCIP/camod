@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ImageAction.java,v 1.19 2008-08-14 06:18:10 schroedn Exp $
+ * $Id: ImageAction.java,v 1.20 2008-08-14 19:00:57 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2008/08/14 06:18:10  schroedn
+ * Added a url field
+ *
  * Revision 1.18  2007/10/31 17:10:37  pandyas
  * Modified comments for #8355 	Add comments field to every submission page
  *
@@ -170,12 +173,12 @@ public final class ImageAction extends BaseAction {
         // Grab the current modelID from the session
         String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
-        System.out.println("<ImageAction save> following Characteristics:" + "\n\t getUrl: "
+        log.debug("<ImageAction save> following Characteristics:" + "\n\t getUrl: "
                 + imageForm.getUrl() + "\n\t getTitle: " + imageForm.getTitle()
                 + "\n\t getDescription: " + imageForm.getDescription()
                 + "\n\t getStainingMethodName() : " + imageForm.getStainingMethodName()                   
                 + "\n\t getStainingMethodCode(): " + imageForm.getStainingMethodCode()    
-                + "\n\t Altern_URL: " + imageForm.getAltern_url() 
+                + "\n\t urlAlternEntry: " + imageForm.getUrlAlternEntry() 
                 + "\n\t Comments(): " + imageForm.getComments()+ "\n"            
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
 

@@ -1704,8 +1704,8 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
-			<field property="rgdPubID" depends="integer">
-				<arg0 key="PublicationForm.rgdPubID" />
+			<field property="rgdPubId" depends="integer">
+				<arg0 key="PublicationForm.rgdPubId" />
 			</field>			
 			<field property="volume" depends="maxlength">
 				<arg0 key="PublicationForm.volume" />

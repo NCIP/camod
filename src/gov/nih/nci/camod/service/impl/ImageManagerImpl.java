@@ -1,7 +1,10 @@
 /*
- * $Id: ImageManagerImpl.java,v 1.29 2008-08-14 06:26:09 schroedn Exp $
+ * $Id: ImageManagerImpl.java,v 1.30 2008-08-14 19:00:57 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.29  2008/08/14 06:26:09  schroedn
+ * Added url for image
+ *
  * Revision 1.28  2007/10/31 19:06:10  pandyas
  * Fixed #8355 	Add comments field to every submission page
  *
@@ -124,17 +127,17 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
 
 		log.debug("Entering populateImage");
 		
-        System.out.println("<ImageAction save> following Characteristics:" + "\n\t getUrl: "
+		log.debug("<ImageAction save> following Characteristics:" + "\n\t getUrl: "
                 + inImageData.getUrl() + "\n\t getTitle: " + inImageData.getTitle()
                 + "\n\t getDescription: " + inImageData.getDescription()
                 + "\n\t getStainingMethodName() : " + inImageData.getStainingMethodName()                   
                 + "\n\t getStainingMethodCode(): " + inImageData.getStainingMethodCode()    
-                + "\n\t Altern_URL: " + inImageData.getAltern_url() 
+                + "\n\t urlAlternEntry: " + inImageData.getUrlAlternEntry() 
                 + "\n\t Comments(): " + inImageData.getComments());
 		
         if (inImage != null) {
 	        inImage.setComments(inImageData.getComments());
-	        inImage.setAltern_url(inImageData.getAltern_url());			
+	        inImage.setUrlAlternEntry(inImageData.getUrlAlternEntry());			
 		}
         
 		if (inImageData.getStainingMethodCode() != null
@@ -175,7 +178,7 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
 
 			while (strToken.hasMoreTokens()) {
 				fileType = strToken.nextToken();
-				System.out.println("Token=" + fileType);
+				log.debug("Token=" + fileType);
 			}
 
 			log.debug("<ImageManagerImpl> fileType is: " + fileType

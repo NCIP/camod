@@ -62,7 +62,7 @@
 					<tr>
 						<td class="resultsBoxGrey" width="15%"><b>Alternate URL</b></td>
 						<td class="resultsBoxGreyEnd" width="85%">
-						<c:out value="${p.altern_url}"/>&nbsp;
+						<c:out value="${p.urlAlternEntry}"/>&nbsp;
 						</td>
 					<tr>					
 					<tr>

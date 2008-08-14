@@ -1,8 +1,11 @@
 /*
  * 
- * $Id: Image.java,v 1.14 2008-08-14 06:23:15 schroedn Exp $
+ * $Id: Image.java,v 1.15 2008-08-14 19:00:57 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2008/08/14 06:23:15  schroedn
+ * New features added
+ *
  * Revision 1.13  2007/10/31 15:54:19  pandyas
  * Fixed #8355 	Add comments field to every submission page
  *
@@ -54,7 +57,7 @@ public class Image extends BaseObject implements Comparable, Serializable, Dupli
 
     private String url;
 
-    private String altern_url;
+    private String urlAlternEntry;
     
     private StainingMethod stainingMethod;
     
@@ -158,7 +161,7 @@ public class Image extends BaseObject implements Comparable, Serializable, Dupli
         }
         else
         {
-            System.out.println("Unable to get thumb URL");
+        	log.debug("Unable to get thumb URL");
         }
 
         return theThumbUrl;
@@ -206,7 +209,7 @@ public class Image extends BaseObject implements Comparable, Serializable, Dupli
             }
             else
             {
-                System.out.println("Unable to get thumb URL");
+            	log.debug("Unable to get thumb URL");
             }
 
             // It's in the old jsp format. Change to new format
@@ -242,7 +245,7 @@ public class Image extends BaseObject implements Comparable, Serializable, Dupli
         }
         catch (Exception e)
         {
-            System.out.println("Exception getting url");
+        	log.debug("Exception getting url");
         }
         return theUrl;
     }
@@ -298,12 +301,12 @@ public class Image extends BaseObject implements Comparable, Serializable, Dupli
 		this.url = url;
 	}
 
-	public String getAltern_url() {
-		return altern_url;
+	public String getUrlAlternEntry() {
+		return urlAlternEntry;
 	}
 
-	public void setAltern_url(String altern_url) {
-		this.altern_url = altern_url;
+	public void setUrlAlternEntry(String urlAlternEntry) {
+		this.urlAlternEntry = urlAlternEntry;
 	}
 
 }
