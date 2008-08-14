@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: ClinicalMarkerPopulateAction.java,v 1.8 2008-08-14 16:44:12 pandyas Exp $
+ * $Id: ClinicalMarkerPopulateAction.java,v 1.9 2008-08-14 17:21:21 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2008/08/14 16:44:12  pandyas
+ * remove debug lines
+ *
  * Revision 1.7  2007/10/31 18:09:11  pandyas
  * Fixed #8355 	Add comments field to every submission page
  * Fixed #8188 	Rename UnctrlVocab items to text entries
@@ -106,8 +109,6 @@ public class ClinicalMarkerPopulateAction extends BaseAction {
 			   					   HttpServletRequest request,
 			   					   HttpServletResponse response )
 	  throws Exception {
-		
-		//System.out.println( "<ClinicalMarkerPopulateAction dropdown> Entering ActionForward dropdown()" );
 		
 		//blank out the FORMDATA Constant field
 		ClinicalMarkerForm clinicalMarkerForm = (ClinicalMarkerForm) form;

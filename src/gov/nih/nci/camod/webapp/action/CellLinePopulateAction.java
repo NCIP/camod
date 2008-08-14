@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: CellLinePopulateAction.java,v 1.19 2008-08-14 16:41:59 pandyas Exp $
+ * $Id: CellLinePopulateAction.java,v 1.20 2008-08-14 17:21:04 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2008/08/14 16:41:59  pandyas
+ * remove debug lines
+ *
  * Revision 1.18  2007/09/12 19:36:40  pandyas
  * modified debug statements for build to stage tier
  *
@@ -106,8 +109,6 @@ public class CellLinePopulateAction extends BaseAction {
             }
 
 		}
-
-		//System.out.println("<CellLinePopulateAction populate> Exited");
 
 		return mapping.findForward("submitCellLines");
 	}
