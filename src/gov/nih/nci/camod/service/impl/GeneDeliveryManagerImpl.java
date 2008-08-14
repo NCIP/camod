@@ -1,9 +1,13 @@
 /**
  * @author schroedln
  * 
- * $Id: GeneDeliveryManagerImpl.java,v 1.26 2007-10-31 19:04:08 pandyas Exp $
+ * $Id: GeneDeliveryManagerImpl.java,v 1.27 2008-08-14 16:32:57 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.26  2007/10/31 19:04:08  pandyas
+ * Fixed #8355 	Add comments field to every submission page
+ * Fixed #8188 	Rename UnctrlVocab items to text entries
+ *
  * Revision 1.25  2007/09/12 19:36:03  pandyas
  * modified debug statements for build to stage tier
  *
@@ -234,7 +238,6 @@ public class GeneDeliveryManagerImpl extends BaseManager implements
 		// anytime viral vector is not other set uncontrolled vocab to null
 		// (covers editing)
 		else {
-			System.out.println("viral vector not other");
 			inGeneDelivery.setViralVector(inGeneDeliveryData.getViralVector());
 			inGeneDelivery.setViralVectorAlternEntry(null);
 		}
