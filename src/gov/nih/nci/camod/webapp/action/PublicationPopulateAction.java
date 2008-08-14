@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: PublicationPopulateAction.java,v 1.17 2008-08-14 06:18:41 schroedn Exp $
+ * $Id: PublicationPopulateAction.java,v 1.18 2008-08-14 19:00:13 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2008/08/14 06:18:41  schroedn
+ * Allow for RAT submission and search of RGD numbers
+ *
  * Revision 1.16  2007/10/31 18:32:44  pandyas
  * Fixed #8355 	Add comments field to every submission page
  *
@@ -46,7 +49,7 @@ public class PublicationPopulateAction extends BaseAction {
 	public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) 
 		throws Exception {
 
-		System.out.println("<PublicationPopulateAction populate> Entering populate() ");
+		log.debug("<PublicationPopulateAction populate> Entering populate() ");
 
 		// Create a form to edit
 		PublicationForm pubForm = (PublicationForm) form;
@@ -91,9 +94,9 @@ public class PublicationPopulateAction extends BaseAction {
             	pubForm.setZfinPubId(thePublication.getZfinPubId());            	
             }
             
-            if ( thePublication.getRgdPubID() != null )
+            if ( thePublication.getRgdPubId() != null )
             {
-            	pubForm.setRgdPubID( thePublication.getRgdPubID() );
+            	pubForm.setRgdPubId( thePublication.getRgdPubId() );
             }
             
 			if (thePublication.getPmid() != null) {
@@ -157,7 +160,7 @@ public class PublicationPopulateAction extends BaseAction {
 	public void dropdown(HttpServletRequest request, HttpServletResponse response) 
 		throws Exception {
 
-		System.out.println("<PublicationPopulateAction dropdown> Entering void dropdown()");
+		log.debug("<PublicationPopulateAction dropdown> Entering void dropdown()");
 		
 		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.PUBDROP, Constants.Dropdowns.ADD_BLANK);
 	}

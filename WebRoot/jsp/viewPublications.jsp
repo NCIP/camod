@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewPublications.jsp,v 1.33 2008-08-14 06:33:29 schroedn Exp $
+ * $Id: viewPublications.jsp,v 1.34 2008-08-14 19:03:42 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.33  2008/08/14 06:33:29  schroedn
+ * new features added
+ *
  * Revision 1.32  2008/02/01 16:28:47  pandyas
  * Removed authors anchor inside detail sections
  *
@@ -161,8 +164,8 @@
 						</c:otherwise>
 					</c:choose>
 					<c:choose>
-						<c:when test="${not empty p.rgdPubID}">
-								<a target="_blank" href="http://rgd.mcw.edu/tools/references/references_view.cgi?id=<c:out value="${p.rgdPubID}"/>">RGD</a>
+						<c:when test="${not empty p.rgdPubId}">
+								<a target="_blank" href="http://rgd.mcw.edu/tools/references/references_view.cgi?id=<c:out value="${p.rgdPubId}"/>">RGD</a>
 								<br/>
 						</c:when>				
 						<c:otherwise>&nbsp;					

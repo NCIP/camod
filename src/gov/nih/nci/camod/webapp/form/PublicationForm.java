@@ -1,7 +1,10 @@
 /*
- * $Id: PublicationForm.java,v 1.12 2008-08-14 06:29:54 schroedn Exp $
+ * $Id: PublicationForm.java,v 1.13 2008-08-14 19:00:18 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2008/08/14 06:29:54  schroedn
+ * publication rgd number for rat feature added
+ *
  * Revision 1.11  2007/10/31 17:25:02  pandyas
  * Fixed #8355 	Add comments field to every submission page
  *
@@ -25,9 +28,12 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  * 
- * $Id: PublicationForm.java,v 1.12 2008-08-14 06:29:54 schroedn Exp $
+ * $Id: PublicationForm.java,v 1.13 2008-08-14 19:00:18 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2008/08/14 06:29:54  schroedn
+ * publication rgd number for rat feature added
+ *
  * Revision 1.11  2007/10/31 17:25:02  pandyas
  * Fixed #8355 	Add comments field to every submission page
  *
@@ -65,7 +71,7 @@ public class PublicationForm extends BaseForm implements PublicationData, Serial
     protected String endPage;
     protected String firstTimeReported;
     protected String jaxJNumber;
-    protected String rgdPubID;
+    protected String rgdPubId;
     protected String zfinPubId;    
     protected String aPubID;
     protected String aCellID;
@@ -295,7 +301,7 @@ public class PublicationForm extends BaseForm implements PublicationData, Serial
         firstTimeReported = null;
         jaxJNumber = null;
         zfinPubId = null;   
-        rgdPubID = null;
+        rgdPubId = null;
     }
 
 	public String getZfinPubId() {
@@ -314,11 +320,11 @@ public class PublicationForm extends BaseForm implements PublicationData, Serial
 		this.comments = comments;
 	}
 
-	public String getRgdPubID() {
-		return rgdPubID;
+	public String getRgdPubId() {
+		return rgdPubId;
 	}
 
-	public void setRgdPubID(String rgdPubID) {
-		this.rgdPubID = rgdPubID;
+	public void setRgdPubId(String rgdPubId) {
+		this.rgdPubId = rgdPubId;
 	}
 }

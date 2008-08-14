@@ -1,7 +1,10 @@
 /*
- * $Id: Publication.java,v 1.13 2008-08-14 06:23:15 schroedn Exp $
+ * $Id: Publication.java,v 1.14 2008-08-14 18:59:42 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2008/08/14 06:23:15  schroedn
+ * New features added
+ *
  * Revision 1.12  2007/10/31 15:54:46  pandyas
  * Fixed #8355 	Add comments field to every submission page
  *
@@ -39,7 +42,7 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
     private Boolean firstTimeReported;
     private String jaxJNumber;
     private String zfinPubId; 
-    private String rgdPubID;
+    private String rgdPubId;
     private PublicationStatus publicationStatus;
     private String comments;
 
@@ -275,11 +278,11 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
 		this.zfinPubId = zfinPubId;
 	}
 
-	public String getRgdPubID() {
-		return rgdPubID;
+	public String getRgdPubId() {
+		return rgdPubId;
 	}
 
-	public void setRgdPubID(String rgdPubID) {
-		this.rgdPubID = rgdPubID;
+	public void setRgdPubId(String rgdPubId) {
+		this.rgdPubId = rgdPubId;
 	}
 }

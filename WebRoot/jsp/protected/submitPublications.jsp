@@ -151,7 +151,7 @@ function trimRGDId(str)
 						<input type=button value="Find RGD #" onClick="myRef = window.open('http://rgd.mcw.edu/references','mywin',
 						'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>
 						<label for="field1">&nbsp;&nbsp;</label>
-						<html:text styleClass="formFieldUnSized" size="20" property="rgdPubID" />
+						<html:text styleClass="formFieldUnSized" size="20" property="rgdPubId" />
 					</td>
 			</tr>
 		</c:when>

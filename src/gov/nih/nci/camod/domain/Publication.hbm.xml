@@ -76,7 +76,7 @@
         	type="string"/>   
 
 	    <!-- rgdPubId -->
-        <property name="rgdPubID" 
+        <property name="rgdPubId" 
         	column="rgd_pub_id" 
         	type="string"/>   
 

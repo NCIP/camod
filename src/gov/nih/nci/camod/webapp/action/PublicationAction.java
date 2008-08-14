@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: PublicationAction.java,v 1.16 2008-08-14 06:18:41 schroedn Exp $
+ * $Id: PublicationAction.java,v 1.17 2008-08-14 19:00:13 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2008/08/14 06:18:41  schroedn
+ * Allow for RAT submission and search of RGD numbers
+ *
  * Revision 1.15  2007/10/31 17:12:35  pandyas
  * Modified comments for #8355 	Add comments field to every submission page
  *
@@ -210,7 +213,7 @@ public final class PublicationAction extends BaseAction {
 				+ pubForm.getStartPage() + "\n\t End Page: " + pubForm.getEndPage() + "\n\t Title: "
 				+ pubForm.getTitle() + "\n\t journal: " + pubForm.getJournal() + "\n\t FirstTimeReported: "
 				+ pubForm.getFirstTimeReported() + "\n\t ACellID: " + pubForm.getACellID() 
-				+ "\n\t RGD Pub ID: " + pubForm.getRgdPubID() 				
+				+ "\n\t RGD Pub ID: " + pubForm.getRgdPubId() 				
 				+ "\n\t Comments: " + pubForm.getComments() + "\n\t ATherapyID: "
 				+ pubForm.getATherapyID() + "\n\t APubID: " + pubForm.getAPubID() 
 				+ "\n\t user: "
@@ -298,7 +301,7 @@ public final class PublicationAction extends BaseAction {
 				+ pubForm.getVolume() + "\n\t PMID: " + pubForm.getPmid() + "\n\t Start Page: "
 				+ pubForm.getStartPage() + "\n\t End Page: " + pubForm.getEndPage() + "\n\t Title: "
 				+ pubForm.getTitle() + "\n\t journal: " + pubForm.getJournal()
-				+ "\n\t RGD Pub ID: " + pubForm.getRgdPubID() 
+				+ "\n\t RGD Pub ID: " + pubForm.getRgdPubId() 
 				+ "\n\t Comments: " + pubForm.getComments() + "\n\t FirstTimeReported: "
 				+ pubForm.getFirstTimeReported() 
 				 + "\n\t Comments: " + pubForm.getComments() + "\n\t user: "

@@ -1,7 +1,10 @@
 /*
- * $Id: PublicationManagerImpl.java,v 1.16 2008-08-14 06:27:53 schroedn Exp $
+ * $Id: PublicationManagerImpl.java,v 1.17 2008-08-14 18:59:57 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2008/08/14 06:27:53  schroedn
+ * RGDPubID added
+ *
  * Revision 1.15  2007/10/31 19:07:45  pandyas
  * Fixed #8188 	Rename UnctrlVocab items to text entries
  *
@@ -152,9 +155,9 @@ public class PublicationManagerImpl extends BaseManager implements PublicationMa
         	inPublication.setZfinPubId(inPublicationData.getZfinPubId());
         }
         
-        if ( inPublicationData.getRgdPubID() != null )
+        if ( inPublicationData.getRgdPubId() != null )
         {
-        	inPublication.setRgdPubID( inPublicationData.getRgdPubID() );
+        	inPublication.setRgdPubId( inPublicationData.getRgdPubId() );
         }
         
         if (inPublicationData.getFirstTimeReported() != null && inPublicationData.getFirstTimeReported().equals("yes"))

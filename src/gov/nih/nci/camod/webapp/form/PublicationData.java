@@ -1,7 +1,10 @@
 /*
- * $Id: PublicationData.java,v 1.6 2008-08-14 06:29:54 schroedn Exp $
+ * $Id: PublicationData.java,v 1.7 2008-08-14 19:00:17 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2008/08/14 06:29:54  schroedn
+ * publication rgd number for rat feature added
+ *
  * Revision 1.5  2007/10/31 17:29:04  pandyas
  * Fixed #8355 	Add comments field to every submission page
  *
@@ -94,7 +97,7 @@ public interface PublicationData
 
 	public void setComments(String comments);	
 	
-	public String getRgdPubID();
+	public String getRgdPubId();
 	
-	public void setRgdPubID(String rgdPubID);
+	public void setRgdPubId(String rgdPubId);
 }
