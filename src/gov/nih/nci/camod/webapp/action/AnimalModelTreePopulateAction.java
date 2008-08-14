@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.53 2008-08-12 19:40:30 pandyas Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.54 2008-08-14 07:05:56 schroedn Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.53  2008/08/12 19:40:30  pandyas
+ *  Fixed #11640  	Delete availability from IMSR from application
+ *
  *  Revision 1.52  2008/01/16 18:29:57  pandyas
  *  Renamed value to Transplant for #8290
  *
@@ -222,7 +225,21 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 				CellLine cellLine = (CellLine) it.next();
 				cellList.add(cellLine);
 			}
-
+			
+			// Retrieve a list of all MicroArray Data associated with this Animal Model
+			Set microArrayDataSet = animalModel.getMicroArrayDataCollection();
+			log.debug("microArrayDataSet: " + microArrayDataSet.size());
+			it = microArrayDataSet.iterator();
+			List<MicroArrayData> microArrayDataList = new ArrayList<MicroArrayData>();
+			
+			while (it.hasNext()) {
+				MicroArrayData microArrayData = (MicroArrayData) it.next();
+				if ( microArrayData.getExperimentName() != null ) {
+					//Check for experimentName
+					microArrayDataList.add(microArrayData);
+				}
+			}
+			
 			// Retrieve a list of all Morpholinos associated with this Animal
 			// model
 			Set transientInterferenceSet = animalModel
@@ -502,6 +519,10 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 
 			request.getSession().setAttribute(Constants.Submit.CELLLINE_LIST,
 					cellList);
+			
+			request.getSession().setAttribute(Constants.Submit.MICROARRAYDATA_LIST,
+					microArrayDataList );
+			
 			request.getSession().setAttribute(Constants.Submit.THERAPY_LIST,
 					therapyList);
 			request.getSession().setAttribute(Constants.Submit.IMAGE_LIST,
