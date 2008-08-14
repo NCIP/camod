@@ -1,7 +1,10 @@
 /*
- * $Id: PublicationData.java,v 1.5 2007-10-31 17:29:04 pandyas Exp $
+ * $Id: PublicationData.java,v 1.6 2008-08-14 06:29:54 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2007/10/31 17:29:04  pandyas
+ * Fixed #8355 	Add comments field to every submission page
+ *
  * Revision 1.4  2007/05/07 16:52:08  pandyas
  * Added code to save, edit and populate zfinPubId from Publication object for pulications from zfin.org
  *
@@ -90,4 +93,8 @@ public interface PublicationData
 	public String getComments();
 
 	public void setComments(String comments);	
+	
+	public String getRgdPubID();
+	
+	public void setRgdPubID(String rgdPubID);
 }
