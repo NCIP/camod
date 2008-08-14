@@ -1,8 +1,11 @@
 <%
 		/*
-		 * $Id: subSubmitMenu.jsp,v 1.64 2008-08-12 19:21:45 pandyas Exp $
+		 * $Id: subSubmitMenu.jsp,v 1.65 2008-08-14 06:41:02 schroedn Exp $
 		 *
 		 * $Log: not supported by cvs2svn $
+		 * Revision 1.64  2008/08/12 19:21:45  pandyas
+		 * Fixed #11640  	Delete availability from IMSR from application
+		 *
 		 * Revision 1.63  2008/01/16 18:34:35  pandyas
 		 * Renamed value to Transplant for #8290
 		 *
@@ -72,6 +75,7 @@
 <%@ page import="gov.nih.nci.camod.domain.GeneDelivery"%>
 <%@ page import="gov.nih.nci.camod.domain.Therapy"%>
 <%@ page import="gov.nih.nci.camod.domain.CellLine"%>
+<%@ page import="gov.nih.nci.camod.domain.MicroArrayData"%>
 <%@ page import="gov.nih.nci.camod.domain.Transplant"%>
 <%@ page import="gov.nih.nci.camod.domain.InducedMutation"%>
 <%@ page import="gov.nih.nci.camod.domain.EngineeredGene"%>
@@ -684,7 +688,17 @@
 		border="0"> 
 		<html:link styleClass="subMenuRed" action="submitMicroarrayData">
 			Enter Microarray Data
-		</html:link><br><br>
+		</html:link><br>		
+		<logic:iterate id="aMicroArrayData" name="microarraydata_list" type="MicroArrayData">	&nbsp;&nbsp;&nbsp;&nbsp;		 
+					 
+			<img src="images/aquadot.jpg" border="0">
+			<html:link styleClass="subMenuBlue"
+				action="MicroArrayDataPopulateAction.do?method=populate" paramId="aMicroArrayDataID"
+				paramName="aMicroArrayData" paramProperty="id">
+				<camod:shorten><bean:write name="aMicroArrayData" property="experimentName" filter="false" /></camod:shorten>
+			</html:link>
+			<br>
+		</logic:iterate> <br>	
 	</span>
 	
 	<div id="menu11" class="masterTitle" onclick="SwitchMenu('sub11')"
