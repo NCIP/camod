@@ -1,7 +1,10 @@
 /*
- * $Id: Log.java,v 1.9 2007-07-31 12:03:28 pandyas Exp $
+ * $Id: Log.java,v 1.10 2008-08-14 17:37:00 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2007/07/31 12:03:28  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.8  2006/04/19 17:37:37  pandyas
  * Removed TODO text
  *
@@ -102,27 +105,53 @@ public class Log extends BaseObject implements Serializable, Duplicatable
         return true;
     }
 
-	public Comments getComments() {
-		return comments;
-	}
+    /**
+     * @return Returns the comments.
+     */
+    public Comments getComments()
+    {
+        return comments;
+    }
 
-	public void setComments(Comments comments) {
-		this.comments = comments;
-	}
+    /**
+     * @param comments The comments to set.
+     */
+    public void setComments(Comments comments)
+    {
+        this.comments = comments;
+    }
 
-	public String getReviewNote() {
-		return reviewNote;
-	}
+    /**
+     * @return Returns the reviewNote.
+     */
+    public String getReviewNote()
+    {
+        return reviewNote;
+    }
 
-	public void setReviewNote(String reviewNote) {
-		this.reviewNote = reviewNote;
-	}
+    /**
+     * @param reviewNote The reviewNote to set.
+     */
+    public void setReviewNote(String reviewNote)
+    {
+        this.reviewNote = reviewNote;
+    }
 
-	public String getState() {
-		return state;
-	}
+    /**
+     * @return Returns the state.
+     */
+    public String getState()
+    {
+        return state;
+    }
 
-	public void setState(String state) {
-		this.state = state;
-	}
+    /**
+     * @param state The state to set.
+     */
+    public void setState(String state)
+    {
+        this.state = state;
+    }
+
+
 }
