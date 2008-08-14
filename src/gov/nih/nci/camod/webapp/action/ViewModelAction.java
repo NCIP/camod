@@ -1,9 +1,13 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.63 2008-08-01 14:15:10 pandyas Exp $
+ *  $Id: ViewModelAction.java,v 1.64 2008-08-14 17:01:42 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.63  2008/08/01 14:15:10  pandyas
+ *  Modifed to prevent SQL inject - added HTTP Header clean
+ *  App scan performed on July 30, 2008
+ *
  *  Revision 1.62  2008/07/28 17:19:02  pandyas
  *  Modifed to prevent SQL inject - added HTTP Header
  *  App scan performed on July 24, 2008
@@ -305,7 +309,7 @@ public class ViewModelAction extends BaseAction
             Comments theComments = theCommentsManager.get(theCommentsId);
             if (theComments != null)
             {
-                System.out.println("Found a comment: " + theComments.getRemark());
+                log.info("Found a comment: " + theComments.getRemark());
                 theCommentsList.add(theComments);
             }
         }
@@ -790,9 +794,9 @@ public class ViewModelAction extends BaseAction
 				}    
 			}
 		} catch (MalformedURLException me) {
-			System.out.println("MalformedURLException: " + me);
+			log.debug("MalformedURLException: " + me);
 		} catch (IOException ioe) {
-			System.out.println("IOException: " + ioe);
+			log.debug("IOException: " + ioe);
 		}
 		
 		// Set collection so therapy link will display if caELMIR data is available
@@ -802,8 +806,6 @@ public class ViewModelAction extends BaseAction
 		request.getSession().setAttribute(Constants.CAELMIR_STUDY_DATA,
 				caelmirStudyData);
         
-         //log.debug("caelmirStudyData.toString(): " + caelmirStudyData.toString());
-
 		return mapping.findForward("viewTherapeuticApproaches");
 	}
     

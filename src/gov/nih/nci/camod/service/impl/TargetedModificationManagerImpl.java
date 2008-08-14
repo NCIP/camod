@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TargetedModificationManagerImpl.java,v 1.38 2008-02-08 16:46:42 pandyas Exp $
+ * $Id: TargetedModificationManagerImpl.java,v 1.39 2008-08-14 16:38:15 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.38  2008/02/08 16:46:42  pandyas
+ * modified log statement for final deployment to QA
+ *
  * Revision 1.37  2008/01/27 23:27:11  pandyas
  * Modifed to clear Gene Identifer when removed from GUI
  *
@@ -342,7 +345,7 @@ public class TargetedModificationManagerImpl extends BaseManager implements
 						new AnimalModel(), inImageData, inPath,
 						Constants.CaImage.FTPGENCONSTORAGEDIRECTORY);
 
-				System.out.println("Image info: \ndescription:"
+				log.debug("Image info: \ndescription:"
 						+ image.getDescription() + " \ntitle:"
 						+ image.getTitle() + " \nname:"
 						+ image.getUrl() + " \nid:"

@@ -1,7 +1,10 @@
 /*
- * $Id: GenomicSegmentManagerImpl.java,v 1.34 2008-01-27 23:25:55 pandyas Exp $
+ * $Id: GenomicSegmentManagerImpl.java,v 1.35 2008-08-14 16:33:42 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.34  2008/01/27 23:25:55  pandyas
+ * Modifed to clear Mutation Identifer when removed from GUI
+ *
  * Revision 1.33  2007/10/31 19:04:57  pandyas
  * Fixed #8188 	Rename UnctrlVocab items to text entries
  *
@@ -203,7 +206,7 @@ public class GenomicSegmentManagerImpl extends BaseManager implements
 						new AnimalModel(), inImageData, inPath,
 						Constants.CaImage.FTPGENCONSTORAGEDIRECTORY);
 
-				System.out.println("Image info: \ndescription:"
+				log.debug("Image info: \ndescription:"
 						+ image.getDescription() + " \ntitle:"
 						+ image.getTitle() + " \nname:"
 						+ image.getUrl() + " \nid:"

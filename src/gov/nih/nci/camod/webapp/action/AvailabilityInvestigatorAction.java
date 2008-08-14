@@ -2,9 +2,12 @@
  *
  * @author pandyas
  * 
- * $Id: AvailabilityInvestigatorAction.java,v 1.9 2007-10-31 17:53:03 pandyas Exp $
+ * $Id: AvailabilityInvestigatorAction.java,v 1.10 2008-08-14 16:48:08 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2007/10/31 17:53:03  pandyas
+ * Modified comments for #9169  	Connect availability of model to person to resolve the available from investigator issue
+ *
  * Revision 1.8  2007/09/12 19:36:40  pandyas
  * modified debug statements for build to stage tier
  *
@@ -76,7 +79,7 @@ public class AvailabilityInvestigatorAction extends BaseAction {
         // Grab the current aAvailabilityID from the session
         String aAvailabilityID = request.getParameter("aAvailabilityID");
 
-        System.out.println("<AvailabilityInvestigatorAction edit> following Characteristics:" + "\n\t name: "
+        log.info("<AvailabilityInvestigatorAction edit> following Characteristics:" + "\n\t name: "
                 + availabilityForm.getName() + "\n\t stockNumber: " + availabilityForm.getStockNumber() 
                 + "\n\t PrincipalInvestigator: " + availabilityForm.getPrincipalInvestigator() + "\n\t user: "
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
@@ -149,7 +152,7 @@ public class AvailabilityInvestigatorAction extends BaseAction {
         // Create a form to edit
         AvailabilityForm availabilityForm = (AvailabilityForm) form;
 
-        System.out.println("<AvailabilityInvestigatorAction edit> following Characteristics:" + "\n\t name: "
+        log.info("<AvailabilityInvestigatorAction edit> following Characteristics:" + "\n\t name: "
                 + availabilityForm.getName() + "\n\t stockNuber: " + availabilityForm.getStockNumber() 
                 + "\n\t PrincipalInvestigator: " + availabilityForm.getPrincipalInvestigator() + "\n\t user: "
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));

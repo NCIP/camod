@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ViralTreatmentAction.java,v 1.16 2007-10-31 17:13:50 pandyas Exp $
+ * $Id: ViralTreatmentAction.java,v 1.17 2008-08-14 17:05:55 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2007/10/31 17:13:50  pandyas
+ * Modified comments for #8355 	Add comments field to every submission page
+ *
  * Revision 1.15  2006/11/09 17:32:21  pandyas
  * Commented out debug code
  *
@@ -79,7 +82,7 @@ public class ViralTreatmentAction extends BaseAction {
 
 		ViralTreatmentForm viralTreatmentForm = (ViralTreatmentForm) form;
 
-		System.out.println("<ViralTreatmentAction editing> editing... " + "\n\t name: " + viralTreatmentForm.getName()
+        log.info("<ViralTreatmentAction editing> editing... " + "\n\t name: " + viralTreatmentForm.getName()
 				+ "\n\t otherName: " + viralTreatmentForm.getOtherName() + "\n\t type: " + viralTreatmentForm.getType()
 				+ "\n\t regimen: " + viralTreatmentForm.getRegimen() + "\n\t dosage: " + viralTreatmentForm.getDosage()
                 + "\n\t dosageUnit: " + viralTreatmentForm.getDosageUnit()
@@ -150,7 +153,7 @@ public class ViralTreatmentAction extends BaseAction {
 
 		ViralTreatmentForm viralTreatmentForm = (ViralTreatmentForm) form;
 
-		System.out.println("<GrowthFactorAction save> Adding... " + "\n\t name: " + viralTreatmentForm.getName()
+        log.info("<GrowthFactorAction save> Adding... " + "\n\t name: " + viralTreatmentForm.getName()
 				+ "\n\t otherName: " + viralTreatmentForm.getOtherName() + "\n\t type: " + viralTreatmentForm.getType()
 				+ "\n\t regimen: " + viralTreatmentForm.getRegimen() + "\n\t dosage: " + viralTreatmentForm.getDosage()
 				+ "\n\t dosageUnit: " + viralTreatmentForm.getDosageUnit()

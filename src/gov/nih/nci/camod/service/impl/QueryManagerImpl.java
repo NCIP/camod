@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.96 2008-08-13 17:41:38 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.97 2008-08-14 16:37:55 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.96  2008/08/13 17:41:38  pandyas
+ * commented out is_induced_mutation_trigger until the database is updated with either 0 or 1 -  m ust be careful to write SQL
+ *
  * Revision 1.95  2008/08/13 16:45:04  pandyas
  * uncommented code to build to dev
  *
@@ -1951,7 +1954,7 @@ public class QueryManagerImpl extends BaseManager
         theParams[0] = inSpecies;
         theParams[1] = theParams[0];
 
-        System.out.println("The params: " + theParams[0]);
+        log.debug("The params: " + theParams[0]);
         return getIds(theSQLString, theParams);
 
     }
@@ -3271,7 +3274,8 @@ public class QueryManagerImpl extends BaseManager
 	  Object[] theParams = new Object[2]; theParams[0] = inExternalSource;
 	  theParams[1] = theParams[0];
 	  
-	  System.out.println("The params: " + theParams[0]); return
+	  log.debug("The params: " + theParams[0]); 
+      return
 	  getIds(theSQLString, theParams);
 	  
 	  }	

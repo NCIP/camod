@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ChemicalDrugAction.java,v 1.19 2007-10-31 17:09:11 pandyas Exp $
+ * $Id: ChemicalDrugAction.java,v 1.20 2008-08-14 16:42:48 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2007/10/31 17:09:11  pandyas
+ * Modified commetns for #8355 	Add comments field to every submission page
+ *
  * Revision 1.18  2007/09/12 19:36:40  pandyas
  * modified debug statements for build to stage tier
  *
@@ -71,8 +74,6 @@ public class ChemicalDrugAction extends BaseAction {
 
 		log.debug("<ChemicalDrugAction> Entering 'edit' method");
 
-		//System.out.println("<ChemicalDrugAction edit> Entering... ");
-
 		// Grab the current CarcinogenExposure we are working with related to this animalModel
 		String aCarcinogenExposureID = request.getParameter("aCarcinogenExposureID");
 
@@ -81,7 +82,7 @@ public class ChemicalDrugAction extends BaseAction {
 
 		ChemicalDrugForm chemicalDrugForm = (ChemicalDrugForm) form;
 
-		System.out.println("<ChemicalDrugAction editing> editing... " + "\n\t name: " + chemicalDrugForm.getName()
+		log.info("<ChemicalDrugAction editing> editing... " + "\n\t name: " + chemicalDrugForm.getName()
 				+ "\n\t otherName: " + chemicalDrugForm.getOtherName() + "\n\t type: " + chemicalDrugForm.getType()
 				+ "\n\t regimen: " + chemicalDrugForm.getRegimen() + "\n\t dosage: " + chemicalDrugForm.getDosage()
 				+ "\n\t dosageUnit: " + chemicalDrugForm.getDosageUnit() + "\n\t ageAtTreatment: "
@@ -141,12 +142,10 @@ public class ChemicalDrugAction extends BaseAction {
 		if (log.isDebugEnabled()) {
 			log.debug("<ChemicalDrugAction> Entering 'save' method");
 		}
-
-		//System.out.println("<ChemicalDrugAction save> Entering... ");
         
         ChemicalDrugForm chemicalDrugForm = (ChemicalDrugForm) form;        
 
-		System.out.println("<ChemicalDrugAction save> Adding... " + "\n\t name: " + chemicalDrugForm.getName()
+		log.info("<ChemicalDrugAction save> Adding... " + "\n\t name: " + chemicalDrugForm.getName()
 				+ "\n\t otherName: " + chemicalDrugForm.getOtherName() + "\n\t type: " + chemicalDrugForm.getType()
 				+ "\n\t regimen: " + chemicalDrugForm.getRegimen() 
                 + "\n\t dosage: " + chemicalDrugForm.getDosage()

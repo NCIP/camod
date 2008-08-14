@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TherapyAction.java,v 1.19 2007-10-31 17:13:34 pandyas Exp $
+ * $Id: TherapyAction.java,v 1.20 2008-08-14 16:59:48 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2007/10/31 17:13:34  pandyas
+ * Modified comments for #8355 	Add comments field to every submission page
+ *
  * Revision 1.18  2007/09/12 19:36:40  pandyas
  * modified debug statements for build to stage tier
  *
@@ -86,7 +89,7 @@ public final class TherapyAction extends BaseAction {
 		// Grab the current aTherapyID from the session
 		String aTherapyID = request.getParameter("aTherapyID");
 
-		System.out.println("<TherapyAction save> following Characteristics:" + "\n\t name: " + therapyForm.getName()
+        log.info("<TherapyAction save> following Characteristics:" + "\n\t name: " + therapyForm.getName()
 				+ "\n\t nscNumber: " + therapyForm.getNscNumber() + "\n\t casNumber: " + therapyForm.getCasNumber()
 				+ "\n\t toxicityGrade: " + therapyForm.getToxicityGrade() + "\n\t chemicalClasses: "
 				+ therapyForm.getSelectedChemicalClasses() + "\n\t processes: " + therapyForm.getSelectedProcesses()
@@ -163,7 +166,7 @@ public final class TherapyAction extends BaseAction {
 		// Create a form to edit
 		TherapyForm therapyForm = (TherapyForm) form;
 
-		System.out.println("<TherapyAction save> following Characteristics:" 
+        log.info("<TherapyAction save> following Characteristics:" 
 				+ "\n\t name: " + therapyForm.getName()
 				+ "\n\t NscNumber: " + therapyForm.getNscNumber() + "\n\t casNumber: " + therapyForm.getCasNumber()
 				+ "\n\t toxicityGrade: " + therapyForm.getToxicityGrade() + "\n\t chemicalClasses: "

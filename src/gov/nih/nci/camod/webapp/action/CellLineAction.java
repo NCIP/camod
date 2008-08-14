@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: CellLineAction.java,v 1.17 2007-09-12 19:36:40 pandyas Exp $
+ * $Id: CellLineAction.java,v 1.18 2008-08-14 16:49:00 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2007/09/12 19:36:40  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.16  2007/08/07 18:28:53  pandyas
  * fixed error message - typo
  *
@@ -63,14 +66,14 @@ public final class CellLineAction extends BaseAction {
 	public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		log.trace("Entering edit");
+		log.debug("Entering edit");
 
 		CellLineForm cellLineForm = (CellLineForm) form;
 
 		// Grab the current aCellID from the session
 		String aCellID = request.getParameter("aCellID");
 
-		System.out.println("<CellLineAction save> following Characteristics:" + "\n\t CellLineName: "
+        log.info("<CellLineAction save> following Characteristics:" + "\n\t CellLineName: "
 				+ cellLineForm.getCellLineName() + "\n\t Experiment: " + cellLineForm.getExperiment()
 				+ "\n\t Results: " + cellLineForm.getResults() + "\n\t Comments: " + cellLineForm.getComments()
 				+ "\n\t Organ: " + cellLineForm.getOrgan() + "\n\t organTissueName: "
@@ -139,7 +142,7 @@ public final class CellLineAction extends BaseAction {
 		// Grab the current modelID from the session
 		String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
-		System.out.println("<CellLineAction save> following Characteristics:" + "\n\t CellLineName: "
+        log.info("<CellLineAction save> following Characteristics:" + "\n\t CellLineName: "
 				+ cellLineForm.getCellLineName() + "\n\t Experiment: " + cellLineForm.getExperiment()
 				+ "\n\t Results: " + cellLineForm.getResults() + "\n\t Comments: " + cellLineForm.getComments()
 				+ "\n\t Organ: " + cellLineForm.getOrgan() + "\n\t organTissueName: "

@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: ClinicalMarkerAction.java,v 1.10 2007-10-31 17:09:27 pandyas Exp $
+ * $Id: ClinicalMarkerAction.java,v 1.11 2008-08-14 16:49:38 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2007/10/31 17:09:27  pandyas
+ * Modified comments for #8355 	Add comments field to every submission page
+ *
  * Revision 1.9  2007/09/12 19:36:40  pandyas
  * modified debug statements for build to stage tier
  *
@@ -74,7 +77,7 @@ public class ClinicalMarkerAction extends BaseAction
         // Create a form to edit
         ClinicalMarkerForm clinicalMarkerForm = (ClinicalMarkerForm) form;
 
-        log.debug("<HistopathologyAction saveClinicalMarker> following Characteristics:" + "\n\t ParentHistopathID: " + clinicalMarkerForm.getHistopathologyID() 
+        log.info("<HistopathologyAction saveClinicalMarker> following Characteristics:" + "\n\t ParentHistopathID: " + clinicalMarkerForm.getHistopathologyID() 
         		+ "\n\t ClinicalMarkerID: " + aClinicalMarkerID + "\n\t Name: " + clinicalMarkerForm.getName() + "\n\t otherName: " + clinicalMarkerForm.getOtherName() + "\n\t Value: " + clinicalMarkerForm.getValue() 
         		 + "\n\t Comments: " + clinicalMarkerForm.getComments() 
         		+ "\n\t user: " + (String) request.getSession().getAttribute(
@@ -154,7 +157,7 @@ public class ClinicalMarkerAction extends BaseAction
         // Grab the current aHistopathID from the session
         String aHistopathologyID = request.getParameter("aHistopathologyID");
 
-        System.out.println("<ClinicalMarkerAction save> following Characteristics:" + "\n\t ParentHistopathID: " 
+        log.info("<ClinicalMarkerAction save> following Characteristics:" + "\n\t ParentHistopathID: " 
                            + aHistopathologyID + "\n\t Name: " + clinicalMarkerForm.getName() + "\n\t otherName: " 
                            + clinicalMarkerForm.getOtherName() + "\n\t Value: " + clinicalMarkerForm.getValue()
                            + "\n\t Comments: " + clinicalMarkerForm.getComments()

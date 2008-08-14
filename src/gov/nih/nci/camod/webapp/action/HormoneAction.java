@@ -1,7 +1,10 @@
 /**
- * $Id: HormoneAction.java,v 1.11 2007-10-31 17:10:24 pandyas Exp $
+ * $Id: HormoneAction.java,v 1.12 2008-08-14 16:53:46 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2007/10/31 17:10:24  pandyas
+ * Modified comments for #8355 	Add comments field to every submission page
+ *
  * Revision 1.10  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -58,14 +61,12 @@ public class HormoneAction extends BaseAction {
 			log.debug("Entering 'edit' method");
 		}
 
-		System.out.println("<HormoneAction edit> Entering... ");
-
         // Grab the current CarcinogenExposure we are working with related to this animalModel
         String aCarcinogenExposureID = request.getParameter("aCarcinogenExposureID");
         
 		HormoneForm hormoneForm = (HormoneForm) form;
 
-		System.out.println("<HormoneAction editing> editing... " + "\n\t name: " + hormoneForm.getName()
+        log.info("<HormoneAction editing> editing... " + "\n\t name: " + hormoneForm.getName()
 				+ "\n\t otherName: " + hormoneForm.getOtherName() + "\n\t regimen: " + hormoneForm.getRegimen()
 				+ "\n\t dosage: " + hormoneForm.getDosage()  + "\n\t Comments: " + hormoneForm.getComments()
 				+ "\n\t dosageUnit: " + hormoneForm.getDosageUnit());
@@ -124,14 +125,12 @@ public class HormoneAction extends BaseAction {
 			log.debug("Entering 'save' method");
 		}
 
-		System.out.println("<HormoneAction save> Entering... ");
-
 		// Grab the current modelID from the session
 		String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
 
 		HormoneForm hormoneForm = (HormoneForm) form;
 
-		System.out.println("<HormoneAction save> Adding... " + "\n\t name: " + hormoneForm.getName()
+        log.info("<HormoneAction save> Adding... " + "\n\t name: " + hormoneForm.getName()
                         + "\n\t otherName: " + hormoneForm.getOtherName() + "\n\t regimen: " + hormoneForm.getRegimen()
                         + "\n\t dosage: " + hormoneForm.getDosage()  + "\n\t Comments: " + hormoneForm.getComments()
                         + "\n\t dosageUnit: " + hormoneForm.getDosageUnit());

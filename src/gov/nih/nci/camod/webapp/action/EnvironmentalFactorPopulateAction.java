@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EnvironmentalFactorPopulateAction.java,v 1.16 2007-10-31 18:10:07 pandyas Exp $
+ * $Id: EnvironmentalFactorPopulateAction.java,v 1.17 2008-08-14 16:50:48 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2007/10/31 18:10:07  pandyas
+ * Fixed #8188 	Rename UnctrlVocab items to text entries
+ *
  * Revision 1.15  2006/04/17 19:09:41  pandyas
  * caMod 2.1 OM changes
  *
@@ -48,7 +51,7 @@ public class EnvironmentalFactorPopulateAction extends BaseAction {
     public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        System.out.println("<EnvironmentalFactorPopulateAction populate> Entering populate() ");
+        log.debug("<EnvironmentalFactorPopulateAction populate> Entering populate() ");
 
         // Create a form to edit
         EnvironmentalFactorForm envForm = (EnvironmentalFactorForm) form;
@@ -136,8 +139,6 @@ public class EnvironmentalFactorPopulateAction extends BaseAction {
      * @throws Exception
      */
     public void dropdown(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-        System.out.println("<EnvironmentalFactorPopulateAction dropdown> Entering void dropdown()");
 
         // Prepopulate all dropdown fields, set the global Constants to the
         // following

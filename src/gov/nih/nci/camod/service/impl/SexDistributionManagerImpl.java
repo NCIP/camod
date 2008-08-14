@@ -1,9 +1,12 @@
 /**
  * @author
  * 
- * $Id: SexDistributionManagerImpl.java,v 1.7 2006-04-17 19:11:06 pandyas Exp $
+ * $Id: SexDistributionManagerImpl.java,v 1.8 2008-08-14 16:37:36 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2006/04/17 19:11:06  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.6  2005/10/21 17:55:58  pandyas
  * fixed exception message
  *
@@ -56,10 +59,10 @@ public class SexDistributionManagerImpl extends BaseManager implements SexDistri
             }
 
         } catch (PersistenceException pe) {
-            System.out.println("PersistenceException in SexDistributionManagerImpl.getByType");
+            log.debug("PersistenceException in SexDistributionManagerImpl.getByType");
             pe.printStackTrace();
         } catch (Exception e) {
-            System.out.println("Exception in SexDistributionManagerImpl.getByType");
+            log.debug("Exception in SexDistributionManagerImpl.getByType");
             e.printStackTrace();
         }
 

@@ -1,7 +1,10 @@
 /**
- * $Id: GrowthFactorAction.java,v 1.14 2007-10-31 17:10:13 pandyas Exp $
+ * $Id: GrowthFactorAction.java,v 1.15 2008-08-14 16:52:02 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2007/10/31 17:10:13  pandyas
+ * Modified comments for #8355 	Add comments field to every submission page
+ *
  * Revision 1.13  2006/10/27 16:34:55  pandyas
  * fixed printout on error - typo
  *
@@ -70,14 +73,12 @@ public class GrowthFactorAction extends BaseAction {
 			log.debug("Entering 'edit' method");
 		}
 
-		System.out.println("<GrowthFactorAction edit> Entering... ");
-
         // Grab the current CarcinogenExposure we are working with related to this animalModel
         String aCarcinogenExposureID = request.getParameter("aCarcinogenExposureID");
 		
 		GrowthFactorForm growthFactorForm = (GrowthFactorForm) form;
 
-		System.out.println("<GrowthFactorAction editing> editing... " + "\n\t name: " + growthFactorForm.getName()
+        log.info("<GrowthFactorAction editing> editing... " + "\n\t name: " + growthFactorForm.getName()
 				+ "\n\t otherName: " + growthFactorForm.getOtherName() + "\n\t type: " + growthFactorForm.getType()
 				+ "\n\t regimen: " + growthFactorForm.getRegimen() + "\n\t dosage: " + growthFactorForm.getDosage()
 				+ "\n\t dosageUnit: " + growthFactorForm.getDosageUnit() + "\n\t ageAtTreatment: "
@@ -144,14 +145,12 @@ public class GrowthFactorAction extends BaseAction {
 			log.debug("Entering 'save' method");
 		}
 
-		System.out.println("<GrowthFactorAction save> Entering... ");
-
 		// Grab the current modelID from the session
 		String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
 
 		GrowthFactorForm growthFactorForm = (GrowthFactorForm) form;
 
-		System.out.println("<GrowthFactorAction save> Adding... " + "\n\t name: " + growthFactorForm.getName()
+        log.info("<GrowthFactorAction save> Adding... " + "\n\t name: " + growthFactorForm.getName()
 				+ "\n\t otherName: " + growthFactorForm.getOtherName() + "\n\t type: " + growthFactorForm.getType()
 				+ "\n\t regimen: " + growthFactorForm.getRegimen() + "\n\t dosage: " + growthFactorForm.getDosage()
 				+ "\n\t dosageUnit: " + growthFactorForm.getDosageUnit() + "\n\t administrativeRoute: "

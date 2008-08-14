@@ -2,9 +2,12 @@
  *
  * @author pandyas
  * 
- * $Id: AvailabilityAction.java,v 1.10 2007-09-12 19:36:40 pandyas Exp $
+ * $Id: AvailabilityAction.java,v 1.11 2008-08-14 16:47:30 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2007/09/12 19:36:40  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.9  2007/07/23 17:40:43  pandyas
  * Fixed typo in word occurred
  *
@@ -76,7 +79,7 @@ public class AvailabilityAction extends BaseAction {
 		// Grab the current aAvailabilityID from the session
 		String aAvailabilityID = request.getParameter("aAvailabilityID");
 
-		System.out.println("<AvailabilityAction edit> following Characteristics:" 
+        log.info("<AvailabilityAction edit> following Characteristics:" 
 				+ "\n\t name: " + availabilityForm.getName() 
 				+ "\n\t stockNuber: " + availabilityForm.getStockNumber() + "\n\t user: "
 				+ (String) request.getSession().getAttribute("camod.loggedon.username"));

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EnvironmentalFactorAction.java,v 1.20 2007-10-31 17:09:46 pandyas Exp $
+ * $Id: EnvironmentalFactorAction.java,v 1.21 2008-08-14 16:50:13 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.20  2007/10/31 17:09:46  pandyas
+ * Modified comments for #8355 	Add comments field to every submission page
+ *
  * Revision 1.19  2006/05/23 16:59:32  pandyas
  * added printout for debug
  *
@@ -60,7 +63,7 @@ public final class EnvironmentalFactorAction extends BaseAction {
 
 		EnvironmentalFactorForm envForm = (EnvironmentalFactorForm) form;
 
-		System.out.println("<EnvironmentalFactorAction save> following Characteristics:" + "\n\t name: "
+        log.info("<EnvironmentalFactorAction save> following Characteristics:" + "\n\t name: "
 				+ envForm.getName() + "\n\t otherName: " + envForm.getOtherName() + "\n\t dosage: "
 				+ envForm.getDosage() + "\n\t envForm.getDosageUnit()" + envForm.getDosageUnit() + "\n\t administrativeRoute: " + envForm.getAdministrativeRoute()
 				+ "\n\t regimen: " + envForm.getRegimen() + "\n\t ageAtTreatment: " + envForm.getAgeAtTreatment()
@@ -120,7 +123,7 @@ public final class EnvironmentalFactorAction extends BaseAction {
 		// Create a form to edit
 		EnvironmentalFactorForm envForm = (EnvironmentalFactorForm) form;
 
-		System.out.println("<EnvironmentalFactorAction save> following Characteristics:" + "\n\t name: "
+        log.info("<EnvironmentalFactorAction save> following Characteristics:" + "\n\t name: "
 				+ envForm.getName() + "\n\t otherName: " + envForm.getOtherName() + "\n\t dosage: "
 				+ envForm.getDosage()  + "\n\t envForm.getDosageUnit()" + envForm.getDosageUnit() 
                 + "\n\t administrativeRoute: " + envForm.getAdministrativeRoute()

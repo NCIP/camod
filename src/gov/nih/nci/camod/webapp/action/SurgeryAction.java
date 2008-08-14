@@ -1,7 +1,10 @@
 /**
- * $Id: SurgeryAction.java,v 1.13 2007-10-31 17:13:12 pandyas Exp $
+ * $Id: SurgeryAction.java,v 1.14 2008-08-14 16:59:10 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2007/10/31 17:13:12  pandyas
+ * Modified comments for #8355 	Add comments field to every submission page
+ *
  * Revision 1.12  2006/11/09 17:31:59  pandyas
  * Commented out debug code
  *
@@ -74,7 +77,7 @@ public class SurgeryAction extends BaseAction {
 
 		SurgeryForm surgeryForm = (SurgeryForm) form;
 
-		System.out.println("<SurgeryAction editing> editing... " + "\n\t name: " + surgeryForm.getName()
+        log.info("<SurgeryAction editing> editing... " + "\n\t name: " + surgeryForm.getName()
 				+ "\n\t otherName: " + surgeryForm.getOtherName() + "\n\t type: " + surgeryForm.getType()
 				+ "\n\t regimen: " + surgeryForm.getRegimen() + "\n\t Comments: " + surgeryForm.getComments()
 				+ "\n\t ageAtTreatmentUnit: " + surgeryForm.getAgeAtTreatmentUnit());
@@ -141,7 +144,7 @@ public class SurgeryAction extends BaseAction {
 
 		SurgeryForm surgeryForm = (SurgeryForm) form;
 
-		System.out.println("<SurgeryAction save> Adding... " + "\n\t name: " + surgeryForm.getName()
+        log.info("<SurgeryAction save> Adding... " + "\n\t name: " + surgeryForm.getName()
 				+ "\n\t otherName: " + surgeryForm.getOtherName() + "\n\t type: " + surgeryForm.getType()
 				+ "\n\t regimen: " + surgeryForm.getRegimen() + "\n\t Comments: " + surgeryForm.getComments()
 				+ "\n\t ageAtTreatmentUnit: " + surgeryForm.getAgeAtTreatmentUnit());

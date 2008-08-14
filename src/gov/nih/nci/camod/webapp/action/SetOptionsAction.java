@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SetOptionsAction.java,v 1.5 2006-04-17 19:09:41 pandyas Exp $
+ * $Id: SetOptionsAction.java,v 1.6 2008-08-14 16:57:03 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/04/17 19:09:41  pandyas
+ * caMod 2.1 OM changes
+ *
  * 
  */
 
@@ -41,7 +44,7 @@ public class SetOptionsAction extends BaseAction {
     	 String speciesName = request.getParameter( "speciesName" );
     	 String page = request.getParameter( "page" );
     	 
-    	 System.out.println( "<SetOptionsActions execute> speciesName: " + speciesName + "  page: " + page );
+         log.info( "<SetOptionsActions execute> speciesName: " + speciesName + "  page: " + page );
     	 
          NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.STRAINDROP, speciesName );
     	        

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: NutritionalFactorAction.java,v 1.14 2007-10-31 17:12:01 pandyas Exp $
+ * $Id: NutritionalFactorAction.java,v 1.15 2008-08-14 16:55:06 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2007/10/31 17:12:01  pandyas
+ * Modified comments for #8355 	Add comments field to every submission page
+ *
  * Revision 1.13  2006/10/27 16:34:38  pandyas
  * fixed printout on error - typo
  *
@@ -72,7 +75,7 @@ public class NutritionalFactorAction extends BaseAction {
 		// Create a form to edit
 		NutritionalFactorForm nutritForm = (NutritionalFactorForm) form;
 
-		System.out.println("<NutritionalFactorAction save> following Characteristics:" + "\n\t name: "
+        log.info("<NutritionalFactorAction save> following Characteristics:" + "\n\t name: "
 				+ nutritForm.getName() + "\n\t otherName: " + nutritForm.getOtherName() + "\n\t dosage: "
 				+ nutritForm.getDosage()  + "\n\t dosageUnit: " + nutritForm.getDosageUnit()
                 + "\n\t regimen: " + nutritForm.getRegimen() + "\n\t ageAtTreatment: "
@@ -137,7 +140,7 @@ public class NutritionalFactorAction extends BaseAction {
 		}
 		NutritionalFactorForm nutritForm = (NutritionalFactorForm) form;
 
-		System.out.println("<NutritionalFactorAction save> following Characteristics:" + "\n\t name: "
+        log.info("<NutritionalFactorAction save> following Characteristics:" + "\n\t name: "
 				+ nutritForm.getName() + "\n\t otherName: " + nutritForm.getOtherName() + "\n\t dosage: "
 				+ nutritForm.getDosage()  + "\n\t dosageUnit: " + nutritForm.getDosageUnit()
                 + "\n\t regimen: " + nutritForm.getRegimen() + "\n\t ageAtTreatment: "

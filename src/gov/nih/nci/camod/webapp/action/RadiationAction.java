@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: RadiationAction.java,v 1.15 2007-10-31 17:12:46 pandyas Exp $
+ * $Id: RadiationAction.java,v 1.16 2008-08-14 16:55:34 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2007/10/31 17:12:46  pandyas
+ * Modified comments for #8355 	Add comments field to every submission page
+ *
  * Revision 1.14  2006/10/27 16:31:51  pandyas
  * fixed printout on error - typo
  *
@@ -71,7 +74,7 @@ public class RadiationAction extends BaseAction {
 		// Create a form to edit
 		RadiationForm radiationForm = (RadiationForm) form;
 
-		System.out.println("<EnvironmentalFactorAction save> following Characteristics:" + "\n\t name: "
+        log.info("<EnvironmentalFactorAction save> following Characteristics:" + "\n\t name: "
 				+ radiationForm.getName() + "\n\t otherName: " + radiationForm.getOtherName() + "\n\t dosage: "
 				+ radiationForm.getDosage() 
                  + "\n\t dosageUnit: " + radiationForm.getDosageUnit()
@@ -140,7 +143,7 @@ public class RadiationAction extends BaseAction {
 		}
 		RadiationForm radiationForm = (RadiationForm) form;
 
-		System.out.println("<EnvironmentalFactorAction save> following Characteristics:" + "\n\t name: "
+        log.info("<EnvironmentalFactorAction save> following Characteristics:" + "\n\t name: "
 				+ radiationForm.getName() + "\n\t otherName: " + radiationForm.getOtherName() + "\n\t dosage: "
 				+ radiationForm.getDosage() 
                  + "\n\t dosageUnit: " + radiationForm.getDosageUnit()

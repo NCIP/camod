@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: TransientInterferenceAction.java,v 1.7 2007-09-12 19:36:40 pandyas Exp $
+ * $Id: TransientInterferenceAction.java,v 1.8 2008-08-14 17:00:21 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2007/09/12 19:36:40  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.6  2007/04/04 13:19:27  pandyas
  * Modified name for conditioning regimen and target site
  *
@@ -70,7 +73,7 @@ public class TransientInterferenceAction extends BaseAction
         // Grab the current aTransIntID for this animalModel
         String aTransIntID = request.getParameter("aTransIntID");
         
-        System.out.println("<TransientInterferenceAction edit> following Characteristics:" 
+        log.info("<TransientInterferenceAction edit> following Characteristics:" 
           + "\n\t Concentration: " + transientInterferenceForm.getConcentration() 
           + "\n\t ConcentrationUnit: " + transientInterferenceForm.getConcentrationUnit() 
           + "\n\t DeliveryMethod: " + transientInterferenceForm.getDeliveryMethod() 
@@ -158,7 +161,7 @@ public class TransientInterferenceAction extends BaseAction
 		transientInterferenceForm.setConceptCode(conceptCode);        
         log.debug("transientInterferenceForm.getConceptCode(): " + transientInterferenceForm.getConceptCode());
         
-        System.out.println("<TransientInterferenceAction save> following Characteristics:" 
+        log.info("<TransientInterferenceAction save> following Characteristics:" 
 	    + "\n\t Concentration: " + transientInterferenceForm.getConcentration() 
 	    + "\n\t ConcentrationUnit: " + transientInterferenceForm.getConcentrationUnit() 
 	    + "\n\t DeliveryMethod: " + transientInterferenceForm.getDeliveryMethod() 

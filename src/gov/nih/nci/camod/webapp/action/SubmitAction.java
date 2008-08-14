@@ -1,8 +1,11 @@
 /**
  *  
- *  $Id: SubmitAction.java,v 1.20 2008-01-15 19:32:07 pandyas Exp $
+ *  $Id: SubmitAction.java,v 1.21 2008-08-14 16:57:47 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.20  2008/01/15 19:32:07  pandyas
+ *  Modified debug statements to build to dev tier
+ *
  *  Revision 1.19  2008/01/15 10:23:20  pandyas
  *  enabled debug statements for testing of errors on DEV
  *  setCancerModels error stops submission of models and superuser not being implemented from camod.properties
@@ -66,7 +69,7 @@ public class SubmitAction extends BaseAction {
     public ActionForward setModelConstants(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        System.out.println("<SubmitAction setModelConstants> Constants.Parameters.MODELID="
+        log.info("<SubmitAction setModelConstants> Constants.Parameters.MODELID="
                 + request.getParameter(Constants.Parameters.MODELID));
 
         String modelID = request.getParameter(Constants.Parameters.MODELID);
