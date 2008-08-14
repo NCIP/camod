@@ -1,5 +1,8 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2007/10/31 14:51:11  pandyas
+ * Fixed #9169  	Connect availability of model to person to resolve the available from investigator issue
+ *
  * Revision 1.14  2007/09/12 19:35:52  pandyas
  * modified debug statements for build to stage tier
  *
@@ -25,11 +28,10 @@
  * Cleanup
  *
  * 
- * $Id: AnimalAvailability.java,v 1.15 2007-10-31 14:51:11 pandyas Exp $
+ * $Id: AnimalAvailability.java,v 1.16 2008-08-14 17:17:40 pandyas Exp $
  */
 package gov.nih.nci.camod.domain;
 
-import gov.nih.nci.camod.service.impl.PersonManagerSingleton;
 import gov.nih.nci.camod.util.Duplicatable;
 import gov.nih.nci.camod.util.HashCodeUtil;
 import java.io.Serializable;
