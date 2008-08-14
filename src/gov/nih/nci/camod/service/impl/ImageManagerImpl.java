@@ -1,7 +1,10 @@
 /*
- * $Id: ImageManagerImpl.java,v 1.28 2007-10-31 19:06:10 pandyas Exp $
+ * $Id: ImageManagerImpl.java,v 1.29 2008-08-14 06:26:09 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.28  2007/10/31 19:06:10  pandyas
+ * Fixed #8355 	Add comments field to every submission page
+ *
  * Revision 1.27  2007/09/12 19:36:03  pandyas
  * modified debug statements for build to stage tier
  *
@@ -120,6 +123,20 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
 			String inStorageDirKey) throws Exception {
 
 		log.debug("Entering populateImage");
+		
+        System.out.println("<ImageAction save> following Characteristics:" + "\n\t getUrl: "
+                + inImageData.getUrl() + "\n\t getTitle: " + inImageData.getTitle()
+                + "\n\t getDescription: " + inImageData.getDescription()
+                + "\n\t getStainingMethodName() : " + inImageData.getStainingMethodName()                   
+                + "\n\t getStainingMethodCode(): " + inImageData.getStainingMethodCode()    
+                + "\n\t Altern_URL: " + inImageData.getAltern_url() 
+                + "\n\t Comments(): " + inImageData.getComments());
+		
+        if (inImage != null) {
+	        inImage.setComments(inImageData.getComments());
+	        inImage.setAltern_url(inImageData.getAltern_url());			
+		}
+        
 		if (inImageData.getStainingMethodCode() != null
 				&& inImageData.getStainingMethodCode().length() >0) {
 
@@ -131,8 +148,6 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
             log.debug("populateImage inImageData.getStainingMethodName(): " +inImageData.getStainingMethodName());            
             inImage.setStainingMethod(stainingMethod);
             
-            inImage.setComments(inImageData.getComments());
-
 		} else {
 			// null staining method - covers editing
 			inImage.setStainingMethod(null);
