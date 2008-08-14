@@ -1,7 +1,10 @@
 /*
- * $Id: Publication.java,v 1.12 2007-10-31 15:54:46 pandyas Exp $
+ * $Id: Publication.java,v 1.13 2008-08-14 06:23:15 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2007/10/31 15:54:46  pandyas
+ * Fixed #8355 	Add comments field to every submission page
+ *
  * Revision 1.11  2007/05/07 16:51:17  pandyas
  * Added zfinPubId to object and mapping for pulications from zfin.org
  *
@@ -35,7 +38,8 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
     private String authors;
     private Boolean firstTimeReported;
     private String jaxJNumber;
-    private String zfinPubId;    
+    private String zfinPubId; 
+    private String rgdPubID;
     private PublicationStatus publicationStatus;
     private String comments;
 
@@ -269,5 +273,13 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
 
 	public void setZfinPubId(String zfinPubId) {
 		this.zfinPubId = zfinPubId;
+	}
+
+	public String getRgdPubID() {
+		return rgdPubID;
+	}
+
+	public void setRgdPubID(String rgdPubID) {
+		this.rgdPubID = rgdPubID;
 	}
 }

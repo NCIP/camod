@@ -1,8 +1,11 @@
 /*
  * 
- * $Id: Image.java,v 1.13 2007-10-31 15:54:19 pandyas Exp $
+ * $Id: Image.java,v 1.14 2008-08-14 06:23:15 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2007/10/31 15:54:19  pandyas
+ * Fixed #8355 	Add comments field to every submission page
+ *
  * Revision 1.12  2007/07/31 12:03:28  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -51,6 +54,8 @@ public class Image extends BaseObject implements Comparable, Serializable, Dupli
 
     private String url;
 
+    private String altern_url;
+    
     private StainingMethod stainingMethod;
     
     private String comments;    
@@ -291,6 +296,14 @@ public class Image extends BaseObject implements Comparable, Serializable, Dupli
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public String getAltern_url() {
+		return altern_url;
+	}
+
+	public void setAltern_url(String altern_url) {
+		this.altern_url = altern_url;
 	}
 
 }

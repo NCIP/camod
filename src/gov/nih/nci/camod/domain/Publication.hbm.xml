@@ -74,7 +74,12 @@
         <property name="jaxJNumber" 
         	column="j_number" 
         	type="string"/>   
-        	
+
+	    <!-- rgdPubId -->
+        <property name="rgdPubID" 
+        	column="rgd_pub_id" 
+        	type="string"/>   
+
 	    <!-- zfinPubId -->
         <property name="zfinPubId" 
         	column="zfin_pub_id" 
