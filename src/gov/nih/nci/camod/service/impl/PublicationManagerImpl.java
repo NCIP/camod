@@ -1,7 +1,10 @@
 /*
- * $Id: PublicationManagerImpl.java,v 1.15 2007-10-31 19:07:45 pandyas Exp $
+ * $Id: PublicationManagerImpl.java,v 1.16 2008-08-14 06:27:53 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2007/10/31 19:07:45  pandyas
+ * Fixed #8188 	Rename UnctrlVocab items to text entries
+ *
  * Revision 1.14  2007/05/07 16:52:06  pandyas
  * Added code to save, edit and populate zfinPubId from Publication object for pulications from zfin.org
  *
@@ -149,7 +152,11 @@ public class PublicationManagerImpl extends BaseManager implements PublicationMa
         	inPublication.setZfinPubId(inPublicationData.getZfinPubId());
         }
         
-
+        if ( inPublicationData.getRgdPubID() != null )
+        {
+        	inPublication.setRgdPubID( inPublicationData.getRgdPubID() );
+        }
+        
         if (inPublicationData.getFirstTimeReported() != null && inPublicationData.getFirstTimeReported().equals("yes"))
         {
             inPublication.setFirstTimeReported(new Boolean(true));
