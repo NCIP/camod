@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ImagePopulateAction.java,v 1.22 2007-10-31 17:11:43 pandyas Exp $
+ * $Id: ImagePopulateAction.java,v 1.23 2008-08-14 06:18:10 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.22  2007/10/31 17:11:43  pandyas
+ * Modified comments for #8188 	Rename UnctrlVocab items to text entries
+ *
  * Revision 1.21  2007/09/12 19:36:40  pandyas
  * modified debug statements for build to stage tier
  *
@@ -55,12 +58,19 @@ public class ImagePopulateAction extends BaseAction {
 
 		System.out.println("<ImagePopulateAction populate> Entering populate() ");
 
+        
 		ImageForm imageForm = (ImageForm) form;
 
 		String aImageID = request.getParameter("aImageID");
 
 		Image theImage = ImageManagerSingleton.instance().get(aImageID);
-       
+  
+        System.out.println("<ImageAction save> following Characteristics:" + "\n\t getUrl: "
+                + theImage.getUrl() + "\n\t getTitle: " + theImage.getTitle()
+                + "\n\t getDescription: " + theImage.getDescription() 
+                + "\n\t Altern_URL: " + theImage.getAltern_url() 
+                + "\n\t Comments(): " + theImage.getComments() );
+        
 		// Handle back arrow
 		if (theImage == null) {
 			request.setAttribute(Constants.Parameters.DELETED, "true");
@@ -94,6 +104,7 @@ public class ImagePopulateAction extends BaseAction {
                 
                 imageForm.setThumbUrl(theImage.getThumbUrl());
                 imageForm.setImageUrl(theImage.getImageUrl());
+                imageForm.setAltern_url( theImage.getAltern_url() );
                 
                 if(theImage.getComments() != null && theImage.getComments().length() >0){
                 	imageForm.setComments(theImage.getComments());
