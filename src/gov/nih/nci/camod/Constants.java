@@ -1,8 +1,13 @@
 /**
  * 
- * $Id: Constants.java,v 1.112 2008-08-12 19:53:24 pandyas Exp $
+ * $Id: Constants.java,v 1.113 2008-08-14 06:22:10 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.112  2008/08/12 19:53:24  pandyas
+ * Fixed #12108  	Admin - View Model Assignment is not working
+ * Fixed #15053  	Search for models with transgenic or targeted modification on advanced search page confusing
+ * Fixed #11640  	Delete availability from IMSR from application
+ *
  * Revision 1.111  2008/05/21 19:04:58  pandyas
  * Modified advanced search to prevent SQL injection
  * Re: Apps Scan run 05/15/2008
@@ -908,6 +913,8 @@ public class Constants {
          * sidebar menu of the submission section
          */
         public static final String CELLLINE_LIST = "cellline_list";
+        
+        public static final String MICROARRAYDATA_LIST = "microarraydata_list";
 
         public static final String ANIMALAVAILABILITY_LIST = "availability_list";
 
