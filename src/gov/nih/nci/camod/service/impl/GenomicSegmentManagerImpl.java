@@ -1,7 +1,10 @@
 /*
- * $Id: GenomicSegmentManagerImpl.java,v 1.35 2008-08-14 16:33:42 pandyas Exp $
+ * $Id: GenomicSegmentManagerImpl.java,v 1.36 2008-08-14 16:34:40 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.35  2008/08/14 16:33:42  pandyas
+ * modified debug line to use log
+ *
  * Revision 1.34  2008/01/27 23:25:55  pandyas
  * Modifed to clear Mutation Identifer when removed from GUI
  *
@@ -68,9 +71,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
