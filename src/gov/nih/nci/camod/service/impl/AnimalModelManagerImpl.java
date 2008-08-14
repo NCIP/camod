@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.95 2008-08-14 17:18:21 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.96 2008-08-14 17:41:54 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.95  2008/08/14 17:18:21  pandyas
+ * remove debug lines
+ *
  * Revision 1.94  2008/08/14 16:32:05  pandyas
  * remove debug lines
  *
@@ -1106,7 +1109,8 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
         TargetedModification theTargetedModification = TargetedModificationManagerSingleton.instance().create(inAnimalModel,
                                                                                                               inTargetedModificationData,
-
+                                                                                                              request);
+        
         inAnimalModel.addEngineeredGene(theTargetedModification);
         save(inAnimalModel);
 
