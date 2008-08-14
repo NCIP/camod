@@ -1,7 +1,10 @@
 /*
- * $Id: ImageForm.java,v 1.12 2007-10-31 17:24:03 pandyas Exp $
+ * $Id: ImageForm.java,v 1.13 2008-08-14 06:29:18 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2007/10/31 17:24:03  pandyas
+ * Fixed #8355 	Add comments field to every submission page
+ *
  * Revision 1.11  2007/07/31 12:02:02  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -17,9 +20,12 @@
  */
 package gov.nih.nci.camod.webapp.form;
 /**
- * $Id: ImageForm.java,v 1.12 2007-10-31 17:24:03 pandyas Exp $
+ * $Id: ImageForm.java,v 1.13 2008-08-14 06:29:18 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2007/10/31 17:24:03  pandyas
+ * Fixed #8355 	Add comments field to every submission page
+ *
  * Revision 1.11  2007/07/31 12:02:02  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -53,6 +59,7 @@ public class ImageForm extends BaseForm implements Serializable, ImageData {
     protected String stainingMethod;    
     protected String stainingMethodName;
     protected String stainingMethodCode;    
+    protected String altern_url;
     protected String imageId;
     protected String imageUrl;
     protected String thumbUrl;
@@ -192,6 +199,14 @@ public class ImageForm extends BaseForm implements Serializable, ImageData {
 	 */
 	public void setComments(String comments) {
 		this.comments = comments;
+	}
+
+	public String getAltern_url() {
+		return altern_url;
+	}
+
+	public void setAltern_url(String altern_url) {
+		this.altern_url = altern_url;
 	}
 
 

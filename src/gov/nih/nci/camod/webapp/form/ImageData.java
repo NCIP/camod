@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ImageData.java,v 1.8 2007-10-31 17:28:21 pandyas Exp $
+ * $Id: ImageData.java,v 1.9 2008-08-14 06:29:18 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2007/10/31 17:28:21  pandyas
+ * Fixed #8355 	Add comments field to every submission page
+ *
  * Revision 1.7  2007/07/31 12:01:41  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -42,6 +45,10 @@ public interface ImageData
 
 	public void setUrl(String url);
 
+	public String getAltern_url();
+	
+	public void setAltern_url(String altern_url);
+	
     public String getTitle();
 
     public void setTitle(String title);
