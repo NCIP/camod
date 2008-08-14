@@ -871,6 +871,27 @@
 			</field>
 		</form>
 
+		<form name="microArrayDataForm">
+			<field property="otherLocationURL" depends="required, maxlength">
+				<arg0 key="MicroArrayDataForm.otherLocationURL" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>
+			<field property="experimentName" depends="required, maxlength">
+				<arg0 key="MicroArrayDataForm.experimentName" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>
+		</form>
+
 		<form name="associatedExpressionForm">
 			<field property="organ"
 				depends="validwhen">
@@ -1683,6 +1704,9 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
+			<field property="rgdPubID" depends="integer">
+				<arg0 key="PublicationForm.rgdPubID" />
+			</field>			
 			<field property="volume" depends="maxlength">
 				<arg0 key="PublicationForm.volume" />
 				<arg1 name="maxlength" key="${var:maxlength}"
