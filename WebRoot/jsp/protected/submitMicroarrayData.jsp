@@ -1,10 +1,33 @@
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
+<%@ include file="/common/taglibs.jsp" %>
+
+<%@ page import="gov.nih.nci.camod.webapp.form.MicroArrayDataForm" %>
+<%@ page import='gov.nih.nci.camod.Constants.*' %>
+
+<script language="JavaScript" src="scripts/EVSTreeScript.js"></script>
 
 <!-- needed for tooltips -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
 
-<FORM name="input" action="http://caarraydb.nci.nih.gov" method="get">
+<%
+	String aMicroArrayDataID = request.getParameter( "aMicroArrayDataID" );
+	String isDeleted = (String) request.getAttribute(Constants.Parameters.DELETED);
+	
+	//if aCellID is passed in, then we are dealing with a previously entered model and are editing it
+	//otherwise, create a new one
+	
+	String actionName = "MicroArrayDataAction.do?method=save";
+	
+    if ( aMicroArrayDataID != null && aMicroArrayDataID.length() > 0 && isDeleted == null) {
+		actionName = "MicroArrayDataAction.do?method=edit";
+	}
+	else {
+	    aMicroArrayDataID = "";
+	}
+%>
+
+<html:form action="<%= actionName %>" focus="experimentName">
 
 
 <!-- submitMicroarrayData.jsp -->
@@ -23,7 +46,54 @@
 	</tr>
 
 	<tr>
-		<td class="greyBox" height="20" colspan="3">
+		<td class="formRequiredNotice" width="5">*</td>
+		<td class="formRequiredLabel"><label for="field1">Experiment Name:</label>
+		</td>
+		<td class="formField">
+			<html:text styleClass="formFieldSized" size="30" property="experimentName" />			
+		</td>
+	</tr>
+		
+	<tr>
+		<td class="formRequiredNotice" width="5">*</td>
+		<td class="formRequiredLabel"><label for="field1">URL for Microarray data not stored in caArray:</label>
+		</td>
+		<td class="formField">
+			<html:text styleClass="formFieldSized" size="30" property="otherLocationURL" />			
+		</td>
+	</tr>
+
+	<tr>
+		<td align="right" colspan="3">
+			<!-- action buttons begins -->
+				<TABLE cellpadding="4" cellspacing="0" border="0">
+			
+				  <html:submit styleClass="actionButton">
+					  <bean:message key="button.submit"/>
+				  </html:submit>
+				  
+				  <html:reset styleClass="actionButton">
+				  	  <bean:message key="button.reset"/>
+  				  </html:reset>
+	  				  
+  				  <c:if test="${not empty aMicroArrayDataID}">
+	  				  <html:submit property="<%=Constants.Parameters.ACTION%>" styleClass="actionButton" onclick="return confirm('Are you sure you want to delete?');">
+						  <bean:message key="button.delete"/>
+					  </html:submit>
+			      </c:if>
+					  
+				  <!--  Done this way since html:hidden doesn't seem to work correctly -->
+				  <input type="hidden" name="aMicroArrayDataID" value="<%= aMicroArrayDataID %>">
+				  
+				  </html:form>			
+				</TABLE>
+			<!-- action buttons end -->
+		</td>
+	</tr>	
+	
+	<!-- Misc -->
+	<tr>
+		<td class="GreyBoxTop" height="20" colspan="3">
     <b>Microarray data is stored in the caArray portal. Follow these simple steps to upload microarray data to caArray.
     <ol >
     	<li style="padding-bottom:7px">Click <a href="http://caarraydb.nci.nih.gov/" target="_caArray">here</a> to login into caArray. A new browser window opens. (Be sure and turn off any pop-up blockers for this site.) <br/>
