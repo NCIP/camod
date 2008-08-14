@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelManager.java,v 1.40 2008-01-16 18:30:30 pandyas Exp $
+ * $Id: AnimalModelManager.java,v 1.41 2008-08-14 06:24:37 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.40  2008/01/16 18:30:30  pandyas
+ * Renamed value to Transplant for #8290
+ *
  * Revision 1.39  2007/10/31 18:48:03  pandyas
  * Fixed #8290 	Rename graft object into transplant object
  *
@@ -96,6 +99,9 @@
  * Added saveXenograft and saveGeneDelivery
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.40  2008/01/16 18:30:30  pandyas
+ * Renamed value to Transplant for #8290
+ *
  * Revision 1.39  2007/10/31 18:48:03  pandyas
  * Fixed #8290 	Rename graft object into transplant object
  *
@@ -260,6 +266,8 @@ public interface AnimalModelManager {
     
     public void addCellLine(AnimalModel inAnimalModel, CellLineData inCellLineData) throws Exception;    
 
+    public void addMicroArrayData( AnimalModel inAnimalModel, MicroArrayDataData inMicroArrayData ) throws Exception;
+    
     public void addGeneticDescription(AnimalModel inAnimalModel, SpontaneousMutationData inSpontaneousMutationData) throws Exception;
     
     public void addGeneticDescription(AnimalModel inAnimalModel, InducedMutationData inInducedMutationData) throws Exception;
