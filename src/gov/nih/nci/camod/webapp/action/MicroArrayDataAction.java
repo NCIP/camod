@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: MicroArrayDataAction.java,v 1.5 2008-08-14 06:17:03 schroedn Exp $
+ * $Id: MicroArrayDataAction.java,v 1.6 2008-08-14 19:01:41 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2008/08/14 06:17:03  schroedn
+ * Microarray - added new field for other urls
+ *
  * Revision 1.4  2006/04/17 19:09:41  pandyas
  * caMod 2.1 OM changes
  *
@@ -58,7 +61,7 @@ public final class MicroArrayDataAction extends BaseAction {
 		// Grab the current aCellID from the session
 		String aMicroArrayID = request.getParameter("aMicroArrayDataID");
 		
-		System.out.println("<MicroArrayDataAction save> following Characteristics:" 
+		log.debug("<MicroArrayDataAction save> following Characteristics:" 
 				+ "\n\t CellLineName: " + microArrayDataForm.getExperimentName() 
 				+ "\n\t Experiment: " + microArrayDataForm.getOtherLocationURL()				
 				+ "\n\t user: " + (String) request.getSession().getAttribute("camod.loggedon.username"));
@@ -127,7 +130,7 @@ public final class MicroArrayDataAction extends BaseAction {
 		// Grab the current modelID from the session
 		String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
-		System.out.println("<MicroArrayDataAction save> following Characteristics:" 
+		log.debug("<MicroArrayDataAction save> following Characteristics:" 
 				+ "\n\t CellLineName: " + microArrayDataForm.getExperimentName() 
 				+ "\n\t Experiment: " + microArrayDataForm.getOtherLocationURL()				
 				+ "\n\t user: " + (String) request.getSession().getAttribute("camod.loggedon.username"));
