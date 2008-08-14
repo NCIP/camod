@@ -1,8 +1,13 @@
 /**
  * 
- * $Id: LogoutAction.java,v 1.10 2008-06-23 18:07:06 pandyas Exp $
+ * $Id: LogoutAction.java,v 1.11 2008-08-14 16:54:33 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2008/06/23 18:07:06  pandyas
+ * Modified to prevent Security issues
+ * Invalidate relevant session identifiers when a user signs out
+ * Re: Apps Scan run 06/17/2008
+ *
  * Revision 1.9  2008/06/16 13:12:22  pandyas
  * Modified to prevent Security issues
  * Invalidate relevant session identifiers when a user signs out
@@ -53,7 +58,6 @@ public class LogoutAction extends BaseAction {
             HttpServletResponse response)
 	throws IOException, ServletException
 	{
-		System.out.println( "<LogoutAction execute> Logging Off" );
 		
         // Original code before security scan changes
 		request.getSession().setAttribute( "camod.loggedon.username", null );
@@ -67,20 +71,13 @@ public class LogoutAction extends BaseAction {
         
 		// Remove user login key set in LoginAction
 		request.getSession().removeAttribute("validUserKey");
-    	log.info("Removed Cookie named validUserCookie" );		
         
         //  Example to secure a cookie, i.e. instruct the browser to
         //  Send the cookie using a secure protocol
         Cookie[] cookieArray = request.getCookies(); 
-        for(int i = 0; i < cookieArray.length; i++){  
-        	log.info("Cookie name: " + cookieArray[i].getName());
-        	log.info("Cookie value: " + cookieArray[i].getValue()); 
-        	log.info("Cookie MaxAge: " + cookieArray[i].getMaxAge());          	
+        for(int i = 0; i < cookieArray.length; i++){           	
         	if(cookieArray[i].getName().equals("validUserKey")) {       		
-            	cookieArray[i].setValue("000000"); 
-            	log.info("Set validUserKey to 00000");
-            	log.info("Cookie name: " + cookieArray[i].getName());
-            	log.info("Cookie value: " + cookieArray[i].getValue());             	
+            	cookieArray[i].setValue("000000");             	
         	}
         }
 		return mapping.findForward( "loggedOut" );

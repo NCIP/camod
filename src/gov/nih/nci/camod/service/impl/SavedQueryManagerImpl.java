@@ -1,9 +1,12 @@
 /**
  * @author schroedlni
  * 
- * $Id: SavedQueryManagerImpl.java,v 1.11 2008-08-12 19:45:50 pandyas Exp $
+ * $Id: SavedQueryManagerImpl.java,v 1.12 2008-08-14 16:36:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2008/08/12 19:45:50  pandyas
+ * Fixed #15053  	Search for models with transgenic or targeted modification on advanced search page confusing
+ *
  * Revision 1.10  2008/01/16 18:30:22  pandyas
  * Renamed value to Transplant for #8290
  *
@@ -102,8 +105,6 @@ public class SavedQueryManagerImpl extends BaseManager implements
 				.iterator();
 		while (sqaIter.hasNext()) {
 			SavedQueryAttribute theSavedQueryAttribute = sqaIter.next();
-			// System.out.println( theSavedQueryAttribute.getAttributeName() + "
-			// = " + theSavedQueryAttribute.getAttributeValue() );
 
 			if (theSavedQueryAttribute.getAttributeName().equals(
 					theBundle.getString("criteria.Keyword"))) {

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ChemicalDrugPopulateAction.java,v 1.19 2007-10-31 18:08:17 pandyas Exp $
+ * $Id: ChemicalDrugPopulateAction.java,v 1.20 2008-08-14 16:43:29 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2007/10/31 18:08:17  pandyas
+ * Modified comments for #8188 	Rename UnctrlVocab items to text entries
+ *
  * Revision 1.18  2006/11/09 17:24:43  pandyas
  * Commented out debug code
  *
@@ -58,8 +61,6 @@ public class ChemicalDrugPopulateAction extends BaseAction
                                   HttpServletRequest request,
                                   HttpServletResponse response) throws Exception
     {
-
-        //System.out.println("<ChemicalDrugPopulateAction populate> Entering ");
 
         ChemicalDrugForm chemicalDrugForm = (ChemicalDrugForm) form;
 
@@ -150,12 +151,8 @@ public class ChemicalDrugPopulateAction extends BaseAction
                                   HttpServletResponse response) throws Exception
     {
 
-        //System.out.println("<ChemicalDrugPopulateAction dropdown> ... ");
-
         // setup dropdown menus
         this.dropdown(request, response);
-
-        //System.out.println("<ChemicalDrugPopulateAction> exiting... ");
 
         return mapping.findForward("submitChemicalDrug");
     }
@@ -171,8 +168,6 @@ public class ChemicalDrugPopulateAction extends BaseAction
                          HttpServletResponse response) throws Exception
     {
 
-        //System.out.println("<ChemicalDrugPopulateAction dropdown> Entering... ");
-
         // Prepopulate all dropdown fields, set the global Constants to the
         // following
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, Constants.Dropdowns.ADD_BLANK);
@@ -182,7 +177,6 @@ public class ChemicalDrugPopulateAction extends BaseAction
 
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.ADMINISTRATIVEROUTEDROP, Constants.Dropdowns.ADD_BLANK);
 
-        //System.out.println("<ChemicalDrugPopulateAction> Finishing dropdown");
     }
 
 }

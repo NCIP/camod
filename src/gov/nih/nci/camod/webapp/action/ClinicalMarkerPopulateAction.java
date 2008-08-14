@@ -2,9 +2,13 @@
  * 
  * @author pandyas
  * 
- * $Id: ClinicalMarkerPopulateAction.java,v 1.7 2007-10-31 18:09:11 pandyas Exp $
+ * $Id: ClinicalMarkerPopulateAction.java,v 1.8 2008-08-14 16:44:12 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2007/10/31 18:09:11  pandyas
+ * Fixed #8355 	Add comments field to every submission page
+ * Fixed #8188 	Rename UnctrlVocab items to text entries
+ *
  * Revision 1.6  2006/11/09 17:26:10  pandyas
  * Commented out debug code
  *
@@ -49,16 +53,12 @@ public class ClinicalMarkerPopulateAction extends BaseAction {
 						           HttpServletResponse response)
 	  throws Exception {
 		
-		//System.out.println( "<ClinicalMarkerPopulateAction populate> Entered" );
-		
 		ClinicalMarkerForm clinicalMarkerForm = (ClinicalMarkerForm) form;
 
        	// Grab the current aHistopathID from the session
        	String aHistopathologyID = request.getParameter("aHistopathologyID");
-       	//System.out.println( "aHistopathologyID: " +aHistopathologyID );
     	
     	String aClinicalMarkerID = request.getParameter( "aClinicalMarkerID" );		
-    	//System.out.println( "aClinicalMarkerID: = " +aClinicalMarkerID);  
     	
     	ClinicalMarkerManager theClinicalMarkerManager = (ClinicalMarkerManager) getBean( "clinicalMarkerManager" );
     	ClinicalMarker theClinicalMarker = theClinicalMarkerManager.get( aClinicalMarkerID ); 
@@ -117,8 +117,6 @@ public class ClinicalMarkerPopulateAction extends BaseAction {
 		//setup dropdown menus
 		this.dropdown( request, response );
 		
-		//System.out.println( "<ClinicalMarkerPopulateAction dropdown> Exiting ActionForward dropdown()" );		
-		
 		return mapping.findForward( "submitClinicalMarkers" );
 	}	
 	
@@ -132,13 +130,9 @@ public class ClinicalMarkerPopulateAction extends BaseAction {
 	public void dropdown( HttpServletRequest request,
 						  HttpServletResponse response )
 	  throws Exception {
-		
-			//System.out.println( "<ClinicalMarkerPopulateAction dropdown> Entering void dropdown()" );
-		
+
 			//Prepopulate all dropdown fields, set the global Constants to the following
 			NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.CLINICALMARKERSDROP, Constants.Dropdowns.ADD_BLANK );
-			
-			//System.out.println( "<ClinicalMarkerPopulateAction dropdown> Exiting void dropdown()" );			
 	}	
 
 }

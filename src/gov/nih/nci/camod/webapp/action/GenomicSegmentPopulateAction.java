@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GenomicSegmentPopulateAction.java,v 1.19 2007-10-31 18:11:03 pandyas Exp $
+ * $Id: GenomicSegmentPopulateAction.java,v 1.20 2008-08-14 16:51:23 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2007/10/31 18:11:03  pandyas
+ * Fixed #8188 	Rename UnctrlVocab items to text entries
+ *
  * Revision 1.18  2007/07/31 12:02:55  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -50,8 +53,6 @@ public class GenomicSegmentPopulateAction extends BaseAction {
 
     public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
-
-        //System.out.println("<GenomicSegmentPopulateAction populate> Entering populate() ");
 
         // setup dropdown menus
         this.dropdown(request, response);
@@ -126,8 +127,6 @@ public class GenomicSegmentPopulateAction extends BaseAction {
     public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        //System.out.println("<GenomicSegmentPopulateAction dropdown> Entering dropdown()");
-
         // setup dropdown menus
         this.dropdown(request, response);
 
@@ -143,10 +142,7 @@ public class GenomicSegmentPopulateAction extends BaseAction {
      */
     public void dropdown(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        //System.out.println("<GenomicSegmentPopulateAction dropdown> Entering void dropdown()");
-
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.GENOMICSEGMENTDROP, "");
 
-        //System.out.println("<GenomicSegmentPopulateAction dropdown> Exiting void dropdown()");
     }
 }

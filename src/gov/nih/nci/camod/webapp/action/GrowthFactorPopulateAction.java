@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GrowthFactorPopulateAction.java,v 1.12 2007-10-31 18:11:18 pandyas Exp $
+ * $Id: GrowthFactorPopulateAction.java,v 1.13 2008-08-14 16:52:49 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2007/10/31 18:11:18  pandyas
+ * Fixed #8188 	Rename UnctrlVocab items to text entries
+ *
  * Revision 1.11  2006/04/17 19:09:41  pandyas
  * caMod 2.1 OM changes
  *
@@ -46,7 +49,7 @@ public class GrowthFactorPopulateAction extends BaseAction {
 	public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		System.out.println("<GrowthFactorPopulateAction populate> ... ");
+		log.debug("<GrowthFactorPopulateAction populate> ... ");
 
 		GrowthFactorForm growthFactorForm = (GrowthFactorForm) form;
 
@@ -115,16 +118,12 @@ public class GrowthFactorPopulateAction extends BaseAction {
 	public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		System.out.println("<GrowthFactorPopulateAction dropdown> ... ");
-
 		// blank out the FORMDATA Constant field
 		GrowthFactorForm growthFactorForm = (GrowthFactorForm) form;
 		request.getSession().setAttribute(Constants.FORMDATA, growthFactorForm);
 
 		// setup dropdown menus
 		this.dropdown(request, response);
-
-		System.out.println("<GrowthFactorPopulateAction> exiting... ");
 
 		return mapping.findForward("submitGrowthFactors");
 	}
@@ -137,8 +136,6 @@ public class GrowthFactorPopulateAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public void dropdown(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-		System.out.println("<GrowthFactorPopulateAction dropdown> Entering... ");
 
 		// Prepopulate all dropdow2n fields, set the global Constants to the
 		// following

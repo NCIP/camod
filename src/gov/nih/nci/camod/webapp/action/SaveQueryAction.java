@@ -1,8 +1,12 @@
 /**
  * 
- * $Id: SaveQueryAction.java,v 1.4 2008-07-11 17:38:46 schroedn Exp $
+ * $Id: SaveQueryAction.java,v 1.5 2008-08-14 16:56:41 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2008/07/11 17:38:46  schroedn
+ * Bug 12042
+ * Save Query fix
+ *
  * Revision 1.3  2006/05/10 15:37:11  schroedn
  * Fixed Dup_Name bug
  *
@@ -65,12 +69,11 @@ public class SaveQueryAction extends BaseAction
     {
 
         log.debug("Entering SaveQueryAction.save");
-        System.out.println("Entering SaveQueryAction.save");
         
         SaveQueryForm theForm = (SaveQueryForm) form;
         SavedQueryManager savedQueryManager = (SavedQueryManager) getBean("savedQueryManager");
         
-        System.out.println("SaveQueryForm\n" + 
+        log.info("SaveQueryForm\n" + 
         							"Page=" + theForm.getPage() + "\n" +
         							"QueryName=" + theForm.getQueryName() + "\n" +
         							"SaveAsNew=" + theForm.getSaveAsNew() + "\n" );
@@ -86,7 +89,6 @@ public class SaveQueryAction extends BaseAction
             {
                 // Update Saved Query
                 log.debug("Updating SavedQuery");
-                System.out.println("Updating SavedQuery");
                 
                 request.getSession().setAttribute(Constants.DUP_NAME, "false");
 
@@ -108,15 +110,12 @@ public class SaveQueryAction extends BaseAction
             if (theForm.getSaveAsNew().equals("yes"))
             {
                 log.debug("Saving new SavedQuery");
-        		System.out.println("Saving new SavedQuery");
                 
         		// Create NEW Saved Query               
                 SavedQuery theQueryToSave = new SavedQuery();
 
                 boolean duplicateName = false;
                 request.getSession().setAttribute(Constants.DUP_NAME, "false");
-                
-                System.out.println("CURRENTUSER=" + (String) request.getSession().getAttribute( Constants.CURRENTUSER ) );
                 
                 //HERE!@
                 List allSaved = savedQueryManager.getSavedQueriesByUsername((String) request.getSession().getAttribute( Constants.CURRENTUSER ));
@@ -125,13 +124,10 @@ public class SaveQueryAction extends BaseAction
                 for (int i = 0; i < allSaved.size(); i++)
                 {
                     SavedQuery theSavedQuery = (SavedQuery) allSaved.get(i);
-                    System.out.println( "SavedQueries= (" + i + ") " +theSavedQuery.getQueryName() );
                    
                     if (theForm.getQueryName().equals(theSavedQuery.getQueryName()))
                     {
                         log.debug( "Query name is a duplicate" );
-                        System.out.println( "Query name is a duplicate" );
-                        
                         duplicateName = true;
                         request.getSession().setAttribute(Constants.DUP_NAME, "true");
                         request.getSession().setAttribute(Constants.NOSAVEOPTION, "false");
@@ -142,7 +138,6 @@ public class SaveQueryAction extends BaseAction
 
                 if (duplicateName == false)
                 {
-                	System.out.println("No Duplicate found");
                 	
                     theQueryToSave.setQueryName(theForm.getQueryName());
                     theQueryToSave.setIsSaved(1l);

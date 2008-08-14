@@ -1,8 +1,12 @@
 /**
  * 
- * $Id: SurgeryPopulateAction.java,v 1.10 2007-10-31 18:34:29 pandyas Exp $
+ * $Id: SurgeryPopulateAction.java,v 1.11 2008-08-14 16:59:24 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2007/10/31 18:34:29  pandyas
+ * Fixed #8355 	Add comments field to every submission page
+ * Fixed #8188 	Rename UnctrlVocab items to text entries
+ *
  * Revision 1.9  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -33,8 +37,6 @@ public class SurgeryPopulateAction extends BaseAction {
 	 */
 	public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-
-		System.out.println("<SurgeryPopulateAction populate> ... ");
 
 		SurgeryForm surgeryForm = (SurgeryForm) form;
 
@@ -94,16 +96,12 @@ public class SurgeryPopulateAction extends BaseAction {
 	public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		System.out.println("<SurgeryPopulateAction dropdown> ... ");
-
 		// blank out the FORMDATA Constant field
 		SurgeryForm surgeryForm = (SurgeryForm) form;
 		request.getSession().setAttribute(Constants.FORMDATA, surgeryForm);
 
 		// setup dropdown menus
 		this.dropdown(request, response);
-
-		System.out.println("<SurgeryPopulateAction> exiting... ");
 
 		return mapping.findForward("submitSurgeryOther");
 	}
@@ -116,8 +114,6 @@ public class SurgeryPopulateAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public void dropdown(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-		System.out.println("<SurgeryPopulateAction dropdown> Entering... ");
 
 		// Prepopulate all dropdown fields, set the global Constants to the
 		// following

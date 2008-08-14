@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.93 2008-08-14 06:25:35 schroedn Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.94 2008-08-14 16:32:05 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.93  2008/08/14 06:25:35  schroedn
+ * Added Microarray
+ *
  * Revision 1.92  2008/07/11 17:44:42  schroedn
  * Bug 5200
  * Status of duplicate model
@@ -509,10 +512,6 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     {
         log.debug("In AnimalModelManagerImpl.duplicate");
         
-        System.out.println("In AnimalModelManagerImpl.duplicate");
-        
-        System.out.println("Calling DuplicateUtil...");
-        
         AnimalModel theDuplicatedModel = (AnimalModel) DuplicateUtil.duplicateBean(inAnimalModel);
 
         String theNewModelDescriptor = theDuplicatedModel.getModelDescriptor() + " (Copy) ";
@@ -524,8 +523,6 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         theDuplicatedModel.setState("Incomplete");
         
         log.debug("In AnimalModelManagerImpl.duplicate state" + theDuplicatedModel.getState());
-        
-        System.out.println("In AnimalModelManagerImpl.duplicate state" + theDuplicatedModel.getState());
         
         save(theDuplicatedModel);
 
@@ -835,17 +832,12 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     public void addTransplant(AnimalModel inAnimalModel,
     		TransplantData inTransplantData) throws Exception
     {
-
-        System.out.println("<AnimalModelManagerImpl populate> Entering addTransplant() ");
-
         log.debug("Entering saveTransplant");
 
         Transplant theTransplant = TransplantManagerSingleton.instance().create(inTransplantData, inAnimalModel);
 
         inAnimalModel.addTransplant(theTransplant);
         save(inAnimalModel);
-
-        System.out.println("<AnimalModelManagerImpl populate> Exiting addTransplant() ");
 
         log.debug("Exiting saveTransplant");
     }
@@ -1144,7 +1136,6 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         log.debug("Entering addGeneticDescription (EngineeredTransgene)");
 
         Transgene theEngineeredTransgene = EngineeredTransgeneManagerSingleton.instance().create(inEngineeredTransgeneData, request);
-        // System.out.println(theGenomicSegment.getName() );
 
         inAnimalModel.addEngineeredGene(theEngineeredTransgene);
         save(inAnimalModel);
@@ -1227,8 +1218,6 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     public void addInvestigatorAvailability(AnimalModel inAnimalModel,
                                             AvailabilityData inAvailabilityData) throws Exception
     {
-
-        System.out.println("<AnimalModelManagerImpl addInvestigatorAvailability>");
 
         log.debug("Entering AnimalModelManagerImpl.addInvestigatorAvailability");
         AnimalAvailability theAvailability = AvailabilityManagerSingleton.instance().createInvestigator(inAvailabilityData);

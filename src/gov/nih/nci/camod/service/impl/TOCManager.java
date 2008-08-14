@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: TOCManager.java,v 1.3 2007-08-08 16:38:33 pandyas Exp $
+ *  $Id: TOCManager.java,v 1.4 2008-08-14 16:38:49 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.3  2007/08/08 16:38:33  pandyas
+ *  removed reference to camod_dev - project name change to camod
+ *
  *  Revision 1.2  2006/05/08 13:33:54  georgeda
  *  Clean up warnings
  *
@@ -161,13 +164,9 @@ public class TOCManager {
 
             TOCQueryGroup theTOCQueryGroup = (TOCQueryGroup) theResults.get(0);
 
-            System.out.println("Group Description: " + theTOCQueryGroup.getDescription());
-
             List theQueries = theTOCQueryGroup.getQueries();
             TOCQuery theQuery = (TOCQuery) theQueries.get(0);
-            System.out.println("Description: " + theQuery.getDescription());
-            System.out.println("Key: " + theQuery.getKey());
-            System.out.println("Size: " + theQuery.getSize());
+
         } catch (Exception e) {
             e.printStackTrace();
         }

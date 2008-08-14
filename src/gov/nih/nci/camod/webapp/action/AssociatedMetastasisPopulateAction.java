@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AssociatedMetastasisPopulateAction.java,v 1.17 2007-10-31 17:08:48 pandyas Exp $
+ * $Id: AssociatedMetastasisPopulateAction.java,v 1.18 2008-08-14 16:46:47 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2007/10/31 17:08:48  pandyas
+ * Modified commetns for #8188 	Rename UnctrlVocab items to text entries
+ *
  * Revision 1.16  2007/09/12 19:36:40  pandyas
  * modified debug statements for build to stage tier
  *
@@ -62,8 +65,6 @@ public class AssociatedMetastasisPopulateAction extends BaseAction {
      */
     public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
-
-        //System.out.println("<AssociatedMetastasisPopulateAction populate> Entered");
 
         AssociatedMetastasisForm assocMetastasisForm = (AssociatedMetastasisForm) form;
 
@@ -163,8 +164,6 @@ public class AssociatedMetastasisPopulateAction extends BaseAction {
     public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        //System.out.println("<AssociatedMetastasisPopulateAction dropdown> Entering ActionForward dropdown()");
-
         // setup dropdown menus
         this.dropdown(request, response);
 
@@ -179,8 +178,6 @@ public class AssociatedMetastasisPopulateAction extends BaseAction {
      * @throws Exception
      */
     public void dropdown(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-        //System.out.println("<AssociatedMetastasisPopulateAction dropdown> Entering void dropdown()");
 
         // Prepopulate all dropdown fields, set the global Constants to the
         // following

@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: CurationManagerImpl.java,v 1.8 2007-08-08 16:38:29 pandyas Exp $
+ *  $Id: CurationManagerImpl.java,v 1.9 2008-08-14 16:32:36 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.8  2007/08/08 16:38:29  pandyas
+ *  removed reference to camod_dev - project name change to camod
+ *
  *  Revision 1.7  2006/11/09 17:37:07  pandyas
  *  Commented out debug code
  *
@@ -54,18 +57,11 @@ public class CurationManagerImpl extends AbstractCurationManager
 
         theAnimalModel.setState(theCurationManager.getDefaultState());
 
-        //System.out.println("1) Current state: " + theAnimalModel.getState());
         theCurationManager.changeState(theAnimalModel, "");
-        //System.out.println("2) Current state: " + theAnimalModel.getState());
         theCurationManager.changeState(theAnimalModel, "");
-        //System.out.println("3) Current state: " + theAnimalModel.getState());
         theCurationManager.changeState(theAnimalModel, "approve");
-        //System.out.println("4) Current state: " + theAnimalModel.getState());
         theCurationManager.changeState(theAnimalModel, "");
-        //System.out.println("5) Current state: " + theAnimalModel.getState());
         theCurationManager.changeState(theAnimalModel, "need_more_info");
-        //System.out.println("6) Current state: " + theAnimalModel.getState());
         theCurationManager.changeState(theAnimalModel, "approve");
-        //System.out.println("7) Current state: " + theAnimalModel.getState());
     }
 }

@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.54 2008-08-14 07:05:56 schroedn Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.55 2008-08-14 16:45:17 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.54  2008/08/14 07:05:56  schroedn
+ *  added microarray
+ *
  *  Revision 1.53  2008/08/12 19:40:30  pandyas
  *  Fixed #11640  	Delete availability from IMSR from application
  *
@@ -163,8 +166,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 
-		System.out
-				.println("<AnimalModelTreePopulateAction populate> Entering... ");
+        log.debug("<AnimalModelTreePopulateAction populate> Entering... ");
 		String speciesName = (String) request.getSession().getAttribute(Constants.AMMODELSPECIESCOMMONNAME);
 		log.debug("speciesName: " + speciesName);
 

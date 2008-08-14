@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: CellLinePopulateAction.java,v 1.18 2007-09-12 19:36:40 pandyas Exp $
+ * $Id: CellLinePopulateAction.java,v 1.19 2008-08-14 16:41:59 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2007/09/12 19:36:40  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.17  2007/08/14 17:05:47  pandyas
  * Bug #8414:  getEVSPreferredDiscription needs to be implemented for Zebrafish vocabulary source
  *
@@ -64,8 +67,6 @@ public class CellLinePopulateAction extends BaseAction {
 	public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		//System.out.println("<CellLinePopulateAction populate> Entered");
-
 		// Create a form to edit
 		CellLineForm cellLineForm = (CellLineForm) form;
 
@@ -101,7 +102,7 @@ public class CellLinePopulateAction extends BaseAction {
                 log.debug("cellLine.getOrgan().getEVSPreferredDescription(): " + cellLine.getOrgan().getEVSPreferredDescription());
     
                 cellLineForm.setOrganTissueCode(cellLine.getOrgan().getConceptCode());
-                //log.debug("OrganTissueCode: " + cellLine.getOrgan().getConceptCode());
+                log.debug("OrganTissueCode: " + cellLine.getOrgan().getConceptCode());
             }
 
 		}

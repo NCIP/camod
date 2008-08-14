@@ -2,9 +2,12 @@
  *
  * @author pandyas
  * 
- * $Id: AvailabilityPopulateAction.java,v 1.8 2007-03-26 12:02:30 pandyas Exp $
+ * $Id: AvailabilityPopulateAction.java,v 1.9 2008-08-14 16:48:28 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2007/03/26 12:02:30  pandyas
+ * caMOd 2.3 enhancements for Zebrafish support
+ *
  * Revision 1.7  2006/11/09 17:23:01  pandyas
  * Commented out debug code
  *
@@ -49,8 +52,6 @@ public class AvailabilityPopulateAction extends BaseAction {
 	public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		//System.out.println("<AvailabilityPopulateAction populate> Entering ");
-
 		// Create a form to edit
 		AvailabilityForm availabilityForm = (AvailabilityForm) form;
 
@@ -72,8 +73,6 @@ public class AvailabilityPopulateAction extends BaseAction {
 			availabilityForm.setStockNumber(avilablity.getStockNumber());
 		}
 
-		//System.out.println("<AvailabilityPopulateAction populate> Exiting ");
-
 		return mapping.findForward("next");
 	}
 
@@ -91,14 +90,10 @@ public class AvailabilityPopulateAction extends BaseAction {
 	public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		//System.out.println("<AvailabilityPopulateAction ActionForward dropdown> Entering ");
-
 		AvailabilityForm availabilityForm = (AvailabilityForm) form;
 
 		String theSource = (String) request.getParameter("lab");
 		availabilityForm.setSource(theSource);
-
-		//System.out.println("<AvailabilityPopulateAction ActionForward dropdown> Exiting ");
 
 		return mapping.findForward("next");
 
