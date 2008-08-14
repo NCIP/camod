@@ -42,9 +42,15 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.45 2008-08-12 20:16:02 pandyas Exp $
+ * $Id: SearchForm.java,v 1.46 2008-08-14 15:57:46 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.45  2008/08/12 20:16:02  pandyas
+ * Code was rolled back to continue work on security scan fixes.  Code added back in jsp again.  Originally From:
+ *  Revision 1.42  2008/07/11 17:20:19  schroedn
+ *  Bug 11007
+ *  Added search for PMID numbers
+ *
  * Revision 1.44  2008/08/12 19:40:32  pandyas
  * Fixed #15053  	Search for models with transgenic or targeted modification on advanced search page confusing
  *
@@ -717,7 +723,6 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
      */
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) 
     {
-        //System.out.println("In SearchForm.validate");
         ActionErrors errors = new ActionErrors();
        
         // Identify the request parameter containing the method name
