@@ -1367,7 +1367,7 @@
 			validate="false">
 		<set-property property="secure" value="false" />
     </action>
- 
+    
      <action path="/ZFINAction"
 	        type="gov.nih.nci.camod.webapp.action.AvailabilityAction"
 	        name="availabilityForm"
@@ -1419,7 +1419,31 @@
 			validate="false">
 		<set-property property="secure" value="false" />
     </action>      
+ 
+      <!-- MicroArrayDataForm -->
+     <action path="/MicroArrayDataAction"
+	        type="gov.nih.nci.camod.webapp.action.MicroArrayDataAction"
+	        name="microArrayDataForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="true"
+	        input="input">
+	    <set-property property="secure" value="false" />
+	    <forward
+            name="input"
+            path="/submitMicroArrayData.do">
+        </forward>   		
+    </action>
     
+    <action path="/MicroArrayDataPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.MicroArrayDataPopulateAction"
+    		name="microArrayDataForm"    		
+            scope="request"
+            parameter="method"
+			validate="false">
+		<set-property property="secure" value="false" />
+    </action>   
+       
 	 <!--  CustomizeSearchResultsAction  -->
      <action path="/CustomizeSearchResultsAction"
 	        type="gov.nih.nci.camod.webapp.action.CustomizeSearchResultsAction"
