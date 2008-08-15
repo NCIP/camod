@@ -1,9 +1,14 @@
 /**
  * @author pandyas
  * 
- * $Id: CarcinogenExposureManagerImpl.java,v 1.10 2008-08-12 19:49:16 pandyas Exp $
+ * $Id: CarcinogenExposureManagerImpl.java,v 1.11 2008-08-15 18:23:01 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2008/08/12 19:49:16  pandyas
+ * Fixed #12825  	induced mutation entries need to be flagged (requires OM change) and searches for induced mutation and carcinogenic interventions need to be fixed
+ *
+ * Note:  All CE and IM models now set a flag in Environmental_Factor object
+ *
  * Revision 1.9  2007/10/31 19:01:53  pandyas
  * Fixed #8355 	Add comments field to every submission page
  * Fixed #8188 	Rename UnctrlVocab items to text entries
@@ -602,7 +607,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
             theEF = new EnvironmentalFactor();
             theCarcinogenExposure.setEnvironmentalFactor(theEF);
         }
-        //theEF.setInducedMutationTrigger(false);
+        theEF.setIsInducedMutationTrigger(false);
 
     }    
 

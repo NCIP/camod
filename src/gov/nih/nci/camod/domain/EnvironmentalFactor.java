@@ -1,7 +1,10 @@
 /*
- * $Id: EnvironmentalFactor.java,v 1.19 2008-08-13 18:44:51 pandyas Exp $
+ * $Id: EnvironmentalFactor.java,v 1.20 2008-08-15 18:23:13 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2008/08/13 18:44:51  pandyas
+ * commented out is_induced_mutation_trigger until the database is updated with either 0 or 1 -  must be careful to write SQL
+ *
  * Revision 1.18  2008/08/13 16:55:28  pandyas
  * minor code change to build to dev
  *
@@ -42,7 +45,7 @@ public class EnvironmentalFactor extends BaseObject implements Comparable, Seria
     private String casNumber;
     private Long nscNumber;
     private String comments;  
-    //private Boolean isInducedMutationTrigger;
+    private Boolean isInducedMutationTrigger;
     
 
     /**
@@ -222,17 +225,17 @@ public class EnvironmentalFactor extends BaseObject implements Comparable, Seria
     
     /**
      * @return Returns the isInducedMutationTrigger.
-     
+    */ 
     public Boolean getIsInducedMutationTrigger() {
         return isInducedMutationTrigger;
     }
-    */
+    
     /**
      * @param isInducedMutationTrigger
      *            The isInducedMutationTrigger to set.
-     
+    */ 
     public void setIsInducedMutationTrigger(Boolean isInducedMutationTrigger) {
         this.isInducedMutationTrigger = isInducedMutationTrigger;
     }    
-    */
+    
 }

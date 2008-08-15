@@ -1,8 +1,11 @@
 /**
  * @author schroedln
  * 
- * $Id: InducedMutationManagerImpl.java,v 1.34 2008-02-08 16:45:59 pandyas Exp $
+ * $Id: InducedMutationManagerImpl.java,v 1.35 2008-08-15 18:23:01 pandyas Exp $
  * $Log: not supported by cvs2svn $
+ * Revision 1.34  2008/02/08 16:45:59  pandyas
+ * modified log statement for final deployment to QA
+ *
  * Revision 1.33  2008/01/27 23:26:33  pandyas
  * Modifed to clear Gene Identifer when removed from GUI
  *
@@ -211,7 +214,9 @@ public class InducedMutationManagerImpl extends BaseManager implements
 
 		// CAS Number
 		theEnvironFactor.setCasNumber(inInducedMutationData.getCasNumber());
-
+		
+		// flag for IM in Environmental Factor object
+		theEnvironFactor.setIsInducedMutationTrigger(true);
          
          // GeneIdentifier
          GeneIdentifier inGeneIdentifier = null;         

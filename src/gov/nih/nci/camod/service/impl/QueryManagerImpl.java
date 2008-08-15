@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.99 2008-08-14 19:01:16 schroedn Exp $
+ * $Id: QueryManagerImpl.java,v 1.100 2008-08-15 18:23:01 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.99  2008/08/14 19:01:16  schroedn
+ * Fixes for saving search results
+ *
  * Revision 1.98  2008/08/14 17:18:45  pandyas
  * remove debug lines
  *
@@ -871,7 +874,7 @@ public class QueryManagerImpl extends BaseManager
 					+ "  AND ef.environmental_factor_id IN (SELECT ce.environmental_factor_id "
 					+ "     FROM carcinogen_exposure ce, abs_cancer_model am "
 					+ "			WHERE ef.environmental_factor_id = ce.environmental_factor_id "
-					//+ "     	AND ef.is_induced_mutation_trigger = 0 "
+					+ "     	AND ef.is_induced_mutation_trigger = 0 "
 					+ "     	AND am.abs_cancer_model_id = ce.abs_cancer_model_id AND am.state = 'Edited-approved')";
 			
 			log.debug("theSQLQuery: " + theSQLQuery.toString());
@@ -1052,7 +1055,7 @@ public class QueryManagerImpl extends BaseManager
 			String theSQLQuery = "SELECT distinct ef.name "
 				+ " FROM environmental_factor ef, engineered_gene eg "
 				+ " WHERE ef.environmental_factor_id = eg.environmental_factor_id "
-				//+ "  AND ef.is_induced_mutation_trigger = 1 "
+				+ "  AND ef.is_induced_mutation_trigger = 1 "
 				+ "     	AND ef.name IS NOT null" ; 
 			           
 
