@@ -1,8 +1,11 @@
 /*
  * 
- * $Id: Image.java,v 1.15 2008-08-14 19:00:57 schroedn Exp $
+ * $Id: Image.java,v 1.16 2008-08-15 15:06:54 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2008/08/14 19:00:57  schroedn
+ * Changes for  altern_url to urlAlternEntry
+ *
  * Revision 1.14  2008/08/14 06:23:15  schroedn
  * New features added
  *
@@ -293,18 +296,32 @@ public class Image extends BaseObject implements Comparable, Serializable, Dupli
         return super.compareTo(o);
     }
 
+    /**
+     * @return Returns the url.
+     */
 	public String getUrl() {
 		return url;
 	}
 
+    /**
+     * @param url
+     *            The url to set.
+     */
 	public void setUrl(String url) {
 		this.url = url;
 	}
-
+	
+    /**
+     * @return Returns the urlAlternEntry.
+     */
 	public String getUrlAlternEntry() {
 		return urlAlternEntry;
 	}
 
+    /**
+     * @param urlAlternEntry
+     *            The urlAlternEntry to set.
+     */
 	public void setUrlAlternEntry(String urlAlternEntry) {
 		this.urlAlternEntry = urlAlternEntry;
 	}
