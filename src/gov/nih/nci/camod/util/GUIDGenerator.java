@@ -3,9 +3,12 @@
  *
  * Created on October 14, 2005, 10:46 AM
  *
- * $Id: GUIDGenerator.java,v 1.2 2006-04-17 19:10:50 pandyas Exp $
+ * $Id: GUIDGenerator.java,v 1.3 2008-08-18 13:54:44 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2006/04/17 19:10:50  pandyas
+ * Added $Id: GUIDGenerator.java,v 1.3 2008-08-18 13:54:44 pandyas Exp $ and $log:$
+ *
  */
 
 
@@ -141,8 +144,6 @@ public class GUIDGenerator
       //Do nothing
     }
     
-    //System.out.println(hashingString);
- 
     return hashingString.hashCode();
   }
  

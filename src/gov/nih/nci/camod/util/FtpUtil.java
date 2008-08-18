@@ -1,10 +1,13 @@
 /**
  * 
- * $Id: FtpUtil.java,v 1.3 2007-08-01 18:04:22 pandyas Exp $
+ * $Id: FtpUtil.java,v 1.4 2008-08-18 13:54:43 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2007/08/01 18:04:22  pandyas
+ * minor format change in println
+ *
  * Revision 1.2  2006/04/17 19:10:50  pandyas
- * Added $Id: FtpUtil.java,v 1.3 2007-08-01 18:04:22 pandyas Exp $ and $log:$
+ * Added $Id: FtpUtil.java,v 1.4 2008-08-18 13:54:43 pandyas Exp $ and $log:$
  *
  * 
  */
@@ -47,8 +50,7 @@ public class FtpUtil {
             sb.append('/');
             sb.append(fileName);
             sb.append(";type=i"); //a=ASCII mode, i=image (binary) mode, d= file directory listing
-            
-            System.out.println( "<FtpUtil.java> StringBuffer: " + sb );
+
             
             BufferedInputStream bis = null;
             BufferedOutputStream bos = null;
