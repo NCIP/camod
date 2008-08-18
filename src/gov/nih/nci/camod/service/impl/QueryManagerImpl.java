@@ -43,9 +43,14 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.100 2008-08-15 18:23:01 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.101 2008-08-18 13:55:25 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.100  2008/08/15 18:23:01  pandyas
+ * Created SQL to clean up DB and finished code for:
+ *
+ * #12825  	induced mutation entries need to be flagged (requires OM change) and searches for induced mutation and carcinogenic interventions need to be fixed
+ *
  * Revision 1.99  2008/08/14 19:01:16  schroedn
  * Fixes for saving search results
  *
@@ -361,11 +366,9 @@ import gov.nih.nci.common.persistence.hibernate.HibernateUtil;
 
 import java.sql.*;
 import java.util.*;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.hibernate.*;
-import org.hibernate.criterion.Expression;
+
 
 /**
  * Implementation of a wrapper around the HQL/JDBC interface. Used for more

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TargetedModificationManagerImpl.java,v 1.39 2008-08-14 16:38:15 pandyas Exp $
+ * $Id: TargetedModificationManagerImpl.java,v 1.40 2008-08-18 13:55:26 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.39  2008/08/14 16:38:15  pandyas
+ * modified debug line to use log
+ *
  * Revision 1.38  2008/02/08 16:46:42  pandyas
  * modified log statement for final deployment to QA
  *
@@ -83,8 +86,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 

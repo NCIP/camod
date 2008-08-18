@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: AutocompleteUtil.java,v 1.5 2008-08-14 17:12:48 pandyas Exp $
+ * $Id: AutocompleteUtil.java,v 1.6 2008-08-18 13:54:53 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2008/08/14 17:12:48  pandyas
+ * remove debug lines
+ *
  * Revision 1.4  2008/01/31 22:25:02  pandyas
  * modified log printouts for dev build
  *
@@ -66,7 +69,6 @@ package gov.nih.nci.camod.util;
 
 import gov.nih.nci.camod.service.impl.QueryManagerSingleton;
 
-import java.util.Date;
 import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;

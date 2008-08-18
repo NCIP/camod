@@ -1,7 +1,10 @@
 /*
- * $Id: SpontaneousMutationManagerImpl.java,v 1.23 2008-02-08 16:46:19 pandyas Exp $
+ * $Id: SpontaneousMutationManagerImpl.java,v 1.24 2008-08-18 13:55:25 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.23  2008/02/08 16:46:19  pandyas
+ * modified log statement for final deployment to QA
+ *
  * Revision 1.22  2008/01/27 23:27:00  pandyas
  * Modifed to clear Gene Identifer when removed from GUI
  *
@@ -48,8 +51,6 @@ import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.SpontaneousMutationManager;
 import gov.nih.nci.camod.webapp.form.SpontaneousMutationData;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class SpontaneousMutationManagerImpl extends BaseManager implements SpontaneousMutationManager
 {

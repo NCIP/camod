@@ -1,9 +1,12 @@
 /**
  * @author schroedlni
  * 
- * $Id: SavedQueryManagerImpl.java,v 1.12 2008-08-14 16:36:40 pandyas Exp $
+ * $Id: SavedQueryManagerImpl.java,v 1.13 2008-08-18 13:55:25 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2008/08/14 16:36:40  pandyas
+ * remove debug lines
+ *
  * Revision 1.11  2008/08/12 19:45:50  pandyas
  * Fixed #15053  	Search for models with transgenic or targeted modification on advanced search page confusing
  *
@@ -48,7 +51,6 @@
 
 package gov.nih.nci.camod.service.impl;
 
-import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.SavedQuery;
 import gov.nih.nci.camod.domain.SavedQueryAttribute;
 import gov.nih.nci.camod.service.SavedQueryManager;
