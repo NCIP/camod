@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.101 2008-08-18 13:55:25 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.102 2008-08-27 14:00:17 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.101  2008/08/18 13:55:25  pandyas
+ * Clean up unused code
+ *
  * Revision 1.100  2008/08/15 18:23:01  pandyas
  * Created SQL to clean up DB and finished code for:
  *
@@ -671,7 +674,7 @@ public class QueryManagerImpl extends BaseManager
 	 */
 	public List getCellLineNames() throws PersistenceException {
 
-		log.info("Entering QueryManagerImpl.getCellLineNames");
+		log.debug("Entering QueryManagerImpl.getCellLineNames");
 		
 		ResultSet theResultSet = null;
 		List<String> theCellLineList = new ArrayList<String>();
@@ -874,10 +877,10 @@ public class QueryManagerImpl extends BaseManager
 			String theSQLQuery = "SELECT ef.name, ef.name_altern_entry "
 					+ "FROM environmental_factor ef "
 					+ "WHERE (ef.type = ? OR ef.type_altern_entry = ?)"
+					+ "     	AND ef.is_induced_mutation_trigger = 0 "
 					+ "  AND ef.environmental_factor_id IN (SELECT ce.environmental_factor_id "
 					+ "     FROM carcinogen_exposure ce, abs_cancer_model am "
-					+ "			WHERE ef.environmental_factor_id = ce.environmental_factor_id "
-					+ "     	AND ef.is_induced_mutation_trigger = 0 "
+					+ "			WHERE ef.environmental_factor_id = ce.environmental_factor_id "					
 					+ "     	AND am.abs_cancer_model_id = ce.abs_cancer_model_id AND am.state = 'Edited-approved')";
 			
 			log.debug("theSQLQuery: " + theSQLQuery.toString());
@@ -890,22 +893,18 @@ public class QueryManagerImpl extends BaseManager
 			while (theResultSet.next()) {
 				String theName = theResultSet.getString(1);
 				String theUncontrolledName = theResultSet.getString(2);
-				log.debug("theName: " + theName + "\ttheUncontrolledName: " +theUncontrolledName);
 
 				if (theName != null  && theName.length() > 0
 						&& !theEFNameList.contains(theName)) {
 					theEFNameList.add(theName);
-					log.debug("Added theName: " + theName + " Bringing total to: " +theEFNameList.size());
 				} else if (theUncontrolledName != null  
 						&& theUncontrolledName.length() > 0
 						&& !theEFNameList.contains(theUncontrolledName)) {
 					theEFNameList.add(theUncontrolledName);
-					log.debug("Added theUncontrolledName: " + theUncontrolledName + " Bringing total to: " +theEFNameList.size());
 				}
 
 			}
 
-			log.debug("Exiting QueryManagerImpl.getQueryOnlyEnvironmentalFactors");
 		} catch (Exception e) {
 			log.error("Exception in getQueryOnlyEnvironmentalFactors", e);
 			throw new PersistenceException(
@@ -2267,7 +2266,8 @@ public class QueryManagerImpl extends BaseManager
 	            OR = " OR ";
 	            theList.add("%" + inTransgeneName.trim().toUpperCase() + "%");
         	} else {
-                theSQLString += OR + " eg.engineered_gene_type = 'T'";
+                theSQLString += OR + " eg.engineered_gene_type = 'T' ";
+                OR = " OR ";
         	}
         }
         if (isTargetedModification == true )
@@ -2278,7 +2278,8 @@ public class QueryManagerImpl extends BaseManager
             OR = " OR ";
             theList.add("%" + inGeneName.trim().toUpperCase() + "%");
         	} else {
-                theSQLString += OR + " eg.engineered_gene_type = 'TM'";        		
+                theSQLString += OR + " eg.engineered_gene_type = 'TM' "; 
+                OR = " OR ";
         	}
         }
         if (inInducedMutationAgent != null && inInducedMutationAgent.trim().length() > 0)
@@ -2431,12 +2432,12 @@ public class QueryManagerImpl extends BaseManager
     public List searchForAnimalModels(SearchData inSearchData) throws Exception
     {
 
-        log.info("Entering searchForAnimalModels");
+        log.debug("Entering searchForAnimalModels");
 
         List theAnimalModels = null;
 
         String theFromClause = "from AnimalModel as am where am.state = 'Edited-approved' AND am.availability.releaseDate < sysdate ";
-        String theOrderByClause = " ORDER BY am.modelDescriptor asc";
+        String theOrderByClause = " ORDER BY am.id asc";
 
         if (inSearchData.getKeyword() != null && inSearchData.getKeyword().length() > 0)
         {
@@ -2448,7 +2449,7 @@ public class QueryManagerImpl extends BaseManager
             log.info("Doing a criteria search");
             theAnimalModels = criteriaSearch(theFromClause, theOrderByClause, inSearchData);
         }
-        log.info("Exiting searchForAnimalModels");
+        log.debug("Exiting searchForAnimalModels");
 
         return theAnimalModels;
     }
@@ -2555,9 +2556,9 @@ public class QueryManagerImpl extends BaseManager
 
         theWhereClause += " OR am.strain IN (" + getStrainIdsForSpecies(inKeyword) + ")";
 
-        theWhereClause += " OR abs_cancer_model_id IN (" + getModelIdsForHistopathologyOrgan(theKeyword, "") + ")";
+        theWhereClause += " OR abs_cancer_model_id IN (" + getModelIdsForHistopathologyOrgan("", theKeyword) + ")";
 
-        theWhereClause += " OR abs_cancer_model_id IN (" + getModelIdsForHistopathologyDisease(theKeyword, "") + ")";
+        theWhereClause += " OR abs_cancer_model_id IN (" + getModelIdsForHistopathologyDisease("", theKeyword) + ")";
 
         theWhereClause += " OR abs_cancer_model_id IN (" + getModelIdsForAnyEnvironmentalFactor(inKeyword) + ")";
 
@@ -2798,7 +2799,7 @@ public class QueryManagerImpl extends BaseManager
 			theWhereClause += " AND abs_cancer_model_id IN ("
 					+ getModelIdsForToolStrain() + ")";
 		}		
-		log.info("QueryMgrImpl theWhereClause: " + theWhereClause.toString());
+		log.debug("QueryMgrImpl buildCriteriaSearchWhereClause: " + theWhereClause.toString());
         return theWhereClause;
 
     }
@@ -2913,15 +2914,12 @@ public class QueryManagerImpl extends BaseManager
                                 SearchData inSearchData) throws Exception
     {
         String theWhereClause = buildCriteriaSearchWhereClause(inSearchData);
-        log.info("theWhereClause: " + theWhereClause);
+        log.debug("theWhereClause: " + theWhereClause);
         List theAnimalModels = null;
 
         try
         {
             String theHQLQuery = inFromClause + theWhereClause + inOrderByClause;
-
-            log.info("HQL Query: " + theHQLQuery);
-
             Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
             theAnimalModels = theQuery.list();
         }
@@ -2979,7 +2977,7 @@ public class QueryManagerImpl extends BaseManager
                           Object inParameters[]) throws PersistenceException
     {
 
-        log.debug("In getIds");
+        log.debug("In getIds ");
 
         String theModelIds = "";
 
