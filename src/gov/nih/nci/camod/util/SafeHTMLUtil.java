@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SafeHTMLUtil.java,v 1.9 2008-08-14 16:40:46 pandyas Exp $
+ * $Id: SafeHTMLUtil.java,v 1.10 2008-08-27 13:58:21 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2008/08/14 16:40:46  pandyas
+ * remove debug lines
+ *
  * Revision 1.8  2008/07/21 18:24:28  pandyas
  * Modified to prevent SQL injection
  * Scan performed on July 21, 2008
@@ -239,10 +242,10 @@ public class SafeHTMLUtil {
     // This is a special case where one of the agent names contains a special character "/" or space
     //  i.e. Chemical / Drug, Growth Factor, and Signaling Molecule are valid selection options
     public static boolean isLetterOrDigitWithExceptions(String input)
-    {  
+    { 
         // validate for intentCode
         boolean validValue = true ;
-        if (input != null && !input.equals("Chemical / Drug") && !input.equals("Growth Factor") )
+        if (input != null && !input.equals("Chemical / Drug") && !input.equals("Growth Factor") && !input.equals("Signaling Molecule"))
         {
             for (int i = 0; i < input.length(); i++)
             {        	
