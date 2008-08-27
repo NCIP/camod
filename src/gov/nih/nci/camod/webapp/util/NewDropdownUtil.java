@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: NewDropdownUtil.java,v 1.58 2008-08-14 17:09:40 pandyas Exp $
+ * $Id: NewDropdownUtil.java,v 1.59 2008-08-27 13:56:42 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.58  2008/08/14 17:09:40  pandyas
+ * remove debug lines
+ *
  * Revision 1.57  2008/08/12 19:40:31  pandyas
  * Fixed #15053  	Search for models with transgenic or targeted modification on advanced search page confusing
  *
@@ -696,7 +699,7 @@ public class NewDropdownUtil
     }
 
     /**
-     * Returns a list for a type of environmental Factors
+     * Returns a list of environmental facotr names for a type of environmental Factors
      * 
      * @return envList
      */
