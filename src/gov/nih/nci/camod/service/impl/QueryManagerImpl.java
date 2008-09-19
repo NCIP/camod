@@ -43,9 +43,13 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.103 2008-09-19 16:03:39 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.104 2008-09-19 16:20:57 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.103  2008/09/19 16:03:39  pandyas
+ * Modified code for gforge #15053] Search for models with transgenic or targeted modification on advanced search page confusing
+ * forgot the join clause in methods to get the transgene and targeted modification name drop down lists so the state was not being filtered correctly
+ *
  * Revision 1.102  2008/08/27 14:00:17  pandyas
  * Modified code for #15053  	Search for models with transgenic or targeted modification on advanced search page confusing
  *
@@ -625,8 +629,9 @@ public class QueryManagerImpl extends BaseManager
 
 		try {
 			// Format the query
-			String theSQLQuery = "SELECT ef.type, ef.type_altern_entry "
-				+ "FROM environmental_factor ef ";			
+			String theSQLQuery = "SELECT distinct(ef.type), ef.type_altern_entry "
+				+ "FROM environmental_factor ef "
+				+ "Where ef.IS_INDUCED_MUTATION_TRIGGER = 0 ";			
 
 			// Format the query			
 			Object[] theParams = new Object[0];
@@ -946,7 +951,7 @@ public class QueryManagerImpl extends BaseManager
 		try {
 			String theSQLQuery = "SELECT distinct eg.name "
 					+ "FROM engineered_gene eg, abs_cancer_model ac "
-					+ "WHERE eg.ABS_CANCER_MODEL_ID = ac.ABS_CANCER_MODEL_ID" 
+					+ "WHERE eg.ABS_CANCER_MODEL_ID = ac.ABS_CANCER_MODEL_ID " 
 					+ "AND eg.engineered_gene_type = 'TM' " 
 					+ "AND ac.state = 'Edited-approved'	";
 			
