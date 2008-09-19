@@ -43,9 +43,14 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.102 2008-08-27 14:00:17 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.103 2008-09-19 16:03:39 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.102  2008/08/27 14:00:17  pandyas
+ * Modified code for #15053  	Search for models with transgenic or targeted modification on advanced search page confusing
+ *
+ * Modified code for #12825  	induced mutation entries need to be flagged (requires OM change) and searches for induced mutation and carcinogenic interventions need to be fixed
+ *
  * Revision 1.101  2008/08/18 13:55:25  pandyas
  * Clean up unused code
  *
@@ -941,7 +946,8 @@ public class QueryManagerImpl extends BaseManager
 		try {
 			String theSQLQuery = "SELECT distinct eg.name "
 					+ "FROM engineered_gene eg, abs_cancer_model ac "
-					+ "WHERE eg.engineered_gene_type = 'TM' " 
+					+ "WHERE eg.ABS_CANCER_MODEL_ID = ac.ABS_CANCER_MODEL_ID" 
+					+ "AND eg.engineered_gene_type = 'TM' " 
 					+ "AND ac.state = 'Edited-approved'	";
 			
 			log.debug("theSQLQuery: " + theSQLQuery.toString());
@@ -1000,7 +1006,8 @@ public class QueryManagerImpl extends BaseManager
 			// Set engineered_gene_type = ? for first pass when list is empty 
 			String	theSQLQuery = "SELECT distinct eg.name "
 				+ "FROM engineered_gene eg, abs_cancer_model ac "
-				+ "WHERE eg.engineered_gene_type = 'T' " 
+				+ "WHERE eg.ABS_CANCER_MODEL_ID = ac.ABS_CANCER_MODEL_ID " 
+				+ "AND eg.engineered_gene_type = 'T' "
 				+ "AND ac.state = 'Edited-approved'	";	
 			
 			log.debug("theSQLQuery: " + theSQLQuery.toString());
