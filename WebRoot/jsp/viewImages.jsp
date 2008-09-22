@@ -37,8 +37,8 @@
 				</c:choose>
 			
 				<td class="<c:out value="${tdClass}"/>" colspan="2">
-					<a href='<c:out value="${p.imageUrl}"/>'>
-					<img src="<c:out value="${p.thumbUrl}"/>" height="40" width="40" alt="Click on the image to open in a new Browser window" target="_blank">( Click to View )</a>
+					<a href='<c:out value="${p.imageUrl}"/>' target="_blank"><c:out value="${p.thumbUrl}"/></a>
+					<!-- <img src="<c:out value="${p.thumbUrl}"/>" height="40" width="40" alt="Click on the image to open in a new Browser window" target="_blank">( Click to View )</a> -->
 					<br><br/>
 					<TABLE summary="" cellpadding="0" cellspacing="0" border="0" align="center" width="100%">
 					<tr>
@@ -62,7 +62,7 @@
 					<tr>
 						<td class="resultsBoxGrey" width="15%"><b>Alternate URL</b></td>
 						<td class="resultsBoxGreyEnd" width="85%">
-						<c:out value="${p.urlAlternEntry}"/>&nbsp;
+						<a href='<c:out value="${p.urlAlternEntry}"/>' target="_blank"><c:out value="${p.urlAlternEntry}"/></a>&nbsp;
 						</td>
 					<tr>					
 					<tr>
