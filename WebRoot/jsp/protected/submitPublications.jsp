@@ -148,7 +148,7 @@ function trimRGDId(str)
 					<td class="formLabel"><label for="field1">RGD number:<br><br>Note: No special characters permitted in this field. Example RGD:1599131 should instead be 1599131</label>
 					</td>
 					<td class="formField">		
-						<input type=button value="Find RGD #" onClick="myRef = window.open('http://rgd.mcw.edu/references','mywin',
+						<input type=button value="Find RGD #" onClick="myRef = window.open('http://rgd.mcw.edu/rgdweb/search/references.html','mywin',
 						'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>
 						<label for="field1">&nbsp;&nbsp;</label>
 						<html:text styleClass="formFieldUnSized" size="20" property="rgdPubId" />
@@ -232,7 +232,7 @@ function trimRGDId(str)
 		<td align="right" colspan="3">
 			<TABLE cellpadding="4" cellspacing="0" border="0">
 			
-				  <html:submit styleClass="actionButton">
+				  <html:submit styleClass="actionButton" onclick="javascript:pmid.value=trim(pmid.value)">
 					  <bean:message key="button.submit"/>
 				  </html:submit>
 				  
