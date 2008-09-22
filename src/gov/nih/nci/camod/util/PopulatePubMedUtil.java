@@ -1,13 +1,17 @@
 /**
  * 
- * $Id: PopulatePubMedUtil.java,v 1.7 2008-07-11 17:34:31 schroedn Exp $
+ * $Id: PopulatePubMedUtil.java,v 1.8 2008-09-22 16:39:57 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2008/07/11 17:34:31  schroedn
+ * Bug 12064
+ * Title field has size limit, fixing pubmed search
+ *
  * Revision 1.6  2006/11/09 17:34:56  pandyas
  * Commented out debug code
  *
  * Revision 1.5  2006/04/17 19:10:50  pandyas
- * Added $Id: PopulatePubMedUtil.java,v 1.7 2008-07-11 17:34:31 schroedn Exp $ and $log:$
+ * Added $Id: PopulatePubMedUtil.java,v 1.8 2008-09-22 16:39:57 schroedn Exp $ and $log:$
  *
  * 
  */
@@ -33,14 +37,18 @@ import java.util.regex.Pattern;
  * @author  Dana Zhang
  * @version 1.0
  * 
- * $Id: PopulatePubMedUtil.java,v 1.7 2008-07-11 17:34:31 schroedn Exp $
+ * $Id: PopulatePubMedUtil.java,v 1.8 2008-09-22 16:39:57 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2008/07/11 17:34:31  schroedn
+ * Bug 12064
+ * Title field has size limit, fixing pubmed search
+ *
  * Revision 1.6  2006/11/09 17:34:56  pandyas
  * Commented out debug code
  *
  * Revision 1.5  2006/04/17 19:10:50  pandyas
- * Added $Id: PopulatePubMedUtil.java,v 1.7 2008-07-11 17:34:31 schroedn Exp $ and $log:$
+ * Added $Id: PopulatePubMedUtil.java,v 1.8 2008-09-22 16:39:57 schroedn Exp $ and $log:$
  *
  */
 
@@ -153,6 +161,7 @@ public class PopulatePubMedUtil implements Runnable{
 
                 }
             } else{
+            	//System.out.println("De-bug 10");
                 pub.setStartPage(null);
                 pub.setEndPage(null);
             }
@@ -169,6 +178,11 @@ public class PopulatePubMedUtil implements Runnable{
             } else {
                 pub.setVolume(null);
             }
+           
+            if ( pub.getStartPage() == null )
+            	pub.setStartPage(new Long(0));
+            if ( pub.getEndPage() == null )
+            	pub.setEndPage(new Long(0));
             
             pub.setYear( Long.valueOf( pubYear.trim() ) );
           //  pub.updateByKey();
@@ -180,7 +194,7 @@ public class PopulatePubMedUtil implements Runnable{
     public static String getPubmedAbstract(Long pubMedID){	
     	// to retrieve record from pub med if pubmedID exits
     	
-    	System.out.println("<PopulatePubMed.java getPubmedAbstract> pubMedID=" + pubMedID );
+    	//System.out.println("<PopulatePubMed.java getPubmedAbstract> pubMedID=" + pubMedID );
         
         StringBuffer buf = new StringBuffer();
         String line = null;
@@ -220,7 +234,7 @@ public class PopulatePubMedUtil implements Runnable{
     }
     
     public static boolean 	get_AbstractString(String pubmedRecord){
-        System.out.println("<PopulatePubMed.java get_AbstractString> Entering...");
+        //System.out.println("<PopulatePubMed.java get_AbstractString> Entering...");
         String pubmedAbstract = null;
         
         boolean flag = false;
@@ -251,7 +265,7 @@ public class PopulatePubMedUtil implements Runnable{
             if( pubmedRecord.indexOf("1: ")!=-1){
                 int i = pubmedRecord.indexOf("1: ");
                 pubmedAbstract = pubmedRecord.trim().substring(i+2);
-                System.out.println( "<PopulatePubMed.java getAbstractString> \n<PopulatePubMed.java getAbstractString> **** pubmedAbstract *****\n" + pubmedAbstract + "\n<PopulatePubMed.java getAbstractString>  **** pubmedAbstract *****\n");
+                //System.out.println( "<PopulatePubMed.java getAbstractString> \n<PopulatePubMed.java getAbstractString> **** pubmedAbstract *****\n" + pubmedAbstract + "\n<PopulatePubMed.java getAbstractString>  **** pubmedAbstract *****\n");
             }
         }
         } catch (Exception e ) { System.out.println( "Exception e=" + e);}
@@ -297,12 +311,19 @@ public class PopulatePubMedUtil implements Runnable{
             }           
         }
         } catch (Exception e ) { System.out.println( "Exception e=" + e);}
+        
+//	    if ( pageArray[0] == null || pageArray[0] == "" )
+//	    	pageArray[0] = "";
+//	    
+//	    if ( pageArray[1] == null || pageArray[1] == "null")
+//	    	pageArray[1] = "";
+	    
         return pageArray;
     }
     private static  String getPublicationTitle(String pubmedAbstract){// to get the title of the record
        
     	System.out.println("<PopulatePubMed.java getPublicationTitle> Entering..." );
-        System.out.println("pubmedAbstract=" + pubmedAbstract );
+       // System.out.println("pubmedAbstract=" + pubmedAbstract );
         String pubMedAbstract = pubmedAbstract;
         
         String endPage = null;
@@ -314,16 +335,21 @@ public class PopulatePubMedUtil implements Runnable{
         	
         if(pubmedAbstract != null){
             //System.out.println("<PopulatePubMed.java> %%%%%%%%%%%%%%%pubmedAbstract:"+pubmedAbstract);
-            if(pubmedAbstract.indexOf("Comment in:")==-1){
+        	//System.out.println( "de-bug 1");
+        	if(pubmedAbstract.indexOf("Comment in:")==-1){
+        		//System.out.println( "de-bug 2");
                 pageArray = getPubMedPages(pubmedAbstract);
                 if(pageArray != null && pageArray[0] != null &&pageArray[1] != null ){
+                	//System.out.println( "de-bug 3");
                     startPage = pageArray[0];
                     endPage = pageArray[1];
                     if(pubmedAbstract.indexOf("Epub")!=-1){
+                    	//System.out.println( "de-bug 4");
                         pubmedAbstract = pubmedAbstract.substring(pubmedAbstract.indexOf("Epub"));
                         pubmedAbstract = pubmedAbstract.substring(pubmedAbstract.indexOf(".")+1);
                         titleCol = pubmedAbstract.substring(0,pubmedAbstract.indexOf(".")).trim();
                     } else if(pubmedAbstract.indexOf("Response to Comment on ")!=-1){
+                    	//System.out.println( "de-bug 5");
                         String pubmedAbstract2 = "Response to Comment on ";
                         if(pubmedAbstract.indexOf("&quot;") !=-1){
                             String pubmedAbstract3 = pubmedAbstract.substring(pubmedAbstract.indexOf("&quot;")+6);
@@ -337,12 +363,14 @@ public class PopulatePubMedUtil implements Runnable{
                         }
                         
                     } else{
+                    	//System.out.println( "de-bug 6");
                         int pageIndex = pubmedAbstract.indexOf(startPage+"-"+endPage);
                         int pageIndexlength  = startPage.length() + endPage.length() + 1;
                         titleCol  = pubmedAbstract.substring(pageIndex + pageIndexlength);
                         titleCol = titleCol.substring(0,titleCol.indexOf(".")).trim();
                     }
                 } else{
+                	//System.out.println( "de-bug 7");
                     pubmedAbstract = pubmedAbstract.substring(pubmedAbstract.indexOf(".")+1);
                     
                     if(pubmedAbstract.indexOf("[Epub ahead of print].")!=-1){
@@ -353,11 +381,13 @@ public class PopulatePubMedUtil implements Runnable{
                     }
                 }
                 if(titleCol.indexOf("; discussion ")!=-1){
+                	//System.out.println( "de-bug 8");
                     titleCol = titleCol.substring(titleCol.indexOf("-"),titleCol.length()).trim();
                     titleCol = titleCol.substring(titleCol.indexOf(" "), titleCol.length()).trim();
                 } 
                 
             } else {
+            	//System.out.println( "de-bug 9");
                 String  titleCol1 = pubmedAbstract.substring((pubmedAbstract.indexOf(".")+1));
                 int titleCol2Int = titleCol1.indexOf(".");
                 String titleCol2 = titleCol1.substring(titleCol2Int+1).trim();
@@ -368,9 +398,11 @@ public class PopulatePubMedUtil implements Runnable{
         	System.out.println( "Exception=" + e );
         }
         
-        titleCol = titleCol.replaceAll("\n", "");       
-        System.out.println("<PopulatePubMed.java getPublicationTitle> *title=" + titleCol );
-       
+        if ( titleCol != null){
+        	titleCol = titleCol.replaceAll("\n", "");        
+        	System.out.println("<PopulatePubMed.java getPublicationTitle> *title=" + titleCol );
+        }
+        
         //Re-Written title retrieval
         //Gforge Bug #12064 - schroedln 4/15/08
         pubMedAbstract = pubMedAbstract.replaceAll("\n", "NEWLINE" );
@@ -382,6 +414,12 @@ public class PopulatePubMedUtil implements Runnable{
         
 	    titleCol = fields[1].replaceAll("NEWLINE", " " );	    
 	    //end of re-written title retrieval
+	    
+//	    if ( startPage == null || startPage == "" )
+//	    	startPage = "";
+//	    
+//	    if ( endPage == null || endPage == "null")
+//	    	endPage = "";
 	    
         return titleCol;
     }
@@ -483,5 +521,4 @@ public class PopulatePubMedUtil implements Runnable{
         } catch (Exception e ) { System.out.println( "Exception e=" + e);}
         return journal;
     }
-    
 }
