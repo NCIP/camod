@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewPublications.jsp,v 1.34 2008-08-14 19:03:42 schroedn Exp $
+ * $Id: viewPublications.jsp,v 1.35 2008-09-22 16:08:29 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.34  2008/08/14 19:03:42  schroedn
+ * Changes for rgdPubID to rgdPubId
+ *
  * Revision 1.33  2008/08/14 06:33:29  schroedn
  * new features added
  *
@@ -160,7 +163,7 @@
 								<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-pubview2.apg&OID=<c:out value="${p.zfinPubId}"/>">ZFIN</a>
 								<br/>
 						</c:when>				
-						<c:otherwise>&nbsp;					
+						<c:otherwise>					
 						</c:otherwise>
 					</c:choose>
 					<c:choose>
@@ -168,7 +171,7 @@
 								<a target="_blank" href="http://rgd.mcw.edu/tools/references/references_view.cgi?id=<c:out value="${p.rgdPubId}"/>">RGD</a>
 								<br/>
 						</c:when>				
-						<c:otherwise>&nbsp;					
+						<c:otherwise>					
 						</c:otherwise>
 					</c:choose>					
 					<c:choose>
@@ -178,7 +181,7 @@
 									<br/>
 									<a target="_blank" href="http://tumor.informatics.jax.org/mtbwi/referenceDetails.do?accId=<c:out value="${p.jaxJNumber}"/>">MTB</a>
 							</c:when>				
-						<c:otherwise>&nbsp;						
+						<c:otherwise>						
 						</c:otherwise>
 					</c:choose>
 			</td>					
