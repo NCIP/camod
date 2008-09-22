@@ -1,8 +1,11 @@
 <%
  /*
-  *   $Id: viewModelCharacteristics.jsp,v 1.50 2008-08-12 19:19:17 pandyas Exp $
+  *   $Id: viewModelCharacteristics.jsp,v 1.51 2008-09-22 17:33:37 pandyas Exp $
   *   
   *   $Log: not supported by cvs2svn $
+  *   Revision 1.50  2008/08/12 19:19:17  pandyas
+  *   Fixed #11640  	Delete availability from IMSR from application
+  *
   *   Revision 1.49  2007/10/31 19:32:10  pandyas
   *   Fixed #8355 	Add comments field to every submission page
   *   Fixed #9169  	Connect availability of model to person to resolve the available from investigator issue
@@ -263,11 +266,11 @@
 			<td class="GreyBox" width="20%"><b>Submitted by</b></td>
 			<td class="GreyBoxRightEnd" width="70%">
 			    <c:if test="${not empty mdl.submitter.emailAddress}">
-				    <a href="mailto:<c:out value="${mdl.submitter.emailAddress}"/>"></a>
+				    <a href="mailto:<c:out value="${mdl.submitter.emailAddress}"/>">
 				</c:if>
 				<c:out value="${mdl.submitter.displayName}"  escapeXml="false"/>
 				<c:if test="${not empty mdl.submitter.emailAddress}">
-				    
+				    </a>
 				</c:if>			
 			</td>
 		</tr>
