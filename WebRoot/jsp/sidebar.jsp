@@ -2,9 +2,13 @@
 
 /**
  * 
- * $Id: sidebar.jsp,v 1.18 2008-07-11 17:31:56 schroedn Exp $
+ * $Id: sidebar.jsp,v 1.19 2008-09-22 16:06:04 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2008/07/11 17:31:56  schroedn
+ * Bug 7028
+ * Add link
+ *
  * Revision 1.17  2006/12/28 18:27:37  pandyas
  * Renamed folder !SSL!( from robohelp) to caMOD (folder name not used in ePublisher)
  *
@@ -104,7 +108,7 @@
 		onclick="document.location.href='#'"
 		onmouseout="changeMenuStyle(this,'subMenuSecondaryTitle'),hideCursor()"
 		height=20><A class=subMenuSecondary
-		href="WebHelp/caMOD/UserGuide.pdf" target="_blank">USER GUIDE</A></TD>
+		href="WebHelp/caMOD/UserGuide.pdf" target="_blank">CAMOD USER GUIDE</A></TD>
 	</TR>		
     <TR>
 	<TD class=subMenuSecondaryTitle
