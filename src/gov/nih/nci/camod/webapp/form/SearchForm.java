@@ -42,9 +42,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.47 2008-08-14 19:02:01 schroedn Exp $
+ * $Id: SearchForm.java,v 1.48 2008-09-23 17:43:48 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.47  2008/08/14 19:02:01  schroedn
+ * clean the pmid for security scans
+ *
  * Revision 1.46  2008/08/14 15:57:46  pandyas
  * remove debug line
  *
@@ -867,7 +870,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             drugNameList = (List)request.getSession().getAttribute(Constants.Dropdowns.THERAPEUTICAPPROACHDRUGQUERYDROP);
             request.getSession().setAttribute(Constants.Dropdowns.SEARCHTHERAPEUTICDRUGNAME, drugNameList);            
             
-            if (!SafeHTMLUtil.isValidStringValue(cellLine,Constants.Dropdowns.SEARCHTHERAPEUTICDRUGNAME,request))
+            if (!SafeHTMLUtil.isValidStringValue(therapeuticApproach,Constants.Dropdowns.SEARCHTHERAPEUTICDRUGNAME,request))
             {
                // populate the validation message
                errors.add("therapeuticApproach", new ActionMessage("error.therapeuticApproach.validValue"));
