@@ -43,9 +43,13 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.104 2008-09-19 16:20:57 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.105 2008-09-29 20:33:14 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.104  2008/09/19 16:20:57  pandyas
+ * Modified code for gforge #12825] induced mutation entries need to be flagged (requires OM change) and searches for induced mutation and carcinogenic interventions need to be fixed
+ * Orginally modified two methods - Forgot a third one called getEnvironmentalFactorAgentTypes method
+ *
  * Revision 1.103  2008/09/19 16:03:39  pandyas
  * Modified code for gforge #15053] Search for models with transgenic or targeted modification on advanced search page confusing
  * forgot the join clause in methods to get the transgene and targeted modification name drop down lists so the state was not being filtered correctly
@@ -582,14 +586,14 @@ public class QueryManagerImpl extends BaseManager
 
 			while (theResultSet.next()) {
 				String theName = theResultSet.getString(1);
-				String theUncontrolledName = theResultSet.getString(2);
+				String theAlternName = theResultSet.getString(2);
 
 				if (theName != null && theName.length() > 0
 						&& !theEnvFactors.contains(theName)) {
 					theEnvFactors.add(theName);
-				} else if (theUncontrolledName != null
-						&& theUncontrolledName.length() > 0
-						&& !theEnvFactors.contains(theUncontrolledName)) {
+				} else if (theAlternName != null
+						&& theAlternName.length() > 0
+						&& !theEnvFactors.contains(theAlternName)) {
 					theEnvFactors.add(theName);
 				}
 			}
@@ -639,7 +643,7 @@ public class QueryManagerImpl extends BaseManager
 
 			while (theResultSet.next()) {
 				String theType = theResultSet.getString(1);
-				String theUncontrolledType = theResultSet.getString(2);
+				String theAlternType = theResultSet.getString(2);
 
 				// Remove ADMIN and Not Specified in appropriate lists
 				if (theType != null && theType.length() > 0
@@ -647,11 +651,11 @@ public class QueryManagerImpl extends BaseManager
 					if (!theType.equals("ADMIN")) {
 					theEFAgentTypesList.add(theType);
 					}
-				} else if (theUncontrolledType != null
-						&& theUncontrolledType.length() > 0
-						&& !theEFAgentTypesList.contains(theUncontrolledType)) {
-					if (!theUncontrolledType.equals("Not Specified")) {
-					theEFAgentTypesList.add(theUncontrolledType);
+				} else if (theAlternType != null
+						&& theAlternType.length() > 0
+						&& !theEFAgentTypesList.contains(theAlternType)) {
+					if (!theAlternType.equals("Not Specified")) {
+					theEFAgentTypesList.add(theAlternType);
 					}
 				}
 			}
@@ -902,15 +906,15 @@ public class QueryManagerImpl extends BaseManager
 			
 			while (theResultSet.next()) {
 				String theName = theResultSet.getString(1);
-				String theUncontrolledName = theResultSet.getString(2);
+				String theAlternName = theResultSet.getString(2);
 
 				if (theName != null  && theName.length() > 0
 						&& !theEFNameList.contains(theName)) {
 					theEFNameList.add(theName);
-				} else if (theUncontrolledName != null  
-						&& theUncontrolledName.length() > 0
-						&& !theEFNameList.contains(theUncontrolledName)) {
-					theEFNameList.add(theUncontrolledName);
+				} else if (theAlternName != null  
+						&& theAlternName.length() > 0
+						&& !theEFNameList.contains(theAlternName)) {
+					theEFNameList.add(theAlternName);
 				}
 
 			}
@@ -1066,19 +1070,31 @@ public class QueryManagerImpl extends BaseManager
         {
 
             /* Format the query */
-			String theSQLQuery = "SELECT distinct ef.name "
-				+ " FROM environmental_factor ef, engineered_gene eg "
+			String theSQLQuery = "SELECT distinct ef.name, ef.NAME_ALTERN_ENTRY "
+				+ " FROM environmental_factor ef, engineered_gene eg, abs_cancer_model am "
 				+ " WHERE ef.environmental_factor_id = eg.environmental_factor_id "
+				+ " AND eg.ABS_CANCER_MODEL_ID = am.ABS_CANCER_MODEL_ID "				
 				+ "  AND ef.is_induced_mutation_trigger = 1 "
-				+ "     	AND ef.name IS NOT null" ; 
+				+ "     	AND am.state = 'Edited-approved' " ; 
 			           
-
+			
+			log.debug("theSQLQuery: " + theSQLQuery.toString());
+			
             Object[] theParams = new Object[0];
             theResultSet = Search.query(theSQLQuery, theParams);
 
-            while (theResultSet.next())
-            {
-                theAgents.add(theResultSet.getString(1));
+            while (theResultSet.next()) {
+				String theName = theResultSet.getString(1);
+				String theAlternName = theResultSet.getString(2);
+
+				if (theName != null  && theName.length() > 0
+						&& !theAgents.contains(theName)) {		
+					theAgents.add(theName);
+				} else if (theAlternName != null  
+						&& theAlternName.length() > 0
+						&& !theAgents.contains(theAlternName)) {
+					theAgents.add(theAlternName);
+				}				
             }
 
             log.debug("Exiting QueryManagerImpl.getQueryOnlyInducedMutationAgents");
@@ -2796,14 +2812,6 @@ public class QueryManagerImpl extends BaseManager
 					+ getModelIdsForTransplant() + ")";
 		}
 		
-		// Search for Transient Interference
-		if (inSearchData.isSearchTransientInterference()) {
-			log.debug("In Search inSearchData.isSearchTransientInterference(): "
-					+ inSearchData.isSearchTransientInterference());
-			theWhereClause += " AND abs_cancer_model_id IN ("
-					+ getModelIdsForTransientInterference() + ")";
-		}
-
 		// Search for tool strains
 		if (inSearchData.isSearchToolStrain()) {
 			log.debug("In Search inSearchData.isSearchToolStrain(): "
