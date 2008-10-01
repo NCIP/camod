@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TestUtil.java,v 1.7 2006-10-23 16:50:25 pandyas Exp $
+ * $Id: TestUtil.java,v 1.8 2008-10-01 23:54:11 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2006/10/23 16:50:25  pandyas
+ * modified printout for tests
+ *
  * Revision 1.6  2006/05/08 14:23:35  georgeda
  * Reformat and clean up warnings
  *
@@ -59,8 +62,13 @@ public class TestUtil {
 
         theQBEAnimalModel.setModelDescriptor(inModelName);
 
+        // HQL problem
         List theModelList = Search.query(theQBEAnimalModel);
-
+        
+//        SearchForm inSearchData = new SearchForm();
+//        inSearchData.setModelDescriptor(inModelName);
+//        List theModelList = QueryManagerSingleton.instance().searchForAnimalModels(inSearchData);
+//        
         if (theModelList.size() > 1) {
             throw new IllegalArgumentException("More than one model matched the name: " + inModelName);
         } else if (theModelList.size() == 0) {

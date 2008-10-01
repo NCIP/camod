@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: SearchPopulateTransplantTest.java,v 1.1 2008-01-16 18:28:51 pandyas Exp $
+ * $Id: SearchPopulateTransplantTest.java,v 1.2 2008-10-01 23:54:11 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2008/01/16 18:28:51  pandyas
+ * Renamed value to Transplant for #8290
+ *
  * Revision 1.3  2007/11/01 13:53:51  pandyas
  * Fixed #8290     Rename graft object into transplant object
  *
@@ -103,7 +106,7 @@ public class SearchPopulateTransplantTest extends BaseModelNeededTest
 
         assertNotNull("Unable to find link to enter a Transplant", theLink);
         WebResponse theCurrentPage = theLink.click();
-        assertCurrentPageContains("if Transplant type is not listed");
+        assertCurrentPageContains("- if transplant type is not listed,");
         
         // Fill in the values and hit submit; Should fail the first time and the
         // populate will fill in the ethnicity strain values        
@@ -111,23 +114,23 @@ public class SearchPopulateTransplantTest extends BaseModelNeededTest
         
         theWebForm.setParameter("donorScientificName", "Mus musculus");
         theCurrentPage = theWebForm.submit();
-        assertCurrentPageContains("if Transplant type is not listed");
+        assertCurrentPageContains("- if transplant type is not listed,");
         // Set the ethnicity strain and submit again
         theWebForm = theCurrentPage.getFormWithName("TransplantForm");
         //theWebForm.setParameter("donorEthinicityStrain", "129");
-        //theCurrentPage = theWebForm.submit();
+        theCurrentPage = theWebForm.submit();
         
         TransplantForm theForm = new TransplantForm();
-        theForm.setTransplantName("TESTTransplant");
+       // theForm.setTransplantName("TESTTransplant");
         theForm.setOrgan("Heart");
         theForm.setOrganTissueName("Heart");
         theForm.setOrganTissueCode("C22498");
         theForm.setAtccNumber("2");
         theForm.setCellAmount("10");
-        theForm.setGrowthPeriod("20");
+        theForm.setGrowthPeriod("20");        
         //theForm.setDonorEthinicityStrain("129");
-
-
+        
+        
         List<String> theParamsToIgnore = new ArrayList<String>();
         //TODO - remove disabled=true but keep disabled until geneticManipulation is entered
         theParamsToIgnore.add("modificationDescription");
@@ -150,7 +153,7 @@ public class SearchPopulateTransplantTest extends BaseModelNeededTest
         TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
 
         assertCurrentPageContains("You have successfully added a Transplant to this model!");
-
+        
         // Verify that populate method returns complete and correct data
         navigateToModelForEditing(myModelName);
 
@@ -180,15 +183,15 @@ public class SearchPopulateTransplantTest extends BaseModelNeededTest
                                                                                   "Enter Transplant");
         assertNotNull("Unable to find link to enter a Transplant", theLink);
         WebResponse theCurrentPage = theLink.click();
-        assertCurrentPageContains("if Transplant type is not listed");
+        assertCurrentPageContains("- if transplant type is not listed,");
         WebForm theWebForm = theCurrentPage.getFormWithName("TransplantForm");
         
         // select from species list, then get strain list without violating validation
         theWebForm.setParameter("name", "Test Transplant");
         theWebForm.setParameter("donorScientificName", "Mus musculus");
-        theWebForm.setParameter("sourceType", "Cell Line");
-        
+        theWebForm.setParameter("sourceType", "Cell Line");        
         theCurrentPage = theWebForm.submit();
+        theWebForm.setParameter("donorEthinicityStrain", "Not Specified");
         
         TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
         //theWebForm.setParameter("donorEthinicityStrain", "129");        
@@ -200,7 +203,7 @@ public class SearchPopulateTransplantTest extends BaseModelNeededTest
         theForm.setAtccNumber("2");
         theForm.setCellAmount("10");
         //theForm.setDonorScientificName("Mus musculus");
-        theForm.setDonorEthinicityStrain("Not Specified");
+        //theForm.setDonorEthinicityStrain("Not Specified");
 
         List<String> theParamsToIgnore = new ArrayList<String>();
         //TODO - remove disabled=true but keep disabled until geneticManipulation is entered

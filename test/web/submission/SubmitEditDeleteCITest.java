@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SubmitEditDeleteCITest.java,v 1.1 2008-05-12 16:29:06 pandyas Exp $
+ * $Id: SubmitEditDeleteCITest.java,v 1.2 2008-10-01 23:54:11 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2008/05/12 16:29:06  pandyas
+ * Modified name for consistency
+ *
  * Revision 1.7  2006/04/27 15:08:52  pandyas
  * Modified while testing caMod 2.1
  *
@@ -48,7 +51,7 @@ public class SubmitEditDeleteCITest extends BaseModelNeededTest {
     }
 
     public static Test suite() {
-        TestSuite suite = new TestSuite(SubmitCITest.class);
+        TestSuite suite = new TestSuite(SubmitEditDeleteCITest.class);
         return suite;
     }
 

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: BaseHttpTest.java,v 1.11 2007-06-27 19:02:36 pandyas Exp $
+ * $Id: BaseHttpTest.java,v 1.12 2008-10-01 23:54:12 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2007/06/27 19:02:36  pandyas
+ * Modified to run JUnit test and ignore security certificate exception
+ *
  * Revision 1.10  2007/02/21 17:08:09  pandyas
  * Initial admin testing - does not work
  *
@@ -116,6 +119,7 @@ public class BaseHttpTest extends TestCase {
         assertNotNull("Couldn't find link to edit model", theLink);
 
         theLink.click();
+        
         assertCurrentPageContains("Editing Model:<b>" + inModel);
 
     }
@@ -163,20 +167,31 @@ public class BaseHttpTest extends TestCase {
     }
 
     protected void logoutOfApplication() throws Exception {
+    	
+    	System.out.println( "<logoutOfApplication> Attempting to log off");
 
         ResourceBundle theBundle = ResourceBundle.getBundle("test");
 
         String theHost = theBundle.getString("testhost");
 
-        // Obtain the main page
+        // Obtain the main page on the meterware web site
         WebRequest theRequest = new GetMethodWebRequest(theHost);
         WebResponse theResponse = myWebConversation.getResponse(theRequest);
-
-        WebLink theLink = theResponse.getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Log out");
+        
+        // We may or may not have to hit the agreement link
+        WebLink theLink = theResponse.getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "CLICKING HERE");
 
         if (theLink != null) {
-            theResponse = theLink.click();
+        	System.out.println( "<logoutOfApplication> Clicking agreement link...");
+            theLink.click();
         }
+        
+        // Now Log off        
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Log out");       
+        if (theLink != null) {
+        	System.out.println( "<logoutOfApplication> Logging off...");
+            theLink.click();
+        }        
     }
 
     protected void loginToApplication(String inUsername, String inPassword) throws Exception {
@@ -194,7 +209,8 @@ public class BaseHttpTest extends TestCase {
         WebResponse response = theForm.submit();
         WebRequest refreshReq;
         refreshReq =  response.getRefreshRequest();
-        //System.out.println("refresh request: " + refreshReq.getURL());
+        
+        System.out.println("refresh request: " + refreshReq.getURL());
         
         // get new response using refreshReq URL
         response = myWebConversation.getResponse(refreshReq.getURL().toString());
@@ -207,8 +223,8 @@ public class BaseHttpTest extends TestCase {
     protected String findModelIdOnPage(String inStartText, String inEndText) throws Exception {
 
         String theModelId = "";
-        //System.out.println("<findModelIdOnPage> inStartText: " + inStartText);
-        //System.out.println("<findModelIdOnPage> inEndText: " + inEndText);
+        System.out.println("<findModelIdOnPage> inStartText: " + inStartText);
+        System.out.println("<findModelIdOnPage> inEndText: " + inEndText);
         
 
         String thePageText = myWebConversation.getCurrentPage().getText();
@@ -299,9 +315,8 @@ public class BaseHttpTest extends TestCase {
             		System.out.println("ParameterName(Map): " + theParameterName + "\t ParameterValue: " + theParameterValue);
             		
             		if (!Constants.Dropdowns.OTHER_OPTION.equals(theParameterValue) && theParameterValue !=null) {
-                		         			
-            			assertCurrentPageContains(theParameterValue);
-      		
+            			
+            			assertCurrentPageContains(theParameterValue);      		
             		}
             	}
             }

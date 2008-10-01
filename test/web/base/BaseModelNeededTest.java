@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: BaseModelNeededTest.java,v 1.6 2006-09-20 18:29:52 georgeda Exp $
+ * $Id: BaseModelNeededTest.java,v 1.7 2008-10-01 23:54:12 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2006/09/20 18:29:52  georgeda
+ * Modified PI assignment for dev server
+ *
  * Revision 1.5  2006/05/08 14:23:11  georgeda
  * Reformat and clean up warnings
  *
@@ -24,6 +27,7 @@ import gov.nih.nci.camod.util.GUIDGenerator;
 
 import com.meterware.httpunit.WebForm;
 import com.meterware.httpunit.WebLink;
+import com.meterware.httpunit.WebRequest;
 import com.meterware.httpunit.WebResponse;
 
 /** 
@@ -40,21 +44,20 @@ public class BaseModelNeededTest extends BaseHttpTest
 
     protected void createModel() throws Exception
     {
+    	System.out.println( "<createModel> Creating a Model" );
+    	
         // Assume we are logged in. Click the SUBMIT button
         WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "SUBMIT MODELS");
-
         assertNotNull("Couldn't find link to submission page", theLink);
-
         theLink.click();
 
         // We may or may not have to hit the agreement link
         theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Add New Model");
-
         assertNotNull("Couldn't find link to add new model", theLink);
-
         WebResponse theCurrentPage = theLink.click();
+        
         assertCurrentPageContains("Model Characteristics");
-
+               
         // Fill in the values and hit submit; Should fail the first time and the
         // populate will fill in the ethnicity strain values
         WebForm theForm = theCurrentPage.getFormWithName("modelCharacteristicsForm");
@@ -65,13 +68,14 @@ public class BaseModelNeededTest extends BaseHttpTest
         theForm.setParameter("scientificName", "Mus musculus");
         theForm.setParameter("description", "Test Phenotype");
         theCurrentPage = theForm.submit();
-
+                
         // Set the ethnicity strain and submit again
         theForm = theCurrentPage.getFormWithName("modelCharacteristicsForm");
         theForm.setParameter("ethinicityStrain", "129");
         theCurrentPage = theForm.submit();
 
-        assertCurrentPageContains("You have successfully created a new model!");
+        System.out.println( "Current URL: " + theCurrentPage.getURL() );
+        assertCurrentPageContains("You have successfully created a new model");        
     }
 
     protected void deleteModel() throws Exception

@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: EditModelCharacteristicsTest.java,v 1.3 2006-10-11 15:47:41 pandyas Exp $
+ * $Id: EditModelCharacteristicsTest.java,v 1.4 2008-10-01 23:54:12 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/10/11 15:47:41  pandyas
+ * changes while testing 2.1.1
+ *
  * Revision 1.2  2006/09/20 19:10:55  georgeda
  * toolMouse now tool strain
  *
@@ -64,6 +67,6 @@ public class EditModelCharacteristicsTest extends BaseModelNeededTest {
         theForm.setParameter("description", "Test Description");
     
         theCurrentPage = theForm.submit();
-        assertCurrentPageContains("You have successfully edited the model characteristics!"); 
+        assertCurrentPageContains("You have successfully edited the Model Characteristics."); 
     }
 }

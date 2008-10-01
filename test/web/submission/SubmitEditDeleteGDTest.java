@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SubmitEditDeleteGDTest.java,v 1.1 2008-05-12 16:29:06 pandyas Exp $
+ * $Id: SubmitEditDeleteGDTest.java,v 1.2 2008-10-01 23:54:12 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2008/05/12 16:29:06  pandyas
+ * Modified name for consistency
+ *
  * Revision 1.8  2006/10/11 15:47:41  pandyas
  * changes while testing 2.1.1
  *
@@ -65,7 +68,7 @@ public class SubmitEditDeleteGDTest extends BaseModelNeededTest
 
     public static Test suite()
     {
-        TestSuite suite = new TestSuite(SubmitGDTest.class);
+        TestSuite suite = new TestSuite(SubmitEditDeleteGDTest.class);
         return suite;
     }
 

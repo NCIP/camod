@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: SearchPopulateCellLinesTest.java,v 1.2 2006-04-27 15:08:43 pandyas Exp $
+ * $Id: SearchPopulateCellLinesTest.java,v 1.3 2008-10-01 23:54:11 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2006/04/27 15:08:43  pandyas
+ * Modified while testing caMod 2.1
+ *
  * Revision 1.1  2006/01/06 16:08:22  pandyas
  * Added testing for populate methods
  *
@@ -29,7 +32,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import web.base.BaseModelNeededTest;
-import web.util.TestUtil;
+//import web.util.TestUtil;
+import gov.nih.nci.camod.TestUtil;
 import com.meterware.httpunit.WebForm;
 import com.meterware.httpunit.WebLink;
 import com.meterware.httpunit.WebResponse;
@@ -217,6 +221,7 @@ public class SearchPopulateCellLinesTest extends BaseModelNeededTest {
 
 		assertCurrentPageContains("You have successfully added a Cell Line to this model!");
 
+		// ???
 		TestUtil.moveModelToEditedApproved(myModelName);
 
 		navigateToSpecificSearchPage(myModelName,"CELL LINES");

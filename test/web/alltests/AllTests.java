@@ -21,8 +21,8 @@ public class AllTests extends TestCase {
         TestSuite suite = new TestSuite();
 
         // Submission tests
-        //suite.addTest(AllSearchTests.suite());
-        //suite.addTest(AllSubmissionTests.suite());
+        suite.addTest(AllSearchTests.suite());
+        suite.addTest(AllSubmissionTests.suite());
 
         return suite;
     }

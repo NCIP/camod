@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: SubmitEditDeleteTransplantTest.java,v 1.2 2008-01-16 18:28:43 pandyas Exp $
+ * $Id: SubmitEditDeleteTransplantTest.java,v 1.3 2008-10-01 23:54:12 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2008/01/16 18:28:43  pandyas
+ * Renamed value to Transplant for #8290
+ *
  * Revision 1.1  2007/11/01 13:53:50  pandyas
  * Fixed #8290     Rename graft object into transplantion object
  *
@@ -69,8 +72,9 @@ public class SubmitEditDeleteTransplantTest extends BaseModelNeededTest {
         WebLink theLink = myWebConversation.getCurrentPage()
                 .getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Transplant");
         WebResponse theCurrentPage = theLink.click(); 
-        assertCurrentPageContains("if Transplant type is not listed");
-        WebForm theForm = theCurrentPage.getFormWithName("raftForm");
+        assertCurrentPageContains("- if transplant type is not listed");
+        
+        WebForm theForm = theCurrentPage.getFormWithName("TransplantForm");
         theForm.setParameter("name", "ABCDEFG");
         theForm.setParameter("sourceType", "Cell Line");        
         theForm.setParameter("donorScientificName", "Mus musculus");

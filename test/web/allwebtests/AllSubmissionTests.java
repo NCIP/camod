@@ -21,7 +21,7 @@ public class AllSubmissionTests extends TestCase {
 
         // Submission tests
         suite.addTest(EditModelCharacteristicsTest.suite());
-        suite.addTest(SubmitEditDeleteCITest.suite());
+       // suite.addTest(SubmitEditDeleteCITest.suite());
         suite.addTest(SubmitEditDeleteCellLinesTest.suite());
         suite.addTest(SubmitEditDeleteHistopathologyTest.suite());
         suite.addTest(SubmitEditDeleteImageTest.suite());
@@ -30,7 +30,7 @@ public class AllSubmissionTests extends TestCase {
         suite.addTest(SubmitEditDeleteTherapyTest.suite());
         suite.addTest(SubmitEditDeleteTransIntTest.suite());
         suite.addTest(SubmitEditDeleteTransplantTest.suite());        
-        suite.addTest(SubmitEditDeleteGDTest.suite());     
+        //suite.addTest(SubmitEditDeleteGDTest.suite());     
         suite.addTest(SubmitPageTest.suite());
 
         return suite;

@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: SubmitEditDeleteModelAvailabilityTest.java,v 1.1 2005-12-27 15:04:09 georgeda Exp $
+ * $Id: SubmitEditDeleteModelAvailabilityTest.java,v 1.2 2008-10-01 23:54:11 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2005/12/27 15:04:09  georgeda
+ * Test cleanup
+ *
  * Revision 1.3  2005/12/12 15:53:48  pandyas
  * modified: navigateToModelForEditing(myModelName);
  *
@@ -128,10 +131,13 @@ public class SubmitEditDeleteModelAvailabilityTest extends BaseModelNeededTest {
         WebResponse theCurrentPage = theLink.click(); 
         assertCurrentPageContains("Strain Name:");
         WebForm theForm = theCurrentPage.getFormWithName("availabilityForm");
-        theForm.setParameter("name", "IIIII");
-        theCurrentPage = theForm.submit();
-        assertCurrentPageContains("You have successfully added an Availability to this model!");
         
+        theForm.setParameter("name", "IIIII");
+        theForm.setParameter("principalInvestigator", "wagnerk");
+        theCurrentPage = theForm.submit();
+        
+        assertCurrentPageContains("You have successfully added an Availability to this model!");
+
         /* Find Model Availablity link to Edit */
         theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "IIIII");        
         assertNotNull("Unable to find link to edit the Availability from the Investigator", theLink);        

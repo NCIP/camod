@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SubmitEditDeleteImageTest.java,v 1.4 2006-10-23 17:08:38 pandyas Exp $
+ * $Id: SubmitEditDeleteImageTest.java,v 1.5 2008-10-01 23:54:11 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2006/10/23 17:08:38  pandyas
+ * removed unused import
+ *
  * Revision 1.3  2006/09/20 19:16:24  georgeda
  * added getTextOnPage method
  *
@@ -72,8 +75,8 @@ public class SubmitEditDeleteImageTest extends BaseModelNeededTest
         assertNotNull("Unable to find link to enter a Image", theLink);
         WebResponse theCurrentPage = theLink.click();
         assertCurrentPageContains("(Image of type .jpg, .jpeg, .gif, .sid or .png)");
-        WebForm theForm = theCurrentPage.getFormWithName("imageForm");
-        theForm.setParameter("fileLocation", new File(theBundle.getString("deploydir") + "/images/iconHelp.gif"));
+        WebForm theForm = theCurrentPage.getFormWithName("imageForm");                
+        theForm.setParameter("fileLocation", new File(theBundle.getString("deploydir").trim() + "images/iconHelp.gif"));
         theForm.setParameter("title", "test image");
         theCurrentPage = theForm.submit();
         //TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");

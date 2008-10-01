@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SearchPopulateCITest.java,v 1.3 2006-04-27 15:08:43 pandyas Exp $
+ * $Id: SearchPopulateCITest.java,v 1.4 2008-10-01 23:54:11 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/04/27 15:08:43  pandyas
+ * Modified while testing caMod 2.1
+ *
  * Revision 1.2  2006/04/17 19:37:34  pandyas
  * caMod 2.1 OM changes
  *
@@ -794,7 +797,7 @@ public class SearchPopulateCITest extends BaseModelNeededTest {
 		navigateToModelForEditing(myModelName);
 
 		theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-				"Other");
+				"Other - ");
 		assertNotNull("Unable to find link to populate a Surgery/Other", theLink);		
 		theCurrentPage = theLink.click();
 		assertCurrentPageContains("(if Surgery is not listed");

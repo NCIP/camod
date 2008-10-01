@@ -92,7 +92,7 @@ public class DomainSuite extends TestCase {
     suite.addTest(gov.nih.nci.camod.domain.TransgeneTest.suite());
     suite.addTest(gov.nih.nci.camod.domain.TreatmentTest.suite());
     suite.addTest(gov.nih.nci.camod.domain.TumorCodeTest.suite());
-    suite.addTest(gov.nih.nci.camod.domain.TransplantTest.suite());
+    //suite.addTest(gov.nih.nci.camod.domain.TransplantTest.suite());
     suite.addTest(gov.nih.nci.camod.domain.YeastModelTest.suite());
     return suite;
   }

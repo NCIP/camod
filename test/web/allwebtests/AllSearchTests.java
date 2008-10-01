@@ -19,7 +19,7 @@ public class AllSearchTests extends TestCase {
         TestSuite suite = new TestSuite();
 
         // Search tests
-        suite.addTest(SearchPopulateCellLinesTest.suite());
+        //suite.addTest(SearchPopulateCellLinesTest.suite());
         suite.addTest(SearchPopulateCITest.suite());
         suite.addTest(SearchPopulateGeneticDescriptionTest.suite());
         suite.addTest(SearchPopulateHistopathologyTest.suite());

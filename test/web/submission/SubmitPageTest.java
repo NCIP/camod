@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SubmitPageTest.java,v 1.3 2006-10-11 15:47:41 pandyas Exp $
+ * $Id: SubmitPageTest.java,v 1.4 2008-10-01 23:54:12 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/10/11 15:47:41  pandyas
+ * changes while testing 2.1.1
+ *
  * Revision 1.2  2005/12/14 20:15:26  pandyas
  * Added JavaDocs
  *
@@ -50,7 +53,11 @@ public class SubmitPageTest extends BaseModelNeededTest {
 
     public void testDuplicateModel() throws Exception {
 
-        String theModelId = findModelIdOnPage("aModelID=" + myModelName, "'>"  + myModelName);
+        //String theModelId = findModelIdOnPage("aModelID=", "\">" + myModelName);
+        String theModelId = findModelIdOnPage("duplicate this record (" + myModelName, "delete this record (" + myModelName);
+       
+        theModelId = theModelId.replaceFirst("aModelID=", "");
+        System.out.println( "theModelID = " + theModelId + "<");
         
         /*
         String theString = findModelIdOnPage("aModelID=", "' onclick='return");
@@ -74,7 +81,11 @@ public class SubmitPageTest extends BaseModelNeededTest {
          */
 
         // We may or may not have to hit the agreement link
-        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_URL_STRING, "method=duplicate&amp;aModelID=" + theModelId);
+        System.out.println( " test= " + "method=duplicate&amp;aModelID=" + theModelId );
+        
+        WebLink[] tst = myWebConversation.getCurrentPage().getLinks();
+        
+        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_URL_STRING, "aModelID=" + theModelId);
         //System.out.println("<testDuplicateModel> theLink: " + theLink);
         
         assertNotNull("Couldn't find link to duplicate model", theLink);
@@ -84,7 +95,7 @@ public class SubmitPageTest extends BaseModelNeededTest {
         theLink.click();
 
         // Make sure it worked
-        String theDupModelName = "myModelName + (Copy)";
+        String theDupModelName = myModelName +" (Copy)";
         //System.out.println("<testDuplicateModel> theDupModelName: " + theDupModelName);
         
         assertCurrentPageContains(theDupModelName);
