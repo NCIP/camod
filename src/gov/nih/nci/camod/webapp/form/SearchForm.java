@@ -42,9 +42,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.48 2008-09-23 17:43:48 pandyas Exp $
+ * $Id: SearchForm.java,v 1.49 2008-10-01 18:25:49 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.48  2008/09/23 17:43:48  pandyas
+ * Typo in validation for therapeutic approaches field
+ *
  * Revision 1.47  2008/08/14 19:02:01  schroedn
  * clean the pmid for security scans
  *
@@ -805,11 +808,12 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         
         // validate for inducedMutationAgent
         if (inducedMutationAgent != null && inducedMutationAgent.length() > 0 )
-        {            
-            NameValueList.generateInducedMutationAgentList();
-            request.getSession().setAttribute(Constants.Dropdowns.SEARCHINDUCEDMUTATIONDROP, NameValueList.getInducedMutationAgentList());
+        { 
+            List inducedMutationAgentList = new ArrayList();
+            inducedMutationAgentList = (List)request.getSession().getAttribute(Constants.Dropdowns.INDUCEDMUTATIONAGENTQUERYDROP);
+            request.getSession().setAttribute(Constants.Dropdowns.SEARCHINDUCEDMUTATIONDROP, inducedMutationAgentList);
 
-            if (!SafeHTMLUtil.isValidValue(inducedMutationAgent,Constants.Dropdowns.SEARCHINDUCEDMUTATIONDROP,request) | !SafeHTMLUtil.isLetterOrDigit(inducedMutationAgent))
+            if (!SafeHTMLUtil.isValidValue(inducedMutationAgent,Constants.Dropdowns.SEARCHINDUCEDMUTATIONDROP,request))
             {
                 // populate the validation message
                 errors.add("inducedMutationAgent", new ActionMessage("error.inducedMutationAgent.validValue"));
