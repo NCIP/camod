@@ -42,9 +42,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: NameValueList.java,v 1.7 2008-08-13 18:40:28 pandyas Exp $
+ * $Id: NameValueList.java,v 1.8 2008-10-01 18:26:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2008/08/13 18:40:28  pandyas
+ * Fixed #6812  	Change spelling of Equus Caballus - start Caballus with a lower case "c"
+ *
  * Revision 1.6  2008/05/22 18:21:06  pandyas
  * Cleaned up data for species.scientific_name so validation would identify valid species selections for prevention of SQL injection - removed hard-coded efforts
  *
@@ -157,18 +160,6 @@ public class NameValueList
         return  approvedSpeciesList ;
     } 
     
-    public static void generateInducedMutationAgentList() {
-
-        inducedMutationAgentList = new ArrayList();
-        inducedMutationAgentList.add(new NameValue("ENU","ENU"));
-        inducedMutationAgentList.add(new NameValue("ethylnitrosourea","ethylnitrosourea"));
-        inducedMutationAgentList.add(new NameValue("name of inducing agent","name of inducing agent"));        
-    }
-
-    public static List getInducedMutationAgentList()  {
-        generateInducedMutationAgentList();
-        return  inducedMutationAgentList ;
-    } 
     
     public static void generateCarcinogenicInterventionList() {
 
