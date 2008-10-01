@@ -42,9 +42,14 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.49 2008-10-01 18:25:49 pandyas Exp $
+ * $Id: SearchForm.java,v 1.50 2008-10-01 18:48:12 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.49  2008/10/01 18:25:49  pandyas
+ * Modifed validation - changed code to get Induced Mutation dropdown list from database to compare with the user input.  We now display the AlternEntry in the dropdown for induced mutation.
+ *
+ * Additional modification for gforge #12825  	induced mutation entries need to be flagged (requires OM change) and searches for induced mutation and carcinogenic interventions need to be fixed
+ *
  * Revision 1.48  2008/09/23 17:43:48  pandyas
  * Typo in validation for therapeutic approaches field
  *
@@ -813,7 +818,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             inducedMutationAgentList = (List)request.getSession().getAttribute(Constants.Dropdowns.INDUCEDMUTATIONAGENTQUERYDROP);
             request.getSession().setAttribute(Constants.Dropdowns.SEARCHINDUCEDMUTATIONDROP, inducedMutationAgentList);
 
-            if (!SafeHTMLUtil.isValidValue(inducedMutationAgent,Constants.Dropdowns.SEARCHINDUCEDMUTATIONDROP,request))
+            if (!SafeHTMLUtil.isValidStringValue(inducedMutationAgent,Constants.Dropdowns.SEARCHINDUCEDMUTATIONDROP,request))
             {
                 // populate the validation message
                 errors.add("inducedMutationAgent", new ActionMessage("error.inducedMutationAgent.validValue"));
