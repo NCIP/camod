@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: SubmitEditDeleteModelAvailabilityTest.java,v 1.2 2008-10-01 23:54:11 schroedn Exp $
+ * $Id: SubmitEditDeleteModelAvailabilityTest.java,v 1.3 2008-10-02 00:04:29 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2008/10/01 23:54:11  schroedn
+ * Junit test fixes for caMOD 2.5 - revision 1
+ *
  * Revision 1.1  2005/12/27 15:04:09  georgeda
  * Test cleanup
  *
@@ -158,38 +161,5 @@ public class SubmitEditDeleteModelAvailabilityTest extends BaseModelNeededTest {
         assertCurrentPageContains("You have successfully deleted an Availability."); 
     }
     
-    public void testIMSR() throws Exception {
-    	navigateToModelForEditing(myModelName);
-        
-        /* Find Model Availablity link to Submit */
-        WebLink theLink = myWebConversation.getCurrentPage()
-                .getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Available from IMSR");
-        WebResponse theCurrentPage = theLink.click(); 
-        assertCurrentPageContains("Strain Name:");
-        WebForm theForm = theCurrentPage.getFormWithName("availabilityForm");
-        theForm.setParameter("name", "IMMMM");
-        theCurrentPage = theForm.submit();
-        assertCurrentPageContains("You have successfully added an Availability to this model!");
-        
-        /* Find the Model Availability link to Edit */
-        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "IMMMM");        
-        assertNotNull("Unable to find link to edit the Availability from IMSR", theLink);        
-        theCurrentPage = theLink.click();        
-        assertCurrentPageContains("Strain Name:");
-        theForm = theCurrentPage.getFormWithName("availabilityForm");
-        theForm.setParameter("name", "IMMMM");
-        theForm.setParameter("stockNumber", "111");         
-        theCurrentPage = theForm.submit();
-        assertCurrentPageContains("You have successfully edited an Availability.");      
-        
-        /* Find the Model Availability link to Delete */
-        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "IMMMM");
-        assertNotNull("Unable to find link to delete the Availability from the Investigator", theLink);        
-        theCurrentPage = theLink.click();        
-        assertCurrentPageContains("Strain Name:");
-        theForm = theCurrentPage.getFormWithName("availabilityForm");               
-        theForm.getSubmitButton( "submitAction", "Delete" ).click();              
-        assertCurrentPageContains("You have successfully deleted an Availability."); 
-    }    
 
 }
