@@ -33,6 +33,28 @@
         	column="name" 
         	type="string"/>
         	
+       	<!-- engineeredGeneType --> 
+        <property name="engineeredGeneType" 
+        	column="engineered_gene_type" 
+        	type="string"
+ 			insert="false"
+	    	update="false"
+        	/>
+
+ 	    <!-- absCancerModelId -->
+	    <property name="absCancerModelId"
+	    		  column="abs_cancer_model_id"
+	    		  type="long" 
+	    		  insert="false"
+	    		  update="false"/>
+
+ 	    <!-- environmentalFactorId -->
+	    <property name="environmentalFactorId"
+	    		  column="environmental_factor_id"
+	    		  type="long" 
+	    		  insert="false"
+	    		  update="false"/>
+	    		         		    		         	
         <!-- comments -->
         <property name="comments" 
         	column="comments" 

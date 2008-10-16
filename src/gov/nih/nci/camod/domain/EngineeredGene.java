@@ -1,7 +1,10 @@
 /*
- * $Id: EngineeredGene.java,v 1.15 2006-10-17 16:14:36 pandyas Exp $
+ * $Id: EngineeredGene.java,v 1.16 2008-10-16 13:54:13 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2006/10/17 16:14:36  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.14  2006/04/18 16:26:52  pandyas
  * Removed getGeneFunctionCollectionSorted() method since it is taken care of in the mapping
  *
@@ -27,6 +30,9 @@ public class EngineeredGene extends BaseObject implements Comparable, Serializab
     private String name;
     private String comments;
     private Image image;
+    private long absCancerModelId;
+    private String environmentalFactorId;
+    private String engineeredGeneType;
     private Conditionality conditionality;
     private MutationIdentifier mutationIdentifier;
     private AbstractCancerModel cancerModel;    
@@ -230,4 +236,45 @@ public class EngineeredGene extends BaseObject implements Comparable, Serializab
         return super.compareTo(o);
     }
 
+	/**
+	 * @return the absCancerModelId
+	 */
+	public long getAbsCancerModelId() {
+		return absCancerModelId;
+	}
+
+	/**
+	 * @param absCancerModelId the absCancerModelId to set
+	 */
+	public void setAbsCancerModelId(long absCancerModelId) {
+		this.absCancerModelId = absCancerModelId;
+	}
+
+	/**
+	 * @return the engineeredGeneType
+	 */
+	public String getEngineeredGeneType() {
+		return engineeredGeneType;
+	}
+
+	/**
+	 * @param engineeredGeneType the engineeredGeneType to set
+	 */
+	public void setEngineeredGeneType(String engineeredGeneType) {
+		this.engineeredGeneType = engineeredGeneType;
+	}
+
+	/**
+	 * @return the environmentalFactorId
+	 */
+	public String getEnvironmentalFactorId() {
+		return environmentalFactorId;
+	}
+
+	/**
+	 * @param environmentalFactorId the environmentalFactorId to set
+	 */
+	public void setEnvironmentalFactorId(String environmentalFactorId) {
+		this.environmentalFactorId = environmentalFactorId;
+	}
 }
