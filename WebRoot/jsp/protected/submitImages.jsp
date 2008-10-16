@@ -61,7 +61,15 @@
 
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
-			<td class="formRequiredLabel"><label for="field1">Upload Image<br>(Image of type .jpg, .jpeg, .gif, .sid or .png)</label></td>
+			<td class="formRequiredLabel"><label for="field1">Title of Image<br>(Enter info only when uploading image)</label></td>
+			<td class="formField">
+				<html:textarea styleClass="formFieldSized" property="title" rows="4" cols="40"/>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="formRequiredNotice" width="5">*</td>
+			<td class="formRequiredLabel"><label for="field1">Upload Image<br>(Image of type .jpg, .jpeg, .gif, .sid or .png)<br>(Required if Alternate URL not used)</label></td>
 			<td class="formField">
 			
 			<c:if test="${not empty imageForm.url}">
@@ -77,15 +85,16 @@
 			
 			</td>
 		</tr>
-
+	
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
-			<td class="formRequiredLabel"><label for="field1">Title of Image<br>(Enter info only when uploading image)</label></td>
+			<td class="formRequiredLabel"><label for="field1">Alternate URL<br>(Required if Upload Image not used)</label>
+			</td>
 			<td class="formField">
-				<html:textarea styleClass="formFieldSized" property="title" rows="4" cols="40"/>
+					<html:text styleClass="formFieldSized" property="urlAlternEntry" size="30"/>			
 			</td>
 		</tr>
-
+	
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field2">Description of Image<br>(Enter info only when uploading image)</label></td>
@@ -108,16 +117,7 @@
 			<html:text styleClass="formFieldSized" disabled="true" property="stainingMethod" size="30"  />
 			<a href="javascript: clearField(document.forms[0].stainingMethod, document.forms[0].stainingMethodCode);"><img border="0" src="/camod/images/clear.gif"></a>
 		</td>
-	</tr>	
-		
-	<tr>
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Alternate URL:</label>
-		</td>
-			<td class="formField">
-					<html:text styleClass="formFieldSized" property="urlAlternEntry" size="30"/>			
-			</td>
-	</tr>	
+	</tr>			
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
