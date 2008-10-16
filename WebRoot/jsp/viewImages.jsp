@@ -37,8 +37,11 @@
 				</c:choose>
 			
 				<td class="<c:out value="${tdClass}"/>" colspan="2">
-					<a href='<c:out value="${p.imageUrl}"/>' target="_blank"><c:out value="${p.thumbUrl}"/></a>
-					<!-- <img src="<c:out value="${p.thumbUrl}"/>" height="40" width="40" alt="Click on the image to open in a new Browser window" target="_blank">( Click to View )</a> -->
+					<c:if test="${empty p.urlAlternEntry}" >
+						<a href='<c:out value="${p.imageUrl}"/>' target="_blank"><c:out value="${p.thumbUrl}"/>
+						<img src="<c:out value="${p.thumbUrl}"/>" height="40" width="40" alt="Click on the image to open in a new Browser window" target="_blank">( Click to View )</a>
+					</c:if>
+												
 					<br><br/>
 					<TABLE summary="" cellpadding="0" cellspacing="0" border="0" align="center" width="100%">
 					<tr>
