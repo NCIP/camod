@@ -28,32 +28,15 @@
 						
 			<bean:define id="maColl" name="mdl" property="microArrayDataCollection"/>
 			<c:forEach var="ma" items="${maColl}">
-				<c:choose>
-					<c:when test="${empty ma.experimentId}">
-						<tr>
-							<td class="resultsBoxGreyEnd">
-				                <ul>
-				                	<li>
-				                	<a href='<c:out value="${ma.url}"/>'><c:out value="${ma.experimentName}" target="_blank"/></a>
-							        </li>
-				                </ul>
-							</td>
-						</tr>	
-					</c:when>
-					
-					<c:otherwise>				
-						<tr>
-							<td class="resultsBoxGreyEnd">
-				                <ul>
-				                	<li>
-				                	<c:set var="uri" value="${uri_start}${ma.experimentId}${uri_end}"/>
-				                	<a href='<c:out value="${uri}"/>'><c:out value="${ma.experimentName}" target="_blank"/></a>
-							        </li>
-				                </ul>
-							</td>
-						</tr>								
-					</c:otherwise>			
-				</c:choose>			
+				<tr>
+					<td class="resultsBoxGreyEnd">
+		                <ul>
+		                	<li>
+		                	<a href='http://<c:out value="${ma.url}"/>' target="_blank"><c:out value="${ma.experimentName}"/></a>
+					        </li>
+		                </ul>
+					</td>
+				</tr>				
 			</c:forEach>	
 									
             <tr><td></td></tr>
