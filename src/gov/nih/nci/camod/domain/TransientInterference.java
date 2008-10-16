@@ -1,5 +1,8 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2007/10/31 15:41:14  pandyas
+ * Fixed #8188 	Rename UnctrlVocab items to AlternEntry
+ *
  * Revision 1.3  2007/04/04 13:17:05  pandyas
  * Modified name for conditioning regimen and target site
  *
@@ -16,7 +19,7 @@
  * Modified to add Morpholino object data to application
  *
  * 
- * $Id: TransientInterference.java,v 1.4 2007-10-31 15:41:14 pandyas Exp $
+ * $Id: TransientInterference.java,v 1.5 2008-10-16 13:55:44 schroedn Exp $
  */
 package gov.nih.nci.camod.domain;
 
@@ -31,6 +34,7 @@ public class TransientInterference extends BaseObject implements Serializable, D
     private String source;
     private String sourceAlternEntry;
     private String type;
+    private Long absCancerModelId;
     private String sequenceDirection;
     private String targetedRegion;
     private String concentration;
@@ -331,6 +335,20 @@ public class TransientInterference extends BaseObject implements Serializable, D
 	 */
 	public void setSourceAlternEntry(String sourceAlternEntry) {
 		this.sourceAlternEntry = sourceAlternEntry;
+	}
+
+	/**
+	 * @return the absCancerModelId
+	 */
+	public Long getAbsCancerModelId() {
+		return absCancerModelId;
+	}
+
+	/**
+	 * @param absCancerModelId the absCancerModelId to set
+	 */
+	public void setAbsCancerModelId(Long absCancerModelId) {
+		this.absCancerModelId = absCancerModelId;
 	}
 
 

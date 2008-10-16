@@ -7,6 +7,7 @@ public class CarcinogenExposure extends BaseObject implements Comparable, Serial
 {
     private static final long serialVersionUID = 3258525453799404851L;
 
+    private long absCancerModelId;
     private EnvironmentalFactor environmentalFactor;
     private Treatment treatment;
     private AbstractCancerModel cancerModel;
@@ -70,5 +71,21 @@ public class CarcinogenExposure extends BaseObject implements Comparable, Serial
             return false;
         return true;
     }
+
+	/**
+	 * @return the absCancerModelId
+	 */
+	public long getAbsCancerModelId() {
+		return absCancerModelId;
+	}
+
+	/**
+	 * @param absCancerModelId the absCancerModelId to set
+	 */
+	public void setAbsCancerModelId(long absCancerModelId) {
+		this.absCancerModelId = absCancerModelId;
+	}
+
+
 
 }

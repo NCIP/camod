@@ -1,8 +1,11 @@
 /*
  * 
- * $Id: Image.java,v 1.16 2008-08-15 15:06:54 schroedn Exp $
+ * $Id: Image.java,v 1.17 2008-10-16 13:55:00 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2008/08/15 15:06:54  schroedn
+ * added getter/setter comments
+ *
  * Revision 1.15  2008/08/14 19:00:57  schroedn
  * Changes for  altern_url to urlAlternEntry
  *
@@ -59,7 +62,9 @@ public class Image extends BaseObject implements Comparable, Serializable, Dupli
     private String description;
 
     private String url;
-
+    
+    private Long absCancerModelId;
+    
     private String urlAlternEntry;
     
     private StainingMethod stainingMethod;
@@ -281,6 +286,8 @@ public class Image extends BaseObject implements Comparable, Serializable, Dupli
         result = HashCodeUtil.hash(result, this.getTitle());
         return result + super.hashCode();
     }
+    
+    
 
     public int compareTo(Object o)
     {
@@ -325,5 +332,20 @@ public class Image extends BaseObject implements Comparable, Serializable, Dupli
 	public void setUrlAlternEntry(String urlAlternEntry) {
 		this.urlAlternEntry = urlAlternEntry;
 	}
+
+	/**
+	 * @return the absCancerModelId
+	 */
+	public Long getAbsCancerModelId() {
+		return absCancerModelId;
+	}
+
+	/**
+	 * @param absCancerModelId the absCancerModelId to set
+	 */
+	public void setAbsCancerModelId(Long absCancerModelId) {
+		this.absCancerModelId = absCancerModelId;
+	}
+
 
 }

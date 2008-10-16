@@ -1,7 +1,10 @@
 /*
- * $Id: Therapy.java,v 1.15 2007-05-16 12:28:43 pandyas Exp $
+ * $Id: Therapy.java,v 1.16 2008-10-16 13:56:32 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2007/05/16 12:28:43  pandyas
+ * Added developmental stage evs tree to Therapy when species is Zebrafsih
+ *
  * Revision 1.14  2007/03/19 18:56:11  pandyas
  * Object Model changes for caMOD 2.3 - dee design doc for details
  *
@@ -27,6 +30,7 @@ public class Therapy extends BaseObject implements Comparable, Serializable, Dup
     private static final long serialVersionUID = 3258525453799404851L;
 
     private Agent agent;
+    private Long absCancerModelId;
     private String experiment;
     private String results;
     private String toxicityGrade;
@@ -216,6 +220,8 @@ public class Therapy extends BaseObject implements Comparable, Serializable, Dup
         this.treatment = treatment;
     }
 
+    
+    
     /**
      * @return Returns the cancerModel.
      */
@@ -275,4 +281,20 @@ public class Therapy extends BaseObject implements Comparable, Serializable, Dup
 
         return super.compareTo(o);
     }
+
+	/**
+	 * @return the absCancerModelId
+	 */
+	public Long getAbsCancerModelId() {
+		return absCancerModelId;
+	}
+
+	/**
+	 * @param absCancerModelId the absCancerModelId to set
+	 */
+	public void setAbsCancerModelId(Long absCancerModelId) {
+		this.absCancerModelId = absCancerModelId;
+	}
+
+
 }

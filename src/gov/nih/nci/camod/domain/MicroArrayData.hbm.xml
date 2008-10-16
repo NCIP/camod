@@ -24,6 +24,13 @@
 	        <generator class="native"/>
 	    </id>	
 	    
+   	    <!-- absCancerModelId -->
+	    <property name="absCancerModelId"
+	    		  column="abs_cancer_model_id"
+	    		  type="long" 
+	    		  insert="false"
+	    		  update="false"/>
+	    		  
         <!-- experimentName -->
         <property name="experimentName" 
         	column="experiment_name" 
@@ -36,7 +43,7 @@
         	
         <!-- otherLocationURL -->
         <property name="url" 
-        	column="url" 
+        	column="other_location_url" 
         	type="string"/>
         	
 

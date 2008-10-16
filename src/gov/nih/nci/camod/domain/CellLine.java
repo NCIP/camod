@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: CellLine.java,v 1.14 2006-04-17 19:13:46 pandyas Exp $
+ * $Id: CellLine.java,v 1.15 2008-10-16 13:52:54 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2006/04/17 19:13:46  pandyas
+ * caMod 2.1 OM changes and added log/id header
+ *
  * Revision 1.13  2006/01/18 14:23:31  georgeda
  * TT# 376 - Updated to use new Java 1.5 features
  *
@@ -39,6 +42,7 @@ public class CellLine extends BaseObject implements Comparable, Serializable, Du
     private static final long serialVersionUID = 3259655453799404851L;
 
     private String name;
+    private Long absCancerModelId;
     private String experiment;
     private String results;
     private String comments;
@@ -220,6 +224,21 @@ public class CellLine extends BaseObject implements Comparable, Serializable, Du
 
         return super.compareTo(o);
     }
+
+	/**
+	 * @return the absCancerModelId
+	 */
+	public Long getAbsCancerModelId() {
+		return absCancerModelId;
+	}
+
+	/**
+	 * @param absCancerModelId the absCancerModelId to set
+	 */
+	public void setAbsCancerModelId(Long absCancerModelId) {
+		this.absCancerModelId = absCancerModelId;
+	}
+
 
 
 }
