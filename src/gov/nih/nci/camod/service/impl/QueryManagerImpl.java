@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.106 2008-10-16 13:59:35 schroedn Exp $
+ * $Id: QueryManagerImpl.java,v 1.107 2008-10-16 15:52:46 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.106  2008/10/16 13:59:35  schroedn
+ * Added CriteriaSearchBeta, implements all HQL for simple, TOC and Advanced searches
+ *
  * Revision 1.105  2008/09/29 20:33:14  pandyas
  * Modified for gforge #12825.  Added code to display name_altern_entry for Induced Mutation drop down list.  Added filter for agent names from models that are 'Edited - approved'.
  *
@@ -3289,21 +3292,21 @@ public class QueryManagerImpl extends BaseManager
 				        				+ " AND am.availability.releaseDate <= sysdate " 
 						        		+ " AND am.id IN " 
 						        		+ " (select distinct th.absCancerModelId from Therapy th, TherapyPublication tp, Publication p " 
-						        		+ " where th.id = tp.therapyId and tp.publicationId = p.id and p.pmid like '%" + inSearchData.getPmid().trim() + "%' ) "
+						        		+ " where th.id = tp.therapyId and tp.publicationId = p.id and p.pmid = '" + inSearchData.getPmid().trim() + "' ) "
 						        		+ " ORDER BY am.id asc ";
         	
         	String thePublicationQuery2 = " from AnimalModel as am where am.state = 'Edited-approved' "
 										+ " AND am.availability.releaseDate <= sysdate " 
 						        		+ " AND am.id IN " 
 						        		+ " (select distinct acmp.absCancerModelId  from  AbsCanModPublication acmp, Publication p " 
-						        		+ "	where  acmp.publicationId = p.id and p.pmid like '%" + inSearchData.getPmid().trim() + "%') "
+						        		+ "	where  acmp.publicationId = p.id and p.pmid = '" + inSearchData.getPmid().trim() + "') "
         								+ " ORDER BY am.id asc ";
         								
         	String thePublicationQuery3 = " from AnimalModel as am where am.state = 'Edited-approved' "
 										+ " AND am.availability.releaseDate <= sysdate " 
 						        		+ " AND am.id IN " 
 						        		+ " (select distinct cl.absCancerModelId from CellLine cl, CellLinePublication cp, Publication p " 
-						        		+ " where cl.id = cp.cellLineId and cp.publicationId = p.id and p.pmid like '%" + inSearchData.getPmid().trim() + "%' ) "
+						        		+ " where cl.id = cp.cellLineId and cp.publicationId = p.id and p.pmid = '" + inSearchData.getPmid().trim() + "' ) "
         								+ " ORDER BY am.id asc ";
         								
         	Query query1 = HibernateUtil.getSession().createQuery(thePublicationQuery1);
