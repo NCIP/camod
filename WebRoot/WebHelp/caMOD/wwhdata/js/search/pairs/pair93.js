@@ -1,0 +1,23 @@
+function FileData_Pairs(x)
+{
+x.t("submitter","information");
+x.t("camod","administration");
+x.t("check","record");
+x.t("overview","editor");
+x.t("tasks","check");
+x.t("perform","following");
+x.t("record","display");
+x.t("record","completeness");
+x.t("functions","overview");
+x.t("display","asks");
+x.t("asks","submitter");
+x.t("editor","camod");
+x.t("editor","perform");
+x.t("editor","editor");
+x.t("completeness","correctness");
+x.t("administration","functions");
+x.t("administration","administration");
+x.t("correctness","approve");
+x.t("following","tasks");
+x.t("approve","record");
+}
