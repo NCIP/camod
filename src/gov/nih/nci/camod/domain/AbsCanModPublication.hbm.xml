@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="gov.nih.nci.camod.domain">
+	<class name="AbsCanModPublication"
+		table="abs_can_mod_publication"
+        lazy="true">
+	    
+	    <!-- absCancerModelId -->
+	    <id name="absCancerModelId" 
+	    	column="abs_cancer_model_id"
+	    	type="long">	    	
+	    </id>	
+	    
+	    <!-- publicationId -->
+        <property name="publicationId" 
+        	column="publication_id" 
+        	type="long"/>
+          	        	
+	</class>
+</hibernate-mapping>
