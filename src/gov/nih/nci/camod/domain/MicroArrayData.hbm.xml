@@ -43,7 +43,7 @@
         	
         <!-- otherLocationURL -->
         <property name="url" 
-        	column="other_location_url" 
+        	column="url" 
         	type="string"/>
         	
 
