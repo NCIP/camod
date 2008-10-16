@@ -1,7 +1,10 @@
 /*
- * $Id: Histopathology.java,v 1.12 2006-10-17 16:14:36 pandyas Exp $
+ * $Id: Histopathology.java,v 1.13 2008-10-16 13:54:39 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2006/10/17 16:14:36  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.11  2006/04/17 19:13:46  pandyas
  * caMod 2.1 OM changes and added log/id header
  *
@@ -23,6 +26,8 @@ public class Histopathology extends BaseObject implements Comparable, Serializab
     private String grossDescription;
     private String relationalOperation;
     private String tumorIncidenceRate;
+    private Long absCancerModelId;
+    private Long parentHistopathologyId;
     private String survivalInfo;
     private String ageOfOnset;
     private String ageOfOnsetUnit;
@@ -418,5 +423,30 @@ public class Histopathology extends BaseObject implements Comparable, Serializab
 
         return super.compareTo(o);
     }
+	/**
+	 * @return the absCancerModelId
+	 */
+	public Long getAbsCancerModelId() {
+		return absCancerModelId;
+	}
+	/**
+	 * @param absCancerModelId the absCancerModelId to set
+	 */
+	public void setAbsCancerModelId(Long absCancerModelId) {
+		this.absCancerModelId = absCancerModelId;
+	}
+	/**
+	 * @return the parentHistopathologyId
+	 */
+	public Long getParentHistopathologyId() {
+		return parentHistopathologyId;
+	}
+	/**
+	 * @param parentHistopathologyId the parentHistopathologyId to set
+	 */
+	public void setParentHistopathologyId(Long parentHistopathologyId) {
+		this.parentHistopathologyId = parentHistopathologyId;
+	}
+
 
 }
