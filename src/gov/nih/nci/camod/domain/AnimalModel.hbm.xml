@@ -26,7 +26,14 @@
         <property name="isToolStrain" 
         	column="is_tool_strain" 
         	type="boolean"/>
-        	
+ 
+       <!-- strainId -->
+        <property name="strainId" 
+        	column="strain_id" 
+        	type="long"	    		  
+        	insert="false"
+	    	update="false"/>
+ 
         <!-- externalSource -->
         <property name="externalSource" 
         	column="external_source" 

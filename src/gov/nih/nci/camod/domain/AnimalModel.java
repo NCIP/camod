@@ -1,5 +1,8 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.26  2008/01/16 18:30:38  pandyas
+ * Renamed value to Transplant for #8290
+ *
  * Revision 1.25  2007/12/27 22:34:45  pandyas
  * Modified  for feature #8816  	Connection to caELMIR - retrieve data for therapy search page
  * Modified code to setCaelmirStudyDataCollection so the Therapy link will display when only caELMIR data is available for a model
@@ -39,7 +42,7 @@
  * Cleanup
  *
  * 
- * $Id: AnimalModel.java,v 1.26 2008-01-16 18:30:38 pandyas Exp $
+ * $Id: AnimalModel.java,v 1.27 2008-10-16 13:52:24 schroedn Exp $
  */
 package gov.nih.nci.camod.domain;
 
@@ -59,6 +62,8 @@ public class AnimalModel extends AbstractCancerModel {
 
 	private String externalSource;
 
+	private Long strainId;
+	
 	private String externalSourceIdentifier;
     
     private String developmentalStage;    
@@ -590,6 +595,20 @@ public class AnimalModel extends AbstractCancerModel {
 	public void setCaelmirStudyDataCollection(
 			List<CaelmirStudyData> caelmirStudyDataCollection) {
 		this.caelmirStudyDataCollection = caelmirStudyDataCollection;
+	}
+
+	/**
+	 * @return the strainId
+	 */
+	public Long getStrainId() {
+		return strainId;
+	}
+
+	/**
+	 * @param strainId the strainId to set
+	 */
+	public void setStrainId(Long strainId) {
+		this.strainId = strainId;
 	}
 
 }
