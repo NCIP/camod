@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.107 2008-10-16 15:52:46 schroedn Exp $
+ * $Id: QueryManagerImpl.java,v 1.108 2008-10-21 06:07:54 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.107  2008/10/16 15:52:46  schroedn
+ * PMID exact search
+ *
  * Revision 1.106  2008/10/16 13:59:35  schroedn
  * Added CriteriaSearchBeta, implements all HQL for simple, TOC and Advanced searches
  *
@@ -2479,8 +2482,8 @@ public class QueryManagerImpl extends BaseManager
         if (inSearchData.getKeyword() != null && inSearchData.getKeyword().length() > 0)
         {
             log.info("Doing a keyword search: " + inSearchData.getKeyword());
-            theAnimalModels = keywordSearch(theFromClause, theOrderByClause, inSearchData.getKeyword());
-            //theAnimalModels = keywordSearchBeta( inSearchData.getKeyword() );
+            //theAnimalModels = keywordSearch(theFromClause, theOrderByClause, inSearchData.getKeyword());
+            theAnimalModels = keywordSearchBeta( inSearchData.getKeyword() );
         }
         else
         {
@@ -2508,11 +2511,13 @@ public class QueryManagerImpl extends BaseManager
         {
             log.debug("Doing a model id search: " + inCurationAssignmentData.getModelId());
             theAnimalModels = adminModelIdSearch(theFromClause, inCurationAssignmentData);
+            //theAnimalModels = adminModelIdSearchBeta( inCurationAssignmentData );
         }
         else
         {
             log.debug("Doing a criteria admin search");
             theAnimalModels = criteriaAdminSearch(theFromClause, theOrderByClause, inCurationAssignmentData);
+            //theAnimalModels = criteriaAdminSearchBeta(inCurationAssignmentData);
         }
         log.debug("theAnimalModels.size() from QM.searchForAdminAnimalModels: " + theAnimalModels.size());
         log.debug("Exiting searchForAdminAnimalModels");
@@ -2623,28 +2628,176 @@ public class QueryManagerImpl extends BaseManager
     	log.info( "in keywordSearchBeta");
     	
         List theAnimalModels = null;
+        List keywordSearch = null;
         
-        String theKeyword = " '%" + keyWord.toUpperCase().trim() + "%' ";
+        String theKeyword = keyWord.toUpperCase().trim();
         
         String theHQLQuery = "FROM AnimalModel as am WHERE am.state = 'Edited-approved' "
-        				   + "AND am.availability.releaseDate < sysdate "
-        				   + "AND upper(am.modelDescriptor) like " + theKeyword + " "
-        				   + "OR am.id "        				   
-        				   + "ORDER BY am.id asc ";
+        				   + "AND am.availability.releaseDate <= sysdate "
+        				   + "AND upper(am.modelDescriptor) like '%" + theKeyword + "%' "      				   
+        				   + "ORDER BY am.id asc ";        
+        Query query1 = HibernateUtil.getSession().createQuery(theHQLQuery);
+        List list1 = query1.list();
         
-        try
-        {                                   
-            Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
-
-            theAnimalModels = theQuery.list();
-        }
-        catch (Exception e)
-        {
-            log.error("Exception occurred searching for models", e);
-            throw e;
-        }
+        //CarcinogenExposure, EnvironmentalFactor
+        theHQLQuery = "from AnimalModel as am where " 
+    				+ "am.state = 'Edited-approved' " 
+    				+ "AND am.availability.releaseDate <= sysdate "
+    				+ "AND am.id IN " 
+    				+ "( SELECT distinct ce.absCancerModelId FROM CarcinogenExposure ce "        			
+    				+ "WHERE ce.environmentalFactor.id IN "
+    				+ "( SELECT ef.id FROM CarcinogenExposure ce, EnvironmentalFactor ef " 
+    				+ "WHERE ce.environmentalFactor.id = ef.id "
+    				+ "AND upper(ef.name) LIKE '%" + theKeyword + "%' " 
+    				+ "OR upper(ef.nameAlternEntry) LIKE '%" + theKeyword + "%' )) "
+					+ "ORDER BY am.id asc ";      
+        query1 = HibernateUtil.getSession().createQuery(theHQLQuery);
+        List list2 = query1.list();
+        list1.addAll(list2);
         
-    	return theAnimalModels;
+        //Therapy, CellLine
+        theHQLQuery = "from AnimalModel as am where " 
+        			+ " am.state = 'Edited-approved' " 
+        			+ " AND am.availability.releaseDate <= sysdate "
+        			+ " AND am.id IN " 
+        			+ " ( SELECT c.absCancerModelId FROM CellLine c " 
+        			+ " WHERE upper( c.name ) like '%" + theKeyword + "%' ) "
+        			+ " ORDER BY am.id asc ";
+        query1 = HibernateUtil.getSession().createQuery(theHQLQuery);
+        list2 = query1.list();
+        list1.addAll(list2);
+        
+        theHQLQuery = "from AnimalModel as am where " 
+					+ " am.state = 'Edited-approved' " 
+					+ " AND am.availability.releaseDate <= sysdate "
+        			+ " AND am.id IN " 
+        			+ " ( SELECT distinct ther.absCancerModelId FROM Therapy ther "  
+        			+ " WHERE ther.id IN "  
+        			+ " ( SELECT t.id FROM Therapy t, Agent ag "  
+        			+ " WHERE t.agent.id = ag.id AND upper(ag.name) like '%" + theKeyword + "%' )) "
+					+ " ORDER BY am.id asc ";
+        query1 = HibernateUtil.getSession().createQuery(theHQLQuery);
+        list2 = query1.list();
+        list1.addAll(list2);
+        
+        //Phenotype
+        theHQLQuery = "from AnimalModel as am where " 
+					+ "am.state = 'Edited-approved' " 
+					+ "AND am.availability.releaseDate <= sysdate "
+					+ "AND am.id IN " 
+		        	+ "( SELECT am.id FROM Phenotype as ph, AnimalModel as am " 
+		        	+ "WHERE am.phenotype.id = ph.id " 
+		        	+ "AND upper(ph.description) like '%" + theKeyword + "%' ) "
+					+ "ORDER BY am.id asc ";
+        query1 = HibernateUtil.getSession().createQuery(theHQLQuery);
+        list2 = query1.list();
+        list1.addAll(list2);
+        
+        theHQLQuery = "from AnimalModel as am where " 
+					+ "am.state = 'Edited-approved' " 
+					+ "AND am.availability.releaseDate <= sysdate "
+					+ "AND am.id IN "
+					+ "( SELECT distinct t.absCancerModelId FROM TransientInterference t " 
+					+ "WHERE upper(t.targetedRegion) like '%" + theKeyword + "%' ) "
+					+ "ORDER BY am.id asc ";
+        query1 = HibernateUtil.getSession().createQuery(theHQLQuery);
+        list2 = query1.list();
+        list1.addAll(list2);
+        
+        theHQLQuery = "from AnimalModel as am where " 
+					+ "am.state = 'Edited-approved' " 
+					+ "AND am.availability.releaseDate <= sysdate "
+					+ "AND am.id IN "
+					+ "( SELECT eg.absCancerModelId FROM EngineeredGene as eg WHERE eg.id "
+		        	+ "IN ( SELECT distinct eg2.id FROM EngineeredGene as eg2 "
+		        	+ "WHERE upper(eg2.name) LIKE '%" + theKeyword + "%' " 
+		        	+ "AND eg2.engineeredGeneType = 'TM' )) "
+					+ "ORDER BY am.id asc ";
+        query1 = HibernateUtil.getSession().createQuery(theHQLQuery);
+        list2 = query1.list();
+        list1.addAll(list2);
+               
+        theHQLQuery = "from AnimalModel as am where " 
+					+ "am.state = 'Edited-approved' " 
+					+ "AND am.availability.releaseDate <= sysdate "
+					+ "AND am.id IN "
+					+ "( SELECT eg.absCancerModelId FROM EngineeredGene as eg WHERE eg.id "
+					+ "IN ( SELECT distinct eg2.id FROM EngineeredGene as eg2 "
+					+ "WHERE upper(eg2.name) LIKE '%" + theKeyword + "%' " 
+					+ "AND eg2.engineeredGeneType = 'T' )) "
+					+ "ORDER BY am.id asc ";
+        query1 = HibernateUtil.getSession().createQuery(theHQLQuery);
+        list2 = query1.list();
+        list1.addAll(list2);
+              
+        theHQLQuery = "from AnimalModel as am where " 
+					+ "am.state = 'Edited-approved' " 
+					+ "AND am.availability.releaseDate <= sysdate "
+					+ "AND am.id IN "        
+					+ "( SELECT eg.absCancerModelId FROM EngineeredGene as eg WHERE eg.id "
+					+ "IN ( SELECT distinct eg2.id FROM EngineeredGene as eg2 "
+					+ "WHERE upper(eg2.cloneDesignator) LIKE '%" + theKeyword + "%' " 
+					+ "AND eg2.engineeredGeneType = 'GS' )) "
+					+ "ORDER BY am.id asc ";
+        query1 = HibernateUtil.getSession().createQuery(theHQLQuery);
+        list2 = query1.list();
+        list1.addAll(list2);
+            
+        theHQLQuery = "from AnimalModel as am where " 
+					+ "am.state = 'Edited-approved' " 
+					+ "AND am.availability.releaseDate <= sysdate "
+					+ "AND am.id IN "        
+					+ "( SELECT eg.absCancerModelId FROM EngineeredGene as eg " 
+					+ "WHERE eg.id IN ( SELECT distinct eg2.id FROM EngineeredGene as eg2, EnvironmentalFactor ef " 
+					+ "WHERE upper(ef.name) like '%" + theKeyword + "%' "  
+					+ "AND ef.id = eg2.environmentalFactorId " 
+					+ "AND eg2.engineeredGeneType = 'IM' )) "
+					+ "ORDER BY am.id asc ";
+        query1 = HibernateUtil.getSession().createQuery(theHQLQuery);
+        list2 = query1.list();
+        list1.addAll(list2);
+        
+        theHQLQuery = "from AnimalModel as am where " 
+					+ "am.state = 'Edited-approved' " 
+					+ "AND am.availability.releaseDate <= sysdate "
+					+ "AND am.id IN "  
+					+ "( SELECT h.absCancerModelId FROM Histopathology as h, Organ as o "  
+					+ "WHERE h.organ.id = o.id " 
+					+ "AND upper(o.name) like '%" + theKeyword + "%' ) "
+					+ "ORDER BY am.id asc ";
+        query1 = HibernateUtil.getSession().createQuery(theHQLQuery);
+        list2 = query1.list();
+        list1.addAll(list2);
+           
+        theHQLQuery = "from AnimalModel as am where " 
+					+ "am.state = 'Edited-approved' " 
+					+ "AND am.availability.releaseDate <= sysdate "
+					+ "AND am.id IN " 
+					+ "( SELECT hist.absCancerModelId FROM Histopathology as hist, Disease as d " 
+					+ "WHERE hist.disease.id = d.id " 
+					+ "AND hist.absCancerModelId is not null " 
+					+ "AND upper(d.name) like '%" + theKeyword + "%' ) "
+					+ "ORDER BY am.id asc ";
+        query1 = HibernateUtil.getSession().createQuery(theHQLQuery);
+        list2 = query1.list();
+        list1.addAll(list2);
+        
+//        theHQLQuery = "from AnimalModel as am where " 
+//					+ "am.state = 'Edited-approved' " 
+//					+ "AND am.availability.releaseDate < sysdate "
+//					+ "OR am.strain.species.id IN " 
+//					+ "( SELECT sp.id FROM Species as sp "  
+//					+ "WHERE upper(sp.scientificName) like '%" + theKeyword + "%' ) "
+//					+ "ORDER BY am.id asc ";
+//        query1 = HibernateUtil.getSession().createQuery(theHQLQuery);
+//        list2 = query1.list();
+//        list1.addAll(list2);
+        
+    	// List of all distinct AnimalModel Ids
+    	HashSet unique = new HashSet(list1);
+    	keywordSearch = new ArrayList( unique );  
+    	
+    	return keywordSearch;
     }
     
     private List keywordSearch(String inFromClause,
@@ -3406,7 +3559,7 @@ public class QueryManagerImpl extends BaseManager
 
         return theAnimalModels;
     }
-    
+        
     private List criteriaAdminSearch(String inFromClause,
     								 String inOrderByClause,
     								 CurationAssignmentData inCurationAssignmentData) throws Exception
