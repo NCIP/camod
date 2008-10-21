@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewPublications.jsp,v 1.36 2008-10-16 14:07:28 schroedn Exp $
+ * $Id: viewPublications.jsp,v 1.37 2008-10-21 06:09:16 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.36  2008/10/16 14:07:28  schroedn
+ * Bug #9127 Added RGD number next to the link for RGD
+ *
  * Revision 1.35  2008/09/22 16:08:29  schroedn
  * Bug #9127
  * Removed non-breaking space tags in front of RGD
@@ -172,7 +175,7 @@
 					</c:choose>
 					<c:choose>
 						<c:when test="${not empty p.rgdPubId}">
-								<a target="_blank" href="http://rgd.mcw.edu/tools/references/references_view.cgi?id=<c:out value="${p.rgdPubId}"/>">RGD</a>&nbsp;#<c:out value="${p.rgdPubId}"/>
+								<c:out value="${p.rgdPubId}"/><br/><a target="_blank" href="http://rgd.mcw.edu/tools/references/references_view.cgi?id=<c:out value="${p.rgdPubId}"/>">RGD</a>
 								<br/>
 						</c:when>				
 						<c:otherwise>					
