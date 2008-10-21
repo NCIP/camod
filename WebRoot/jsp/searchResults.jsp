@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchResults.jsp,v 1.30 2008-08-14 17:10:53 pandyas Exp $
+ * $Id: searchResults.jsp,v 1.31 2008-10-21 06:11:42 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.30  2008/08/14 17:10:53  pandyas
+ * remove debug line
+ *
  * Revision 1.29  2007/09/11 15:55:30  pandyas
  * Comment out debug
  *
@@ -92,7 +95,7 @@
 	String[] resultColumns = ( String[] ) request.getSession().getAttribute( Constants.SEARCHRESULTCOLUMNS );
    	if ( resultColumns == null ) 
    	{
-   		resultColumns = new String[] { "Model Id", "Model Descriptor", "Tumor Sites", "Species" };   //default        
+   		resultColumns = new String[] { "Unique Model Identifier", "Model Descriptor", "Tumor Sites", "Species" };   //default        
   	}  
   	
 	//String noSaveOption = request.getParameter( "noSaveOption" );  	  	 
@@ -263,8 +266,8 @@
 					<%
 					    for (int i = 0; i < resultColumns.length; i++) {
 					    	
-							if( resultColumns[i].equals("Model Id") ) { %>
-							     <display:column title="Model Id" sortable="true" headerClass="sortable" >
+							if( resultColumns[i].equals("Unique Model Identifier") ) { %>
+							     <display:column title="Unique Model Identifier" sortable="true" headerClass="sortable" >
 							         <camod:highlight><c:out escapeXml="false" value="${row.modelId}"/></camod:highlight>
 							     </display:column>	 							
 							<% }					    	
@@ -293,13 +296,13 @@
 							         <camod:highlight><c:out escapeXml="false" value="${row.tumorSites}"/></camod:highlight>
 							     </display:column>	 							
 							<% } 
-							else if( resultColumns[i].equals("Submitted by") ) { %>
-							     <display:column title="Submitted by" sortable="true" >
+							else if( resultColumns[i].equals("Submitter") ) { %>
+							     <display:column title="Submitter" sortable="true" >
 							         <camod:highlight><c:out escapeXml="false" value="${row.submitterName}"/></camod:highlight>
 							     </display:column>	 							
 							<% }
-							else if( resultColumns[i].equals("Submitted Date") ) { %>
-							     <display:column title="Submitted Date" sortable="true" >
+							else if( resultColumns[i].equals("Submitted on") ) { %>
+							     <display:column title="Submitted on" sortable="true" >
 							         <camod:highlight><c:out escapeXml="false" value="${row.submittedDate}"/></camod:highlight>
 							     </display:column>	 							
 							<% }
@@ -324,23 +327,23 @@
 							         <camod:highlight><c:out escapeXml="false" value="${row.transgene}"/></camod:highlight>
 							     </display:column>	 							
 							<% }
-							else if( resultColumns[i].equals("Transcriptional 1") ) { %>
-							     <display:column title="Transcriptional 1" sortable="true" headerClass="sortable" >
+							else if( resultColumns[i].equals("Promoter") ) { %>
+							     <display:column title="Promoter" sortable="true" headerClass="sortable" >
 							         <camod:highlight><c:out escapeXml="false" value="${row.transcriptional1}"/></camod:highlight>
 							     </display:column>	 														     
 							<% }												
-							else if( resultColumns[i].equals("Segment Type") ) { %>
-							     <display:column title="Segment Type" sortable="true" headerClass="sortable" >
+							else if( resultColumns[i].equals("Genomic Segment Type") ) { %>
+							     <display:column title="Genomic Segment Type" sortable="true" headerClass="sortable" >
 							         <camod:highlight><c:out escapeXml="false" value="${row.segmentType}"/></camod:highlight>
 							     </display:column>	 							
 							<% }	
-							else if( resultColumns[i].equals("Designator") ) { %>
-							     <display:column title="Designator" sortable="true" headerClass="sortable" >
+							else if( resultColumns[i].equals("Genomic Segment Designator") ) { %>
+							     <display:column title="Genomic Segment Designator" sortable="true" headerClass="sortable" >
 							         <camod:highlight><c:out escapeXml="false" value="${row.designator}"/></camod:highlight>
 							     </display:column>	 							
 							<% }
-							else if( resultColumns[i].equals("Targeted Gene / Locus") ) { %>
-							     <display:column title="Targeted Gene / Locus" sortable="true" headerClass="sortable" >
+							else if( resultColumns[i].equals("Targeted Modification") ) { %>
+							     <display:column title="Targeted Modification" sortable="true" headerClass="sortable" >
 							         <camod:highlight><c:out escapeXml="false" value="${row.targetedGeneLocus}"/></camod:highlight>
 							     </display:column>	 							
 							<% }	
@@ -354,8 +357,8 @@
 							         <camod:highlight><c:out escapeXml="false" value="${row.nameOfInducingAgent}"/></camod:highlight>
 							     </display:column>	 							
 							<% }	
-							else if( resultColumns[i].equals("Gene Name") ) { %>
-							     <display:column title="Gene Name" sortable="true" headerClass="sortable" >
+							else if( resultColumns[i].equals("Spontaneous Mutation in Gene") ) { %>
+							     <display:column title="Spontaneous Mutation in Gene" sortable="true" headerClass="sortable" >
 							         <camod:highlight><c:out escapeXml="false" value="${row.geneName}"/></camod:highlight>
 							     </display:column>	 							
 							<% }	
@@ -368,22 +371,7 @@
 							     <display:column title="Environmental Factor" sortable="true" headerClass="sortable" >
 							         <camod:highlight><c:out escapeXml="false" value="${row.environmentalFactor}"/></camod:highlight>
 							     </display:column>	 							
-							<% }	
-							else if( resultColumns[i].equals("Viral Vector") ) { %>
-							     <display:column title="Viral Vector" sortable="true" headerClass="sortable" >
-							         <camod:highlight><c:out escapeXml="false" value="${row.viralVector}"/></camod:highlight>
-							     </display:column>	 							
-							<% }	
-							else if( resultColumns[i].equals("Gene") ) { %>
-							     <display:column title="Gene" sortable="true" headerClass="sortable" >
-							         <camod:highlight><c:out escapeXml="false" value="${row.gene}"/></camod:highlight>
-							     </display:column>	 							
-							<% }	
-							else if( resultColumns[i].equals("Growth Factor") ) { %>
-							     <display:column title="Growth Factor" sortable="true" headerClass="sortable" >
-							         <camod:highlight><c:out escapeXml="false" value="${row.growthFactor}"/></camod:highlight>
-							     </display:column>	 							
-							<% }	
+							<% }		
 							else if( resultColumns[i].equals("Hormone") ) { %>
 							     <display:column title="Hormone" sortable="true" headerClass="sortable" >
 							         <camod:highlight><c:out escapeXml="false" value="${row.hormone}"/></camod:highlight>
@@ -414,13 +402,13 @@
 							         <camod:highlight><c:out escapeXml="false" value="${row.journal}"/></camod:highlight>
 							     </display:column>	 							
 							<% }								
-							else if( resultColumns[i].equals("PMID number") ) { %>
-							     <display:column title="PMID number" sortable="true" headerClass="sortable" >
+							else if( resultColumns[i].equals("PubMed Identifier") ) { %>
+							     <display:column title="PubMed Identifier" sortable="true" headerClass="sortable" >
 							         <camod:highlight><c:out escapeXml="false" value="${row.PMIDNumber}"/></camod:highlight>
 							     </display:column>	 							
 							<% }
-							else if( resultColumns[i].equals("Site of Lesion / Tumor") ) { %>
-							     <display:column title="Site of Lesion / Tumor" sortable="true" headerClass="sortable" >
+							else if( resultColumns[i].equals("Site of Primary Tumor") ) { %>
+							     <display:column title="Site of Primary Tumor" sortable="true" headerClass="sortable" >
 							         <camod:highlight><c:out escapeXml="false" value="${row.siteOfLesionTumor}"/></camod:highlight>
 							     </display:column>	 							
 							<% }							
@@ -429,23 +417,18 @@
 							         <camod:highlight><c:out escapeXml="false" value="${row.diagnosis}"/></camod:highlight>
 							     </display:column>	 							
 							<% }								
-							else if( resultColumns[i].equals("Age of Onset") ) { %>
-							     <display:column title="Age of Onset" sortable="true" headerClass="sortable" >
+							else if( resultColumns[i].equals("Age of Tumor Onset") ) { %>
+							     <display:column title="Age of Tumor Onset" sortable="true" headerClass="sortable" >
 							         <camod:highlight><c:out escapeXml="false" value="${row.ageOfOnset}"/></camod:highlight>
 							     </display:column>	 							
-							<% }
-							else if( resultColumns[i].equals("Tumor incidence over lifetime") ) { %>
-							     <display:column title="Tumor incidence over lifetime" sortable="true" headerClass="sortable" >
-							         <camod:highlight><c:out escapeXml="false" value="${row.tumorIncidenceOverLifetime}"/></camod:highlight>
-							     </display:column>	 							
-							<% }							
+							<% }						
 							else if( resultColumns[i].equals("Site and Diagnosis of Metastasis") ) { %>
 							     <display:column title="Site and Diagnosis of Metastasis" sortable="true" headerClass="sortable" >
 							         <camod:highlight><c:out escapeXml="false" value="${row.siteAndDiagnosisOfMetastasis}"/></camod:highlight>
 							     </display:column>	 							
 							<% }								
-							else if( resultColumns[i].equals("Drug / Compound Name") ) { %>
-							     <display:column title="Drug / Compound Name" sortable="true" headerClass="sortable" >
+							else if( resultColumns[i].equals("Therapeutic Agent Name") ) { %>
+							     <display:column title="Therapeutic Agent Name" sortable="true" headerClass="sortable" >
 							         <camod:highlight><c:out escapeXml="false" value="${row.drugCompoundName}"/></camod:highlight>
 							     </display:column>	 							
 							<% }
@@ -454,8 +437,8 @@
 							         <camod:highlight><c:out escapeXml="false" value="${row.nameOfCellLine}"/></camod:highlight>
 							     </display:column>	 							
 							<% }							
-							else if( resultColumns[i].equals("Organ / Tissue") ) { %>
-							     <display:column title="Organ / Tissue" sortable="true" headerClass="sortable" >
+							else if( resultColumns[i].equals("Cell Line Organ of Origin") ) { %>
+							     <display:column title="Cell Line Organ of Origin" sortable="true" headerClass="sortable" >
 							         <camod:highlight><c:out escapeXml="false" value="${row.organTissue}"/></camod:highlight>
 							     </display:column>	 							
 							<% }							
@@ -464,18 +447,18 @@
 							         <camod:highlight><c:out escapeXml="false" value="${row.imageTitle}"/></camod:highlight>
 							     </display:column>	 							
 							<% }							
-							else if( resultColumns[i].equals("Distributor") ) { %>
-							     <display:column title="Distributor" sortable="true" headerClass="sortable" >
+							else if( resultColumns[i].equals("Animal Distributor") ) { %>
+							     <display:column title="Animal Distributor" sortable="true" headerClass="sortable" >
 							         <camod:highlight><c:out escapeXml="false" value="${row.distributor}"/></camod:highlight>
 							     </display:column>	 							
 							<% }							
-							else if( resultColumns[i].equals("Cell line") ) { %>
-							     <display:column title="Cell line" sortable="true" headerClass="sortable" >
+							else if( resultColumns[i].equals("Name of transplanted cell line") ) { %>
+							     <display:column title="Name of transplanted cell line" sortable="true" headerClass="sortable" >
 							         <camod:highlight><c:out escapeXml="false" value="${row.cellLine}"/></camod:highlight>
 							     </display:column>	 							
 							<% }							
-							else if( resultColumns[i].equals("Donor Species") ) { %>
-							     <display:column title="Donor Species" sortable="true" headerClass="sortable" >
+							else if( resultColumns[i].equals("Transplant Donor Species") ) { %>
+							     <display:column title="Transplant Donor Species" sortable="true" headerClass="sortable" >
 							         <camod:highlight><c:out escapeXml="false" value="${row.donorSpecies}"/></camod:highlight>
 							     </display:column>	 							
 							<% }							
@@ -484,18 +467,13 @@
 							         <camod:highlight><c:out escapeXml="false" value="${row.sourceType}"/></camod:highlight>
 							     </display:column>	 							
 							<% }	
-							else if( resultColumns[i].equals("Carcinogen") ) { %>
-							     <display:column title="Carcinogen" sortable="true" headerClass="sortable" >
+							else if( resultColumns[i].equals("Carcinogenic Agent") ) { %>
+							     <display:column title="Carcinogenic Agent" sortable="true" headerClass="sortable" >
 							         <camod:highlight><c:out escapeXml="false" value="${row.carcinogen}"/></camod:highlight>
 							     </display:column>	 							
-							<% }
-							else if( resultColumns[i].equals("Publications") ) { %>
-							     <display:column title="Publications" sortable="true" headerClass="sortable" >
-							         <camod:highlight><c:out escapeXml="false" value="${row.publications}"/></camod:highlight>
-							     </display:column>	 							
 							<% }			
-							else if( resultColumns[i].equals("Microarray") ) { %>
-							     <display:column title="Microarray" sortable="true" headerClass="sortable" >
+							else if( resultColumns[i].equals("Microarray Experiment Title") ) { %>
+							     <display:column title="Microarray Experiment Title" sortable="true" headerClass="sortable" >
 							         <camod:highlight><c:out escapeXml="false" value="${row.microarray}"/></camod:highlight>
 							     </display:column>	 							
 							<% }																										

@@ -1,37 +1,27 @@
-Age of Onset
-Carcinogen
-Cell line
-Designator
+Targeted Modification Type
+Age of Tumor Onset
+Carcinogenic Agent
+Name of transplanted cell line
+Genomic Segment Designator
 Diagnosis
-Distributor
-Donor Species
-Drug / Compound Name
+Animal Distributor
+Transplant Donor Species
 Gender
-Gene
-Gene Name
-Growth Factor
+Spontaneous Mutation in Gene
 Image Title
-Microarray
+Microarray Experiment Title
 Model Descriptor
-Model Id
+Unique Model Identifier
 Name of Cell line
-Name of inducing agent
-Organ / Tissue
-PMID number
+Cell Line Organ of Origin
+PubMed Identifier
 Principal Investigator
-Publications
-Segment Type
+Genomic Segment Type
 Site and Diagnosis of Metastasis
-Site of Lesion / Tumor
+Site of Primary Tumor
 Species
-Strain
-Submitted by
-Submitted Date
-Targeted Gene / Locus
-Transcriptional 1
-Transgene
-Transplant Type
-Tumor incidence over lifetime
+Submitter
+Submitted on
 Tumor Sites
-Type of Modification
-Viral Vector
+Year of Publication
+Journal
