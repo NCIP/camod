@@ -32,7 +32,7 @@
 					<td class="resultsBoxGreyEnd">
 		                <ul>
 		                	<li>
-		                	<a href='http://<c:out value="${ma.url}"/>' target="_blank"><c:out value="${ma.experimentName}"/></a>
+		                	<a href='<c:out value="${ma.url}"/>' target="_blank"><c:out value="${ma.experimentName}"/></a>
 					        </li>
 		                </ul>
 					</td>
