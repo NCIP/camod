@@ -1,8 +1,12 @@
 /**
  * 
- * $Id: ViewTOCSearchResultsAction.java,v 1.9 2008-07-28 17:20:47 pandyas Exp $
+ * $Id: ViewTOCSearchResultsAction.java,v 1.10 2008-10-22 18:19:07 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2008/07/28 17:20:47  pandyas
+ * Modifed to prevent SQL inject - added HTTP Header
+ * App scan performed on July 24, 2008
+ *
  * Revision 1.8  2008/07/15 15:18:48  pandyas
  * minor change
  *
@@ -33,6 +37,7 @@ package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.service.impl.*;
+import gov.nih.nci.camod.util.CriteriaTableUtil;
 import gov.nih.nci.camod.util.NameValueList;
 import gov.nih.nci.camod.util.SafeHTMLUtil;
 import gov.nih.nci.camod.webapp.form.SearchForm;
@@ -74,6 +79,11 @@ public class ViewTOCSearchResultsAction extends BaseAction {
         }        
 
         try {
+            
+        	//Remove any retained criteriatable values
+    		request.getSession().setAttribute(Constants.CRITERIATABLE, "" );    		
+    		request.getSession().setAttribute(Constants.NOSAVEOPTION, "false");
+    		
             // This is meant to prevent SQL injection into the key value of the TOC queries
         	// Security scan failed so this is checked first and the query will not run unless clean
             if (theKey != null && theKey.length() > 0)
@@ -95,7 +105,7 @@ public class ViewTOCSearchResultsAction extends BaseAction {
 		                        + Constants.TOCSearch.TOC_QUERY_FILE);
 		
 		                List theResults = theTOCManager.process(); 
-		                request.getSession().setAttribute(Constants.TOCSearch.TOC_QUERY_RESULTS, theResults);
+		                request.getSession().setAttribute(Constants.TOCSearch.TOC_QUERY_RESULTS, theResults);		                
 		            }
 
 		            List theGroupList = (List) request.getSession().getAttribute(Constants.TOCSearch.TOC_QUERY_RESULTS);
