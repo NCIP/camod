@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: CriteriaTableUtil.java,v 1.11 2008-08-12 19:44:53 pandyas Exp $
+ * $Id: CriteriaTableUtil.java,v 1.12 2008-10-22 05:57:18 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2008/08/12 19:44:53  pandyas
+ * Fixed #15053  	Search for models with transgenic or targeted modification on advanced search page confusing
+ *
  * Revision 1.10  2008/01/16 18:30:04  pandyas
  * Renamed value to Transplant for #8290
  *
@@ -104,7 +107,16 @@ public class CriteriaTableUtil
                 theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.Species") + "</td><td class=\"formFieldNone\">" + sData.getSpecies() + "</td></tr>";
             }
         }
-
+        
+        // PMID criteria
+        if (sData.getPmid()!= null)
+        {
+            if (sData.getPmid().length() > 0)
+            {
+                theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.Pmid") + "</td><td class=\"formFieldNone\">" + sData.getPmid() + "</td></tr>";
+            }
+        }
+        
         // Search for organ
         if (sData.getOrganTissueName() != null)
         {

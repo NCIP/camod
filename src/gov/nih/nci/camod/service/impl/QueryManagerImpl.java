@@ -43,7 +43,7 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.108 2008-10-21 06:07:54 schroedn Exp $
+ * $Id: QueryManagerImpl.java,v 1.109 2008-10-22 05:56:30 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
  * Revision 1.107  2008/10/16 15:52:46  schroedn
@@ -3175,14 +3175,14 @@ public class QueryManagerImpl extends BaseManager
     	{
     		theSQLQuery += "select am.abs_cancer_model_id from abs_cancer_model am "
     					+  "Inner join availability av on am.AVAILABILITY_ID=av.availability_id "
-    					+  "where am.STATE='Edited-approved' and av.release_date < sysdate";
+    					+  "where am.STATE='Edited-approved' and av.release_date <= sysdate";
     		
     		theHQLQuery += "from AnimalModel as am "   					
     					+  "where am.state = 'Edited-approved' AND am.availability.releaseDate <= sysdate ";    					    		
     	} else
     	{
     		theHQLQuery += "from AnimalModel as am"
-    					+  "where am.availability.releaseDate < sysdate";
+    					+  "where am.availability.releaseDate <= sysdate";
     	}
 
 		// Model descriptor criteria
@@ -3461,7 +3461,10 @@ public class QueryManagerImpl extends BaseManager
 						        		+ " (select distinct cl.absCancerModelId from CellLine cl, CellLinePublication cp, Publication p " 
 						        		+ " where cl.id = cp.cellLineId and cp.publicationId = p.id and p.pmid = '" + inSearchData.getPmid().trim() + "' ) "
         								+ " ORDER BY am.id asc ";
-        								
+        	log.info("HQL1= " + thePublicationQuery1 );
+        	log.info("HQL2= " + thePublicationQuery2 );
+        	log.info("HQL3= " + thePublicationQuery3 );
+        	
         	Query query1 = HibernateUtil.getSession().createQuery(thePublicationQuery1);
         	Query query2 = HibernateUtil.getSession().createQuery(thePublicationQuery2);
         	Query query3 = HibernateUtil.getSession().createQuery(thePublicationQuery3);
@@ -3486,12 +3489,13 @@ public class QueryManagerImpl extends BaseManager
         	
         	// pmid search requires a union which is not currently supported in HQL so it was preformed in 
         	// its own seperate HQL queries and here is combined with the other search options
-        	if( pmids != null && pmids.size() > 0 )
-        	{
+        	if ( inSearchData.getPmid() != null && 
+            		inSearchData.getPmid().trim().length() > 0 )
+            {
         		String theBaseHQLQuery = "from AnimalModel as am "   					
-									   +  "where am.state = 'Edited-approved' AND am.availability.releaseDate < sysdate "    					    		
+									   +  "where am.state = 'Edited-approved' AND am.availability.releaseDate <= sysdate "    					    		
 								   	   + " ORDER BY am.id asc ";
-        		
+        		        		
         		// Check to see if the pmid was the only search option selected
         		// if so, then the result set are only the pmids
         		// if not, then the result set is the intersection of the pmids results and the HQL results
