@@ -42,9 +42,14 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.50 2008-10-01 18:48:12 pandyas Exp $
+ * $Id: SearchForm.java,v 1.51 2008-10-22 15:29:51 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.50  2008/10/01 18:48:12  pandyas
+ * Modifed validation - changed code to get Induced Mutation dropdown list from database to compare with the user input.  We no longer need hard-coded list for IM validation since the flag was added to EF in caMOD 2.5.
+ *
+ * Additional modification for gforge #12825  	induced mutation entries need to be flagged (requires OM change) and searches for induced mutation and carcinogenic interventions need to be fixed
+ *
  * Revision 1.49  2008/10/01 18:25:49  pandyas
  * Modifed validation - changed code to get Induced Mutation dropdown list from database to compare with the user input.  We now display the AlternEntry in the dropdown for induced mutation.
  *
@@ -689,6 +694,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         organTissueName = null;
         inducedMutationAgent = null;
         geneName = null;
+        pmid = null;
         transgeneName = null;
         genomicSegDesignator = null;
         therapeuticApproach = null;
