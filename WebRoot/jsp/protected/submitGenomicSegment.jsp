@@ -34,13 +34,16 @@
 <!-- submitGenomicSegment.jsp -->
 <!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
-	<tr><td>
-	<TABLE summary="" cellpadding="3" cellspacing="0" border="0">
-	
-		<tr>
-			<html:errors/>
-			<td class="formMessage" colspan="3">* indicates a required field</td>
-		</tr>
+<tr><td>
+	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
+	<tr><td valign="top">
+
+	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
+
+	<tr>
+		<html:errors/>
+		<td class="formMessage" colspan="3">* indicates a required field</td>
+	</tr>
 		
 		<tr>
 			<td class="formTitle" height="20" colspan="6">Genomic Segment&nbsp;
@@ -223,13 +226,15 @@
 				  <!--  Done this way since html:hidden doesn't seem to work correctly -->
 				  <html:hidden property="segmentId"/>
 				  	
-				</html:form>			
 			</TABLE>
-			</td>
-		</tr>		
-		
-	</TABLE>	
-</td></tr></TABLE>
+		</td>
+	</tr>
+</TABLE>
+
+<!-- -->
+	</td></tr></TABLE>
+</tr></td></TABLE>
+</html:form>
 
 <SCRIPT>
 chkSegmentName();
