@@ -60,15 +60,16 @@ var cal1 = new CalendarPopup();
 <!-- submitModelCharacteristics.jsp -->
 <!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
-	<tr><td>
-	
-	<TABLE summary="" cellpadding="3" cellspacing="0" border="0">
-		
-		<tr>
-			<html:errors/>
-			<td class="formMessage" colspan="3">* indicates a required field</td>
-	
-		</tr>
+<tr><td>
+	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
+	<tr><td valign="top">
+
+	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
+
+	<tr>
+		<html:errors/>
+		<td class="formMessage" colspan="3">* indicates a required field</td>
+	</tr>
 
 		<tr>
 			<td class="formTitle" height="20" colspan="3"><a>Model Characteristics</a>&nbsp;
@@ -242,14 +243,15 @@ var cal1 = new CalendarPopup();
 					  <html:reset styleClass="actionButton">
 					  	  <bean:message key="button.reset"/>
 	  				  </html:reset>
-				  
-				  </html:form>			
 				</TABLE>
 			</td>
 		</tr>
-		
-	</TABLE>	
-</td></tr></TABLE>
+	</TABLE>
+
+<!-- -->
+	</td></tr></TABLE>
+</tr></td></TABLE>
+</html:form>
 
 <SCRIPT LANGUAGE="JavaScript">
 	chkOtherStrain();
