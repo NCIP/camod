@@ -43,7 +43,7 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.109 2008-10-22 05:56:30 schroedn Exp $
+ * $Id: QueryManagerImpl.java,v 1.110 2008-10-29 07:03:31 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
  * Revision 1.107  2008/10/16 15:52:46  schroedn
@@ -888,27 +888,26 @@ public class QueryManagerImpl extends BaseManager
 	 * @throws PersistenceException
 	 */
 	public List getQueryOnlyEnvironmentalFactors(String inType)
-			throws PersistenceException {
-
+	throws PersistenceException {
+		
 		log.debug("Entering QueryManagerImpl.getQueryOnlyEnvironmentalFactors");
 		log.debug("<getQueryOnlyEnvironmentalFactors> inType: " + inType);
 		
 		ResultSet theResultSet = null;
 		List<String> theEFNameList = new ArrayList<String>();
-
+		
 		try {
 			// Format the query
 			String theSQLQuery = "SELECT ef.name, ef.name_altern_entry "
 					+ "FROM environmental_factor ef "
 					+ "WHERE (ef.type = ? OR ef.type_altern_entry = ?)"
-					+ "     	AND ef.is_induced_mutation_trigger = 0 "
 					+ "  AND ef.environmental_factor_id IN (SELECT ce.environmental_factor_id "
 					+ "     FROM carcinogen_exposure ce, abs_cancer_model am "
 					+ "			WHERE ef.environmental_factor_id = ce.environmental_factor_id "					
 					+ "     	AND am.abs_cancer_model_id = ce.abs_cancer_model_id AND am.state = 'Edited-approved')";
 			
-			log.debug("theSQLQuery: " + theSQLQuery.toString());
-
+			log.info("theSQLQuery: " + theSQLQuery.toString());
+		
 			Object[] theParams = new Object[2];
 			theParams[0] = inType;
 			theParams[1] = inType;			
@@ -917,7 +916,7 @@ public class QueryManagerImpl extends BaseManager
 			while (theResultSet.next()) {
 				String theName = theResultSet.getString(1);
 				String theAlternName = theResultSet.getString(2);
-
+		
 				if (theName != null  && theName.length() > 0
 						&& !theEFNameList.contains(theName)) {
 					theEFNameList.add(theName);
@@ -926,9 +925,9 @@ public class QueryManagerImpl extends BaseManager
 						&& !theEFNameList.contains(theAlternName)) {
 					theEFNameList.add(theAlternName);
 				}
-
+		
 			}
-
+		
 		} catch (Exception e) {
 			log.error("Exception in getQueryOnlyEnvironmentalFactors", e);
 			throw new PersistenceException(
@@ -936,17 +935,18 @@ public class QueryManagerImpl extends BaseManager
 		} finally {
 			if (theResultSet != null) {
 				try {
-                    Statement stmt = theResultSet.getStatement();
-                    theResultSet.close();
-                    stmt.close();
+		            Statement stmt = theResultSet.getStatement();
+		            theResultSet.close();
+		            stmt.close();
 				} catch (Exception e) {
 				}
 			}
 		}
- 		Collections.sort(theEFNameList);
+		log.info( "Size = " + theEFNameList );
+		Collections.sort(theEFNameList);
 		return theEFNameList;
-	}
-	
+}
+	 
 	/**
 	 * Return the list of gene names (targeted modification)
 	 * 
@@ -2471,7 +2471,7 @@ public class QueryManagerImpl extends BaseManager
 
     public List searchForAnimalModels(SearchData inSearchData) throws Exception
     {
-
+    	
         log.debug("Entering searchForAnimalModels");
 
         List theAnimalModels = null;
@@ -2482,14 +2482,12 @@ public class QueryManagerImpl extends BaseManager
         if (inSearchData.getKeyword() != null && inSearchData.getKeyword().length() > 0)
         {
             log.info("Doing a keyword search: " + inSearchData.getKeyword());
-            //theAnimalModels = keywordSearch(theFromClause, theOrderByClause, inSearchData.getKeyword());
-            theAnimalModels = keywordSearchBeta( inSearchData.getKeyword() );
+            theAnimalModels = keywordSearch( inSearchData.getKeyword() );
         }
         else
         {
             log.info("Doing a criteria search");
-            //theAnimalModels = criteriaSearch(theFromClause, theOrderByClause, inSearchData);
-            theAnimalModels = criteriaSearchBeta(inSearchData, true);
+            theAnimalModels = criteriaSearch(inSearchData, true);
         }
         
         log.debug("Exiting searchForAnimalModels");
@@ -2527,29 +2525,16 @@ public class QueryManagerImpl extends BaseManager
 
     public int countMatchingAnimalModels(SearchData inSearchData) throws Exception
     {
-
-        log.debug("Entering countMatchingAnimalModels");
-
-        String theFromClause = "select count (am) from AnimalModel as am where am.state = 'Edited-approved' AND am.availability.releaseDate < sysdate ";
+        log.info("Entering countMatchingAnimalModels");
         List theCountResults = null;
 
         if (inSearchData.getKeyword() != null && inSearchData.getKeyword().trim().length() > 0)
         {
             log.debug("Doing a keyword search: " + inSearchData.getKeyword());
-            String theWhereClause = buildKeywordSearchWhereClause(inSearchData.getKeyword());
-
+            
             try
             {
-                String theHQLQuery = theFromClause + theWhereClause;
-
-                log.debug("HQL Query: " + theHQLQuery);
-
-                String theKeyword = "%" + inSearchData.getKeyword().toUpperCase().trim() + "%";
-                Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
-                theQuery.setParameter("keyword", theKeyword);
-
-                theCountResults = theQuery.list();
-
+                theCountResults = keywordSearch( inSearchData.getKeyword() );
             }
             catch (Exception e)
             {
@@ -2560,17 +2545,9 @@ public class QueryManagerImpl extends BaseManager
         else
         {
             log.debug("Doing a criteria search");
-            String theWhereClause = buildCriteriaSearchWhereClause(inSearchData);
-
             try
             {
-                String theHQLQuery = theFromClause + theWhereClause;
-
-                log.debug("HQL Query: " + theHQLQuery);
-
-                Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
-                theCountResults = theQuery.list();
-
+                theCountResults = criteriaSearch( inSearchData, true ); 
             }
             catch (Exception e)
             {
@@ -2579,50 +2556,13 @@ public class QueryManagerImpl extends BaseManager
             }
         }
 
-        int theCount = -1;
-        if (theCountResults != null && theCountResults.size() > 0)
-        {
-            Integer theInt = (Integer) theCountResults.get(0);
-            theCount = theInt.intValue();
-        }
+        int theCount = theCountResults.size();  
         log.debug("Exiting searchForAnimalModels");
 
         return theCount;
     }
 
-    // Build the where clause for the search and the count
-    private String buildKeywordSearchWhereClause(String inKeyword) throws Exception
-    {
-        String theKeyword = "%" + inKeyword.toUpperCase().trim() + "%";
-
-        String theWhereClause = "";
-
-        theWhereClause += " AND (upper(am.modelDescriptor) like :keyword ";
-
-        theWhereClause += " OR am.strain IN (" + getStrainIdsForSpecies(inKeyword) + ")";
-
-        theWhereClause += " OR abs_cancer_model_id IN (" + getModelIdsForHistopathologyOrgan("", theKeyword) + ")";
-
-        theWhereClause += " OR abs_cancer_model_id IN (" + getModelIdsForHistopathologyDisease("", theKeyword) + ")";
-
-        theWhereClause += " OR abs_cancer_model_id IN (" + getModelIdsForAnyEnvironmentalFactor(inKeyword) + ")";
-
-        theWhereClause += " OR abs_cancer_model_id IN (" + getModelIdsForAnyEngineeredGene(inKeyword) + ")";
-
-        theWhereClause += " OR am.phenotype IN (from Phenotype as p where upper(p.description) like :keyword )";
-
-        theWhereClause += " OR abs_cancer_model_id IN (" + getModelIdsForCellLine(inKeyword) + ")";
-
-        theWhereClause += " OR abs_cancer_model_id IN (" + getModelIdsForTherapeuticApproach(inKeyword) + "))";
-
-        theWhereClause += " OR abs_cancer_model_id IN (" + getModelIdsForTransientInterference(inKeyword) + "))";
-
-        log.debug("KeyWordSearchWhereClause: " + theWhereClause.toString());
-        
-        return theWhereClause;
-    }
-    
-    private List keywordSearchBeta( String keyWord )
+    private List keywordSearch( String keyWord )
     	throws Exception
     {
     	log.info( "in keywordSearchBeta");
@@ -2800,36 +2740,6 @@ public class QueryManagerImpl extends BaseManager
     	return keywordSearch;
     }
     
-    private List keywordSearch(String inFromClause,
-                               String inOrderByClause,
-                               String inKeyword) throws Exception
-    {
-
-        String theWhereClause = buildKeywordSearchWhereClause(inKeyword);
-
-        List theAnimalModels = null;
-
-        try
-        {
-            String theHQLQuery = inFromClause + theWhereClause + inOrderByClause;
-
-            log.debug("<keywordSearch> HQL Query: " + theHQLQuery);
-
-            String theKeyword = "%" + inKeyword.toUpperCase() + "%";
-            Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
-            theQuery.setParameter("keyword", theKeyword);
-
-            theAnimalModels = theQuery.list();
-        }
-        catch (Exception e)
-        {
-            log.error("Exception occurred searching for models", e);
-            throw e;
-        }
-
-        return theAnimalModels;
-    }
-    
     private List adminModelIdSearch(String inFromClause, CurationAssignmentData inCurationAssignmentData) throws Exception
      {
 
@@ -2857,207 +2767,6 @@ public class QueryManagerImpl extends BaseManager
 
         return theAnimalModels;     
      }
-
-    private String buildCriteriaSearchWhereClause(SearchData inSearchData) throws Exception
-    {
-        String theWhereClause = "";
-
-        // PI criteria
-        if (inSearchData.getPiName() != null && inSearchData.getPiName().length() > 0)
-        {
-
-            StringTokenizer theTokenizer = new StringTokenizer(inSearchData.getPiName());
-            String theLastName = theTokenizer.nextToken(",").trim();
-            String theFirstName = theTokenizer.nextToken().trim();
-
-            theWhereClause += " AND am.principalInvestigator IN (from Person as p where p.lastName like '%" + theLastName + "%' AND p.firstName like '%" + theFirstName + "%')";
-        }
-
-		// Model descriptor criteria
-		if (inSearchData.getModelDescriptor() != null
-				&& inSearchData.getModelDescriptor().trim().length() > 0) {
-
-            theWhereClause += " AND upper(am.modelDescriptor) like '%" + inSearchData.getModelDescriptor().toUpperCase().trim() + "%'";
-        }
-
-        // Species criteria
-        if (inSearchData.getSpecies() != null && inSearchData.getSpecies().length() > 0)
-        {
-        	//find the first 999
-        	String allStrainIds = getStrainIdsForSpecies(inSearchData.getSpecies());        	            
-        	String patternStr = ",";
-            String[] fields = allStrainIds.split(patternStr);            
-        	System.out.println( "Number of StrainIds for Species = " + fields.length );
-//        	
-//        	System.out.println( "What is this?");
-//        	for ( int i = 0; i < fields.length; i++)
-//        	{
-//        		System.out.println(fields[i]);
-//        	}
-        	
-            theWhereClause += " AND am.strain IN (" + getStrainIdsForSpecies(inSearchData.getSpecies()) + ")";
-        }
-
-        // Search for organ
-        if (inSearchData.getOrganTissueCode() != null && inSearchData.getOrganTissueCode().length() > 0 || inSearchData.getOrgan()!= null && inSearchData.getOrgan().length() > 0)
-        {
-        	//find the first 999
-        	String allOrganIds = getModelIdsForHistopathologyOrgan(inSearchData.getOrganTissueCode(),inSearchData.getOrgan());        	            
-        	String patternStr = ",";
-            String[] fields = allOrganIds.split(patternStr);            
-        	System.out.println( "Number of allOrganIds for Species = " + fields.length );
-        	
-        	theWhereClause += " AND abs_cancer_model_id IN (";
-        	
-        	boolean first = true; 
-        	for ( int i = 0; i < fields.length; i++)
-        	{
-        		if ( first == true ){
-        			theWhereClause += fields[i] ;
-        			first = false;
-        		}
-    			else
-    				theWhereClause += "," + fields[i] ;        	    			        
-        		
-        		if( i == 995 )
-        		{ 
-        			first = true;
-        			theWhereClause += ") OR abs_cancer_model_id IN (";
-        		} 
-        	}        	
-        	theWhereClause += ")";
-        	
-        	System.out.println( "theWhereclause = " + theWhereClause);
-        	
-            //theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForHistopathologyOrgan(inSearchData.getOrganTissueCode(),inSearchData.getOrgan() ) + ")";
-        }
-
-		// Search for disease
-		if (inSearchData.getDiagnosisCode() != null
-				&& inSearchData.getDiagnosisCode().trim().length() > 0
-				|| inSearchData.getTumorClassification() != null
-				&& inSearchData.getTumorClassification().length() > 0) {
-			theWhereClause += " AND abs_cancer_model_id IN ("
-					+ getModelIdsForHistopathologyDisease(inSearchData
-							.getDiagnosisCode(), inSearchData
-							.getTumorClassification()) + ")";
-		}
-		
-		// Search for external source
-		if (inSearchData.getExternalSource() != null
-				&& inSearchData.getExternalSource().length() > 0) {
-			log.debug("In Search inSearchData.getExternalSource: "
-					+ inSearchData.getExternalSource());
-			theWhereClause += " AND upper(am.externalSource) like '%"
-					+ inSearchData.getExternalSource().toUpperCase().trim()
-					+ "%'";
-		}		
-
-		// ///////////////////////////////////////
-		// Carcinogenic interventions
-		// ///////////////////////////////////////
-
-		if (inSearchData.getCarcinogenicIntervention() != null
-				&& inSearchData.getCarcinogenicIntervention().trim().length() > 0) {
-			
-			if (inSearchData.getAgentName() != null
-					&& inSearchData.getAgentName().trim().length() > 0) {
-				log.debug("<QueryManagerImpl> Searching for Carcinogenic Interventions by agent type and name  - selected by user");
-			// Search for a CE by agent type
-				theWhereClause += " AND abs_cancer_model_id IN ("
-						+ getModelIdsForEnvironmentalFactor(inSearchData.getCarcinogenicIntervention(),
-								inSearchData.getAgentName().trim()) + ")";
-			} else {
-				log.debug("<QueryManagerImpl> Searching for Carcinogenic Interventions by agent type only - selected by user");
-				// Search for any model w/ an agent type 
-				theWhereClause += " AND abs_cancer_model_id IN ("
-						+ getModelIdsForAnEnvironmentalFactorByType(inSearchData.getCarcinogenicIntervention()) + ")";
-			}
-		}
-
-		// call if any of the data is set for Genetic Desription section
-		if (inSearchData.isSearchEngineeredTransgene()
-				|| inSearchData.isSearchTargetedModification()
-				|| (inSearchData.getGenomicSegDesignator() != null && inSearchData
-						.getGenomicSegDesignator().trim().length() > 0)
-				|| (inSearchData.getInducedMutationAgent() != null && inSearchData
-						.getInducedMutationAgent().trim().length() > 0)) {
-
-			// Search for engineered genes
-			theWhereClause += " AND abs_cancer_model_id IN ("
-					+ getModelIdsForEngineeredGenes(inSearchData.getGeneName(), inSearchData.getTransgeneName(),
-							inSearchData.isSearchEngineeredTransgene(), inSearchData
-									.isSearchTargetedModification(), inSearchData
-									.getGenomicSegDesignator(), inSearchData
-									.getInducedMutationAgent()) + ")";
-		}
-
-		// Search for phenotype
-		if (inSearchData.getPhenotype() != null
-				&& inSearchData.getPhenotype().trim().length() > 0) {
-			theWhereClause += " AND am.phenotype IN (from Phenotype as p where upper(p.description) like '%"
-					+ inSearchData.getPhenotype().trim().toUpperCase() + "%')";
-		}
-
-		// Search for cellline
-		if (inSearchData.getCellLine() != null
-				&& inSearchData.getCellLine().trim().length() > 0) {
-			theWhereClause += " AND abs_cancer_model_id IN ("
-					+ getModelIdsForCellLine(inSearchData.getCellLine().trim())
-					+ ")";
-		}
-
-		// Search for therapeutic approaches
-		if (inSearchData.isSearchTherapeuticApproaches()) {
-			theWhereClause += " AND abs_cancer_model_id IN ("
-					+ getModelIdsForTherapeuticApproach(inSearchData
-							.getTherapeuticApproach().trim()) + ")";
-		}
-
-		// Search for metastasis
-		if (inSearchData.isSearchHistoMetastasis()) {
-			theWhereClause += " AND abs_cancer_model_id IN ("
-					+ getModelIdsForHistoMetastasis() + ")";
-		}
-
-		// Search for microarray data
-		if (inSearchData.isSearchMicroArrayData()) {
-			theWhereClause += " AND abs_cancer_model_id IN ("
-					+ getModelIdsForMicroArrayData() + ")";
-		}
-
-		// Search for image data
-		if (inSearchData.isSearchImageData()) {
-			log.debug("In theWhereClause for image data");
-			theWhereClause += " AND abs_cancer_model_id IN ("
-					+ getModelIdsForImageData() + ")";
-		}
-
-		// Search for Transient Interference
-		if (inSearchData.isSearchTransientInterference()) {
-			theWhereClause += " AND abs_cancer_model_id IN ("
-					+ getModelIdsForTransientInterference() + ")";
-		}
-
-		// Search for Transplant
-		if (inSearchData.isSearchTransplant()) {
-			log.debug("In Search inSearchData.isSearchTransplant(): "
-					+ inSearchData.isSearchTransplant());
-			theWhereClause += " AND abs_cancer_model_id IN ("
-					+ getModelIdsForTransplant() + ")";
-		}
-		
-		// Search for tool strains
-		if (inSearchData.isSearchToolStrain()) {
-			log.debug("In Search inSearchData.isSearchToolStrain(): "
-					+ inSearchData.isSearchToolStrain());
-			theWhereClause += " AND abs_cancer_model_id IN ("
-					+ getModelIdsForToolStrain() + ")";
-		}		
-		log.debug("QueryMgrImpl buildCriteriaSearchWhereClause: " + theWhereClause.toString());
-        return theWhereClause;
-
-    }
 
     private String buildAdminCriteriaSearchWhereClause(CurationAssignmentData inCurationAssignmentData) throws Exception
     {
@@ -3164,7 +2873,7 @@ public class QueryManagerImpl extends BaseManager
 
     }       
     
-    private List criteriaSearchBeta( SearchData inSearchData, boolean editedApproved ) throws Exception
+    private List criteriaSearch( SearchData inSearchData, boolean editedApproved ) throws Exception
     {    
     	List theAnimalModels = null;
        
@@ -3321,13 +3030,8 @@ public class QueryManagerImpl extends BaseManager
 	        // Search for Transgene
 	        if ( inSearchData.isSearchEngineeredTransgene())
 	        {
-	        	if( inGeneName != null && inGeneName.trim().length() > 0)
-	        	{
-	        		theHQLQuery += theHQLQueryPrefix + " upper(eg2.name) LIKE '%" + inGeneName.trim().toUpperCase() + "%' " 
-	        					+  " AND eg2.engineeredGeneType = 'T' )) ";
-	        	} else {
-	        		theHQLQuery +=  theHQLQueryPrefix + " eg2.engineeredGeneType = 'T' )) ";
-	        	}
+	        	theHQLQuery += theHQLQueryPrefix + " upper(eg2.name) LIKE '%" + inSearchData.getTransgeneName().trim().toUpperCase() + "%' " 
+				+  " AND eg2.engineeredGeneType = 'T' )) ";	        	
 	        }	
 	        
 	        // Search Genomic Segment
@@ -3349,27 +3053,44 @@ public class QueryManagerImpl extends BaseManager
 
         // Carcinogenic interventions			 				
 		// Searching for Carcinogenic Interventions by agent type and name  - selected by user
-        if (inSearchData.getAgentName() != null	&& inSearchData.getAgentName().trim().length() > 0 
-        		&& inSearchData.getCarcinogenicIntervention() != null && inSearchData.getCarcinogenicIntervention().trim().length() > 0) 
-		{			 					 
-		 	// Search for a CE by agent type			 		
-	 		theHQLQuery += " AND am.id IN "
-	 					+  " ( SELECT distinct ce.absCancerModelId FROM CarcinogenExposure as ce WHERE ce.environmentalFactor.id IN "
-	 					+  " ( SELECT ef.id FROM CarcinogenExposure ce, EnvironmentalFactor ef WHERE ce.environmentalFactor.id = ef.id "
-	 					+  " AND (ef.name = '" + inSearchData.getCarcinogenicIntervention().trim() + "' OR ef.nameAlternEntry = '" + inSearchData.getCarcinogenicIntervention().trim() + "') "
-	 					+  " AND (ef.type = '" + inSearchData.getAgentName().trim() + "' OR ef.typeAlternEntry = '" + inSearchData.getAgentName().trim() + "')  ) ) ";			 			  			 			
+		if ( inSearchData.getCarcinogenicIntervention() != null && inSearchData.getCarcinogenicIntervention().trim().length() > 0 )
+		{
+			log.info( "AgentName = " +inSearchData.getAgentName() + " CarcIntervention= " +inSearchData.getCarcinogenicIntervention()  );
+
+			if (inSearchData.getAgentName() != null	&& inSearchData.getAgentName().trim().length() > 0 )
+			{
+			 	// Search for a CE by agent type			 		
+//		 		theHQLQuery += " AND am.id IN "
+//		 					+  " ( SELECT distinct ce.absCancerModelId FROM CarcinogenExposure as ce WHERE ce.environmentalFactor.id IN "
+//		 					+  " ( SELECT ef.id FROM CarcinogenExposure ce, EnvironmentalFactor ef WHERE ce.environmentalFactor.id = ef.id "
+//		 					+  " AND (ef.name = '" + inSearchData.getCarcinogenicIntervention() 
+//		 					+  "' OR ef.nameAlternEntry = '" + inSearchData.getCarcinogenicIntervention() + "') "
+//		 					+  " AND (ef.type = '" + inSearchData.getAgentName() 
+//		 					+  "' OR ef.typeAlternEntry = '" + inSearchData.getAgentName() + "')  ) ) ";
+
+				theHQLQuery += " AND am.id IN ( SELECT distinct ce.absCancerModelId FROM CarcinogenExposure as ce WHERE ce.environmentalFactor.id IN " 
+							+ " ( SELECT ef.id FROM CarcinogenExposure ce, EnvironmentalFactor ef "
+							+ " WHERE ce.environmentalFactor.id = ef.id " 
+							+ " AND (ef.name = '"+ inSearchData.getAgentName() + "' OR ef.nameAlternEntry = '"+ inSearchData.getAgentName() + "' ) " 
+							+ " AND (ef.type = '" + inSearchData.getCarcinogenicIntervention() + "' OR ef.typeAlternEntry = '" + inSearchData.getCarcinogenicIntervention() + "')  )) ";
+				
+			} else {
+			 	// Search for any model w/ an agent type 
+//		 		theHQLQuery += " AND am.id IN "
+//							+  " ( SELECT distinct ce.absCancerModelId FROM CarcinogenExposure as ce WHERE ce.environmentalFactor.id IN "
+//							+  " ( SELECT ef.id FROM CarcinogenExposure ce, EnvironmentalFactor ef WHERE ce.environmentalFactor.id = ef.id "
+//							+  " AND (ef.type = '" + inSearchData.getCarcinogenicIntervention() 
+//							+  "' OR ef.typeAlternEntry = '" + inSearchData.getCarcinogenicIntervention() + "')  ) ) ";
+				
+				theHQLQuery += " AND am.id IN ( SELECT distinct ce.absCancerModelId FROM CarcinogenExposure as ce WHERE ce.environmentalFactor.id IN " 
+							+ " ( SELECT ef.id FROM CarcinogenExposure ce, EnvironmentalFactor ef "
+							+ " WHERE ce.environmentalFactor.id = ef.id " 
+							+ " AND (ef.type = '" + inSearchData.getCarcinogenicIntervention() + "' OR ef.typeAlternEntry = '" + inSearchData.getCarcinogenicIntervention() + "')  )) ";				
+		 	}
 		} 
         
-        if ( inSearchData.getCarcinogenicIntervention() != null && inSearchData.getCarcinogenicIntervention().trim().length() > 0 )
-        {				
-		 	// Search for any model w/ an agent type 
-	 		theHQLQuery += " AND am.id IN "
-						+  " ( SELECT distinct ce.absCancerModelId FROM CarcinogenExposure as ce WHERE ce.environmentalFactor.id IN "
-						+  " ( SELECT ef.id FROM CarcinogenExposure ce, EnvironmentalFactor ef WHERE ce.environmentalFactor.id = ef.id "
-						+  " AND (ef.type = '" + inSearchData.getCarcinogenicIntervention().trim() + "' OR ef.typeAlternEntry = '" + inSearchData.getCarcinogenicIntervention().trim() + "')  ) ) ";
-	 	} 
-        
-        
+
+		
         // Search for Cell Lines
 		if (inSearchData.getCellLine() != null
 				&& inSearchData.getCellLine().trim().length() > 0) 
@@ -3461,6 +3182,7 @@ public class QueryManagerImpl extends BaseManager
 						        		+ " (select distinct cl.absCancerModelId from CellLine cl, CellLinePublication cp, Publication p " 
 						        		+ " where cl.id = cp.cellLineId and cp.publicationId = p.id and p.pmid = '" + inSearchData.getPmid().trim() + "' ) "
         								+ " ORDER BY am.id asc ";
+        	
         	log.info("HQL1= " + thePublicationQuery1 );
         	log.info("HQL2= " + thePublicationQuery2 );
         	log.info("HQL3= " + thePublicationQuery3 );
@@ -3532,37 +3254,7 @@ public class QueryManagerImpl extends BaseManager
     	}
            
     	return theAnimalModels;    	
-    }
-    
-    private List criteriaSearch(String inFromClause,
-                                String inOrderByClause,
-                                SearchData inSearchData) throws Exception
-    {
-        String theWhereClause = buildCriteriaSearchWhereClause(inSearchData);
-        log.debug("theWhereClause: " + theWhereClause);
-        List theAnimalModels = null;
-
-        try
-        {
-            String theHQLQuery = inFromClause + theWhereClause + inOrderByClause;
-            
-            //System.out.println( "inFromClause" + inFromClause);
-            //System.out.println( "theWhereClause" + theWhereClause);
-            //System.out.println( "inOrderByClause" + inOrderByClause);
-            //System.out.println( "Search Query: \n" + inFromClause + theWhereClause + inOrderByClause );
-            
-            Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
-            theAnimalModels = theQuery.list();
-            
-        }
-        catch (Exception e)
-        {
-            log.error("Exception occurred searching for models", e);
-            throw e;
-        }
-
-        return theAnimalModels;
-    }
+    }    
         
     private List criteriaAdminSearch(String inFromClause,
     								 String inOrderByClause,
