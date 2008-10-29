@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchSimple.jsp,v 1.52 2008-05-12 15:29:10 pandyas Exp $
+ * $Id: searchSimple.jsp,v 1.53 2008-10-29 07:05:04 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.52  2008/05/12 15:29:10  pandyas
+ * minor format change to be consistent
+ *
  * Revision 1.51  2007/10/18 18:28:28  pandyas
  * Moved error message up on page
  *
@@ -132,11 +135,29 @@
 		document.searchForm.organ.disabled = false;
 	}
 	
+	function disableOrgan() {
+		document.searchForm.organ.disabled = true;
+	}	
+	
 	function getOrganTree( control ) {
 		form = control.form;
 		form.action = "SimpleSearchPopulateAction.do?unprotected_method=setSpeciesForOrganTree";
 		form.submit();
-	}				
+	}
+		
+	function clearOrganTree( control ) {	
+		document.searchForm.modelDescriptor.value = '';
+		document.searchForm.keyword.value = '';
+		document.searchForm.piName.value = '';
+		document.searchForm.species.value = '';
+		document.searchForm.organTissueCode.value = '';
+		document.searchForm.organTissueName.value = '';
+		document.searchForm.organ.value = '';
+		
+		form = control.form;
+		form.action = "SimpleSearchPopulateAction.do?unprotected_method=clearSpeciesForOrganTree";
+		form.submit();	
+	}			
 </SCRIPT>
 
 <%
@@ -294,7 +315,7 @@
 							  Search
 						  </html:submit>
 							  
-						  <html:submit property="<%=Constants.Parameters.ACTION%>" styleClass="actionButton">
+						  <html:submit property="<%=Constants.Parameters.ACTION%>" onclick="clearOrganTree( this );" styleClass="actionButton">
 						  	  <bean:message key="button.clear"/>
 						  </html:submit>
 						  

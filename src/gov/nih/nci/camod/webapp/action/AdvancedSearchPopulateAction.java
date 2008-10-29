@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AdvancedSearchPopulateAction.java,v 1.20 2008-08-12 19:44:01 pandyas Exp $
+ * $Id: AdvancedSearchPopulateAction.java,v 1.21 2008-10-29 07:06:57 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.20  2008/08/12 19:44:01  pandyas
+ * Fixed #15053  	Search for models with transgenic or targeted modification on advanced search page confusing
+ *
  * Revision 1.19  2008/05/21 19:06:29  pandyas
  * Modified advanced search to prevent SQL injection
  * Converted text entry to dropdown lists for easier validation
@@ -167,19 +170,18 @@ public class AdvancedSearchPopulateAction extends BaseAction {
 	 * @return
 	 * @throws Exception
 	 */
-	public ActionForward setAgentNameDropdown(ActionMapping mapping,
-			ActionForm form, HttpServletRequest request,
+	public ActionForward setAgentNameDropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
         // Get the form used
         SearchForm theSearchForm = (SearchForm) form;
         
         log.debug("<setAgentNameDropdown> theSearchForm.getCarcinogenicIntervention(): " + theSearchForm.getCarcinogenicIntervention());
+        
         //Set constant for the Agent type here 
         request.getSession().setAttribute(Constants.ENVFactors.AGENT_TYPE, theSearchForm.getCarcinogenicIntervention());        
 
-		NewDropdownUtil.populateDropdown(request,
-				Constants.Dropdowns.ENVIRONMENTALFACTORNAMESDROP, theSearchForm.getCarcinogenicIntervention());
+		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.ENVIRONMENTALFACTORNAMESDROP, theSearchForm.getCarcinogenicIntervention());
 
 		return mapping.findForward("searchAdvanced");
 
@@ -206,5 +208,17 @@ public class AdvancedSearchPopulateAction extends BaseAction {
 
         return mapping.findForward("searchAdvanced");    	
     }	
-	
+    
+    public ActionForward clearOrganDiseaseTree(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+    	
+    	String theSearchSpecies = null;    	
+        SearchForm theSearchForm = (SearchForm) form;   
+        theSearchForm.allFieldsReset();
+        
+        request.getSession().setAttribute(Constants.SEARCHSPECIESCOMMONNAME, theSearchSpecies);
+
+        return mapping.findForward("searchAdvanced");    	
+    }
+    
 }

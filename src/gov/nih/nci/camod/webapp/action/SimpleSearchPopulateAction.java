@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SimpleSearchPopulateAction.java,v 1.15 2008-07-02 17:43:51 pandyas Exp $
+ * $Id: SimpleSearchPopulateAction.java,v 1.16 2008-10-29 07:06:25 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2008/07/02 17:43:51  pandyas
+ * Commented out debug statements
+ *
  * Revision 1.14  2008/05/27 14:37:02  pandyas
  * Modified to prevent SQL injection
  * Cleaned method name before proceeding
@@ -146,4 +149,18 @@ public class SimpleSearchPopulateAction extends BaseAction {
 
         return mapping.findForward("next");    	
     }
+    
+    public ActionForward clearSpeciesForOrganTree(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+    	
+    	log.info( "Clearing Species for Organ Tree" );
+    	
+    	String theSearchSpecies = null;
+    	SearchForm theSearchForm = (SearchForm) form;
+    	theSearchForm.simpleSearchReset();
+    	
+        request.getSession().setAttribute(Constants.SEARCHSPECIESCOMMONNAME, theSearchSpecies);
+
+        return mapping.findForward("next");    	
+    }    
 }

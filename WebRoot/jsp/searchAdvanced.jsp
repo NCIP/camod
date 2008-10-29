@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.76 2008-08-14 19:03:04 schroedn Exp $
+ * $Id: searchAdvanced.jsp,v 1.77 2008-10-29 07:05:43 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.76  2008/08/14 19:03:04  schroedn
+ * Moved location of PMID search field
+ *
  * Revision 1.75  2008/08/12 20:13:31  pandyas
  * Code was rolled back to continue work on security scan fixes.  Code added back in jsp again.  Originally From:
  * Revision 1.72  2008/07/11 17:10:25  schroedn
@@ -226,8 +229,13 @@
 		form = control.form;
 		form.action = "AdvancedSearchPopulateAction.do?unprotected_method=setSpeciesForTrees";
 		form.submit();
-	}			
-	
+	}	
+			
+	function clearOrganDiseaseTree( control ) {	
+		form = control.form;
+		form.action = "AdvancedSearchPopulateAction.do?unprotected_method=clearOrganDiseaseTree";
+		form.submit();	
+	}		
 </SCRIPT>
 
 <%
@@ -669,7 +677,7 @@
 						  Search
 					  </html:submit>
 	  				  
-	  				  <html:submit property="<%=Constants.Parameters.ACTION%>" styleClass="actionButton">
+	  				  <html:submit property="<%=Constants.Parameters.ACTION%>" onclick="clearOrganDiseaseTree( this );" styleClass="actionButton">
 					  	  <bean:message key="button.clear"/>
 	  				  </html:submit>
 	  				  
