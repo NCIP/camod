@@ -1,8 +1,11 @@
 <%
 		/*
-		 * $Id: subSubmitMenu.jsp,v 1.65 2008-08-14 06:41:02 schroedn Exp $
+		 * $Id: subSubmitMenu.jsp,v 1.66 2008-10-29 07:43:09 schroedn Exp $
 		 *
 		 * $Log: not supported by cvs2svn $
+		 * Revision 1.65  2008/08/14 06:41:02  schroedn
+		 * Added Microarray sidebar
+		 *
 		 * Revision 1.64  2008/08/12 19:21:45  pandyas
 		 * Fixed #11640  	Delete availability from IMSR from application
 		 *
@@ -264,7 +267,7 @@
 				action="InducedMutationPopulateAction.do?method=populate"
 				paramId="aInducedMutationID" paramName="aInducedMutation"
 				paramProperty="id">
-				<camod:shorten><bean:write name="aInducedMutation" property="environmentalFactor.displayNameIM" filter="false" /></camod:shorten>
+				<camod:shorten><bean:write name="aInducedMutation" property="environmentalFactor.name" filter="false" /><bean:write name="aInducedMutation" property="environmentalFactor.nameAlternEntry" filter="false" /></camod:shorten>
 			</html:link><br>
 		</logic:iterate> 
 	
