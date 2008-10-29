@@ -1,6 +1,6 @@
 <%
 		/*
-		 * $Id: subSubmitMenu.jsp,v 1.66 2008-10-29 07:43:09 schroedn Exp $
+		 * $Id: subSubmitMenu.jsp,v 1.67 2008-10-29 15:47:30 schroedn Exp $
 		 *
 		 * $Log: not supported by cvs2svn $
 		 * Revision 1.65  2008/08/14 06:41:02  schroedn
@@ -267,7 +267,14 @@
 				action="InducedMutationPopulateAction.do?method=populate"
 				paramId="aInducedMutationID" paramName="aInducedMutation"
 				paramProperty="id">
-				<camod:shorten><bean:write name="aInducedMutation" property="environmentalFactor.name" filter="false" /><bean:write name="aInducedMutation" property="environmentalFactor.nameAlternEntry" filter="false" /></camod:shorten>
+				
+				     <logic:present name="aInducedMutation" property="environmentalFactor.name">
+       					<bean:write name="aInducedMutation" property="environmentalFactor.name" filter="false" />
+      				</logic:present>      
+				     <logic:notPresent name="aInducedMutation" property="environmentalFactor.name">
+        					<bean:write name="aInducedMutation" property="environmentalFactor.nameAlternEntry" filter="false" />
+      				</logic:notPresent>           				
+				
 			</html:link><br>
 		</logic:iterate> 
 	
