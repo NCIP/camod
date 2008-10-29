@@ -1,7 +1,10 @@
 /*
- * $Id: EngineeredGene.java,v 1.16 2008-10-16 13:54:13 schroedn Exp $
+ * $Id: EngineeredGene.java,v 1.17 2008-10-29 18:54:56 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2008/10/16 13:54:13  schroedn
+ * Added absCancerModelId, environmentalFactorId and engineeredGeneType. Used for HQL searching
+ *
  * Revision 1.15  2006/10/17 16:14:36  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -31,7 +34,7 @@ public class EngineeredGene extends BaseObject implements Comparable, Serializab
     private String comments;
     private Image image;
     private long absCancerModelId;
-    private String environmentalFactorId;
+    //private long environmentalFactorId;
     private String engineeredGeneType;
     private Conditionality conditionality;
     private MutationIdentifier mutationIdentifier;
@@ -264,17 +267,17 @@ public class EngineeredGene extends BaseObject implements Comparable, Serializab
 		this.engineeredGeneType = engineeredGeneType;
 	}
 
-	/**
-	 * @return the environmentalFactorId
-	 */
-	public String getEnvironmentalFactorId() {
-		return environmentalFactorId;
-	}
-
-	/**
-	 * @param environmentalFactorId the environmentalFactorId to set
-	 */
-	public void setEnvironmentalFactorId(String environmentalFactorId) {
-		this.environmentalFactorId = environmentalFactorId;
-	}
+//	/**
+//	 * @return the environmentalFactorId
+//	 */
+//	public long getEnvironmentalFactorId() {
+//		return environmentalFactorId;
+//	}
+//
+//	/**
+//	 * @param environmentalFactorId the environmentalFactorId to set
+//	 */
+//	public void setEnvironmentalFactorId(long environmentalFactorId) {
+//			this.environmentalFactorId = environmentalFactorId;
+//	}
 }

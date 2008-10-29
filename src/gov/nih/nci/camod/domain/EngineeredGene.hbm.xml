@@ -48,12 +48,6 @@
 	    		  insert="false"
 	    		  update="false"/>
 
- 	    <!-- environmentalFactorId -->
-	    <property name="environmentalFactorId"
-	    		  column="environmental_factor_id"
-	    		  type="long" 
-	    		  insert="false"
-	    		  update="false"/>
 	    		         		    		         	
         <!-- comments -->
         <property name="comments" 

@@ -43,7 +43,7 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.110 2008-10-29 07:03:31 schroedn Exp $
+ * $Id: QueryManagerImpl.java,v 1.111 2008-10-29 18:52:31 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
  * Revision 1.107  2008/10/16 15:52:46  schroedn
@@ -2689,8 +2689,7 @@ public class QueryManagerImpl extends BaseManager
 					+ "AND am.id IN "        
 					+ "( SELECT eg.absCancerModelId FROM EngineeredGene as eg " 
 					+ "WHERE eg.id IN ( SELECT distinct eg2.id FROM EngineeredGene as eg2, EnvironmentalFactor ef " 
-					+ "WHERE upper(ef.name) like '%" + theKeyword + "%' "  
-					+ "AND ef.id = eg2.environmentalFactorId " 
+					+ "WHERE upper(ef.name) like '%" + theKeyword + "%' "  				 
 					+ "AND eg2.engineeredGeneType = 'IM' )) "
 					+ "ORDER BY am.id asc ";
         query1 = HibernateUtil.getSession().createQuery(theHQLQuery);
@@ -3047,7 +3046,7 @@ public class QueryManagerImpl extends BaseManager
     			theHQLQuery += " AND am.id IN (SELECT eg.absCancerModelId FROM EngineeredGene as eg "
 							+  " WHERE eg.id IN ( SELECT distinct eg2.id FROM EngineeredGene as eg2, EnvironmentalFactor ef WHERE "
     						+  " upper(ef.name) LIKE '%" + inSearchData.getInducedMutationAgent().trim().toUpperCase() + "%' " 
-        					+  " AND ef.id = eg2.environmentalFactorId AND eg2.engineeredGeneType = 'IM' )) ";
+        					+  " AND eg2.engineeredGeneType = 'IM' )) ";
 	        }  
 		}
 
