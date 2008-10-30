@@ -11,19 +11,19 @@
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 
 			<tr>
-                    <td colspan="2"><BR></BR>
+                    <td colspan="2" class="resultsBoxWhiteEnd><BR></BR>
 
-                        <h2>Application Support</h2>
+                        <b>Application Support</b>
                         <BR>
 
-                        <p>For Further Questions Please Contact</p>
+                        <br>For further questions please contact<br><br>
 
-                        <p><b>NCICB Application Support</b><br>
+                        <b>NCICB Application Support</b><br>
                             <a href="mailto:ncicb@pop.nci.nih.gov">ncicb@pop.nci.nih.gov</a><br>
                             Local: 301-451-4384    <br>
                             Toll-free: 888-478-4423    <br>
-                            Web: <a href="http://ncicbsupport.nci.nih.gov">http://ncicbsupport.nci.nih.gov</a>
-                        </p>
+                            Web: <a href="http://ncicb.nci.nih.gov/NCICB/support">http://ncicb.nci.nih.gov/NCICB/support</a>
+                       
                     </td>								
 			</tr>			
 
