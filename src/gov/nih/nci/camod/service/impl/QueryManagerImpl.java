@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.111 2008-10-29 18:52:31 schroedn Exp $
+ * $Id: QueryManagerImpl.java,v 1.112 2008-10-30 16:21:09 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.111  2008/10/29 18:52:31  schroedn
+ * Fixes 17464,17463,17374
+ *
  * Revision 1.107  2008/10/16 15:52:46  schroedn
  * PMID exact search
  *
@@ -906,7 +909,7 @@ public class QueryManagerImpl extends BaseManager
 					+ "			WHERE ef.environmental_factor_id = ce.environmental_factor_id "					
 					+ "     	AND am.abs_cancer_model_id = ce.abs_cancer_model_id AND am.state = 'Edited-approved')";
 			
-			log.info("theSQLQuery: " + theSQLQuery.toString());
+			log.debug("theSQLQuery: " + theSQLQuery.toString());
 		
 			Object[] theParams = new Object[2];
 			theParams[0] = inType;
@@ -942,7 +945,7 @@ public class QueryManagerImpl extends BaseManager
 				}
 			}
 		}
-		log.info( "Size = " + theEFNameList );
+		log.debug( "Size = " + theEFNameList );
 		Collections.sort(theEFNameList);
 		return theEFNameList;
 }
@@ -2054,7 +2057,7 @@ public class QueryManagerImpl extends BaseManager
 	        theSQLString += " AND o.concept_code IN (" + theConceptCodeList + "))";
 		}
 		
-		log.info("theSQLString: " + theSQLString.toString());
+		log.debug("theSQLString: " + theSQLString.toString());
 		System.out.println("theSQLString: " + theSQLString.toString());
 		
 		return getIds(theSQLString, theParams);
@@ -2481,12 +2484,12 @@ public class QueryManagerImpl extends BaseManager
 
         if (inSearchData.getKeyword() != null && inSearchData.getKeyword().length() > 0)
         {
-            log.info("Doing a keyword search: " + inSearchData.getKeyword());
+            log.debug("Doing a keyword search: " + inSearchData.getKeyword());
             theAnimalModels = keywordSearch( inSearchData.getKeyword() );
         }
         else
         {
-            log.info("Doing a criteria search");
+            log.debug("Doing a criteria search");
             theAnimalModels = criteriaSearch(inSearchData, true);
         }
         
@@ -2525,7 +2528,7 @@ public class QueryManagerImpl extends BaseManager
 
     public int countMatchingAnimalModels(SearchData inSearchData) throws Exception
     {
-        log.info("Entering countMatchingAnimalModels");
+        log.debug("Entering countMatchingAnimalModels");
         List theCountResults = null;
 
         if (inSearchData.getKeyword() != null && inSearchData.getKeyword().trim().length() > 0)
@@ -2565,7 +2568,7 @@ public class QueryManagerImpl extends BaseManager
     private List keywordSearch( String keyWord )
     	throws Exception
     {
-    	log.info( "in keywordSearchBeta");
+    	log.debug( "in keywordSearchBeta");
     	
         List theAnimalModels = null;
         List keywordSearch = null;
@@ -2897,14 +2900,14 @@ public class QueryManagerImpl extends BaseManager
 		if (inSearchData.getModelDescriptor() != null
 				&& inSearchData.getModelDescriptor().trim().length() > 0) 
 		{
-			log.info("Model Descriptor Criteria Used");
+			log.debug("Model Descriptor Criteria Used");
 			theHQLQuery += "AND upper(am.modelDescriptor) like '%" + inSearchData.getModelDescriptor().toUpperCase().trim() + "%'";
         }
 		
         // PI criteria
         if (inSearchData.getPiName() != null && inSearchData.getPiName().length() > 0)
         {
-        	log.info("PI Criteria Used");	
+        	log.debug("PI Criteria Used");	
             StringTokenizer theTokenizer = new StringTokenizer(inSearchData.getPiName());
             String theLastName = theTokenizer.nextToken(",").trim();
             String theFirstName = theTokenizer.nextToken().trim();
@@ -3054,7 +3057,7 @@ public class QueryManagerImpl extends BaseManager
 		// Searching for Carcinogenic Interventions by agent type and name  - selected by user
 		if ( inSearchData.getCarcinogenicIntervention() != null && inSearchData.getCarcinogenicIntervention().trim().length() > 0 )
 		{
-			log.info( "AgentName = " +inSearchData.getAgentName() + " CarcIntervention= " +inSearchData.getCarcinogenicIntervention()  );
+			log.debug( "AgentName = " +inSearchData.getAgentName() + " CarcIntervention= " +inSearchData.getCarcinogenicIntervention()  );
 
 			if (inSearchData.getAgentName() != null	&& inSearchData.getAgentName().trim().length() > 0 )
 			{
@@ -3151,7 +3154,7 @@ public class QueryManagerImpl extends BaseManager
 		
         theHQLQuery += " ORDER BY am.id asc ";
         
-        //log.info("SearchData = " + inSearchData.getPmid().trim() );
+        //log.debug("SearchData = " + inSearchData.getPmid().trim() );
         
         List pmids = null;
         
@@ -3159,7 +3162,7 @@ public class QueryManagerImpl extends BaseManager
         if ( inSearchData.getPmid() != null && 
         		inSearchData.getPmid().trim().length() > 0 )
         {
-        	log.info( "Searching PMIDs" );
+        	log.debug( "Searching PMIDs" );
         	
         	String thePublicationQuery1 = " from AnimalModel as am where am.state = 'Edited-approved' "
 				        				+ " AND am.availability.releaseDate <= sysdate " 
@@ -3182,9 +3185,9 @@ public class QueryManagerImpl extends BaseManager
 						        		+ " where cl.id = cp.cellLineId and cp.publicationId = p.id and p.pmid = '" + inSearchData.getPmid().trim() + "' ) "
         								+ " ORDER BY am.id asc ";
         	
-        	log.info("HQL1= " + thePublicationQuery1 );
-        	log.info("HQL2= " + thePublicationQuery2 );
-        	log.info("HQL3= " + thePublicationQuery3 );
+        	log.debug("HQL1= " + thePublicationQuery1 );
+        	log.debug("HQL2= " + thePublicationQuery2 );
+        	log.debug("HQL3= " + thePublicationQuery3 );
         	
         	Query query1 = HibernateUtil.getSession().createQuery(thePublicationQuery1);
         	Query query2 = HibernateUtil.getSession().createQuery(thePublicationQuery2);
@@ -3205,7 +3208,7 @@ public class QueryManagerImpl extends BaseManager
 
     	//Perform the Search    	
         try {
-        	log.info( "theHQLQuery : " + theHQLQuery );      	
+        	log.debug( "theHQLQuery : " + theHQLQuery );      	
         	Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);        	
         	
         	// pmid search requires a union which is not currently supported in HQL so it was preformed in 
