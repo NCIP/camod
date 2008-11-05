@@ -26,7 +26,12 @@
         <property name="adminSiteAlternEntry" 
         	column="admin_site_altern_entry" 
         	type="string"/>  
-        	
+ 
+ 	    <!-- parAbsCanModelId -->
+        <property name="parAbsCanModelId" 
+        	column="par_abs_can_model_id" 
+        	type="long"/>
+	    	       	
 	    <!-- conditioningRegimen -->
         <property name="conditioningRegimen" 
         	column="conditioning_regimen" 

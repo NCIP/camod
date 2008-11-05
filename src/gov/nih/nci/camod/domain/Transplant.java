@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Transplant.java,v 1.1 2008-01-16 18:30:38 pandyas Exp $
+ * $Id: Transplant.java,v 1.2 2008-11-05 04:57:02 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2008/01/16 18:30:38  pandyas
+ * Renamed value to Transplant for #8290
+ *
  * Revision 1.1  2007/10/31 15:58:56  pandyas
  * Fixed #8290 	Rename graft object into transplant object
  *
@@ -48,6 +51,7 @@ public class Transplant extends AbstractCancerModel implements Comparable
     private String parentalCellLineName;
     private String atccNumber;
     private String cellAmount;
+    private Long parAbsCanModelId;
     private String growthPeriod;
     private String sourceType;
     private String sourceTypeAlternEntry;
@@ -382,6 +386,20 @@ public class Transplant extends AbstractCancerModel implements Comparable
 	 */
 	public void setCondRegimenAlternEntry(String condRegimenAlternEntry) {
 		this.condRegimenAlternEntry = condRegimenAlternEntry;
+	}
+
+	/**
+	 * @return the parAbsCanModelId
+	 */
+	public Long getParAbsCanModelId() {
+		return parAbsCanModelId;
+	}
+
+	/**
+	 * @param parAbsCanModelId the parAbsCanModelId to set
+	 */
+	public void setParAbsCanModelId(Long parAbsCanModelId) {
+		this.parAbsCanModelId = parAbsCanModelId;
 	}
 
 
