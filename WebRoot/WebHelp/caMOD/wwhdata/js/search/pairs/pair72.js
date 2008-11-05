@@ -2,7 +2,7 @@ function FileData_Pairs(x)
 {
 x.t("example","70417");
 x.t("example","j:134077");
-x.t("example","zdb-geno-050428-1");
+x.t("example","zdb-pub-071009-8");
 x.t("unmodified","state");
 x.t("reported","first");
 x.t("comment","comment");
@@ -262,7 +262,6 @@ x.t("appropriate","information");
 x.t("submit","edit");
 x.t("submit","button");
 x.t("published","unpublished");
-x.t("zdb-geno-050428-1","click");
 x.t("locate","publication");
 x.t("submitted","preparation");
 x.t("submitted","publications");
@@ -295,4 +294,5 @@ x.t("animal","model");
 x.t("learn","zebrafish");
 x.t("learn","rgd");
 x.t("(rgd)","identifier");
+x.t("zdb-pub-071009-8","click");
 }
