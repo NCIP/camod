@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.112 2008-10-30 16:21:09 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.113 2008-11-05 04:53:50 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.112  2008/10/30 16:21:09  pandyas
+ * modify debug statements for build to dev
+ *
  * Revision 1.111  2008/10/29 18:52:31  schroedn
  * Fixes 17464,17463,17374
  *
@@ -379,6 +382,7 @@ package gov.nih.nci.camod.service.impl;
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.Agent;
 import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.domain.AnimalModelSearchResult;
 import gov.nih.nci.camod.domain.Comments;
 import gov.nih.nci.camod.domain.Log;
 import gov.nih.nci.camod.domain.Person;
@@ -2736,12 +2740,15 @@ public class QueryManagerImpl extends BaseManager
 //        list1.addAll(list2);
         
     	// List of all distinct AnimalModel Ids
-    	HashSet unique = new HashSet(list1);
+    	LinkedHashSet unique = new LinkedHashSet(list1);
     	keywordSearch = new ArrayList( unique );  
     	
+		// sort list by model id
+		Collections.sort(keywordSearch, new _sortAnimalModels());
+		
     	return keywordSearch;
-    }
-    
+    } 
+
     private List adminModelIdSearch(String inFromClause, CurationAssignmentData inCurationAssignmentData) throws Exception
      {
 
@@ -3151,6 +3158,13 @@ public class QueryManagerImpl extends BaseManager
 						+  "AND am.id IN ( select distinct hp.absCancerModelId from Histopathology hp " 
 						+  "where hp.id IN (select h.parentHistopathologyId from Histopathology h where h.parentHistopathologyId is not null) ) ";
 		}
+
+		// Search for Transplant
+		if ( inSearchData.isSearchTransplant() ) 
+		{
+			theHQLQuery += "AND am.id IN ( select am.id from Transplant as t, AnimalModel as am where am.id = t.parAbsCanModelId and t.parAbsCanModelId is not null ) ";
+		}		
+		
 		
         theHQLQuery += " ORDER BY am.id asc ";
         
@@ -3671,5 +3685,23 @@ public class QueryManagerImpl extends BaseManager
 			e.printStackTrace();
 		}
 
+	}
+}
+
+class _sortAnimalModels implements java.util.Comparator {
+
+	public void SortAnimalModels() {
+	}
+
+	public int compare(Object oo1, Object oo2) {
+		AnimalModel o1 = (AnimalModel) oo1;
+		AnimalModel o2 = (AnimalModel) oo2;
+
+		if (o1.getId() > o2.getId())
+			return 1;
+		else if (o1.getId() < o2.getId() )
+			return -1;
+		else
+			return 0;
 	}
 }
