@@ -38,7 +38,7 @@
 			
 				<td class="<c:out value="${tdClass}"/>" colspan="2">
 					<c:if test="${empty p.urlAlternEntry}" >
-						<a href='<c:out value="${p.imageUrl}"/>' target="_blank"><c:out value="${p.thumbUrl}"/>
+						<a href='<c:out value="${p.imageUrl}"/>' target="_blank">
 						<img src="<c:out value="${p.thumbUrl}"/>" height="40" width="40" alt="Click on the image to open in a new Browser window" target="_blank">( Click to View )</a>
 					</c:if>
 												
