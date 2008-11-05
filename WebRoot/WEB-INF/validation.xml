@@ -179,7 +179,7 @@
 					resource="false" />
 				<var>
 					<var-name>maxlength</var-name>
-					<var-value>10000</var-value>
+					<var-value>5000</var-value>
 				</var>
 			</field>						
 			<field property="releaseDate" depends="required">
@@ -2052,7 +2052,7 @@
 					resource="false" />
 				<var>
 					<var-name>maxlength</var-name>
-					<var-value>10000</var-value>
+					<var-value>5000</var-value>
 				</var>
 			</field>			
 		</form>
