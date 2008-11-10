@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.63 2008-08-12 19:19:54 pandyas Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.64 2008-11-10 18:11:08 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.63  2008/08/12 19:19:54  pandyas
+ * Fixed #12824  	Delete Sequnce ID field from genetic description search page, targeted modification table
+ *
  * Revision 1.62  2008/02/11 17:15:10  pandyas
  * Fixed #12355  	Models with "Targeted" Genomic segment are showing "random" and models with " random" genomic segment is showing "targeted".
  *
@@ -905,8 +908,8 @@
 			</c:if>&nbsp;			
 		</tr>		
 		<tr>
-			<td class="WhiteBox" width="35%"><b>Comments</b></td>
-			<td class="WhiteBoxRightEnd" width="65%">
+			<td class="GreyBox" width="35%"><b>Comments</b></td>
+			<td class="GreyBoxRightEnd" width="65%">
 				<camod:highlight>
 					<c:out value="${tm.comments}" escapeXml="false"/>&nbsp;
 				</camod:highlight>		
@@ -928,16 +931,16 @@
 	        </tr>
 
 	        <tr>
-	            <td class="WhiteBox" width="35%"><b>Database Links</b></td>
-	            <td class="WhiteBoxRightEnd" width="65%">&nbsp;
+	            <td class="GreyBox" width="35%"><b>Database Links</b></td>
+	            <td class="GreyBoxRightEnd" width="65%">&nbsp;
 					<A target="_blank" href="http://www.ncbi.nlm.nih.gov/UniGene/clust.cgi?ORG=<c:out value="${gene.taxon.abbreviation}"/>&amp;CID=<c:out value="${gene.clusterId}"/>">UniGene</A>
 						&nbsp;|&nbsp;
 			        <A target="_blank" href="http://cgap.nci.nih.gov/Genes/GeneInfo?ORG=Mm&CID=<c:out value="${gene.clusterId}"/>">CGAP</A>
 	           	</td>
 	        </tr>
 	        <tr>
-	            <td valign="top" class="GreyBox" width="35%"><b>Gene Ontology</b></td>
-	            <td valign="top" class="GreyBoxRightEnd" width="65%"><font size="-2" color="#666699">Gene classification by the European Bioinformatics Institute, as recorded in GOA (GO Annotation@EBI)</font>
+	            <td valign="top" class="WhiteBox" width="35%"><b>Gene Ontology</b></td>
+	            <td valign="top" class="WhiteBoxRightEnd" width="65%"><font size="-2" color="#666699">Gene classification by the European Bioinformatics Institute, as recorded in GOA (GO Annotation@EBI)</font>
 					<ul>
 						<c:forEach var="ont" items="${gene.geneOntologyCollection}">
 							<li>
@@ -951,8 +954,8 @@
 	           	</td>
 	        </tr>
 	        <tr>
-	            <td valign="top" class="WhiteBox" width="35%"><b>BioCarta Pathways</b></td>
-	            <td valign="top" class="WhiteBoxRightEnd" width="65%">
+	            <td valign="top" class="GreyBox" width="35%"><b>BioCarta Pathways</b></td>
+	            <td valign="top" class="GreyBoxRightEnd" width="65%">
 		        <font size="-2" color="#666699">Pathway information courtesy of <A target="_blank" href="http://www.biocarta.com">BioCarta</a></font>
 		        <br>
 					<ul>
