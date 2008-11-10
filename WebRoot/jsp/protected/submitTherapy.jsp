@@ -1,9 +1,12 @@
 <%
 
 /**
- * $Id: submitTherapy.jsp,v 1.37 2008-01-23 22:26:25 pandyas Exp $
+ * $Id: submitTherapy.jsp,v 1.38 2008-11-10 18:33:48 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.37  2008/01/23 22:26:25  pandyas
+ * Fixed #11831  	maximize buttion in pop-up windows disabled which prevents user to see full page
+ *
  * Revision 1.36  2007/10/23 17:29:51  pandyas
  * Fixed bug #9611:  	"Submit" "Cancel" buttons become invisible after submission error in "Enter Terapy" page
  * Moved </form> below last table so form displays in full
@@ -214,7 +217,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Dose:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized"  property="dosage" size="15"  />
+			<html:text styleClass="formFieldUnSized"  property="dosage" size="15" escapeXml="false" />
 			<label for="field1">&nbsp;Units&nbsp;</label>			
 			<html:select styleClass="formFieldUnSized" size="1" property="dosageUnit" >												
 				<html:options name="<%= Dropdowns.CHEMTHERAPYDOSEUNITSDROP %>"/>				
