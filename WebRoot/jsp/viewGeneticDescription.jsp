@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.64 2008-11-10 18:11:08 pandyas Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.65 2008-11-10 19:08:11 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.64  2008/11/10 18:11:08  pandyas
+ * modified background color for gforge ##12824 Delete Sequence ID field from genetic description search page, targeted modification table
+ *
  * Revision 1.63  2008/08/12 19:19:54  pandyas
  * Fixed #12824  	Delete Sequnce ID field from genetic description search page, targeted modification table
  *
@@ -881,8 +884,8 @@
 		<!-- Display MGI or ZFIN or RGD identifier -->
         <tr>
 			<c:if test="${not empty tm.mutationIdentifier.mgiId}">        
-			<td class="WhiteBox" width="35%"><b>MGI Number</b></td>
-				<td class="WhiteBoxRightEnd" width="65%">
+			<td class="GreyBox" width="35%"><b>MGI Number</b></td>
+				<td class="GreyBoxRightEnd" width="65%">
 				<a target="_blank" href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=<c:out value="${tm.mutationIdentifier.mgiId}"/>&selectedQuery=Genes+and+Markers">
 				    <c:out value="${tm.mutationIdentifier.mgiId}"/>
 				</a>
@@ -890,8 +893,8 @@
 			</c:if>&nbsp;
 			
 			<c:if test="${not empty tm.mutationIdentifier.zfinId}">        
-			<td class="WhiteBox" width="35%"><b>ZFIN Number</b></td>
-				<td class="WhiteBoxRightEnd" width="65%"> 
+			<td class="GreyBox" width="35%"><b>ZFIN Number</b></td>
+				<td class="GreyBoxRightEnd" width="65%"> 
 				<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-genotypeview.apg&OID=<c:out value="${tm.mutationIdentifier.zfinId}"/>">				 
 				    <c:out value="${tm.mutationIdentifier.zfinId}"/>
 				</a>
@@ -899,8 +902,8 @@
 			</c:if>&nbsp;
 			
 			<c:if test="${not empty tm.mutationIdentifier.rgdId}">        
-			<td class="WhiteBox" width="35%"><b>RGD Number</b></td>
-				<td class="WhiteBoxRightEnd" width="65%">
+			<td class="GreyBox" width="35%"><b>RGD Number</b></td>
+				<td class="GreyBoxRightEnd" width="65%">
 				<a target="_blank" href="http://rgd.mcw.edu/tools/strains/strains_view.cgi?id=<c:out value="${tm.mutationIdentifier.rgdId}"/>">
 				    <c:out value="${tm.mutationIdentifier.rgdId}"/>
 				</a>
@@ -908,8 +911,8 @@
 			</c:if>&nbsp;			
 		</tr>		
 		<tr>
-			<td class="GreyBox" width="35%"><b>Comments</b></td>
-			<td class="GreyBoxRightEnd" width="65%">
+			<td class="WhiteBox" width="35%"><b>Comments</b></td>
+			<td class="WhiteBoxRightEnd" width="65%">
 				<camod:highlight>
 					<c:out value="${tm.comments}" escapeXml="false"/>&nbsp;
 				</camod:highlight>		
@@ -920,8 +923,8 @@
 		<c:set var="gene" value="${targetedModGeneMap[tmId]}"/>
 		<c:if test="${not empty gene}">
 	        <tr>
-	            <td class="WhiteBox" width="35%"><b>Gene Info</b></td>
-	            <td class="WhiteBoxRightEnd" width="65%">
+	            <td class="GreyBox" width="35%"><b>Gene Info</b></td>
+	            <td class="GreyBoxRightEnd" width="65%">
 	            	<camod:highlight>
 	            		<c:out value="${gene.taxon.abbreviation}" escapeXml="false"/>.&nbsp; 
 			            <c:out value="${gene.symbol}" escapeXml="false"/>.&nbsp; 
@@ -931,16 +934,16 @@
 	        </tr>
 
 	        <tr>
-	            <td class="GreyBox" width="35%"><b>Database Links</b></td>
-	            <td class="GreyBoxRightEnd" width="65%">&nbsp;
+	            <td class="WhiteBox" width="35%"><b>Database Links</b></td>
+	            <td class="WhiteBoxRightEnd" width="65%">&nbsp;
 					<A target="_blank" href="http://www.ncbi.nlm.nih.gov/UniGene/clust.cgi?ORG=<c:out value="${gene.taxon.abbreviation}"/>&amp;CID=<c:out value="${gene.clusterId}"/>">UniGene</A>
 						&nbsp;|&nbsp;
 			        <A target="_blank" href="http://cgap.nci.nih.gov/Genes/GeneInfo?ORG=Mm&CID=<c:out value="${gene.clusterId}"/>">CGAP</A>
 	           	</td>
 	        </tr>
 	        <tr>
-	            <td valign="top" class="WhiteBox" width="35%"><b>Gene Ontology</b></td>
-	            <td valign="top" class="WhiteBoxRightEnd" width="65%"><font size="-2" color="#666699">Gene classification by the European Bioinformatics Institute, as recorded in GOA (GO Annotation@EBI)</font>
+	            <td valign="top" class="GreyBox" width="35%"><b>Gene Ontology</b></td>
+	            <td valign="top" class="GreyBoxRightEnd" width="65%"><font size="-2" color="#666699">Gene classification by the European Bioinformatics Institute, as recorded in GOA (GO Annotation@EBI)</font>
 					<ul>
 						<c:forEach var="ont" items="${gene.geneOntologyCollection}">
 							<li>
@@ -954,8 +957,8 @@
 	           	</td>
 	        </tr>
 	        <tr>
-	            <td valign="top" class="GreyBox" width="35%"><b>BioCarta Pathways</b></td>
-	            <td valign="top" class="GreyBoxRightEnd" width="65%">
+	            <td valign="top" class="WhiteBox" width="35%"><b>BioCarta Pathways</b></td>
+	            <td valign="top" class="whiteBoxRightEnd" width="65%">
 		        <font size="-2" color="#666699">Pathway information courtesy of <A target="_blank" href="http://www.biocarta.com">BioCarta</a></font>
 		        <br>
 					<ul>
