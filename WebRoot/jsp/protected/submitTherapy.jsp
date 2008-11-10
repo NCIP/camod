@@ -1,9 +1,12 @@
 <%
 
 /**
- * $Id: submitTherapy.jsp,v 1.38 2008-11-10 18:33:48 pandyas Exp $
+ * $Id: submitTherapy.jsp,v 1.39 2008-11-10 18:48:04 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.38  2008/11/10 18:33:48  pandyas
+ * modified dose box for gforge #17673 Add values to Unit, Administrative Route drop-down menus
+ *
  * Revision 1.37  2008/01/23 22:26:25  pandyas
  * Fixed #11831  	maximize buttion in pop-up windows disabled which prevents user to see full page
  *
@@ -217,7 +220,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Dose:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized"  property="dosage" size="15" escapeXml="false" />
+			<html:text styleClass="formFieldUnSized"  property="dosage" size="15"  />
 			<label for="field1">&nbsp;Units&nbsp;</label>			
 			<html:select styleClass="formFieldUnSized" size="1" property="dosageUnit" >												
 				<html:options name="<%= Dropdowns.CHEMTHERAPYDOSEUNITSDROP %>"/>				
