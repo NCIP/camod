@@ -7,12 +7,14 @@ Dilut
 dilution (cell culture)
 Dilution factor 10^2
 Dilution factor 10^3
+genome copies (gc)
 grams/kg/injection
 International Units/animal/injection
 mg/kg
 mg/kg/body weight
 mg/animal/injection
 micrograms per hour
+microgram/kg/day
 micrograms/kg/injection
 micrograms/ml/duration (cell culture)
 micrograms/animal/injection

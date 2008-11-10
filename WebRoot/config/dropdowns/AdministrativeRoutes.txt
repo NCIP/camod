@@ -5,7 +5,9 @@ dermal
 gavage
 intramuscular
 intraperitoneal
+intrastriatal injection
 intravenous
+oral
 pellet
 subcutaneous
 topical
