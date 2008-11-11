@@ -25,6 +25,7 @@
         
 		<!-- CGLIB reflection_optimizer -->
 		<property name="hibernate.cglib.use_reflection_optimizer">false</property> 
+		<property name="hibernate.jdbc.batch_size">0</property>
        
 	
         <!-- Mapping files -->
