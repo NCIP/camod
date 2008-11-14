@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewCarcinogenicInterventions.jsp,v 1.35 2007-10-31 19:33:58 pandyas Exp $
+ * $Id: viewCarcinogenicInterventions.jsp,v 1.36 2008-11-14 17:14:13 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.35  2007/10/31 19:33:58  pandyas
+ * Fixed #8188 	Rename UnctrlVocab items to text entries
+ *
  * Revision 1.34  2007/08/27 15:34:57  pandyas
  * Reverted back to EVSPreferredDescription since this was fixed
  *
@@ -1048,6 +1051,43 @@
 			</TABLE>
 			<br>
 			</c:if>		
+
+     		<!--   Start Signaling Molecule Section (Jackson Lab data) ------------------------------------------------>
+			<c:set var="environmentalFactorType" value="Signaling Molecule"/>
+			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
+			<c:if test="${not empty cdList}">
+			<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
+			<tr>
+				<td class="formTitleBlue" height="20" colspan="7">Signaling Molecule</td>
+			</tr>
+			
+			<tr>
+				<td class="greySubTitleLeft" width="17%">Agent Type</td>
+				<td class="greySubTitleLeft" width="17%">Agent Name</td>				
+			</tr>
+			
+			<c:forEach var="cd" items="${cdList}" varStatus="stat">
+				<c:choose>
+					<c:when test = "${stat.count % 2 == 0}">
+						<c:set var="tdClass" value="resultsBoxWhite"/>
+					</c:when>
+					<c:otherwise>
+						<c:set var="tdClass" value="resultsBoxGrey"/>
+					</c:otherwise>
+				</c:choose>
+			<tr>
+				<td class="<c:out value="${tdClass}"/>" width="17%">
+					<camod:highlight><c:out value="${cd.environmentalFactor.typeAlternEntry}" escapeXml="false"/></camod:highlight>
+				</td>
+
+				<td class="<c:out value="${tdClass}"/>" width="20%">
+					<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
+				</td>
+			</tr>
+			</c:forEach>
+			</TABLE>
+			<br>
+			</c:if>
 
 
 		</td></tr></TABLE>
