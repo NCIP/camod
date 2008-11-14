@@ -92,7 +92,12 @@
 ================================================================
 
 - Grid
-	* caMOD 2.5 is now available on the GRID.  
+	* Programmatic access to caMOD is available through a caGRID data service (API). A data service allows data owners to share the 
+	  data from a source (e.g. Oracle or MySQL relational databases) with their collaborators. caGRID is an infrastructure that connects 
+	  data, research tools, scientists, and organizations to leverage their combined strengths and expertise in an open federated 
+	  environment with widely accepted standards and shared tools.
+		For more information about caGrid, see
+		https://cabig.nci.nih.gov/workspaces/Architecture/caGrid. 
 
 - Search 
 	* Complete change of the search architecture to accomodate increased amount of data (GForge entry #5249, 16311, 16234)
