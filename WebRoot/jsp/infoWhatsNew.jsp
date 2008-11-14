@@ -34,7 +34,7 @@
 																	<TBODY>
 																		<TR>
 																			<TD class="formTitleBlue" colspan="2" height="20">
-																				Release of caMOD 2.4 - February 2008
+																				Release of caMOD 2.5 - December 2008
 																			</TD>
 																		</TR>
 																		<TR>
@@ -51,12 +51,12 @@
 																		
 																		<TR>
 																			<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">
-																				caELMIR Integration
+																				caGRID Integration
 																			</TD>
 																			<TD
 																				style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
 																				width="80%">
-																				caELMIR, the Cancer Electronic Laboratory Management Information Resource is a laboratory information management tool that helps bench scientists to store, manage, and share experimental data generated during preclinical trials. The connection between caMOD and caELMIR enables caMOD users to retrieve data generated in preclinical trials and review information about studies, experiments, protocols, and animals. The caELMIR study information is shown on the Therapeutic Approaches search page in caMOD. For additional data, the user will be directed to caELMIR.
+																				Programmatic access to caMOD is available through a caGRID data service (API). A data service allows data owners to share the data from a source (e.g. Oracle or MySQL relational databases) with their collaborators. caGRID is an infrastructure that connects data, research tools, scientists, and organizations to leverage their combined strengths and expertise in an open federated environment with widely accepted standards and shared tools.
 																			</TD>
 																		</TR>					
 																		
@@ -65,22 +65,34 @@
 																		
 																		<TR>
 																			<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">
-																				Object Model changes as a result of the VCDE review
+																				Support for Searching Enhanced
 																			</TD>
 																			<TD
 																				style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
 																				width="80%">
-																				A variety of changes e.g. introduction of a gene object to comply with the gene identifier standard were made following the recommendations of the Vocabulary and Common Data Elements Workgroup.</li></ul>
+																				Many improvements were made to the search functionality such as: complete change of the search architecture to accomodate increased amount of data, improved keyword search, improved search for transgene and targeted modifications, search for PubMed Identifier added to Advanced Search, customization of the search results list improved.
+																				</li></ul>
 																			</TD>
 																		</TR>
 																		<TR>
 																			<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">
-																				Compliance with NCICB Technology Stack Requirements
+																				Support for Submission Enhanced
 																			</TD>
 																			<TD
 																				style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
 																				width="80%">
-																				The backend technology was upgrade to Jboss 4.0.5, a newer version of ANT, and to caCORE 3.2 which retrieves vocabularies from the Enterprise Vocabulary System.
+																				Many improvements were made to the search functionality such as: customization of publication submission page for rat model, submission of URL for microarray experiments stored in locations other than caArray, submission of URL for images stored in locations other than caIMAGE. 
+																				
+																			</TD>
+																		</TR>
+																																				<TR>
+																			<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">
+																				Support for Publication Enhanced
+																			</TD>
+																			<TD
+																				style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
+																				width="80%">
+																				New script improves data retrieval from PubMED.
 																			</TD>
 																		</TR>
 																		
