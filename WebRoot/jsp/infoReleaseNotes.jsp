@@ -91,24 +91,40 @@
     3.0 New Features and Updates
 ================================================================
 
+- Grid
+	* caMOD 2.5 is now available on the GRID.  
+
+- Search 
+	* Complete change of the search architecture to accomodate increased amount of data (GForge entry #5249, 16311, 16234)
+	* Improved keyword search (GForge entries #16202, 15041)
+	* Improved search for transgene and targeted modifications (GForge entry #15053)
+	* Search for PubMed Identifier added to Advanced Search (GForge entry #11007)
+	* Customization of the search results list improved (GForge entry #7474)
+	
+- Submission
+	* Customization of publication submission page for rat model (GForge entry #9127)
+	* Submission of URL for microarray experiments stored in locations other than caArray (GForge entry #5097)
+	* Submission of URL for images stored in locations other than caIMAGE (GForge entry #7850)
+	
+- Other
+	* New script improves data retrieval from PubMED (GForge entries #5173, 12064)
 
 
-
+The caMOD 2.5 Common Data Elements (CDEs) are available via caDSR 
   
   
 ================================================================
     4.0 Defects Fixed Since Last Release
 ================================================================
 
-- ATCC link not working on transplant search page (GForge entry #11878) 
-- The left menu list needs to be changed for the viewInvivoDetails.jsp (GForge entry #11837, #9206) 
-- Comments for associated expression are not shown for targeted modification and genomic segment (GForge entry #11833) 
-- Maximize buttion in pop-up windows disabled which prevents user to see full page (GForge entry #11831)
-- Fixed LDAP search function (GForge entry #7992, #8963, #11499)
-- Data in construct description and construct title are not kept (GForge entry #11619)
-- Fixed search function for rat anatomy, rat diseases, zebrafish anatomy, zebrafish developmental stages, and staining method vocabularies displayed in EVS tree (GForge entry #6389, 7387, 7451, 7790, 9274, 9277, 9425, 10818, 11022)
- 
-
+- Left side search menu disappears when user customizes search result list, saves queries etc (GForge entry # 5204)
+- Query not saved when search returns no models.(GForge entry # 7636)
+- Drug screening search displays models that are not edited-approved (GForge #11697)
+- Save query function broken (GForge #12042)
+- Admin - View Model Assignment is not working (GForge entry #12108)
+- Release date selection not maintaining value (GForge entry #12216)
+- Dosage unit on Growth Factor page incorrectly stored and displayed (GForge entry #14332)
+- TOC search does not clear search criteria of previously performed search (GForge entry #15026)
 
 ================================================================
     5.0 Known Issues/Defects
