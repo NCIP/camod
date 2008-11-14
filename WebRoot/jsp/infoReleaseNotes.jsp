@@ -22,7 +22,7 @@
     
                              caMOD
                           Version 2.4
-                           Feb 2008
+                           Dec 2008
 
        National Cancer Institute's Center for Bioinformatics
 
@@ -46,7 +46,7 @@
 ================================================================
  
 
-    caMOD 2.4, the Cancer Models Database, is a open source data management 
+    caMOD 2.5, the Cancer Models Database, is a open source data management 
     system developed for the management and sharing of data of animal models. 
     caMOD features controlled vocabularies from a shared, publicly accessible metadata repository (caDSR) and enterprise vocabulary services (EVS) from the National 
     Cancer Institute.  
@@ -63,6 +63,9 @@
 ================================================================
     2.0 Release History
 ================================================================
+    caMOD Version 2.5 
+    --	Dec 2008 
+    
     caMOD Version 2.4 
     --	Feb 2008 
 
@@ -88,34 +91,9 @@
     3.0 New Features and Updates
 ================================================================
 
-caELMIR Integration
-
-caELMIR, the Cancer Electronic Laboratory Management Information Resource (http://caelmir.compmed.ucdavis.edu/caelmir/) is a laboratory information management tool that helps bench scientists to store, manage, and share experimental data generated during preclinical trials. The connection between caMOD and caELMIR  enables caMOD users to retrieve data generated in preclinical trials and review information about studies, experiments, protocols, and animals. The caELMIR study information is shown on the Therapeutic Approaches search page in caMOD. For additional data, the user will be directed to caELMIR. (GForge entry #8816)
 
 
-Object Model changes as a result of the VCDE silver level compliance review:
 
-Following the recommendations made by the Vocabulary and Common Data Elements Workgroup (https://cabig.nci.nih.gov/workspaces/VCDE) during the caMOD review the following changes were made:
-- Introduction of a gene object to comply with the gene identifier standard (GForge entry #9756, #8187, #11878)
-- Rename UnctrlVocab items to Alterntext entries (GForge entry #9756)
-- Rename Graft object into Transplant object (GForge entry #8290)
-- Add Comments field to every submission page (GForge entry #8355)
-- Connect availability of model to person to resolve the available from investigator issue (GForge entry #9169)
-
-Other Changes
-- Redesigned the publication search page (GForge entry #5169, #10679)
-- Redesigned publication table on cell line and therapy search page  (GForge entry #10683)
-- Improved navigation within the therapy search page. These changes were caused by the integration of the caELMIR data and the redesign of the publication table (GForge entry #10504)
-- Updated online help including a downloadable user guide (PDF file)
-
-
-NCICB Technology Stack Requirements (GForge entry #6779, #7079, #11880)
-- Upgrade to Jboss 4.0.5 from 4.0.2 
-- Upgrade to newer version of ANT for project
-- Upgrade to use caCORE32 in caMOD and EVSTree to render vocabulary trees
-
-The caMOD 2.1 Common Data Elements (CDEs) are available via caDSR 
-(cancer Data Standard Repository) http://ncicb.nci.nih.gov/core/caDSR
   
   
 ================================================================
