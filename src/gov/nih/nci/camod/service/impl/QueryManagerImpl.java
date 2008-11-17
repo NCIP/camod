@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.113 2008-11-05 04:53:50 schroedn Exp $
+ * $Id: QueryManagerImpl.java,v 1.114 2008-11-17 17:36:10 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.113  2008/11/05 04:53:50  schroedn
+ * gforge #17553 No sorting of search results for keyword
+ *
  * Revision 1.112  2008/10/30 16:21:09  pandyas
  * modify debug statements for build to dev
  *
@@ -2696,7 +2699,8 @@ public class QueryManagerImpl extends BaseManager
 					+ "AND am.id IN "        
 					+ "( SELECT eg.absCancerModelId FROM EngineeredGene as eg " 
 					+ "WHERE eg.id IN ( SELECT distinct eg2.id FROM EngineeredGene as eg2, EnvironmentalFactor ef " 
-					+ "WHERE upper(ef.name) like '%" + theKeyword + "%' "  				 
+                    + "WHERE eg2.id = ef.id "
+                    + "AND upper(ef.name) like '%" + theKeyword + "%' "                    
 					+ "AND eg2.engineeredGeneType = 'IM' )) "
 					+ "ORDER BY am.id asc ";
         query1 = HibernateUtil.getSession().createQuery(theHQLQuery);
