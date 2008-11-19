@@ -2,9 +2,13 @@
 
 /**
  * 
- * $Id: sidebar.jsp,v 1.19 2008-09-22 16:06:04 schroedn Exp $
+ * $Id: sidebar.jsp,v 1.20 2008-11-19 19:02:03 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2008/09/22 16:06:04  schroedn
+ * Bug #7028
+ * Changed link to 'CAMOD USER GUIDE'
+ *
  * Revision 1.18  2008/07/11 17:31:56  schroedn
  * Bug 7028
  * Add link
@@ -55,7 +59,7 @@
 		String pageName = sidebar.findSubMenu( request, jspName );
 		
 		if ( ! pageName.equals("redirect") ) { 
-			System.out.println( "subMenu PageName=" + pageName );
+			//System.out.println( "subMenu PageName=" + pageName );
 			%><jsp:include page="<%=pageName%>" /><%
 		} else
 			response.sendRedirect( "login.jsp" );
