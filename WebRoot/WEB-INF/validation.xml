@@ -49,6 +49,15 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
+			<field property="comments" depends="maxlength">
+				<arg0 key="ClinicalMarkerForm.comments" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>2000</var-value>
+				</var>
+			</field>			
 		</form>
 
 		<form name="drugScreenSearchForm">
@@ -206,6 +215,15 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
+			<field property="comments" depends="maxlength">
+				<arg0 key="GeneDeliveryForm.comments" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>2000</var-value>
+				</var>
+			</field>			
 			<field property="ageAtTreatment" depends="maxlength">
 				<arg0 key="CarcinogenExposure.ageAtTreatment" />
 				<arg1 name="maxlength" key="${var:maxlength}"
@@ -258,6 +276,15 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
+			<field property="comments" depends="maxlength">
+				<arg0 key="ChemicalDrugForm.comments" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>2000</var-value>
+				</var>
+			</field>			
 			<field property="ageAtTreatment" depends="maxlength">
 				<arg0 key="CarcinogenExposure.ageAtTreatment" />
 				<arg1 name="maxlength" key="${var:maxlength}"
@@ -324,6 +351,15 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
+			<field property="comments" depends="maxlength">
+				<arg0 key="EnvironmentalFactorForm.comments" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>2000</var-value>
+				</var>
+			</field>			
 			<field property="ageAtTreatment" depends="maxlength">
 				<arg0 key="CarcinogenExposure.ageAtTreatment" />
 				<arg1 name="maxlength" key="${var:maxlength}"
@@ -390,6 +426,15 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
+			<field property="comments" depends="maxlength">
+				<arg0 key="GrowthFactorForm.comments" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>2000</var-value>
+				</var>
+			</field>			
 			<field property="ageAtTreatment" depends="maxlength">
 				<arg0 key="CarcinogenExposure.ageAtTreatment" />
 				<arg1 name="maxlength" key="${var:maxlength}"
@@ -456,6 +501,15 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
+			<field property="comments" depends="maxlength">
+				<arg0 key="HormoneForm.comments" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>2000</var-value>
+				</var>
+			</field>				
 			<field property="ageAtTreatment" depends="maxlength">
 				<arg0 key="CarcinogenExposure.ageAtTreatment" />
 				<arg1 name="maxlength" key="${var:maxlength}"
@@ -504,11 +558,11 @@
 
 		<form name="nutritionalFactorForm">
 			<field property="name" depends="required">
-				<arg0 key="NutritionalFactorsForm.name" />
+				<arg0 key="NutritionalFactorForm.name" />
 			</field>
 			<field property="otherName"
 				depends="validwhen, maxlength">
-				<arg0 key="NutritionalFactorsForm.otherName" />
+				<arg0 key="NutritionalFactorForm.otherName" />
 				<var>
 					<var-name>test</var-name>
 					<var-value>
@@ -522,6 +576,15 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
+			<field property="comments" depends="maxlength">
+				<arg0 key="NutritionalFactorForm.comments" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>2000</var-value>
+				</var>
+			</field>			
 			<field property="ageAtTreatment" depends="maxlength">
 				<arg0 key="CarcinogenExposure.ageAtTreatment" />
 				<arg1 name="maxlength" key="${var:maxlength}"
@@ -571,6 +634,15 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
+			<field property="comments" depends="maxlength">
+				<arg0 key="RadiationForm.comments" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>2000</var-value>
+				</var>
+			</field>			
 			<field property="ageAtTreatment" depends="maxlength">
 				<arg0 key="CarcinogenExposure.ageAtTreatment" />
 				<arg1 name="maxlength" key="${var:maxlength}"
@@ -637,6 +709,15 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
+			<field property="comments" depends="maxlength">
+				<arg0 key="SurgeryForm.comments" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>2000</var-value>
+				</var>
+			</field>			
 			<field property="ageAtTreatment" depends="maxlength">
 				<arg0 key="CarcinogenExposure.ageAtTreatment" />
 				<arg1 name="maxlength" key="${var:maxlength}"
@@ -677,6 +758,15 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
+			<field property="comments" depends="maxlength">
+				<arg0 key="ViralTreatmentForm.comments" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>2000</var-value>
+				</var>
+			</field>			
 			<field property="ageAtTreatment" depends="maxlength">
 				<arg0 key="CarcinogenExposure.ageAtTreatment" />
 				<arg1 name="maxlength" key="${var:maxlength}"
@@ -1719,6 +1809,15 @@
 			<field property="endPage" depends="integer">
 				<arg0 key="PublicationForm.endPage" />
 			</field>
+			<field property="comments" depends="maxlength">
+				<arg0 key="PublicationForm.comments" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>2000</var-value>
+				</var>
+			</field>			
 		</form>
 
 		<form name="userSettingsForm">
@@ -1918,6 +2017,15 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
+			<field property="comments" depends="maxlength">
+				<arg0 key="ImageForm.comments" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>2000</var-value>
+				</var>
+			</field>			
 		</form>
 
 		<form name="histopathologyForm">
@@ -2296,7 +2404,16 @@
 					<var-name>maxlength</var-name>
 					<var-value>255</var-value>
 				</var>
-			</field>		
+			</field>
+			<field property="comments" depends="maxlength">
+				<arg0 key="TransplantForm.comments" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>2000</var-value>
+				</var>
+			</field>					
 		</form>
 		
 		<form name="transientInterferenceForm">
