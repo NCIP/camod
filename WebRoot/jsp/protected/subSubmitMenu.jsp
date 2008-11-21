@@ -1,8 +1,11 @@
 <%
 		/*
-		 * $Id: subSubmitMenu.jsp,v 1.67 2008-10-29 15:47:30 schroedn Exp $
+		 * $Id: subSubmitMenu.jsp,v 1.68 2008-11-21 17:26:56 pandyas Exp $
 		 *
 		 * $Log: not supported by cvs2svn $
+		 * Revision 1.67  2008/10/29 15:47:30  schroedn
+		 * Bug #16902 Old models not showing link
+		 *
 		 * Revision 1.65  2008/08/14 06:41:02  schroedn
 		 * Added Microarray sidebar
 		 *
@@ -267,14 +270,7 @@
 				action="InducedMutationPopulateAction.do?method=populate"
 				paramId="aInducedMutationID" paramName="aInducedMutation"
 				paramProperty="id">
-				
-				     <logic:present name="aInducedMutation" property="environmentalFactor.name">
-       					<bean:write name="aInducedMutation" property="environmentalFactor.name" filter="false" />
-      				</logic:present>      
-				     <logic:notPresent name="aInducedMutation" property="environmentalFactor.name">
-        					<bean:write name="aInducedMutation" property="environmentalFactor.nameAlternEntry" filter="false" />
-      				</logic:notPresent>           				
-				
+				<camod:shorten><bean:write name="aInducedMutation" property="environmentalFactor.displayNameIM" filter="false" /></camod:shorten>
 			</html:link><br>
 		</logic:iterate> 
 	
