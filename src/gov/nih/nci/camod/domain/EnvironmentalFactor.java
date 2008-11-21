@@ -1,7 +1,12 @@
 /*
- * $Id: EnvironmentalFactor.java,v 1.20 2008-08-15 18:23:13 pandyas Exp $
+ * $Id: EnvironmentalFactor.java,v 1.21 2008-11-21 17:28:37 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.20  2008/08/15 18:23:13  pandyas
+ * Created SQL to clean up DB and finished code for:
+ *
+ * #12825  	induced mutation entries need to be flagged (requires OM change) and searches for induced mutation and carcinogenic interventions need to be fixed
+ *
  * Revision 1.19  2008/08/13 18:44:51  pandyas
  * commented out is_induced_mutation_trigger until the database is updated with either 0 or 1 -  must be careful to write SQL
  *
@@ -95,11 +100,16 @@ public class EnvironmentalFactor extends BaseObject implements Comparable, Seria
     
     /**
      * @return Returns the display name for Induced Mutation.
-     * name is saved in uncontrolledVocab since it is free-text.
+     * name is saved in nameAlternEntry since it is free-text.
+     * old models store IM name is the name field 
+     * This will be cleaned up now that we have a flag 
      */
     public String getDisplayNameIM()
     {
         String theDisplayName = nameAlternEntry;
+        if (theDisplayName == null && theDisplayName.length() >0){
+        	 theDisplayName = name;
+        }
 
         return theDisplayName;
     }    
