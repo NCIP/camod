@@ -22,21 +22,33 @@
 				<c:out value="${mdl.modelDescriptor}" escapeXml="false"/></td>
 			</tr>			
 			
-			<tr>
-				<td class="resultsBoxWhiteEnd">Microarray data is not stored in caArray.</td> 
-			</tr>
-						
 			<bean:define id="maColl" name="mdl" property="microArrayDataCollection"/>
 			<c:forEach var="ma" items="${maColl}">
-				<tr>
-					<td class="resultsBoxGreyEnd">
-		                <ul>
-		                	<li>
-		                	<a href='<c:out value="${ma.url}"/>' target="_blank"><c:out value="${ma.experimentName}"/></a>
-					        </li>
-		                </ul>
-					</td>
-				</tr>				
+				<c:choose>
+					<c:when test="${empty ma.experimentId}">
+							<tr>
+								<td class="resultsBoxGreyEnd">
+					                <ul>
+					                	<li>
+					                	<a href='<c:out value="${ma.url}"/>' target="_blank"><c:out value="${ma.experimentName}"/> (Data not stored in caARRAY)</a>
+								        </li>
+					                </ul>
+								</td>
+							</tr>
+					</c:when>					
+					<c:otherwise>
+						<tr>
+							<td class="resultsBoxGreyEnd">
+				                <ul>
+				                	<li>
+				                	<c:set var="uri" value="${uri_start}${ma.experimentId}${uri_end}"/>
+				                	<a href='<c:out value="${uri}"/>'><c:out value="${ma.experimentName}"/></a>
+							        </li>
+				                </ul>
+							</td>
+						</tr>								
+					</c:otherwise>			
+				</c:choose>			
 			</c:forEach>	
 									
             <tr><td></td></tr>
