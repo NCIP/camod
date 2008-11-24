@@ -65,11 +65,11 @@
         </parameter>
         <parameter>
           <name>cqlQueryProcessorConfig_applicationHostName</name>
-          <value>http://localhost:8080</value>
+          <value>http://cbiovdev5058.nci.nih.gov</value>
         </parameter>
         <parameter>
           <name>cqlQueryProcessorConfig_applicationHostPort</name>
-          <value>8080</value>
+          <value>59180</value>
         </parameter>
         <parameter>
           <name>cqlQueryProcessorConfig_useServiceLogin</name>

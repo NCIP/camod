@@ -47,7 +47,7 @@
  </ns1:serviceDescription>
  <ns1:hostingResearchCenter>
   <ns9:ResearchCenter displayName="NCICB" shortName="NCICB" xmlns:ns9="gme://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata.common">
-   <ns9:Address country="" locality="Rockville" postalCode="20852" stateProvince="MD" street1="6116 Executive Bvd" street2=""/>
+   <ns9:Address country="USA" locality="Rockville" postalCode="20852" stateProvince="MD" street1="2115 East Jefferson Street" street2=""/>
    <ns9:ResearchCenterDescription description="" homepageURL="" imageURL="" rssNewsURL=""/>
    <ns9:pointOfContactCollection>
     <ns9:PointOfContact affiliation="NCICB" email="" firstName="Avinash" lastName="Shanbhag" phoneNumber="" role="Maintainer"/>
