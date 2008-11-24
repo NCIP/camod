@@ -1,4 +1,4 @@
 
 micrograms
-micrograms/mouse/day
+micrograms/animal/day
 mg/kg
