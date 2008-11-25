@@ -1,7 +1,14 @@
 /*
- * $Id: EnvironmentalFactor.java,v 1.21 2008-11-21 17:28:37 pandyas Exp $
+ * $Id: EnvironmentalFactor.java,v 1.22 2008-11-25 19:14:52 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.21  2008/11/21 17:28:37  pandyas
+ * modified for gfrorge #16902  	link to the induced mutation page in the Admin/ Edited Models mode is not available for old models
+ *
+ * Reversed last two code fixes in subSubmitMenu.jsp.  This fix needs to be done in this class.  The EnvironmentalFactor object has a convinience method to get the name we want to display.  The getDisplayNameIM method was modified to look for nameAlternEntry or name (for older models) when displaying IM models.
+ *
+ * We have decided to rework this since we have the EF flag after release 2.5 and nameAlternEntry no longer may be needed to differeentiate between CE and IM in the EF table.
+ *
  * Revision 1.20  2008/08/15 18:23:13  pandyas
  * Created SQL to clean up DB and finished code for:
  *
@@ -107,7 +114,7 @@ public class EnvironmentalFactor extends BaseObject implements Comparable, Seria
     public String getDisplayNameIM()
     {
         String theDisplayName = nameAlternEntry;
-        if (theDisplayName == null && theDisplayName.length() >0){
+        if (theDisplayName == null ){
         	 theDisplayName = name;
         }
 
