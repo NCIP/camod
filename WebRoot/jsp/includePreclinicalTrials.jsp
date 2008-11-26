@@ -1,6 +1,9 @@
 <%
  /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.31  2008/01/10 15:55:29  pandyas
+ * Removed space before Jax number
+ *
  * Revision 1.30  2008/01/10 13:25:40  pandyas
  * Added link to top of page for Therapy screen - results were getting very long
  *
@@ -72,7 +75,7 @@
  * Defect #86.  Removed unneeded field.
  *
  *
- * $Id: includePreclinicalTrials.jsp,v 1.31 2008-01-10 15:55:29 pandyas Exp $
+ * $Id: includePreclinicalTrials.jsp,v 1.32 2008-11-26 17:38:16 pandyas Exp $
  */
 %>
 <tr>
@@ -89,7 +92,7 @@
 <tr>
 	<td class="resultsBoxGrey" width="25%"><b>Dose</b></td>
 	<td class="resultsBoxGreyEnd" width="75%" colspan="3">&nbsp;
-		<camod:highlight><c:out value="${t.treatment.dosage}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}"/></camod:highlight>
+		<camod:highlight><c:out value="${t.treatment.dosage}" escapeXml="false"/>&nbsp;<c:out value="${t.treatment.dosageUnit}"/></camod:highlight>
 	</td>
 </tr>
 <tr>
