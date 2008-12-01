@@ -41,6 +41,11 @@
 	<TABLE summary="" cellpadding="6" cellspacing="0" border="0" align="left">
 	
 	<tr>
+		<html:errors/>
+		<td class="formMessage" colspan="3">* indicates a required field</td>
+	</tr>	
+	
+	<tr>
 		<td class="formTitle" height="20" colspan="3">Microarray Data &nbsp;
 		<camod:cshelp topic="microarray_data_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 	</tr>
@@ -83,9 +88,8 @@
 			      </c:if>
 					  
 				  <!--  Done this way since html:hidden doesn't seem to work correctly -->
-				  <input type="hidden" name="aMicroArrayDataID" value="<%= aMicroArrayDataID %>">
-				  
-				  </html:form>			
+				  <input type="hidden" name="aMicroArrayDataID" value="<%= aMicroArrayDataID %>">				  
+			
 				</TABLE>
 			<!-- action buttons end -->
 		</td>
@@ -133,5 +137,5 @@
 <!-- -->
 	</td></tr></TABLE>
 </tr></td></TABLE>
-
+</html:form>	
 <%@ include file="/jsp/footer.jsp" %>
