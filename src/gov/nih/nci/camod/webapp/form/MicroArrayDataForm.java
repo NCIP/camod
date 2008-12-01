@@ -1,7 +1,10 @@
 /*
- * $Id: MicroArrayDataForm.java,v 1.6 2008-08-14 20:09:18 schroedn Exp $
+ * $Id: MicroArrayDataForm.java,v 1.7 2008-12-01 19:52:37 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2008/08/14 20:09:18  schroedn
+ * Microarray rename other_location_url to url
+ *
  * Revision 1.5  2008/08/14 06:29:33  schroedn
  * microarray url feature added
  *
@@ -13,29 +16,10 @@ package gov.nih.nci.camod.webapp.form;
 
 import java.io.Serializable;
 
-/**
- * 
- * $Id: MicroArrayDataForm.java,v 1.6 2008-08-14 20:09:18 schroedn Exp $
- *
- * $Log: not supported by cvs2svn $
- * Revision 1.5  2008/08/14 06:29:33  schroedn
- * microarray url feature added
- *
- * Revision 1.4  2006/04/17 19:09:19  pandyas
- * caMod 2.1 OM changes
- *
- * 
- */
 public class MicroArrayDataForm extends BaseForm implements Serializable, MicroArrayDataData {
     
     private static final long serialVersionUID = 3257015453799404851L;
     
-	/**
-	 * Default empty constructor
-	 * @author rajputs
-	 */
-	public MicroArrayDataForm() {}
-	
 	protected String experimentName;
 	protected String experimentId;
 	protected String url;
