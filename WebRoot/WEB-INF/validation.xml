@@ -1014,8 +1014,7 @@
 				<var>
 					<var-name>test</var-name>
 					<var-value>
-						((isRandom != 'Targeted') or ((isRandom ==
-						'Targeted') and (*this* != null)))
+						((isRandom != 'no') or (*this* != null))
 					</var-value>
 				</var>
 				<var>
@@ -1293,8 +1292,7 @@
 				<var>
 					<var-name>test</var-name>
 					<var-value>
-						((isRandom != 'Targeted') or ((isRandom ==
-						'Targeted') and (*this* != null)))
+						((isRandom != 'no') or (*this* != null))
 					</var-value>
 				</var>
 				<var>
