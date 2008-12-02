@@ -91,7 +91,11 @@
 			<td class="formRequiredLabel"><label for="field1">Alternate URL<br>(Required if Upload Image not used)</label>
 			</td>
 			<td class="formField">
-					<html:text styleClass="formFieldSized" property="urlAlternEntry" size="30"/>			
+				<br>
+				<label for="field3">Please enter a complete URL with http:// <br>(http, https, ftp schemes allowed)</label>
+				<br>
+				<br>			
+				<html:text styleClass="formFieldSized" property="urlAlternEntry" size="30"/>			
 			</td>
 		</tr>
 	
