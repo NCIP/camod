@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.77 2008-10-29 07:05:43 schroedn Exp $
+ * $Id: searchAdvanced.jsp,v 1.78 2008-12-02 18:51:59 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.77  2008/10/29 07:05:43  schroedn
+ * Bug #17424 Fixed clear button, cleared out selected anatomy and disease
+ *
  * Revision 1.76  2008/08/14 19:03:04  schroedn
  * Moved location of PMID search field
  *
@@ -509,17 +512,6 @@
 				<html:select styleClass="formFieldSized" size="1" property="genomicSegDesignator" >
 					<html:options name="<%= Dropdowns.CLONEDESIGNATORQUERYDROP %>" />												
 				</html:select>
-			</td>
-		</tr>
-		<tr>
-			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel">
-				<label for="field3">Select Inducing Agent for Induced Mutation</label>
-			</td>
-			<td class="formField">				
-				<html:select styleClass="formFieldSized" size="1" property="inducedMutationAgent" >
-					<html:options name="<%= Dropdowns.INDUCEDMUTATIONAGENTQUERYDROP %>" />										
-				</html:select>				
 			</td>
 		</tr>
 
