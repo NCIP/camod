@@ -53,13 +53,13 @@
 	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@ROLE@" value="${role}"/>
 	</target>
 	
-	<target name="jar-wsrf-output-file">
+	<target name="war-generated-wsrf-file">
 		<jar destfile="${build.dir}/wsrf-camod.war" basedir="${output.dir}" />
 	</target>
 	<target name="unjar-file">
 		<delete dir="${temp.dir}" failonerror="false"/>
 		<mkdir dir="${temp.dir}"/>
-		<unjar src="${grid.service.war.filename}" dest="${temp.dir}"/>
+		<unjar src="${grid.service.wsrf.war.filename}" dest="${temp.dir}"/>
 	</target>
 	<target name="config-grid-service" depends="config-service-metadata"> 
 		<antcall target="jar-grid-service"/>
@@ -67,26 +67,26 @@
 	<target name="jar-grid-service" >
 		<delete dir="${artifacts.dir}" failonerror="false"/>
 		<mkdir dir="${artifacts.dir}"/>
-	<jar destfile="${artifacts.dir}/${grid.service.war.filename}" basedir="${temp.dir}"/>
+	<jar destfile="${artifacts.dir}/${grid.service.wsrf.war.filenames}" basedir="${temp.dir}"/>
 	</target>
 
 	<!-- ************************************************************************************************-->
 	<!--                          Fix SDK genereated Client (EngineeredGene.hbm.xml)                     -->
 	<!-- ************************************************************************************************-->
-	<target name="unjar-client-file">
-		<delete dir="${orm.dir}" failonerror="false"/>
-		<mkdir dir="${orm.dir}"/>
-		<unjar src="${client.orm.jar.filename}" dest="${orm.dir}"/>
+	<target name="unjar-client-orm-file">
+		<delete dir="${temp.dir}" failonerror="false"/>
+		<mkdir dir="${temp.dir}"/>
+		<unjar src="${client.orm.jar.filename}" dest="${temp.dir}"/>
 	</target>	
-	<target name="jar-client-file">
-		<jar destfile="${build.dir}/camodSDKClient-orm.jar" basedir="${orm.dir}" />
+	<target name="jar-client-orm-file">
+		<jar destfile="${build.dir}/camodSDKClient-orm.jar" basedir="${temp.dir}" />
 	</target>
-	<target name="unjar-sdk-client-file">
-		<delete dir="${orm.dir}" failonerror="false"/>
-		<mkdir dir="${orm.dir}"/>
-		<unjar src="${client.sdk.war.filename}" dest="${orm.dir}"/>
+	<target name="unwar-sdk-client-file">
+		<delete dir="${temp.dir}" failonerror="false"/>
+		<mkdir dir="${temp.dir}"/>
+		<unjar src="${client.sdk.war.filename}" dest="${temp.dir}"/>
 	</target>	
-	<target name="jar-sdk-client-file">
-		<jar destfile="${build.dir}/camodSDKClient.war" basedir="${orm.dir}" />
+	<target name="war-sdk-client-file">
+		<jar destfile="${build.dir}/camodSDKClient.war" basedir="${temp.dir}" />
 	</target>	
 </project>
