@@ -1,4 +1,4 @@
-<ns1:Deployment deployDateTime="1227554841789" deploymentPrefix="cagrid" serviceDeploymentDirName="cagrid_CamodGridService" serviceName="CamodGridService" xsi:type="ns1:Deployment" xmlns:ns1="gme://gov.nih.nci.cagrid.introduce/1/Deployment" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ns1:Deployment deployDateTime="1228759414106" deploymentPrefix="cagrid" serviceDeploymentDirName="cagrid_CamodGridService" serviceName="CamodGridService" xsi:type="ns1:Deployment" xmlns:ns1="gme://gov.nih.nci.cagrid.introduce/1/Deployment" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <Jars xsi:type="ns1:Jars">
   <Jar location="." name="acegi-security-1.0.4.jar" xsi:type="ns1:Jar"/>
   <Jar location="." name="ant-contrib-1.0b3.jar" xsi:type="ns1:Jar"/>

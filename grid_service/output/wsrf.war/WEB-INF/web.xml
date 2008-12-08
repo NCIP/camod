@@ -30,7 +30,7 @@
     </servlet-class>
 <init-param>
 <param-name>webContext</param-name>
-<param-value>wsrf</param-value>
+<param-value>camod-wsrf</param-value>
 </init-param>
 <init-param>
 <param-name>defaultPort</param-name>

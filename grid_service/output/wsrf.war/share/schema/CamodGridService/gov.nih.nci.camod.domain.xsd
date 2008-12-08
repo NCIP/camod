@@ -1178,17 +1178,17 @@
   <xs:element name="GeneDelivery" type="GeneDelivery" />
   <xs:complexType name="GeneDelivery">
     <xs:sequence>
-      <xs:element name="treatment" minOccurs="0" maxOccurs="1">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element ref="Treatment" minOccurs="0" maxOccurs="1" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
       <xs:element name="organ" minOccurs="0" maxOccurs="1">
         <xs:complexType>
           <xs:sequence>
             <xs:element ref="Organ" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="treatment" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Treatment" minOccurs="0" maxOccurs="1" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
