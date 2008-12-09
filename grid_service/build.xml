@@ -32,7 +32,7 @@
 		    <replaceregexp file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml" match="http://localhost:8080" replace="${remote.app.service.url}" />
 	</target>
 	<!-- ************************************************************************************************-->
-	<!--                                             Configure   Service    Metadata                         -->
+	<!--                             Configure   Service    Metadata  (skip for NCICB)                   -->
 	<!-- ************************************************************************************************-->
 	<target name="config-service-metadata" depends="config-remote-service-url">
 		<copy file="conf/serviceMetadata.xml.template" tofile="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" overwrite="true"/>
@@ -61,7 +61,7 @@
 		<mkdir dir="${temp.dir}"/>
 		<unjar src="${grid.service.wsrf.war.filename}" dest="${temp.dir}"/>
 	</target>
-	<target name="config-grid-service" depends="config-service-metadata"> 
+	<target name="config-grid-service" depends="config-remote-service-url"> 
 		<antcall target="jar-grid-service"/>
 	</target>
 	<target name="jar-grid-service" >
