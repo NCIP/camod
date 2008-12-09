@@ -29,7 +29,8 @@
 	<!--                                             Configure Remote Service                             -->
 	<!-- ************************************************************************************************-->
 	<target name="config-remote-service-url" depends="config-index-service-url">
-		    <replaceregexp file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml" match="http://localhost:8080" replace="${remote.app.service.url}" />
+		    <replaceregexp file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml" match="http://localhost" replace="${remote.app.service.url}" />
+		<replaceregexp file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml" match="8080" replace="${remote.app.service.url}" />
 	</target>
 	<!-- ************************************************************************************************-->
 	<!--                             Configure   Service    Metadata  (skip for NCICB)                   -->
