@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ****************************************************************************************************-->
+<!--                                     caCORE ToolKit Demo Build Script					                 -->
+<!-- ****************************************************************************************************-->
+
+
+<project name="Camod Grid Client Demo" default="run" basedir=".">
+	<property file="build.properties"/>
+	<property name="conf.dir" value="conf" />
+	<property name="lib.dir" value="lib" />
+	<property name="src.dir" value="src" />
+	<property name="build.dir" value="bin" />
+
+	<path id="cp">
+		<fileset dir="lib">
+			<include name="**/*.jar"/>
+		</fileset>
+		<pathelement path="${conf.dir}"/>
+	</path>
+
+	<!-- ************************************************************************************************-->
+	<!--                                             Run Java Client Demo                                -->
+	<!-- ************************************************************************************************-->
+
+	<target name="compile">
+		<delete dir="${build.dir}" failonerror="false"/>
+		<mkdir dir="${build.dir}"/>
+		<javac srcdir="${src.dir}" destdir="${build.dir}" source="1.5" debug="true" debuglevel="lines,vars,source">
+			<classpath refid="cp"/>
+			<classpath>
+				<pathelement location="${src.dir}"/>
+			</classpath>
+		</javac>
+	</target>	
+	<target name="run" depends="compile">
+		<java classname="CamodGridServiceClient" fork="true">
+			 <arg line="-url ${service.url}"/>
+			<classpath refid="cp"/>
+			<classpath>
+				<pathelement location="${build.dir}"/>
+				<pathelement location="${src.dir}"/>
+			</classpath>
+		</java>
+	</target>
+</project>
