@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-module
   type="WEB"
-  name="camod_dev"
+  name="camod"
   id="myeclipse.1123781550710"
   context-root="/camod_dev"
   j2ee-spec="1.4"
-  archive="camod_dev.war">
+  archive="camod.war">
   <attributes>
     <attribute name="webrootdir" value="WebRoot" />
   </attributes>
