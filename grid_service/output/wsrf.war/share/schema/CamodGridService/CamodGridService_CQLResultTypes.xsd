@@ -9,71 +9,70 @@
     <xs:group name="PermissibleCQLObjectResults">
         <xs:choice>        
         <!-- element references to exposed objects -->
-		<xs:element ref="ns0:Conditionality" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:StainingMethod" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:ExpressionLevelDesc" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:SpontaneousMutation" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:AnimalAvailability" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:Availability" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:Publication" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:ModelSection" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:ExpressionFeature" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:MutationIdentifier" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:GeneIdentifier" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:Log" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:Party" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:Organ" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
 		<xs:element ref="ns0:AnimalDistributor" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
 		<xs:element ref="ns0:ContactInfo" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:ExpressionFeature" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:TransientInterferenceMethod" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:Organ" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:GeneDelivery" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:CellLine" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:RegulatoryElement" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:Agent" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:ChemicalClass" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:Disease" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:SegmentType" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:EngineeredGene" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:InvivoResult" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:AnimalAvailability" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:EnvironmentalFactor" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:Log" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:RegulatoryElementType" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:Phenotype" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:CarcinogenExposure" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:GeneIdentifier" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:SexDistribution" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:ClinicalMarker" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:BiologicalProcess" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:TransientInterference" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:Comments" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:Nomenclature" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:Species" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:ProteomicsData" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:Therapy" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:Genotype" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:DevelopmentalStage" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:Availability" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:Endpoint" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:AgentTarget" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:Treatment" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:GeneticAlteration" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:Histopathology" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:Publication" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:AbstractCancerModel" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:MutationIdentifier" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:PublicationStatus" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
 		<xs:element ref="ns0:ScreeningResult" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:ModelSection" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:Image" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:Party" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:TumorCode" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:Genotype" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:ChemicalClass" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:Phenotype" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
 		<xs:element ref="ns0:Strain" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:MicroArrayData" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:ModificationType" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:GeneFunction" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:Role" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:TargetedModification" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:AnimalModel" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:Organization" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:Person" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
-		<xs:element ref="ns0:InducedMutation" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:ExpressionLevelDesc" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:TransientInterferenceMethod" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
 		<xs:element ref="ns0:YeastModel" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:CarcinogenExposure" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:AgentTarget" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:Role" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:GeneticAlteration" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:ProteomicsData" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:AnimalModel" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:Treatment" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:TargetedModification" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:SegmentType" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:Conditionality" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:SexDistribution" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:EnvironmentalFactor" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:CellLine" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:Person" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:AbstractCancerModel" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:ClinicalMarker" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:InducedMutation" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:InvivoResult" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
 		<xs:element ref="ns0:GenomicSegment" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:DevelopmentalStage" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:BiologicalProcess" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:ModificationType" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:Species" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:Agent" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
 		<xs:element ref="ns0:Transplantation" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:Endpoint" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:EngineeredGene" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:SpontaneousMutation" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:TransientInterference" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:TumorCode" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:Therapy" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:Image" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:RegulatoryElement" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
 		<xs:element ref="ns0:Transgene" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:Comments" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:Histopathology" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:StainingMethod" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:MicroArrayData" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:Nomenclature" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:PublicationStatus" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:RegulatoryElementType" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:GeneFunction" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:Organization" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
+		<xs:element ref="ns0:Disease" xmlns:ns0="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain"/>
  
         </xs:choice>
     </xs:group>
