@@ -54,21 +54,28 @@
 	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@ROLE@" value="${role}"/>
 	</target>
 	
+	<!-- Take wsrf.war and change name into wsrf-camod.war -->
 	<target name="war-generated-wsrf-file">
 		<jar destfile="${build.dir}/wsrf-camod.war" basedir="${output.dir}" />
 	</target>
+	
+	<!-- Take grid_service\wsrf-camod.war and unjar the contents into temp.dir -->
 	<target name="unjar-file">
 		<delete dir="${temp.dir}" failonerror="false"/>
 		<mkdir dir="${temp.dir}"/>
-		<unjar src="${grid.service.wsrf.war.filename}" dest="${temp.dir}"/>
+		<unjar src="${grid.service.war.filename}" dest="${temp.dir}"/>
 	</target>
+	
+	<!-- Configure grid service for the various tiers (modify properties file)  -->
 	<target name="config-grid-service" depends="config-remote-service-url"> 
 		<antcall target="jar-grid-service"/>
 	</target>
+	
+	<!-- Jar the grid service after modifying it for the various tiers -->
 	<target name="jar-grid-service" >
 		<delete dir="${artifacts.dir}" failonerror="false"/>
 		<mkdir dir="${artifacts.dir}"/>
-	<jar destfile="${artifacts.dir}/${grid.service.wsrf.war.filenames}" basedir="${temp.dir}"/>
+	<jar destfile="${artifacts.dir}/${grid.service.war.filename}" basedir="${temp.dir}"/>
 	</target>
 
 	<!-- ************************************************************************************************-->
