@@ -65,7 +65,7 @@
         </parameter>
         <parameter>
           <name>cqlQueryProcessorConfig_applicationHostName</name>
-          <value>http://141.161.25.20</value>
+          <value>http://localhost</value>
         </parameter>
         <parameter>
           <name>cqlQueryProcessorConfig_applicationHostPort</name>

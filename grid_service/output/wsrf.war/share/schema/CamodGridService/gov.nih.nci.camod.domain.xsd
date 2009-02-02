@@ -18,17 +18,17 @@
     <xs:complexContent>
       <xs:extension base="AbstractCancerModel">
         <xs:sequence>
-          <xs:element name="screeningResultCollection" minOccurs="0" maxOccurs="1">
-            <xs:complexType>
-              <xs:sequence>
-                <xs:element ref="ScreeningResult" minOccurs="0" maxOccurs="unbounded" />
-              </xs:sequence>
-            </xs:complexType>
-          </xs:element>
           <xs:element name="targetedModificationCollection" minOccurs="0" maxOccurs="1">
             <xs:complexType>
               <xs:sequence>
                 <xs:element ref="TargetedModification" minOccurs="0" maxOccurs="unbounded" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="screeningResultCollection" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="ScreeningResult" minOccurs="0" maxOccurs="unbounded" />
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -105,13 +105,6 @@
     <xs:complexContent>
       <xs:extension base="AbstractCancerModel">
         <xs:sequence>
-          <xs:element name="transientInterferenceCollection" minOccurs="0" maxOccurs="1">
-            <xs:complexType>
-              <xs:sequence>
-                <xs:element ref="TransientInterference" minOccurs="0" maxOccurs="unbounded" />
-              </xs:sequence>
-            </xs:complexType>
-          </xs:element>
           <xs:element name="cellLineCollection" minOccurs="0" maxOccurs="1">
             <xs:complexType>
               <xs:sequence>
@@ -119,24 +112,10 @@
               </xs:sequence>
             </xs:complexType>
           </xs:element>
-          <xs:element name="engineeredGeneCollection" minOccurs="0" maxOccurs="1">
+          <xs:element name="spontaneousMutationCollection" minOccurs="0" maxOccurs="1">
             <xs:complexType>
               <xs:sequence>
-                <xs:element ref="EngineeredGene" minOccurs="0" maxOccurs="unbounded" />
-              </xs:sequence>
-            </xs:complexType>
-          </xs:element>
-          <xs:element name="animalAvailabilityCollection" minOccurs="0" maxOccurs="1">
-            <xs:complexType>
-              <xs:sequence>
-                <xs:element ref="AnimalAvailability" minOccurs="0" maxOccurs="unbounded" />
-              </xs:sequence>
-            </xs:complexType>
-          </xs:element>
-          <xs:element name="therapyCollection" minOccurs="0" maxOccurs="1">
-            <xs:complexType>
-              <xs:sequence>
-                <xs:element ref="Therapy" minOccurs="0" maxOccurs="unbounded" />
+                <xs:element ref="SpontaneousMutation" minOccurs="0" maxOccurs="unbounded" />
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -147,17 +126,17 @@
               </xs:sequence>
             </xs:complexType>
           </xs:element>
-          <xs:element name="geneDeliveryCollection" minOccurs="0" maxOccurs="1">
+          <xs:element name="phenotype" minOccurs="0" maxOccurs="1">
             <xs:complexType>
               <xs:sequence>
-                <xs:element ref="GeneDelivery" minOccurs="0" maxOccurs="unbounded" />
+                <xs:element ref="Phenotype" minOccurs="0" maxOccurs="1" />
               </xs:sequence>
             </xs:complexType>
           </xs:element>
-          <xs:element name="proteomicsDataCollection" minOccurs="0" maxOccurs="1">
+          <xs:element name="animalAvailabilityCollection" minOccurs="0" maxOccurs="1">
             <xs:complexType>
               <xs:sequence>
-                <xs:element ref="ProteomicsData" minOccurs="0" maxOccurs="unbounded" />
+                <xs:element ref="AnimalAvailability" minOccurs="0" maxOccurs="unbounded" />
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -168,6 +147,20 @@
               </xs:sequence>
             </xs:complexType>
           </xs:element>
+          <xs:element name="transientInterferenceCollection" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="TransientInterference" minOccurs="0" maxOccurs="unbounded" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="engineeredGeneCollection" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="EngineeredGene" minOccurs="0" maxOccurs="unbounded" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
           <xs:element name="nomenclatureCollection" minOccurs="0" maxOccurs="1">
             <xs:complexType>
               <xs:sequence>
@@ -175,17 +168,17 @@
               </xs:sequence>
             </xs:complexType>
           </xs:element>
-          <xs:element name="carcinogenExposureCollection" minOccurs="0" maxOccurs="1">
+          <xs:element name="therapyCollection" minOccurs="0" maxOccurs="1">
             <xs:complexType>
               <xs:sequence>
-                <xs:element ref="CarcinogenExposure" minOccurs="0" maxOccurs="unbounded" />
+                <xs:element ref="Therapy" minOccurs="0" maxOccurs="unbounded" />
               </xs:sequence>
             </xs:complexType>
           </xs:element>
-          <xs:element name="spontaneousMutationCollection" minOccurs="0" maxOccurs="1">
+          <xs:element name="proteomicsDataCollection" minOccurs="0" maxOccurs="1">
             <xs:complexType>
               <xs:sequence>
-                <xs:element ref="SpontaneousMutation" minOccurs="0" maxOccurs="unbounded" />
+                <xs:element ref="ProteomicsData" minOccurs="0" maxOccurs="unbounded" />
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -203,10 +196,17 @@
               </xs:sequence>
             </xs:complexType>
           </xs:element>
-          <xs:element name="phenotype" minOccurs="0" maxOccurs="1">
+          <xs:element name="geneDeliveryCollection" minOccurs="0" maxOccurs="1">
             <xs:complexType>
               <xs:sequence>
-                <xs:element ref="Phenotype" minOccurs="0" maxOccurs="1" />
+                <xs:element ref="GeneDelivery" minOccurs="0" maxOccurs="unbounded" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="carcinogenExposureCollection" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="CarcinogenExposure" minOccurs="0" maxOccurs="unbounded" />
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -245,17 +245,17 @@
     <xs:complexContent>
       <xs:extension base="EngineeredGene">
         <xs:sequence>
-          <xs:element name="yeastModel" minOccurs="0" maxOccurs="1">
-            <xs:complexType>
-              <xs:sequence>
-                <xs:element ref="YeastModel" minOccurs="0" maxOccurs="1" />
-              </xs:sequence>
-            </xs:complexType>
-          </xs:element>
           <xs:element name="modificationTypeCollection" minOccurs="0" maxOccurs="1">
             <xs:complexType>
               <xs:sequence>
                 <xs:element ref="ModificationType" minOccurs="0" maxOccurs="unbounded" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="yeastModel" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="YeastModel" minOccurs="0" maxOccurs="1" />
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -302,17 +302,17 @@
   <xs:element name="CellLine" type="CellLine" />
   <xs:complexType name="CellLine">
     <xs:sequence>
-      <xs:element name="publicationCollection" minOccurs="0" maxOccurs="1">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element ref="Publication" minOccurs="0" maxOccurs="unbounded" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
       <xs:element name="organ" minOccurs="0" maxOccurs="1">
         <xs:complexType>
           <xs:sequence>
             <xs:element ref="Organ" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="publicationCollection" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Publication" minOccurs="0" maxOccurs="unbounded" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -339,38 +339,10 @@
   <xs:element name="AbstractCancerModel" type="AbstractCancerModel" />
   <xs:complexType name="AbstractCancerModel">
     <xs:sequence>
-      <xs:element name="strain" minOccurs="0" maxOccurs="1">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element ref="Strain" minOccurs="0" maxOccurs="1" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
       <xs:element name="availability" minOccurs="0" maxOccurs="1">
         <xs:complexType>
           <xs:sequence>
             <xs:element ref="Availability" minOccurs="0" maxOccurs="1" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="publicationCollection" minOccurs="0" maxOccurs="1">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element ref="Publication" minOccurs="0" maxOccurs="unbounded" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="commentsCollection" minOccurs="0" maxOccurs="1">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element ref="Comments" minOccurs="0" maxOccurs="unbounded" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="logCollection" minOccurs="0" maxOccurs="1">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element ref="Log" minOccurs="0" maxOccurs="unbounded" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -381,10 +353,38 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="strain" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Strain" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="principalInvestigator" minOccurs="0" maxOccurs="1">
         <xs:complexType>
           <xs:sequence>
             <xs:element ref="Person" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="logCollection" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Log" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="commentsCollection" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Comments" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="publicationCollection" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Publication" minOccurs="0" maxOccurs="unbounded" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -544,17 +544,17 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="chemicalClassCollection" minOccurs="0" maxOccurs="1">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element ref="ChemicalClass" minOccurs="0" maxOccurs="unbounded" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
       <xs:element name="biologicalProcessCollection" minOccurs="0" maxOccurs="1">
         <xs:complexType>
           <xs:sequence>
             <xs:element ref="BiologicalProcess" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="chemicalClassCollection" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="ChemicalClass" minOccurs="0" maxOccurs="unbounded" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -573,17 +573,17 @@
     <xs:complexContent>
       <xs:extension base="AbstractCancerModel">
         <xs:sequence>
-          <xs:element name="organ" minOccurs="0" maxOccurs="1">
-            <xs:complexType>
-              <xs:sequence>
-                <xs:element ref="Organ" minOccurs="0" maxOccurs="1" />
-              </xs:sequence>
-            </xs:complexType>
-          </xs:element>
           <xs:element name="tumorCode" minOccurs="0" maxOccurs="1">
             <xs:complexType>
               <xs:sequence>
                 <xs:element ref="TumorCode" minOccurs="0" maxOccurs="1" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="invivoResultCollection" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="InvivoResult" minOccurs="0" maxOccurs="unbounded" />
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -594,10 +594,10 @@
               </xs:sequence>
             </xs:complexType>
           </xs:element>
-          <xs:element name="invivoResultCollection" minOccurs="0" maxOccurs="1">
+          <xs:element name="organ" minOccurs="0" maxOccurs="1">
             <xs:complexType>
               <xs:sequence>
-                <xs:element ref="InvivoResult" minOccurs="0" maxOccurs="unbounded" />
+                <xs:element ref="Organ" minOccurs="0" maxOccurs="1" />
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -637,10 +637,10 @@
   <xs:element name="EngineeredGene" type="EngineeredGene" />
   <xs:complexType name="EngineeredGene">
     <xs:sequence>
-      <xs:element name="image" minOccurs="0" maxOccurs="1">
+      <xs:element name="conditionality" minOccurs="0" maxOccurs="1">
         <xs:complexType>
           <xs:sequence>
-            <xs:element ref="Image" minOccurs="0" maxOccurs="1" />
+            <xs:element ref="Conditionality" minOccurs="0" maxOccurs="1" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -651,17 +651,17 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="image" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Image" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="expressionFeatureCollection" minOccurs="0" maxOccurs="1">
         <xs:complexType>
           <xs:sequence>
             <xs:element ref="ExpressionFeature" minOccurs="0" maxOccurs="unbounded" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="conditionality" minOccurs="0" maxOccurs="1">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element ref="Conditionality" minOccurs="0" maxOccurs="1" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -687,13 +687,6 @@
   <xs:element name="SpontaneousMutation" type="SpontaneousMutation" />
   <xs:complexType name="SpontaneousMutation">
     <xs:sequence>
-      <xs:element name="geneticAlteration" minOccurs="0" maxOccurs="1">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element ref="GeneticAlteration" minOccurs="0" maxOccurs="1" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
       <xs:element name="geneIdentifier" minOccurs="0" maxOccurs="1">
         <xs:complexType>
           <xs:sequence>
@@ -705,6 +698,13 @@
         <xs:complexType>
           <xs:sequence>
             <xs:element ref="MutationIdentifier" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="geneticAlteration" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="GeneticAlteration" minOccurs="0" maxOccurs="1" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -749,17 +749,17 @@
   <xs:element name="Therapy" type="Therapy" />
   <xs:complexType name="Therapy">
     <xs:sequence>
+      <xs:element name="developmentalStage" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="DevelopmentalStage" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="treatment" minOccurs="0" maxOccurs="1">
         <xs:complexType>
           <xs:sequence>
             <xs:element ref="Treatment" minOccurs="0" maxOccurs="1" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="agent" minOccurs="0" maxOccurs="1">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element ref="Agent" minOccurs="0" maxOccurs="1" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -770,10 +770,10 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="developmentalStage" minOccurs="0" maxOccurs="1">
+      <xs:element name="agent" minOccurs="0" maxOccurs="1">
         <xs:complexType>
           <xs:sequence>
-            <xs:element ref="DevelopmentalStage" minOccurs="0" maxOccurs="1" />
+            <xs:element ref="Agent" minOccurs="0" maxOccurs="1" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -830,17 +830,17 @@
     <xs:complexContent>
       <xs:extension base="EngineeredGene">
         <xs:sequence>
-          <xs:element name="regulatoryElementCollection" minOccurs="0" maxOccurs="1">
-            <xs:complexType>
-              <xs:sequence>
-                <xs:element ref="RegulatoryElement" minOccurs="0" maxOccurs="unbounded" />
-              </xs:sequence>
-            </xs:complexType>
-          </xs:element>
           <xs:element name="species" minOccurs="0" maxOccurs="1">
             <xs:complexType>
               <xs:sequence>
                 <xs:element ref="Species" minOccurs="0" maxOccurs="1" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="regulatoryElementCollection" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="RegulatoryElement" minOccurs="0" maxOccurs="unbounded" />
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -861,17 +861,17 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="submitter" minOccurs="0" maxOccurs="1">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element ref="Person" minOccurs="0" maxOccurs="1" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
       <xs:element name="modelSection" minOccurs="0" maxOccurs="1">
         <xs:complexType>
           <xs:sequence>
             <xs:element ref="ModelSection" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="submitter" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Person" minOccurs="0" maxOccurs="1" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -883,10 +883,17 @@
   <xs:element name="Histopathology" type="Histopathology" />
   <xs:complexType name="Histopathology">
     <xs:sequence>
-      <xs:element name="organ" minOccurs="0" maxOccurs="1">
+      <xs:element name="clinicalMarkerCollection" minOccurs="0" maxOccurs="1">
         <xs:complexType>
           <xs:sequence>
-            <xs:element ref="Organ" minOccurs="0" maxOccurs="1" />
+            <xs:element ref="ClinicalMarker" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="geneticAlteration" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="GeneticAlteration" minOccurs="0" maxOccurs="1" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -904,17 +911,10 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="clinicalMarkerCollection" minOccurs="0" maxOccurs="1">
+      <xs:element name="organ" minOccurs="0" maxOccurs="1">
         <xs:complexType>
           <xs:sequence>
-            <xs:element ref="ClinicalMarker" minOccurs="0" maxOccurs="unbounded" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="geneticAlteration" minOccurs="0" maxOccurs="1">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element ref="GeneticAlteration" minOccurs="0" maxOccurs="1" />
+            <xs:element ref="Organ" minOccurs="0" maxOccurs="1" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -994,17 +994,17 @@
   <xs:element name="AnimalAvailability" type="AnimalAvailability" />
   <xs:complexType name="AnimalAvailability">
     <xs:sequence>
-      <xs:element name="principalInvestigator" minOccurs="0" maxOccurs="1">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element ref="Person" minOccurs="0" maxOccurs="1" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
       <xs:element name="animalDistributor" minOccurs="0" maxOccurs="1">
         <xs:complexType>
           <xs:sequence>
             <xs:element ref="AnimalDistributor" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="principalInvestigator" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Person" minOccurs="0" maxOccurs="1" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -1058,17 +1058,17 @@
   <xs:element name="ExpressionFeature" type="ExpressionFeature" />
   <xs:complexType name="ExpressionFeature">
     <xs:sequence>
-      <xs:element name="organ" minOccurs="0" maxOccurs="1">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element ref="Organ" minOccurs="0" maxOccurs="1" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
       <xs:element name="expressionLevelDesc" minOccurs="0" maxOccurs="1">
         <xs:complexType>
           <xs:sequence>
             <xs:element ref="ExpressionLevelDesc" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="organ" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Organ" minOccurs="0" maxOccurs="1" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -1093,6 +1093,13 @@
   <xs:element name="Log" type="Log" />
   <xs:complexType name="Log">
     <xs:sequence>
+      <xs:element name="comments" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Comments" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="submitter" minOccurs="0" maxOccurs="1">
         <xs:complexType>
           <xs:sequence>
@@ -1107,13 +1114,6 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="comments" minOccurs="0" maxOccurs="1">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element ref="Comments" minOccurs="0" maxOccurs="1" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
     </xs:sequence>
     <xs:attribute name="id" type="xs:long" />
     <xs:attribute name="reviewNote" type="xs:string" />
@@ -1123,17 +1123,17 @@
   <xs:element name="Party" type="Party" />
   <xs:complexType name="Party">
     <xs:sequence>
-      <xs:element name="contactInfoCollection" minOccurs="0" maxOccurs="1">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element ref="ContactInfo" minOccurs="0" maxOccurs="unbounded" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
       <xs:element name="roleCollection" minOccurs="0" maxOccurs="1">
         <xs:complexType>
           <xs:sequence>
             <xs:element ref="Role" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="contactInfoCollection" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="ContactInfo" minOccurs="0" maxOccurs="unbounded" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>

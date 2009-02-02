@@ -47,12 +47,12 @@
  </ns1:serviceDescription>
  <ns1:hostingResearchCenter>
   <ns9:ResearchCenter displayName="NCICB" shortName="NCICB" xmlns:ns9="gme://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata.common">
-   <ns9:Address country="" locality="Rocville" postalCode="20852" stateProvince="MD" street1="6116 Executive Bvd" street2=""/>
+   <ns9:Address country="USA" locality="Rockville" postalCode="20852" stateProvince="MD" street1="2115 East Jefferson Street" street2=""/>
    <ns9:ResearchCenterDescription description="" homepageURL="" imageURL="" rssNewsURL=""/>
    <ns9:pointOfContactCollection>
     <ns9:PointOfContact affiliation="NCICB" email="" firstName="Avinash" lastName="Shanbhag" phoneNumber="" role="Maintainer"/>
     <ns9:PointOfContact affiliation="NCICB" email="" firstName="Denise" lastName="Warzel" phoneNumber="" role="Maintainer"/>
-    <ns9:PointOfContact affiliation="NCICB" email="pandyas@mail.nih.gov" firstName="Sima" lastName="pandya" phoneNumber="" role="Developer"/>
+    <ns9:PointOfContact affiliation="NCICB" email="pandyas@mail.nih.gov" firstName="Sima" lastName="Pandya" phoneNumber="" role="Developer"/>
     <ns9:PointOfContact affiliation="NCICB" email="" firstName="Stephen" lastName="Reckford" phoneNumber="" role="Maintainer"/>
     <ns9:PointOfContact affiliation="NCICB" email="" firstName="Juli" lastName="Klemm" phoneNumber="" role="Maintainer"/>
    </ns9:pointOfContactCollection>
