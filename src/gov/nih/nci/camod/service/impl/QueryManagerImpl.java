@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.114 2008-11-17 17:36:10 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.115 2009-02-17 22:08:18 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.114  2008/11/17 17:36:10  pandyas
+ * Modified for groge #17773  	Keyword search query incorrect
+ *
  * Revision 1.113  2008/11/05 04:53:50  schroedn
  * gforge #17553 No sorting of search results for keyword
  *
@@ -2643,6 +2646,7 @@ public class QueryManagerImpl extends BaseManager
         list2 = query1.list();
         list1.addAll(list2);
         
+        // TransientInterference
         theHQLQuery = "from AnimalModel as am where " 
 					+ "am.state = 'Edited-approved' " 
 					+ "AND am.availability.releaseDate <= sysdate "
@@ -2654,6 +2658,7 @@ public class QueryManagerImpl extends BaseManager
         list2 = query1.list();
         list1.addAll(list2);
         
+        // EngineeredGene - targeted Modification
         theHQLQuery = "from AnimalModel as am where " 
 					+ "am.state = 'Edited-approved' " 
 					+ "AND am.availability.releaseDate <= sysdate "
@@ -2666,7 +2671,8 @@ public class QueryManagerImpl extends BaseManager
         query1 = HibernateUtil.getSession().createQuery(theHQLQuery);
         list2 = query1.list();
         list1.addAll(list2);
-               
+        
+        // EngineeredGene - Transgene
         theHQLQuery = "from AnimalModel as am where " 
 					+ "am.state = 'Edited-approved' " 
 					+ "AND am.availability.releaseDate <= sysdate "
@@ -2679,7 +2685,8 @@ public class QueryManagerImpl extends BaseManager
         query1 = HibernateUtil.getSession().createQuery(theHQLQuery);
         list2 = query1.list();
         list1.addAll(list2);
-              
+         
+        // EngineeredGene - Genomic segment
         theHQLQuery = "from AnimalModel as am where " 
 					+ "am.state = 'Edited-approved' " 
 					+ "AND am.availability.releaseDate <= sysdate "
@@ -2692,7 +2699,8 @@ public class QueryManagerImpl extends BaseManager
         query1 = HibernateUtil.getSession().createQuery(theHQLQuery);
         list2 = query1.list();
         list1.addAll(list2);
-            
+         
+        // EngineeredGene - Induced Mutation
         theHQLQuery = "from AnimalModel as am where " 
 					+ "am.state = 'Edited-approved' " 
 					+ "AND am.availability.releaseDate <= sysdate "
@@ -2707,6 +2715,7 @@ public class QueryManagerImpl extends BaseManager
         list2 = query1.list();
         list1.addAll(list2);
         
+        // Histopathology - Organ
         theHQLQuery = "from AnimalModel as am where " 
 					+ "am.state = 'Edited-approved' " 
 					+ "AND am.availability.releaseDate <= sysdate "
@@ -2718,7 +2727,8 @@ public class QueryManagerImpl extends BaseManager
         query1 = HibernateUtil.getSession().createQuery(theHQLQuery);
         list2 = query1.list();
         list1.addAll(list2);
-           
+         
+        // Histopathology - Disease
         theHQLQuery = "from AnimalModel as am where " 
 					+ "am.state = 'Edited-approved' " 
 					+ "AND am.availability.releaseDate <= sysdate "
@@ -2731,17 +2741,6 @@ public class QueryManagerImpl extends BaseManager
         query1 = HibernateUtil.getSession().createQuery(theHQLQuery);
         list2 = query1.list();
         list1.addAll(list2);
-        
-//        theHQLQuery = "from AnimalModel as am where " 
-//					+ "am.state = 'Edited-approved' " 
-//					+ "AND am.availability.releaseDate < sysdate "
-//					+ "OR am.strain.species.id IN " 
-//					+ "( SELECT sp.id FROM Species as sp "  
-//					+ "WHERE upper(sp.scientificName) like '%" + theKeyword + "%' ) "
-//					+ "ORDER BY am.id asc ";
-//        query1 = HibernateUtil.getSession().createQuery(theHQLQuery);
-//        list2 = query1.list();
-//        list1.addAll(list2);
         
     	// List of all distinct AnimalModel Ids
     	LinkedHashSet unique = new LinkedHashSet(list1);
