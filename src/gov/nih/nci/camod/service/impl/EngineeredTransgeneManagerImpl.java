@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EngineeredTransgeneManagerImpl.java,v 1.39 2007-09-12 19:36:03 pandyas Exp $
+ * $Id: EngineeredTransgeneManagerImpl.java,v 1.40 2009-02-17 22:09:55 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.39  2007/09/12 19:36:03  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.38  2007/07/31 12:02:28  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -229,8 +232,6 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements
 
 		// Transgene (coding sequence only)
 		inEngineeredTransgene.setName(inEngineeredTransgeneData.getName());
-		inEngineeredTransgene.setConstructSequence(inEngineeredTransgeneData
-				.getConstructSequence());
 
 		if (inEngineeredTransgeneData.getScientificName() != null
 				&& inEngineeredTransgeneData.getScientificName().length() > 0) {
@@ -368,6 +369,9 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements
 		// Additional Features (i.e. Comments)
 		inEngineeredTransgene.setComments(inEngineeredTransgeneData
 				.getComments());
+		
+		// construct sequence
+		inEngineeredTransgene.setConstructSequence(inEngineeredTransgeneData.getConstructSequence());		
 
 		if (inEngineeredTransgene.getImage() != null) {
 			Image image = inEngineeredTransgene.getImage();
