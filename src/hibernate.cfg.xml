@@ -14,7 +14,7 @@
 <hibernate-configuration>
     <session-factory>
         <property name="connection.datasource">java:/camod</property>
-        <property name="hibernate.show_sql">false</property>
+        <property name="hibernate.show_sql">true</property>
         <property name="dialect">org.hibernate.dialect.OracleDialect</property> 
         <property name="max_fetch_depth">1</property>
         <property name="cglib.use_reflection_optimizer">false</property>
