@@ -1,23 +1,87 @@
 <ns1:DomainTypesInformation xmlns:ns1="http://SDKQuery4.caBIG/1/gov.nih.nci.cagrid.sdkquery4.beans.domaininfo">
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Strain">
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.YeastModel">
+  <ns1:TypeAttribute attributeName="modelDescriptor" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="experimentDesign" javaTypeName="java.lang.String"/>
   <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="conceptCode" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="nameAlternEntry" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="state" javaTypeName="java.lang.String"/>
+  <ns1:SuperclassName>gov.nih.nci.camod.domain.AbstractCancerModel</ns1:SuperclassName>
+ </ns1:DomainType>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.CarcinogenExposure">
+  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+ </ns1:DomainType>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Role">
+  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
   <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
+ </ns1:DomainType>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.GeneticAlteration">
+  <ns1:TypeAttribute attributeName="observation" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+  <ns1:TypeAttribute attributeName="methodOfObservation" javaTypeName="java.lang.String"/>
+ </ns1:DomainType>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.ProteomicsData">
+  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+  <ns1:TypeAttribute attributeName="experimentName" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="experimentId" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="comments" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="otherLocationURL" javaTypeName="java.lang.String"/>
+ </ns1:DomainType>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.AnimalModel">
+  <ns1:TypeAttribute attributeName="externalSource" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="experimentDesign" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="url" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="state" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="modelDescriptor" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="externalSourceIdentifier" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="comments" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="developmentalStage" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="isToolStrain" javaTypeName="java.lang.Boolean"/>
+  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+  <ns1:SuperclassName>gov.nih.nci.camod.domain.AbstractCancerModel</ns1:SuperclassName>
+ </ns1:DomainType>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.CellLine">
+  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="comments" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+  <ns1:TypeAttribute attributeName="experiment" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="results" javaTypeName="java.lang.String"/>
+ </ns1:DomainType>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Person">
+  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+  <ns1:TypeAttribute attributeName="username" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="firstName" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="isPrincipalInvestigator" javaTypeName="java.lang.Boolean"/>
+  <ns1:TypeAttribute attributeName="lastName" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="middleName" javaTypeName="java.lang.String"/>
+  <ns1:SuperclassName>gov.nih.nci.camod.domain.Party</ns1:SuperclassName>
+ </ns1:DomainType>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Species">
+  <ns1:TypeAttribute attributeName="commonName" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
   <ns1:TypeAttribute attributeName="abbreviation" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="scientificNameAlternEntry" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="scientificName" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="conceptCode" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="commonNameAlternEntry" javaTypeName="java.lang.String"/>
  </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Phenotype">
-  <ns1:TypeAttribute attributeName="breedingNotes" javaTypeName="java.lang.String"/>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.GeneIdentifier">
   <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="description" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="entrezGeneID" javaTypeName="java.lang.String"/>
  </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.ChemicalClass">
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Party">
+  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+  <ns1:SubclassName>gov.nih.nci.camod.domain.Organization</ns1:SubclassName>
+  <ns1:SubclassName>gov.nih.nci.camod.domain.Person</ns1:SubclassName>
+ </ns1:DomainType>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.AnimalDistributor">
   <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
   <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
  </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Genotype">
-  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.GeneDelivery">
   <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+  <ns1:TypeAttribute attributeName="viralVectorAlternEntry" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="geneInVirus" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="viralVector" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="comments" javaTypeName="java.lang.String"/>
  </ns1:DomainType>
  <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.ScreeningResult">
   <ns1:TypeAttribute attributeName="diffinh" javaTypeName="java.lang.Float"/>
@@ -25,41 +89,18 @@
   <ns1:TypeAttribute attributeName="stage" javaTypeName="java.lang.String"/>
   <ns1:TypeAttribute attributeName="aveinh" javaTypeName="java.lang.Float"/>
  </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.ContactInfo">
-  <ns1:TypeAttribute attributeName="zip" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="address" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="lab" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="email" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="fax" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="state" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="institute" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="city" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="phone" javaTypeName="java.lang.String"/>
- </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.AnimalDistributor">
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Genotype">
   <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
   <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
  </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Organ">
-  <ns1:TypeAttribute attributeName="conceptCode" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.ChemicalClass">
   <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
- </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Party">
   <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:SubclassName>gov.nih.nci.camod.domain.Organization</ns1:SubclassName>
-  <ns1:SubclassName>gov.nih.nci.camod.domain.Person</ns1:SubclassName>
  </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Log">
-  <ns1:TypeAttribute attributeName="timestamp" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="reviewNote" javaTypeName="java.lang.String"/>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Phenotype">
+  <ns1:TypeAttribute attributeName="breedingNotes" javaTypeName="java.lang.String"/>
   <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="state" javaTypeName="java.lang.String"/>
- </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.GeneIdentifier">
-  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="entrezGeneID" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="description" javaTypeName="java.lang.String"/>
  </ns1:DomainType>
  <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.MutationIdentifier">
   <ns1:TypeAttribute attributeName="rgdId" javaTypeName="java.lang.String"/>
@@ -67,87 +108,169 @@
   <ns1:TypeAttribute attributeName="mgiId" javaTypeName="java.lang.String"/>
   <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
  </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Availability">
-  <ns1:TypeAttribute attributeName="modifiedDate" javaTypeName="java.util.Date"/>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.ExpressionLevelDesc">
   <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="visibleTo" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="releaseDate" javaTypeName="java.util.Date"/>
-  <ns1:TypeAttribute attributeName="enteredDate" javaTypeName="java.util.Date"/>
+  <ns1:TypeAttribute attributeName="expressionLevel" javaTypeName="java.lang.String"/>
  </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.AnimalAvailability">
-  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="comments" javaTypeName="java.lang.String"/>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.TransientInterferenceMethod">
   <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="stockNumber" javaTypeName="java.lang.String"/>
- </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Disease">
-  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="nameAlternEntry" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
   <ns1:TypeAttribute attributeName="conceptCode" javaTypeName="java.lang.String"/>
- </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.GeneFunction">
   <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="function" javaTypeName="java.lang.String"/>
  </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Conditionality">
-  <ns1:TypeAttribute attributeName="description" javaTypeName="java.lang.String"/>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.AgentTarget">
+  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
   <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="conditionedBy" javaTypeName="java.lang.String"/>
+ </ns1:DomainType>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Treatment">
+  <ns1:TypeAttribute attributeName="dosageUnit" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="adminRouteAlternEntry" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="dosage" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="ageAtTreatment" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+  <ns1:TypeAttribute attributeName="ageAtTreatmentUnit" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="regimen" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="administrativeRoute" javaTypeName="java.lang.String"/>
+ </ns1:DomainType>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.TargetedModification">
+  <ns1:TypeAttribute attributeName="esCellLineName" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="constructSequence" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="comments" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="blastocystName" javaTypeName="java.lang.String"/>
+  <ns1:SuperclassName>gov.nih.nci.camod.domain.EngineeredGene</ns1:SuperclassName>
  </ns1:DomainType>
  <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.SegmentType">
   <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
   <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
   <ns1:TypeAttribute attributeName="nameAlternEntry" javaTypeName="java.lang.String"/>
  </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.RegulatoryElementType">
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Conditionality">
+  <ns1:TypeAttribute attributeName="description" javaTypeName="java.lang.String"/>
   <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="conditionedBy" javaTypeName="java.lang.String"/>
  </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.PublicationStatus">
-  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.SexDistribution">
   <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+  <ns1:TypeAttribute attributeName="type" javaTypeName="java.lang.String"/>
  </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Nomenclature">
-  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
- </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.MicroArrayData">
-  <ns1:TypeAttribute attributeName="experimentName" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="comments" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="experimentId" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="url" javaTypeName="java.lang.String"/>
- </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.ExpressionFeature">
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.EnvironmentalFactor">
+  <ns1:TypeAttribute attributeName="isInducedMutationTrigger" javaTypeName="java.lang.Boolean"/>
+  <ns1:TypeAttribute attributeName="casNumber" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="typeAlternEntry" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="type" javaTypeName="java.lang.String"/>
   <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
   <ns1:TypeAttribute attributeName="comments" javaTypeName="java.lang.String"/>
- </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.ModelSection">
-  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+  <ns1:TypeAttribute attributeName="nameAlternEntry" javaTypeName="java.lang.String"/>
   <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="nscNumber" javaTypeName="java.lang.Float"/>
  </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Publication">
-  <ns1:TypeAttribute attributeName="zfinPubId" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="journal" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="year" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="authors" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="startPage" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="comments" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="endPage" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="pmid" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="jaxJNumber" javaTypeName="java.lang.String"/>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.AbstractCancerModel">
   <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="firstTimeReported" javaTypeName="java.lang.Boolean"/>
-  <ns1:TypeAttribute attributeName="title" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="volume" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="rgdPubId" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="experimentDesign" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="state" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="modelDescriptor" javaTypeName="java.lang.String"/>
+  <ns1:SubclassName>gov.nih.nci.camod.domain.YeastModel</ns1:SubclassName>
+  <ns1:SubclassName>gov.nih.nci.camod.domain.AnimalModel</ns1:SubclassName>
+  <ns1:SubclassName>gov.nih.nci.camod.domain.Transplantation</ns1:SubclassName>
  </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.StainingMethod">
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.InducedMutation">
+  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="comments" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+  <ns1:TypeAttribute attributeName="description" javaTypeName="java.lang.String"/>
+  <ns1:SuperclassName>gov.nih.nci.camod.domain.EngineeredGene</ns1:SuperclassName>
+ </ns1:DomainType>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.InvivoResult">
+  <ns1:TypeAttribute attributeName="toxicityEvalDay" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="toxicitySurvivors" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="evaluationDay" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="percentTreatedControl" javaTypeName="java.lang.Float"/>
+  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+ </ns1:DomainType>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.GenomicSegment">
+  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+  <ns1:TypeAttribute attributeName="comments" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="constructSequence" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="locationOfIntegration" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="cloneDesignator" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="isRandom" javaTypeName="java.lang.Boolean"/>
+  <ns1:TypeAttribute attributeName="segmentSize" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
+  <ns1:SuperclassName>gov.nih.nci.camod.domain.EngineeredGene</ns1:SuperclassName>
+ </ns1:DomainType>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.DevelopmentalStage">
+  <ns1:TypeAttribute attributeName="conceptCode" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+ </ns1:DomainType>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.BiologicalProcess">
+  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+ </ns1:DomainType>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.ModificationType">
+  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
   <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
   <ns1:TypeAttribute attributeName="nameAlternEntry" javaTypeName="java.lang.String"/>
+ </ns1:DomainType>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Agent">
+  <ns1:TypeAttribute attributeName="comments" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="nscNumber" javaTypeName="java.lang.Long"/>
   <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+  <ns1:TypeAttribute attributeName="isCMAPAgent" javaTypeName="java.lang.Boolean"/>
+  <ns1:TypeAttribute attributeName="casNumber" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="source" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
   <ns1:TypeAttribute attributeName="conceptCode" javaTypeName="java.lang.String"/>
+ </ns1:DomainType>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Transplantation">
+  <ns1:TypeAttribute attributeName="parentalCellLineName" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="atccNumber" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="state" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="growthPeriod" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="sourceTypeAlternEntry" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+  <ns1:TypeAttribute attributeName="sourceType" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="cellAmount" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="geneticManipulation" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="administrativeSite" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="modificationDescription" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="condRegimenAlternEntry" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="experimentDesign" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="modelDescriptor" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="adminSiteAlternEntry" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="conditioningRegimen" javaTypeName="java.lang.String"/>
+  <ns1:SuperclassName>gov.nih.nci.camod.domain.AbstractCancerModel</ns1:SuperclassName>
+ </ns1:DomainType>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.SpontaneousMutation">
+  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+  <ns1:TypeAttribute attributeName="comments" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
+ </ns1:DomainType>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.TumorCode">
+  <ns1:TypeAttribute attributeName="description" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+  <ns1:TypeAttribute attributeName="abbreviation" javaTypeName="java.lang.String"/>
+ </ns1:DomainType>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Transgene">
+  <ns1:TypeAttribute attributeName="locationOfIntegration" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="isRandom" javaTypeName="java.lang.Boolean"/>
+  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="constructSequence" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="comments" javaTypeName="java.lang.String"/>
+  <ns1:SuperclassName>gov.nih.nci.camod.domain.EngineeredGene</ns1:SuperclassName>
+ </ns1:DomainType>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Organization">
+  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+  <ns1:SuperclassName>gov.nih.nci.camod.domain.Party</ns1:SuperclassName>
+ </ns1:DomainType>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Comments">
+  <ns1:TypeAttribute attributeName="state" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="remark" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
  </ns1:DomainType>
  <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Histopathology">
   <ns1:TypeAttribute attributeName="grossDescription" javaTypeName="java.lang.String"/>
@@ -165,45 +288,95 @@
   <ns1:TypeAttribute attributeName="ageOfDetection" javaTypeName="java.lang.String"/>
   <ns1:TypeAttribute attributeName="comparativeData" javaTypeName="java.lang.String"/>
  </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Comments">
-  <ns1:TypeAttribute attributeName="state" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="remark" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
- </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Transgene">
-  <ns1:TypeAttribute attributeName="locationOfIntegration" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="isRandom" javaTypeName="java.lang.Boolean"/>
-  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="constructSequence" javaTypeName="java.lang.String"/>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.MicroArrayData">
+  <ns1:TypeAttribute attributeName="experimentName" javaTypeName="java.lang.String"/>
   <ns1:TypeAttribute attributeName="comments" javaTypeName="java.lang.String"/>
-  <ns1:SuperclassName>gov.nih.nci.camod.domain.EngineeredGene</ns1:SuperclassName>
- </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.RegulatoryElement">
-  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="experimentId" javaTypeName="java.lang.Long"/>
   <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
- </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Image">
-  <ns1:TypeAttribute attributeName="title" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="urlAlternEntry" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="comments" javaTypeName="java.lang.String"/>
   <ns1:TypeAttribute attributeName="url" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="description" javaTypeName="java.lang.String"/>
  </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Therapy">
-  <ns1:TypeAttribute attributeName="tumorResponse" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="results" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="experiment" javaTypeName="java.lang.String"/>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Nomenclature">
+  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
+ </ns1:DomainType>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.PublicationStatus">
+  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+ </ns1:DomainType>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.RegulatoryElementType">
+  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
+ </ns1:DomainType>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.GeneFunction">
+  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+  <ns1:TypeAttribute attributeName="function" javaTypeName="java.lang.String"/>
+ </ns1:DomainType>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.AnimalAvailability">
+  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
   <ns1:TypeAttribute attributeName="comments" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="toxicityGrade" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="biomarker" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="stockNumber" javaTypeName="java.lang.String"/>
  </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.TumorCode">
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Availability">
+  <ns1:TypeAttribute attributeName="modifiedDate" javaTypeName="java.util.Date"/>
+  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+  <ns1:TypeAttribute attributeName="visibleTo" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="releaseDate" javaTypeName="java.util.Date"/>
+  <ns1:TypeAttribute attributeName="enteredDate" javaTypeName="java.util.Date"/>
+ </ns1:DomainType>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Publication">
+  <ns1:TypeAttribute attributeName="zfinPubId" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="journal" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="year" javaTypeName="java.lang.Long"/>
+  <ns1:TypeAttribute attributeName="authors" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="startPage" javaTypeName="java.lang.Long"/>
+  <ns1:TypeAttribute attributeName="comments" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="endPage" javaTypeName="java.lang.Long"/>
+  <ns1:TypeAttribute attributeName="pmid" javaTypeName="java.lang.Long"/>
+  <ns1:TypeAttribute attributeName="jaxJNumber" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+  <ns1:TypeAttribute attributeName="firstTimeReported" javaTypeName="java.lang.Boolean"/>
+  <ns1:TypeAttribute attributeName="title" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="volume" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="rgdPubId" javaTypeName="java.lang.String"/>
+ </ns1:DomainType>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.ModelSection">
+  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
+ </ns1:DomainType>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.ClinicalMarker">
+  <ns1:TypeAttribute attributeName="nameAlternEntry" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="comments" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="value" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+ </ns1:DomainType>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.EngineeredGene">
+  <ns1:TypeAttribute attributeName="comments" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+  <ns1:SubclassName>gov.nih.nci.camod.domain.TargetedModification</ns1:SubclassName>
+  <ns1:SubclassName>gov.nih.nci.camod.domain.InducedMutation</ns1:SubclassName>
+  <ns1:SubclassName>gov.nih.nci.camod.domain.GenomicSegment</ns1:SubclassName>
+  <ns1:SubclassName>gov.nih.nci.camod.domain.Transgene</ns1:SubclassName>
+ </ns1:DomainType>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.StainingMethod">
+  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="nameAlternEntry" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+  <ns1:TypeAttribute attributeName="conceptCode" javaTypeName="java.lang.String"/>
+ </ns1:DomainType>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Strain">
+  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+  <ns1:TypeAttribute attributeName="conceptCode" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="nameAlternEntry" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="abbreviation" javaTypeName="java.lang.String"/>
+ </ns1:DomainType>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Endpoint">
+  <ns1:TypeAttribute attributeName="code" javaTypeName="java.lang.String"/>
   <ns1:TypeAttribute attributeName="description" javaTypeName="java.lang.String"/>
   <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="abbreviation" javaTypeName="java.lang.String"/>
  </ns1:DomainType>
  <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.TransientInterference">
   <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
@@ -221,223 +394,58 @@
   <ns1:TypeAttribute attributeName="concentrationUnit" javaTypeName="java.lang.String"/>
   <ns1:TypeAttribute attributeName="sourceAlternEntry" javaTypeName="java.lang.String"/>
  </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.SpontaneousMutation">
-  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="comments" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
- </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.EngineeredGene">
-  <ns1:TypeAttribute attributeName="comments" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:SubclassName>gov.nih.nci.camod.domain.TargetedModification</ns1:SubclassName>
-  <ns1:SubclassName>gov.nih.nci.camod.domain.InducedMutation</ns1:SubclassName>
-  <ns1:SubclassName>gov.nih.nci.camod.domain.GenomicSegment</ns1:SubclassName>
-  <ns1:SubclassName>gov.nih.nci.camod.domain.Transgene</ns1:SubclassName>
- </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Organization">
-  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:SuperclassName>gov.nih.nci.camod.domain.Party</ns1:SuperclassName>
- </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Endpoint">
-  <ns1:TypeAttribute attributeName="code" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="description" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
- </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Transplantation">
-  <ns1:TypeAttribute attributeName="parentalCellLineName" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="atccNumber" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="state" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="growthPeriod" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="sourceTypeAlternEntry" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="sourceType" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="cellAmount" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="geneticManipulation" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="administrativeSite" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="modificationDescription" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="condRegimenAlternEntry" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="experimentDesign" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="modelDescriptor" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="adminSiteAlternEntry" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="conditioningRegimen" javaTypeName="java.lang.String"/>
-  <ns1:SuperclassName>gov.nih.nci.camod.domain.AbstractCancerModel</ns1:SuperclassName>
- </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Agent">
-  <ns1:TypeAttribute attributeName="comments" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="nscNumber" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="isCMAPAgent" javaTypeName="java.lang.Boolean"/>
-  <ns1:TypeAttribute attributeName="casNumber" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="source" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="conceptCode" javaTypeName="java.lang.String"/>
- </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Species">
-  <ns1:TypeAttribute attributeName="commonName" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="abbreviation" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="scientificNameAlternEntry" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="scientificName" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="conceptCode" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="commonNameAlternEntry" javaTypeName="java.lang.String"/>
- </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.ModificationType">
-  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="nameAlternEntry" javaTypeName="java.lang.String"/>
- </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.BiologicalProcess">
-  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
- </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.DevelopmentalStage">
-  <ns1:TypeAttribute attributeName="conceptCode" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
- </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.GenomicSegment">
-  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="comments" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="constructSequence" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="locationOfIntegration" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="cloneDesignator" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="isRandom" javaTypeName="java.lang.Boolean"/>
-  <ns1:TypeAttribute attributeName="segmentSize" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
-  <ns1:SuperclassName>gov.nih.nci.camod.domain.EngineeredGene</ns1:SuperclassName>
- </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.InvivoResult">
-  <ns1:TypeAttribute attributeName="toxicityEvalDay" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="toxicitySurvivors" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="evaluationDay" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="percentTreatedControl" javaTypeName="java.lang.Float"/>
-  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
- </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.InducedMutation">
-  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="comments" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="description" javaTypeName="java.lang.String"/>
-  <ns1:SuperclassName>gov.nih.nci.camod.domain.EngineeredGene</ns1:SuperclassName>
- </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.ClinicalMarker">
-  <ns1:TypeAttribute attributeName="nameAlternEntry" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="comments" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="value" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
- </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.AbstractCancerModel">
-  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="experimentDesign" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="state" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="modelDescriptor" javaTypeName="java.lang.String"/>
-  <ns1:SubclassName>gov.nih.nci.camod.domain.YeastModel</ns1:SubclassName>
-  <ns1:SubclassName>gov.nih.nci.camod.domain.AnimalModel</ns1:SubclassName>
-  <ns1:SubclassName>gov.nih.nci.camod.domain.Transplantation</ns1:SubclassName>
- </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Person">
-  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="username" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="firstName" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="isPrincipalInvestigator" javaTypeName="java.lang.Boolean"/>
-  <ns1:TypeAttribute attributeName="lastName" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="middleName" javaTypeName="java.lang.String"/>
-  <ns1:SuperclassName>gov.nih.nci.camod.domain.Party</ns1:SuperclassName>
- </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.CellLine">
-  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="comments" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="experiment" javaTypeName="java.lang.String"/>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Therapy">
+  <ns1:TypeAttribute attributeName="tumorResponse" javaTypeName="java.lang.String"/>
   <ns1:TypeAttribute attributeName="results" javaTypeName="java.lang.String"/>
- </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.EnvironmentalFactor">
-  <ns1:TypeAttribute attributeName="isInducedMutationTrigger" javaTypeName="java.lang.Boolean"/>
-  <ns1:TypeAttribute attributeName="casNumber" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="typeAlternEntry" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="type" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+  <ns1:TypeAttribute attributeName="experiment" javaTypeName="java.lang.String"/>
   <ns1:TypeAttribute attributeName="comments" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="nameAlternEntry" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="nscNumber" javaTypeName="java.lang.Float"/>
- </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.SexDistribution">
   <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="type" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="toxicityGrade" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="biomarker" javaTypeName="java.lang.String"/>
  </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.TargetedModification">
-  <ns1:TypeAttribute attributeName="esCellLineName" javaTypeName="java.lang.String"/>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Image">
+  <ns1:TypeAttribute attributeName="title" javaTypeName="java.lang.String"/>
   <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="constructSequence" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="urlAlternEntry" javaTypeName="java.lang.String"/>
   <ns1:TypeAttribute attributeName="comments" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="blastocystName" javaTypeName="java.lang.String"/>
-  <ns1:SuperclassName>gov.nih.nci.camod.domain.EngineeredGene</ns1:SuperclassName>
- </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Treatment">
-  <ns1:TypeAttribute attributeName="dosageUnit" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="adminRouteAlternEntry" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="dosage" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="ageAtTreatment" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="ageAtTreatmentUnit" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="regimen" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="administrativeRoute" javaTypeName="java.lang.String"/>
- </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.AnimalModel">
-  <ns1:TypeAttribute attributeName="externalSource" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="experimentDesign" javaTypeName="java.lang.String"/>
   <ns1:TypeAttribute attributeName="url" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="state" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="modelDescriptor" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="externalSourceIdentifier" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="comments" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="developmentalStage" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="isToolStrain" javaTypeName="java.lang.Boolean"/>
-  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:SuperclassName>gov.nih.nci.camod.domain.AbstractCancerModel</ns1:SuperclassName>
+  <ns1:TypeAttribute attributeName="description" javaTypeName="java.lang.String"/>
  </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.ProteomicsData">
-  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="experimentName" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="experimentId" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="comments" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="otherLocationURL" javaTypeName="java.lang.String"/>
- </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.GeneticAlteration">
-  <ns1:TypeAttribute attributeName="observation" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="methodOfObservation" javaTypeName="java.lang.String"/>
- </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Role">
-  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
- </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.AgentTarget">
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.RegulatoryElement">
   <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
   <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
  </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.CarcinogenExposure">
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Disease">
+  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="nameAlternEntry" javaTypeName="java.lang.String"/>
   <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+  <ns1:TypeAttribute attributeName="conceptCode" javaTypeName="java.lang.String"/>
  </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.YeastModel">
-  <ns1:TypeAttribute attributeName="modelDescriptor" javaTypeName="java.lang.String"/>
-  <ns1:TypeAttribute attributeName="experimentDesign" javaTypeName="java.lang.String"/>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.ExpressionFeature">
+  <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+  <ns1:TypeAttribute attributeName="comments" javaTypeName="java.lang.String"/>
+ </ns1:DomainType>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Log">
+  <ns1:TypeAttribute attributeName="timestamp" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="reviewNote" javaTypeName="java.lang.String"/>
   <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
   <ns1:TypeAttribute attributeName="state" javaTypeName="java.lang.String"/>
-  <ns1:SuperclassName>gov.nih.nci.camod.domain.AbstractCancerModel</ns1:SuperclassName>
  </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.TransientInterferenceMethod">
-  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.Organ">
   <ns1:TypeAttribute attributeName="conceptCode" javaTypeName="java.lang.String"/>
   <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
+  <ns1:TypeAttribute attributeName="name" javaTypeName="java.lang.String"/>
  </ns1:DomainType>
- <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.ExpressionLevelDesc">
+ <ns1:DomainType javaClassName="gov.nih.nci.camod.domain.ContactInfo">
+  <ns1:TypeAttribute attributeName="zip" javaTypeName="java.lang.String"/>
   <ns1:TypeAttribute attributeName="id" javaTypeName="java.lang.Long"/>
-  <ns1:TypeAttribute attributeName="expressionLevel" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="address" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="lab" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="email" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="fax" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="state" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="institute" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="city" javaTypeName="java.lang.String"/>
+  <ns1:TypeAttribute attributeName="phone" javaTypeName="java.lang.String"/>
  </ns1:DomainType>
 </ns1:DomainTypesInformation>
