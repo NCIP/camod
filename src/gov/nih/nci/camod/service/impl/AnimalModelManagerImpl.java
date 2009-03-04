@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.97 2008-10-30 16:21:26 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.98 2009-03-04 16:20:03 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.97  2008/10/30 16:21:26  pandyas
+ * modify debug statements for build to dev
+ *
  * Revision 1.96  2008/08/14 17:41:54  pandyas
  * Fixed missing code
  *
@@ -505,7 +508,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      */
     public void save(AnimalModel inAnimalModel) throws Exception
     {
-        log.debug("In AnimalModelManagerImpl.save");
+        log.info("In AnimalModelManagerImpl.save");
         super.save(inAnimalModel);
     }
 
@@ -700,7 +703,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 			ModelCharacteristicsData inModelCharacteristicsData,
 			String inUsername, AnimalModel inAnimalModel) throws Exception {
 
-		log.debug("Entering populateAnimalModel");
+		log.info("Entering populateAnimalModel");
 
 		// Handle the person debugrmation
 		if (inUsername != null) {
@@ -713,7 +716,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 			}
 			inAnimalModel.setSubmitter(theSubmitter);
 		}
-
+        log.info("Before PI");
 		Person thePI = PersonManagerSingleton.instance().getByUsername(
 				inModelCharacteristicsData.getPrincipalInvestigator());
 
@@ -723,7 +726,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 		}
 
 		inAnimalModel.setPrincipalInvestigator(thePI);
-
+        log.info("Before ToolStrain");
 		// Set the animal model debugrmation
 		boolean isToolStrain = inModelCharacteristicsData.getIsToolStrain()
 				.equals("yes") ? true : false;
@@ -742,7 +745,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 				inModelCharacteristicsData.getOtherEthnicityStrain(),
 				inModelCharacteristicsData.getScientificName());
 
-		log.debug("\n theNewStrain: " + theNewStrain.getName() + ": "
+		log.info("\n theNewStrain: " + theNewStrain.getName() + ": "
 				+ theNewStrain.getNameAlternEntry());
 		// other option selected
 		if (inModelCharacteristicsData.getEthinicityStrain().equals(
@@ -756,12 +759,12 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 			// used to setSpecies in AnimalModel now used to setStrain in 2.1
 			inAnimalModel.setStrain(theNewStrain);
 		}
-		
+        log.info("Before Dev stage");		
 		// Set developmental stage
 		if (inModelCharacteristicsData.getDevelopmentalStage() != null && inModelCharacteristicsData.getDevelopmentalStage().length() > 0){
 			inAnimalModel.setDevelopmentalStage(inModelCharacteristicsData.getDevelopmentalStage());
 		}
-
+        log.info("Before Genotype");
 		// Genotype Clear previous entry - add new
 		Genotype theGenotype = null;
 		Set<Genotype> genotypeColl = inAnimalModel.getGenotypeCollection();
@@ -771,7 +774,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 			theGenotype = GenotypeManagerSingleton.instance().getOrCreate(inModelCharacteristicsData.getGenotype());
 			inAnimalModel.addGenotype(theGenotype);
 		}
-
+        log.info("Before Nomenclature");
 		// Nomenclature Clear previous entry - add new
 		Nomenclature theNomenclature = null;
 		Set<Nomenclature> nomenclatureColl = inAnimalModel.getNomenclatureCollection();
@@ -782,7 +785,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 					.getOrCreate(inModelCharacteristicsData.getNomenclature());
 			inAnimalModel.addNomenclature(theNomenclature);
 		}
-
+        log.info("Before Phenotype");
 		// Phenotype
 		Phenotype thePhenotype = inAnimalModel.getPhenotype();
 		if (thePhenotype == null) {
@@ -802,6 +805,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 		thePhenotype.setBreedingNotes(inModelCharacteristicsData
 				.getBreedingNotes());
 
+        log.info("Before Availability");        
 		// Get the availability
 		Availability theAvailability = inAnimalModel.getAvailability();
 
@@ -813,6 +817,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 		}
 		theAvailability.setEnteredDate(new Date());
 
+        log.info("Before Release Date");        
 		// Convert the date
 		Date theDate = new Date();
 		if (!inModelCharacteristicsData.getReleaseDate().equals("immediately")) {
@@ -829,11 +834,12 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 		}
 		theAvailability.setReleaseDate(theDate);
 
+        log.info("Before setAvailability()");        
 		// Associated the created objects
 		inAnimalModel.setAvailability(theAvailability);
 		inAnimalModel.setPhenotype(thePhenotype);
 
-		log.debug("Exiting populateAnimalModel");
+		log.info("Exiting populateAnimalModel");
 
 		return inAnimalModel;
 	}
