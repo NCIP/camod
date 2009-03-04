@@ -1,0 +1,44 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>camod_search_rat_models</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">camod_search_rat_models</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/camod/jsp/viewLicense.jsp;jsessionid=0D5C22634354ACF0A3D94BC426B489C4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=CLICKING HERE</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=SEARCH MODELS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>species</td>
+	<td>label=Rat (Rattus norvegicus)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Search' and @type='submit' and @onclick='blankKeyword()']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>MMTV-TGF alpha (transgenic rats</td>
+	<td>MMTV-TGF alpha (transgenic rats</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
