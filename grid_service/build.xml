@@ -84,7 +84,7 @@
 	<target name="unjar-client-orm-file">
 		<delete dir="${temp.dir}" failonerror="false"/>
 		<mkdir dir="${temp.dir}"/>
-		<unjar src="${client.orm.jar.filename}" dest="${temp.dir}"/>
+		<unjar src="${client.orm.jar.filename}" dest="${temp.dir}" />
 	</target>	
 	<target name="jar-client-orm-file">
 		<jar destfile="${build.dir}/camodSDKClient-orm.jar" basedir="${temp.dir}" />
