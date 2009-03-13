@@ -298,6 +298,15 @@
 			</td>
 		</c:if>
 	</tr>
+
+	<tr>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field2">Construct Sequence:</label>
+		</td>
+		<td class="formField">
+			<html:textarea styleClass="formFieldSized" property="constructSequence" rows="4" cols="32"  />	
+		</td>
+	</tr>	
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
@@ -347,16 +356,6 @@
 		</td>
 	</tr>
 	
-	<tr>
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Construct Sequence:<br>(Enter info only when uploading image)</label>
-		</td>
-		<td class="formField">
-			<html:textarea styleClass="formFieldSized" property="constructSequence" rows="4" cols="32"  />	
-		</td>
-	</tr>	
-
-
 	
 	<tr>
 		<td align="right" colspan="3">
