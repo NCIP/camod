@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.115 2009-02-17 22:08:18 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.116 2009-03-13 14:57:59 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.115  2009/02/17 22:08:18  pandyas
+ * Added better coments for code clarity
+ *
  * Revision 1.114  2008/11/17 17:36:10  pandyas
  * Modified for groge #17773  	Keyword search query incorrect
  *
@@ -1308,7 +1311,7 @@ public class QueryManagerImpl extends BaseManager
     }
 
     /**
-     * Return the list of PIs associated with animal models
+     * Return the list of PIs associated with animal models that are edited-approved
      * 
      * @return a sorted list of unique PIs
      * 
@@ -1362,6 +1365,61 @@ public class QueryManagerImpl extends BaseManager
         return thePIList;
     }
 
+    /**
+     * Return the list of all PIs associated with animal models
+     * 
+     * @return a sorted list of unique PIs
+     * 
+     * @throws PersistenceException
+     */
+    public List getQueryAllPrincipalInvestigators() throws PersistenceException
+    {
+        log.info("Entering QueryManagerImpl.getQueryAllPrincipalInvestigators");
+
+        // Format the query
+        String theSQLString = "SELECT last_name, first_name " + "FROM party " + "WHERE is_principal_investigator = 1 " + "ORDER BY last_name ASC";
+
+        ResultSet theResultSet = null;
+
+        List<String> thePIList = new ArrayList<String>();
+
+        try
+        {
+            log.info("getQueryAllPrincipalInvestigators - SQL: " + theSQLString);
+
+            Object[] params = new Object[0];
+            theResultSet = Search.query(theSQLString, params);
+
+            while (theResultSet.next())
+            {
+                String thePIEntry = theResultSet.getString(1) + ", " + theResultSet.getString(2);
+                thePIList.add(thePIEntry);
+            }
+
+        }
+        catch (Exception e)
+        {
+            log.error("Exception in getQueryOnlyPrincipalInvestigators", e);
+            throw new PersistenceException("Exception in getQueryOnlyPrincipalInvestigators: " + e);
+        }
+        finally
+        {
+            if (theResultSet != null)
+            {                
+                try
+                {
+                    Statement stmt = theResultSet.getStatement();
+                    theResultSet.close();
+                    stmt.close();
+
+                }
+                catch (Exception e)
+                {}
+            }
+        }
+        return thePIList;
+    }    
+    
     /**
      * Return the list of Editors associated with animal models
      * 
@@ -3463,6 +3521,12 @@ public class QueryManagerImpl extends BaseManager
         return models;
     }
 
+    /*
+     * Returns all publication entered in the cell line, therapy, and publication
+     * submission screens.  This removed duplicates for display on the publication
+     * search results screen.
+     * 
+     */
     public List getAllPublications(long absCancerModelId) throws PersistenceException
     {    	
         List<Publication> publications = new ArrayList<Publication>();
@@ -3472,11 +3536,66 @@ public class QueryManagerImpl extends BaseManager
         
         try
         {
-            String theSQLString = "select publication_id, year, authors" + "\n" + "  from publication" + "\n" + "  where publication_id in (" + "\n" + "	  select min(publication_id) publication_id" + "\n" + "	  from (" + "\n" + "		select p.pmid, p.publication_id" + "\n" + "		  from therapy th," + "\n" + "		       therapy_publication tp," + "\n" + "		       publication p" + "\n" + "		  where th.abs_cancer_model_id = ?" + "\n" + "		   and th.therapy_id = tp.therapy_id" + "\n" + "		   and tp.publication_id = p.publication_id" + "\n" + "		union" + "\n" + "		select p.pmid, p.publication_id" + "\n" + "		  from cell_line cl," + "\n" + "		       cell_line_publication cp," + "\n" + "		       publication p" + "\n" + "		 where cl.abs_cancer_model_id = ?" + "\n" + "		   and cl.cell_line_id = cp.cell_line_id" + "\n" + "		   and cp.publication_id = p.publication_id" + "\n" + "		union" + "\n" + "		select p.pmid, p.publication_id" + "\n" + "		  from abs_can_mod_publication acmp," + "\n" + "		       publication p" + "\n" + "		 where acmp.abs_cancer_model_id = ?" + "\n" + "		   and acmp.publication_id = p.publication_id )" + "\n" + "	 group by pmid )" + "\n" + " order by year desc, authors" + "\n";
+            String theSQLString = " select publication_id, year, authors" + "\n"
+            + "  from publication" + "\n" 
+            + "  where publication_id in (" + "\n" 
+            + "		select p.publication_id" + "\n" 
+            + "		  from therapy th," + "\n" 
+            + "		       therapy_publication tp," + "\n" 
+            + "		       publication p" + "\n" 
+            + "		  where th.abs_cancer_model_id = ?" + "\n" 
+            + "		   and th.therapy_id = tp.therapy_id" + "\n" 
+            + "		   and tp.publication_id = p.publication_id"  + "\n"
+            + "		   and p.PMID IS NULL"  + "\n" 
+            + "		union" + "\n" 
+            + "		select p.publication_id" + "\n" 
+            + "		  from cell_line cl," + "\n" 
+            + "		       cell_line_publication cp," + "\n" 
+            + "		       publication p" + "\n" 
+            + "		 where cl.abs_cancer_model_id = ?" + "\n" 
+            + "		   and cl.cell_line_id = cp.cell_line_id" + "\n" 
+            + "		   and cp.publication_id = p.publication_id" + "\n"
+            + "		   and p.PMID IS NULL"  + "\n" 
+            + "		union" + "\n" 
+            + "		select p.publication_id" + "\n" 
+            + "		  from abs_can_mod_publication acmp," + "\n" 
+            + "		       publication p" + "\n" 
+            + "		 where acmp.abs_cancer_model_id = ?" + "\n"
+            + "		 and p.PMID IS NULL" + "\n"            
+            + "		   and acmp.publication_id = p.publication_id " + "\n" 
+            + "		union" + "\n"  
+            + "	  select min(publication_id) publication_id" + "\n" 
+            + "	  from (" + "\n" 
+            + "		select p.pmid, p.publication_id" + "\n" 
+            + "		  from therapy th," + "\n" 
+            + "		       therapy_publication tp," + "\n" 
+            + "		       publication p" + "\n" 
+            + "		  where th.abs_cancer_model_id = ?" + "\n" 
+            + "		   and th.therapy_id = tp.therapy_id" + "\n" 
+            + "		   and tp.publication_id = p.publication_id"  + "\n"
+            + "		   and p.PMID IS NOT NULL"  + "\n" 
+            + "		union" + "\n" 
+            + "		select p.pmid, p.publication_id" + "\n" 
+            + "		  from cell_line cl," + "\n" 
+            + "		       cell_line_publication cp," + "\n" 
+            + "		       publication p" + "\n" 
+            + "		 where cl.abs_cancer_model_id = ?" + "\n" 
+            + "		   and cl.cell_line_id = cp.cell_line_id" + "\n" 
+            + "		   and cp.publication_id = p.publication_id" + "\n"
+            + "		   and p.PMID IS NOT NULL"  + "\n" 
+            + "		union" + "\n" 
+            + "		select p.pmid, p.publication_id" + "\n" 
+            + "		  from abs_can_mod_publication acmp," + "\n" 
+            + "		       publication p" + "\n" 
+            + "		 where acmp.abs_cancer_model_id = ?" + "\n"
+            + "		 and p.PMID IS NOT NULL" + "\n"            
+            + "		   and acmp.publication_id = p.publication_id )" + "\n" 
+            + "	 group by pmid )" + " \n"            
+            + " order by year desc, authors" + "\n";
 
-            log.debug("getAllPublications - SQL: " + theSQLString);
-            Object[] params = new Object[3];
-            params[0] = params[1] = params[2] = String.valueOf(absCancerModelId);
+            log.info("getAllPublications - SQL: " + theSQLString);
+            Object[] params = new Object[6];
+            params[0] = params[1] = params[2] = params[3] = params[4] = params[5] = String.valueOf(absCancerModelId);
             theResultSet = Search.query(theSQLString, params);
             
             // Rewrote this method during the upgrade to Hibernate
@@ -3501,7 +3620,7 @@ public class QueryManagerImpl extends BaseManager
             }            
             
 
-            log.debug("Got " + cc + " publications");
+            log.info("Got " + cc + " publications");
         }
         catch (Exception e)
         {
@@ -3626,7 +3745,8 @@ public class QueryManagerImpl extends BaseManager
 	  String theSQLString = "SELECT distinct abs_cancer_model_id FROM abs_cancer_model WHERE upper(acm.external_source) like ?";
 	  
 	  
-	  Object[] theParams = new Object[2]; theParams[0] = inExternalSource;
+	  Object[] theParams = new Object[2]; 
+	  theParams[0] = inExternalSource;
 	  theParams[1] = theParams[0];
 	  
 	  log.debug("The params: " + theParams[0]); 
