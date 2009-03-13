@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.65 2008-08-14 17:07:03 pandyas Exp $
+ *  $Id: ViewModelAction.java,v 1.66 2009-03-13 17:03:46 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.65  2008/08/14 17:07:03  pandyas
+ *  remove debug line
+ *
  *  Revision 1.64  2008/08/14 17:01:42  pandyas
  *  modified debug line to use log
  *
@@ -245,6 +248,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -670,6 +674,10 @@ public class ViewModelAction extends BaseAction
             {
                 therapeuticApprochesColl.add(t);
             }
+            // Sort therapy in order entered as requested by user
+            Collections.sort(therapeuticApprochesColl);
+            log.debug("therapeuticApprochesColl: " + therapeuticApprochesColl.toString());
+            
             Agent a = t.getAgent();
             AgentManager myAgentManager = (AgentManager) getBean("agentManager");
             if (a != null)
