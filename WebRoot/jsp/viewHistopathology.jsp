@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.47  2008/08/14 17:11:33  pandyas
+ * remove debug line
+ *
  * Revision 1.46  2008/01/31 23:38:20  pandyas
  * remove log printouts now that bug is resolved
  *
@@ -84,7 +87,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: viewHistopathology.jsp,v 1.47 2008-08-14 17:11:33 pandyas Exp $
+ * $Id: viewHistopathology.jsp,v 1.48 2009-03-13 15:08:15 pandyas Exp $
  *
  */   
 %>
@@ -215,7 +218,14 @@
 				<td class="resultsBoxWhite" width="25%"><b>Diagnosis</b></td>
 				<td class="resultsBoxWhiteEnd" width="75%">
 				    <bean:define id="d" name="h" property="disease"/>
-					     <camod:highlight><c:out value="${d.EVSPreferredDescription}"/>&nbsp;<br></camod:highlight>
+						<c:choose>
+							<c:when test="${empty d.name}">
+							<camod:highlight><c:out value="${d.nameAlternEntry}" escapeXml="false"/></camod:highlight>
+							</c:when>
+						<c:otherwise>
+							<camod:highlight><c:out value="${d.EVSPreferredDescription}" escapeXml="false"/></camod:highlight>
+						</c:otherwise>
+						</c:choose>	
 				</td>
 			</tr>
 				
