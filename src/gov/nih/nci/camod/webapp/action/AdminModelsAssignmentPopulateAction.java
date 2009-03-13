@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AdminModelsAssignmentPopulateAction.java,v 1.9 2007-09-12 19:36:40 pandyas Exp $
+ * $Id: AdminModelsAssignmentPopulateAction.java,v 1.10 2009-03-13 15:00:39 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2007/09/12 19:36:40  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.8  2007/07/31 12:02:38  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -76,7 +79,7 @@ public class AdminModelsAssignmentPopulateAction extends BaseAction {
 					Constants.Dropdowns.NONHUMANSPECIESDROP,
 					Constants.Dropdowns.ADD_BLANK_OPTION);	
 	        
-	        NewDropdownUtil.populateDropdown(inRequest, Constants.Dropdowns.PRINCIPALINVESTIGATORQUERYDROP,
+	        NewDropdownUtil.populateDropdown(inRequest, Constants.Dropdowns.PRINCIPALINVESTIGATORQUERYALLDROP,
 	                Constants.Dropdowns.ADD_BLANK);		        
 
 

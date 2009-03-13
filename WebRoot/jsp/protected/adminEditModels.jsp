@@ -1,8 +1,11 @@
 <%
 /*
- * $Id: adminEditModels.jsp,v 1.11 2008-08-12 19:24:54 pandyas Exp $
+ * $Id: adminEditModels.jsp,v 1.12 2009-03-13 15:02:40 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2008/08/12 19:24:54  pandyas
+ * Fixed #12108  	Admin - View Model Assignment is not working
+ *
  * Revision 1.10  2007/09/07 16:44:08  pandyas
  * Removed duplicate on adminEditModels as per Ulli request
  *
@@ -144,7 +147,7 @@
 				
 				<td class="formField">				
 					<html:select styleClass="formFieldSized" size="1" property="principalInvestigator" >
-						<html:options name="<%=Dropdowns.PRINCIPALINVESTIGATORQUERYDROP %>" />										
+						<html:options name="<%=Dropdowns.PRINCIPALINVESTIGATORQUERYALLDROP %>" />										
 					</html:select>			
 				</td>				
 			</tr>

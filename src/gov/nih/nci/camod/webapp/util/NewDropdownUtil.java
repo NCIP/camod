@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: NewDropdownUtil.java,v 1.59 2008-08-27 13:56:42 pandyas Exp $
+ * $Id: NewDropdownUtil.java,v 1.60 2009-03-13 15:02:04 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.59  2008/08/27 13:56:42  pandyas
+ * Updated comments for method
+ *
  * Revision 1.58  2008/08/14 17:09:40  pandyas
  * remove debug lines
  *
@@ -291,6 +294,11 @@ public class NewDropdownUtil
         {
             theReturnList = getQueryOnlyPrincipalInvestigatorList(inRequest, inFilter);
         }
+        
+        else if (inDropdownKey.equals(Constants.Dropdowns.PRINCIPALINVESTIGATORQUERYALLDROP))
+        {
+            theReturnList = getQueryAllPrincipalInvestigatorList(inRequest, inFilter);
+        }        
 
         else if (inDropdownKey.equals(Constants.Dropdowns.INDUCEDMUTATIONAGENTQUERYDROP))
         {
@@ -843,7 +851,7 @@ public class NewDropdownUtil
     }
 
     /**
-     * Returns a list of all Principal Investigators
+     * Returns a list of all Principal Investigators for edited-approved models
      * 
      * @return list of PI's
      * @throws Exception
@@ -861,6 +869,26 @@ public class NewDropdownUtil
         
         return thePIOnlyList;
     }
+
+    /**
+     * Returns a list of all Principal Investigators for models in all states
+     * 
+     * @return list of PI's
+     * @throws Exception
+     */
+    private static List getQueryAllPrincipalInvestigatorList(HttpServletRequest inRequest,
+                                                              String inAddBlank) throws Exception
+    {
+
+        log.info("Entering NewDropdownUtil.getQueryAllPrincipalInvestigatorList");
+        
+        //Assign list to a constant so simple search can validate against cross-site scripting in searchForm.validate
+        List thePIOnlyList = QueryManagerSingleton.instance().getQueryAllPrincipalInvestigators(); 
+        log.info("In NewDropdownUtil.getQueryAllPrincipalInvestigatorList -  ");
+        inRequest.getSession().setAttribute(Constants.Dropdowns.PRINCIPALINVESTIGATORQUERYALLDROP, thePIOnlyList);        
+        
+        return thePIOnlyList;
+    }   
     
 
     /**

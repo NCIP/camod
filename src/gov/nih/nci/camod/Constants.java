@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.113 2008-08-14 06:22:10 schroedn Exp $
+ * $Id: Constants.java,v 1.114 2009-03-13 14:56:47 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.113  2008/08/14 06:22:10  schroedn
+ * Added constant for microarraydata list
+ *
  * Revision 1.112  2008/08/12 19:53:24  pandyas
  * Fixed #12108  	Admin - View Model Assignment is not working
  * Fixed #15053  	Search for models with transgenic or targeted modification on advanced search page confusing
@@ -539,8 +542,11 @@ public class Constants {
         
         public static final String ITEMSPERPAGEDROP = "ItemsPerPage.txt";
         
-        // Query dropdowns
+        // PI list filtered by Editied-approved for simple and adv search screens
         public static final String PRINCIPALINVESTIGATORQUERYDROP = "principalinvestigatorquerydrop.db";
+        
+        // PI list NOT filtered by Editied-approved for admin > edit models screen
+        public static final String PRINCIPALINVESTIGATORQUERYALLDROP = "principalinvestigatoralldrop.db";         
 
         public static final String INDUCEDMUTATIONAGENTQUERYDROP = "inducedmutationagentquerydrop.db";
                      
