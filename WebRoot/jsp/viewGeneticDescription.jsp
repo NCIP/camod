@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.65 2008-11-10 19:08:11 pandyas Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.66 2009-03-19 00:37:49 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.65  2008/11/10 19:08:11  pandyas
+ * modified background color for gforge ##12824 Delete Sequence ID field from genetic description search page, targeted modification table
+ *
  * Revision 1.64  2008/11/10 18:11:08  pandyas
  * modified background color for gforge ##12824 Delete Sequence ID field from genetic description search page, targeted modification table
  *
@@ -427,14 +430,6 @@
 					</camod:highlight>		
 				</td>
 			</tr>
-			<tr>
-				<td class="WhiteBox" width="35%"><b>Construct Sequence</b></td>
-				<td class="WhiteBoxRightEnd" width="65%">
-					<camod:highlight>
-						<c:out value="${tg.constructSequence}" escapeXml="false"/>&nbsp;
-					</camod:highlight>
-				</td>
-			</tr>		
 		</c:if>
 		<tr>
 			<td class="GreyBox" width="35%"><b>Organ / Tissue Gene is Expressed in and Expression Level</b></td>
@@ -496,7 +491,14 @@
 				</td>
 			</c:if>&nbsp;			
 		</tr>
-		
+			<tr>
+				<td class="WhiteBox" width="35%"><b>Construct Sequence</b></td>
+				<td class="WhiteBoxRightEnd" width="65%">
+					<camod:highlight>
+						<c:out value="${tg.constructSequence}" escapeXml="false"/>&nbsp;
+					</camod:highlight>
+				</td>
+			</tr>		
 		<tr>
 			<td class="GreyBox" width="35%"><b>Comment</b></td>
 			<td class="GreyBoxRightEnd" width="65%">
@@ -664,15 +666,7 @@
 						<c:out value="${gs.image.description}" escapeXml="false"/>&nbsp;
 					</camod:highlight>
 				</td>
-			</tr>		
-			<tr>
-				<td class="WhiteBox" width="35%"><b>Construct Sequence</b></td>
-				<td class="WhiteBoxRightEnd" width="65%">
-					<camod:highlight>
-						<c:out value="${gs.constructSequence}" escapeXml="false"/>&nbsp;
-					</camod:highlight>		
-				</td>
-			</tr>
+			</tr>	
 		</c:if>
 		<!-- Display MGI or ZFIN or RGD identifier -->
         <tr>
@@ -702,7 +696,15 @@
 				</a>
 				</td>
 			</c:if>&nbsp;			
-		</tr>		
+		</tr>
+			<tr>
+				<td class="WhiteBox" width="35%"><b>Construct Sequence</b></td>
+				<td class="WhiteBoxRightEnd" width="65%">
+					<camod:highlight>
+						<c:out value="${gs.constructSequence}" escapeXml="false"/>&nbsp;
+					</camod:highlight>		
+				</td>
+			</tr>				
 		<tr>
 			<td class="WhiteBox" width="35%"><b>Comments</b></td>
 			<td class="WhiteBoxRightEnd" width="65%">
@@ -871,14 +873,6 @@
 					</camod:highlight>
 				</td>
 			</tr>
-			<tr>
-				<td class="WhiteBox" width="35%"><b>Construct Sequence</b></td>
-				<td class="WhiteBoxRightEnd" width="65%">
-					<camod:highlight>
-						<c:out value="${tm.constructSequence}" escapeXml="false"/>&nbsp;
-					</camod:highlight>
-				</td>
-			</tr>	
 		</c:if>	
 		
 		<!-- Display MGI or ZFIN or RGD identifier -->
@@ -909,7 +903,15 @@
 				</a>
 				</td>
 			</c:if>&nbsp;			
-		</tr>		
+		</tr>
+			<tr>
+				<td class="WhiteBox" width="35%"><b>Construct Sequence</b></td>
+				<td class="WhiteBoxRightEnd" width="65%">
+					<camod:highlight>
+						<c:out value="${tm.constructSequence}" escapeXml="false"/>&nbsp;
+					</camod:highlight>
+				</td>
+			</tr>				
 		<tr>
 			<td class="WhiteBox" width="35%"><b>Comments</b></td>
 			<td class="WhiteBoxRightEnd" width="65%">
