@@ -43,9 +43,13 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.116 2009-03-13 14:57:59 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.117 2009-03-19 00:36:35 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.116  2009/03/13 14:57:59  pandyas
+ * modified for #19758  	Remove the filter from the PI drop-down list on admin (Edit Models) search criteria screen
+ * modified for #12483  	Why does unpublished entry not show up on publication, cell lines, or therapeutic approaches search screen
+ *
  * Revision 1.115  2009/02/17 22:08:18  pandyas
  * Added better coments for code clarity
  *
@@ -1377,8 +1381,8 @@ public class QueryManagerImpl extends BaseManager
         log.info("Entering QueryManagerImpl.getQueryAllPrincipalInvestigators");
 
         // Format the query
-        String theSQLString = "SELECT last_name, first_name " + "FROM party " + "WHERE is_principal_investigator = 1 " + "ORDER BY last_name ASC";
-
+        String theSQLString = "SELECT last_name, first_name " + "FROM party " + "WHERE is_principal_investigator = 1  " + "  AND first_name IS NOT NULL " + "  AND last_name IS NOT NULL " + "  AND party_id IN (SELECT DISTINCT principal_investigator_id FROM abs_cancer_model)" + "ORDER BY last_name ASC";
+        log.info("getQueryAllPrincipalInvestigators - theSQLString: " + theSQLString);
         ResultSet theResultSet = null;
 
         List<String> thePIList = new ArrayList<String>();
