@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions name="CamodGridService" targetNamespace="http://camod.cagrid.nci.nih.gov/CamodGridService/service" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:binding="http://camod.cagrid.nci.nih.gov/CamodGridService/bindings" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
-  <wsdl:import namespace="http://camod.cagrid.nci.nih.gov/CamodGridService/bindings" location="CamodGridService_bindings.wsdl"/>
-  <wsdl:service name="CamodGridService">
-    <wsdl:port name="CamodGridServicePortTypePort" binding="binding:CamodGridServicePortTypeSOAPBinding">
-      <soap:address location="http://localhost:8080/wsrf/services/"/>
-    </wsdl:port>
-  </wsdl:service>
-</wsdl:definitions>
