@@ -17,7 +17,7 @@ import org.springframework.web.context.ContextLoaderListener;
  * 
  * @author <a href="mailto:matt@raibledesigns.com">Matt Raible</a>
  * 
- * @web.listener 
+ *  @web.listener
  */
 public class StartupListener extends ContextLoaderListener implements ServletContextListener {
 
