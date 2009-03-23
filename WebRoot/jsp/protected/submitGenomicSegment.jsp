@@ -150,7 +150,7 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Construct Sequence:<br>(Enter info only when uploading image)</label>
+		<td class="formLabel"><label for="field2">Construct Sequence:<br></label>
 		</td>
 		<td class="formField">
 			<html:textarea styleClass="formFieldSized" property="constructSequence" rows="4" cols="32"  />	
