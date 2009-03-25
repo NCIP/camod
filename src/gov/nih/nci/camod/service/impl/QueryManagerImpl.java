@@ -43,9 +43,13 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.117 2009-03-19 00:36:35 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.118 2009-03-25 16:23:53 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.117  2009/03/19 00:36:35  pandyas
+ * modified for #19758  	Remove the filter from the PI drop-down list on admin (Edit Models) search criteria screen
+ * Filter for PIs with models and not just all PIs
+ *
  * Revision 1.116  2009/03/13 14:57:59  pandyas
  * modified for #19758  	Remove the filter from the PI drop-down list on admin (Edit Models) search criteria screen
  * modified for #12483  	Why does unpublished entry not show up on publication, cell lines, or therapeutic approaches search screen
@@ -1886,7 +1890,7 @@ public class QueryManagerImpl extends BaseManager
                                                     String inModelId) throws PersistenceException
     {
 
-        String theSQLString = "SELECT distinct trans_inv.invivo_result_id FROM transplant_invivo_result trans_inv " + "WHERE trans_inv.invivo_result_id IN (SELECT ir.invivo_result_id FROM invivo_result ir, agent ag " + "     WHERE ir.agent_id = ag.agent_id and ag.nsc_number = ?) and trans_inv.abs_cancer_model_id = ?";
+        String theSQLString = "SELECT distinct trans_inv.invivo_result_id FROM transplantation_invivo_result trans_inv " + "WHERE trans_inv.invivo_result_id IN (SELECT ir.invivo_result_id FROM invivo_result ir, agent ag " + "     WHERE ir.agent_id = ag.agent_id and ag.nsc_number = ?) and trans_inv.abs_cancer_model_id = ?";
 
         Object[] theParams = new Object[2];
         theParams[0] = inNSCNumber;
@@ -1897,7 +1901,7 @@ public class QueryManagerImpl extends BaseManager
 
     /**
      * Get yeast screen result data (ave inibition etc.) for a given Agent
-     * (drug)
+     * (drug)transplantation_invivo_result
      * 
      * @param agent
      *            refers to the compound that was used in the yeast experiment
@@ -1974,11 +1978,11 @@ public class QueryManagerImpl extends BaseManager
     }
 
     /**
-     * Get the invivo (Transplant) data (from DTP) for a given Agent.nscNumber
+     * Get the invivo (Transplantation) data (from DTP) for a given Agent.nscNumber
      * (drug)
      * 
      * @param agent
-     *            refers to the compound that was used in the Transplant
+     *            refers to the compound that was used in the Transplantation
      *            experiment
      * 
      * @return the results (list of abs_cancer_model_id, model_descriptor, and #
@@ -1998,7 +2002,7 @@ public class QueryManagerImpl extends BaseManager
             String theSQLString = "select acm.abs_cancer_model_id," + "\n" + "       acm.model_descriptor," 
             + "\n" + "       st.name," + "\n" + "       acm.administrative_site," + "\n" 
             + "       count(*)" + "\n" + "  from invivo_Result sr," + "\n" + "       agent a," + "\n" 
-            + "       TRANSPLANT_INVIVO_RESULT ymsr," + "\n" + "       abs_cancer_model acm," + "\n" 
+            + "       TRANSPLANTATION_INVIVO_RESULT ymsr," + "\n" + "       abs_cancer_model acm," + "\n" 
             + "       treatment t," + "\n" + "       strain st," + "\n" + "       species sp" + "\n" 
             + " where sr.agent_id = a.agent_id" + "\n" + "   and sr.invivo_result_id = ymsr.invivo_result_id" 
             + "\n" + "   and sr.treatment_id = t.treatment_id" + "\n" 
@@ -2035,7 +2039,7 @@ public class QueryManagerImpl extends BaseManager
                 results.add(item);
                 cc++;
             }
-            log.debug("Got " + cc + " Transplant models");
+            log.debug("Got " + cc + " Transplantation models");
         }
         catch (Exception e)
         {
@@ -2155,13 +2159,13 @@ public class QueryManagerImpl extends BaseManager
     }
 
     /**
-     * Get the model id's for any model that has a Transplant
+     * Get the model id's for any model that has a Transplantation
      *  
      * @return a list of matching model ids
      * 
      * @throws PersistenceException
      */
-    private String getModelIdsForTransplant() throws PersistenceException
+    private String getModelIdsForTransplantation() throws PersistenceException
     {
 
         String theSQLString = "SELECT distinct par_abs_can_model_id FROM abs_cancer_model ";
@@ -3224,10 +3228,10 @@ public class QueryManagerImpl extends BaseManager
 						+  "where hp.id IN (select h.parentHistopathologyId from Histopathology h where h.parentHistopathologyId is not null) ) ";
 		}
 
-		// Search for Transplant
-		if ( inSearchData.isSearchTransplant() ) 
+		// Search for Transplantation
+		if ( inSearchData.isSearchTransplantation() ) 
 		{
-			theHQLQuery += "AND am.id IN ( select am.id from Transplant as t, AnimalModel as am where am.id = t.parAbsCanModelId and t.parAbsCanModelId is not null ) ";
+			theHQLQuery += "AND am.id IN ( select am.id from Transplantation as t, AnimalModel as am where am.id = t.parAbsCanModelId and t.parAbsCanModelId is not null ) ";
 		}		
 		
 		

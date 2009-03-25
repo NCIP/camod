@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.56 2008-08-14 17:20:46 pandyas Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.57 2009-03-25 16:24:58 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.56  2008/08/14 17:20:46  pandyas
+ *  remove debug lines
+ *
  *  Revision 1.55  2008/08/14 16:45:17  pandyas
  *  remove debug lines
  *
@@ -308,15 +311,15 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 				}
 			}
 
-			// Retrive the list of all Transplants assoicated with
+			// Retrive the list of all Transplantations assoicated with
 			// this Animal Model
-			Set transplantSet = animalModel.getTransplantCollection();
-            log.debug("transplantSet: " + transplantSet.size());
-			it = transplantSet.iterator();
-			List<Transplant> transplantList = new ArrayList<Transplant>();
+			Set transplantationSet = animalModel.getTransplantationCollection();
+            log.debug("transplantSet: " + transplantationSet.size());
+			it = transplantationSet.iterator();
+			List<Transplantation> transplantList = new ArrayList<Transplantation>();
 
 			while (it.hasNext()) {
-				Transplant transplant = (Transplant) it.next();
+				Transplantation transplant = (Transplantation) it.next();
 				transplantList.add(transplant);
 			}
 
@@ -483,7 +486,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 			request.getSession().setAttribute(
 					Constants.Submit.PUBLICATION_LIST, pubList);
 
-			request.getSession().setAttribute(Constants.Submit.TRANSPLANT_LIST,
+			request.getSession().setAttribute(Constants.Submit.TRANSPLANTATION_LIST,
 					transplantList);
 
 			/* GeneticDescription Lists */

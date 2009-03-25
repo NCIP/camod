@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Transplant.java,v 1.2 2008-11-05 04:57:02 schroedn Exp $
+ * $Id: Transplantation.java,v 1.3 2009-03-25 16:19:39 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2008/11/05 04:57:02  schroedn
+ * gForge #17515 Query for Transplant TOC not returning correct results, fix
+ *
  * Revision 1.1  2008/01/16 18:30:38  pandyas
  * Renamed value to Transplant for #8290
  *
@@ -41,7 +44,7 @@ import java.util.*;
 /**
  * @author rajputs
  */
-public class Transplant extends AbstractCancerModel implements Comparable
+public class Transplantation extends AbstractCancerModel implements Comparable
 {
     private static final long serialVersionUID = 3257445453799404851L;
 
@@ -273,7 +276,7 @@ public class Transplant extends AbstractCancerModel implements Comparable
             return false;
         if (!(this.getClass().isInstance(o)))
             return false;
-        final Transplant obj = (Transplant) o;
+        final Transplantation obj = (Transplantation) o;
         if (HashCodeUtil.notEqual(this.getName(), obj.getName()))
             return false;
         return true;
@@ -288,9 +291,9 @@ public class Transplant extends AbstractCancerModel implements Comparable
 
     public int compareTo(Object o)
     {
-        if ((o instanceof Transplant) && (this.getName() != null) && (((Transplant) o).getName() != null))
+        if ((o instanceof Transplantation) && (this.getName() != null) && (((Transplantation) o).getName() != null))
         {
-            int result = this.getName().compareTo(((Transplant) o).getName());
+            int result = this.getName().compareTo(((Transplantation) o).getName());
             if (result != 0)
             {
                 return result;

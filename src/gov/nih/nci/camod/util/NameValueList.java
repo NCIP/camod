@@ -42,9 +42,14 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: NameValueList.java,v 1.8 2008-10-01 18:26:40 pandyas Exp $
+ * $Id: NameValueList.java,v 1.9 2009-03-25 16:24:14 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2008/10/01 18:26:40  pandyas
+ * Modifed validation - changed code to get Induced Mutation dropdown list from database to compare with the user input.  We no longer need hard-coded list for IM validation since the flag was added to EF in caMOD 2.5.
+ *
+ * Additional modification for gforge #12825  	induced mutation entries need to be flagged (requires OM change) and searches for induced mutation and carcinogenic interventions need to be fixed
+ *
  * Revision 1.7  2008/08/13 18:40:28  pandyas
  * Fixed #6812  	Change spelling of Equus Caballus - start Caballus with a lower case "c"
  *
@@ -114,7 +119,7 @@ public class NameValueList
     	tableOfContentsList.add(new NameValue("Metastases_Query","Metastases_Query"));
     	tableOfContentsList.add(new NameValue("Rattus_Norvegicus_Query","Rattus_Norvegicus_Query"));
     	tableOfContentsList.add(new NameValue("Rattus_Rattus_Query","Rattus_Rattus_Query"));
-    	tableOfContentsList.add(new NameValue("Transplant_Query","Transplant_Query"));
+    	tableOfContentsList.add(new NameValue("Transplantation_Query","Transplantation_Query"));
     	
     }
 

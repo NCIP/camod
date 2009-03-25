@@ -42,9 +42,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.51 2008-10-22 15:29:51 schroedn Exp $
+ * $Id: SearchForm.java,v 1.52 2009-03-25 16:25:12 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.51  2008/10/22 15:29:51  schroedn
+ * Added PMID to simpleSearchReset()
+ *
  * Revision 1.50  2008/10/01 18:48:12  pandyas
  * Modifed validation - changed code to get Induced Mutation dropdown list from database to compare with the user input.  We no longer need hard-coded list for IM validation since the flag was added to EF in caMOD 2.5.
  *
@@ -262,7 +265,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
     protected boolean searchHistoMetastasis = false;
     protected boolean searchMicroArrayData = false;
     protected boolean searchImageData = false;    
-    protected boolean searchTransplant = false;
+    protected boolean searchTransplantation = false;
     protected boolean searchTransientInterference = false;
     protected boolean searchToolStrain = false; 
     
@@ -610,14 +613,14 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         this.searchImageData = searchImageData;
     }    
 
-    public boolean isSearchTransplant()
+    public boolean isSearchTransplantation()
     {
-        return searchTransplant;
+        return searchTransplantation;
     }
 
-    public void setSearchTransplant(boolean searchTransplant)
+    public void setSearchTransplantation(boolean searchTransplantation)
     {
-        this.searchTransplant = searchTransplant;
+        this.searchTransplantation = searchTransplantation;
     }
 
     /**
@@ -706,7 +709,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         searchTargetedModification = false;
         searchHistoMetastasis = false;
         searchMicroArrayData = false;
-        searchTransplant = false;
+        searchTransplantation = false;
         searchToolStrain = false;
         externalSource = null;
         searchImageData = false;
@@ -957,16 +960,16 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
                 errors.add("searchImageData", new ActionMessage("error.invalidParameter.validValue"));
         } 
 
-        // validate for searchTransplant
-        if (searchTransplant == true | searchTransplant == false )
+        // validate for searchTransplantation
+        if (searchTransplantation == true | searchTransplantation == false )
         {
         } else {           
                 // populate the validation message
-                errors.add("searchTransplant", new ActionMessage("error.invalidParameter.validValue")); 
+                errors.add("searchTransplantation", new ActionMessage("error.invalidParameter.validValue")); 
         }
 
         // validate for searchTransientInterference
-        if (searchTransplant == true | searchTransplant == false )
+        if (searchTransientInterference == true | searchTransientInterference == false )
         {
         } else {           
                 // populate the validation message

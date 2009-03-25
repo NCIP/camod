@@ -1,9 +1,12 @@
 /**
  * @author schroedlni
  * 
- * $Id: SavedQueryManagerImpl.java,v 1.13 2008-08-18 13:55:25 pandyas Exp $
+ * $Id: SavedQueryManagerImpl.java,v 1.14 2009-03-25 16:23:53 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2008/08/18 13:55:25  pandyas
+ * Clean up unused code
+ *
  * Revision 1.12  2008/08/14 16:36:40  pandyas
  * remove debug lines
  *
@@ -291,9 +294,9 @@ public class SavedQueryManagerImpl extends BaseManager implements
 			}
 			
 			if (theSavedQueryAttribute.getAttributeName().equals(
-					theBundle.getString("criteria.isSearchTransplant"))) {
+					theBundle.getString("criteria.isSearchTransplantation"))) {
 				if (theSavedQueryAttribute.getAttributeValue().equals("true")) {
-					inSearchForm.setSearchTransplant(true);
+					inSearchForm.setSearchTransplantation(true);
 				}
 			}			
 		}
@@ -580,11 +583,11 @@ public class SavedQueryManagerImpl extends BaseManager implements
 			criteriaList.add(sqa);
 		}
 
-		// Is it a transplant
-		if (inSearchData.isSearchTransplant() == true) {
+		// Is it a transplantation
+		if (inSearchData.isSearchTransplantation() == true) {
 			SavedQueryAttribute sqa = new SavedQueryAttribute();
 			sqa.setAttributeName(theBundle
-					.getString("criteria.isSearchTransplant"));
+					.getString("criteria.isSearchTransplantation"));
 			sqa.setAttributeValue("true");
 			criteriaList.add(sqa);
 		}

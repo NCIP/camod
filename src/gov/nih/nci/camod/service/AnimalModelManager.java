@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelManager.java,v 1.41 2008-08-14 06:24:37 schroedn Exp $
+ * $Id: AnimalModelManager.java,v 1.42 2009-03-25 16:21:25 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.41  2008/08/14 06:24:37  schroedn
+ * addMicroarraydata()
+ *
  * Revision 1.40  2008/01/16 18:30:30  pandyas
  * Renamed value to Transplant for #8290
  *
@@ -99,6 +102,9 @@
  * Added saveXenograft and saveGeneDelivery
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.41  2008/08/14 06:24:37  schroedn
+ * addMicroarraydata()
+ *
  * Revision 1.40  2008/01/16 18:30:30  pandyas
  * Renamed value to Transplant for #8290
  *
@@ -208,9 +214,7 @@ package gov.nih.nci.camod.service;
 
 import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.webapp.form.*;
-
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -243,7 +247,7 @@ public interface AnimalModelManager {
     
     public List searchAdmin(CurationAssignmentData inCurationAssignment) throws Exception;    
 
-    public void addTransplant(AnimalModel inAnimalModel, TransplantData inTransplantData) throws Exception;
+    public void addTransplantation(AnimalModel inAnimalModel, TransplantationData inTransplantationData) throws Exception;
 
     public void addGeneDelivery(AnimalModel inAnimalModel, GeneDeliveryData inGeneDeliveryData) throws Exception;
 

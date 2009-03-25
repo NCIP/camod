@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TransplantManagerImpl.java,v 1.1 2008-01-16 18:30:22 pandyas Exp $
+ * $Id: TransplantationManagerImpl.java,v 1.3 2009-03-25 16:23:53 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2008/01/16 18:30:22  pandyas
+ * Renamed value to Transplant for #8290
+ *
  * Revision 1.1  2007/10/31 19:13:27  pandyas
  * Fixed #8290 	Rename graft object into transplant object
  *
@@ -95,10 +98,10 @@ import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.Organ;
 import gov.nih.nci.camod.domain.Strain;
-import gov.nih.nci.camod.domain.Transplant;
-import gov.nih.nci.camod.service.TransplantManager;
+import gov.nih.nci.camod.domain.Transplantation;
+import gov.nih.nci.camod.service.TransplantationManager;
 import gov.nih.nci.camod.util.MailUtil;
-import gov.nih.nci.camod.webapp.form.TransplantData;
+import gov.nih.nci.camod.webapp.form.TransplantationData;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -112,242 +115,242 @@ import java.util.TreeMap;
 /**
  * @author rajputs
  */
-public class TransplantManagerImpl extends BaseManager implements
-TransplantManager {
+public class TransplantationManagerImpl extends BaseManager implements
+TransplantationManager {
 
 	/**
-	 * Get all Transplant objects
+	 * Get all Transplantation objects
 	 * 
 	 * 
-	 * @return the matching Transplant objects, or null if not found.
+	 * @return the matching Transplantation objects, or null if not found.
 	 * 
 	 * @exception Exception
 	 *                when anything goes wrong.
 	 */
 	public List getAll() throws Exception {
-		log.trace("In TransplantManagerImpl.getAll");
-		return super.getAll(Transplant.class);
+		log.trace("In TransplantationManagerImpl.getAll");
+		return super.getAll(Transplantation.class);
 	}
 
 	/**
-	 * Get a specific Transplant by id
+	 * Get a specific Transplantation by id
 	 * 
 	 * @param id
-	 *            the unique id for a Transplant
+	 *            the unique id for a Transplantation
 	 * 
-	 * @return the matching Transplant object, or null if not found.
+	 * @return the matching Transplantation object, or null if not found.
 	 * 
 	 * @exception Exception
 	 *                when anything goes wrong.
 	 */
-	public Transplant get(String id) throws Exception {
-		log.trace("In TransplantManagerImpl.get");
-		return (Transplant) super.get(id, Transplant.class);
+	public Transplantation get(String id) throws Exception {
+		log.trace("In TransplantationManagerImpl.get");
+		return (Transplantation) super.get(id, Transplantation.class);
 	}
 
-	public void save(Transplant transplant) throws Exception {
-		log.trace("In TransplantManagerImpl.save");
-		super.save(transplant);
+	public void save(Transplantation transplantation) throws Exception {
+		log.trace("In TransplantationManagerImpl.save");
+		super.save(transplantation);
 	}
 
 	public void remove(String id, AnimalModel inAnimalModel) throws Exception {
-		log.trace("In TransplantManagerImpl.remove");
+		log.trace("In TransplantationManagerImpl.remove");
 
-		inAnimalModel.getTransplantCollection().remove(get(id));
+		inAnimalModel.getTransplantationCollection().remove(get(id));
 		super.save(inAnimalModel);
 	}
 
-	public Transplant create(TransplantData inTransplantData,
+	public Transplantation create(TransplantationData inTransplantationData,
 			AnimalModel inAnimalModel) throws Exception {
 
 		log
-				.trace("<TransplantManagerImpl> Entering TransplantManagerImpl.create");
+				.trace("<TransplantationManagerImpl> Entering TransplantationManagerImpl.create");
 
-		Transplant theTransplant = new Transplant();
-		populateSpeciesStrain(inTransplantData, theTransplant, inAnimalModel);
-		populateOrgan(inTransplantData, theTransplant);
-		populateTransplant(inTransplantData, theTransplant, inAnimalModel);
+		Transplantation theTransplantation = new Transplantation();
+		populateSpeciesStrain(inTransplantationData, theTransplantation, inAnimalModel);
+		populateOrgan(inTransplantationData, theTransplantation);
+		populateTransplantation(inTransplantationData, theTransplantation, inAnimalModel);
 
-		log.debug("<TransplantManagerImpl> Exiting TransplantManagerImpl.create");
+		log.debug("<TransplantationManagerImpl> Exiting TransplantationManagerImpl.create");
 
-		return theTransplant;
+		return theTransplantation;
 	}
 
-	public void update(TransplantData inTransplantData, Transplant inTransplant,
+	public void update(TransplantationData inTransplantationData, Transplantation inTransplantation,
 			AnimalModel inAnimalModel) throws Exception {
-		log.debug("Entering TransplantManagerImpl.update TransplantId: "
-				+ inTransplant.getId());
+		log.debug("Entering TransplantationManagerImpl.update TransplantationId: "
+				+ inTransplantation.getId());
 
         // Populate w/ the new values and save
-        populateSpeciesStrain(inTransplantData, inTransplant, inAnimalModel);
-        populateOrgan(inTransplantData, inTransplant);
-        populateTransplant(inTransplantData, inTransplant, inAnimalModel);
-        save(inTransplant);
+        populateSpeciesStrain(inTransplantationData, inTransplantation, inAnimalModel);
+        populateOrgan(inTransplantationData, inTransplantation);
+        populateTransplantation(inTransplantationData, inTransplantation, inAnimalModel);
+        save(inTransplantation);
 
-        log.debug("Exiting TransplantDataManagerImpl.update");
+        log.debug("Exiting TransplantationDataManagerImpl.update");
     }
 
-	private void populateTransplant(TransplantData inTransplantData,
-			Transplant inTransplant, AnimalModel inAnimalModel) throws Exception {
+	private void populateTransplantation(TransplantationData inTransplantationData,
+			Transplantation inTransplantation, AnimalModel inAnimalModel) throws Exception {
 
-        log.debug("Entering TransplantManagerImpl.populateGraft");
+        log.debug("Entering TransplantationManagerImpl.populateGraft");
 
-        /* Set Transplant name */
-        inTransplant.setName(inTransplantData.getName());
+        /* Set Transplantation name */
+        inTransplantation.setName(inTransplantationData.getName());
 
 		/* Set other adminstrative site or selected adminstrative site */
 		// save directly in administrativeSite column of table
-		if (inTransplantData.getAdministrativeSite().equals(
+		if (inTransplantationData.getAdministrativeSite().equals(
 				Constants.Dropdowns.OTHER_OPTION)) {
 			// Do not save other in the DB
-			inTransplant.setAdminSiteAlternEntry(inTransplantData
+			inTransplantation.setAdminSiteAlternEntry(inTransplantationData
 					.getOtherAdministrativeSite());
 
 			// Send e-mail for other administrativeSite
-			sendEmail(inAnimalModel, inTransplantData
+			sendEmail(inAnimalModel, inTransplantationData
 					.getOtherAdministrativeSite(), "AdministrativeSite");
 		} else {
-			inTransplant.setAdministrativeSite(inTransplantData
+			inTransplantation.setAdministrativeSite(inTransplantationData
 					.getAdministrativeSite());
 
 			// Null out during editing from 'other' to selected
-			inTransplant.setAdminSiteAlternEntry(null);
+			inTransplantation.setAdminSiteAlternEntry(null);
 		}
 		
 		// save directly in ConditioningRegimen column of table
-		if (inTransplantData.getConditioningRegimen().equals(
+		if (inTransplantationData.getConditioningRegimen().equals(
 				Constants.Dropdowns.OTHER_OPTION)) {
-			inTransplant.setConditioningRegimen(null);
+			inTransplantation.setConditioningRegimen(null);
 			log.debug("ConditioningRegimen = Other");
 			// Do not save "other" value in the DB
-			inTransplant.setCondRegimenAlternEntry(inTransplantData.getOtherConditioningRegimen());
-			log.debug("OtherConditioningRegimen = " + inTransplantData.getOtherConditioningRegimen());
+			inTransplantation.setCondRegimenAlternEntry(inTransplantationData.getOtherConditioningRegimen());
+			log.debug("OtherConditioningRegimen = " + inTransplantationData.getOtherConditioningRegimen());
 
 			// Send e-mail for other ConditioningRegime
-			sendEmail(inAnimalModel, inTransplantData
+			sendEmail(inAnimalModel, inTransplantationData
 					.getOtherConditioningRegimen(), "ConditioningRegimen");
 		} else {
-			inTransplant.setConditioningRegimen(inTransplantData
+			inTransplantation.setConditioningRegimen(inTransplantationData
 					.getConditioningRegimen());
-			log.debug("ConditioningRegimen not other= " + inTransplantData
+			log.debug("ConditioningRegimen not other= " + inTransplantationData
 					.getConditioningRegimen());
 
 			// Null out during editing from 'other' to selected
-			inTransplant.setCondRegimenAlternEntry(null);
+			inTransplantation.setCondRegimenAlternEntry(null);
 		}
 		
-		inTransplant.setGeneticManipulation(inTransplantData
+		inTransplantation.setGeneticManipulation(inTransplantationData
 				.getGeneticManipulation());
-		inTransplant.setModificationDescription(inTransplantData
+		inTransplantation.setModificationDescription(inTransplantationData
 				.getModificationDescription());
-		inTransplant.setParentalCellLineName(inTransplantData
+		inTransplantation.setParentalCellLineName(inTransplantationData
 				.getParentalCellLineName());
-		inTransplant.setAtccNumber(inTransplantData.getAtccNumber());
-		inTransplant.setCellAmount(inTransplantData.getCellAmount());
-		inTransplant.setGrowthPeriod(inTransplantData.getGrowthPeriod());
-		inTransplant.setComments(inTransplantData.getComments());
+		inTransplantation.setAtccNumber(inTransplantationData.getAtccNumber());
+		inTransplantation.setCellAmount(inTransplantationData.getCellAmount());
+		inTransplantation.setGrowthPeriod(inTransplantationData.getGrowthPeriod());
+		inTransplantation.setComments(inTransplantationData.getComments());
 		
 		// anytime the Source type is "other"
-		if (inTransplantData.getSourceType().equals(
+		if (inTransplantationData.getSourceType().equals(
 				Constants.Dropdowns.OTHER_OPTION)) {
 			// Set Source type
-			inTransplant.setSourceType(null);
-			inTransplant.setSourceTypeAlternEntry(inTransplantData
+			inTransplantation.setSourceType(null);
+			inTransplantation.setSourceTypeAlternEntry(inTransplantationData
 					.getOtherSourceType());
 
-			// Send e-mail for other Transplantt Type
-			sendEmail(inAnimalModel, inTransplantData.getOtherSourceType(),
+			// Send e-mail for other Transplantationt Type
+			sendEmail(inAnimalModel, inTransplantationData.getOtherSourceType(),
 					"SourceType");
 
 		}
 		// anytime Source type is not other set uncontrolled vocab to null
 		// (covers editing)
 		else {
-			inTransplant.setSourceType(inTransplantData.getSourceType());
-			inTransplant.setSourceTypeAlternEntry(null);
+			inTransplantation.setSourceType(inTransplantationData.getSourceType());
+			inTransplantation.setSourceTypeAlternEntry(null);
 		}
 
-		log.debug("Exiting TransplantManagerImpl.populateGraft");
+		log.debug("Exiting TransplantationManagerImpl.populateGraft");
 	}
 
-	private void populateSpeciesStrain(TransplantData inTransplantData,
-			Transplant inTransplant, AnimalModel inAnimalModel) throws Exception {
+	private void populateSpeciesStrain(TransplantationData inTransplantationData,
+			Transplantation inTransplantation, AnimalModel inAnimalModel) throws Exception {
 
 		// Use Species to create strain
 		Strain theStrain = StrainManagerSingleton.instance().getOrCreate(
-				inTransplantData.getDonorEthinicityStrain(),
-				inTransplantData.getOtherDonorEthinicityStrain(),
-				inTransplantData.getDonorScientificName(),
-				inTransplantData.getOtherDonorScientificName());
+				inTransplantationData.getDonorEthinicityStrain(),
+				inTransplantationData.getOtherDonorEthinicityStrain(),
+				inTransplantationData.getDonorScientificName(),
+				inTransplantationData.getOtherDonorScientificName());
 
 		// other option selected for species - send e-mail
-		if (inTransplantData.getDonorScientificName().equals(
+		if (inTransplantationData.getDonorScientificName().equals(
 				Constants.Dropdowns.OTHER_OPTION)) {
 			// Send e-mail for other donor species
-			sendEmail(inAnimalModel, inTransplantData
+			sendEmail(inAnimalModel, inTransplantationData
 					.getOtherDonorScientificName(), "Donor Species");
 		}
 		// other option selected for strain - send e-mail
-		if (inTransplantData.getDonorEthinicityStrain().equals(
+		if (inTransplantationData.getDonorEthinicityStrain().equals(
 				Constants.Dropdowns.OTHER_OPTION)) {
 			// Send e-mail for other donor species
-			sendEmail(inAnimalModel, inTransplantData
+			sendEmail(inAnimalModel, inTransplantationData
 					.getOtherDonorEthinicityStrain(), "Donor Strain");
 		}
 
 		log.debug("\n <populateSpeciesStrain> theSpecies is NOT other: ");
-		inTransplant.setStrain(theStrain);
+		inTransplantation.setStrain(theStrain);
 
 	}
 
-	private void populateOrgan(TransplantData inTransplantData,
-			Transplant inTransplant) throws Exception {
+	private void populateOrgan(TransplantationData inTransplantationData,
+			Transplantation inTransplantation) throws Exception {
         
-        log.debug("<TransplantManagerImpl> populateOrgan: ");        
+        log.debug("<TransplantationManagerImpl> populateOrgan: ");        
 
         // Update loop handeled separately for conceptCode = 00000
-        if (inTransplantData.getOrganTissueCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)){
-            if(inTransplantData.getOrgan() != null && inTransplantData.getOrgan().length() >0 ) {
-                log.debug("Organ update loop for text: " + inTransplantData.getOrgan()); 
-                inTransplant.setOrgan(new Organ());
-                inTransplant.getOrgan().setName(inTransplantData.getOrgan());   
-                inTransplant.getOrgan().setConceptCode(
+        if (inTransplantationData.getOrganTissueCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)){
+            if(inTransplantationData.getOrgan() != null && inTransplantationData.getOrgan().length() >0 ) {
+                log.debug("Organ update loop for text: " + inTransplantationData.getOrgan()); 
+                inTransplantation.setOrgan(new Organ());
+                inTransplantation.getOrgan().setName(inTransplantationData.getOrgan());   
+                inTransplantation.getOrgan().setConceptCode(
                         Constants.Dropdowns.CONCEPTCODEZEROS);     
             } else {
                 log.debug("Clear previously entered organ text: " );
-                inTransplant.setOrgan(null); 
+                inTransplantation.setOrgan(null); 
             }
         } else {            
             // Using trees loop, new save loop and update loop
-            if (inTransplantData.getOrganTissueCode() != null && inTransplantData.getOrganTissueCode().length() > 0
-                    && inTransplantData.getOrganTissueName() != null && inTransplantData.getOrganTissueName().length() > 0) {
-                log.debug("OrganTissueCode: " + inTransplantData.getOrganTissueCode());
-                log.debug("OrganTissueName: " + inTransplantData.getOrganTissueName()); 
+            if (inTransplantationData.getOrganTissueCode() != null && inTransplantationData.getOrganTissueCode().length() > 0
+                    && inTransplantationData.getOrganTissueName() != null && inTransplantationData.getOrganTissueName().length() > 0) {
+                log.debug("OrganTissueCode: " + inTransplantationData.getOrganTissueCode());
+                log.debug("OrganTissueName: " + inTransplantationData.getOrganTissueName()); 
                 
                 log.debug("OrganTissueCode() != null - getOrCreate method used");
                 // when using tree, organTissueName populates the organ name entry
                 Organ theNewOrgan = OrganManagerSingleton.instance().getOrCreate(
-                		inTransplantData.getOrganTissueCode(),
-                		inTransplantData.getOrganTissueName());
+                		inTransplantationData.getOrganTissueCode(),
+                		inTransplantationData.getOrganTissueName());
                 
                 log.debug("theNewOrgan: " + theNewOrgan);
-                inTransplant.setOrgan(theNewOrgan); 
+                inTransplantation.setOrgan(theNewOrgan); 
             } 
             // Clear organ selection via GUI
-            if (inTransplantData.getOrgan() == null && inTransplantData.getOrganTissueCode().length() <1 ) {
+            if (inTransplantationData.getOrgan() == null && inTransplantationData.getOrganTissueCode().length() <1 ) {
                 log.debug("Null out organ when cleared: " );
-                inTransplant.setOrgan(null);                 
+                inTransplantation.setOrgan(null);                 
 
             }
             // initial save text entry organ from GUI
-            if (inTransplantData.getOrgan() != null && inTransplantData.getOrgan().length() >0 ) {
+            if (inTransplantationData.getOrgan() != null && inTransplantationData.getOrgan().length() >0 ) {
                 // text entry loop = new save
-                log.debug("Organ (initial text entry): " + inTransplantData.getOrgan()); 
-                inTransplant.setOrgan(new Organ());
-                inTransplant.getOrgan().setName(inTransplantData.getOrgan());                
-                inTransplant.getOrgan().setConceptCode(
+                log.debug("Organ (initial text entry): " + inTransplantationData.getOrgan()); 
+                inTransplantation.setOrgan(new Organ());
+                inTransplantation.getOrgan().setName(inTransplantationData.getOrgan());                
+                inTransplantation.getOrgan().setConceptCode(
                         Constants.Dropdowns.CONCEPTCODEZEROS); 
-                log.debug("New Organ: " + inTransplant.getOrgan().toString());
+                log.debug("New Organ: " + inTransplantation.getOrgan().toString());
             }           
             
         } 

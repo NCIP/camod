@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.98 2009-03-04 16:20:03 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.99 2009-03-25 16:22:24 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.98  2009/03/04 16:20:03  pandyas
+ * added comments to debug MTB data load on camoddev21
+ *
  * Revision 1.97  2008/10/30 16:21:26  pandyas
  * modify debug statements for build to dev
  *
@@ -306,7 +309,7 @@ import gov.nih.nci.camod.domain.TargetedModification;
 import gov.nih.nci.camod.domain.Therapy;
 import gov.nih.nci.camod.domain.Transgene;
 import gov.nih.nci.camod.domain.TransientInterference;
-import gov.nih.nci.camod.domain.Transplant;
+import gov.nih.nci.camod.domain.Transplantation;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.util.DuplicateUtil;
 import gov.nih.nci.camod.util.MailUtil;
@@ -336,7 +339,7 @@ import gov.nih.nci.camod.webapp.form.SurgeryData;
 import gov.nih.nci.camod.webapp.form.TargetedModificationData;
 import gov.nih.nci.camod.webapp.form.TherapyData;
 import gov.nih.nci.camod.webapp.form.TransientInterferenceData;
-import gov.nih.nci.camod.webapp.form.TransplantData;
+import gov.nih.nci.camod.webapp.form.TransplantationData;
 import gov.nih.nci.camod.webapp.form.ViralTreatmentData;
 import gov.nih.nci.common.persistence.Persist;
 import gov.nih.nci.common.persistence.Search;
@@ -844,17 +847,17 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 		return inAnimalModel;
 	}
 
-    public void addTransplant(AnimalModel inAnimalModel,
-    		TransplantData inTransplantData) throws Exception
+    public void addTransplantation(AnimalModel inAnimalModel,
+    		TransplantationData inTransplantationData) throws Exception
     {
-        log.debug("Entering saveTransplant");
+        log.debug("Entering saveTransplantation");
 
-        Transplant theTransplant = TransplantManagerSingleton.instance().create(inTransplantData, inAnimalModel);
+        Transplantation theTransplantation = TransplantationManagerSingleton.instance().create(inTransplantationData, inAnimalModel);
 
-        inAnimalModel.addTransplant(theTransplant);
+        inAnimalModel.addTransplantation(theTransplantation);
         save(inAnimalModel);
 
-        log.debug("Exiting saveTransplant");
+        log.debug("Exiting saveTransplantation");
     }
 
     /**

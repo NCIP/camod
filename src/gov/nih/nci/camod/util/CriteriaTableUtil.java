@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: CriteriaTableUtil.java,v 1.12 2008-10-22 05:57:18 schroedn Exp $
+ * $Id: CriteriaTableUtil.java,v 1.13 2009-03-25 16:24:14 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2008/10/22 05:57:18  schroedn
+ * PMID search fix
+ *
  * Revision 1.11  2008/08/12 19:44:53  pandyas
  * Fixed #15053  	Search for models with transgenic or targeted modification on advanced search page confusing
  *
@@ -284,9 +287,9 @@ public class CriteriaTableUtil
         }
         
         // Search for Transplant
-        if (sData.isSearchTransplant())
+        if (sData.isSearchTransplantation())
         {
-            theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.isSearchTransplant") + "</td><td class=\"formFieldNone\">" + "Checked" + "</td></tr>";
+            theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.isSearchTransplantation") + "</td><td class=\"formFieldNone\">" + "Checked" + "</td></tr>";
         }
 
         theDisplayTable += "</TABLE>";

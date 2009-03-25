@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TransplantManagerSingleton.java,v 1.1 2008-01-16 18:30:22 pandyas Exp $
+ * $Id: TransplantationManagerSingleton.java,v 1.4 2009-03-25 16:23:52 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2008/01/16 18:30:22  pandyas
+ * Renamed value to Transplant for #8290
+ *
  * Revision 1.2  2007/11/01 15:40:53  pandyas
  * Fixed #8290     Rename graft object into transplant object
  *
@@ -25,16 +28,16 @@ package gov.nih.nci.camod.service.impl;
 /**
  * @author dgeorge
  * 
- * Singleton class for the TransplantManagerImpl
+ * Singleton class for the TransplantationManagerImpl
  */
-public class TransplantManagerSingleton {
+public class TransplantationManagerSingleton {
 
-    private static TransplantManagerImpl ourManager = new TransplantManagerImpl();
+    private static TransplantationManagerImpl ourManager = new TransplantationManagerImpl();
 
     /**
-     * @return the global instance of the TransplantManager
+     * @return the global instance of the TransplantationManager
      */
-    public static synchronized TransplantManagerImpl instance() {
+    public static synchronized TransplantationManagerImpl instance() {
         return ourManager;
     }
 }

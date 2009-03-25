@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TransplantForm.java,v 1.1 2008-01-16 18:29:46 pandyas Exp $
+ * $Id: TransplantationForm.java,v 1.3 2009-03-25 16:25:12 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2008/01/16 18:29:46  pandyas
+ * Renamed value to Transplant for #8290
+ *
  * Revision 1.1  2007/10/31 17:59:39  pandyas
  * Fixed #8290 	Rename graft object into transplant object
  *
@@ -40,7 +43,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionMapping;
 
-public class TransplantForm extends BaseForm implements Serializable, TransplantData {
+public class TransplantationForm extends BaseForm implements Serializable, TransplantationData {
 
     private static final long serialVersionUID = 3257125453799404851L;
 
@@ -49,10 +52,10 @@ public class TransplantForm extends BaseForm implements Serializable, Transplant
      * 
      * @author rajputs
      */
-    public TransplantForm() {
+    public TransplantationForm() {
     }
 
-    // This form does not include properties from the parent class of Transplant,
+    // This form does not include properties from the parent class of Transplantation,
     // AbstractCancerModel
     protected String name;
     protected String geneticManipulation;

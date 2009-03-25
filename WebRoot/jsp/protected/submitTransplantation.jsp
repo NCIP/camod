@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: submitTransplant.jsp,v 1.2 2008-01-23 22:26:25 pandyas Exp $
+ * $Id: submitTransplantation.jsp,v 1.3 2009-03-25 16:27:54 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2008/01/23 22:26:25  pandyas
+ * Fixed #11831  	maximize buttion in pop-up windows disabled which prevents user to see full page
+ *
  * Revision 1.1  2008/01/16 18:34:35  pandyas
  * Renamed value to Transplant for #8290
  *
@@ -105,7 +108,7 @@
 
 <%@ page import="gov.nih.nci.camod.domain.AnimalModel" %>	
 <%@ page import="gov.nih.nci.camod.domain.Strain" %>	
-<%@ page import="gov.nih.nci.camod.webapp.form.TransplantForm" %>	
+<%@ page import="gov.nih.nci.camod.webapp.form.TransplantationForm" %>	
 <%@ page import='gov.nih.nci.camod.Constants.*' %>
 
 <%@ page import="java.util.List" %>
@@ -118,19 +121,19 @@
 <script language="JavaScript" src="scripts/global.js"></script>
 
 <%
-	String aTransplantID = request.getParameter( "aTransplantID" );
+	String aTransplantationID = request.getParameter( "aTransplantationID" );
     String isDeleted = (String) request.getAttribute(Constants.Parameters.DELETED);
     
-	//if aTransplantID is passed in, then we are dealing with a previously entered model and are editing it
+	//if aTransplantationID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one
 	
-	String actionName = "TransplantAction.do?method=save";
+	String actionName = "TransplantationAction.do?method=save";
 	
-	if ( aTransplantID != null && aTransplantID.length() > 0 && isDeleted == null) {
-		actionName = "TransplantAction.do?method=edit";
+	if ( aTransplantationID != null && aTransplantationID.length() > 0 && isDeleted == null) {
+		actionName = "TransplantationAction.do?method=edit";
 	}
 	else {
-	    aTransplantID = "";
+	    aTransplantationID = "";
 	}
 %>
 
@@ -141,7 +144,7 @@
 	}
 	function getOptions( control ) {
 		form = control.form;
-		form.action  = "TransplantPopulateAction.do?method=setStrainOrganValues";
+		form.action  = "TransplantationPopulateAction.do?method=setStrainOrganValues";
 		form.submit();		
 	}	
 		
@@ -167,7 +170,7 @@
 
 <html:form action="<%= actionName %>" focus="name">
 
-<!-- submitTransplant.jsp -->
+<!-- submitTransplantation.jsp -->
 <!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
@@ -182,13 +185,13 @@
 	</tr>
 	
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Transplant
+		<td class="formTitle" height="20" colspan="3">Transplantation
 			<camod:cshelp topic="xenograft_transplant_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field1">Name of Transplant:</label>
+		<td class="formRequiredLabel"><label for="field1">Name of Transplantation:</label>
 		</td>
 		<td class="formField">
 				<html:text styleClass="formFieldSized" property="name"  size="30" />
@@ -245,7 +248,7 @@
 				<c:when test="${donorspeciescommonname == 'Mouse'}">
 				<td class="formLabel"><label for="field1">Organ/Tissue:</label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />							
-					<a href="javascript:showMouseTissueTree('transplantForm', 'organTissueCode', 'organTissueName', 'organ', true)">
+					<a href="javascript:showMouseTissueTree('transplantationForm', 'organTissueCode', 'organTissueName', 'organ', true)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>
 				</td>				
 					<html:hidden property="organTissueCode"/>
@@ -258,7 +261,7 @@
 				<c:when test="${donorspeciescommonname == 'Rat'}">	
 				<td class="formLabel"><label for="field1">Organ/Tissue:</label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
-					<a href="javascript:showRatTissueTree('transplantForm', 'organTissueCode', 'organTissueName', 'organ', true)">
+					<a href="javascript:showRatTissueTree('transplantationForm', 'organTissueCode', 'organTissueName', 'organ', true)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>
 				</td>
 					<html:hidden property="organTissueCode"/>
@@ -271,7 +274,7 @@
 				<c:when test="${donorspeciescommonname == 'Zebrafish'}">
 				<td class="formLabel"><label for="field1">Organ/Tissue:</label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
-					<a href="javascript:showZebrafishTissueTree('transplantForm', 'organTissueCode', 'organTissueName', 'organ', true)">
+					<a href="javascript:showZebrafishTissueTree('transplantationForm', 'organTissueCode', 'organTissueName', 'organ', true)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>
 				</td>
 					<html:hidden property="organTissueCode"/>
@@ -284,7 +287,7 @@
 				<c:when test="${donorspeciescommonname == 'Human'}">
 				<td class="formLabel"><label for="field1">Organ/Tissue:</label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
-					<a href="javascript:showHumanTissueTree('transplantForm', 'organTissueCode', 'organTissueName', 'organ', true)">
+					<a href="javascript:showHumanTissueTree('transplantationForm', 'organTissueCode', 'organTissueName', 'organ', true)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>
 				</td>
 					<html:hidden property="organTissueCode"/>
@@ -312,7 +315,7 @@
 		<td class="formRequiredLabel"><label for="field3">Source Type:</label></td>
 		<td class="formField">
 		<br>				
-		<label for="field3">- if transplant type is not listed, <br>then please select "Other" and then specify it below:</label>
+		<label for="field3">- if transplantation type is not listed, <br>then please select "Other" and then specify it below:</label>
 		<br>
 		<br>		
 			<html:select styleClass="formFieldSized" size="1" property="sourceType" onclick="chkOtherSourceType(this);">
@@ -466,14 +469,14 @@
 				  	  <bean:message key="button.reset"/>
   				  </html:reset>
 
-			      <c:if test="${not empty aTransplantID}">
+			      <c:if test="${not empty aTransplantationID}">
 	  				  <html:submit property="<%=Constants.Parameters.ACTION%>" styleClass="actionButton" onclick="return confirm('Are you sure you want to delete?');">
 						  <bean:message key="button.delete"/>
 					  </html:submit>
 				  </c:if>
 				  				
 				  <!--  Done this way since html:hidden doesn't seem to work correctly -->
-				  <input type="hidden" name="aTransplantID" value="<%= aTransplantID %>">
+				  <input type="hidden" name="aTransplantationID" value="<%= aTransplantationID %>">
 							
 			</TABLE>
 		</td>

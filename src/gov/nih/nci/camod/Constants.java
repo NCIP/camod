@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.114 2009-03-13 14:56:47 pandyas Exp $
+ * $Id: Constants.java,v 1.115 2009-03-25 16:17:45 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.114  2009/03/13 14:56:47  pandyas
+ * modified for #19758  	Remove the filter from the PI drop-down list on admin (Edit Models) search criteria screen
+ *
  * Revision 1.113  2008/08/14 06:22:10  schroedn
  * Added constant for microarraydata list
  *
@@ -711,7 +714,7 @@ public class Constants {
 
         public static final String GENETIC_DESCRIPTION = "Genetic Description Page";
 
-        public static final String TRANSPLANT = "Transplant Page";
+        public static final String TRANSPLANTATION = "Transplantation Page";
         
         public static final String TRANSIENT_INTERFERENCE = "Transient Interference Page";
     }
@@ -734,12 +737,12 @@ public class Constants {
     // Used to compare AMMODELSPECIESCOMMONNAME to Zebrafish in EvsTreeUtil.java
     public static final String ZEBRAFISH = "Zebrafish";
     
-    // This constants stores the donor species common name for the Transplant screens 
-    // set in TransplantPopulateAction
+    // This constants stores the donor species common name for the Transplantation screens 
+    // set in TransplantationPopulateAction
     public static final String DONORSPECIESCOMMONNAME = "donorspeciescommonname";
     
     // This constants stores the species common name from the simple and advanced search screens 
-    // set in TransplantPopulateAction
+    // set in TransplantationPopulateAction
     public static final String SEARCHSPECIESCOMMONNAME = "searchspeciescommonname";    
 
     /**
@@ -749,9 +752,9 @@ public class Constants {
 
     public static final String ANIMALMODEL = "animalmodel";
 
-    public static final String TRANSPLANTMODEL = "transplantmodel";
+    public static final String TRANSPLANTATIONMODEL = "transplantationmodel";
 
-    public static final String TRANSPLANTRESULTLIST = "transplantresultlist";
+    public static final String TRANSPLANTATIONRESULTLIST = "transplantationresultlist";
 
     /**
      * Used to store username for current user
@@ -885,7 +888,7 @@ public class Constants {
 
         public static final String VIRALTREATMENT_LIST = "viraltreatment_list";
 
-        public static final String TRANSPLANT_LIST = "transplant_list";
+        public static final String TRANSPLANTATION_LIST = "transplantation_list";
 
         public static final String SPONTANEOUSMUTATION_LIST = "spontaneousmutation_list";
 

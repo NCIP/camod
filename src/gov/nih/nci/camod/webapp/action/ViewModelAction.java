@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.66 2009-03-13 17:03:46 pandyas Exp $
+ *  $Id: ViewModelAction.java,v 1.67 2009-03-25 16:24:58 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.66  2009/03/13 17:03:46  pandyas
+ *  modified for #19205  	Sort therapies in the order they are entered
+ *
  *  Revision 1.65  2008/08/14 17:07:03  pandyas
  *  remove debug line
  *
@@ -219,7 +222,7 @@ import gov.nih.nci.camod.domain.Comments;
 import gov.nih.nci.camod.domain.EngineeredGene;
 import gov.nih.nci.camod.domain.GeneIdentifier;
 import gov.nih.nci.camod.domain.GenomicSegment;
-import gov.nih.nci.camod.domain.Transplant;
+import gov.nih.nci.camod.domain.Transplantation;
 import gov.nih.nci.camod.domain.InducedMutation;
 import gov.nih.nci.camod.domain.Person;
 import gov.nih.nci.camod.domain.SpontaneousMutation;
@@ -230,7 +233,7 @@ import gov.nih.nci.camod.service.AgentManager;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.service.CommentsManager;
 import gov.nih.nci.camod.service.PersonManager;
-import gov.nih.nci.camod.service.TransplantManager;
+import gov.nih.nci.camod.service.TransplantationManager;
 import gov.nih.nci.camod.service.impl.QueryManagerSingleton;
 import gov.nih.nci.camod.util.EvsTreeUtil;
 import gov.nih.nci.camod.util.SafeHTMLUtil;
@@ -444,6 +447,7 @@ public class ViewModelAction extends BaseAction
                     try
                     {
                       ApplicationService appService = EvsTreeUtil.getApplicationService();
+                      log.info("EvsTreeUtil.getApplicationService: " + appService.toString());
                         DatabaseCrossReference dcr = new DatabaseCrossReferenceImpl(); 
                         dcr.setCrossReferenceId(geneIdentifier.getEntrezGeneID());
 
@@ -694,9 +698,9 @@ public class ViewModelAction extends BaseAction
                     {
                         yeastResults.put(a.getId(), yeastStages);
                     }
-                    // now get invivo/Transplant data
-                    List transplantResults = QueryManagerSingleton.instance().getInvivoResults(a, true);
-                    invivoResults.put(a.getId(), transplantResults);
+                    // now get invivo/Transplantation data
+                    List transplantationResults = QueryManagerSingleton.instance().getInvivoResults(a, true);
+                    invivoResults.put(a.getId(), transplantationResults);
                 }
             }
         }
@@ -961,16 +965,16 @@ public class ViewModelAction extends BaseAction
      * @return
      * @throws Exception
      */
-    public ActionForward populateTransplant(ActionMapping mapping,
+    public ActionForward populateTransplantation(ActionMapping mapping,
                                                      ActionForm form,
                                                      HttpServletRequest request,
                                                      HttpServletResponse response) throws Exception
     {
-        log.debug("<populateTransplant> Enter:");    	
+        log.debug("<populateTransplantation> Enter:");    	
         setCancerModel(request);
-        setComments(request, Constants.Pages.TRANSPLANT);
-        log.debug("<populateTransplant> Exit:"); 
-        return mapping.findForward("viewTransplant");
+        setComments(request, Constants.Pages.TRANSPLANTATION);
+        log.debug("<populateTransplantation> Exit:"); 
+        return mapping.findForward("viewTransplantation");
     }
 
     /**
@@ -988,26 +992,26 @@ public class ViewModelAction extends BaseAction
      * @return
      * @throws Exception
      */
-    public ActionForward populateTransplantDetails(ActionMapping mapping,
+    public ActionForward populateTransplantationDetails(ActionMapping mapping,
                                                   ActionForm form,
                                                   HttpServletRequest request,
                                                   HttpServletResponse response) throws Exception
     {
-        log.debug("<populateTransplantDetails> Enter:");    	
+        log.debug("<populateTransplantationDetails> Enter:");    	
         String modelID = request.getParameter("tModelID");
         request.getSession().setAttribute(Constants.MODELID, modelID);
         String nsc = request.getParameter("nsc");
         if (nsc != null && nsc.length() == 0)
             return mapping.findForward("viewModelCharacteristics");
-        log.debug("<populateTransplantDetails> modelID:" + modelID);
-        log.debug("<populateTransplantDetails> nsc:" + nsc);
-        TransplantManager mgr = (TransplantManager) getBean("transplantManager");
+        log.debug("<populateTransplantationDetails> modelID:" + modelID);
+        log.debug("<populateTransplantationDetails> nsc:" + nsc);
+        TransplantationManager mgr = (TransplantationManager) getBean("transplantationManager");
 
-        Transplant t = mgr.get(modelID);
+        Transplantation t = mgr.get(modelID);
 
-        request.getSession().setAttribute(Constants.TRANSPLANTMODEL, t);
+        request.getSession().setAttribute(Constants.TRANSPLANTATIONMODEL, t);
         request.getSession().setAttribute(Constants.NSC_NUMBER, nsc);
-        request.getSession().setAttribute(Constants.TRANSPLANTRESULTLIST, t.getInvivoResultCollectionByNSC(nsc));
+        request.getSession().setAttribute(Constants.TRANSPLANTATIONRESULTLIST, t.getInvivoResultCollectionByNSC(nsc));
         return mapping.findForward("viewInvivoDetails");
     }
 }

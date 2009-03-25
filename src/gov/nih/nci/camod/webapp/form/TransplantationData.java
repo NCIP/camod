@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: TransplantData.java,v 1.1 2008-01-16 18:29:46 pandyas Exp $
+ * $Id: TransplantationData.java,v 1.3 2009-03-25 16:25:12 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2008/01/16 18:29:46  pandyas
+ * Renamed value to Transplant for #8290
+ *
  * Revision 1.1  2007/10/31 17:44:39  pandyas
  * Fixed #8290 	Rename graft object into transplant object
  *
@@ -42,9 +45,9 @@
 package gov.nih.nci.camod.webapp.form;
 
 /**
- * Transplant interface
+ * Transplantation interface
  */
-public interface TransplantData
+public interface TransplantationData
 {
 
     public String getDonorScientificName();

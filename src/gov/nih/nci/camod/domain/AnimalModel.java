@@ -1,5 +1,8 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.27  2008/10/16 13:52:24  schroedn
+ * Added StrainId to domain for searching
+ *
  * Revision 1.26  2008/01/16 18:30:38  pandyas
  * Renamed value to Transplant for #8290
  *
@@ -42,7 +45,7 @@
  * Cleanup
  *
  * 
- * $Id: AnimalModel.java,v 1.27 2008-10-16 13:52:24 schroedn Exp $
+ * $Id: AnimalModel.java,v 1.28 2009-03-25 16:19:40 pandyas Exp $
  */
 package gov.nih.nci.camod.domain;
 
@@ -74,7 +77,7 @@ public class AnimalModel extends AbstractCancerModel {
 
 	private Set<MicroArrayData> microArrayDataCollection = new HashSet<MicroArrayData>();
 
-	private Set<Transplant> transplantCollection = new HashSet<Transplant>();
+	private Set<Transplantation> transplantationCollection = new HashSet<Transplantation>();
 
 	private Set<Therapy> therapyCollection = new HashSet<Therapy>();
 	
@@ -423,25 +426,25 @@ public class AnimalModel extends AbstractCancerModel {
 	}
 
 	/**
-	 * @return Returns the transplantCollection.
+	 * @return Returns the transplantationCollection.
 	 */
-	public Set<Transplant> getTransplantCollection() {
-		return transplantCollection;
+	public Set<Transplantation> getTransplantationCollection() {
+		return transplantationCollection;
 	}
 
 	/**
 	 * @param transplanCollection
-	 *            The transplantCollection to set.
+	 *            The transplantationCollection to set.
 	 */
-	public void setTransplantCollection(Set<Transplant> transplantCollection) {
-		this.transplantCollection = transplantCollection;
+	public void setTransplantationCollection(Set<Transplantation> transplantationCollection) {
+		this.transplantationCollection = transplantationCollection;
 	}
 
-	public void addTransplant(Transplant transplant) {
-		transplantCollection.add(transplant);
+	public void addTransplantation(Transplantation transplantation) {
+		transplantationCollection.add(transplantation);
 	}
 
-	/**
+	/**setTransplantationCollection
 	 * @return Returns the microArrayDataCollection.
 	 */
 	public Set<MicroArrayData> getMicroArrayDataCollection() {

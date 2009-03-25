@@ -1,8 +1,15 @@
 <%
 		/*
-		 * $Id: subSubmitMenu.jsp,v 1.68 2008-11-21 17:26:56 pandyas Exp $
+		 * $Id: subSubmitMenu.jsp,v 1.69 2009-03-25 16:27:54 pandyas Exp $
 		 *
 		 * $Log: not supported by cvs2svn $
+		 * Revision 1.68  2008/11/21 17:26:56  pandyas
+		 * modified for gfrorge #16902  	link to the induced mutation page in the Admin/ Edited Models mode is not available for old models
+		 *
+		 * Reversed last two code fixes.  This fix needed to be done on the EnvironmentalFactor object which has a convinience method to get the name we want to display.  The getDisplayNameIM method needed to be modified to look for nameAlternEntry or name (for older models) when displaying IM models.
+		 *
+		 * We have decided to rework this since we have the EF flag after release 2.5 and nameAlternEntry no longer may be needed to differeentiate between CE and IM in the EF table.
+		 *
 		 * Revision 1.67  2008/10/29 15:47:30  schroedn
 		 * Bug #16902 Old models not showing link
 		 *
@@ -82,7 +89,7 @@
 <%@ page import="gov.nih.nci.camod.domain.Therapy"%>
 <%@ page import="gov.nih.nci.camod.domain.CellLine"%>
 <%@ page import="gov.nih.nci.camod.domain.MicroArrayData"%>
-<%@ page import="gov.nih.nci.camod.domain.Transplant"%>
+<%@ page import="gov.nih.nci.camod.domain.Transplantation"%>
 <%@ page import="gov.nih.nci.camod.domain.InducedMutation"%>
 <%@ page import="gov.nih.nci.camod.domain.EngineeredGene"%>
 <%@ page import="gov.nih.nci.camod.domain.ExpressionFeature"%>
@@ -777,19 +784,19 @@
 	<div id="menu12" class="masterTitle" onclick="SwitchMenu('sub12')"
 		onmouseover="ChangeClass('menu12','masterTitleOver')"
 		onmouseout="ChangeClass('menu12','masterTitle')"><IMG height=5 alt=""
-		src="images/subMenuArrow.gif" width=5> TRANSPLANT</div>
+		src="images/subMenuArrow.gif" width=5> TRANSPLANTATION</div>
 	<span class="submasterdiv" id="sub12"> <img
 		src="images/right_arrow.gif" border="0"> 
-		<html:link styleClass="subMenuRed" action="TransplantPopulateAction.do?method=dropdown">
-			Enter Transplant
+		<html:link styleClass="subMenuRed" action="TransplantationPopulateAction.do?method=dropdown">
+			Enter Transplantation
 		</html:link><br>
-		<logic:iterate id="aTransplant" name="transplant_list" type="Transplant">&nbsp;&nbsp;&nbsp;&nbsp;
+		<logic:iterate id="aTransplantation" name="transplantation_list" type="Transplantation">&nbsp;&nbsp;&nbsp;&nbsp;
 			
 			<img src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
-				action="TransplantPopulateAction.do?method=populate"
-				paramId="aTransplantID" paramName="aTransplant" paramProperty="id">
-				<camod:shorten><bean:write name="aTransplant" property="name" filter="false" /></camod:shorten>
+				action="TransplantationPopulateAction.do?method=populate"
+				paramId="aTransplantationID" paramName="aTransplantation" paramProperty="id">
+				<camod:shorten><bean:write name="aTransplantation" property="name" filter="false" /></camod:shorten>
 			</html:link>
 			<br>
 		</logic:iterate> <br>

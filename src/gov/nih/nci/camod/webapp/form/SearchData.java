@@ -42,9 +42,15 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchData.java,v 1.18 2008-08-12 20:14:28 pandyas Exp $
+ * $Id: SearchData.java,v 1.19 2009-03-25 16:25:13 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2008/08/12 20:14:28  pandyas
+ * Code was rolled back to continue work on security scan fixes.  Code added back in jsp again.  Originally From:
+ * Revision 1.15  2008/07/11 17:18:19  schroedn
+ * Bug 11007
+ * Added search for PMID numbers
+ *
  * Revision 1.17  2008/08/12 19:40:32  pandyas
  * Fixed #15053  	Search for models with transgenic or targeted modification on advanced search page confusing
  *
@@ -224,9 +230,9 @@ public interface SearchData {
 
 	public void setExternalSource(String externalSource);
 
-	public boolean isSearchTransplant();
+	public boolean isSearchTransplantation();
 
-	public void setSearchTransplant(boolean b);
+	public void setSearchTransplantation(boolean b);
 
 	public String getTumorClassification();
 
