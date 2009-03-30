@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchResults.jsp,v 1.31 2008-10-21 06:11:42 schroedn Exp $
+ * $Id: searchResults.jsp,v 1.32 2009-03-30 16:10:49 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.31  2008/10/21 06:11:42  schroedn
+ * Bug #7474 Changed field names
+ *
  * Revision 1.30  2008/08/14 17:10:53  pandyas
  * remove debug line
  *
@@ -457,8 +460,8 @@
 							         <camod:highlight><c:out escapeXml="false" value="${row.cellLine}"/></camod:highlight>
 							     </display:column>	 							
 							<% }							
-							else if( resultColumns[i].equals("Transplant Donor Species") ) { %>
-							     <display:column title="Transplant Donor Species" sortable="true" headerClass="sortable" >
+							else if( resultColumns[i].equals("Transplantation Donor Species") ) { %>
+							     <display:column title="Transplantation Donor Species" sortable="true" headerClass="sortable" >
 							         <camod:highlight><c:out escapeXml="false" value="${row.donorSpecies}"/></camod:highlight>
 							     </display:column>	 							
 							<% }							
