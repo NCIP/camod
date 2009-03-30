@@ -5,7 +5,7 @@ Name of transplanted cell line
 Genomic Segment Designator
 Diagnosis
 Animal Distributor
-Transplant Donor Species
+Transplantation Donor Species
 Gender
 Spontaneous Mutation in Gene
 Image Title
