@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchResults.jsp,v 1.32 2009-03-30 16:10:49 pandyas Exp $
+ * $Id: searchResults.jsp,v 1.33 2009-04-01 19:38:02 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.32  2009/03/30 16:10:49  pandyas
+ * modified for #17833  	Make sure all references to Tranplantation are properly named
+ *
  * Revision 1.31  2008/10/21 06:11:42  schroedn
  * Bug #7474 Changed field names
  *
@@ -455,8 +458,8 @@
 							         <camod:highlight><c:out escapeXml="false" value="${row.distributor}"/></camod:highlight>
 							     </display:column>	 							
 							<% }							
-							else if( resultColumns[i].equals("Name of transplanted cell line") ) { %>
-							     <display:column title="Name of transplanted cell line" sortable="true" headerClass="sortable" >
+							else if( resultColumns[i].equals("Name of Transplanted Cell Line") ) { %>
+							     <display:column title="Name of Transplanted Cell Line" sortable="true" headerClass="sortable" >
 							         <camod:highlight><c:out escapeXml="false" value="${row.cellLine}"/></camod:highlight>
 							     </display:column>	 							
 							<% }							
