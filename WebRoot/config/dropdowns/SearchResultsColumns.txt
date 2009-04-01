@@ -1,7 +1,7 @@
 Targeted Modification Type
 Age of Tumor Onset
 Carcinogenic Agent
-Name of transplanted cell line
+Name of Transplanted Cell Line
 Genomic Segment Designator
 Diagnosis
 Animal Distributor
