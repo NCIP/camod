@@ -49,15 +49,16 @@
 	}	
 </SCRIPT>
 
-<html:form action="<%= actionName %>" focus="isRandom" enctype="multipart/form-data">
+
 
 <!-- submitEngineeredTransgene.jsp -->
 <!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
+	
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
 	<tr><td valign="top">
-
+	<html:form action="<%= actionName %>" focus="isRandom" enctype="multipart/form-data">
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
 
 	<tr>
@@ -377,10 +378,11 @@
 			      
 				  <html:hidden property="transgeneId"/>
 				  	
-				</html:form>			
+			
 			</TABLE>
 		</td>
 	</tr>
+
 </TABLE>
 
 <SCRIPT>
@@ -395,8 +397,9 @@ chkOther_SS();
 </SCRIPT>
 
 <!-- -->
+	</html:form>
 	</td></tr></TABLE>
-</tr></td></TABLE>
+</td></tr></TABLE>
 
 
 
