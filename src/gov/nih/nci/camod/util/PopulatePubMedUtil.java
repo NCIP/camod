@@ -1,8 +1,13 @@
 /**
  * 
- * $Id: PopulatePubMedUtil.java,v 1.8 2008-09-22 16:39:57 schroedn Exp $
+ * $Id: PopulatePubMedUtil.java,v 1.9 2009-04-28 18:33:50 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2008/09/22 16:39:57  schroedn
+ * Bug #5173
+ * Recieve nothing from PMID 18720519 fixed
+ * Fixed trim/submit problem
+ *
  * Revision 1.7  2008/07/11 17:34:31  schroedn
  * Bug 12064
  * Title field has size limit, fixing pubmed search
@@ -11,7 +16,7 @@
  * Commented out debug code
  *
  * Revision 1.5  2006/04/17 19:10:50  pandyas
- * Added $Id: PopulatePubMedUtil.java,v 1.8 2008-09-22 16:39:57 schroedn Exp $ and $log:$
+ * Added $Id: PopulatePubMedUtil.java,v 1.9 2009-04-28 18:33:50 pandyas Exp $ and $log:$
  *
  * 
  */
@@ -37,9 +42,14 @@ import java.util.regex.Pattern;
  * @author  Dana Zhang
  * @version 1.0
  * 
- * $Id: PopulatePubMedUtil.java,v 1.8 2008-09-22 16:39:57 schroedn Exp $
+ * $Id: PopulatePubMedUtil.java,v 1.9 2009-04-28 18:33:50 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2008/09/22 16:39:57  schroedn
+ * Bug #5173
+ * Recieve nothing from PMID 18720519 fixed
+ * Fixed trim/submit problem
+ *
  * Revision 1.7  2008/07/11 17:34:31  schroedn
  * Bug 12064
  * Title field has size limit, fixing pubmed search
@@ -48,7 +58,7 @@ import java.util.regex.Pattern;
  * Commented out debug code
  *
  * Revision 1.5  2006/04/17 19:10:50  pandyas
- * Added $Id: PopulatePubMedUtil.java,v 1.8 2008-09-22 16:39:57 schroedn Exp $ and $log:$
+ * Added $Id: PopulatePubMedUtil.java,v 1.9 2009-04-28 18:33:50 pandyas Exp $ and $log:$
  *
  */
 
@@ -126,7 +136,7 @@ public class PopulatePubMedUtil implements Runnable{
                     }
                     
                 }
-                pub.setStartPage(new Long(pageNumber.toString()));
+                pub.setStartPage(pageNumber.toString());
                 if(pageEnd.length() >= pageStart.length()){
                     StringBuffer endPageNumbers = new StringBuffer();
                     char[] pageEndChars = pageEnd.toCharArray();
@@ -139,7 +149,7 @@ public class PopulatePubMedUtil implements Runnable{
                         }
                         
                     }
-                    pub.setEndPage(new Long(endPageNumbers.toString()));
+                    pub.setEndPage(endPageNumbers.toString());
                     
                 } else {
                     int diff = pageStart.length() - pageEnd.length();
@@ -157,7 +167,7 @@ public class PopulatePubMedUtil implements Runnable{
                         }                        
                     }
                     
-                    pub.setEndPage(new Long(endPageNumber.toString()));
+                    pub.setEndPage(endPageNumber.toString());
 
                 }
             } else{
@@ -180,9 +190,9 @@ public class PopulatePubMedUtil implements Runnable{
             }
            
             if ( pub.getStartPage() == null )
-            	pub.setStartPage(new Long(0));
+            	pub.setStartPage("0");
             if ( pub.getEndPage() == null )
-            	pub.setEndPage(new Long(0));
+            	pub.setEndPage("0");
             
             pub.setYear( Long.valueOf( pubYear.trim() ) );
           //  pub.updateByKey();

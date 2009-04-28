@@ -32,7 +32,7 @@
 	    <!-- endPage -->
         <property name="endPage" 
         	column="end_page" 
-        	type="long"/>
+        	type="string"/>
 	    
 	    <!-- year -->
         <property name="year" 
@@ -53,7 +53,7 @@
 	    <!-- startPage -->
         <property name="startPage" 
         	column="start_page" 
-        	type="long"/>
+        	type="string"/>
 	    
 	    <!-- journal -->
         <property name="journal" 

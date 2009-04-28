@@ -1,7 +1,10 @@
 /*
- * $Id: PublicationManagerImpl.java,v 1.17 2008-08-14 18:59:57 schroedn Exp $
+ * $Id: PublicationManagerImpl.java,v 1.18 2009-04-28 18:33:37 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2008/08/14 18:59:57  schroedn
+ * Changes for rgdPubID to rgdPubId
+ *
  * Revision 1.16  2008/08/14 06:27:53  schroedn
  * RGDPubID added
  *
@@ -121,7 +124,7 @@ public class PublicationManagerImpl extends BaseManager implements PublicationMa
         strPub = inPublicationData.getStartPage().trim();
         if (strPub.length() > 0)
         {
-            inPublication.setStartPage(Long.valueOf(strPub));
+            inPublication.setStartPage(strPub);
         }
         else
         {
@@ -131,7 +134,7 @@ public class PublicationManagerImpl extends BaseManager implements PublicationMa
         strPub = inPublicationData.getEndPage().trim();
         if (strPub.length() > 0)
         {
-            inPublication.setEndPage(Long.valueOf(strPub));
+            inPublication.setEndPage(strPub);
         }
         else
         {

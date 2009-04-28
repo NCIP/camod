@@ -1,7 +1,10 @@
 /*
- * $Id: Publication.java,v 1.14 2008-08-14 18:59:42 schroedn Exp $
+ * $Id: Publication.java,v 1.15 2009-04-28 18:33:20 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2008/08/14 18:59:42  schroedn
+ * Changes for rgdPubID to rgdPubId
+ *
  * Revision 1.13  2008/08/14 06:23:15  schroedn
  * New features added
  *
@@ -32,11 +35,11 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
     private static final long serialVersionUID = 3258755453799404851L;
 
     private String volume;
-    private Long endPage;
+    private String endPage;
     private Long year;
     private String title;
     private Long pmid;
-    private Long startPage;
+    private String startPage;
     private String journal;
     private String authors;
     private Boolean firstTimeReported;
@@ -67,7 +70,7 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
     /**
      * @return Returns the endPage.
      */
-    public Long getEndPage()
+    public String getEndPage()
     {
         return endPage;
     }
@@ -76,7 +79,7 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
      * @param endPage
      *            The endPage to set.
      */
-    public void setEndPage(Long endPage)
+    public void setEndPage(String endPage)
     {
         this.endPage = endPage;
     }
@@ -136,7 +139,7 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
     /**
      * @return Returns the startPage.
      */
-    public Long getStartPage()
+    public String getStartPage()
     {
         return startPage;
     }
@@ -145,7 +148,7 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
      * @param startPage
      *            The startPage to set.
      */
-    public void setStartPage(Long startPage)
+    public void setStartPage(String startPage)
     {
         this.startPage = startPage;
     }
