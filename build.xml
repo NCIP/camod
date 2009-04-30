@@ -42,7 +42,13 @@
                </fileset>
                <fileset dir="${source.nondeploy.lib.dir}">
                   <include name="*.jar"/>
-                </fileset>	         	
+                </fileset>
+                <fileset dir="${source.nondeploy.lib.dir}">
+                   <include name="*.jar"/>
+                 </fileset>
+                <fileset dir="${source.javamail.dir}">
+                   <include name="*.jar"/>
+                </fileset>	
          </classpath>
         </javac>
     </target>
