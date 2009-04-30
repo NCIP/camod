@@ -1,8 +1,12 @@
 /**
  * 
- * $Id: Constants.java,v 1.116 2009-04-30 18:39:12 pandyas Exp $
+ * $Id: Constants.java,v 1.117 2009-04-30 20:01:09 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.116  2009/04/30 18:39:12  pandyas
+ * modified for #17833  	Make sure all references to Transplantation are properly named
+ * - modified 4 more files
+ *
  * Revision 1.115  2009/03/25 16:17:45  pandyas
  * modified for #17833  	Make sure all references to Tranplantation are properly named
  *
@@ -1179,12 +1183,12 @@ public class Constants {
         /**
          * The namespace to fetch the concepts from
          */
-        public static final String NCI_SCHEMA = "NCI_Thesaurus";
+        public static final String NAMESPACE = "NCI_Thesaurus";
         
         /**
          * The namespace to fetch the concepts from
          */
-        public static final String ZEBRAFISH_SCHEMA = "Zebrafish";        
+        public static final String ZEBRAFISH_NAMESPACE = "Zebrafish";        
 
         /**
          * The tag used to get the display name
