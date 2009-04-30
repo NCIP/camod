@@ -40,6 +40,9 @@
               <fileset dir="${source.lib.dir}">
                  <include name="*.jar"/>
                </fileset>
+               <fileset dir="${source.nondeploy.lib.dir}">
+                  <include name="*.jar"/>
+                </fileset>	         	
          </classpath>
         </javac>
     </target>
