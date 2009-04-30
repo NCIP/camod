@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: submitTransplantation.jsp,v 1.3 2009-03-25 16:27:54 pandyas Exp $
+ * $Id: submitTransplantation.jsp,v 1.4 2009-04-30 18:39:25 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2009/03/25 16:27:54  pandyas
+ * modified for #17833  	Make sure all references to Tranplantation are properly named
+ *
  * Revision 1.2  2008/01/23 22:26:25  pandyas
  * Fixed #11831  	maximize buttion in pop-up windows disabled which prevents user to see full page
  *
@@ -420,7 +423,7 @@
 		<br>
 		<br>
 			<html:select styleClass="formFieldSized" size="1" property="administrativeSite"  onclick="chkOtherAdminSite();">												
-				<html:options name="<%= Dropdowns.TRANSPLANTADMINSITESDROP %>"/>					
+				<html:options name="<%= Dropdowns.TRANSPLANTATIONADMINSITESDROP %>"/>					
 			</html:select>			
 		</td>
 	</tr>

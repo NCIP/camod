@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TransplantationPopulateAction.java,v 1.3 2009-03-25 16:24:58 pandyas Exp $
+ * $Id: TransplantationPopulateAction.java,v 1.4 2009-04-30 18:38:50 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2009/03/25 16:24:58  pandyas
+ * modified for #17833  	Make sure all references to Tranplantation are properly named
+ *
  * Revision 1.1  2008/01/16 18:29:57  pandyas
  * Renamed value to Transplant for #8290
  *
@@ -327,7 +330,7 @@ public class TransplantationPopulateAction extends BaseAction
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STRAINDROP, theSpecies);
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.AGEUNITSDROP, "");
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SOURCETYPEDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.TRANSPLANTADMINSITESDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.TRANSPLANTATIONADMINSITESDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.CONDITIONINGREGIMEN, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
 
 

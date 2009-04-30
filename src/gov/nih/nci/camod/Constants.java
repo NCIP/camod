@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.115 2009-03-25 16:17:45 pandyas Exp $
+ * $Id: Constants.java,v 1.116 2009-04-30 18:39:12 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.115  2009/03/25 16:17:45  pandyas
+ * modified for #17833  	Make sure all references to Tranplantation are properly named
+ *
  * Revision 1.114  2009/03/13 14:56:47  pandyas
  * modified for #19758  	Remove the filter from the PI drop-down list on admin (Edit Models) search criteria screen
  *
@@ -515,7 +518,7 @@ public class Constants {
 
         public static final String SOURCETYPEDROP = "SourceTypes.txt";
 
-        public static final String TRANSPLANTADMINSITESDROP = "TransplantAdministrativeSites.txt";
+        public static final String TRANSPLANTATIONADMINSITESDROP = "TransplantationAdminSites.txt";
 
         public static final String INDUCEDMUTATIONDROP = "InducedMutations.txt";
 
@@ -1176,12 +1179,12 @@ public class Constants {
         /**
          * The namespace to fetch the concepts from
          */
-        public static final String NAMESPACE = "NCI_Thesaurus";
+        public static final String NCI_SCHEMA = "NCI_Thesaurus";
         
         /**
          * The namespace to fetch the concepts from
          */
-        public static final String ZEBRAFISH_NAMESPACE = "Zebrafish";        
+        public static final String ZEBRAFISH_SCHEMA = "Zebrafish";        
 
         /**
          * The tag used to get the display name
