@@ -1,8 +1,12 @@
 /**
  * 
- * $Id: TransplantationPopulateAction.java,v 1.4 2009-04-30 18:38:50 pandyas Exp $
+ * $Id: TransplantationPopulateAction.java,v 1.5 2009-05-04 17:24:57 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2009/04/30 18:38:50  pandyas
+ * modified for #17833  	Make sure all references to Transplantation are properly named
+ * - modified 4 more files
+ *
  * Revision 1.3  2009/03/25 16:24:58  pandyas
  * modified for #17833  	Make sure all references to Tranplantation are properly named
  *
@@ -187,7 +191,7 @@ public class TransplantationPopulateAction extends BaseAction
             request.getSession().setAttribute(Constants.DONORSPECIESCOMMONNAME, transplantation.getStrain().getSpecies().getCommonName());
             log.debug("transplantation.getStrain().getSpecies().getCommonName(): " + transplantation.getStrain().getSpecies().getCommonName());            
             
-            // Species was required in previous versions of caMod and is stored in donorSpecies column
+            // Species was required in previous versions of caMOD and is stored in donorSpecies column
             // The species and strain are required for 2.1 and strain_id is stored for all future versions
             // Therefore, we must search in both to populate correctly
             if (transplantation.getDonorSpecies() != null)
