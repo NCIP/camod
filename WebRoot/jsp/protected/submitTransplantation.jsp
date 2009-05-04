@@ -2,9 +2,13 @@
 
 /**
  * 
- * $Id: submitTransplantation.jsp,v 1.4 2009-04-30 18:39:25 pandyas Exp $
+ * $Id: submitTransplantation.jsp,v 1.5 2009-05-04 17:27:53 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2009/04/30 18:39:25  pandyas
+ * modified for #17833  	Make sure all references to Transplantation are properly named
+ * - modified 4 more files
+ *
  * Revision 1.3  2009/03/25 16:27:54  pandyas
  * modified for #17833  	Make sure all references to Tranplantation are properly named
  *
@@ -171,11 +175,12 @@
 	
 </SCRIPT>
 
-<html:form action="<%= actionName %>" focus="name">
+
 
 <!-- submitTransplantation.jsp -->
 <!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<html:form action="<%= actionName %>" focus="name">
 <tr><td>
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
 	<tr><td valign="top">
@@ -487,8 +492,10 @@
 	</TABLE>
 	
 	</td></tr></TABLE>
-</tr></td></TABLE>
+</td></tr>
 </html:form>
+</TABLE>
+
 
 <SCRIPT LANGUAGE="JavaScript">
 	chkOtherSourceType();
