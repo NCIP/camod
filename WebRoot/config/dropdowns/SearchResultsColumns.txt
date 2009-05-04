@@ -1,27 +1,26 @@
 Targeted Modification Type
 Age of Tumor Onset
-Carcinogenic Agent
-Name of Transplanted Cell Line
-Genomic Segment Designator
-Diagnosis
 Animal Distributor
-Transplantation Donor Species
+Carcinogenic Agent
+Cell Line Organ of Origin
+Diagnosis
 Gender
-Spontaneous Mutation in Gene
+Genomic Segment Designator
+Genomic Segment Type
 Image Title
+Journal
+Name of Cell line
+Name of Transplanted Cell Line
 Microarray Experiment Title
 Model Descriptor
-Unique Model Identifier
-Name of Cell line
-Cell Line Organ of Origin
-PubMed Identifier
 Principal Investigator
-Genomic Segment Type
+PubMed Identifier
 Site and Diagnosis of Metastasis
 Site of Primary Tumor
 Species
-Submitter
+Spontaneous Mutation in Gene
 Submitted on
+Submitter
 Tumor Sites
+Unique Model Identifier
 Year of Publication
-Journal
