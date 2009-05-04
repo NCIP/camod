@@ -21,29 +21,29 @@
 		<c:out value="${mdl.modelDescriptor}" escapeXml="false"/></td>
 	</tr>
 
-	<c:forEach var="xt" items="${mdl.transplantationCollection}" 
+	<c:forEach var="t" items="${mdl.transplantationCollection}" 
 			       varStatus="stat">
 
 			<tr>
 				<td class="formTitleBlue" height="20" colspan="2">
-				<c:out value="${xt.name}" escapeXml="false"/>
+				<c:out value="${t.name}" escapeXml="false"/>
 				</td>
 			</tr>
 			       
 		<tr>
 			<td class="GreyBox"><b>Transplantation:</b></td>
-			<td class="GreyBoxRightEnd"><c:out value="${xt.name}" escapeXml="false"/>&nbsp;</td>
+			<td class="GreyBoxRightEnd"><c:out value="${t.name}" escapeXml="false"/>&nbsp;</td>
 		</tr>
 		<tr>		
 			<td class="WhiteBox"><b>Donor Species</b></td>
 			<td class="WhiteBoxRightEnd">
 				<c:choose>
-					<c:when test="${not empty xt.donorSpecies}">			
-					    <c:out value="${xt.donorSpecies.displayName}" escapeXml="false"/>&nbsp;
+					<c:when test="${not empty t.donorSpecies}">			
+					    <c:out value="${t.donorSpecies.displayName}" escapeXml="false"/>&nbsp;
 					</c:when>
 				    <c:otherwise>
-				        <c:if test="${not empty xt.strain}">
-				        	<c:out value="${xt.strain.species.displayName}" escapeXml="false"/>&nbsp;
+				        <c:if test="${not empty t.strain}">
+				        	<c:out value="${t.strain.species.displayName}" escapeXml="false"/>&nbsp;
 				        </c:if>
 					</c:otherwise>
 				</c:choose>&nbsp;		
@@ -54,11 +54,11 @@
 			<td class="GreyBox"><b>Donor Strain</b></td>
 			<td class="GreyBoxRightEnd">
 				<c:choose>
-					<c:when test="${empty xt.strain.name}">
-						<c:out value="${xt.strain.nameAlternEntry}" escapeXml="false"/>
+					<c:when test="${empty t.strain.name}">
+						<c:out value="${t.strain.nameAlternEntry}" escapeXml="false"/>
 					</c:when>
 					<c:otherwise>
-						<c:out value="${xt.strain.name}" escapeXml="false"/>
+						<c:out value="${t.strain.name}" escapeXml="false"/>
 					</c:otherwise>
 				</c:choose>&nbsp;
             </td>
@@ -66,7 +66,7 @@
 		<tr>
 			<td class="WhiteBox"><b>Organ/Tissue</b></td>
 			<td class="WhiteBoxRightEnd">
-					<c:out value="${xt.organ.EVSPreferredDescription}" escapeXml="false"/>&nbsp;
+					<c:out value="${t.organ.EVSPreferredDescription}" escapeXml="false"/>&nbsp;
 			</td>
 		</tr>
 						
@@ -74,35 +74,35 @@
 			<td class="GreyBox"><b>Source Type</b></td>
 			<td class="GreyBoxRightEnd">
 			<c:choose>
-				<c:when test="${empty xt.sourceType}">
-					<c:out value="${xt.sourceTypeAlternEntry}" escapeXml="false"/>&nbsp;
+				<c:when test="${empty t.sourceType}">
+					<c:out value="${t.sourceTypeAlternEntry}" escapeXml="false"/>&nbsp;
 				</c:when>
 				<c:otherwise>
-					<c:out value="${xt.sourceType}" escapeXml="false"/>&nbsp;
+					<c:out value="${t.sourceType}" escapeXml="false"/>&nbsp;
 				</c:otherwise>
 			</c:choose>
 			</td>
 		</tr>
 		<tr>
 			<td class="WhiteBox"><b>Parental Cell line:</b></td>
-			<td class="WhiteBoxRightEnd"><c:out value="${xt.parentalCellLineName}" escapeXml="false"/>&nbsp;</td>
+			<td class="WhiteBoxRightEnd"><c:out value="${t.parentalCellLineName}" escapeXml="false"/>&nbsp;</td>
 		</tr>
 		<tr>		
 			<td class="GreyBox"><b>ATCC number of Cell Line:</b></td>
 			<td class="GreyBoxRightEnd">
-			<a target="atcc" href="http://www.atcc.org/common/catalog/numSearch/numResults.cfm?atccNum=<c:out value="${xt.atccNumber}"/>">
-			<c:out value="${xt.atccNumber}" escapeXml="false"/>&nbsp;</td> 		
+			<a target="atcc" href="http://www.atcc.org/common/catalog/numSearch/numResults.cfm?atccNum=<c:out value="${t.atccNumber}"/>">
+			<c:out value="${t.atccNumber}" escapeXml="false"/>&nbsp;</a></td> 		
 		</tr>
 
 		<tr>
 			<td class="WhiteBox"><b>Conditioning Regimen</b></td>
 			<td class="WhiteBoxRightEnd">
 			<c:choose>
-				<c:when test="${empty xt.conditioningRegimen}">
-					<c:out value="${xt.condRegimenAlternEntry}" escapeXml="false"/>&nbsp;
+				<c:when test="${empty t.conditioningRegimen}">
+					<c:out value="${t.condRegimenAlternEntry}" escapeXml="false"/>&nbsp;
 				</c:when>
 				<c:otherwise>
-					<c:out value="${xt.conditioningRegimen}" escapeXml="false"/>&nbsp;
+					<c:out value="${t.conditioningRegimen}" escapeXml="false"/>&nbsp;
 				</c:otherwise>
 			</c:choose>
 			</td>
@@ -110,29 +110,29 @@
 
 		<tr>		
 			<td class="GreyBox"><b>Genetic Alteration:</b></td>
-			<td class="GreyBoxRightEnd"><c:out value="${xt.geneticManipulation}" escapeXml="false"/>&nbsp;</td>
+			<td class="GreyBoxRightEnd"><c:out value="${t.geneticManipulation}" escapeXml="false"/>&nbsp;</td>
 		</tr>		
 		<tr>
 			<td class="WhiteBox"><b>Method of Modification:</b></td>
-			<td class="WhiteBoxRightEnd"><c:out value="${xt.modificationDescription}" escapeXml="false"/>&nbsp;</td>
+			<td class="WhiteBoxRightEnd"><c:out value="${t.modificationDescription}" escapeXml="false"/>&nbsp;</td>
 		</tr>						
         <tr>
-			<td class="GreyBox"><b>Amount of Cells<b></td>
-			<td class="GreyBoxRightEnd"><c:out value="${xt.cellAmount}" escapeXml="false"/>&nbsp;</td>
+			<td class="GreyBox"><B>Amount of Cells</B></td>
+			<td class="GreyBoxRightEnd"><c:out value="${t.cellAmount}" escapeXml="false"/>&nbsp;</td>
 		</tr>
         <tr>
-			<td class="WhiteBox"><b>Growth Period<b></td>
-			<td class="WhiteBoxRightEnd"><c:out value="${xt.growthPeriod}" escapeXml="false"/>&nbsp;</td>
+			<td class="WhiteBox"><b>Growth Period</b></td>
+			<td class="WhiteBoxRightEnd"><c:out value="${t.growthPeriod}" escapeXml="false"/>&nbsp;</td>
 		</tr>			
 		<tr>
 			<td class="GreyBox"><b>Site of Administration:</b></td>
 			<td class="GreyBoxRightEnd">
 			<c:choose>
-				<c:when test="${empty xt.administrativeSite}">
-					<c:out value="${xt.adminSiteAlternEntry}" escapeXml="false"/>&nbsp;
+				<c:when test="${empty t.administrativeSite}">
+					<c:out value="${t.adminSiteAlternEntry}" escapeXml="false"/>&nbsp;
 				</c:when>
 				<c:otherwise>
-					<c:out value="${xt.administrativeSite}" escapeXml="false"/>&nbsp;
+					<c:out value="${t.administrativeSite}" escapeXml="false"/>&nbsp;
 				</c:otherwise>
 			</c:choose>
 			</td>
@@ -151,7 +151,7 @@
 
 <!-- -->
 	</td></tr></TABLE>
-</tr></td></TABLE>
+</td></tr></TABLE>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
@@ -159,6 +159,7 @@
     <% pageContext.setAttribute(Parameters.MODELSECTIONVALUE, Pages.TRANSPLANTATION); %>
     <%@ include file="/jsp/includeComments.jsp" %>
     </TABLE>
+	</td></tr>    
 </TABLE>
 
 <%@ include file="/jsp/footer.jsp" %>
