@@ -2275,10 +2275,10 @@
 			</field>
 		</form>
 
-		<form name="transplantForm">
+		<form name="transplantationForm">
 			<field property="name"
 				depends="required,maxlength">
-				<arg0 key="TransplantForm.name" />
+				<arg0 key="TransplantationForm.name" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -2287,7 +2287,7 @@
 				</var>
 			</field>
 			<field property="atccNumber" depends="maxlength">
-				<arg0 key="TransplantForm.atccNumber" />
+				<arg0 key="TransplantationForm.atccNumber" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -2297,7 +2297,7 @@
 			</field>
 			<field property="parentalCellLineName"
 				depends="maxlength">
-				<arg0 key="TransplantForm.parentalCellLineName" />
+				<arg0 key="TransplantationForm.parentalCellLineName" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -2306,7 +2306,7 @@
 				</var>
 			</field>
 			<field property="cellAmount" depends="maxlength">
-				<arg0 key="TransplantForm.cellAmount" />
+				<arg0 key="TransplantationForm.cellAmount" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -2315,7 +2315,7 @@
 				</var>				
 			</field>
 			<field property="growthPeriod" depends="maxlength">
-				<arg0 key="TransplantForm.growthPeriod" />
+				<arg0 key="TransplantationForm.growthPeriod" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -2325,7 +2325,7 @@
 			</field>
 			<field property="modificationDescription"
 				depends="maxlength">
-				<arg0 key="TransplantForm.modificationDescription" />
+				<arg0 key="TransplantationForm.modificationDescription" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -2334,7 +2334,7 @@
 				</var>
 			</field>
 			<field property="geneticManipulation" depends="maxlength">
-				<arg0 key="TransplantForm.geneticManipulation" />
+				<arg0 key="TransplantationForm.geneticManipulation" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -2343,15 +2343,15 @@
 				</var>
 			</field>
 			<field property="donorScientificName" depends="required">
-				<arg0 key="TransplantForm.donorScientificName" />
+				<arg0 key="TransplantationForm.donorScientificName" />
 			</field>
 			<field property="donorEthinicityStrain"
 				depends="required">
-				<arg0 key="TransplantForm.donorEthinicityStrain" />
+				<arg0 key="TransplantationForm.donorEthinicityStrain" />
 			</field>
 			<field property="otherDonorEthinicityStrain"
 				depends="validwhen,maxlength">
-				<arg0 key="TransplantForm.otherDonorEthinicityStrain" />
+				<arg0 key="TransplantationForm.otherDonorEthinicityStrain" />
 				<var>
 					<var-name>test</var-name>
 					<var-value>
@@ -2368,11 +2368,11 @@
 				</var>
 			</field>
 			<field property="sourceType" depends="required">
-				<arg0 key="TransplantForm.sourceType" />
+				<arg0 key="TransplantationForm.sourceType" />
 			</field>
 			<field property="otherSourceType"
 				depends="validwhen, maxlength">
-				<arg0 key="TransplantForm.otherSourceType" />
+				<arg0 key="TransplantationForm.otherSourceType" />
 				<var>
 					<var-name>test</var-name>
 					<var-value>
@@ -2389,7 +2389,7 @@
 			</field>
 			<field property="otherAdministrativeSite"
 				depends="validwhen, maxlength">
-				<arg0 key="TransplantForm.otherAdministrativeSite" />
+				<arg0 key="TransplantationForm.otherAdministrativeSite" />
 				<var>
 					<var-name>test</var-name>
 					<var-value>
@@ -2406,7 +2406,7 @@
 			</field>
 			<field property="otherConditioningRegimen"
 				depends="validwhen, maxlength">
-				<arg0 key="TransplantForm.otherConditioningRegimen" />
+				<arg0 key="TransplantationForm.otherConditioningRegimen" />
 				<var>
 					<var-name>test</var-name>
 					<var-value>
@@ -2422,7 +2422,7 @@
 				</var>
 			</field>
 			<field property="comments" depends="maxlength">
-				<arg0 key="TransplantForm.comments" />
+				<arg0 key="TransplantationFormm.comments" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
