@@ -182,6 +182,24 @@
 					<var-value>2000</var-value>
 				</var>
 			</field>
+			<field property="genotype" depends="maxlength">
+				<arg0 key="ModelCharacteristicsForm.genotype" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>2000</var-value>
+				</var>
+			</field>
+			<field property="nomenclature" depends="maxlength">
+				<arg0 key="ModelCharacteristicsForm.nomenclature" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>2000</var-value>
+				</var>
+			</field>			
 		</form>
 
 		<form name="geneDeliveryForm">
@@ -953,7 +971,7 @@
 					resource="false" />
 				<var>
 					<var-name>maxlength</var-name>
-					<var-value>255</var-value>
+					<var-value>2000</var-value>
 				</var>
 			</field>
 			<field property="results" depends="maxlength">
@@ -962,7 +980,7 @@
 					resource="false" />
 				<var>
 					<var-name>maxlength</var-name>
-					<var-value>255</var-value>
+					<var-value>2000</var-value>
 				</var>
 			</field>
 		</form>
@@ -998,7 +1016,16 @@
 						((organTissueCode != null) or (organ != null))
 					</var-value>		          
 		        </var>	
-			</field>			
+			</field>
+			<field property="comments" depends="required,maxlength">
+				<arg0 key="AssociatedExpressionForm.comments" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+ 				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>
 		</form>
 
 		<form name="engineeredTransgeneForm">
@@ -1200,7 +1227,7 @@
 					resource="false" />
 				<var>
 					<var-name>maxlength</var-name>
-					<var-value>255</var-value>
+					<var-value>4000</var-value>
 				</var>
 			</field>
 			<field property="mgiId" depends="maxlength">
@@ -1391,7 +1418,7 @@
 					resource="false" />
 				<var>
 					<var-name>maxlength</var-name>
-					<var-value>255</var-value>
+					<var-value>4000</var-value>
 				</var>
 			</field>
 			<field property="title" depends="maxlength">
@@ -1443,7 +1470,7 @@
 					resource="false" />
 				<var>
 					<var-name>maxlength</var-name>
-					<var-value>255</var-value>
+					<var-value>4000</var-value>
 				</var>
 			</field>
 			<field property="geneIdentifier" depends="maxlength">
@@ -1526,7 +1553,7 @@
 					resource="false" />
 				<var>
 					<var-name>maxlength</var-name>
-					<var-value>255</var-value>
+					<var-value>4000</var-value>
 				</var>
 			</field>
 			<field property="title" depends="maxlength">
@@ -1765,7 +1792,7 @@
 				</var>
 				<var>
 					<var-name>maxlength</var-name>
-					<var-value>255</var-value>
+					<var-value>2000</var-value>
 				</var>
 			</field>
 			<field property="year" depends="integer">
@@ -1789,8 +1816,14 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
-			<field property="rgdPubId" depends="integer">
+			<field property="rgdPubId" depends="maxlength">
 				<arg0 key="PublicationForm.rgdPubId" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>				
 			</field>			
 			<field property="volume" depends="maxlength">
 				<arg0 key="PublicationForm.volume" />
@@ -2024,7 +2057,7 @@
 					resource="false" />
 				<var>
 					<var-name>maxlength</var-name>
-					<var-value>255</var-value>
+					<var-value>4000</var-value>
 				</var>
 			</field>
 			<field property="comments" depends="maxlength">
@@ -2143,7 +2176,7 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
-			<field property="comparativeData" depends="maxlength">
+			<field property="ageOfOnset" depends="maxlength">
 				<arg0 key="HistopathologyForm.ageOfOnset" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
@@ -2157,7 +2190,7 @@
 		<form name="associatedMetastasisForm">
 			<field property="organ"
 				depends="validwhen">
-				<arg0 key="HistopathologyForm.organ" />
+				<arg0 key="AssociatedMetastasisForm.organ" />
 		        <var>
 		          <var-name>test</var-name>
 					<var-value>
@@ -2167,7 +2200,7 @@
 			</field>			
 			<field property="tumorClassification"
 				depends="validwhen">
-				<arg0 key="HistopathologyForm.tumorClassification" />
+				<arg0 key="AssociatedMetastasisForm.tumorClassification" />
 		        <var>
 		          <var-name>test</var-name>
 		          <var-value>
@@ -2177,7 +2210,7 @@
 			</field>
 			<field property="otherTumorClassification"
 				depends="validwhen, maxlength">
-				<arg0 key="HistopathologyForm.otherTumorClassification" />
+				<arg0 key="AssociatedMetastasisForm.otherTumorClassification" />
 				<var>
 					<var-name>test</var-name>
 					<var-value>
@@ -2200,17 +2233,35 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
-			<field property="weightOfTumor" depends="float">
+			<field property="weightOfTumor" depends="maxlength">
 				<arg0 key="AssociatedMetastasisForm.weightOfTumor" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>				
 			</field>
-			<field property="volumeOfTumor" depends="float">
+			<field property="volumeOfTumor" depends="maxlength">
 				<arg0 key="AssociatedMetastasisForm.volumeOfTumor" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>				
 			</field>
-			<field property="tumorIncidenceRate" depends="float">
+			<field property="tumorIncidenceRate" depends="maxlength">
 				<arg0 key="AssociatedMetastasisForm.tumorIncidenceRate" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>				
 			</field>
 			<field property="survivalInfo" depends="maxlength">
-				<arg0 key="HistopathologyForm.survivalInfo" />
+				<arg0 key="AssociatedMetastasisForm.survivalInfo" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -2219,17 +2270,17 @@
 				</var>
 			</field>
 			<field property="grossDescription" depends="maxlength">
-				<arg0 key="HistopathologyForm.grossDescription" />
+				<arg0 key="AssociatedMetastasisForm.grossDescription" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
 					<var-name>maxlength</var-name>
-					<var-value>255</var-value>
+					<var-value>2000</var-value>
 				</var>
 			</field>
 			<field property="microscopicDescription"
 				depends="maxlength">
-				<arg0 key="HistopathologyForm.microscopicDescription" />
+				<arg0 key="AssociatedMetastasisForm.microscopicDescription" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -2238,7 +2289,7 @@
 				</var>
 			</field>
 			<field property="observation" depends="maxlength">
-				<arg0 key="HistopathologyForm.observation" />
+				<arg0 key="AssociatedMetastasisForm.observation" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -2247,7 +2298,7 @@
 				</var>
 			</field>
 			<field property="methodOfObservation" depends="maxlength">
-				<arg0 key="HistopathologyForm.methodOfObservation" />
+				<arg0 key="AssociatedMetastasisForm.methodOfObservation" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -2256,23 +2307,23 @@
 				</var>
 			</field>
 			<field property="comparativeData" depends="maxlength">
-				<arg0 key="HistopathologyForm.ageOfOnset" />
+				<arg0 key="AssociatedMetastasisForm.comparativeData" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
 					<var-name>maxlength</var-name>
 					<var-value>255</var-value>
 				</var>
-			</field>
-			<field property="comments" depends="maxlength">
-				<arg0 key="HistopathologyForm.comment" />
+			</field>			
+			<field property="ageOfDetection" depends="maxlength">
+				<arg0 key="AssociatedMetastasisForm.ageOfDetection" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
 					<var-name>maxlength</var-name>
-					<var-value>2000</var-value>
+					<var-value>255</var-value>
 				</var>
-			</field>
+			</field>	
 		</form>
 
 		<form name="transplantationForm">
@@ -2345,6 +2396,24 @@
 			<field property="donorScientificName" depends="required">
 				<arg0 key="TransplantationForm.donorScientificName" />
 			</field>
+			<field property="otherDonorScientificName"
+				depends="validwhen,maxlength">
+				<arg0 key="TransplantForm.otherDonorScientificName" />
+				<var>
+					<var-name>test</var-name>
+					<var-value>
+						((donorScientificName != 'Other') or
+						((donorScientificName == 'Other') and (*this*
+						!= null)))
+					</var-value>
+				</var>
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>			
 			<field property="donorEthinicityStrain"
 				depends="required">
 				<arg0 key="TransplantationForm.donorEthinicityStrain" />
@@ -2433,10 +2502,16 @@
 		</form>
 		
 		<form name="transientInterferenceForm">
-			<field property="targetedRegion" depends="required">
+			<field property="targetedRegion"
+				depends="required,maxlength">
 				<arg0 key="TransientInterferenceForm.targetedRegion" />
-			</field>
-			
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>			
 			<field property="otherSource"
 				depends="validwhen, maxlength">
 				<arg0 key="TransientInterferenceForm.otherSource" />
@@ -2485,8 +2560,8 @@
 					<var-value>255</var-value>
 				</var>
 			</field>						
-			<field property="type" depends="maxlength">
-				<arg0 key="TransientInterferenceForm.type" />
+			<field property="concentration" depends="maxlength">
+				<arg0 key="TransientInterferenceForm.concentration" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -2494,15 +2569,6 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
-			<field property="sequenceDirection" depends="maxlength">
-				<arg0 key="TransientInterferenceForm.sequenceDirection" />
-				<arg1 name="maxlength" key="${var:maxlength}"
-					resource="false" />
-				<var>
-					<var-name>maxlength</var-name>
-					<var-value>255</var-value>
-				</var>
-			</field>			
 		</form>
 		
 		
