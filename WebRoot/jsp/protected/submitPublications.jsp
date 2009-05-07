@@ -45,17 +45,18 @@ function trimRGDId(str)
 	<c:set var="actionName" value="PublicationAction.do?method=addTherapyPublication&aTherapyID=${publicationForm.ATherapyID}" />
 </c:if>
 
-<html:form action="<%= (String) pageContext.getAttribute("actionName") %>" focus="name">
+
 
 <!-- submitPublications.jsp -->
 <!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
+	
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
 	<tr><td valign="top">
 
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
-	
+	<html:form action="<%= (String) pageContext.getAttribute("actionName") %>" focus="name">
 	<tr>
 		<html:errors/>
 		<td class="formMessage" colspan="3">* indicates a required field</td>
@@ -251,11 +252,11 @@ function trimRGDId(str)
   				  <html:hidden property="ACellID" />
   				  <html:hidden property="ATherapyID" />
  
- 			  </html:form>			
+ 			  			
 			</TABLE>
-			
+			</html:form>
 		</td></tr></TABLE>
 	</td></tr></TABLE>
-</tr></td></TABLE>
+</td></tr></TABLE>
 
 <%@ include file="/jsp/footer.jsp" %>

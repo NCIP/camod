@@ -58,18 +58,19 @@ var cal1 = new CalendarPopup();
 	
 </SCRIPT>
 
-<html:form action="AnimalModelAction.do?method=save" focus="modelDescriptor" onsubmit="transferFields()">
 
 <!-- submitNewModel.jsp -->
 <!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
-	<tr><td>
-	
-	<TABLE summary="" cellpadding="3" cellspacing="0" border="0">
+<tr><td>
+	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
+	<tr><td valign="top">
+
+		<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
+		<html:form action="AnimalModelAction.do?method=save" focus="modelDescriptor" onsubmit="transferFields()">
 		<tr>
 			<html:errors/>
 			<td class="formMessage" colspan="3">* indicates a required field</td>
-	
 		</tr>
 
 		<tr>
@@ -240,12 +241,15 @@ var cal1 = new CalendarPopup();
 					  <html:reset styleClass="actionButton">
 					  	  <bean:message key="button.reset"/>
 	  				  </html:reset>
-				  
-				  </html:form>			
 				</TABLE>
 			</td>
-		</tr>		
-	</TABLE>	
+		</tr>
+	</html:form>		
+	</TABLE>
+
+<!-- -->
+	</td></tr></TABLE>
+	
 </td></tr></TABLE>
 
 <SCRIPT LANGUAGE="JavaScript">

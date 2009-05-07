@@ -65,7 +65,7 @@ var cal1 = new CalendarPopup();
 	<tr><td valign="top">
 
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
-
+	<html:form action="EditAnimalModel.do?method=edit" focus="modelDescriptor" onsubmit="transferFields()">
 	<tr>
 		<html:errors/>
 		<td class="formMessage" colspan="3">* indicates a required field</td>
@@ -80,8 +80,7 @@ var cal1 = new CalendarPopup();
 			<td class="formRequiredNotice" width="5">*</td>
 			<td class="formRequiredLabel"><label for="field1">Model Descriptor:</label>
 			</td>
-			<td class="formField">			
-					<html:form action="EditAnimalModel.do?method=edit" focus="modelDescriptor" onsubmit="transferFields()">
+			<td class="formField">	
 					<html:text styleClass="formFieldSized" property="modelDescriptor" size="30"/>
 			</td>
 		</tr>
@@ -246,12 +245,14 @@ var cal1 = new CalendarPopup();
 				</TABLE>
 			</td>
 		</tr>
+	</html:form>		
 	</TABLE>
 
 <!-- -->
 	</td></tr></TABLE>
-</tr></td></TABLE>
-</html:form>
+	
+</td></tr></TABLE>
+
 
 <SCRIPT LANGUAGE="JavaScript">
 	chkOtherStrain();
