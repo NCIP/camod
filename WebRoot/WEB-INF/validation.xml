@@ -2398,7 +2398,7 @@
 			</field>
 			<field property="otherDonorScientificName"
 				depends="validwhen,maxlength">
-				<arg0 key="TransplantForm.otherDonorScientificName" />
+				<arg0 key="TransplantationForm.otherDonorScientificName" />
 				<var>
 					<var-name>test</var-name>
 					<var-value>
