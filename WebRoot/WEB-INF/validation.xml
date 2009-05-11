@@ -1470,7 +1470,7 @@
 					resource="false" />
 				<var>
 					<var-name>maxlength</var-name>
-					<var-value>4000</var-value>
+					<var-value>2000</var-value>
 				</var>
 			</field>
 			<field property="geneIdentifier" depends="maxlength">
@@ -2511,14 +2511,16 @@
 					<var-name>maxlength</var-name>
 					<var-value>255</var-value>
 				</var>
-			</field>			
+			</field>	
 			<field property="otherSource"
-				depends="validwhen, maxlength">
+				depends="validwhen,maxlength">
 				<arg0 key="TransientInterferenceForm.otherSource" />
 				<var>
 					<var-name>test</var-name>
 					<var-value>
-						((source != 'Other') or (*this* != null))
+						((source != 'Other') or
+						((source == 'Other') and (*this*
+						!= null)))
 					</var-value>
 				</var>
 				<arg1 name="maxlength" key="${var:maxlength}"
@@ -2527,14 +2529,16 @@
 					<var-name>maxlength</var-name>
 					<var-value>255</var-value>
 				</var>
-			</field>			
+			</field>
 			<field property="otherDeliveryMethod"
-				depends="validwhen, maxlength">
+				depends="validwhen,maxlength">
 				<arg0 key="TransientInterferenceForm.otherDeliveryMethod" />
 				<var>
 					<var-name>test</var-name>
 					<var-value>
-						((deliveryMethod != 'Other') or (*this* != null))
+						((deliveryMethod != 'Other') or
+						((deliveryMethod == 'Other') and (*this*
+						!= null)))
 					</var-value>
 				</var>
 				<arg1 name="maxlength" key="${var:maxlength}"
@@ -2543,14 +2547,16 @@
 					<var-name>maxlength</var-name>
 					<var-value>255</var-value>
 				</var>
-			</field>			
+			</field>
 			<field property="otherVisualLigand"
-				depends="validwhen, maxlength">
+				depends="validwhen,maxlength">
 				<arg0 key="TransientInterferenceForm.otherVisualLigand" />
 				<var>
 					<var-name>test</var-name>
 					<var-value>
-						((visualLigand != 'Other') or (*this* != null))
+						((visualLigand != 'Other') or
+						((visualLigand == 'Other') and (*this*
+						!= null)))
 					</var-value>
 				</var>
 				<arg1 name="maxlength" key="${var:maxlength}"
@@ -2559,7 +2565,7 @@
 					<var-name>maxlength</var-name>
 					<var-value>255</var-value>
 				</var>
-			</field>						
+			</field>	
 			<field property="concentration" depends="maxlength">
 				<arg0 key="TransientInterferenceForm.concentration" />
 				<arg1 name="maxlength" key="${var:maxlength}"
