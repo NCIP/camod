@@ -20,13 +20,25 @@
 				</c:otherwise>
 			</c:choose>
 			<td class="<c:out value="${tdClass}"/>" width="25%">
-				<camod:highlight><c:out value="${cpitem.leadOrganizationName}"/></camod:highlight>
+				Title:<c:out value="${cpitem.title}"/><br/>
+				<c:choose>
+					<c:when test="${empty cpitem.PDQIdentifier}">
+						PDQId:<c:out value="${cpitem.PDQIdentifier}"/><br/>
+						<a target="_blank" href="http://www.cancer.gov/clinicltrials/<c:out value="${cpitem.PDQIdentifier}"/>"></a>
+						<br/>
+					</c:when>
+					<c:otherwise>
+					PDQId: blank
+					</c:otherwise>
+				</c:choose>			
 			</td>
 			<td class="<c:out value="${tdClass}"/>End" width="75%">
 				<!-- TODO PU Name -->
+				Lead Organization:<camod:highlight><c:out value="${cpitem.leadOrganizationName}"/></camod:highlight><br/>
 				PI:<c:out value="${cpitem.PIName}"/><br/>
 				Phase: <c:out value="${cpitem.phase}"/><br/>
 				Status of Trial: <c:out value="${cpitem.currentStatus}"/><br/>
+				PDQId:<c:out value="${cpitem.PDQIdentifier}"/><br/>
 
 			</td>
 		</tr>
