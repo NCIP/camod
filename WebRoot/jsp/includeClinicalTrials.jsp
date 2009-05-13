@@ -19,27 +19,26 @@
 					<c:set var="tdClass" value="resultsBoxGrey"/>
 				</c:otherwise>
 			</c:choose>
-			<td class="<c:out value="${tdClass}"/>" width="25%">
-				Title:<c:out value="${cpitem.title}"/><br/>
-				<c:choose>
-					<c:when test="${empty cpitem.PDQIdentifier}">
-						PDQId:<c:out value="${cpitem.PDQIdentifier}"/><br/>
-						<a target="_blank" href="http://www.cancer.gov/clinicltrials/<c:out value="${cpitem.PDQIdentifier}"/>"></a>
+			<td class="<c:out value="${tdClass}"/>" width="50%">
+				Title: <c:out value="${cpitem.title}"/><br/>
+				<br/>
+				<c:choose>			
+					<c:when test="${not empty cpitem.PDQIdentifier}">
+						PDQIdentifier: <c:out value="${cpitem.PDQIdentifier}"/>&nbsp;<br/>
+						Additional Info from PDQ: 
+						<a target="_blank" href="http://www.cancer.gov/clinicltrials/<c:out value="${cpitem.PDQIdentifier}"/>"><c:out value="${cpitem.PDQIdentifier}"/></a>
 						<br/>
 					</c:when>
 					<c:otherwise>
-					PDQId: blank
 					</c:otherwise>
 				</c:choose>			
 			</td>
-			<td class="<c:out value="${tdClass}"/>End" width="75%">
+			<td valign="top" class="<c:out value="${tdClass}"/>End" width="50%">
 				<!-- TODO PU Name -->
-				Lead Organization:<camod:highlight><c:out value="${cpitem.leadOrganizationName}"/></camod:highlight><br/>
-				PI:<c:out value="${cpitem.PIName}"/><br/>
+				Lead Organization: <camod:highlight><c:out value="${cpitem.leadOrganizationName}"/></camod:highlight><br/>
+				PI: <c:out value="${cpitem.PIName}"/><br/>
 				Phase: <c:out value="${cpitem.phase}"/><br/>
 				Status of Trial: <c:out value="${cpitem.currentStatus}"/><br/>
-				PDQId:<c:out value="${cpitem.PDQIdentifier}"/><br/>
-
 			</td>
 		</tr>
 	</c:forEach>
