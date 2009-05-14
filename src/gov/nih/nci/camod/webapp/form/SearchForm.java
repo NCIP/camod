@@ -42,9 +42,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.52 2009-03-25 16:25:12 pandyas Exp $
+ * $Id: SearchForm.java,v 1.53 2009-05-14 18:24:43 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.52  2009/03/25 16:25:12  pandyas
+ * modified for #17833  	Make sure all references to Tranplantation are properly named
+ *
  * Revision 1.51  2008/10/22 15:29:51  schroedn
  * Added PMID to simpleSearchReset()
  *
@@ -836,12 +839,12 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         
         // validate for carcinogenicIntervention
         if (carcinogenicIntervention != null && carcinogenicIntervention.length() > 0 )
-        {           
-            NameValueList.generateCarcinogenicInterventionList();
-            request.getSession().setAttribute(Constants.Dropdowns.SEARCHCARCINOGENEXPOSUREDROP, NameValueList.getCarcinogenicInterventionList());
+        {   
+        	List envFactorAgentNameList = new ArrayList();        
+            envFactorAgentNameList = (List)request.getSession().getAttribute(Constants.Dropdowns.CARCINOGENICAGENTSQUERYDROP);
+            request.getSession().setAttribute(Constants.Dropdowns.SEARCHCARCINOGENEXPOSUREDROP, envFactorAgentNameList);
 
-	            if (!SafeHTMLUtil.isValidValue(carcinogenicIntervention,Constants.Dropdowns.SEARCHCARCINOGENEXPOSUREDROP,request) 
-	            		| !SafeHTMLUtil.isLetterOrDigitWithExceptions(carcinogenicIntervention))
+	            if (!SafeHTMLUtil.isValidValue(carcinogenicIntervention,Constants.Dropdowns.SEARCHCARCINOGENEXPOSUREDROP,request))            		
 	            {
 	                   // populate the validation message
 	                   errors.add("carcinogenicIntervention", new ActionMessage("error.carcinogenicIntervention.validValue"));
