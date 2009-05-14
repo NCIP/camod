@@ -26,7 +26,7 @@
 					<c:when test="${not empty cpitem.PDQIdentifier}">
 						PDQIdentifier: <c:out value="${cpitem.PDQIdentifier}"/>&nbsp;<br/>
 						Additional Info from PDQ: 
-						<a target="_blank" href="http://www.cancer.gov/clinicltrials/<c:out value="${cpitem.PDQIdentifier}"/>"><c:out value="${cpitem.PDQIdentifier}"/></a>
+						<a target="_blank" href="http://www.cancer.gov/clinicaltrials/<c:out value="${cpitem.PDQIdentifier}"/>"><c:out value="${cpitem.PDQIdentifier}"/></a>
 						<br/>
 					</c:when>
 					<c:otherwise>
