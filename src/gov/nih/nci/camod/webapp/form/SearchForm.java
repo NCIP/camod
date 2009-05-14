@@ -42,9 +42,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.53 2009-05-14 18:24:43 pandyas Exp $
+ * $Id: SearchForm.java,v 1.54 2009-05-14 18:48:02 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.53  2009/05/14 18:24:43  pandyas
+ * modified for gforge #21177  	Upgrade validation for CE and IM in searchForm - flag added in last release
+ *
  * Revision 1.52  2009/03/25 16:25:12  pandyas
  * modified for #17833  	Make sure all references to Tranplantation are properly named
  *
@@ -813,9 +816,9 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         {
             List genomicSegDesigList = new ArrayList();
             genomicSegDesigList = (List)request.getSession().getAttribute(Constants.Dropdowns.CLONEDESIGNATORQUERYDROP);
-            request.getSession().setAttribute(Constants.Dropdowns.SEARCHGENOMICSEGMENT, genomicSegDesigList);            
+            request.getSession().setAttribute(Constants.Dropdowns.SEARCHGENOMICSEGMENTDROP, genomicSegDesigList);            
             
-            if (!SafeHTMLUtil.isValidStringValue(genomicSegDesignator,Constants.Dropdowns.SEARCHGENOMICSEGMENT,request))
+            if (!SafeHTMLUtil.isValidStringValue(genomicSegDesignator,Constants.Dropdowns.SEARCHGENOMICSEGMENTDROP,request))
             {
                // populate the validation message
                errors.add("genomicSegDesignator", new ActionMessage("error.genomicSegDesignator.validValue"));
@@ -844,7 +847,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             envFactorAgentNameList = (List)request.getSession().getAttribute(Constants.Dropdowns.CARCINOGENICAGENTSQUERYDROP);
             request.getSession().setAttribute(Constants.Dropdowns.SEARCHCARCINOGENEXPOSUREDROP, envFactorAgentNameList);
 
-	            if (!SafeHTMLUtil.isValidValue(carcinogenicIntervention,Constants.Dropdowns.SEARCHCARCINOGENEXPOSUREDROP,request))            		
+	            if (!SafeHTMLUtil.isValidStringValue(carcinogenicIntervention,Constants.Dropdowns.SEARCHCARCINOGENEXPOSUREDROP,request))            		
 	            {
 	                   // populate the validation message
 	                   errors.add("carcinogenicIntervention", new ActionMessage("error.carcinogenicIntervention.validValue"));
@@ -872,9 +875,9 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         {
             List cellLineList = new ArrayList();
             cellLineList = (List)request.getSession().getAttribute(Constants.Dropdowns.CELLLINENAMEQUERYDROP);
-            request.getSession().setAttribute(Constants.Dropdowns.SEARCHCELLLINE, cellLineList);            
+            request.getSession().setAttribute(Constants.Dropdowns.SEARCHCELLLINEDROP, cellLineList);            
             
-            if (!SafeHTMLUtil.isValidStringValue(cellLine,Constants.Dropdowns.SEARCHCELLLINE,request))
+            if (!SafeHTMLUtil.isValidStringValue(cellLine,Constants.Dropdowns.SEARCHCELLLINEDROP,request))
             {
                // populate the validation message
                errors.add("cellLine", new ActionMessage("error.cellLine.validValue"));
@@ -889,9 +892,9 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         { 
             List drugNameList = new ArrayList();
             drugNameList = (List)request.getSession().getAttribute(Constants.Dropdowns.THERAPEUTICAPPROACHDRUGQUERYDROP);
-            request.getSession().setAttribute(Constants.Dropdowns.SEARCHTHERAPEUTICDRUGNAME, drugNameList);            
+            request.getSession().setAttribute(Constants.Dropdowns.SEARCHTHERAPEUTICDRUGNAMEDROP, drugNameList);            
             
-            if (!SafeHTMLUtil.isValidStringValue(therapeuticApproach,Constants.Dropdowns.SEARCHTHERAPEUTICDRUGNAME,request))
+            if (!SafeHTMLUtil.isValidStringValue(therapeuticApproach,Constants.Dropdowns.SEARCHTHERAPEUTICDRUGNAMEDROP,request))
             {
                // populate the validation message
                errors.add("therapeuticApproach", new ActionMessage("error.therapeuticApproach.validValue"));

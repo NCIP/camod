@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.117 2009-04-30 20:01:09 pandyas Exp $
+ * $Id: Constants.java,v 1.118 2009-05-14 18:44:30 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.117  2009/04/30 20:01:09  pandyas
+ * removed two changes meant for EVS - caBIO upgrade which is not built yet
+ *
  * Revision 1.116  2009/04/30 18:39:12  pandyas
  * modified for #17833  	Make sure all references to Transplantation are properly named
  * - modified 4 more files
@@ -626,11 +629,11 @@ public class Constants {
         public static final String SEARCHINDUCEDMUTATIONDROP = "searchinducedmutation";  
         public static final String SEARCHCARCINOGENEXPOSUREDROP = "searchcarcinogenexposure";  
         public static final String SEARCHENVIRONFACTORDROP = "searchenvironfactor";
-        public static final String SEARCHCELLLINE = "searchcellline";
-        public static final String SEARCHGENOMICSEGMENT = "searchgenomicsegment";        
+        public static final String SEARCHCELLLINEDROP = "searchcellline";
+        public static final String SEARCHGENOMICSEGMENTDROP = "searchgenomicsegment";        
         public static final String SEARCHPIDROP = "searchpi";    
         public static final String SEARCHTOCDROP = "searchtableofcontents";
-        public static final String SEARCHTHERAPEUTICDRUGNAME = "searchtherapeuticdrugname";  
+        public static final String SEARCHTHERAPEUTICDRUGNAMEDROP = "searchtherapeuticdrugname";  
         
         // Used for values selected for the advanced search for Genetic Description
         public static final String ENGINEEREDTRANSGENE = "engineeredTransgene";
