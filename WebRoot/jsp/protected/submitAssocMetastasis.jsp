@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.35  2007/06/25 17:49:19  pandyas
+ * Removed constant for '00000' - not used anymore
+ *
  * Revision 1.34  2007/06/13 20:20:34  pandyas
  * Modified code for EVS trees after formal testing
  *
@@ -76,7 +79,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: submitAssocMetastasis.jsp,v 1.35 2007-06-25 17:49:19 pandyas Exp $
+ * $Id: submitAssocMetastasis.jsp,v 1.36 2009-05-15 18:08:32 pandyas Exp $
  *
  */   
 %>
@@ -226,9 +229,9 @@
 							<html:text styleClass="formFieldSized" disabled="true" property="tumorClassification"   size="30" />
 						</td>												
 					</c:when>
-					<c:when test="${modelspeciescommonname == 'Zebrafish'}">
-						<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
-						</td>	
+				<c:when test="${modelspeciescommonname == 'Zebrafish'}">
+					  <tr>
+							<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;</td>	
 							<td class="formField">
 								<html:hidden property="diagnosisCode"/>						
 								<html:select styleClass="formFieldSized" size="1" property="tumorClassification" onchange="chkOtherDiagnosis();" >
@@ -238,15 +241,15 @@
 								-if Diagnosis is not listed, then please<br>select "Other" from the list and specify it below:
 							</td>
 						</tr>			
-							<tr>
+						<tr>
 								<td class="formRequiredNotice" width="5">&nbsp;</td>
 								<td class="formLabel"><label for="field1">Other Diagnosis:</label></td>
 								<td class="formField">
 									<html:text styleClass="formFieldSized" property="otherTumorClassification"  size="30" />
 								</td>
-							</tr>						
-					</c:when>							
-					<c:otherwise>
+						</tr>						
+				</c:when>							
+				<c:otherwise>
 					<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
 					</td>
 						<html:hidden property="diagnosisCode"/>			
@@ -397,16 +400,16 @@
 				  <input type="hidden" name="aHistopathologyID" value="<%= aHistopathologyID %>">
 				  <input type="hidden" name="aAssociatedMetastasisID" value="<%= aAssociatedMetastasisID %>">
 				  
-				  </html:form>
-			</TABLE>
-			<!-- action buttons end -->
-		</td>
-	</tr>
-</TABLE>
+				</TABLE>
+			</td>
+		</tr>
+	</html:form>		
+	</TABLE>
 
 <!-- -->
 	</td></tr></TABLE>
-</tr></td></TABLE>
+	
+</td></tr></TABLE>
 
 <SCRIPT>
 	chkObservation();

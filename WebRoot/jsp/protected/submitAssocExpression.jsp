@@ -49,7 +49,7 @@
 	}
 %>
 	
-<html:form action="<%= actionName %>" focus="name">	
+	
 
 
 <!-- submitAssocExpression.jsp -->
@@ -61,7 +61,7 @@
 <!-- -->
 
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
-	
+	<html:form action="<%= actionName %>" focus="name">
 	<tr>
 	    <html:errors/>
 		<td class="formMessage" colspan="3">* indicates a required field</td>
@@ -176,14 +176,15 @@
 				  <c:if test="${not empty aEngineeredTransgeneID}">
 				      <input type="hidden" name="aEngineeredTransgeneID" value="<%= aEngineeredTransgeneID %>">
 				  </c:if>
-				</html:form>			
-			</TABLE>
-		</td>
-	</tr>
-</TABLE>
+				</TABLE>
+			</td>
+		</tr>
+	</html:form>		
+	</TABLE>
 
-	<!-- -->
-</TABLE>
-</tr></TABLE>
+<!-- -->
+	</td></tr></TABLE>
+	
+</td></tr></TABLE>
 
 <%@ include file="/jsp/footer.jsp" %>
