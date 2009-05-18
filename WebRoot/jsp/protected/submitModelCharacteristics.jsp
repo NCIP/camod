@@ -169,7 +169,7 @@ var cal1 = new CalendarPopup();
 			<td class="formLabel"><label for="field2">Experimental Design:</label>
 			</td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldSized" property="experimentDesign" cols="32" rows="4"/>
+					<html:textarea styleClass="formFieldUnSized" property="experimentDesign" cols="40" rows="4" />
 			</td>
 		</tr>
 
@@ -178,7 +178,7 @@ var cal1 = new CalendarPopup();
 			<td class="formRequiredLabel"><label for="field2">Phenotype:</label>
 			</td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldSized" property="description" cols="32" rows="4"/>			
+					<html:textarea styleClass="formFieldUnSized" property="description" cols="45" rows="4" />			
 			</td>
 		</tr>
 
@@ -227,7 +227,7 @@ var cal1 = new CalendarPopup();
 			<td class="formLabel"><label for="field1">Comment:</label>
 			</td>
 				<td class="formField">
-						<html:textarea styleClass="formFieldSized" property="comments" cols="32" rows="4"/>			
+						<html:textarea styleClass="formFieldUnSized" property="comments" cols="50" rows="4" />			
 				</td>
 		</tr>			
 
