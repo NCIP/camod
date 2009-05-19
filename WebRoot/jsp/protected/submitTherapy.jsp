@@ -1,9 +1,12 @@
 <%
 
 /**
- * $Id: submitTherapy.jsp,v 1.40 2009-05-19 17:10:04 pandyas Exp $
+ * $Id: submitTherapy.jsp,v 1.41 2009-05-19 17:28:54 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.40  2009/05/19 17:10:04  pandyas
+ * modified for gforge #19723  	Increase width of paragraph text boxes on various submission screens
+ *
  * Revision 1.39  2008/11/10 18:48:04  pandyas
  * modified dose box for gforge #17673 Add values to Unit, Administrative Route drop-down menus
  *
@@ -214,7 +217,7 @@
 		<td class="formLabel"><label for="field1">Experiment:</label>
 		</td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldUnSized" property="experiment" cols="50" rows="3"/>			
+					<html:textarea styleClass="formFieldUnSized" property="experiment" cols="60" rows="3"/>			
 			</td>
 	</tr>
 	<tr>
@@ -297,7 +300,7 @@
 		<td class="formLabel"><label for="field1">Results:</label>
 		</td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldUnSized" property="results" cols="50" rows="3"/>			
+					<html:textarea styleClass="formFieldUnSized" property="results" cols="60" rows="3"/>			
 			</td>
 	</tr>
     <tr align="LEFT" valign="TOP">
@@ -333,7 +336,7 @@
 		<td class="formLabel"><label for="field1">Comment:</label>
 		</td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldUnSized" property="comments" cols="50" rows="3"/>			
+					<html:textarea styleClass="formFieldUnSized" property="comments" cols="60" rows="3"/>			
 			</td>
 	</tr>		
 	
