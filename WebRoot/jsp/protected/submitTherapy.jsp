@@ -1,9 +1,12 @@
 <%
 
 /**
- * $Id: submitTherapy.jsp,v 1.39 2008-11-10 18:48:04 pandyas Exp $
+ * $Id: submitTherapy.jsp,v 1.40 2009-05-19 17:10:04 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.39  2008/11/10 18:48:04  pandyas
+ * modified dose box for gforge #17673 Add values to Unit, Administrative Route drop-down menus
+ *
  * Revision 1.38  2008/11/10 18:33:48  pandyas
  * modified dose box for gforge #17673 Add values to Unit, Administrative Route drop-down menus
  *
@@ -75,8 +78,6 @@
 	}
 </SCRIPT>
 
-<html:form action="<%= actionName %>" focus="name" onsubmit="selectAll()">
-
 <!-- submitTherapy.jsp -->
 <!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
@@ -85,7 +86,7 @@
 	<tr><td valign="top">
 
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
-
+	<html:form action="<%= actionName %>" focus="name" onsubmit="selectAll()">
 	<tr>
 		<html:errors/>
 		<td class="formMessage" colspan="3">* indicates a required field</td>
@@ -213,7 +214,7 @@
 		<td class="formLabel"><label for="field1">Experiment:</label>
 		</td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldSized" property="experiment" cols="60" rows="3"/>			
+					<html:textarea styleClass="formFieldUnSized" property="experiment" cols="50" rows="3"/>			
 			</td>
 	</tr>
 	<tr>
@@ -296,7 +297,7 @@
 		<td class="formLabel"><label for="field1">Results:</label>
 		</td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldSized" property="results" cols="60" rows="3"/>			
+					<html:textarea styleClass="formFieldUnSized" property="results" cols="50" rows="3"/>			
 			</td>
 	</tr>
     <tr align="LEFT" valign="TOP">
@@ -332,7 +333,7 @@
 		<td class="formLabel"><label for="field1">Comment:</label>
 		</td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldSized" property="comments" cols="60" rows="3"/>			
+					<html:textarea styleClass="formFieldUnSized" property="comments" cols="50" rows="3"/>			
 			</td>
 	</tr>		
 	
@@ -360,12 +361,13 @@
 			</TABLE>
 		</td>
 	</tr>
+	</html:form>
 </TABLE>
 
 <!-- -->
 	</td></tr></TABLE>
-</tr></td></TABLE>
-</html:form>
+</td></tr></TABLE>
+
 
 <SCRIPT LANGUAGE="JavaScript">
     removeAllSelected();
