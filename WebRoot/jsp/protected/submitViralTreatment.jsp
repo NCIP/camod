@@ -26,7 +26,6 @@
 	}
 %>
 
-<html:form action="<%= actionName %>" focus="name">
 
 <!-- submitViralTreatment.jsp -->
 <!-- Main Content Begins -->
@@ -36,6 +35,7 @@
 	<tr><td valign="top">
 
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
+	<html:form action="<%= actionName %>" focus="name">
 	<tr>
 	    <html:errors/>
 		<td class="formMessage" colspan="3">* indicates a required field</td>
@@ -169,12 +169,13 @@
 			</TABLE>
 		</td>
 	</tr>
+	</html:form>
 	</TABLE>
 
 <!-- -->
 	</td></tr></TABLE>
-</tr></td></TABLE>
-</html:form>
+</td></tr></TABLE>
+
 			  
 <SCRIPT>
 chkOtherName();
