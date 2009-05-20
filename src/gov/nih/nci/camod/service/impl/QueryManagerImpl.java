@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.118 2009-03-25 16:23:53 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.119 2009-05-20 17:27:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.118  2009/03/25 16:23:53  pandyas
+ * modified for #17833  	Make sure all references to Tranplantation are properly named
+ *
  * Revision 1.117  2009/03/19 00:36:35  pandyas
  * modified for #19758  	Remove the filter from the PI drop-down list on admin (Edit Models) search criteria screen
  * Filter for PIs with models and not just all PIs
@@ -1921,7 +1924,14 @@ public class QueryManagerImpl extends BaseManager
         try
         {
 
-            String theSQLString = "select st.name," + "\n" + "       t.dosage," + "\n" + "       sr.aveinh aveinh," + "\n" + "       sr.diffinh diffinh" + "\n" + "  from screening_Result sr," + "\n" + "       agent ag," + "\n" + "       strain st," + "\n" + "       YST_MDL_SCRNING_RESULT ymsr," + "\n" + "       abs_cancer_model acm," + "\n" + "       treatment t," + "\n" + "   species sp" + "\n" + " where sr.agent_id = ag.agent_id" + "\n" + "   and sr.screening_result_id = ymsr.screening_result_id" + "\n" + "   and sr.treatment_id = t.treatment_id" + "\n" + "   and ymsr.abs_cancer_model_id = acm.abs_cancer_model_id" + "\n" + "   and acm.strain_id = st.strain_id" + "\n" + "   and st.species_id = sp.species_id" + "\n" + "   and sr.stage = ?" + "\n";
+            String theSQLString = "select st.name," + "\n" + "       t.dosage," + "\n" + "       sr.aveinh aveinh," + "\n" + "       " +
+            		"sr.diffinh diffinh" + "\n" + "  from screening_result sr," + "\n" + "       agent ag," + "\n" + "       " +
+            				"strain st," + "\n" + "       YST_MDL_SCRNING_RESULT ymsr," + "\n" + "       abs_cancer_model acm," 
+            				+ "\n" + "       treatment t," + "\n" + "   species sp" + "\n" + " where sr.agent_id = ag.agent_id" 
+            				+ "\n" + "   and sr.screening_result_id = ymsr.screening_result_id" + "\n" 
+            				+ "   and sr.treatment_id = t.treatment_id" + "\n" + "   and ymsr.abs_cancer_model_id = acm.abs_cancer_model_id" 
+            				+ "\n" + "   and acm.strain_id = st.strain_id" + "\n" + "   " 
+            				+ "and st.species_id = sp.species_id" + "\n" + "   and sr.stage = ?" + "\n";
 
             // We query for the agent id on the drug screen search pages and the nsc number on
             // the theraputic approaches pages
