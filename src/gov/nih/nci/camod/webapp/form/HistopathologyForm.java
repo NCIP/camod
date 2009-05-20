@@ -2,9 +2,13 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyForm.java,v 1.9 2007-04-30 20:11:06 pandyas Exp $
+ * $Id: HistopathologyForm.java,v 1.10 2009-05-20 17:16:56 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2007/04/30 20:11:06  pandyas
+ * Implemented species specific vocabulary trees from EVSTree
+ * Added variable to hold otherTumorClassification for Zebrafish diagnosis tree
+ *
  * Revision 1.8  2006/10/17 16:10:47  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -25,9 +29,13 @@ import java.io.Serializable;
 
 /**
  * 
- * $Id: HistopathologyForm.java,v 1.9 2007-04-30 20:11:06 pandyas Exp $
+ * $Id: HistopathologyForm.java,v 1.10 2009-05-20 17:16:56 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2007/04/30 20:11:06  pandyas
+ * Implemented species specific vocabulary trees from EVSTree
+ * Added variable to hold otherTumorClassification for Zebrafish diagnosis tree
+ *
  * Revision 1.8  2006/10/17 16:10:47  pandyas
  * modified during development of caMOD 2.2 - various
  * Revision 1.7 2006/04/17 19:09:19 pandyas
@@ -135,18 +143,32 @@ public class HistopathologyForm extends BaseForm implements Serializable,
 		this.organTissueCode = organTissueCode;
 	}
 
+	/**
+	 * @return Returns the diagnosisCode.
+	 */	
 	public String getDiagnosisCode() {
 		return diagnosisCode;
 	}
 
+	/**
+	 * @param diagnosisCode
+	 *            The diagnosisCode to set.
+	 */		
 	public void setDiagnosisCode(String diagnosisCode) {
 		this.diagnosisCode = diagnosisCode;
 	}
 
+	/**
+	 * @return Returns the diagnosisName.
+	 */	
 	public String getDiagnosisName() {
 		return diagnosisName;
 	}
 
+	/**
+	 * @param diagnosisName
+	 *            The diagnosisName to set.
+	 */	
 	public void setDiagnosisName(String diagnosisName) {
 		this.diagnosisName = diagnosisName;
 	}
@@ -361,18 +383,30 @@ public class HistopathologyForm extends BaseForm implements Serializable,
 		this.comments = comments;
 	}
 
+	/**
+	 * @return Returns the tumorClassification.
+	 */	
 	public String getTumorClassification() {
 		return tumorClassification;
 	}
-
+	/**
+	 * @param tumorClassification
+	 *            The tumorClassification to set.
+	 */
 	public void setTumorClassification(String tumorClassification) {
 		this.tumorClassification = tumorClassification;
 	}
 
+	/**
+	 * @return Returns the otherTumorClassification.
+	 */	
 	public String getOtherTumorClassification() {
 		return otherTumorClassification;
 	}
-
+	/**
+	 * @param otherTumorClassification
+	 *            The otherTumorClassification to set.
+	 */
 	public void setOtherTumorClassification(String otherTumorClassification) {
 		this.otherTumorClassification = otherTumorClassification;
 	}
