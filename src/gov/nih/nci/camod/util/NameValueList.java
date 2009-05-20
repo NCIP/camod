@@ -42,9 +42,13 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: NameValueList.java,v 1.10 2009-05-06 15:07:47 pandyas Exp $
+ * $Id: NameValueList.java,v 1.11 2009-05-20 17:12:20 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2009/05/06 15:07:47  pandyas
+ * modifed for #18338  	Add rabbit to species list
+ * Added scientific name to validation list for species
+ *
  * Revision 1.9  2009/03/25 16:24:14  pandyas
  * modified for #17833  	Make sure all references to Tranplantation are properly named
  *
@@ -88,9 +92,6 @@ public class NameValueList
 
     // stores a list of induced mutation agents
     private static List inducedMutationAgentList = new ArrayList();
-
-    // stores a list of carcinogenic interventions
-    private static List carcinogenicInterventionList = new ArrayList();
 
     // stores a list of external Sources
     private static List externalSourceList = new ArrayList(); 
@@ -167,34 +168,6 @@ public class NameValueList
     public static List getApprovedSpeciesList() {
         generateApprovedSpeciesList();
         return  approvedSpeciesList ;
-    } 
-    
-    
-    public static void generateCarcinogenicInterventionList() {
-
-        carcinogenicInterventionList = new ArrayList();
-        carcinogenicInterventionList.add(new NameValue("Chemical / Drug","Chemical / Drug"));
-        carcinogenicInterventionList.add(new NameValue("Environment","Environment"));
-        carcinogenicInterventionList.add(new NameValue("Growth Factor","Growth Factor")); 
-        carcinogenicInterventionList.add(new NameValue("Hormone","Hormone"));
-        carcinogenicInterventionList.add(new NameValue("Nutrition","Nutrition")); 
-        carcinogenicInterventionList.add(new NameValue("Other","Other"));
-        carcinogenicInterventionList.add(new NameValue("Radiation","Radiation")); 
-        carcinogenicInterventionList.add(new NameValue("Viral","Viral"));
-        carcinogenicInterventionList.add(new NameValue("Antibody","Antibody")); 
-        
-        carcinogenicInterventionList.add(new NameValue("Bacteria","Bacteria"));
-        carcinogenicInterventionList.add(new NameValue("Plasmid","Plasmid")); 
-        carcinogenicInterventionList.add(new NameValue("Signaling Molecule","Signaling Molecule"));        
-        carcinogenicInterventionList.add(new NameValue("Transposon","Transposon"));        
-        
-    }
-
-    public static List getCarcinogenicInterventionList()  {
-        generateCarcinogenicInterventionList();
-        return  carcinogenicInterventionList ;
-    }   
-    
- 
+    }  
  
 }
