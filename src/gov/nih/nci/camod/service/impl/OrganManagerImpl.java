@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * $Id: OrganManagerImpl.java,v 1.11 2007-09-12 19:36:03 pandyas Exp $
+ * $Id: OrganManagerImpl.java,v 1.12 2009-05-20 17:27:02 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2007/09/12 19:36:03  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.10  2006/05/08 13:33:10  georgeda
  * Clean up warnings
  *
@@ -198,7 +201,7 @@ public class OrganManagerImpl extends BaseManager implements OrganManager
         else
         {
             theOrgan = theQBEOrgan;
-            String thePreferredDiscription = EvsTreeUtil.getEVSPreferedDescription(inConceptCode);
+            String thePreferredDiscription = EvsTreeUtil.getConceptDetails(null, inConceptCode);
 
             if (thePreferredDiscription != null && thePreferredDiscription.length() > 0)
             {

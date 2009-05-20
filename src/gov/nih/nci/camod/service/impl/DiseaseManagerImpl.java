@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: DiseaseManagerImpl.java,v 1.6 2007-09-12 19:36:03 pandyas Exp $
+ * $Id: DiseaseManagerImpl.java,v 1.7 2009-05-20 17:27:02 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2007/09/12 19:36:03  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.5  2006/04/21 13:39:12  georgeda
  * Cleanup
  *
@@ -123,7 +126,7 @@ public class DiseaseManagerImpl extends BaseManager implements DiseaseManager
             // Get the preferred description
             if (inConceptCode != null && !inConceptCode.contains("000000"))
             {
-                String thePreferredDiscription = EvsTreeUtil.getEVSPreferedDescription(inConceptCode);
+                String thePreferredDiscription = EvsTreeUtil.getConceptDetails(null, inConceptCode);
 
                 if (thePreferredDiscription != null && thePreferredDiscription.length() > 0)
                 {

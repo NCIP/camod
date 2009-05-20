@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: StainingMethodManagerImpl.java,v 1.4 2007-09-12 19:36:03 pandyas Exp $
+ * $Id: StainingMethodManagerImpl.java,v 1.5 2009-05-20 17:27:02 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2007/09/12 19:36:03  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.3  2007/04/20 17:51:27  pandyas
  * Modified to add Staining Method tree to Image submission
  *
@@ -72,7 +75,7 @@ public class StainingMethodManagerImpl extends BaseManager implements StainingMe
         else
         {
             theStainingMethod = theQBEStainingMethod;
-            String thePreferredDiscription = EvsTreeUtil.getEVSPreferedDescription(inConceptCode);
+            String thePreferredDiscription = EvsTreeUtil.getConceptDetails(null, inConceptCode);
 
             if (thePreferredDiscription != null && thePreferredDiscription.length() > 0)
             {

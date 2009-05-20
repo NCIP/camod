@@ -1,5 +1,8 @@
 /**
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2007/09/12 19:36:03  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.7  2006/01/18 14:24:23  georgeda
  * TT# 376 - Updated to use new Java 1.5 features
  *
@@ -10,18 +13,19 @@
  * Fixed part of bug #21
  *
  * 
- * $Id: AgentManagerImpl.java,v 1.8 2007-09-12 19:36:03 pandyas Exp $
+ * $Id: AgentManagerImpl.java,v 1.9 2009-05-20 17:22:07 pandyas Exp $
  * 
  */
 package gov.nih.nci.camod.service.impl;
 
-import gov.nih.nci.cabio.domain.impl.AgentImpl;
+
 import gov.nih.nci.camod.domain.Agent;
 import gov.nih.nci.camod.service.AgentManager;
 import gov.nih.nci.camod.util.DrugScreenResult;
 import gov.nih.nci.camod.util.EvsTreeUtil;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
 import gov.nih.nci.system.applicationservice.ApplicationService;
+import gov.nih.nci.system.applicationservice.CaBioApplicationService;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -80,7 +84,8 @@ public class AgentManagerImpl extends BaseManager implements AgentManager
 
     public Collection getClinicalProtocols(Agent a)
     {
-        ApplicationService appService = EvsTreeUtil.getApplicationService();
+    	ApplicationService appService = null;
+    	appService = (CaBioApplicationService)EvsTreeUtil.getCabioApplicationService();
         Collection protocols = null;
         if (a != null)
         {
@@ -88,7 +93,7 @@ public class AgentManagerImpl extends BaseManager implements AgentManager
             if (nscNumber != null)
             {
                 // get clinical protocols from caBIO
-                gov.nih.nci.cabio.domain.Agent agt = new AgentImpl();
+                gov.nih.nci.cabio.domain.Agent agt = new gov.nih.nci.cabio.domain.Agent();
                 agt.setNSCNumber(nscNumber);
                 try
                 {
