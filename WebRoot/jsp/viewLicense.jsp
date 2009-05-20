@@ -1,7 +1,8 @@
-<%@ include file="header.jsp" %>
-<TR>
+<%@ include file="/jsp/header.jsp" %>
+
+
 <!-- Following cell is for main content -->
-<TD valign=top width="100%"> 
+<TR><TD valign=top width="100%"> 
 
 <!-- Following table is ended at the end of the Application footer -->
 <TABLE height="100%" cellSpacing=0 cellPadding=0 width="100%" summary="" border=0>

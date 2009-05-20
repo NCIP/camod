@@ -27,16 +27,15 @@
 	}
 %>
 
-<html:form action="<%= actionName %>" focus="cellLineName">
-
 <!-- submitCellLines.jsp -->
 <!-- Main Content Begins -->
-<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE cellpadding="10" cellspacing="0" border="1" class="contentBegins" width="100%" height="100%">
 <tr><td>
-	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
+	<TABLE summary="" cellpadding="0" cellspacing="0" border="1" class="contentPage" width="100%" height="100%">
 	<tr><td valign="top">
 
-	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">	
+	<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="left" width="100%">
+	<html:form action="<%= actionName %>" focus="cellLineName">	
 	<tr>
 		<html:errors/>
 		<td class="formMessage" colspan="3">* indicates a required field</td>
@@ -65,7 +64,7 @@
 				<td class="formRequiredLabel"><label for="field1">Organ / Tissue:</label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />							
 					<a href="javascript:showMouseTissueTree('cellLineForm', 'organTissueCode', 'organTissueName', 'organ', true)">
-						<IMG src="images\selectUP.gif" align=middle border=0></a>
+						<IMG src="images\selectUP.gif" align=middle ></a>
 				</td>				
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
@@ -77,7 +76,7 @@
 				<td class="formRequiredLabel"><label for="field1">Organ / Tissue:</label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
 					<a href="javascript:showRatTissueTree('cellLineForm', 'organTissueCode', 'organTissueName', 'organ', true)">
-						<IMG src="images\selectUP.gif" align=middle border=0></a>
+						<IMG src="images\selectUP.gif" align=middle  ></a>
 				</td>
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
@@ -89,7 +88,7 @@
 				<td class="formRequiredLabel"><label for="field1">Organ / Tissue:</label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
 					<a href="javascript:showZebrafishTissueTree('cellLineForm', 'organTissueCode', 'organTissueName', 'organ', true)">
-						<IMG src="images\selectUP.gif" align=middle border=0></a>
+						<IMG src="images\selectUP.gif" align=middle ></a>
 				</td>
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
@@ -139,7 +138,7 @@
 	<tr>
 		<td align="right" colspan="3">
 			<!-- action buttons begins -->
-				<TABLE cellpadding="4" cellspacing="0" border="0">
+				<TABLE cellpadding="4" cellspacing="0" border="1">
 			
 				  <html:submit styleClass="actionButton">
 					  <bean:message key="button.submit"/>
@@ -156,17 +155,16 @@
 			      </c:if>
 					  
 				  <!--  Done this way since html:hidden doesn't seem to work correctly -->
-				  <input type="hidden" name="aCellID" value="<%= aCellID %>">
-				  
-				  </html:form>			
+				  <input type="hidden" name="aCellID" value="<%= aCellID %>">				  			
 				</TABLE>
 			<!-- action buttons end -->
 		</td>
 	</tr>
+</html:form>	
 </TABLE>
 
 <!-- -->
 	</td></tr></TABLE>
-</tr></td></TABLE>
+</td></tr></TABLE>
 
 <%@ include file="/jsp/footer.jsp" %>

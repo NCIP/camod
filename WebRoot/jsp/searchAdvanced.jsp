@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.79 2009-03-13 15:06:48 pandyas Exp $
+ * $Id: searchAdvanced.jsp,v 1.80 2009-05-20 17:28:41 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.79  2009/03/13 15:06:48  pandyas
+ * modified for #17040  	Make PMID field on advanced search screen user-friendly by adding a link to PubMed and trim functions
+ *
  * Revision 1.78  2008/12/02 18:51:59  pandyas
  * modified for gforge #16902  	link to the induced mutation page in the Admin/ Edited Models mode is not available for old models
  * removed induced mutation selection and will bring it back after rework and database cleanup
@@ -251,11 +254,12 @@
 	String aQueryName = (String) request.getSession().getAttribute( Constants.QUERY_NAME );		
 %>
 
-<html:form action="SearchAdvancedAction.do" focus="keyword" onsubmit="enableFields()">
+
 
 <!-- searchAdvanced.jsp -->
 <!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<html:form action="SearchAdvancedAction.do" focus="keyword" onsubmit="enableFields()">
 		<tr>
 			<html:errors/>
 			<td class="formMessage" colspan="3"></td>
@@ -684,13 +688,14 @@
 					  	  <bean:message key="button.clear"/>
 	  				  </html:submit>
 	  				  
-				  </html:form>		
+		
 				</TABLE>
 			</td>
 		</tr>
 		<!-- action buttons end -->
 	</TABLE>
-</td></tr></TABLE>	
+</html:form>	
+</tr></td></TABLE>	
 
 <SCRIPT LANGUAGE="JavaScript">
     checkFields();
