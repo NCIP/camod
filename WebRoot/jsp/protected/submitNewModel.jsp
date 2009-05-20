@@ -202,7 +202,7 @@ var cal1 = new CalendarPopup();
 		</tr>
 
 		<tr>
-			<td class="formRequiredNotice" widh="5">&nbsp;</td>
+			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">Website for add. info:</label>
 			</td>
 			<td class="formField">
