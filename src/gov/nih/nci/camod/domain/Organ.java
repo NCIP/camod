@@ -1,7 +1,11 @@
 /*
- * $Id: Organ.java,v 1.17 2006-10-31 17:55:24 pandyas Exp $
+ * $Id: Organ.java,v 1.18 2009-05-20 17:07:20 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2006/10/31 17:55:24  pandyas
+ * Organ returns the EVS Preferred displayName
+ *  if the conceptCode = 000000, then return the name just like disease.  This is needed for JAX data from MTB.
+ *
  * Revision 1.16  2006/04/17 19:13:46  pandyas
  * caMod 2.1 OM changes and added log/id header
  *
@@ -70,7 +74,7 @@ public class Organ extends BaseObject implements Comparable, Serializable, Dupli
         }
         else
         {
-            thePreferedDesc = EvsTreeUtil.getEVSPreferedDescription(conceptCode);
+            thePreferedDesc = EvsTreeUtil.getConceptDetails(null, conceptCode);
         }
         return thePreferedDesc;
     }    

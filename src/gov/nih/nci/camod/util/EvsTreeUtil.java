@@ -1,9 +1,12 @@
 /**
  *  @author georgeda 
  *  
- *  $Id: EvsTreeUtil.java,v 1.13 2008-08-14 06:27:33 schroedn Exp $  
+ *  $Id: EvsTreeUtil.java,v 1.14 2009-05-20 17:11:50 pandyas Exp $  
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.13  2008/08/14 06:27:33  schroedn
+ *  Check for null first
+ *
  *  Revision 1.12  2008/01/15 19:31:28  pandyas
  *  Modified debug statements to build to dev tier
  *
@@ -45,21 +48,28 @@
 package gov.nih.nci.camod.util;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.evs.query.EVSQuery;
-import gov.nih.nci.evs.query.EVSQueryImpl;
 import gov.nih.nci.system.applicationservice.ApplicationService;
-
-import java.io.FileInputStream;
+import gov.nih.nci.system.applicationservice.EVSApplicationService;
+import gov.nih.nci.system.client.ApplicationServiceProvider;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.LexGrid.LexBIG.DataModel.Collections.ResolvedConceptReferenceList;
+import org.LexGrid.LexBIG.DataModel.Core.CodingSchemeVersionOrTag;
+import org.LexGrid.LexBIG.DataModel.Core.ResolvedConceptReference;
+import org.LexGrid.LexBIG.LexBIGService.CodedNodeSet;
+import org.LexGrid.concepts.Concept;
+import org.LexGrid.LexBIG.DataModel.Collections.ConceptReferenceList;
+import org.LexGrid.LexBIG.DataModel.Core.ConceptReference;
+//import org.LexGrid.relations.Relations;
+import org.LexGrid.commonTypes.Property;
+
 
 /**
  * Static helper class for caching EVS values.
- * 
+ *
  */
 public class EvsTreeUtil
 {
@@ -69,121 +79,229 @@ public class EvsTreeUtil
     private EvsTreeUtil()
     {}
 
+
     /**
-     * Get a preferred name based on a concept code. Will return the cached
-     * value if it has been fetched before.
-     * 
-     * @param inConceptCode
-     *            the concept code to get the preferred name for.
-     * 
+     * Get the application service based on the properties file
+     *
      * @return the preferred name, or an empty string if something goes wrong.
-     */
-    public static synchronized String getEVSPreferedDescription(String inConceptCode)
+     */     
+    public static ApplicationService getCabioApplicationService()
     {
-        log.debug("Entering getEVSPreferedDescription");
+		ApplicationService appService = null;
 
-        String theDescription = "";
-        String EVSTreeNameSpace = "";
-        String DisplayNameTag = "";
+		try {
+			log.info("CaBioApplicationService.getCabioApplicationService Enter : " );
+		
+			appService=ApplicationServiceProvider.getApplicationService("ServiceInfo");
+			
+			log.debug("ApplicationService : " + appService.toString());
 
-        if (ourDescriptions.containsKey(inConceptCode))
-        {
-            theDescription = (String) ourDescriptions.get(inConceptCode);
-        }
-        else
-        {
-            try
-            {
-                log.debug("inConceptCode: " + inConceptCode);                
-                
-            	// Define parameters for Zebrafish namespace
-                // Maybe a better way to do this, but I didn't want to send in HttpServletRequest everywhere
-                if( inConceptCode != null ){
-                    if(inConceptCode.contains("ZFA:")){
-                        log.debug("Zebrafish modelSpecies");
-
-                		EVSTreeNameSpace = Constants.Evs.ZEBRAFISH_NAMESPACE;
-                		DisplayNameTag = Constants.Evs.DISPLAY_NAME_TAG_LOWER_CASE;
-                	//Define parameters for all NCI_Thesaurus namespace	
-                	} else {
-                        log.debug("NOT Zebrafish modelSpecies");                    
-                		EVSTreeNameSpace = Constants.Evs.NAMESPACE;
-                		DisplayNameTag = Constants.Evs.DISPLAY_NAME_TAG;
-                	}                	
-                }
-            	
-            	log.debug("EVSTreeNameSpace: " + EVSTreeNameSpace);    	
-            	
-                ApplicationService theAppService = getApplicationService();
-                log.debug("theAppService: " + theAppService.toString());
-
-                EVSQuery theConceptNameQuery = new EVSQueryImpl();
-                theConceptNameQuery.getConceptNameByCode(EVSTreeNameSpace, inConceptCode);
-
-                List theConceptNames = (List) theAppService.evsSearch(theConceptNameQuery);
-
-                // Should only be one
-                if (theConceptNames.size() > 0)
-                {
-                    String theDisplayName = (String) theConceptNames.get(0);
-
-                    EVSQuery theDisplayNameQuery = new EVSQueryImpl();
-                    //theDisplayNameQuery.getPropertyValues(Constants.Evs.NAMESPACE, theDisplayName, Constants.Evs.DISPLAY_NAME_TAG);
-                    theDisplayNameQuery.getPropertyValues(EVSTreeNameSpace, theDisplayName, DisplayNameTag);
-
-                    // Should only be one
-                    List theDisplayNameList = (List) theAppService.evsSearch(theDisplayNameQuery);
-                    log.debug("theDisplayNameList.size: " + theDisplayNameList.size());
-
-                    if (theDisplayNameList.size() > 0)
-                    {
-                        theDescription = (String) theDisplayNameList.get(0);
-                        log.debug("theDescription: " + theDescription);                        
-
-                        // Cache for next time
-                        ourDescriptions.put(inConceptCode, theDescription);
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-                log.error("Exception getting preferred description: ", e);
-            }
-        }
-        log.debug("Exiting getEVSPreferedDescription");
-
-        return theDescription;
+		}		
+		catch (FileNotFoundException e) {
+			log.error("Caught FileNotFoundException properties for caBIO: ", e);
+			e.printStackTrace();
+		} catch (IOException e) {
+			log.error("Caught IOException finding file for properties for caBIO: ", e);
+			e.printStackTrace();
+		} 
+		catch (Exception e) {
+			log.error("Caught Exception e for caBIO: ", e);
+			e.printStackTrace();
+		}		
+		return appService;
     }
     
 
 
     /**
      * Get the application service based on the properties file
-     * 
-     * @return the preferred name, or an empty string if something goes wrong.
+     *
+     * @return the application service.
      */
-    public static ApplicationService getApplicationService()
+    public static EVSApplicationService getApplicationService()
     {
         // Get the app service uri
 		Properties camodProperties = new Properties();
 		String camodPropertiesFileName = null;
+		EVSApplicationService appService = null;
 
-		camodPropertiesFileName = System.getProperty("gov.nih.nci.camod.camodProperties");
-		
+		//camodPropertiesFileName = System.getProperty("gov.nih.nci.camod.camodProperties");
+
 		try {
-			
-		FileInputStream in = new FileInputStream(camodPropertiesFileName);
-		camodProperties.load(in);
-	
-		} 
-		catch (FileNotFoundException e) {
-			log.error("Caught exception finding file for properties: ", e);
-			e.printStackTrace();			
-		} catch (IOException e) {
-			log.error("Caught exception finding file for properties: ", e);
-			e.printStackTrace();			
+			log.debug("EVSApplicationService.getApplicationService Enter : " );
+			// load properties from external file
+			//FileInputStream in = new FileInputStream(camodPropertiesFileName);
+			//camodProperties.load(in);
+			//String serverURL = camodProperties.getProperty("evs.uri");
+			String serverURL = "http://lexevsapi.nci.nih.gov/lexevsapi42";
+
+			log.debug("serverURL : " + serverURL);
+
+			ApplicationServiceProvider applicationServiceProvider = new ApplicationServiceProvider();
+			appService =
+				(EVSApplicationService)applicationServiceProvider.
+				getApplicationService(serverURL);
+
+			log.debug("EVSApplicationService : " + appService.toString());
 		}
-        return ApplicationService.getRemoteInstance(camodProperties.getProperty("evs.uri"));
+		catch (FileNotFoundException e) {
+			log.error("Caught exception finding file for properties for EVS: ", e);
+			e.printStackTrace();
+		} catch (IOException e) {
+			log.error("Caught exception finding file for properties for EVS: ", e);
+			e.printStackTrace();
+		} catch (Exception e) {
+			log.error("Caught exception finding file for properties for EVS: ", e);
+			e.printStackTrace();
+		}
+		return appService;
+    }
+
+	public static ConceptReferenceList createConceptReferenceList(String[] codes, String codingSchemeName)
+	{
+		if (codes == null)
+		{
+			return null;
+		}
+		ConceptReferenceList list = new ConceptReferenceList();
+		for (int i = 0; i < codes.length; i++)
+		{
+			ConceptReference cr = new ConceptReference();
+			cr.setCodingScheme(codingSchemeName);
+			cr.setConceptCode(codes[i]);
+			list.addConceptReference(cr);
+		}
+		return list;
+	}
+
+	public static Concept getConceptByCode(String codingSchemeName, String vers, String ltag, String code)
+	{
+        try {
+			RemoteServerUtil rsu = new RemoteServerUtil();
+			EVSApplicationService lbSvc = rsu.createLexBIGService();
+			if (lbSvc == null)
+			{
+				System.out.println("lbSvc == null???");
+				return null;
+			}
+
+			CodingSchemeVersionOrTag versionOrTag = new CodingSchemeVersionOrTag();
+			versionOrTag.setVersion(vers);
+
+			ConceptReferenceList crefs =
+				createConceptReferenceList(
+					new String[] {code}, codingSchemeName);
+
+			CodedNodeSet cns = null;
+
+			try {
+				cns = lbSvc.getCodingSchemeConcepts(codingSchemeName, versionOrTag);
+		    } catch (Exception e1) {
+				e1.printStackTrace();
+			}
+
+			cns = cns.restrictToCodes(crefs);
+			ResolvedConceptReferenceList matches = cns.resolveToList(null, null, null, 1);
+
+			if (matches == null)
+			{
+				System.out.println("Concep not found.");
+				return null;
+			}
+
+			// Analyze the result ...
+			if (matches.getResolvedConceptReferenceCount() > 0) {
+				ResolvedConceptReference ref =
+					(ResolvedConceptReference) matches.enumerateResolvedConceptReference().nextElement();
+
+				Concept entry = ref.getReferencedEntry();
+				return entry;
+			}
+		 } catch (Exception e) {
+			 e.printStackTrace();
+			 return null;
+		 }
+		 return null;
+	}
+
+	public static String outputPropertyDetails(Property[] properties)
+    {
+		log.debug("EvsTreeUtil.outputPropertyDetails Entered");
+		String prop_value = "";
+		String evsDisplayNameValue = "";
+		
+		for (int i=0; i<properties.length; i++)
+		{
+			Property property = (Property) properties[i];
+			String prop_name = property.getPropertyName();
+			prop_value = property.getText().getContent();
+			if(property.getPropertyName().equals(Constants.Evs.DISPLAY_NAME_TAG) || property.getPropertyName().equals(Constants.Evs.DISPLAY_NAME_TAG_LOWER_CASE)) {
+				log.debug("property.getPropertyName(): "  + property.getPropertyName());
+				evsDisplayNameValue = property.getText().getContent();				
+				log.debug("evsDisplayNameValue: " + evsDisplayNameValue);
+				break;
+			} 
+		}
+		log.debug("EvsTreeUtil.outputPropertyDetails Exit ");
+		log.debug("Final evsDisplayNameValue: " + evsDisplayNameValue);
+		return evsDisplayNameValue;
+	}
+
+	public static String getConceptDetails(String version, String code)
+	{
+		log.debug("EvsTreeUtil.getConceptDetails Entered: ");
+        String scheme = "";
+        String theDescription = ""; 
+		
+		if( code != null ){
+            if(code.contains("ZFA")){
+                log.debug("Zebrafish modelSpecies");
+        		scheme = Constants.Evs.ZEBRAFISH_SCHEMA;
+        		//DisplayNameTag = Constants.Evs.DISPLAY_NAME_TAG_LOWER_CASE;
+        	//Define parameters for all NCI_Thesaurus schema
+        	} else {
+                log.debug("NOT Zebrafish modelSpecies");
+                scheme = Constants.Evs.NCI_SCHEMA;
+        		//DisplayNameTag = Constants.Evs.DISPLAY_NAME_TAG;
+        	}
+		}
+
+        Concept ce = getConceptByCode(scheme, null, null, code);
+        if (ce == null)
+        {
+        	log.info("Concept not found -- " + code);
+		}
+		else
+		{
+			log.debug("Concept found -- " + code);
+			log.debug("Concept log.debug+ ce.getEntityDescription().getContent()");
+
+			int num_properties = 0;
+
+			Property[] properties = ce.getPresentation();
+			num_properties = num_properties + properties.length;
+
+			theDescription = outputPropertyDetails(properties);
+			log.debug("\n theDescription: " + theDescription);
+
+			log.debug("\nTotal number of properties: " + num_properties + "\n\n");
+	    }
+        return theDescription;
+	}
+
+    public static void main(String[] args)
+ 	{
+  		EvsTreeUtil test = new EvsTreeUtil();
+		String scheme = "NCI Thesaurus";
+		String version = null;
+		String code = "C17763";
+  		//test.getConceptDetails(scheme, version, code);
+		test.getConceptDetails(version, code);
+
+		scheme = "Zebrafish";
+		version = null;
+		code = "ZFA_0000315";
+		//test.getConceptDetails(scheme, version, code);
+		test.getConceptDetails(version, code);
     }
 }

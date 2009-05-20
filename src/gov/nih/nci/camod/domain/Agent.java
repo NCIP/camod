@@ -1,5 +1,8 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2006/05/08 13:30:26  georgeda
+ * Clean up warnings
+ *
  * Revision 1.12  2006/04/17 19:13:46  pandyas
  * caMod 2.1 OM changes and added log/id header
  *
@@ -10,7 +13,7 @@
  * Cleanup
  *
  * 
- * $Id: Agent.java,v 1.13 2006-05-08 13:30:26 georgeda Exp $
+ * $Id: Agent.java,v 1.14 2009-05-20 17:07:20 pandyas Exp $
  */
 package gov.nih.nci.camod.domain;
 
@@ -64,7 +67,8 @@ public class Agent extends BaseObject implements Serializable, Duplicatable {
      */
     public String getEVSPreferredDescription()
     {
-        return EvsTreeUtil.getEVSPreferedDescription(conceptCode);
+    	String concept = getConceptCode();   	
+        return EvsTreeUtil.getConceptDetails(null, concept);   
     }
 
     /**

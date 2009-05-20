@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.118 2009-05-14 18:44:30 pandyas Exp $
+ * $Id: Constants.java,v 1.119 2009-05-20 17:06:16 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.118  2009/05/14 18:44:30  pandyas
+ * modified for gforge #21177  	Upgrade validation on SearchForm
+ *
  * Revision 1.117  2009/04/30 20:01:09  pandyas
  * removed two changes meant for EVS - caBIO upgrade which is not built yet
  *
@@ -1186,12 +1189,12 @@ public class Constants {
         /**
          * The namespace to fetch the concepts from
          */
-        public static final String NAMESPACE = "NCI_Thesaurus";
+        public static final String NCI_SCHEMA = "NCI_Thesaurus";
         
         /**
          * The namespace to fetch the concepts from
          */
-        public static final String ZEBRAFISH_NAMESPACE = "Zebrafish";        
+        public static final String ZEBRAFISH_SCHEMA = "Zebrafish";        
 
         /**
          * The tag used to get the display name

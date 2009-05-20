@@ -1,7 +1,10 @@
 /*
- * $Id: Disease.java,v 1.18 2007-10-31 15:33:31 pandyas Exp $
+ * $Id: Disease.java,v 1.19 2009-05-20 17:07:20 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2007/10/31 15:33:31  pandyas
+ * Fixed #8188 	Rename UnctrlVocab items to AlternEntry
+ *
  * Revision 1.17  2007/04/30 20:06:55  pandyas
  * Implemented species specific vocabulary trees from EVSTree
  * Added uncontrolled vocab for disease name
@@ -19,6 +22,7 @@
 package gov.nih.nci.camod.domain;
 
 import gov.nih.nci.camod.util.*;
+
 import java.io.Serializable;
 
 /**
@@ -70,7 +74,7 @@ public class Disease extends BaseObject implements Comparable, Serializable, Dup
         }
         else
         {
-            thePreferedDesc = EvsTreeUtil.getEVSPreferedDescription(conceptCode);
+        	thePreferedDesc = EvsTreeUtil.getConceptDetails(null, conceptCode);
         }
         return thePreferedDesc;
     }

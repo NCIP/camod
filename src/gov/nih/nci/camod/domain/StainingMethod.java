@@ -60,7 +60,7 @@ public class StainingMethod extends BaseObject implements Comparable, Serializab
         }
         else
         {
-            thePreferedDesc = EvsTreeUtil.getEVSPreferedDescription(conceptCode);
+            thePreferedDesc = EvsTreeUtil.getConceptDetails(null, conceptCode);
         }
         return thePreferedDesc;
     }     

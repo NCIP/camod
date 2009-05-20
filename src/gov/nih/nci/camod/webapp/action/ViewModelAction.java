@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.67 2009-03-25 16:24:58 pandyas Exp $
+ *  $Id: ViewModelAction.java,v 1.68 2009-05-20 17:16:34 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.67  2009/03/25 16:24:58  pandyas
+ *  modified for #17833  	Make sure all references to Tranplantation are properly named
+ *
  *  Revision 1.66  2009/03/13 17:03:46  pandyas
  *  modified for #19205  	Sort therapies in the order they are entered
  *
@@ -212,7 +215,7 @@ package gov.nih.nci.camod.webapp.action;
 
 import edu.wustl.common.util.CaElmirInterfaceManager;
 import gov.nih.nci.cabio.domain.Gene;
-import gov.nih.nci.cabio.domain.impl.GeneImpl;
+//import gov.nih.nci.cabio.domain.impl.GeneImpl;
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.Agent;
 import gov.nih.nci.camod.domain.AnimalModel;
@@ -238,8 +241,10 @@ import gov.nih.nci.camod.service.impl.QueryManagerSingleton;
 import gov.nih.nci.camod.util.EvsTreeUtil;
 import gov.nih.nci.camod.util.SafeHTMLUtil;
 import gov.nih.nci.common.domain.DatabaseCrossReference;
-import gov.nih.nci.common.domain.impl.DatabaseCrossReferenceImpl;
+//import gov.nih.nci.common.domain.impl.DatabaseCrossReferenceImpl;
 import gov.nih.nci.system.applicationservice.ApplicationService;
+import gov.nih.nci.system.applicationservice.CaBioApplicationService;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -446,9 +451,10 @@ public class ViewModelAction extends BaseAction
                     // the geneId is available
                     try
                     {
-                      ApplicationService appService = EvsTreeUtil.getApplicationService();
+                      ApplicationService appService = (CaBioApplicationService)EvsTreeUtil.getCabioApplicationService();
+
                       log.info("EvsTreeUtil.getApplicationService: " + appService.toString());
-                        DatabaseCrossReference dcr = new DatabaseCrossReferenceImpl(); 
+                        DatabaseCrossReference dcr = new DatabaseCrossReference(); 
                         dcr.setCrossReferenceId(geneIdentifier.getEntrezGeneID());
 
                         dcr.setType("gov.nih.nci.cabio.domain.Gene");
@@ -456,7 +462,7 @@ public class ViewModelAction extends BaseAction
                         List<DatabaseCrossReference> cfcoll = new ArrayList<DatabaseCrossReference>();
                         cfcoll.add(dcr);
 
-                        Gene myGene = new GeneImpl();
+                        Gene myGene = new Gene();
                         myGene.setDatabaseCrossReferenceCollection(cfcoll);
                         List resultList = appService.search(Gene.class, myGene);
 

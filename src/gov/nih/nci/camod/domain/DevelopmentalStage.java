@@ -1,8 +1,11 @@
 /**
  *
- * $Id: DevelopmentalStage.java,v 1.1 2007-05-16 12:28:23 pandyas Exp $
+ * $Id: DevelopmentalStage.java,v 1.2 2009-05-20 17:07:20 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2007/05/16 12:28:23  pandyas
+ * Added developmental stage evs tree to Therapy when species is Zebrafsih
+ *
  * 
  */
 
@@ -88,7 +91,8 @@ public class DevelopmentalStage extends BaseObject implements Comparable, Serial
      */
     public String getEVSPreferredDescription()
     {
-        return EvsTreeUtil.getEVSPreferedDescription(conceptCode);
+    	String concept = getConceptCode();   	
+        return EvsTreeUtil.getConceptDetails(null, concept);  
     }    
 
     /**
