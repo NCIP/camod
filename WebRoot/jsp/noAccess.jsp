@@ -16,6 +16,6 @@
 </head>
 
 <body>
-<b>You do not have the proper privleges to access this page<b>
+<b>You do not have the proper privileges to access this page<b>
 </body>
 </html>
