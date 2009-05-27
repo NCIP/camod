@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.57 2009-03-25 16:24:58 pandyas Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.58 2009-05-27 14:59:20 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.57  2009/03/25 16:24:58  pandyas
+ *  modified for #17833  	Make sure all references to Tranplantation are properly named
+ *
  *  Revision 1.56  2008/08/14 17:20:46  pandyas
  *  remove debug lines
  *
@@ -143,7 +146,6 @@ import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.AnimalModelManager;
 
-import java.util.ArrayList;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -405,6 +407,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 					if (agent != null) {
 						therapyList.add(ty);
 					}
+					Collections.sort(therapyList);	
 				}
 
 			} // end of else
