@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.119 2009-05-20 17:27:40 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.120 2009-05-27 14:59:42 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.119  2009/05/20 17:27:40  pandyas
+ * reformated
+ *
  * Revision 1.118  2009/03/25 16:23:53  pandyas
  * modified for #17833  	Make sure all references to Tranplantation are properly named
  *
@@ -402,7 +405,6 @@ package gov.nih.nci.camod.service.impl;
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.Agent;
 import gov.nih.nci.camod.domain.AnimalModel;
-import gov.nih.nci.camod.domain.AnimalModelSearchResult;
 import gov.nih.nci.camod.domain.Comments;
 import gov.nih.nci.camod.domain.Log;
 import gov.nih.nci.camod.domain.Person;
