@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.120 2009-05-27 14:59:42 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.121 2009-05-28 18:46:55 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.120  2009/05/27 14:59:42  pandyas
+ * removed unused import statement
+ *
  * Revision 1.119  2009/05/20 17:27:40  pandyas
  * reformated
  *
@@ -1387,18 +1390,18 @@ public class QueryManagerImpl extends BaseManager
      */
     public List getQueryAllPrincipalInvestigators() throws PersistenceException
     {
-        log.info("Entering QueryManagerImpl.getQueryAllPrincipalInvestigators");
+        log.debug("Entering QueryManagerImpl.getQueryAllPrincipalInvestigators");
 
         // Format the query
         String theSQLString = "SELECT last_name, first_name " + "FROM party " + "WHERE is_principal_investigator = 1  " + "  AND first_name IS NOT NULL " + "  AND last_name IS NOT NULL " + "  AND party_id IN (SELECT DISTINCT principal_investigator_id FROM abs_cancer_model)" + "ORDER BY last_name ASC";
-        log.info("getQueryAllPrincipalInvestigators - theSQLString: " + theSQLString);
+        log.debug("getQueryAllPrincipalInvestigators - theSQLString: " + theSQLString);
         ResultSet theResultSet = null;
 
         List<String> thePIList = new ArrayList<String>();
 
         try
         {
-            log.info("getQueryAllPrincipalInvestigators - SQL: " + theSQLString);
+            log.debug("getQueryAllPrincipalInvestigators - SQL: " + theSQLString);
 
             Object[] params = new Object[0];
             theResultSet = Search.query(theSQLString, params);
@@ -3613,7 +3616,7 @@ public class QueryManagerImpl extends BaseManager
             + "	 group by pmid )" + " \n"            
             + " order by year desc, authors" + "\n";
 
-            log.info("getAllPublications - SQL: " + theSQLString);
+            log.debug("getAllPublications - SQL: " + theSQLString);
             Object[] params = new Object[6];
             params[0] = params[1] = params[2] = params[3] = params[4] = params[5] = String.valueOf(absCancerModelId);
             theResultSet = Search.query(theSQLString, params);
@@ -3640,7 +3643,7 @@ public class QueryManagerImpl extends BaseManager
             }            
             
 
-            log.info("Got " + cc + " publications");
+            log.debug("Got " + cc + " publications");
         }
         catch (Exception e)
         {

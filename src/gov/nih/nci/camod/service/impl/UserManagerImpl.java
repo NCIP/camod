@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: UserManagerImpl.java,v 1.32 2008-06-18 17:53:31 pandyas Exp $
+ * $Id: UserManagerImpl.java,v 1.33 2009-05-28 18:47:31 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.32  2008/06/18 17:53:31  pandyas
+ * Removed commented out lines needed for authentication
+ *
  * Revision 1.31  2008/05/21 19:03:56  pandyas
  * Modified advanced search to prevent SQL injection
  * Re: Apps Scan run 05/15/2008
@@ -18,7 +21,7 @@
  * Added debug for e-mail from LDAP - testing bug for PM e-mail
  *
  * Revision 1.27  2007/03/27 18:39:41  pandyas
- * changed log.info to log.debug to clean up output - done testing changes
+ * changed debug statments to clean up output - done testing changes
  *
  * Revision 1.26  2007/03/20 14:11:11  pandyas
  * Added logging to debug QA tier

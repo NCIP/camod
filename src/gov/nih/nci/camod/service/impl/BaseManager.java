@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: BaseManager.java,v 1.11 2009-03-04 16:25:47 pandyas Exp $
+ * $Id: BaseManager.java,v 1.12 2009-05-28 18:45:49 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2009/03/04 16:25:47  pandyas
+ * added comments to debug MTB data load on camoddev21
+ *
  * Revision 1.10  2008/01/31 22:26:19  pandyas
  * remove log printouts now that bug is resolved
  *
@@ -132,7 +135,7 @@ public class BaseManager implements Manager
      */
     protected void save(Object inObject) throws Exception
     {
-        log.info("Entering BaseManager.save");
+        log.debug("Entering BaseManager.save");
 
         try
         {
@@ -140,7 +143,7 @@ public class BaseManager implements Manager
             HibernateUtil.beginTransaction();
 
             // Save the object
-            log.info("Saving object");
+            log.debug("Saving object");
             Persist.save(inObject);
 
             // Commit all changes or none

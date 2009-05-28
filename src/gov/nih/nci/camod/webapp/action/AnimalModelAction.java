@@ -1,8 +1,13 @@
 /**
  * 
- * $Id: AnimalModelAction.java,v 1.30 2008-06-13 17:35:23 pandyas Exp $
+ * $Id: AnimalModelAction.java,v 1.31 2009-05-28 18:48:41 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.30  2008/06/13 17:35:23  pandyas
+ * Modified to prevent Cross-Site Scripting
+ * Cleaned parameter name before proceeding
+ * Re: Apps Scan run 06/12/2008
+ *
  * Revision 1.29  2008/06/11 17:43:23  pandyas
  * Format change only
  *
@@ -130,10 +135,10 @@ public final class AnimalModelAction extends BaseAction {
 			
 	        // Get and clean method to prevent Cross-Site Scripting
 	        String methodName = request.getParameter("method");
-	        log.info("methodName: " + methodName);
+	        log.debug("methodName: " + methodName);
 	        if (!methodName.equals("save")){
 		        methodName = SafeHTMLUtil.clean(methodName);
-		        log.info("methodName: " + methodName);
+		        log.debug("methodName: " + methodName);
 	        }
 
 			// Get the user
@@ -270,10 +275,10 @@ public final class AnimalModelAction extends BaseAction {
 			
 	        // Get and clean method to prevent Cross-Site Scripting
 	        String methodName = request.getParameter("method");
-	        log.info("methodName: " + methodName);
+	        log.debug("methodName: " + methodName);
 	        if (!methodName.equals("edit")){
 		        methodName = SafeHTMLUtil.clean(methodName);
-		        log.info("methodName: " + methodName);
+		        log.debug("methodName: " + methodName);
 	        }				
 
 			AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
@@ -344,10 +349,10 @@ public final class AnimalModelAction extends BaseAction {
 			
 	        // Get and clean method to prevent Cross-Site Scripting
 	        String methodName = request.getParameter("method");
-	        log.info("methodName: " + methodName);
+	        log.debug("methodName: " + methodName);
 	        if (!methodName.equals("duplicate")){
 		        methodName = SafeHTMLUtil.clean(methodName);
-		        log.info("methodName: " + methodName);
+		        log.debug("methodName: " + methodName);
 	        }				
 
 			String modelID = request.getParameter("aModelID");
@@ -399,9 +404,9 @@ public final class AnimalModelAction extends BaseAction {
 			
 	        // Get and clean method to prevent Cross-Site Scripting
 	        String methodName = request.getParameter("method");
-	        log.info("methodName: " + methodName);
+	        log.debug("methodName: " + methodName);
 	        methodName = SafeHTMLUtil.clean(methodName);
-	        log.info("methodName: " + methodName);	
+	        log.debug("methodName: " + methodName);	
 	        
 			// Retrieve the parameter passed by the URL
 			String modelID = request.getParameter("aModelID");
@@ -450,10 +455,10 @@ public final class AnimalModelAction extends BaseAction {
 		try {
 	        // Get and clean method to prevent Cross-Site Scripting
 	        String methodName = request.getParameter("method");
-	        log.info("methodName: " + methodName);
+	        log.debug("methodName: " + methodName);
 	        if (!methodName.equals("returnUserModels")){
 		        methodName = SafeHTMLUtil.clean(methodName);
-		        log.info("methodName: " + methodName);
+		        log.debug("methodName: " + methodName);
 	        }				
 
 			List amList = animalModelManager.getAllByUser((String) request

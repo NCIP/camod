@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: NewDropdownUtil.java,v 1.60 2009-03-13 15:02:04 pandyas Exp $
+ * $Id: NewDropdownUtil.java,v 1.61 2009-05-28 18:49:31 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.60  2009/03/13 15:02:04  pandyas
+ * modified for #19758  	Remove the filter from the PI drop-down list on admin (Edit Models) search criteria screen
+ *
  * Revision 1.59  2008/08/27 13:56:42  pandyas
  * Updated comments for method
  *
@@ -880,11 +883,11 @@ public class NewDropdownUtil
                                                               String inAddBlank) throws Exception
     {
 
-        log.info("Entering NewDropdownUtil.getQueryAllPrincipalInvestigatorList");
+        log.debug("Entering NewDropdownUtil.getQueryAllPrincipalInvestigatorList");
         
         //Assign list to a constant so simple search can validate against cross-site scripting in searchForm.validate
         List thePIOnlyList = QueryManagerSingleton.instance().getQueryAllPrincipalInvestigators(); 
-        log.info("In NewDropdownUtil.getQueryAllPrincipalInvestigatorList -  ");
+        log.debug("In NewDropdownUtil.getQueryAllPrincipalInvestigatorList -  ");
         inRequest.getSession().setAttribute(Constants.Dropdowns.PRINCIPALINVESTIGATORQUERYALLDROP, thePIOnlyList);        
         
         return thePIOnlyList;

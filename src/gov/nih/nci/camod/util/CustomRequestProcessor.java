@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: CustomRequestProcessor.java,v 1.12 2008-01-15 19:31:18 pandyas Exp $
+ * $Id: CustomRequestProcessor.java,v 1.13 2009-05-28 18:48:01 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2008/01/15 19:31:18  pandyas
+ * Modified debug statements to build to dev tier
+ *
  * Revision 1.11  2008/01/14 21:03:15  pandyas
  * Enabled logging for dev tier instability issue testing
  *
@@ -10,7 +13,7 @@
  * modified debug statements for build to stage tier
  *
  * Revision 1.9  2007/03/27 18:40:11  pandyas
- * changed log.info to log.debug to clean up output - done testing changes
+ * changed log statements to clean up output - done testing changes
  *
  * Revision 1.8  2005/12/06 19:51:32  georgeda
  * Defect #255 - add SSL
