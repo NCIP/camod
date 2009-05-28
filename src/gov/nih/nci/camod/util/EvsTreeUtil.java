@@ -1,9 +1,12 @@
 /**
  *  @author georgeda 
  *  
- *  $Id: EvsTreeUtil.java,v 1.14 2009-05-20 17:11:50 pandyas Exp $  
+ *  $Id: EvsTreeUtil.java,v 1.15 2009-05-28 19:10:13 pandyas Exp $  
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.14  2009/05/20 17:11:50  pandyas
+ *  modified for gforge #17325 Upgrade caMOD to use caBIO 4.x and EVS 4.x to get data
+ *
  *  Revision 1.13  2008/08/14 06:27:33  schroedn
  *  Check for null first
  *
@@ -51,6 +54,8 @@ import gov.nih.nci.camod.Constants;
 import gov.nih.nci.system.applicationservice.ApplicationService;
 import gov.nih.nci.system.applicationservice.EVSApplicationService;
 import gov.nih.nci.system.client.ApplicationServiceProvider;
+
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
@@ -90,7 +95,7 @@ public class EvsTreeUtil
 		ApplicationService appService = null;
 
 		try {
-			log.info("CaBioApplicationService.getCabioApplicationService Enter : " );
+			log.debug("CaBioApplicationService.getCabioApplicationService Enter : " );
 		
 			appService=ApplicationServiceProvider.getApplicationService("ServiceInfo");
 			
@@ -125,24 +130,24 @@ public class EvsTreeUtil
 		String camodPropertiesFileName = null;
 		EVSApplicationService appService = null;
 
-		//camodPropertiesFileName = System.getProperty("gov.nih.nci.camod.camodProperties");
+		camodPropertiesFileName = System.getProperty("gov.nih.nci.camod.camodProperties");
 
 		try {
-			log.debug("EVSApplicationService.getApplicationService Enter : " );
+			log.info("EVSApplicationService.getApplicationService Enter : " );
 			// load properties from external file
-			//FileInputStream in = new FileInputStream(camodPropertiesFileName);
-			//camodProperties.load(in);
-			//String serverURL = camodProperties.getProperty("evs.uri");
-			String serverURL = "http://lexevsapi.nci.nih.gov/lexevsapi42";
+			FileInputStream in = new FileInputStream(camodPropertiesFileName);
+			camodProperties.load(in);
+			String serverURL = camodProperties.getProperty("evs.uri");
+			//String serverURL = "http://lexevsapi.nci.nih.gov/lexevsapi42";
 
-			log.debug("serverURL : " + serverURL);
+			log.info("serverURL : " + serverURL);
 
 			ApplicationServiceProvider applicationServiceProvider = new ApplicationServiceProvider();
 			appService =
 				(EVSApplicationService)applicationServiceProvider.
 				getApplicationService(serverURL);
 
-			log.debug("EVSApplicationService : " + appService.toString());
+			log.info("EVSApplicationService : " + appService.toString());
 		}
 		catch (FileNotFoundException e) {
 			log.error("Caught exception finding file for properties for EVS: ", e);
