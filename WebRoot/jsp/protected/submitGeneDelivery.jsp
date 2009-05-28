@@ -27,8 +27,6 @@
 	}
 %>
 
-<html:form action="<%= actionName %>" focus="name" >
-
 
 <!-- using chkOtherName and name for viralVector would conflict with the organ name variable -->
 
@@ -51,7 +49,7 @@
 <!-- -->
 
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
-	
+	<html:form action="<%= actionName %>" focus="name" >
 	<tr>
 		<html:errors/>
 		<td class="formMessage" colspan="3">* indicates a required field</td>
@@ -209,18 +207,18 @@
 				      </c:if>
 			        				  
 					  <!--  Done this way since html:hidden doesn't seem to work correctly -->
-  				  	  <input type="hidden" name="aCarcinogenExposureID" value="<%= aCarcinogenExposureID %>">
-				  
-				  </html:form>			
+  				  	  <input type="hidden" name="aCarcinogenExposureID" value="<%= aCarcinogenExposureID %>">			  
+			
 				</TABLE>
 			<!-- action buttons end -->
 		</td>
 	</tr>
+	</html:form>
 </TABLE>
 
 <!-- -->
 	</td></tr></TABLE>
-</tr></td></TABLE>
+</td></tr></TABLE>
 
 <SCRIPT>
     chkOtherViralVector();
