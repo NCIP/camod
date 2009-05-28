@@ -1236,7 +1236,7 @@
 					resource="false" />
 				<var>
 					<var-name>maxlength</var-name>
-					<var-value>4000</var-value>
+					<var-value>255</var-value>
 				</var>
 			</field>
 			<field property="mgiId" depends="maxlength">
