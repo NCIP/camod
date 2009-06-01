@@ -29,12 +29,12 @@
 
 <!-- submitCellLines.jsp -->
 <!-- Main Content Begins -->
-<TABLE cellpadding="10" cellspacing="0" border="1" class="contentBegins" width="100%" height="100%">
+<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
-	<TABLE summary="" cellpadding="0" cellspacing="0" border="1" class="contentPage" width="100%" height="100%">
+	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
 	<tr><td valign="top">
 
-	<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="left" width="100%">
+	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left" width="100%">
 	<html:form action="<%= actionName %>" focus="cellLineName">	
 	<tr>
 		<html:errors/>
@@ -138,7 +138,7 @@
 	<tr>
 		<td align="right" colspan="3">
 			<!-- action buttons begins -->
-				<TABLE cellpadding="4" cellspacing="0" border="1">
+				<TABLE cellpadding="4" cellspacing="0" border="0">
 			
 				  <html:submit styleClass="actionButton">
 					  <bean:message key="button.submit"/>
