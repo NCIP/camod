@@ -39,17 +39,17 @@ public class SearchAdminAssignmentAction extends BaseAction {
 		} else {
 			// Do the search
 			try {
-					log.info("<SearchAdminAssignmentAction> In search loop: ");
+					log.debug("<SearchAdminAssignmentAction> In search loop: ");
 					AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
 	
 					// Perform the search
 					List results = animalModelManager.searchAdmin(theForm);
-					log.info("SearchAdminAssignmentAction results.size(): " + results.size());
+					log.debug("SearchAdminAssignmentAction results.size(): " + results.size());
 	
 					// Set admin search results constant
 					inRequest.getSession().setAttribute(Constants.ADMIN_MODEL_ASSIGN_SEARCH_RESULTS,
 							results);
-					log.info("SearchAdminAssignmentAction set results to Constant ");				
+					log.debug("SearchAdminAssignmentAction set results to Constant ");				
 	
 				} catch (Exception e) {
 					log.info(e);

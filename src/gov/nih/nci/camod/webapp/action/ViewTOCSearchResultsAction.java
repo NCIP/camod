@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ViewTOCSearchResultsAction.java,v 1.10 2008-10-22 18:19:07 schroedn Exp $
+ * $Id: ViewTOCSearchResultsAction.java,v 1.11 2009-06-01 17:02:53 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2008/10/22 18:19:07  schroedn
+ * Removed the criteria table data from the search results for TOC
+ *
  * Revision 1.9  2008/07/28 17:20:47  pandyas
  * Modifed to prevent SQL inject - added HTTP Header
  * App scan performed on July 24, 2008
@@ -55,17 +58,17 @@ public class ViewTOCSearchResultsAction extends BaseAction {
     public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.info("In ViewTOCSearchResultsAction.execute");
+        log.debug("In ViewTOCSearchResultsAction.execute");
         
         String theForward = "next";
         
         String theKey = (String) request.getParameter(Constants.Parameters.TOCQUERYKEY);
-        log.info("theKey: " + theKey);
+        log.debug("theKey: " + theKey);
         
         // clean specific header that is used in SQL injection
         if (request.getHeader("X-Forwarded-For") != null){
         	String sID = request.getHeader("X-Forwarded-For");
-            log.info("sID: " + sID);
+            log.debug("sID: " + sID);
             sID = SafeHTMLUtil.clean(sID);
         }
        
@@ -73,9 +76,9 @@ public class ViewTOCSearchResultsAction extends BaseAction {
         Enumeration headerNames = request.getHeaderNames();
         while(headerNames.hasMoreElements()){
         	String sID = headerNames.nextElement().toString();
-            log.info("sID: " + sID);
+            log.debug("sID: " + sID);
             sID = SafeHTMLUtil.clean(sID);
-        	log.info("cleaned header: " + sID);            	
+        	log.debug("cleaned header: " + sID);            	
         }        
 
         try {

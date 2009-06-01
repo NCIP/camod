@@ -1,9 +1,12 @@
 /**
  *  @author georgeda 
  *  
- *  $Id: EvsTreeUtil.java,v 1.15 2009-05-28 19:10:13 pandyas Exp $  
+ *  $Id: EvsTreeUtil.java,v 1.16 2009-06-01 16:53:42 pandyas Exp $  
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.15  2009/05/28 19:10:13  pandyas
+ *  getting ready for QA build
+ *
  *  Revision 1.14  2009/05/20 17:11:50  pandyas
  *  modified for gforge #17325 Upgrade caMOD to use caBIO 4.x and EVS 4.x to get data
  *
@@ -133,21 +136,21 @@ public class EvsTreeUtil
 		camodPropertiesFileName = System.getProperty("gov.nih.nci.camod.camodProperties");
 
 		try {
-			log.info("EVSApplicationService.getApplicationService Enter : " );
+			log.debug("EVSApplicationService.getApplicationService Enter : " );
 			// load properties from external file
 			FileInputStream in = new FileInputStream(camodPropertiesFileName);
 			camodProperties.load(in);
 			String serverURL = camodProperties.getProperty("evs.uri");
 			//String serverURL = "http://lexevsapi.nci.nih.gov/lexevsapi42";
 
-			log.info("serverURL : " + serverURL);
+			log.debug("serverURL : " + serverURL);
 
 			ApplicationServiceProvider applicationServiceProvider = new ApplicationServiceProvider();
 			appService =
 				(EVSApplicationService)applicationServiceProvider.
 				getApplicationService(serverURL);
 
-			log.info("EVSApplicationService : " + appService.toString());
+			log.debug("EVSApplicationService : " + appService.toString());
 		}
 		catch (FileNotFoundException e) {
 			log.error("Caught exception finding file for properties for EVS: ", e);

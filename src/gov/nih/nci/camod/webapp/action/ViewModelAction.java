@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.68 2009-05-20 17:16:34 pandyas Exp $
+ *  $Id: ViewModelAction.java,v 1.69 2009-06-01 17:02:46 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.68  2009/05/20 17:16:34  pandyas
+ *  modified for gforge #17325 Upgrade caMOD to use caBIO 4.x and EVS 4.x to get data
+ *
  *  Revision 1.67  2009/03/25 16:24:58  pandyas
  *  modified for #17833  	Make sure all references to Tranplantation are properly named
  *
@@ -324,7 +327,7 @@ public class ViewModelAction extends BaseAction
             Comments theComments = theCommentsManager.get(theCommentsId);
             if (theComments != null)
             {
-                log.info("Found a comment: " + theComments.getRemark());
+                log.debug("Found a comment: " + theComments.getRemark());
                 theCommentsList.add(theComments);
             }
         }
@@ -363,23 +366,23 @@ public class ViewModelAction extends BaseAction
            	String sID = null;
             if (request.getHeader("X-Forwarded-For") != null){
             	sID = request.getHeader("X-Forwarded-For");
-	            log.info("sID: " + sID);
+	            log.debug("sID: " + sID);
 	            sID = SafeHTMLUtil.clean(sID);
             }
             
             // get and clean Referer header to prevent SQL injection
             if (request.getHeader("Referer") != null){
             	sID = request.getHeader("Referer");
-	            log.info("sID: " + sID);
+	            log.debug("sID: " + sID);
 	            sID = SafeHTMLUtil.clean(sID);
             }            
             
 	        // Get and clean method to prevent Cross-Site Scripting 
 	        String methodName = request.getParameter("unprotected_method");
-	        log.info("methodName: " + methodName);
+	        log.debug("methodName: " + methodName);
 	        if (!methodName.equals("populateModelCharacteristics")){
 		        methodName = SafeHTMLUtil.clean(methodName);
-		        log.info("methodName: " + methodName);
+		        log.debug("methodName: " + methodName);
 	        }            
             
         	
@@ -453,7 +456,7 @@ public class ViewModelAction extends BaseAction
                     {
                       ApplicationService appService = (CaBioApplicationService)EvsTreeUtil.getCabioApplicationService();
 
-                      log.info("EvsTreeUtil.getApplicationService: " + appService.toString());
+                      log.debug("EvsTreeUtil.getApplicationService: " + appService.toString());
                         DatabaseCrossReference dcr = new DatabaseCrossReference(); 
                         dcr.setCrossReferenceId(geneIdentifier.getEntrezGeneID());
 
@@ -472,7 +475,7 @@ public class ViewModelAction extends BaseAction
                         if (geneCount > 0)
                         {
                             myGene = (Gene) resultList.get(0);
-                            //log.info("Gene:" + geneIdentifier + " ==>" + myGene);
+                            log.debug("Gene:" + geneIdentifier + " ==>" + myGene);
                             tmGeneMap.put(tm.getId(), myGene);
                         }
                     }
