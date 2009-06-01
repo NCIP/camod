@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.36  2007/06/13 19:39:27  pandyas
+ * Modified code for EVS trees after formal testing
+ *
  * Revision 1.35  2007/06/13 12:12:30  pandyas
  * Modified for save of organ/diagnosis for each tree options
  * Removed constants so validation would work for all cases
@@ -77,7 +80,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: submitHistopathology.jsp,v 1.36 2007-06-13 19:39:27 pandyas Exp $
+ * $Id: submitHistopathology.jsp,v 1.37 2009-06-01 14:44:56 pandyas Exp $
  *
  */   
 %>
@@ -104,8 +107,6 @@
 	    aHistopathologyID = "";
 	}
 %>
-
-<html:form action="<%= actionName %>" focus="organ">
 
 <SCRIPT LANGUAGE="JavaScript">
 		
@@ -139,6 +140,7 @@
 <!-- -->
 
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
+	<html:form action="<%= actionName %>" focus="organ">
 	<tr>
 		<html:errors/>
 		<td class="formMessage" colspan="3">* indicates a required field</td>
@@ -311,7 +313,7 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Tumor Incidence over Lifetime (%)<br>(Enter numbers only):</label>
+		<td class="formLabel"><label for="field1">Tumor Incidence over Lifetime (%)</label>
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="tumorIncidenceRate" size="30" />
@@ -329,16 +331,16 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Gross Description / Macroscopic Description:</label>
+		<td class="formLabel"><label for="field1">Gross Description / Macroscopic Description<br> (Field holds 2,000 characters):</label>
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="grossDescription" size="30" />
+			<html:textarea styleClass="formFieldSized" property="grossDescription" cols="32" rows="4"/>
 		</td>
 	</tr>	
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Microscopic Description (Field holds 2,000 characters):</label>
+		<td class="formLabel"><label for="field2">Microscopic Description<br> (Field holds 2,000 characters):</label>
 		</td>
 			<td class="formField">
 					<html:textarea styleClass="formFieldSized"  property="microscopicDescription" cols="32" rows="4"/>			
@@ -401,18 +403,18 @@
 			      </c:if>
 			      
 				  <!--  Done this way since html:hidden doesn't seem to work correctly -->
-				  <input type="hidden" name="aHistopathologyID" value="<%= aHistopathologyID %>">
-				  
-				  </html:form>
+				  <input type="hidden" name="aHistopathologyID" value="<%= aHistopathologyID %>">				  
+
 			</TABLE>
 			<!-- action buttons end -->
 		</td>
 	</tr>
+</html:form>	
 </TABLE>
 
 <!-- -->
 	</td></tr></TABLE>
-</tr></td></TABLE>
+</td></tr></TABLE>
 
 <SCRIPT>
 	chkObservation();
