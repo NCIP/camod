@@ -956,14 +956,19 @@
 				</var>
 			</field>
 			<field property="organ"
-				depends="validwhen">
+				depends="validwhen,maxlength">
 				<arg0 key="CellLineForm.organ" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
 		        <var>
 		          <var-name>test</var-name>
 					<var-value>
 						((organTissueCode != null) or (organ != null))
 					</var-value>		          
-		        </var>	
+		        </var>
+		        <var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>		        	
 			</field>	
 			<field property="comments" depends="maxlength">
 				<arg0 key="CellLineForm.comments" />
@@ -2088,22 +2093,34 @@
 
 		<form name="histopathologyForm">
 			<field property="organ"
-				depends="validwhen">
+				depends="validwhen,maxlength">
 				<arg0 key="HistopathologyForm.organ" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />				
 		        <var>
 		          <var-name>test</var-name>
 					<var-value>
 						((organTissueCode != null) or (organ != null))
 					</var-value>		          
-		        </var>	
-			</field>			
+		        </var>
+		        <var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>		        	
+			</field>
 			<field property="tumorClassification"
-				depends="validwhen">
+				depends="validwhen,maxlength">
 				<arg0 key="HistopathologyForm.tumorClassification" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />	
 		        <var>
 		          <var-name>test</var-name>
 		          <var-value>((diagnosisCode != null) or (tumorClassification != null))</var-value>
 		        </var>
+		        <var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
 			</field>
 			<field property="otherTumorClassification"
 				depends="validwhen, maxlength">
@@ -2129,12 +2146,33 @@
 					<var-name>maxlength</var-name>
 					<var-value>255</var-value>
 				</var>
-			</field>					
-			<field property="weightOfTumor" depends="float">
-				<arg0 key="HistopathologyForm.weightOfTumor" />
 			</field>
-			<field property="volumeOfTumor" depends="float">
+			<field property="ageOfDetection" depends="maxlength">
+				<arg0 key="HistopathologyForm.ageOfDetection" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>
+			<field property="weightOfTumor" depends="maxlength">
+				<arg0 key="HistopathologyForm.weightOfTumor" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>				
+			</field>
+			<field property="volumeOfTumor" depends="maxlength">
 				<arg0 key="HistopathologyForm.volumeOfTumor" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>				
 			</field>
 			<field property="tumorIncidenceRate" depends="maxlength">
 				<arg0 key="HistopathologyForm.tumorIncidenceRate" />
@@ -2204,27 +2242,39 @@
 
 		<form name="associatedMetastasisForm">
 			<field property="organ"
-				depends="validwhen">
+				depends="validwhen,maxlength">
 				<arg0 key="AssociatedMetastasisForm.organ" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />				
 		        <var>
 		          <var-name>test</var-name>
 					<var-value>
 						((organTissueCode != null) or (organ != null))
 					</var-value>		          
 		        </var>	
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>		        
 			</field>			
 			<field property="tumorClassification"
-				depends="validwhen">
+				depends="validwhen,maxlength">
 				<arg0 key="AssociatedMetastasisForm.tumorClassification" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />				
 		        <var>
 		          <var-name>test</var-name>
 		          <var-value>
 		          	((diagnosisCode != null) or (tumorClassification != null))
 		          </var-value>
 		        </var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>		        
 			</field>
 			<field property="otherTumorClassification"
-				depends="validwhen, maxlength">
+				depends="validwhen,maxlength">
 				<arg0 key="AssociatedMetastasisForm.otherTumorClassification" />
 				<var>
 					<var-name>test</var-name>
