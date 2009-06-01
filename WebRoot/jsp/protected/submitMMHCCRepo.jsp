@@ -25,8 +25,6 @@
 	}
 %>
 
-<html:form action="<%= actionName %>" focus="name">
-
 <!-- submitMMHCCRepo.jsp -->
 <!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
@@ -36,7 +34,7 @@
 <!-- -->
 
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
-	
+	<html:form action="<%= actionName %>" focus="name">
 	<tr>
 	    <html:errors/>
 		<td class="formMessage" colspan="3">* indicates a required field</td>
@@ -90,17 +88,16 @@
 	  				  
 					  <!--  Done this way since html:hidden doesn't seem to work correctly -->
   				  	  <input type="hidden" name="aAvailabilityID" value="<%= aAvailabilityID %>">	  				  
-				  
-				  </html:form>			
 			</TABLE>
 			<!-- action buttons end -->
 		</td>
 	</tr>
+	</html:form>
 </TABLE>
 
 <!-- -->
 	</td></tr></TABLE>
-</tr></td></TABLE>
+</td></tr></TABLE>
 
 <%@ include file="/jsp/footer.jsp" %>
 
