@@ -42,7 +42,7 @@ by clicking on the buttons below.</P>
       <P>Please send comments and suggestions to <A 
       href="mailto:ncicb@pop.nci.nih.gov?subject=Cancer Model Database(caMOD)">ncicb@pop.nci.nih.gov</A> 
       | <A 
-      href="http://www.hhs.gov/Privacy.html">Privacy Notice</A> | <A 
+      href="http://www.nih.gov/about/privacy.htm">Privacy Notice</A> | <A 
       href="http://cancer.gov/accessibility/nci508.htm">Accessibility 
       Information</A> </P>
 
