@@ -11,10 +11,6 @@
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 
 			<tr>
-				<td class="formTitle" height="20">Privacy Notice</td>				
-			</tr>
-			
-			<tr>
 				<td class="resultsBoxGreyEnd"><b>Use Guidelines for Public Access</b></td>
 			</tr>
 			
@@ -52,6 +48,6 @@
 			</TABLE>
 		</td></tr></TABLE>
 	</td></tr></TABLE>
-</tr></td></TABLE>
+</td></tr></TABLE>
 
 <%@ include file="footer.jsp" %>
