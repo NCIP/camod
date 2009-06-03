@@ -2038,35 +2038,19 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
-			<field property="fileLocation" depends="requiredif,maxlength">
+			<field property="fileLocation" depends="maxlength">
 				<arg0 key="ImageForm.fileLocation" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
-		        <var>
-		            <var-name>field[0]</var-name>
-		            <var-value>urlAlternEntry</var-value>
-		        </var>
-		        <var>
-		            <var-name>fieldTest[0]</var-name>
-		            <var-value>NULL</var-value>
-		        </var>						
 				<var>			
 					<var-name>maxlength</var-name>
 					<var-value>255</var-value>
 				</var>
 			</field>
-			<field property="urlAlternEntry" depends="requiredif,maxlength">
+			<field property="urlAlternEntry" depends="maxlength">
 				<arg0 key="ImageForm.urlAlternEntry" />
 				<arg1 name="maxlength" key="${var:maxlength}"
-					resource="false" />
-		        <var>
-		            <var-name>field[0]</var-name>
-		            <var-value>fileLocation</var-value>
-		        </var>
-		        <var>
-		            <var-name>fieldTest[0]</var-name>
-		            <var-value>NULL</var-value>
-		        </var>							        					
+					resource="false" />							        					
 				<var>
 					<var-name>maxlength</var-name>
 					<var-value>255</var-value>
