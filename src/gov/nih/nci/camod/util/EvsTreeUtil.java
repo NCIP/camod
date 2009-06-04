@@ -1,9 +1,12 @@
 /**
  *  @author georgeda 
  *  
- *  $Id: EvsTreeUtil.java,v 1.16 2009-06-01 16:53:42 pandyas Exp $  
+ *  $Id: EvsTreeUtil.java,v 1.17 2009-06-04 15:02:00 pandyas Exp $  
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.16  2009/06/01 16:53:42  pandyas
+ *  getting ready for QA build
+ *
  *  Revision 1.15  2009/05/28 19:10:13  pandyas
  *  getting ready for QA build
  *
@@ -234,7 +237,7 @@ public class EvsTreeUtil
 
 	public static String outputPropertyDetails(Property[] properties)
     {
-		log.debug("EvsTreeUtil.outputPropertyDetails Entered");
+		log.info("EvsTreeUtil.outputPropertyDetails Entered");
 		String prop_value = "";
 		String evsDisplayNameValue = "";
 		
@@ -244,31 +247,31 @@ public class EvsTreeUtil
 			String prop_name = property.getPropertyName();
 			prop_value = property.getText().getContent();
 			if(property.getPropertyName().equals(Constants.Evs.DISPLAY_NAME_TAG) || property.getPropertyName().equals(Constants.Evs.DISPLAY_NAME_TAG_LOWER_CASE)) {
-				log.debug("property.getPropertyName(): "  + property.getPropertyName());
+				log.info("property.getPropertyName(): "  + property.getPropertyName());
 				evsDisplayNameValue = property.getText().getContent();				
-				log.debug("evsDisplayNameValue: " + evsDisplayNameValue);
+				log.info("evsDisplayNameValue: " + evsDisplayNameValue);
 				break;
 			} 
 		}
-		log.debug("EvsTreeUtil.outputPropertyDetails Exit ");
-		log.debug("Final evsDisplayNameValue: " + evsDisplayNameValue);
+		log.info("EvsTreeUtil.outputPropertyDetails Exit ");
+		log.info("Final evsDisplayNameValue: " + evsDisplayNameValue);
 		return evsDisplayNameValue;
 	}
 
 	public static String getConceptDetails(String version, String code)
 	{
-		log.debug("EvsTreeUtil.getConceptDetails Entered: ");
+		log.info("EvsTreeUtil.getConceptDetails Entered: ");
         String scheme = "";
         String theDescription = ""; 
 		
 		if( code != null ){
             if(code.contains("ZFA")){
-                log.debug("Zebrafish modelSpecies");
+                log.info("Zebrafish modelSpecies");
         		scheme = Constants.Evs.ZEBRAFISH_SCHEMA;
         		//DisplayNameTag = Constants.Evs.DISPLAY_NAME_TAG_LOWER_CASE;
         	//Define parameters for all NCI_Thesaurus schema
         	} else {
-                log.debug("NOT Zebrafish modelSpecies");
+                log.info("NOT Zebrafish modelSpecies");
                 scheme = Constants.Evs.NCI_SCHEMA;
         		//DisplayNameTag = Constants.Evs.DISPLAY_NAME_TAG;
         	}
@@ -281,8 +284,8 @@ public class EvsTreeUtil
 		}
 		else
 		{
-			log.debug("Concept found -- " + code);
-			log.debug("Concept log.debug+ ce.getEntityDescription().getContent()");
+			log.info("Concept found -- " + code);
+			log.info("Concept log.debug+ ce.getEntityDescription().getContent()");
 
 			int num_properties = 0;
 
@@ -290,9 +293,9 @@ public class EvsTreeUtil
 			num_properties = num_properties + properties.length;
 
 			theDescription = outputPropertyDetails(properties);
-			log.debug("\n theDescription: " + theDescription);
+			log.info("\n theDescription: " + theDescription);
 
-			log.debug("\nTotal number of properties: " + num_properties + "\n\n");
+			log.info("\nTotal number of properties: " + num_properties + "\n\n");
 	    }
         return theDescription;
 	}
