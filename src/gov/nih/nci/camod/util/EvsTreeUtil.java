@@ -1,9 +1,12 @@
 /**
  *  @author georgeda 
  *  
- *  $Id: EvsTreeUtil.java,v 1.17 2009-06-04 15:02:00 pandyas Exp $  
+ *  $Id: EvsTreeUtil.java,v 1.18 2009-06-04 16:12:38 pandyas Exp $  
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.17  2009/06/04 15:02:00  pandyas
+ *  testing preferred description in new methods
+ *
  *  Revision 1.16  2009/06/01 16:53:42  pandyas
  *  getting ready for QA build
  *
@@ -238,13 +241,15 @@ public class EvsTreeUtil
 	public static String outputPropertyDetails(Property[] properties)
     {
 		log.info("EvsTreeUtil.outputPropertyDetails Entered");
+
 		String prop_value = "";
 		String evsDisplayNameValue = "";
 		
 		for (int i=0; i<properties.length; i++)
 		{
-			Property property = (Property) properties[i];
+			Property property = (Property) properties[i];		
 			String prop_name = property.getPropertyName();
+			log.info("property.getPropertyName(): " + property.getPropertyName());			
 			prop_value = property.getText().getContent();
 			if(property.getPropertyName().equals(Constants.Evs.DISPLAY_NAME_TAG) || property.getPropertyName().equals(Constants.Evs.DISPLAY_NAME_TAG_LOWER_CASE)) {
 				log.info("property.getPropertyName(): "  + property.getPropertyName());
