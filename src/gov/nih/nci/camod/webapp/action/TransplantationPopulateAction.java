@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TransplantationPopulateAction.java,v 1.5 2009-05-04 17:24:57 pandyas Exp $
+ * $Id: TransplantationPopulateAction.java,v 1.6 2009-06-04 18:48:43 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2009/05/04 17:24:57  pandyas
+ * minor format change
+ *
  * Revision 1.4  2009/04/30 18:38:50  pandyas
  * modified for #17833  	Make sure all references to Transplantation are properly named
  * - modified 4 more files
@@ -143,6 +146,7 @@ public class TransplantationPopulateAction extends BaseAction
 
         // Grab the current Transplantationion we are working with related to this AM
         String aTransplantationID = request.getParameter("aTransplantationID");
+        log.info("TransplantationPopulateAction aTransplantationID: ");
 
         Transplantation transplantation = TransplantationManagerSingleton.instance().get(aTransplantationID);
 
@@ -189,7 +193,7 @@ public class TransplantationPopulateAction extends BaseAction
             }
             // When populating multiple Transplantation, this constant needs to be reset for each species entry
             request.getSession().setAttribute(Constants.DONORSPECIESCOMMONNAME, transplantation.getStrain().getSpecies().getCommonName());
-            log.debug("transplantation.getStrain().getSpecies().getCommonName(): " + transplantation.getStrain().getSpecies().getCommonName());            
+            log.info("transplantation.getStrain().getSpecies().getCommonName(): " + transplantation.getStrain().getSpecies().getCommonName());            
             
             // Species was required in previous versions of caMOD and is stored in donorSpecies column
             // The species and strain are required for 2.1 and strain_id is stored for all future versions
@@ -241,15 +245,15 @@ public class TransplantationPopulateAction extends BaseAction
                 // simply display EVSPreferredDescription, unless concept code is '00000'
                 if (transplantation.getOrgan().getConceptCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)) {
                 	transplantationForm.setOrgan(transplantation.getOrgan().getEVSPreferredDescription());
-                    log.debug("<TransplantationPopulateAction> setOrgan= " + transplantation.getOrgan().getName());
+                    log.info("<TransplantationPopulateAction> setOrgan= " + transplantation.getOrgan().getName());
                     transplantationForm.setOrganTissueCode(transplantation.getOrgan().getConceptCode());
-                    log.debug("<TransplantationPopulateAction> OrganTissueCode= " + transplantation.getOrgan().getConceptCode());           
+                    log.info("<TransplantationPopulateAction> OrganTissueCode= " + transplantation.getOrgan().getConceptCode());           
                     
                 } else {
                 	transplantationForm.setOrgan(transplantation.getOrgan().getEVSPreferredDescription());
-                    log.debug("<TransplantationPopulateAction> setOrgan= " + transplantation.getOrgan().getEVSPreferredDescription());
+                    log.info("<TransplantationPopulateAction> setOrgan= " + transplantation.getOrgan().getEVSPreferredDescription());
                     transplantationForm.setOrganTissueCode(transplantation.getOrgan().getConceptCode());
-                    log.debug("<TransplantationPopulateAction> OrganTissueCode= " + transplantation.getOrgan().getConceptCode());
+                    log.info("<TransplantationPopulateAction> OrganTissueCode= " + transplantation.getOrgan().getConceptCode());
                 }
             }
 

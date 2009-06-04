@@ -1,7 +1,10 @@
 /*
- * $Id: Organ.java,v 1.20 2009-06-04 16:59:08 pandyas Exp $
+ * $Id: Organ.java,v 1.21 2009-06-04 18:49:09 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.20  2009/06/04 16:59:08  pandyas
+ * getting ready for QA build
+ *
  * Revision 1.19  2009/06/04 15:03:07  pandyas
  * testing preferred description in new methods
  *
@@ -82,7 +85,7 @@ public class Organ extends BaseObject implements Comparable, Serializable, Dupli
         {
             thePreferedDesc = EvsTreeUtil.getConceptDetails(null, conceptCode);
         }
-        //System.out.println("Organ thePreferedDesc: " + thePreferedDesc);
+        System.out.println("Organ thePreferedDesc: " + thePreferedDesc);
         return thePreferedDesc;
     }    
 

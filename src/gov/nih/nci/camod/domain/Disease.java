@@ -1,7 +1,10 @@
 /*
- * $Id: Disease.java,v 1.19 2009-05-20 17:07:20 pandyas Exp $
+ * $Id: Disease.java,v 1.20 2009-06-04 18:48:56 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2009/05/20 17:07:20  pandyas
+ * modified for gforge #17325 Upgrade caMOD to use caBIO 4.x and EVS 4.x to get data
+ *
  * Revision 1.18  2007/10/31 15:33:31  pandyas
  * Fixed #8188 	Rename UnctrlVocab items to AlternEntry
  *
@@ -76,6 +79,7 @@ public class Disease extends BaseObject implements Comparable, Serializable, Dup
         {
         	thePreferedDesc = EvsTreeUtil.getConceptDetails(null, conceptCode);
         }
+        System.out.println("Disease thePreferedDesc: " + thePreferedDesc);
         return thePreferedDesc;
     }
 
