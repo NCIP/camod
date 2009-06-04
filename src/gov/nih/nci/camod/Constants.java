@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.119 2009-05-20 17:06:16 pandyas Exp $
+ * $Id: Constants.java,v 1.120 2009-06-04 16:28:10 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.119  2009/05/20 17:06:16  pandyas
+ * modified for gforge #17325 Upgrade caMOD to use caBIO 4.x and EVS 4.x to get data
+ *
  * Revision 1.118  2009/05/14 18:44:30  pandyas
  * modified for gforge #21177  	Upgrade validation on SearchForm
  *
@@ -1201,7 +1204,7 @@ public class Constants {
          */
         public static final String DISPLAY_NAME_TAG = "Display_Name";
         
-        public static final String DISPLAY_NAME_TAG_LOWER_CASE = "display_name";        
+        public static final String PREFERRED_NAME_TAG = "Preferred_Name";        
 
         /**
          * The key for the URI in the camod.properties file
