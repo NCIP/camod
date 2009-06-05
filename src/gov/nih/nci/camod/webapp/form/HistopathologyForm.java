@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyForm.java,v 1.10 2009-05-20 17:16:56 pandyas Exp $
+ * $Id: HistopathologyForm.java,v 1.11 2009-06-05 16:33:55 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2009/05/20 17:16:56  pandyas
+ * Added comments to methods
+ *
  * Revision 1.9  2007/04/30 20:11:06  pandyas
  * Implemented species specific vocabulary trees from EVSTree
  * Added variable to hold otherTumorClassification for Zebrafish diagnosis tree
@@ -29,9 +32,12 @@ import java.io.Serializable;
 
 /**
  * 
- * $Id: HistopathologyForm.java,v 1.10 2009-05-20 17:16:56 pandyas Exp $
+ * $Id: HistopathologyForm.java,v 1.11 2009-06-05 16:33:55 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2009/05/20 17:16:56  pandyas
+ * Added comments to methods
+ *
  * Revision 1.9  2007/04/30 20:11:06  pandyas
  * Implemented species specific vocabulary trees from EVSTree
  * Added variable to hold otherTumorClassification for Zebrafish diagnosis tree
@@ -57,45 +63,25 @@ public class HistopathologyForm extends BaseForm implements Serializable,
 	}
 
 	protected String organ;
-
 	protected String organTissueName;
-
 	protected String organTissueCode;
-
-	protected String diagnosisName;
-	
+	protected String diagnosisName;	
 	protected String diagnosisCode;
-
-	protected String tumorClassification;
-	
-	protected String otherTumorClassification;	
-
+	protected String tumorClassification;	
+	protected String otherTumorClassification;
 	protected String ageOfOnset;
-
 	protected String ageOfOnsetUnit;
-
 	protected String ageOfDetection;
-
 	protected String ageOfDetectionUnit;
-
 	protected String weightOfTumor;
-
 	protected String volumeOfTumor;
-
 	protected String tumorIncidenceRate;
-
 	protected String survivalInfo;
-
 	protected String grossDescription;
-
 	protected String microscopicDescription;
-
 	protected String observation;
-
 	protected String methodOfObservation;
-
 	protected String comparativeData;
-
 	protected String comments;
 
 	/**
