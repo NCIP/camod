@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyManagerImpl.java,v 1.28 2009-05-28 18:46:30 pandyas Exp $
+ * $Id: HistopathologyManagerImpl.java,v 1.29 2009-06-05 16:08:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.28  2009/05/28 18:46:30  pandyas
+ * getting ready for QA build
+ *
  * Revision 1.27  2008/05/21 19:03:56  pandyas
  * Modified advanced search to prevent SQL injection
  * Re: Apps Scan run 05/15/2008
@@ -227,17 +230,19 @@ public class HistopathologyManagerImpl extends BaseManager implements
                                         HistopathologyData inHistopathologyData,
                                         Histopathology inHistopathology) throws Exception { 
             
-            log.debug("<HistopathologyManagerImpl> Entering populateDisease"); 
-            log.debug("DiagnosisCode: " + inHistopathologyData.getDiagnosisCode());
-            log.debug("DiagnosisName: " + inHistopathologyData.getDiagnosisName()); 
-            log.debug("TumorClassification: " + inHistopathologyData.getTumorClassification()); 
+            log.info("<HistopathologyManagerImpl> Entering populateDisease"); 
+            log.info("DiagnosisCode: " + inHistopathologyData.getDiagnosisCode());
+            log.info("DiagnosisName: " + inHistopathologyData.getDiagnosisName()); 
+            log.info("TumorClassification: " + inHistopathologyData.getTumorClassification());
+            log.info("OtherTumorClassification: " + inHistopathologyData.getOtherTumorClassification());
             
-		// Update loop handeled separately for conceptCode = 00000
+		// Update loop handled separately for conceptCode = 000000
 		if (inHistopathologyData.getDiagnosisCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)){
             log.debug("<HistopathologyManagerImpl> CONCEPTCODEZEROS loop");             
             log.debug("TumorClassification: " + inHistopathologyData.getTumorClassification());            
             log.debug("otherTumorClassification: " + inHistopathologyData.getOtherTumorClassification());
             
+            // Other selected from Zebrafish submission
             if (inHistopathologyData.getOtherTumorClassification() != null){
                 inHistopathology.setDisease(new Disease());
                 log.debug("Concept code set to 000000");
@@ -249,8 +254,8 @@ public class HistopathologyManagerImpl extends BaseManager implements
             } else {
 	            log.debug("inHistopathologyData.getDiagnosisCode() is null: ");
 	            inHistopathology.setDisease(new Disease()); 
-	            inHistopathology.getDisease().setName(inHistopathologyData.getTumorClassification());
-	            inHistopathology.getDisease().setConceptCode(Constants.Dropdowns.CONCEPTCODEZEROS);				
+	            inHistopathology.getDisease().setConceptCode(Constants.Dropdowns.CONCEPTCODEZEROS);
+	            inHistopathology.getDisease().setName(inHistopathologyData.getTumorClassification());	            				
             }		
 		
 		} else {
