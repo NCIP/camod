@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyManagerImpl.java,v 1.29 2009-06-05 16:08:40 pandyas Exp $
+ * $Id: HistopathologyManagerImpl.java,v 1.30 2009-06-05 19:05:56 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.29  2009/06/05 16:08:40  pandyas
+ * Testing disease issue
+ *
  * Revision 1.28  2009/05/28 18:46:30  pandyas
  * getting ready for QA build
  *
@@ -230,7 +233,10 @@ public class HistopathologyManagerImpl extends BaseManager implements
                                         HistopathologyData inHistopathologyData,
                                         Histopathology inHistopathology) throws Exception { 
             
-            log.info("<HistopathologyManagerImpl> Entering populateDisease"); 
+            log.info("<HistopathologyManagerImpl> Entering populateDisease");
+            log.info("ConceptCode: " + inHistopathology.getDisease().getConceptCode());
+            log.info("Name: " + inHistopathology.getDisease().getName()); 
+            log.info("NameAlternEntry: " + inHistopathology.getDisease().getNameAlternEntry());             
             log.info("DiagnosisCode: " + inHistopathologyData.getDiagnosisCode());
             log.info("DiagnosisName: " + inHistopathologyData.getDiagnosisName()); 
             log.info("TumorClassification: " + inHistopathologyData.getTumorClassification());
