@@ -1793,7 +1793,7 @@
 			<field property="firstTimeReported" depends="required">
 				<arg0 key="PublicationForm.firstTimeReported" />
 			</field>			
-			<field property="pmid" depends="validwhen, integer">
+			<field property="pmid" depends="validwhen,integer">
 				<arg0 key="PublicationForm.pmid" />
 				<var>
 					<var-name>test</var-name>
@@ -1846,7 +1846,16 @@
 					<var-name>maxlength</var-name>
 					<var-value>255</var-value>
 				</var>				
-			</field>			
+			</field>
+			<field property="zfinPubId" depends="maxlength">
+				<arg0 key="PublicationForm.zfinPubId" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>				
+			</field>
 			<field property="volume" depends="maxlength">
 				<arg0 key="PublicationForm.volume" />
 				<arg1 name="maxlength" key="${var:maxlength}"
