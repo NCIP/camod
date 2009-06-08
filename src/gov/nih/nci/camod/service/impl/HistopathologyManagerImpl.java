@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyManagerImpl.java,v 1.34 2009-06-08 16:49:34 pandyas Exp $
+ * $Id: HistopathologyManagerImpl.java,v 1.35 2009-06-08 16:58:46 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.34  2009/06/08 16:49:34  pandyas
+ * testing disease issue for disease objects in edit mode
+ *
  * Revision 1.33  2009/06/08 15:34:19  pandyas
  * modified for gforge #TBD
  * Disease not populating in Histopathology for models in edit mode when diagnosis is entered manually
@@ -248,11 +251,6 @@ public class HistopathologyManagerImpl extends BaseManager implements
             Histopathology inHistopathology) throws Exception { 
 
         log.info("<HistopathologyManagerImpl> Entering populateDisease");
-        if(inHistopathology.getDisease().getConceptCode() != null){
-            log.info("ConceptCode: " + inHistopathology.getDisease().getConceptCode());
-            log.info("Name: " + inHistopathology.getDisease().getName()); 
-            log.info("NameAlternEntry: " + inHistopathology.getDisease().getNameAlternEntry());
-        }
         log.info("DiagnosisCode: " + inHistopathologyData.getDiagnosisCode());
         log.info("DiagnosisName: " + inHistopathologyData.getDiagnosisName()); 
         log.info("TumorClassification: " + inHistopathologyData.getTumorClassification());
