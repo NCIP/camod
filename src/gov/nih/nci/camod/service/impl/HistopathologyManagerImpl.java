@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyManagerImpl.java,v 1.35 2009-06-08 16:58:46 pandyas Exp $
+ * $Id: HistopathologyManagerImpl.java,v 1.36 2009-06-08 17:56:56 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.35  2009/06/08 16:58:46  pandyas
+ * Testing disease issue
+ *
  * Revision 1.34  2009/06/08 16:49:34  pandyas
  * testing disease issue for disease objects in edit mode
  *
@@ -279,21 +282,19 @@ public class HistopathologyManagerImpl extends BaseManager implements
         }		
 	
 	} else {
-        log.info("<HistopathologyManagerImpl> ELSE CONCEPTCODEZEROS loop");             
+        log.info("Select Disease from EVS - Mouse, Rat general loop");
+        // Diagnosis selected from tree (i.e. Mouse, Rat)
 		// every submission - lookup disease or create one new
-        // DiagnosisCode() != null for all trees 
 		if (inHistopathologyData.getDiagnosisCode() != null && inHistopathologyData.getDiagnosisCode().length() > 0) {
-       
-           log.info("DiagnosisCode() != null loop: " );                 
                 
            Disease theNewDisease = DiseaseManagerSingleton.instance()
                    .getOrCreate(inHistopathologyData.getDiagnosisCode(),
                            inHistopathologyData.getDiagnosisName());
-           log.debug("theNewDisease: " + theNewDisease.toString());
+           log.info("theNewDisease: " + theNewDisease.toString());
            inHistopathology.setDisease(theNewDisease); 
             
 		} else {
-               log.info("DiagnosisCode() == null loop: " ); 
+			// Zebrafish diagnosis selected as 'Other' from list loop
             if (inHistopathologyData.getOtherTumorClassification() != null && 
                     inHistopathologyData.getOtherTumorClassification().length() > 0) {
                 log.info("OtherTumorClassification() != null loop: " ); 
@@ -310,7 +311,8 @@ public class HistopathologyManagerImpl extends BaseManager implements
                 inHistopathology.getDisease().setNameAlternEntry(
                          inHistopathologyData.getOtherTumorClassification());
                 inHistopathology.getDisease().setName(null);
-           } else {           
+           } else {
+        	   // Zebrafish diagnosis selected from list loop or entered as text (i.e. Rabbit, Hamster, ect)
                log.info("OtherTumorClassification() == null loop: " ); 
                log.info("TumorClassification: " + inHistopathologyData.getTumorClassification());
                log.info("other TumorClassification: " + inHistopathologyData.getOtherTumorClassification());
