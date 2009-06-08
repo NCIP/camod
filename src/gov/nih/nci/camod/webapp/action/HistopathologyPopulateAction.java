@@ -2,9 +2,13 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyPopulateAction.java,v 1.21 2009-06-08 15:43:31 pandyas Exp $
+ * $Id: HistopathologyPopulateAction.java,v 1.22 2009-06-08 15:59:06 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.21  2009/06/08 15:43:31  pandyas
+ * modified for gforge #TBD
+ * Disease not populating in Histopathology for models in edit mode when diagnosis is entered manually
+ *
  * Revision 1.20  2009/06/08 15:30:35  pandyas
  * Testing disease issue
  *
@@ -89,13 +93,13 @@ public class HistopathologyPopulateAction extends BaseAction {
     public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.debug("<HistopathologyPopulateAction populate> Entered");
+        log.info("<HistopathologyPopulateAction populate> Entered");
 
         HistopathologyForm histopathologyForm = (HistopathologyForm) form;
 
         // Grab the current aHistopathID from the session
         String aHistopatholgyID = request.getParameter("aHistopathologyID");
-        log.debug("aHistopatholgyID: " + aHistopatholgyID);
+        log.info("aHistopatholgyID: " + aHistopatholgyID);
 
         Histopathology theHistopathology = HistopathologyManagerSingleton.instance().get(aHistopatholgyID);
 
@@ -109,19 +113,19 @@ public class HistopathologyPopulateAction extends BaseAction {
             this.dropdown(request, response);
 
             /* set Organ attributes */
-            log.debug("<HistopathologyPopulateAction populate> get the Organ attributes");
+            log.info("<HistopathologyPopulateAction populate> get the Organ attributes");
 
             // since we are always querying from concept code (save and edit),
             // simply display EVSPreferredDescription, unless concept code is '00000'
             if (theHistopathology.getOrgan().getConceptCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)) {
 	            histopathologyForm.setOrgan(theHistopathology.getOrgan().getName());
-	            log.debug("theHistopathology.getOrgan().getName(): " + theHistopathology.getOrgan().getName());	
+	            log.info("theHistopathology.getOrgan().getName(): " + theHistopathology.getOrgan().getName());	
 	            histopathologyForm.setOrganTissueCode(theHistopathology.getOrgan().getConceptCode());
-	            log.debug("OrganTissueCode: " + theHistopathology.getOrgan().getConceptCode());            	
+	            log.info("OrganTissueCode: " + theHistopathology.getOrgan().getConceptCode());            	
             	
             } else {
 	            histopathologyForm.setOrgan(theHistopathology.getOrgan().getEVSPreferredDescription());
-	            log.debug("theHistopathology.getOrgan().getEVSPreferredDescription(): " + theHistopathology.getOrgan().getEVSPreferredDescription());	
+	            log.info("theHistopathology.getOrgan().getEVSPreferredDescription(): " + theHistopathology.getOrgan().getEVSPreferredDescription());	
 	            histopathologyForm.setOrganTissueCode(theHistopathology.getOrgan().getConceptCode());
             }
             
@@ -199,7 +203,7 @@ public class HistopathologyPopulateAction extends BaseAction {
     public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.debug("<HistopathologyPopulateAction dropdown> Entering ActionForward dropdown()");
+        log.info("<HistopathologyPopulateAction dropdown> Entering ActionForward dropdown()");
 
         // setup dropdown menus
         this.dropdown(request, response);
@@ -216,7 +220,7 @@ public class HistopathologyPopulateAction extends BaseAction {
      */
     public void dropdown(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        log.debug("<HistopathologyPopulateAction dropdown> Entering void dropdown()");
+        log.info("<HistopathologyPopulateAction dropdown> Entering void dropdown()");
 
         // Prepopulate all dropdown fields, set the global Constants to the
         // following
