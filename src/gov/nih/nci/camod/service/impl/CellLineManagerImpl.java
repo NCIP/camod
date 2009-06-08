@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: CellLineManagerImpl.java,v 1.20 2007-09-12 19:36:03 pandyas Exp $
+ * $Id: CellLineManagerImpl.java,v 1.21 2009-06-08 15:30:48 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.20  2007/09/12 19:36:03  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.19  2007/06/20 17:55:13  pandyas
  * Fixed save and edit for cell line
  *
@@ -217,7 +220,7 @@ public class CellLineManagerImpl extends BaseManager implements CellLineManager 
 
         log.debug("<CellLineManagerImpl> Entering populateOrgan");
 
-        // Update loop handeled separately for conceptCode = 00000
+        // Update loop handled separately for conceptCode = 000000
         if (inCellLineData.getOrganTissueCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)){
             log.debug("Organ update loop for text: " + inCellLineData.getOrgan()); 
             inCellLine.setOrgan(new Organ());
