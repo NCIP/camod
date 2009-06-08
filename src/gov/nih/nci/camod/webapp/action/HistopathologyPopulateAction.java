@@ -2,9 +2,13 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyPopulateAction.java,v 1.24 2009-06-08 18:35:43 pandyas Exp $
+ * $Id: HistopathologyPopulateAction.java,v 1.25 2009-06-08 18:57:35 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.24  2009/06/08 18:35:43  pandyas
+ * modified for gforge #TBD
+ * Disease not populating in Histopathology for models in edit mode when diagnosis is entered manually
+ *
  * Revision 1.23  2009/06/08 16:30:20  pandyas
  * testing disease issue for disease objects in edit mode
  *
@@ -139,7 +143,7 @@ public class HistopathologyPopulateAction extends BaseAction {
             /* Set Disease object attributes - check for other Zebrafish entry*/
             Disease disease = theHistopathology.getDisease();
             // get disease for Zebrafish models when 'Other' is selected from list
-            if(disease.getNameAlternEntry() != null) {
+            if(disease.getNameAlternEntry() != null  && disease.getNameAlternEntry().length() >0) {
             	log.info("disease is other in DB for Zebrafish");
             	histopathologyForm.setTumorClassification(Constants.Dropdowns.OTHER_OPTION);
             	histopathologyForm.setDiagnosisCode(disease.getConceptCode());            	
@@ -151,8 +155,11 @@ public class HistopathologyPopulateAction extends BaseAction {
                 	log.info("disease getConceptCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS");
             		// Concept code is 00000, so just use name
 	            	histopathologyForm.setDiagnosisName(disease.getName());
+	            	log.info("disease.getName(): " + disease.getName());
 	            	histopathologyForm.setDiagnosisCode(disease.getConceptCode());
-	            	histopathologyForm.setTumorClassification(disease.getName());            		
+	            	log.info("disease.getConceptCode(): " + disease.getConceptCode());
+	            	histopathologyForm.setTumorClassification(disease.getName());
+	            	log.info("disease.getName(): " + disease.getName());
             		
             	} else {
             		// get disease for models selected from the EVS tree (i.e. Mouse, Rat)
