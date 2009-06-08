@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyPopulateAction.java,v 1.22 2009-06-08 15:59:06 pandyas Exp $
+ * $Id: HistopathologyPopulateAction.java,v 1.23 2009-06-08 16:30:20 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.22  2009/06/08 15:59:06  pandyas
+ * Testing disease issue
+ *
  * Revision 1.21  2009/06/08 15:43:31  pandyas
  * modified for gforge #TBD
  * Disease not populating in Histopathology for models in edit mode when diagnosis is entered manually
@@ -96,6 +99,7 @@ public class HistopathologyPopulateAction extends BaseAction {
         log.info("<HistopathologyPopulateAction populate> Entered");
 
         HistopathologyForm histopathologyForm = (HistopathologyForm) form;
+        log.info("histopathologyForm: " + histopathologyForm);
 
         // Grab the current aHistopathID from the session
         String aHistopatholgyID = request.getParameter("aHistopathologyID");
