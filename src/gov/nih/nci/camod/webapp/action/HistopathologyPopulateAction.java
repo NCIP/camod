@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyPopulateAction.java,v 1.20 2009-06-08 15:30:35 pandyas Exp $
+ * $Id: HistopathologyPopulateAction.java,v 1.21 2009-06-08 15:43:31 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.20  2009/06/08 15:30:35  pandyas
+ * Testing disease issue
+ *
  * Revision 1.19  2007/10/31 18:11:45  pandyas
  * Fixed #8188 	Rename UnctrlVocab items to text entries
  *
@@ -125,20 +128,22 @@ public class HistopathologyPopulateAction extends BaseAction {
             /* Set Disease object attributes - check for other Zebrafish entry*/
             Disease disease = theHistopathology.getDisease();
             if(disease.getNameAlternEntry() != null) {
-            	log.debug("disease is other in DB");
+            	log.info("disease is other in DB");
             	histopathologyForm.setTumorClassification(Constants.Dropdowns.OTHER_OPTION);
             	histopathologyForm.setDiagnosisCode(disease.getConceptCode());            	
             	histopathologyForm.setOtherTumorClassification(disease.getNameAlternEntry());
             	
             } else {
-            	if (disease.getConceptCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)){
+            	log.info("disease getConceptCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS");
+            	if (disease.getConceptCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS) || disease.getConceptCode().equals(Constants.Dropdowns.CONCEPTCODEZEROSWITHC)){
             		// Concept code is 00000, so just use name
 	            	histopathologyForm.setDiagnosisName(disease.getName());
 	            	histopathologyForm.setDiagnosisCode(disease.getConceptCode());
 	            	histopathologyForm.setTumorClassification(disease.getName());            		
             		
             	} else {
-            		// Concept code is not 00000, so get preferred name from EVS -broken for zebrafish
+            		log.info("disease getConceptCode() not equal to Constants.Dropdowns.CONCEPTCODEZEROS");
+            		// Concept code is not 000000, so get preferred name from EVS 
 	            	histopathologyForm.setDiagnosisName(disease.getEVSPreferredDescription());
 	            	histopathologyForm.setDiagnosisCode(disease.getConceptCode());
 	            	histopathologyForm.setTumorClassification(disease.getEVSPreferredDescription());
