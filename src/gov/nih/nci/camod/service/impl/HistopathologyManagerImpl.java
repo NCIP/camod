@@ -2,9 +2,13 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyManagerImpl.java,v 1.37 2009-06-08 18:35:53 pandyas Exp $
+ * $Id: HistopathologyManagerImpl.java,v 1.38 2009-06-08 19:25:29 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.37  2009/06/08 18:35:53  pandyas
+ * modified for gforge #TBD
+ * Disease not populating in Histopathology for models in edit mode when diagnosis is entered manually
+ *
  * Revision 1.36  2009/06/08 17:56:56  pandyas
  * modified for gforge #TBD
  * Disease not populating in Histopathology for models in edit mode when diagnosis is entered manually
@@ -294,7 +298,7 @@ public class HistopathologyManagerImpl extends BaseManager implements
                 inHistopathology.getDisease().setName(null);
            } else {
         	   // Zebrafish diagnosis selected from list loop or entered as text (i.e. Rabbit, Hamster, ect)
-               log.info("OtherTumorClassification() == null loop: " ); 
+               log.info("OtherTumorClassification() not filled in: " ); 
                log.info("TumorClassification: " + inHistopathologyData.getTumorClassification());
                log.info("other TumorClassification: " + inHistopathologyData.getOtherTumorClassification());
 

@@ -2,9 +2,13 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyPopulateAction.java,v 1.25 2009-06-08 18:57:35 pandyas Exp $
+ * $Id: HistopathologyPopulateAction.java,v 1.26 2009-06-08 19:25:44 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.25  2009/06/08 18:57:35  pandyas
+ * modified for gforge #TBD
+ * Disease not populating in Histopathology for models in edit mode when diagnosis is entered manually
+ *
  * Revision 1.24  2009/06/08 18:35:43  pandyas
  * modified for gforge #TBD
  * Disease not populating in Histopathology for models in edit mode when diagnosis is entered manually
@@ -132,7 +136,7 @@ public class HistopathologyPopulateAction extends BaseAction {
 	            histopathologyForm.setOrgan(theHistopathology.getOrgan().getName());
 	            log.info("theHistopathology.getOrgan().getName(): " + theHistopathology.getOrgan().getName());	
 	            histopathologyForm.setOrganTissueCode(theHistopathology.getOrgan().getConceptCode());
-	            log.info("OrganTissueCode: " + theHistopathology.getOrgan().getConceptCode());            	
+	            log.info("OrganTissueCode: " + theHistopathology.getOrgan().getConceptCode()); 	            
             	
             } else {
 	            histopathologyForm.setOrgan(theHistopathology.getOrgan().getEVSPreferredDescription());

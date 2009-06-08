@@ -1,7 +1,10 @@
 /*
- * $Id: Disease.java,v 1.20 2009-06-04 18:48:56 pandyas Exp $
+ * $Id: Disease.java,v 1.21 2009-06-08 19:25:05 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.20  2009/06/04 18:48:56  pandyas
+ * Testing disease issue
+ *
  * Revision 1.19  2009/05/20 17:07:20  pandyas
  * modified for gforge #17325 Upgrade caMOD to use caBIO 4.x and EVS 4.x to get data
  *
@@ -100,7 +103,7 @@ public class Disease extends BaseObject implements Comparable, Serializable, Dup
     public String toString()
     {
         String result = super.toString() + " - ";
-        result += this.getName();
+        result += this.getName()+ " - " + this.getConceptCode();
         return result;
     }
 
