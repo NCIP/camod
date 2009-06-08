@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyPopulateAction.java,v 1.23 2009-06-08 16:30:20 pandyas Exp $
+ * $Id: HistopathologyPopulateAction.java,v 1.24 2009-06-08 18:35:43 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.23  2009/06/08 16:30:20  pandyas
+ * testing disease issue for disease objects in edit mode
+ *
  * Revision 1.22  2009/06/08 15:59:06  pandyas
  * Testing disease issue
  *
@@ -135,21 +138,24 @@ public class HistopathologyPopulateAction extends BaseAction {
             
             /* Set Disease object attributes - check for other Zebrafish entry*/
             Disease disease = theHistopathology.getDisease();
+            // get disease for Zebrafish models when 'Other' is selected from list
             if(disease.getNameAlternEntry() != null) {
-            	log.info("disease is other in DB");
+            	log.info("disease is other in DB for Zebrafish");
             	histopathologyForm.setTumorClassification(Constants.Dropdowns.OTHER_OPTION);
             	histopathologyForm.setDiagnosisCode(disease.getConceptCode());            	
             	histopathologyForm.setOtherTumorClassification(disease.getNameAlternEntry());
             	
             } else {
-            	log.info("disease getConceptCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS");
-            	if (disease.getConceptCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS) || disease.getConceptCode().equals(Constants.Dropdowns.CONCEPTCODEZEROSWITHC)){
+            	// get disease for models (i.e. Zebrafish diagnosis selected from list) and Mouse entered manually
+            	if (disease.getConceptCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS) ){
+                	log.info("disease getConceptCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS");
             		// Concept code is 00000, so just use name
 	            	histopathologyForm.setDiagnosisName(disease.getName());
 	            	histopathologyForm.setDiagnosisCode(disease.getConceptCode());
 	            	histopathologyForm.setTumorClassification(disease.getName());            		
             		
             	} else {
+            		// get disease for models selected from the EVS tree (i.e. Mouse, Rat)
             		log.info("disease getConceptCode() not equal to Constants.Dropdowns.CONCEPTCODEZEROS");
             		// Concept code is not 000000, so get preferred name from EVS 
 	            	histopathologyForm.setDiagnosisName(disease.getEVSPreferredDescription());
