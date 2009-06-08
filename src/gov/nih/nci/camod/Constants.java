@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.120 2009-06-04 16:28:10 pandyas Exp $
+ * $Id: Constants.java,v 1.121 2009-06-08 15:31:53 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.120  2009/06/04 16:28:10  pandyas
+ * The Property object for the Zebrafish vocabulary returns only  Preferred_Name, Synonym, NCI_Preferred_Term.  We used to display the "display_name" for both the NCI_Thesaurus and Zebrafish vocabs.
+ *
  * Revision 1.119  2009/05/20 17:06:16  pandyas
  * modified for gforge #17325 Upgrade caMOD to use caBIO 4.x and EVS 4.x to get data
  *
@@ -436,7 +439,10 @@ public class Constants {
         public static final String NOT_SPECIFIED_OPTION = "Not specified";
 
         // Six zeros is entered for all organ and disease entries without conceptCodes - text entry, ect.
-        public static final String CONCEPTCODEZEROS = "000000";        
+        public static final String CONCEPTCODEZEROS = "000000"; 
+        
+        // C with six zeros is entered for Mouse disease entered manually from EVSTree
+        public static final String CONCEPTCODEZEROSWITHC = "C000000";         
         
         /* all species from DB -  used for various Screens */
         public static final String SPECIESQUERYDROP = "speciesquerydrop.db";          
