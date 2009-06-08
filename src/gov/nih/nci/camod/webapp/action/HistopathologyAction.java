@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyAction.java,v 1.19 2008-08-14 16:53:04 pandyas Exp $
+ * $Id: HistopathologyAction.java,v 1.20 2009-06-08 15:30:21 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2008/08/14 16:53:04  pandyas
+ * remove debug line
+ *
  * Revision 1.18  2007/09/12 19:36:40  pandyas
  * modified debug statements for build to stage tier
  *
@@ -92,7 +95,7 @@ public class HistopathologyAction extends BaseAction {
     public ActionForward editHistopathology(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.debug("<HistopathologyAction> Entering 'edit' method");
+        log.info("<HistopathologyAction> Entering 'edit' method");
 
         // Grab the current aHistopathID from the session
         String aHistopathologyID = request.getParameter("aHistopathologyID");
@@ -103,7 +106,7 @@ public class HistopathologyAction extends BaseAction {
         // Create a form to edit
         HistopathologyForm histopathologyForm = (HistopathologyForm) form;
 
-        log.debug("<HistopathologyAction edit> following Characteristics:" + "\n\t  HistopathID: " + aHistopathologyID
+        log.info("<HistopathologyAction edit> following Characteristics:" + "\n\t  HistopathID: " + aHistopathologyID
                 + "\n\t organ: " + histopathologyForm.getOrgan() 
                 + "\n\t organTissueName: " + histopathologyForm.getOrganTissueName() 
                 + "\n\t organTissueCode: " + histopathologyForm.getOrganTissueCode() 
@@ -268,7 +271,7 @@ public class HistopathologyAction extends BaseAction {
     public ActionForward saveHistopathology(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.debug("<HistopathologyAction> Entering 'save' method");
+        log.info("<HistopathologyAction> Entering 'save' method");
 
         // Grab the current modelID from the session
         String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
@@ -276,7 +279,7 @@ public class HistopathologyAction extends BaseAction {
         // Create a form to edit
         HistopathologyForm histopathologyForm = (HistopathologyForm) form;
 
-        log.debug("<HistopathologyAction save> following Characteristics:" 
+        log.info("<HistopathologyAction save> following Characteristics:" 
         		+ "\n\t organ: " + histopathologyForm.getOrgan() 
         		+ "\n\t organTissueName: " + histopathologyForm.getOrganTissueName() 
         		+ "\n\t organTissueCode: " + histopathologyForm.getOrganTissueCode() 

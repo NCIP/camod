@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyPopulateAction.java,v 1.19 2007-10-31 18:11:45 pandyas Exp $
+ * $Id: HistopathologyPopulateAction.java,v 1.20 2009-06-08 15:30:35 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2007/10/31 18:11:45  pandyas
+ * Fixed #8188 	Rename UnctrlVocab items to text entries
+ *
  * Revision 1.18  2007/09/12 19:36:40  pandyas
  * modified debug statements for build to stage tier
  *
@@ -135,7 +138,7 @@ public class HistopathologyPopulateAction extends BaseAction {
 	            	histopathologyForm.setTumorClassification(disease.getName());            		
             		
             	} else {
-            		// Concept code is not 00000, so get prefered name from EVS -broken for zebrafish
+            		// Concept code is not 00000, so get preferred name from EVS -broken for zebrafish
 	            	histopathologyForm.setDiagnosisName(disease.getEVSPreferredDescription());
 	            	histopathologyForm.setDiagnosisCode(disease.getConceptCode());
 	            	histopathologyForm.setTumorClassification(disease.getEVSPreferredDescription());
