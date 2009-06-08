@@ -2,9 +2,13 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyManagerImpl.java,v 1.33 2009-06-08 15:34:19 pandyas Exp $
+ * $Id: HistopathologyManagerImpl.java,v 1.34 2009-06-08 16:49:34 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.33  2009/06/08 15:34:19  pandyas
+ * modified for gforge #TBD
+ * Disease not populating in Histopathology for models in edit mode when diagnosis is entered manually
+ *
  * Revision 1.32  2009/06/08 15:28:15  pandyas
  * testing disease issue for disease objects in edit mode
  *
@@ -238,69 +242,91 @@ public class HistopathologyManagerImpl extends BaseManager implements
 		}
     }
 		
+
     private void populateDisease(AnimalModel inAnimalModel,
             HistopathologyData inHistopathologyData,
             Histopathology inHistopathology) throws Exception { 
 
         log.info("<HistopathologyManagerImpl> Entering populateDisease");
+        if(inHistopathology.getDisease().getConceptCode() != null){
+            log.info("ConceptCode: " + inHistopathology.getDisease().getConceptCode());
+            log.info("Name: " + inHistopathology.getDisease().getName()); 
+            log.info("NameAlternEntry: " + inHistopathology.getDisease().getNameAlternEntry());
+        }
         log.info("DiagnosisCode: " + inHistopathologyData.getDiagnosisCode());
         log.info("DiagnosisName: " + inHistopathologyData.getDiagnosisName()); 
         log.info("TumorClassification: " + inHistopathologyData.getTumorClassification());
-        log.info("OtherTumorClassification: " + inHistopathologyData.getOtherTumorClassification());            
+        log.info("OtherTumorClassification: " + inHistopathologyData.getOtherTumorClassification());
+        
+	// Update loop handled separately for conceptCode = 000000
+	if (inHistopathologyData.getDiagnosisCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)){
+        log.info("<HistopathologyManagerImpl> CONCEPTCODEZEROS loop");             
+        log.info("TumorClassification: " + inHistopathologyData.getTumorClassification());            
+        log.info("otherTumorClassification: " + inHistopathologyData.getOtherTumorClassification());
+        
+        // Other selected from Zebrafish submission
+        if (inHistopathologyData.getOtherTumorClassification() != null){
+            inHistopathology.setDisease(new Disease());
+            log.info("Concept code set to 000000");
+            inHistopathology.getDisease().setConceptCode(
+                     Constants.Dropdowns.CONCEPTCODEZEROS);              
+            inHistopathology.getDisease().setNameAlternEntry(
+                     inHistopathologyData.getOtherTumorClassification());
+            inHistopathology.getDisease().setName(null);            	
+        } else {
+            log.info("inHistopathologyData.getDiagnosisCode() is null: ");
+            inHistopathology.setDisease(new Disease()); 
+            inHistopathology.getDisease().setConceptCode(Constants.Dropdowns.CONCEPTCODEZEROS);
+            inHistopathology.getDisease().setName(inHistopathologyData.getTumorClassification());	            				
+        }		
+	
+	} else {
+        log.info("<HistopathologyManagerImpl> ELSE CONCEPTCODEZEROS loop");             
+		// every submission - lookup disease or create one new
+        // DiagnosisCode() != null for all trees 
+		if (inHistopathologyData.getDiagnosisCode() != null && inHistopathologyData.getDiagnosisCode().length() > 0) {
+       
+           log.info("DiagnosisCode() != null loop: " );                 
+                
+           Disease theNewDisease = DiseaseManagerSingleton.instance()
+                   .getOrCreate(inHistopathologyData.getDiagnosisCode(),
+                           inHistopathologyData.getDiagnosisName());
+           log.debug("theNewDisease: " + theNewDisease.toString());
+           inHistopathology.setDisease(theNewDisease); 
+            
+		} else {
+               log.info("DiagnosisCode() == null loop: " ); 
+            if (inHistopathologyData.getOtherTumorClassification() != null && 
+                    inHistopathologyData.getOtherTumorClassification().length() > 0) {
+                log.info("OtherTumorClassification() != null loop: " ); 
+                log.info("TumorClassification: " + inHistopathologyData.getTumorClassification());
+                log.info("other TumorClassification: " + inHistopathologyData.getOtherTumorClassification());
+                
+                log.info("Sending Notification eMail - new Zebrafish Diagnosis added");
+                sendEmail(inAnimalModel, inHistopathologyData
+                         .getDiagnosisName(), "otherDiagnosisName");
+                inHistopathology.setDisease(new Disease());
+                log.info("Concept code set to 000000");
+                inHistopathology.getDisease().setConceptCode(
+                         Constants.Dropdowns.CONCEPTCODEZEROS);              
+                inHistopathology.getDisease().setNameAlternEntry(
+                         inHistopathologyData.getOtherTumorClassification());
+                inHistopathology.getDisease().setName(null);
+           } else {           
+               log.info("OtherTumorClassification() == null loop: " ); 
+               log.info("TumorClassification: " + inHistopathologyData.getTumorClassification());
+               log.info("other TumorClassification: " + inHistopathologyData.getOtherTumorClassification());
 
-        	/**
-        	 *  This loop saves a disease if it is new for the model or if a new disease is selected  
-        	 *  or manually entered and the page is resubmitted 
-        	 */
-            // If DiagnosisCode is not null (mouse from EVS, Mouse entered manually, and Rat from EVS)
-            if (inHistopathologyData.getDiagnosisCode() != null){
-                log.info("inHistopathologyData.getDiagnosisCode() != null loop"); 
-            	
-        		// Check for exisiting Disease
-        		Disease theDisease = null;	        		
-        		if (inHistopathology.getDisease()  != null){
-                    log.info("Existing Disease conceptCode from DB: " + inHistopathology.getDisease().getConceptCode());
-                    log.info("Name from DB: " + inHistopathology.getDisease().getName()); 	
-                    log.info("NameAlternEntry from DB: " + inHistopathology.getDisease().getNameAlternEntry());	                    
-        			// If no prior data make a new object to save
-        			theDisease = inHistopathology.getDisease();
-        		} else {	        			
-        			theDisease = new Disease();
-        		}
-        		
-        		// Set name field from diagnosis name in GUI for all three
-        		theDisease.setName(inHistopathologyData.getDiagnosisName());
-        		
-	            	// Mouse manually entered - set to C000000 by EVSTree application
-	            	if (inHistopathologyData.getDiagnosisCode().equals(Constants.Dropdowns.CONCEPTCODEZEROSWITHC)){
-	                    // Set concept code to C000000
-	            		theDisease.setConceptCode(
-	                            Constants.Dropdowns.CONCEPTCODEZEROSWITHC);            		
-	            		// Mouse and Rat from EVS vocabulary tree - set concept code sent from EVS
-	            	} else {
-	            		theDisease.setConceptCode(
-	            				inHistopathologyData.getDiagnosisCode());              		
-	            	}
-        	// Diagnosis Code is null for Zebrafish from list, Zebrafish other from GUI, and all other species w/o vocabs
-            } else {
-                log.info("inHistopathologyData.getDiagnosisCode() is null loop");      		
-            	// Set concept code to six zeros for both Zebrafish cases
-        		inHistopathology.getDisease().setConceptCode(
-                        Constants.Dropdowns.CONCEPTCODEZEROS);            	
-	            	// Zebrafish other is the only case that set the otherTumorClassification
-	            	if (inHistopathologyData.getOtherTumorClassification() != null && inHistopathologyData.getOtherTumorClassification().length() >0){
-		                log.info("inHistopathologyData.getOtherTumorClassification() != null loop");
-	            		//  Set nameAlternEntry	
-	                    inHistopathology.getDisease().setNameAlternEntry(
-	                            inHistopathologyData.getOtherTumorClassification());
-	                    inHistopathology.getDisease().setName(null); 
-	            	} else {
-	            		log.info("inHistopathologyData.getOtherTumorClassification() is null loop");
-	            		// Set name for Zebrafish from list and all other species w/o vocabs
-	                    inHistopathology.getDisease().setName(
-	                            inHistopathologyData.getTumorClassification());             		
-	            	}            	
-            }
+               inHistopathology.setDisease(new Disease());
+               log.info("Concept code set to 000000");
+               inHistopathology.getDisease().setConceptCode(
+                        Constants.Dropdowns.CONCEPTCODEZEROS);              
+               inHistopathology.getDisease().setName(
+                        inHistopathologyData.getTumorClassification());
+            }                
+            
+        }
+	}     	
     	
     }
 	
