@@ -2,9 +2,13 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyManagerImpl.java,v 1.38 2009-06-08 19:25:29 pandyas Exp $
+ * $Id: HistopathologyManagerImpl.java,v 1.39 2009-06-09 15:25:05 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.38  2009/06/08 19:25:29  pandyas
+ * modified for gforge #TBD
+ * Disease not populating in Histopathology for models in edit mode when diagnosis is entered manually
+ *
  * Revision 1.37  2009/06/08 18:35:53  pandyas
  * modified for gforge #TBD
  * Disease not populating in Histopathology for models in edit mode when diagnosis is entered manually
@@ -267,6 +271,32 @@ public class HistopathologyManagerImpl extends BaseManager implements
         log.info("TumorClassification: " + inHistopathologyData.getTumorClassification());
         log.info("OtherTumorClassification: " + inHistopathologyData.getOtherTumorClassification());
         
+        // Update loop handled separately for conceptCode = 000000
+        // This loop updates disease for models w/o vocabularies (Rabbit, Hamster, ect) 
+	if (inHistopathologyData.getDiagnosisCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)){
+        log.info("<HistopathologyManagerImpl> update model w/ CONCEPTCODEZEROS loop");             
+        log.info("TumorClassification: " + inHistopathologyData.getTumorClassification());            
+        log.info("otherTumorClassification: " + inHistopathologyData.getOtherTumorClassification());
+        
+        // Update a model w/ 'Other' selected from Zebrafish submission
+        if (inHistopathologyData.getOtherTumorClassification() != null){
+            inHistopathology.setDisease(new Disease());
+            log.info("Concept code set to 000000");
+            inHistopathology.getDisease().setConceptCode(
+                     Constants.Dropdowns.CONCEPTCODEZEROS);              
+            inHistopathology.getDisease().setNameAlternEntry(
+                     inHistopathologyData.getOtherTumorClassification());
+            inHistopathology.getDisease().setName(null);            	
+        } else {
+        	// Update a model entered w/o vocabulary tree (Rabbit, Hamster, ect)
+        	// Update a Mouse model when diagnosis is entered manually
+            log.info("inHistopathologyData.getDiagnosisCode() is null: ");
+            inHistopathology.setDisease(new Disease()); 
+            inHistopathology.getDisease().setConceptCode(Constants.Dropdowns.CONCEPTCODEZEROS);
+            inHistopathology.getDisease().setName(inHistopathologyData.getTumorClassification());	            				
+        }		
+	
+	} else {
         log.info("Select Disease from EVS - Mouse, Rat general loop");
         // Diagnosis selected from tree (i.e. Mouse, Rat)
         // Diagnosis entered manually for Mouse
@@ -310,7 +340,8 @@ public class HistopathologyManagerImpl extends BaseManager implements
                         inHistopathologyData.getTumorClassification());
             }              
             
-        }	     	
+        }
+	}     	
     	
     }
 	
