@@ -2,9 +2,16 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyManagerImpl.java,v 1.40 2009-06-09 16:25:49 pandyas Exp $
+ * $Id: HistopathologyManagerImpl.java,v 1.41 2009-06-09 18:40:13 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.40  2009/06/09 16:25:49  pandyas
+ * modified for gforge #TBD
+ * Disease not populating in Histopathology for models in edit mode when diagnosis is entered manually
+ *
+ * entered into gforge as:
+ * 21639  	manually submitted diagnoses disappear in submit--> edit model mode
+ *
  * Revision 1.39  2009/06/09 15:25:05  pandyas
  * modified for gforge #TBD
  * Disease not populating in Histopathology for models in edit mode when diagnosis is entered manually
@@ -292,12 +299,20 @@ public class HistopathologyManagerImpl extends BaseManager implements
                      inHistopathologyData.getOtherTumorClassification());
             inHistopathology.getDisease().setName(null);            	
         } else {
-        	// Update a model entered w/o vocabulary tree (Rabbit, Hamster, ect)
-        	// Update a Mouse model when diagnosis is entered manually
-            log.info("inHistopathologyData.getDiagnosisCode() is null: ");
-            inHistopathology.setDisease(new Disease()); 
-            inHistopathology.getDisease().setConceptCode(Constants.Dropdowns.CONCEPTCODEZEROS);
-            inHistopathology.getDisease().setName(inHistopathologyData.getTumorClassification());	            				
+        	if(inHistopathologyData.getTumorClassification() != null) {
+            	// Update a model entered w/o vocabulary tree (Rabbit, Hamster, ect)
+                log.info("inHistopathologyData.getDiagnosisCode() is null: ");
+                inHistopathology.setDisease(new Disease()); 
+                inHistopathology.getDisease().setConceptCode(Constants.Dropdowns.CONCEPTCODEZEROS);
+                inHistopathology.getDisease().setName(inHistopathologyData.getTumorClassification());
+        	} else {
+            	// Update a model when diagnosis is entered manually (i.e Mouse entered manually)
+                log.info("inHistopathologyData.getDiagnosisCode() is null: ");
+                inHistopathology.setDisease(new Disease()); 
+                inHistopathology.getDisease().setConceptCode(Constants.Dropdowns.CONCEPTCODEZEROS);
+                inHistopathology.getDisease().setName(inHistopathologyData.getDiagnosisName()); 
+        	}
+	            				
         }		
 	
 	} else {
