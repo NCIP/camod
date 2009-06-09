@@ -2,9 +2,14 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyManagerImpl.java,v 1.39 2009-06-09 15:25:05 pandyas Exp $
+ * $Id: HistopathologyManagerImpl.java,v 1.40 2009-06-09 16:25:49 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.39  2009/06/09 15:25:05  pandyas
+ * modified for gforge #TBD
+ * Disease not populating in Histopathology for models in edit mode when diagnosis is entered manually
+ * - fixed code for models entered w/o vocab and Mouse entered manually
+ *
  * Revision 1.38  2009/06/08 19:25:29  pandyas
  * modified for gforge #TBD
  * Disease not populating in Histopathology for models in edit mode when diagnosis is entered manually
@@ -272,7 +277,6 @@ public class HistopathologyManagerImpl extends BaseManager implements
         log.info("OtherTumorClassification: " + inHistopathologyData.getOtherTumorClassification());
         
         // Update loop handled separately for conceptCode = 000000
-        // This loop updates disease for models w/o vocabularies (Rabbit, Hamster, ect) 
 	if (inHistopathologyData.getDiagnosisCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)){
         log.info("<HistopathologyManagerImpl> update model w/ CONCEPTCODEZEROS loop");             
         log.info("TumorClassification: " + inHistopathologyData.getTumorClassification());            
