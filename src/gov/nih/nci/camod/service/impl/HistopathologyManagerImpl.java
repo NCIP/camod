@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyManagerImpl.java,v 1.41 2009-06-09 18:40:13 pandyas Exp $
+ * $Id: HistopathologyManagerImpl.java,v 1.42 2009-06-09 19:04:05 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.41  2009/06/09 18:40:13  pandyas
+ * modified for gforge #21639  	manually submitted diagnoses disappear in submit--> edit model mode
+ *
  * Revision 1.40  2009/06/09 16:25:49  pandyas
  * modified for gforge #TBD
  * Disease not populating in Histopathology for models in edit mode when diagnosis is entered manually
@@ -308,9 +311,11 @@ public class HistopathologyManagerImpl extends BaseManager implements
         	} else {
             	// Update a model when diagnosis is entered manually (i.e Mouse entered manually)
                 log.info("inHistopathologyData.getDiagnosisCode() is null: ");
-                inHistopathology.setDisease(new Disease()); 
-                inHistopathology.getDisease().setConceptCode(Constants.Dropdowns.CONCEPTCODEZEROS);
-                inHistopathology.getDisease().setName(inHistopathologyData.getDiagnosisName()); 
+                Disease theNewDisease = DiseaseManagerSingleton.instance()
+                .getOrCreate(inHistopathologyData.getDiagnosisCode(),
+                        inHistopathologyData.getDiagnosisName());
+                log.info("theNewDisease: " + theNewDisease.toString());
+                inHistopathology.setDisease(theNewDisease); 
         	}
 	            				
         }		
