@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.121 2009-05-28 18:46:55 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.122 2009-06-10 20:20:55 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.121  2009/05/28 18:46:55  pandyas
+ * getting ready for QA build
+ *
  * Revision 1.120  2009/05/27 14:59:42  pandyas
  * removed unused import statement
  *
@@ -3015,7 +3018,8 @@ public class QueryManagerImpl extends BaseManager
                
         // Search for organ
         if (inSearchData.getOrganTissueCode() != null && inSearchData.getOrganTissueCode().length() > 0 || inSearchData.getOrgan()!= null && inSearchData.getOrgan().length() > 0)
-        {       	
+        {  
+        	log.info("inSearchData.getOrganTissueCode(): " + inSearchData.getOrganTissueCode());
 	   		// Format the query
 	        Object[] theParams = null;
 	        String inConceptCodes = inSearchData.getOrganTissueCode();
@@ -3027,7 +3031,10 @@ public class QueryManagerImpl extends BaseManager
 		   					+  "WHERE h.organ.id = o.id "
 	        				+  "AND upper(o.name) like '%" + inSearchData.getOrgan().toUpperCase() + "%') ";
 	        	
+	        	log.info("theHQLQuery: " + theHQLQuery);
+	        	
 	   		} else if (inConceptCodes.trim().length() > 0) {
+	   			log.info("inConceptCodes.trim(): " + inConceptCodes.trim());
 	            
 	            StringTokenizer theTokenizer = new StringTokenizer(inConceptCodes, ",");	
 	   			theParams = new Object[0];
@@ -3042,6 +3049,8 @@ public class QueryManagerImpl extends BaseManager
 	        	theHQLQuery += "AND am.id IN (SELECT h.absCancerModelId FROM Histopathology as h, Organ as o " 
    							+  "WHERE h.organ.id = o.id "
 	        				+  "AND o.conceptCode IN (" + theConceptCodeList + ")) ";
+	        	
+	        	log.info("theHQLQuery: " + theHQLQuery);
 	   		}
 	      //  theHQLQuery += ") ";
    		}
