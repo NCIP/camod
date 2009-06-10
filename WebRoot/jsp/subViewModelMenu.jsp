@@ -212,7 +212,7 @@
 		%>
 		<a href="ViewModelAction.do?unprotected_method=populateTransplantation&aModelID=<%=mdl%>" styleClass="subMenuPrimary">TRANSPLANTATION</a>	
 	    <%} else { %>
-			TRANSPLANT
+			TRANSPLANTATION
 		<%}%>
 	<BR>
 	<BR>
