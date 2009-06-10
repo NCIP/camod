@@ -19,7 +19,7 @@
 
 			<tr>
 				<td class="formTitle" height="20" colspan="9">
-					Transplant - Model:
+					Transplantation - Model:
 					<c:out value="${tm.modelDescriptor}" escapeXml="false"/>
 				</td>				
 			</tr>			
