@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SearchAction.java,v 1.15 2009-06-11 17:02:05 pandyas Exp $
+ * $Id: SearchAction.java,v 1.16 2009-06-11 17:21:04 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2009/06/11 17:02:05  pandyas
+ * modified to test #21666  	Error when Table of Content -? Cardiovascular System is selected
+ *
  * Revision 1.14  2009/06/11 16:43:57  pandyas
  * modified to test #21666  	Error when Table of Content -? Cardiovascular System is selected
  *
@@ -246,6 +249,7 @@ public final class SearchAction extends BaseAction {
 				// Save the current form data into constants
 				request.getSession().setAttribute(Constants.SEARCH_FORM,
 						theForm);
+				log.info("<SearchAction>: Set form: " );
 
 			} catch (Exception e) {
 				log.info(e);
@@ -260,12 +264,14 @@ public final class SearchAction extends BaseAction {
 		// Create the Criteria HTML table to be display on the search result
 		// page
 		try {
+			log.info("<SearchAction>: Create the Criteria HTML: " );
 			request.getSession().setAttribute(Constants.CRITERIATABLE,
 					CriteriaTableUtil.buildCriteriaDisplayTable(theForm));
 
 			request.getSession().setAttribute(Constants.DUP_NAME, "false");
 
 			request.getSession().setAttribute(Constants.NOSAVEOPTION, "false");
+			log.info("<SearchAction>: Finished Creating the Criteria HTML: " );
 
 		} catch (Exception e) {
 			// Set the error message
@@ -275,6 +281,7 @@ public final class SearchAction extends BaseAction {
 			saveErrors(request, msg);
 		}
 		log.info("<SearchAction>: Exiting: " );
+		log.info("<SearchAction>: theForward: " + theForward);
 		return mapping.findForward(theForward);
 	}
 }
