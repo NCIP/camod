@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SearchAction.java,v 1.14 2009-06-11 16:43:57 pandyas Exp $
+ * $Id: SearchAction.java,v 1.15 2009-06-11 17:02:05 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2009/06/11 16:43:57  pandyas
+ * modified to test #21666  	Error when Table of Content -? Cardiovascular System is selected
+ *
  * Revision 1.13  2008/02/08 16:48:24  pandyas
  * modified log statement for final deployment to QA
  *
@@ -170,11 +173,13 @@ public final class SearchAction extends BaseAction {
 
 				// Calculate the elasped time of search
 				long start = System.currentTimeMillis();
+				log.info("<SearchAction> start: " + start);
 
 				// Perform the search
 				List results = animalModelManager.search(theForm);
 
 				long elapsedTimeMillis = System.currentTimeMillis() - start;
+				log.info("<SearchAction> elapsedTimeMillis: " + elapsedTimeMillis);
 
 				// Set search results constant
 				request.getSession().setAttribute(Constants.SEARCH_RESULTS,
@@ -220,8 +225,10 @@ public final class SearchAction extends BaseAction {
 				// If a user is logged in, save the query to the history
 				String currentUser = (String) request.getSession()
 						.getAttribute(Constants.CURRENTUSER);
+				
+				log.info("<SearchAction>: currentUser: " + currentUser);				
 
-				if (currentUser != null) {
+				if (currentUser != null && currentUser.length() >0) {
 					// Set the user for this save
 					PersonManager personManager = (PersonManager) getBean("personManager");
 					savedQuery.setUser(personManager
@@ -267,7 +274,7 @@ public final class SearchAction extends BaseAction {
 					"errors.admin.message"));
 			saveErrors(request, msg);
 		}
-
+		log.info("<SearchAction>: Exiting: " );
 		return mapping.findForward(theForward);
 	}
 }
