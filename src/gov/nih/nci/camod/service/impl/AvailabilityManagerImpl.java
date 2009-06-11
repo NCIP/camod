@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AvailabilityManagerImpl.java,v 1.19 2009-06-11 15:35:10 pandyas Exp $
+ * $Id: AvailabilityManagerImpl.java,v 1.20 2009-06-11 15:57:11 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2009/06/11 15:35:10  pandyas
+ * modified to test #21517  	Available from Investigator page cannot be submitted without selecting investigator although fields is not labeled as required
+ *
  * Revision 1.18  2009/06/11 13:27:43  pandyas
  * modified to test #21517  	Available from Investigator page cannot be submitted without selecting investigator although fields is not labeled as required
  *
@@ -200,7 +203,7 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
         inAvailability.setName(inAvailabilityData.getName());
         log.info("setName: " + inAvailabilityData.getName());
 
-        if (inAvailabilityData.getPrincipalInvestigator() != null)
+        if (inAvailabilityData.getPrincipalInvestigator() != null && inAvailabilityData.getPrincipalInvestigator().length() >0)
         {
             /* Convert the PI name from dropdown to PI_id stored in DB */
             Person thePI = PersonManagerSingleton.instance().getByUsername(inAvailabilityData.getPrincipalInvestigator());
