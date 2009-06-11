@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AvailabilityManagerImpl.java,v 1.16 2009-06-01 16:51:58 pandyas Exp $
+ * $Id: AvailabilityManagerImpl.java,v 1.17 2009-06-11 13:24:38 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2009/06/01 16:51:58  pandyas
+ * getting ready for QA build
+ *
  * Revision 1.15  2009/06/01 16:26:44  pandyas
  * modified for gforge #21517  	Available from Investigator page cannot be submitted without selecting investigator although fields is not labeled as required
  *
@@ -81,12 +84,12 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
 
     public AnimalAvailability createInvestigator(AvailabilityData inAvailabilityData) throws Exception
     {
-        log.debug("Entering AvailabilityManagerImpl.createInvestigator");
+        log.info("Entering AvailabilityManagerImpl.createInvestigator");
 
         AnimalAvailability theAvailability = new AnimalAvailability();
         populateInvestigatorAvailability(inAvailabilityData, theAvailability);
 
-        log.debug("Exiting AvailabilityManagerImpl.createInvestigator");
+        log.info("Exiting AvailabilityManagerImpl.createInvestigator");
 
         return theAvailability;
     }
@@ -94,14 +97,14 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
     public void update(AvailabilityData inAvailabilityData,
                        AnimalAvailability inAvailability) throws Exception
     {
-        log.debug("Entering AvailabilityManagerImpl.update");
-        log.debug("Updating AvailabilityData (ID): " + inAvailability.getId());
+        log.info("Entering AvailabilityManagerImpl.update");
+        log.info("Updating AvailabilityData (ID): " + inAvailability.getId());
 
         // Populate w/ the new values and save
         editAvailability(inAvailabilityData, inAvailability);
         save(inAvailability);
 
-        log.debug("Exiting AvailabilityManagerImpl.update");
+        log.info("Exiting AvailabilityManagerImpl.update");
     }
 
     public void updateInvestigatorAvailability(AvailabilityData inAvailabilityData,
@@ -141,12 +144,12 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
     private void editAvailability(AvailabilityData inAvailabilityData,
                                   AnimalAvailability inAvailability) throws Exception
     {
-        log.debug("Entering AvailabilityManagerImpl.editAvailability");
+        log.info("Entering AvailabilityManagerImpl.editAvailability");
 
         inAvailability.setName(inAvailabilityData.getName());
         inAvailability.setStockNumber(inAvailabilityData.getStockNumber().trim());
 
-        log.debug("Exiting AvailabilityManagerImpl.editAvailability");
+        log.info("Exiting AvailabilityManagerImpl.editAvailability");
 
     }
 
