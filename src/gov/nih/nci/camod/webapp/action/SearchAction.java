@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SearchAction.java,v 1.13 2008-02-08 16:48:24 pandyas Exp $
+ * $Id: SearchAction.java,v 1.14 2009-06-11 16:43:57 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2008/02/08 16:48:24  pandyas
+ * modified log statement for final deployment to QA
+ *
  * Revision 1.12  2007/12/17 18:03:22  pandyas
  * Removed * in searchFilter used for getting e-mail from LDAP
  * Apps Support ticket was submitted (31169 - incorrect e-mail associated with my caMOD account) stating:
@@ -86,7 +89,7 @@ public final class SearchAction extends BaseAction {
 			HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
-		log.debug("<SearchAction> entered ");
+		log.info("<SearchAction> entered ");
 
 		SearchForm theForm = new SearchForm();
 		SavedQuery resubmittedSavedQuery = null;
@@ -143,7 +146,7 @@ public final class SearchAction extends BaseAction {
 		}
 
 		if (theForm.getKeyword() != null && theForm.getKeyword().length() > 0) {
-			log.debug("<SearchAction> Keyword: " + theForm.getKeyword());
+			log.info("<SearchAction> Keyword: " + theForm.getKeyword());
 			request.getSession().setAttribute(Constants.KEYWORD_HIGHLIGHT,
 					theForm.getKeyword());
 		}
@@ -162,7 +165,7 @@ public final class SearchAction extends BaseAction {
 		else {
 
 			try {
-				log.debug("<SearchAction> In search loop: ");
+				log.info("<SearchAction> In search loop: ");
 				AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
 
 				// Calculate the elasped time of search
@@ -186,7 +189,7 @@ public final class SearchAction extends BaseAction {
 				savedQuery.setNumberResults(results.size());
 
 				log
-						.debug("<SearchAction>: savedQuery.setQueryName( No Name Provided )");
+						.info("<SearchAction>: savedQuery.setQueryName( No Name Provided )");
 				savedQuery.setQueryName("No Name Provided");
 
 				if (resubmittedSavedQuery != null) {

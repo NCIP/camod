@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.101 2009-06-11 13:24:49 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.102 2009-06-11 16:43:44 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.101  2009/06/11 13:24:49  pandyas
+ * modified to test #21517  	Available from Investigator page cannot be submitted without selecting investigator although fields is not labeled as required
+ *
  * Revision 1.100  2009/05/28 18:41:06  pandyas
  * getting ready for QA build
  *
@@ -668,7 +671,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     public List<AnimalModelSearchResult> search(SearchData inSearchData) throws Exception
     {
 
-        log.debug("In search");
+        log.info("In search");
         List theAnimalModels = QueryManagerSingleton.instance().searchForAnimalModels(inSearchData);
 
         List<AnimalModelSearchResult> theDisplayList = new ArrayList<AnimalModelSearchResult>();
@@ -679,7 +682,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
             AnimalModel theAnimalModel = (AnimalModel) theAnimalModels.get(i);
             theDisplayList.add(new AnimalModelSearchResult(theAnimalModel));
         }
-        log.debug("In search - theDisplayList.size(): " + theDisplayList.size());
+        log.info("In search - theDisplayList.size(): " + theDisplayList.size());
         return theDisplayList;
     }
     

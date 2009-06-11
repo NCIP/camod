@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.122 2009-06-10 20:20:55 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.123 2009-06-11 16:43:37 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.122  2009/06/10 20:20:55  pandyas
+ * modified for gforge #21666  	Error when Table of Content -? Cardiovascular System is selected
+ *
  * Revision 1.121  2009/05/28 18:46:55  pandyas
  * getting ready for QA build
  *
@@ -2569,7 +2572,7 @@ public class QueryManagerImpl extends BaseManager
     public List searchForAnimalModels(SearchData inSearchData) throws Exception
     {
     	
-        log.debug("Entering searchForAnimalModels");
+        log.info("Entering searchForAnimalModels");
 
         List theAnimalModels = null;
 
@@ -2578,16 +2581,16 @@ public class QueryManagerImpl extends BaseManager
 
         if (inSearchData.getKeyword() != null && inSearchData.getKeyword().length() > 0)
         {
-            log.debug("Doing a keyword search: " + inSearchData.getKeyword());
+            log.info("Doing a keyword search: " + inSearchData.getKeyword());
             theAnimalModels = keywordSearch( inSearchData.getKeyword() );
         }
         else
         {
-            log.debug("Doing a criteria search");
+            log.info("Doing a criteria search");
             theAnimalModels = criteriaSearch(inSearchData, true);
         }
         
-        log.debug("Exiting searchForAnimalModels");
+        log.info("Exiting searchForAnimalModels");
 
         return theAnimalModels;
     }
@@ -2994,14 +2997,14 @@ public class QueryManagerImpl extends BaseManager
 		if (inSearchData.getModelDescriptor() != null
 				&& inSearchData.getModelDescriptor().trim().length() > 0) 
 		{
-			log.debug("Model Descriptor Criteria Used");
+			log.info("Model Descriptor Criteria Used");
 			theHQLQuery += "AND upper(am.modelDescriptor) like '%" + inSearchData.getModelDescriptor().toUpperCase().trim() + "%'";
         }
 		
         // PI criteria
         if (inSearchData.getPiName() != null && inSearchData.getPiName().length() > 0)
         {
-        	log.debug("PI Criteria Used");	
+        	log.info("PI Criteria Used");	
             StringTokenizer theTokenizer = new StringTokenizer(inSearchData.getPiName());
             String theLastName = theTokenizer.nextToken(",").trim();
             String theFirstName = theTokenizer.nextToken().trim();
@@ -3018,7 +3021,8 @@ public class QueryManagerImpl extends BaseManager
                
         // Search for organ
         if (inSearchData.getOrganTissueCode() != null && inSearchData.getOrganTissueCode().length() > 0 || inSearchData.getOrgan()!= null && inSearchData.getOrgan().length() > 0)
-        {  
+        { 
+        	log.info("Organ Criteria Used");
         	log.info("inSearchData.getOrganTissueCode(): " + inSearchData.getOrganTissueCode());
 	   		// Format the query
 	        Object[] theParams = null;
