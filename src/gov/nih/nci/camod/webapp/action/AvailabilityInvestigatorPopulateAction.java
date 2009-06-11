@@ -2,9 +2,12 @@
  *
  * @author pandyas
  * 
- * $Id: AvailabilityInvestigatorPopulateAction.java,v 1.10 2008-02-08 16:47:53 pandyas Exp $
+ * $Id: AvailabilityInvestigatorPopulateAction.java,v 1.11 2009-06-11 15:20:22 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2008/02/08 16:47:53  pandyas
+ * modified log statement for final deployment to QA
+ *
  * Revision 1.9  2007/10/31 17:54:57  pandyas
  * Fixed #9169  	Connect availability of model to person to resolve the available from investigator issue
  *
@@ -61,7 +64,7 @@ public class AvailabilityInvestigatorPopulateAction extends BaseAction {
     public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.debug("<AvailabilityInvestigatorPopulateAction populate> Entering ");
+        log.info("<AvailabilityInvestigatorPopulateAction populate> Entering ");
 
         // Create a form to edit
         AvailabilityForm availabilityForm = (AvailabilityForm) form;
@@ -71,7 +74,7 @@ public class AvailabilityInvestigatorPopulateAction extends BaseAction {
         String aAvailabilityID = request.getParameter("aAvailabilityID");
 
         AnimalAvailability avilablity = AvailabilityManagerSingleton.instance().get(aAvailabilityID);
-        log.debug("avilablity (id and name): " + avilablity);
+        log.info("avilablity (id and name): " + avilablity);
 
         if (avilablity == null) {
             request.setAttribute(Constants.Parameters.DELETED, "true");
@@ -88,7 +91,7 @@ public class AvailabilityInvestigatorPopulateAction extends BaseAction {
                     if (avilablity.getStockNumber() != null){
                     	if(avilablity.getStockNumber().equals("-1")) {
 
-                        log.debug("Old 2-tier format.  Setting the stock number to the PI");
+                        log.info("Old 2-tier format.  Setting the stock number to the PI");
 
                         // Get the PI from the model
                         String theModelID = "" + request.getSession().getAttribute(Constants.MODELID);
@@ -104,7 +107,7 @@ public class AvailabilityInvestigatorPopulateAction extends BaseAction {
                     // AnimalAvailability table
                     availabilityForm.setPrincipalInvestigator(avilablity
             					.getPrincipalInvestigator().getUsername());
-            		log.debug("am.getPrincipalInvestigator().getUsername(): " + avilablity
+            		log.info("am.getPrincipalInvestigator().getUsername(): " + avilablity
             					.getPrincipalInvestigator().getUsername());
                         
                     }
