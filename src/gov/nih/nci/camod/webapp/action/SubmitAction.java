@@ -1,8 +1,11 @@
 /**
  *  
- *  $Id: SubmitAction.java,v 1.21 2008-08-14 16:57:47 pandyas Exp $
+ *  $Id: SubmitAction.java,v 1.22 2009-06-11 19:48:35 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.21  2008/08/14 16:57:47  pandyas
+ *  modified debug line to use log
+ *
  *  Revision 1.20  2008/01/15 19:32:07  pandyas
  *  Modified debug statements to build to dev tier
  *
@@ -73,7 +76,7 @@ public class SubmitAction extends BaseAction {
                 + request.getParameter(Constants.Parameters.MODELID));
 
         String modelID = request.getParameter(Constants.Parameters.MODELID);
-        log.debug("modelID: " + modelID);
+        log.info("modelID: " + modelID);
 
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
 
@@ -94,14 +97,14 @@ public class SubmitAction extends BaseAction {
             
             AnimalModelStateForm theForm = new AnimalModelStateForm();
             theForm.setModelId(am.getId().toString());
-            log.debug("setModelId: " + am.getId().toString());
+            log.info("setModelId: " + am.getId().toString());
             
             // Get the coordinator
     		Properties camodProperties = new Properties();
     		String camodPropertiesFileName = null;
 
     		camodPropertiesFileName = System.getProperty("gov.nih.nci.camod.camodProperties");
-    		log.debug("camodPropertiesFileName: " + camodPropertiesFileName.toString());
+    		log.info("camodPropertiesFileName: " + camodPropertiesFileName.toString());
     		
     		try {
 			
