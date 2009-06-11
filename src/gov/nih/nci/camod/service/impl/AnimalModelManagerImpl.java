@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.100 2009-05-28 18:41:06 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.101 2009-06-11 13:24:49 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.100  2009/05/28 18:41:06  pandyas
+ * getting ready for QA build
+ *
  * Revision 1.99  2009/03/25 16:22:24  pandyas
  * modified for #17833  	Make sure all references to Tranplantation are properly named
  *
@@ -1238,11 +1241,11 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
                                             AvailabilityData inAvailabilityData) throws Exception
     {
 
-        log.debug("Entering AnimalModelManagerImpl.addInvestigatorAvailability");
+        log.info("Entering AnimalModelManagerImpl.addInvestigatorAvailability");
         AnimalAvailability theAvailability = AvailabilityManagerSingleton.instance().createInvestigator(inAvailabilityData);
         inAnimalModel.addAnimalAvailability(theAvailability);
         save(inAnimalModel);
-        log.debug("Exiting AnimalModelManagerImpl.addInvestigatorAvailability");
+        log.info("Exiting AnimalModelManagerImpl.addInvestigatorAvailability");
     }
 
     public void addAssociatedExpression(AnimalModel inAnimalModel,

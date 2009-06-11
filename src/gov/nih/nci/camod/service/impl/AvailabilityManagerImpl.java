@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AvailabilityManagerImpl.java,v 1.17 2009-06-11 13:24:38 pandyas Exp $
+ * $Id: AvailabilityManagerImpl.java,v 1.18 2009-06-11 13:27:43 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2009/06/11 13:24:38  pandyas
+ * modified to test #21517  	Available from Investigator page cannot be submitted without selecting investigator although fields is not labeled as required
+ *
  * Revision 1.16  2009/06/01 16:51:58  pandyas
  * getting ready for QA build
  *
@@ -156,21 +159,21 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
     private void populateInvestigatorAvailability(AvailabilityData inAvailabilityData,
                                                   AnimalAvailability inAvailability) throws Exception
     {
-        log.debug("Entering AvailabilityManagerImpl.populateInvestigatorAvailability");
+        log.info("Entering AvailabilityManagerImpl.populateInvestigatorAvailability");
 
         // set Availability name
+        log.info("setName: " + inAvailabilityData.getName());        
         inAvailability.setName(inAvailabilityData.getName());
-        log.debug("setName: " + inAvailabilityData.getName());
 
         if (inAvailabilityData.getPrincipalInvestigator() != null && inAvailabilityData.getPrincipalInvestigator().length() > 0)
         {
             /* Convert the PI name from dropdown to PI_id stored in DB */
             Person thePI = PersonManagerSingleton.instance().getByUsername(inAvailabilityData.getPrincipalInvestigator());
 
-            log.debug("thePI : " + thePI.toString());
+            log.info("thePI : " + thePI.toString());
 
             inAvailability.setPrincipalInvestigator(thePI);
-            log.debug("thePI.getId().toString(): " + thePI.getId().toString());
+            log.info("thePI.getId().toString(): " + thePI.getId().toString());
         }
         else
         {
@@ -179,10 +182,10 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
 
         /* get distributor object */
         AnimalDistributor theDistributor = AnimalDistributorManagerSingleton.instance().getByName(inAvailabilityData.getSource());
-        log.debug("theDistributor): " + theDistributor);
+        log.info("theDistributor): " + theDistributor);
 
         inAvailability.setAnimalDistributor(theDistributor);
-        log.debug("Exiting AvailabilityManagerImpl.populateInvestigatorAvailability");
+        log.info("Exiting AvailabilityManagerImpl.populateInvestigatorAvailability");
     }
 
     private void editInvestigatorAvailability(AvailabilityData inAvailabilityData,
