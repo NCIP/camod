@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchSimple.jsp,v 1.53 2008-10-29 07:05:04 schroedn Exp $
+ * $Id: searchSimple.jsp,v 1.54 2009-06-11 16:40:46 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.53  2008/10/29 07:05:04  schroedn
+ * Bug #17424 Fixed clear button, cleared out selected anatomy and disease
+ *
  * Revision 1.52  2008/05/12 15:29:10  pandyas
  * minor format change to be consistent
  *
@@ -116,7 +119,7 @@
 
 <!-- needed for tooltips -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
-<SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>
+<SCRIPT src="/scripts/TipMessages.js" TYPE="text/javascript"></SCRIPT>
 
 <SCRIPT language="JavaScript" src="scripts/global.js"></script>
 <SCRIPT language="JavaScript" src="scripts/EVSTreeScript.js"></script>
@@ -166,7 +169,6 @@
 	String aQueryName = (String) request.getSession().getAttribute( Constants.QUERY_NAME );		
 %>
 
-<html:form action="SearchSimpleAction.do" focus="keyword">
 
 <!-- searchSimple.jsp -->
 <!-- Main Content Begins -->
@@ -179,7 +181,7 @@
 	<tr><td>
 	
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
-	
+	<html:form action="SearchSimpleAction.do" focus="keyword">
         <tr>
             <td class="formTitleBlue" height="20" colspan="3">
                 Keyword Search:&nbsp;&nbsp;
@@ -319,15 +321,14 @@
 						  	  <bean:message key="button.clear"/>
 						  </html:submit>
 						  
-				  		</html:form>			
+			
 				  		</td>
 			  		</tr>
 				</TABLE>
 			</td>
 		</tr>
-				
+		</html:form>				
 		</TABLE>		
-		</td></tr>
 				
 </td></tr>
 </TABLE>
