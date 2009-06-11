@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ViewTOCSearchResultsAction.java,v 1.11 2009-06-01 17:02:53 pandyas Exp $
+ * $Id: ViewTOCSearchResultsAction.java,v 1.12 2009-06-11 17:42:53 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2009/06/01 17:02:53  pandyas
+ * getting ready for QA build
+ *
  * Revision 1.10  2008/10/22 18:19:07  schroedn
  * Removed the criteria table data from the search results for TOC
  *
@@ -58,12 +61,12 @@ public class ViewTOCSearchResultsAction extends BaseAction {
     public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.debug("In ViewTOCSearchResultsAction.execute");
+        log.info("In ViewTOCSearchResultsAction.execute");
         
         String theForward = "next";
         
         String theKey = (String) request.getParameter(Constants.Parameters.TOCQUERYKEY);
-        log.debug("theKey: " + theKey);
+        log.info("theKey: " + theKey);
         
         // clean specific header that is used in SQL injection
         if (request.getHeader("X-Forwarded-For") != null){
@@ -98,7 +101,7 @@ public class ViewTOCSearchResultsAction extends BaseAction {
 	                // set theForward to failure - fail gracefully but do not let query continue
 	                theForward = "failure";
 	            } else {	            
-		            log.debug("theKey is a valid value - continue with querry: " + theKey); 
+		            log.info("theKey is a valid value - continue with querry: " + theKey); 
             
 		            // Handle external linkage
 		            if (request.getSession().getAttribute(Constants.TOCSearch.TOC_QUERY_RESULTS) == null) {
@@ -107,11 +110,13 @@ public class ViewTOCSearchResultsAction extends BaseAction {
 		                TOCManager theTOCManager = new TOCManager(getServlet().getServletContext().getRealPath("/")
 		                        + Constants.TOCSearch.TOC_QUERY_FILE);
 		
-		                List theResults = theTOCManager.process(); 
+		                List theResults = theTOCManager.process();
+		                log.info("TOC: " + theResults); 
 		                request.getSession().setAttribute(Constants.TOCSearch.TOC_QUERY_RESULTS, theResults);		                
 		            }
 
 		            List theGroupList = (List) request.getSession().getAttribute(Constants.TOCSearch.TOC_QUERY_RESULTS);
+		            log.info("theGroupList: " + theGroupList); 
 
 		            for (int i = 0; i < theGroupList.size(); i++) {
 		                TOCQueryGroup theQueryGroup = (TOCQueryGroup) theGroupList.get(i);
@@ -121,6 +126,7 @@ public class ViewTOCSearchResultsAction extends BaseAction {
 		
 		                    if (theQuery.getKey().equals(theKey)) {                   	
 		                        request.getSession().setAttribute(Constants.SEARCH_RESULTS, theQuery.getResults());
+		                        log.info("TOC theQuery.getResults(): " + theQuery.getResults());
 		                        break;
 		                    }
 		                }
@@ -130,13 +136,14 @@ public class ViewTOCSearchResultsAction extends BaseAction {
         } catch (Exception e) {
 
             theForward = "failure";
-            log.error("Caught an error running the canned query: ", e);
+            log.info("Caught an error running the canned query: ", e);
 
             // Encountered an error saving the model.
             ActionMessages theMsg = new ActionMessages();
             theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
             saveErrors(request, theMsg);
         }
+        log.info("Exiting ViewTOCSearchResultsAction theForward: "+ theForward);
         return mapping.findForward(theForward);
     }
     

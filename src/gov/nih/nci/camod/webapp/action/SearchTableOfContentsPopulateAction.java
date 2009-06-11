@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SearchTableOfContentsPopulateAction.java,v 1.2 2006-04-17 19:09:40 pandyas Exp $
+ * $Id: SearchTableOfContentsPopulateAction.java,v 1.3 2009-06-11 17:42:53 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2006/04/17 19:09:40  pandyas
+ * caMod 2.1 OM changes
+ *
  * 
  */
 
@@ -30,7 +33,7 @@ public class SearchTableOfContentsPopulateAction extends BaseAction {
     public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.trace("In SearchTableOfContentsPopulateAction.populate");
+        log.info("In SearchTableOfContentsPopulateAction.populate");
 
         // Get the curation manager workflow XML
         TOCManager theTOCManager = new TOCManager(getServlet().getServletContext().getRealPath("/")
@@ -39,7 +42,8 @@ public class SearchTableOfContentsPopulateAction extends BaseAction {
         List theResults = theTOCManager.process();
 
         request.getSession().setAttribute(Constants.TOCSearch.TOC_QUERY_RESULTS, theResults);
-
+        
+        log.info("Exiting SearchTableOfContentsPopulateAction.populate");
         return mapping.findForward("next");
     }
 
