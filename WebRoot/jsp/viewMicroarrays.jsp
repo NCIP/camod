@@ -30,7 +30,7 @@
 								<td class="resultsBoxGreyEnd">
 					                <ul>
 					                	<li>
-					                	<a href='<c:out value="${ma.url}"/>' target="_blank"><c:out value="${ma.experimentName}"/> (Data not stored in caARRAY)</a>
+					                	<a href='<c:out value="${ma.url}"/>' target="_blank"><c:out value="${ma.experimentName}"/></a>
 								        </li>
 					                </ul>
 								</td>
@@ -60,6 +60,6 @@
 		</tr>
 		</TABLE>
 	</td></tr></TABLE>
-</tr></td></TABLE>
+</td></tr></TABLE>
 
 <%@ include file="/jsp/footer.jsp" %>
