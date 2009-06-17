@@ -2,9 +2,13 @@
  * 
  * @author pandyas
  * 
- * $Id: DiseaseManagerImpl.java,v 1.8 2009-06-08 19:25:13 pandyas Exp $
+ * $Id: DiseaseManagerImpl.java,v 1.9 2009-06-17 18:02:38 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2009/06/08 19:25:13  pandyas
+ * modified for gforge #TBD
+ * Disease not populating in Histopathology for models in edit mode when diagnosis is entered manually
+ *
  * Revision 1.7  2009/05/20 17:27:02  pandyas
  * modified for gforge #17325 Upgrade caMOD to use caBIO 4.x and EVS 4.x to get data
  *
@@ -97,7 +101,7 @@ public class DiseaseManagerImpl extends BaseManager implements DiseaseManager
                                String inDiseaseName) throws Exception
     {
 
-        log.info("<DiseaseManagerImpl> Entering getOrCreate");
+        log.debug("<DiseaseManagerImpl> Entering getOrCreate");
 
         Disease theQBEDisease = new Disease();
 
@@ -123,7 +127,7 @@ public class DiseaseManagerImpl extends BaseManager implements DiseaseManager
         }
         else
         {
-            log.info("<DiseaseManagerImpl> No matching disease. Create new one");
+            log.debug("<DiseaseManagerImpl> No matching disease. Create new one");
             theDisease = theQBEDisease;
 
             // Get the preferred description
@@ -141,7 +145,7 @@ public class DiseaseManagerImpl extends BaseManager implements DiseaseManager
                 }
             }
         }
-        log.info("<DiseaseManagerImpl> theDisease: " +theDisease.toString());
+        log.debug("<DiseaseManagerImpl> theDisease: " +theDisease.toString());
         return theDisease;
     }
 }

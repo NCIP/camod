@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AvailabilityManagerImpl.java,v 1.21 2009-06-11 16:03:56 pandyas Exp $
+ * $Id: AvailabilityManagerImpl.java,v 1.22 2009-06-17 18:02:20 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.21  2009/06/11 16:03:56  pandyas
+ * modified for gforge #21517  	Available from Investigator page cannot be submitted without selecting investigator although fields is not labeled as required
+ *
  * Revision 1.20  2009/06/11 15:57:11  pandyas
  * modified for gforge #21517  	Available from Investigator page cannot be submitted without selecting investigator although fields is not labeled as required
  *
@@ -96,12 +99,12 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
 
     public AnimalAvailability createInvestigator(AvailabilityData inAvailabilityData) throws Exception
     {
-        log.info("Entering AvailabilityManagerImpl.createInvestigator");
+        log.debug("Entering AvailabilityManagerImpl.createInvestigator");
 
         AnimalAvailability theAvailability = new AnimalAvailability();
         populateInvestigatorAvailability(inAvailabilityData, theAvailability);
 
-        log.info("Exiting AvailabilityManagerImpl.createInvestigator");
+        log.debug("Exiting AvailabilityManagerImpl.createInvestigator");
 
         return theAvailability;
     }
@@ -109,27 +112,27 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
     public void update(AvailabilityData inAvailabilityData,
                        AnimalAvailability inAvailability) throws Exception
     {
-        log.info("Entering AvailabilityManagerImpl.update");
-        log.info("Updating AvailabilityData (ID): " + inAvailability.getId());
+        log.debug("Entering AvailabilityManagerImpl.update");
+        log.debug("Updating AvailabilityData (ID): " + inAvailability.getId());
 
         // Populate w/ the new values and save
         editAvailability(inAvailabilityData, inAvailability);
         save(inAvailability);
 
-        log.info("Exiting AvailabilityManagerImpl.update");
+        log.debug("Exiting AvailabilityManagerImpl.update");
     }
 
     public void updateInvestigatorAvailability(AvailabilityData inAvailabilityData,
                                                AnimalAvailability inAvailability) throws Exception
     {
-        log.info("Entering AvailabilityManagerImpl.updateInvestigatorAvailability");
-        log.info("Updating AvailabilityData: " + inAvailability.getId());
+        log.debug("Entering AvailabilityManagerImpl.updateInvestigatorAvailability");
+        log.debug("Updating AvailabilityData: " + inAvailability.getId());
 
         // Populate w/ the new values and save
         editInvestigatorAvailability(inAvailabilityData, inAvailability);
         save(inAvailability);
 
-        log.info("Exiting AvailabilityManagerImpl.updateInvestigatorAvailability");
+        log.debug("Exiting AvailabilityManagerImpl.updateInvestigatorAvailability");
     }
 
     private void populateAvailability(AvailabilityData inAvailabilityData,
@@ -156,22 +159,22 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
     private void editAvailability(AvailabilityData inAvailabilityData,
                                   AnimalAvailability inAvailability) throws Exception
     {
-        log.info("Entering AvailabilityManagerImpl.editAvailability");
+        log.debug("Entering AvailabilityManagerImpl.editAvailability");
 
         inAvailability.setName(inAvailabilityData.getName());
         inAvailability.setStockNumber(inAvailabilityData.getStockNumber().trim());
 
-        log.info("Exiting AvailabilityManagerImpl.editAvailability");
+        log.debug("Exiting AvailabilityManagerImpl.editAvailability");
 
     }
 
     private void populateInvestigatorAvailability(AvailabilityData inAvailabilityData,
                                                   AnimalAvailability inAvailability) throws Exception
     {
-        log.info("Entering AvailabilityManagerImpl.populateInvestigatorAvailability");
+        log.debug("Entering AvailabilityManagerImpl.populateInvestigatorAvailability");
 
         // set Availability name
-        log.info("setName: " + inAvailabilityData.getName());        
+        log.debug("setName: " + inAvailabilityData.getName());        
         inAvailability.setName(inAvailabilityData.getName());
 
         if (inAvailabilityData.getPrincipalInvestigator() != null && inAvailabilityData.getPrincipalInvestigator().length() > 0)
@@ -179,10 +182,10 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
             /* Convert the PI name from dropdown to PI_id stored in DB */
             Person thePI = PersonManagerSingleton.instance().getByUsername(inAvailabilityData.getPrincipalInvestigator());
 
-            log.info("thePI : " + thePI.toString());
+            log.debug("thePI : " + thePI.toString());
 
             inAvailability.setPrincipalInvestigator(thePI);
-            log.info("thePI.getId().toString(): " + thePI.getId().toString());
+            log.debug("thePI.getId().toString(): " + thePI.getId().toString());
         }
         else
         {
@@ -191,31 +194,31 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
 
         /* get distributor object */
         AnimalDistributor theDistributor = AnimalDistributorManagerSingleton.instance().getByName(inAvailabilityData.getSource());
-        log.info("theDistributor): " + theDistributor);
+        log.debug("theDistributor): " + theDistributor);
 
         inAvailability.setAnimalDistributor(theDistributor);
-        log.info("Exiting AvailabilityManagerImpl.populateInvestigatorAvailability");
+        log.debug("Exiting AvailabilityManagerImpl.populateInvestigatorAvailability");
     }
 
     private void editInvestigatorAvailability(AvailabilityData inAvailabilityData,
                                               AnimalAvailability inAvailability) throws Exception
     {
-        log.info("Entering AvailabilityManagerImpl.editInvestigatorAvailability");
+        log.debug("Entering AvailabilityManagerImpl.editInvestigatorAvailability");
 
         // set Availability name
         inAvailability.setName(inAvailabilityData.getName());
-        log.info("setName: " + inAvailabilityData.getName());
+        log.debug("setName: " + inAvailabilityData.getName());
 
         if (inAvailabilityData.getPrincipalInvestigator() != null && inAvailabilityData.getPrincipalInvestigator().length() >0)
         {
-            log.info("inAvailabilityData.getPrincipalInvestigator() != null : " );
-            log.info("inAvailabilityData.getPrincipalInvestigator() : "  + inAvailabilityData.getPrincipalInvestigator());
+            log.debug("inAvailabilityData.getPrincipalInvestigator() != null : " );
+            log.debug("inAvailabilityData.getPrincipalInvestigator() : "  + inAvailabilityData.getPrincipalInvestigator());
             /* Convert the PI name from dropdown to PI_id stored in DB */
             Person thePI = PersonManagerSingleton.instance().getByUsername(inAvailabilityData.getPrincipalInvestigator());
 
-            log.info("thePI : " + thePI.toString());
+            log.debug("thePI : " + thePI.toString());
 
-            log.info("thePI.getId().toString(): " + thePI.getId().toString());
+            log.debug("thePI.getId().toString(): " + thePI.getId().toString());
             inAvailability.setPrincipalInvestigator(thePI);
         }
         else
@@ -223,6 +226,6 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
             inAvailability.setStockNumber("-1");
         }
 
-        log.info("Exiting AvailabilityManagerImpl.editInvestigatorAvailability");
+        log.debug("Exiting AvailabilityManagerImpl.editInvestigatorAvailability");
     }
 }

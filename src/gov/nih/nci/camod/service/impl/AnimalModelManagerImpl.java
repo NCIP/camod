@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.102 2009-06-11 16:43:44 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.103 2009-06-17 18:01:44 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.102  2009/06/11 16:43:44  pandyas
+ * modified to test #21666  	Error when Table of Content -? Cardiovascular System is selected
+ *
  * Revision 1.101  2009/06/11 13:24:49  pandyas
  * modified to test #21517  	Available from Investigator page cannot be submitted without selecting investigator although fields is not labeled as required
  *
@@ -671,7 +674,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     public List<AnimalModelSearchResult> search(SearchData inSearchData) throws Exception
     {
 
-        log.info("In search");
+        log.debug("In search");
         List theAnimalModels = QueryManagerSingleton.instance().searchForAnimalModels(inSearchData);
 
         List<AnimalModelSearchResult> theDisplayList = new ArrayList<AnimalModelSearchResult>();
@@ -682,7 +685,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
             AnimalModel theAnimalModel = (AnimalModel) theAnimalModels.get(i);
             theDisplayList.add(new AnimalModelSearchResult(theAnimalModel));
         }
-        log.info("In search - theDisplayList.size(): " + theDisplayList.size());
+        log.debug("In search - theDisplayList.size(): " + theDisplayList.size());
         return theDisplayList;
     }
     
@@ -1244,11 +1247,11 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
                                             AvailabilityData inAvailabilityData) throws Exception
     {
 
-        log.info("Entering AnimalModelManagerImpl.addInvestigatorAvailability");
+        log.debug("Entering AnimalModelManagerImpl.addInvestigatorAvailability");
         AnimalAvailability theAvailability = AvailabilityManagerSingleton.instance().createInvestigator(inAvailabilityData);
         inAnimalModel.addAnimalAvailability(theAvailability);
         save(inAnimalModel);
-        log.info("Exiting AnimalModelManagerImpl.addInvestigatorAvailability");
+        log.debug("Exiting AnimalModelManagerImpl.addInvestigatorAvailability");
     }
 
     public void addAssociatedExpression(AnimalModel inAnimalModel,

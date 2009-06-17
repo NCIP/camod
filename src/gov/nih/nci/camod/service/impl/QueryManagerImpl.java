@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.123 2009-06-11 16:43:37 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.124 2009-06-17 18:03:43 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.123  2009/06/11 16:43:37  pandyas
+ * modified to test #21666  	Error when Table of Content -? Cardiovascular System is selected
+ *
  * Revision 1.122  2009/06/10 20:20:55  pandyas
  * modified for gforge #21666  	Error when Table of Content -? Cardiovascular System is selected
  *
@@ -2572,7 +2575,7 @@ public class QueryManagerImpl extends BaseManager
     public List searchForAnimalModels(SearchData inSearchData) throws Exception
     {
     	
-        log.info("Entering searchForAnimalModels");
+        log.debug("Entering searchForAnimalModels");
 
         List theAnimalModels = null;
 
@@ -2581,16 +2584,16 @@ public class QueryManagerImpl extends BaseManager
 
         if (inSearchData.getKeyword() != null && inSearchData.getKeyword().length() > 0)
         {
-            log.info("Doing a keyword search: " + inSearchData.getKeyword());
+            log.debug("Doing a keyword search: " + inSearchData.getKeyword());
             theAnimalModels = keywordSearch( inSearchData.getKeyword() );
         }
         else
         {
-            log.info("Doing a criteria search");
+            log.debug("Doing a criteria search");
             theAnimalModels = criteriaSearch(inSearchData, true);
         }
         
-        log.info("Exiting searchForAnimalModels");
+        log.debug("Exiting searchForAnimalModels");
 
         return theAnimalModels;
     }
@@ -2997,14 +3000,14 @@ public class QueryManagerImpl extends BaseManager
 		if (inSearchData.getModelDescriptor() != null
 				&& inSearchData.getModelDescriptor().trim().length() > 0) 
 		{
-			log.info("Model Descriptor Criteria Used");
+			log.debug("Model Descriptor Criteria Used");
 			theHQLQuery += "AND upper(am.modelDescriptor) like '%" + inSearchData.getModelDescriptor().toUpperCase().trim() + "%'";
         }
 		
         // PI criteria
         if (inSearchData.getPiName() != null && inSearchData.getPiName().length() > 0)
         {
-        	log.info("PI Criteria Used");	
+        	log.debug("PI Criteria Used");	
             StringTokenizer theTokenizer = new StringTokenizer(inSearchData.getPiName());
             String theLastName = theTokenizer.nextToken(",").trim();
             String theFirstName = theTokenizer.nextToken().trim();
@@ -3022,8 +3025,8 @@ public class QueryManagerImpl extends BaseManager
         // Search for organ
         if (inSearchData.getOrganTissueCode() != null && inSearchData.getOrganTissueCode().length() > 0 || inSearchData.getOrgan()!= null && inSearchData.getOrgan().length() > 0)
         { 
-        	log.info("Organ Criteria Used");
-        	log.info("inSearchData.getOrganTissueCode(): " + inSearchData.getOrganTissueCode());
+        	log.debug("Organ Criteria Used");
+        	log.debug("inSearchData.getOrganTissueCode(): " + inSearchData.getOrganTissueCode());
 	   		// Format the query
 	        Object[] theParams = null;
 	        String inConceptCodes = inSearchData.getOrganTissueCode();
@@ -3035,10 +3038,10 @@ public class QueryManagerImpl extends BaseManager
 		   					+  "WHERE h.organ.id = o.id "
 	        				+  "AND upper(o.name) like '%" + inSearchData.getOrgan().toUpperCase() + "%') ";
 	        	
-	        	log.info("theHQLQuery: " + theHQLQuery);
+	        	log.debug("theHQLQuery: " + theHQLQuery);
 	        	
 	   		} else if (inConceptCodes.trim().length() > 0) {
-	   			log.info("inConceptCodes.trim(): " + inConceptCodes.trim());
+	   			log.debug("inConceptCodes.trim(): " + inConceptCodes.trim());
 	            
 	            StringTokenizer theTokenizer = new StringTokenizer(inConceptCodes, ",");	
 	   			theParams = new Object[0];
@@ -3054,7 +3057,7 @@ public class QueryManagerImpl extends BaseManager
    							+  "WHERE h.organ.id = o.id "
 	        				+  "AND o.conceptCode IN (" + theConceptCodeList + ")) ";
 	        	
-	        	log.info("theHQLQuery: " + theHQLQuery);
+	        	log.debug("theHQLQuery: " + theHQLQuery);
 	   		}
 	      //  theHQLQuery += ") ";
    		}

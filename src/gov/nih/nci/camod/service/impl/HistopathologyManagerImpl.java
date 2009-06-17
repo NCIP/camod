@@ -2,9 +2,14 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyManagerImpl.java,v 1.42 2009-06-09 19:04:05 pandyas Exp $
+ * $Id: HistopathologyManagerImpl.java,v 1.43 2009-06-17 18:03:12 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.42  2009/06/09 19:04:05  pandyas
+ * modified for gforge #21639  	manually submitted diagnoses disappear in submit--> edit model mode
+ *
+ * Mouse entered manually will get or create a new disease
+ *
  * Revision 1.41  2009/06/09 18:40:13  pandyas
  * modified for gforge #21639  	manually submitted diagnoses disappear in submit--> edit model mode
  *
@@ -281,21 +286,21 @@ public class HistopathologyManagerImpl extends BaseManager implements
             Histopathology inHistopathology) throws Exception { 
 
         log.info("<HistopathologyManagerImpl> Entering populateDisease");
-        log.info("DiagnosisCode: " + inHistopathologyData.getDiagnosisCode());
-        log.info("DiagnosisName: " + inHistopathologyData.getDiagnosisName()); 
-        log.info("TumorClassification: " + inHistopathologyData.getTumorClassification());
-        log.info("OtherTumorClassification: " + inHistopathologyData.getOtherTumorClassification());
+        log.debug("DiagnosisCode: " + inHistopathologyData.getDiagnosisCode());
+        log.debug("DiagnosisName: " + inHistopathologyData.getDiagnosisName()); 
+        log.debug("TumorClassification: " + inHistopathologyData.getTumorClassification());
+        log.debug("OtherTumorClassification: " + inHistopathologyData.getOtherTumorClassification());
         
         // Update loop handled separately for conceptCode = 000000
 	if (inHistopathologyData.getDiagnosisCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)){
-        log.info("<HistopathologyManagerImpl> update model w/ CONCEPTCODEZEROS loop");             
-        log.info("TumorClassification: " + inHistopathologyData.getTumorClassification());            
-        log.info("otherTumorClassification: " + inHistopathologyData.getOtherTumorClassification());
+        log.debug("<HistopathologyManagerImpl> update model w/ CONCEPTCODEZEROS loop");             
+        log.debug("TumorClassification: " + inHistopathologyData.getTumorClassification());            
+        log.debug("otherTumorClassification: " + inHistopathologyData.getOtherTumorClassification());
         
         // Update a model w/ 'Other' selected from Zebrafish submission
         if (inHistopathologyData.getOtherTumorClassification() != null){
             inHistopathology.setDisease(new Disease());
-            log.info("Concept code set to 000000");
+            log.debug("Concept code set to 000000");
             inHistopathology.getDisease().setConceptCode(
                      Constants.Dropdowns.CONCEPTCODEZEROS);              
             inHistopathology.getDisease().setNameAlternEntry(
@@ -304,24 +309,24 @@ public class HistopathologyManagerImpl extends BaseManager implements
         } else {
         	if(inHistopathologyData.getTumorClassification() != null) {
             	// Update a model entered w/o vocabulary tree (Rabbit, Hamster, ect)
-                log.info("inHistopathologyData.getDiagnosisCode() is null: ");
+                log.debug("inHistopathologyData.getDiagnosisCode() is null: ");
                 inHistopathology.setDisease(new Disease()); 
                 inHistopathology.getDisease().setConceptCode(Constants.Dropdowns.CONCEPTCODEZEROS);
                 inHistopathology.getDisease().setName(inHistopathologyData.getTumorClassification());
         	} else {
             	// Update a model when diagnosis is entered manually (i.e Mouse entered manually)
-                log.info("inHistopathologyData.getDiagnosisCode() is null: ");
+                log.debug("inHistopathologyData.getDiagnosisCode() is null: ");
                 Disease theNewDisease = DiseaseManagerSingleton.instance()
                 .getOrCreate(inHistopathologyData.getDiagnosisCode(),
                         inHistopathologyData.getDiagnosisName());
-                log.info("theNewDisease: " + theNewDisease.toString());
+                log.debug("theNewDisease: " + theNewDisease.toString());
                 inHistopathology.setDisease(theNewDisease); 
         	}
 	            				
         }		
 	
 	} else {
-        log.info("Select Disease from EVS - Mouse, Rat general loop");
+        log.debug("Select Disease from EVS - Mouse, Rat general loop");
         // Diagnosis selected from tree (i.e. Mouse, Rat)
         // Diagnosis entered manually for Mouse
 		if (inHistopathologyData.getDiagnosisCode() != null && inHistopathologyData.getDiagnosisCode().length() > 0) {
@@ -329,22 +334,22 @@ public class HistopathologyManagerImpl extends BaseManager implements
            Disease theNewDisease = DiseaseManagerSingleton.instance()
                    .getOrCreate(inHistopathologyData.getDiagnosisCode(),
                            inHistopathologyData.getDiagnosisName());
-           log.info("theNewDisease: " + theNewDisease.toString());
+           log.debug("theNewDisease: " + theNewDisease.toString());
            inHistopathology.setDisease(theNewDisease); 
             
 		} else {
 			// Zebrafish diagnosis selected as 'Other' from list loop
             if (inHistopathologyData.getOtherTumorClassification() != null && 
                     inHistopathologyData.getOtherTumorClassification().length() > 0) {
-                log.info("OtherTumorClassification() != null loop: " ); 
-                log.info("TumorClassification: " + inHistopathologyData.getTumorClassification());
-                log.info("other TumorClassification: " + inHistopathologyData.getOtherTumorClassification());
+                log.debug("OtherTumorClassification() != null loop: " ); 
+                log.debug("TumorClassification: " + inHistopathologyData.getTumorClassification());
+                log.debug("other TumorClassification: " + inHistopathologyData.getOtherTumorClassification());
                 
-                log.info("Sending Notification eMail - new Zebrafish Diagnosis added");
+                log.debug("Sending Notification eMail - new Zebrafish Diagnosis added");
                 sendEmail(inAnimalModel, inHistopathologyData
                          .getDiagnosisName(), "otherDiagnosisName");
                 inHistopathology.setDisease(new Disease());
-                log.info("Concept code set to 000000");
+                log.debug("Concept code set to 000000");
                 inHistopathology.getDisease().setConceptCode(
                          Constants.Dropdowns.CONCEPTCODEZEROS);              
                 inHistopathology.getDisease().setNameAlternEntry(
@@ -352,12 +357,12 @@ public class HistopathologyManagerImpl extends BaseManager implements
                 inHistopathology.getDisease().setName(null);
            } else {
         	   // Zebrafish diagnosis selected from list loop or entered as text (i.e. Rabbit, Hamster, ect)
-               log.info("OtherTumorClassification() not filled in: " ); 
-               log.info("TumorClassification: " + inHistopathologyData.getTumorClassification());
-               log.info("other TumorClassification: " + inHistopathologyData.getOtherTumorClassification());
+               log.debug("OtherTumorClassification() not filled in: " ); 
+               log.debug("TumorClassification: " + inHistopathologyData.getTumorClassification());
+               log.debug("other TumorClassification: " + inHistopathologyData.getOtherTumorClassification());
 
                inHistopathology.setDisease(new Disease());
-               log.info("Concept code set to 000000");
+               log.debug("Concept code set to 000000");
                inHistopathology.getDisease().setConceptCode(
                         Constants.Dropdowns.CONCEPTCODEZEROS);              
                inHistopathology.getDisease().setName(
