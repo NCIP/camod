@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchResults.jsp,v 1.33 2009-04-01 19:38:02 pandyas Exp $
+ * $Id: searchResults.jsp,v 1.34 2009-06-17 16:06:06 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.33  2009/04/01 19:38:02  pandyas
+ * minor modified for #17833  	Make sure all references to Transplantation are properly named
+ *
  * Revision 1.32  2009/03/30 16:10:49  pandyas
  * modified for #17833  	Make sure all references to Tranplantation are properly named
  *
@@ -101,7 +104,7 @@
 	String[] resultColumns = ( String[] ) request.getSession().getAttribute( Constants.SEARCHRESULTCOLUMNS );
    	if ( resultColumns == null ) 
    	{
-   		resultColumns = new String[] { "Unique Model Identifier", "Model Descriptor", "Tumor Sites", "Species" };   //default        
+   		resultColumns = new String[] { "Unique Model Identifier", "Model Descriptor", "Species" };   //default        
   	}  
   	
 	//String noSaveOption = request.getParameter( "noSaveOption" );  	  	 

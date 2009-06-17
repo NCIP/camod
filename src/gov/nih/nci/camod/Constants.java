@@ -1,8 +1,12 @@
 /**
  * 
- * $Id: Constants.java,v 1.121 2009-06-08 15:31:53 pandyas Exp $
+ * $Id: Constants.java,v 1.122 2009-06-17 16:06:44 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.121  2009/06/08 15:31:53  pandyas
+ * modified for gforge #TBD
+ * Disease not populating in Histopathology for models in edit mode when diagnosis is entered manually
+ *
  * Revision 1.120  2009/06/04 16:28:10  pandyas
  * The Property object for the Zebrafish vocabulary returns only  Preferred_Name, Synonym, NCI_Preferred_Term.  We used to display the "display_name" for both the NCI_Thesaurus and Zebrafish vocabs.
  *
@@ -333,7 +337,7 @@ public class Constants {
     
     public static final int ITEMSPERPAGEDEFAULT = 15;
     
-    public static final String[] SEARCHRESULTCOLUMNSDEFAULT = { "Model Id", "Model Descriptor", "Tumor Sites", "Species"  }; 
+    public static final String[] SEARCHRESULTCOLUMNSDEFAULT = { "Model Id", "Model Descriptor", "Species"  }; 
     
     public static final String SELECTEDSEARCHRESULTCOLUMNS = "selectedsearchresultcolumns";
     
