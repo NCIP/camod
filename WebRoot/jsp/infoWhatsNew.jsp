@@ -34,7 +34,7 @@
 																	<TBODY>
 																		<TR>
 																			<TD class="formTitleBlue" colspan="2" height="20">
-																				Release of caMOD 2.5 - December 2008
+																				Release of caMOD 2.5.1 - June 2009
 																			</TD>
 																		</TR>
 																		<TR>
@@ -51,12 +51,26 @@
 																		
 																		<TR>
 																			<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">
-																				caGRID Integration
+																				EVS API upgrade
 																			</TD>
 																			<TD
 																				style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
 																				width="80%">
-																				Programmatic access to caMOD is available through a caGRID data service (API). A data service allows data owners to share the data from a source (e.g. Oracle or MySQL relational databases) with their collaborators. caGRID is an infrastructure that connects data, research tools, scientists, and organizations to leverage their combined strengths and expertise in an open federated environment with widely accepted standards and shared tools.
+																				The EVS (formerly part of caCORE ) API is a public domain, open source wrapper that provides 
+																	            full access to the LexBIG Terminology Server. LexBIG hosts the NCI Thesaurus, the 
+																	            NCI Metathesaurus, and several other vocabularies (like Zebrafish).
+            
+																	            The EVS 3.2 model, exposed as part of caCORE 3.2, has been re-released with
+																	            LexBIG as the back-end terminology service in place of the proprietary Apelon DTS
+																	            back end. The SDK 4.0 was used to generate the EVS 3.2 Java API, as well as the SOAP
+																	            and HTTP REST interfaces.  The only difference between the EVS 3.2 API exposed as part of the caCORE EVS 4.x
+																	            and the API exposed as part of caCORE 3.2 is the back-end terminology server used to
+																	            retrieve the vocabulary data.             
+																	            
+																	            caMOD will upgrade to use the EVS 4.2 API to get the Display Name or Preferred Name for its
+																	            vocabulary entries. 
+																	             
+																	            EVSTree has also been upgraded to retrieve all 8 vocabularies from the enw EVS 4.2 API.            
 																			</TD>
 																		</TR>					
 																		
@@ -65,12 +79,19 @@
 																		
 																		<TR>
 																			<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">
-																				Searching Enhanced
+																				caBIO API upgrade
 																			</TD>
 																			<TD
 																				style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
 																				width="80%">
-																				Many improvements were made to the search functionality such as: complete change of the search architecture to accomodate increased amount of data, improved keyword search, improved search for transgene and targeted modifications, search for PubMed Identifier added to Advanced Search, customization of the search results list improved.
+																				The caMOD application connects to caBIO to retrieve additional data for the Therapeutic Approaches 
+																	            and Genetic Description search results screens.  On the Therapeutic Approaches search results screen caMOD 
+																	            displays clinical trials data from caBIO.  On the Genetic Description search results screen caMOD displays 
+																	            additional data within the Targeted Modification section for "Gene Info" (official nomenclature of the gene), 
+																	            Database Links to UniGene and CGAP, "Gene Ontology" (controlled vocabulary to describe gene and gene product attributes), 
+																	            and "BioCarta Pathways".  
+																	
+																	            caMOD will upgrade to use the caBIO 4.0 API (jars match EVS 4.2) to get additional data from caBIO.
 																				</li></ul>
 																			</TD>
 																		</TR>
