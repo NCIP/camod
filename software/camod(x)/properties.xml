@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="properties" default="generate.database.properties">
+    <!-- Library versions and JARs -->
+    <property name="lib.dir" location="lib"/>
+    
+    <!-- Load user overrides -->
+    <property file="${user.home}/.build.properties"/>
+    <property file="build.properties"/>
+    
+    <!-- Application options that will likely vary between applications -->
+    <property name="form.auth.action" value="j_security_check"/>
+    <property name="encrypt.password" value="true"/>
+    <property name="encrypt.algorithm" value="SHA"/>
+    <property name="secure.login" value="false"/> <!-- SSL for login -->
+    <property name="secure.application" value="false"/> <!-- SSL for all -->
+    <property name="rememberMe.enabled" value="true"/>
+    <property name="http.port" value="8081"/>
+    <property name="https.port" value="8443"/>
+    <property name="dao.type" value="hibernate"/>
+    <property name="jsp.2" value="false"/>
+    
+    <!-- Defaults for database.properties -->
+    <property name="database.jar" location="${oracle.jar}"/>
+    <property name="database.type" value="oracle"/>
+    <property name="database.name" value="ncicb"/>
+    <property name="database.host" value="localhost"/>
+    <property name="database.username" value="camod"/>
+    <property name="database.password" value="camod"/>
+    <property name="database.schema" value="CAMOD"/>
+    <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle9Dialect"/>
+    <property name="database.driver_class" value="oracle.jdbc.driver.OracleDriver"/>
+    <property name="database.url" value="jdbc:oracle:thin:@${database.host}:1521:${database.name}"/>
+    <property name="database.show_sql" value="true"/>
+    
+    <!-- Build and deploy properties -->
+    <property environment="env"/>
+    <property name="env.COMPUTERNAME" value="${env.HOSTNAME}"/>
+    <!-- These values are only used if not specified in build.properties -->
+    <property name="tomcat.home" value="${env.CATALINA_HOME}"/>    
+    <!-- The target directory for building the packed web application -->
+    <property name="webapp.dist" value="${dist.dir}/webapps"/>    
+    <!-- The target directory for building the unpacked web application -->
+    <property name="webapp.target" value="${build.dir}/${webapp.name}"/>    
+    <!-- Should Java compilations set the debug compiler option? -->
+    <property name="compile.debug" value="true"/>
+    <!-- Should Java compilations set the deprecation compiler option? -->
+    <property name="compile.deprecation" value="false"/>
+    <!-- Should Java compilations set the optimize compiler option? -->
+    <property name="compile.optimize" value="false"/>
+    <!-- The source directory for the whole project -->
+    <property name="src" value="${basedir}/src"/>
+    <property name="tar.user" value="ant"/>
+    <property name="tar.group" value="ant"/>
+    <property name="tar.mode" value="644"/>
+    
+    <!-- =================================================================== -->
+    <!-- Classpaths                                                          -->
+    <!-- =================================================================== -->
+    
+    <!--  Entire lib --> 
+    <path id="all.classpath"> 
+        <fileset dir="${build.webapp.lib.dir}" includes="*.jar"/>   
+        <path location="${build.classes.dir}"/> 
+    </path> 
+    
+    
+    <path id="xdoclet.classpath">
+        <pathelement location="${log4j.jar}"/>
+        <pathelement location="${commons-logging.jar}"/>
+        <pathelement location="${commons-collections.jar}"/>
+        <fileset dir="${xdoclet.dir}" includes="*.jar"/>
+        <fileset dir="${velocity.dir}" includes="*.jar"/>
+    </path>
+    
+    <!-- Hibernate -->
+    <path id="hibernate.classpath">
+        <pathelement location="${build.webapp.lib.dir}/hibernate3x.jar"/>
+    </path>
+    
+    <!-- DAO -->
+    <path id="dao.compile.classpath">
+        <path refid="hibernate.classpath"/>
+        <pathelement location="${commons-lang.jar}"/>
+        <pathelement location="${commons-logging.jar}"/>
+        <fileset dir="${spring.dir}" includes="*.jar"/>
+    </path>
+        
+    <property name="inheritAll" value="true"/>
+    
+    <!-- this macro is called by tasks that depend on a database.properties -->
+    <macrodef name="generate-database-properties">
+        <sequential>
+            <echo>generating database.properties from build.properties</echo>
+            <propertyfile comment="Hibernate Configuration for JUnit tests" 
+                file="${basedir}/database.properties">
+                <entry key="hibernate.dialect" value="${hibernate.dialect}"/>
+                <entry key="hibernate.connection.driver_class" value="${database.driver_class}"/>
+                <entry key="hibernate.connection.url" value="${database.url}"/>
+                <entry key="hibernate.connection.username" value="${database.username}"/>
+                <entry key="hibernate.connection.password" value="${database.password}"/>
+                <entry key="hibernate.connection.show_sql" value="${database.show_sql}"/>
+                <entry key="dao.type" value="${dao.type}"/>
+             </propertyfile>
+             <replace file="database.properties" token="amp;" value=""/>
+             <property file="database.properties"/>
+         </sequential>
+    </macrodef>
+    
+</project>
