@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : Role.hbm.xml
+    Created on : May 4, 2005
+    Author     : rajputs
+    Description: Hibernate mapping file for Role
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="gov.nih.nci.camod.domain">
+	<class name="Role" 
+    	table="role"
+        lazy="true" mutable="false">
+
+	    <!-- id -->
+	    <id name="id" 
+	    	column="role_id"
+	    	type="long"    	
+	    	unsaved-value="null">	    	
+	        <generator class="native"/>
+	    </id>	    
+	    
+	    <!-- name -->
+        <property name="name" 
+        	column="name" 
+        	type="string"/>
+        	
+        <!-- partyCollection (many-to-many bidirectional) -->
+        <!-- Note: this collection will NOT be used to synchronize state with the database. -->
+        <set name="partyCollection"
+        	table="party_role"
+        	inverse="true" 
+        	lazy="true"
+        	cascade="all-delete-orphan"
+		sort="natural">
+        	
+        	<key column="role_id"/>
+        	<many-to-many class="Party" 
+        		column="party_id"/>
+        </set> 
+	</class>
+</hibernate-mapping>

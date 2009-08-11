@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="gov.nih.nci.camod.domain">
+
+	<class name="SavedQuery"
+		   table="saved_query"
+           lazy="true">
+
+		<!-- id -->
+		<id name="id" 
+		    column="saved_query_id"
+	    	type="long" 		     
+		    unsaved-value="null">
+	        <generator class="native"/>
+		</id>	   	
+	    
+	    <!-- queryName -->
+		<property name="queryName" 
+			  column="query_name"
+			  type="string" />
+		
+		<!-- elapsedTime -->	  
+		<property name="elapsedTime" 
+				  type="long"
+				  column="query_elapsed_time"/>
+		
+		<!-- executeTime -->
+		<property name="executeTime" 
+		          type="timestamp"
+			  	  column="query_execute_timestamp" 
+			      not-null="false" 
+			      length="10" />
+		
+		<!-- isSaved -->
+		<property name="isSaved"
+				  type="long"
+				  column="is_saved" />
+		
+		<!-- numberResults -->
+		<property name="numberResults"
+				  type="long"
+				  column="number_results" />
+				  
+		<!-- user (many-to-one) -->
+		<many-to-one name="user" 
+		             class="Person"
+			   		 not-null="true">
+			<column name="party_id" />
+		</many-to-one>
+
+		<!-- savedQueryAttributes (one-to-many) -->
+		<set name="savedQueryAttributes" 
+		     cascade="all-delete-orphan" >
+			<key column="saved_query_id" />
+			<one-to-many class="SavedQueryAttribute" />
+		</set>
+			
+	</class>
+</hibernate-mapping>

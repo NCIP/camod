@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="gov.nih.nci.camod.domain">
+
+	<class name="SavedQueryAttribute"
+		   table="saved_query_attribute">
+
+		<!-- id -->
+		<id name="id" 
+		    column="saved_query_attribute_id" 
+	    	type="long"    	
+	    	unsaved-value="null">
+	    	<generator class="native"/>
+		</id>
+
+		<!-- attributeName -->
+		<property name="attributeName" 
+			column="attribute_name"
+			type="string" />
+
+		<!-- attributeValue -->
+		<property name="attributeValue" 
+		    column="attribute_value"
+		    type="string" />		
+
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : CaelmirStudyData.hbm.xml
+    Created on : Dec 26, 2007
+    Author     : pandyas
+    Description: Hibernate mapping file for CaelmirStudyData
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="gov.nih.nci.camod.domain">
+	<class name="CaelmirStudyData" 
+    	table="caelmir_study_data"
+        lazy="true">
+
+	    <!-- id -->
+	    <id name="id" 
+	    	column="caelmir_study_data_id"
+	    	type="long"    	
+	    	unsaved-value="null">	    	
+	        <generator class="native"/>
+	    </id>
+	    
+	    <!-- studyName -->
+        <property name="StudyName" 
+        	column="study_name" 
+        	type="string"/>
+        	
+        <!-- hypothesis -->
+        <property name="hypothesis" 
+        	column="hypothesis" 
+        	type="string"
+        	length="2000"/>
+        	
+        <!-- url -->
+        <property name="url" 
+        	column="url" 
+        	type="string"/>	
+        	
+       	<!-- description -->
+        <property name="description" 
+        	column="description" 
+        	type="string"/>	 	
+        	
+       	<!-- investigatorName -->
+        <property name="investigatorName" 
+        	column="investigator_name" 
+        	type="string"/>	 
+        
+        <!-- email -->
+        <property name="email" 
+        	column="email" 
+        	type="string"/>
+        	
+        <!-- institution -->
+        <property name="institution" 
+        	column="institution" 
+        	type="string"/> 
+                  
+   	  	
+	</class>
+</hibernate-mapping>

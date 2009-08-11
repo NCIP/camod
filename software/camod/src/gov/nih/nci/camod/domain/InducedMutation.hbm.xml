@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : InducedMutation.hbm.xml
+    Created on : May 6, 2005
+    Author     : rajputs
+    Description: Hibernate mapping file for InducedMutation
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="gov.nih.nci.camod.domain">
+	<subclass name="InducedMutation" 
+    	extends="EngineeredGene"
+    	discriminator-value="IM"
+        lazy="true">
+	    
+        <!-- geneIdentifier: this is really a one-to-one relationship with unique=true -->
+        <!-- (one-to-one unidirectional) -->
+        <many-to-one name="geneIdentifier"
+        	class="GeneIdentifier"
+        	column="gene_identifier_id"
+        	cascade="save-update"
+        	unique="true"/> 
+	    
+	    <!-- description -->
+        <property name="description" 
+        	column="description" 
+        	type="string"/>
+        	
+        <!-- geneticAlteration: this is really a one-to-one relationship with unique=true -->
+        <!-- (one-to-one unidirectional) -->
+        <many-to-one name="geneticAlteration"
+        	class="GeneticAlteration"
+        	column="genetic_alteration_id"
+        	cascade="all"        	 
+        	unique="true"/> 
+       
+        <!-- environmentalFactor (many-to-one unidirectional) -->
+        <many-to-one
+        	name="environmentalFactor"
+        	column="environmental_factor_id"
+        	cascade="save-update"
+        	class="EnvironmentalFactor"/>        
+        	
+	</subclass>
+</hibernate-mapping>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : DevelopmentalStage.hbm.xml
+    Created on : May 14, 2007
+    Author     : pandyas
+    Description: Hibernate mapping file for DevelopmentalStage
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="gov.nih.nci.camod.domain">
+	<class name="DevelopmentalStage" 
+    	table="developmental_stage"
+        lazy="true"
+        mutable="false">
+
+	    <!-- id -->
+	    <id name="id" 
+	    	column="developmental_stage_id"
+	    	type="long"    	
+	    	unsaved-value="null">	    	
+	        <generator class="native"/>
+	    </id>
+	    
+	    <!-- name -->
+        <property name="name" 
+        	column="name" 
+        	type="string"/>
+        	
+        <!-- conceptCode -->
+        <property name="conceptCode" 
+        	column="concept_code" 
+        	type="string"/>  
+        	
+        <!-- therapyCollection (many-to-one bidirectional) -->
+        <set name="therapyCollection" inverse="true"
+	         cascade="save-update">
+            <key column="therapy_id"
+            not-null="true"/>
+            <one-to-many class="Therapy"/>
+        </set> 
+                	      	
+
+	</class>
+</hibernate-mapping>

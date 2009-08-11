@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : ModelSection.hbm.xml
+    Created on : July 21, 2005
+    Author     : pandyas
+    Description: Hibernate mapping file for ModelSection
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="gov.nih.nci.camod.domain">
+	<class name="ModelSection" 
+    	table="model_section"
+        lazy="true" mutable="false">
+
+	    <!-- id -->
+	    <id name="id" 
+	    	column="model_section_id"
+	    	type="long"    	
+	    	unsaved-value="null">	    	
+	        <generator class="native"/>
+	    </id>	    
+	    
+	    <!-- name -->
+        <property name="name" 
+        	column="name" 
+        	type="string"/>
+        	
+	</class>
+</hibernate-mapping>

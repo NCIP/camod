@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : ClinicalMarker.hbm.xml
+    Created on : July 19, 2005
+    Author     : rajputs
+    Description: Hibernate mapping file for ClinicalMarker
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="gov.nih.nci.camod.domain">
+	<class name="ClinicalMarker" 
+    	table="clinical_marker"
+        lazy="true">
+
+	    <!-- id -->
+	    <id name="id" 
+	    	column="clinical_marker_id"
+	    	type="long"    	
+	    	unsaved-value="null">	    	
+	        <generator class="native"/>
+	    </id>
+	    
+        <!-- name -->
+        <property name="name" 
+        	column="name" 
+        	type="string"/>
+        	
+        <!--  nameAlternEntry -->
+        <property name="nameAlternEntry" 
+        	column="name_altern_entry" 
+        	type="string"/>
+        	
+        <!-- value -->
+        <property name="value" 
+        	column="value" 
+        	type="string"/>
+        	
+        <!-- comments -->
+        <property name="comments" 
+        	column="comments" 
+        	type="string"/>	        	
+    	
+	</class>
+</hibernate-mapping>

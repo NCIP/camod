@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : Disease.hbm.xml
+    Created on : July 19, 2005
+    Author     : rajputs
+    Description: Hibernate mapping file for Disease
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="gov.nih.nci.camod.domain">
+	<class name="Disease" 
+    	table="disease"
+        lazy="true"
+        mutable="false">
+
+	    <!-- id -->
+	    <id name="id" 
+	    	column="disease_id"
+	    	type="long"    	
+	    	unsaved-value="null">	    	
+	        <generator class="native"/>
+	    </id>
+	    
+	    <!-- name -->
+        <property name="name" 
+        	column="name" 
+        	type="string"/>
+        	
+        <!-- nameAlternEntry -->
+        <property name="nameAlternEntry" 
+        	column="name_altern_entry" 
+        	type="string"/>         	
+        	
+        <!-- conceptCode -->
+        <property name="conceptCode" 
+        	column="concept_code" 
+        	type="string"/>
+         
+	</class>
+</hibernate-mapping>
