@@ -67,9 +67,10 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 
 	<!-- Properties that relate to how to call build targets from sub-projects-->
 	<!-- Working directory passed to Ant tasks -->
-	<property name="camod-api.base.dir" value="${software.dir}/camod" />
+	<!-- webapp=camod.war, api=camodSDKClient.war, grid=wsrf-camod.war -->
 	<property name="camod-webapp.base.dir" value="${software.dir}/camod" />
-	<property name="grid.base.dir" value="${software.dir}/grid-sample" />
+	<property name="camod-api.base.dir" value="${software.dir}/grid_service" />	
+	<property name="grid.base.dir" value="${software.dir}/grid_service" />
 
 	<!-- Build file names relative working dir above, if the basedir of the sub-project ant script is ".." you should set the *.basdir to and the build file should include the dir and build file name from the *.base.dir -->
 	<property name="camod-webapp.build.file" value="build.xml" />
@@ -77,9 +78,9 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<property name="grid.build.file" value="build.xml" />
 
 	<!-- The target name that should be called from the sub-project build file -->
-	<property name="camod-api.build.target" value="build:all" />
-	<property name="camod-webapp.build.target" value="dist" />
-	<property name="grid.build.target" value="dist" />
+	<property name="camod-webapp.build.target" value="build_war" />
+	<property name="camod-api.build.target" value="war-sdk-client-file" />
+	<property name="grid.build.target" value="config-grid-service" />
 
 	<!-- Maven comamnd line arguments, bda profile is inside profiles.xml that gets copied to ear folder before build to override exiting properties -->
 
@@ -129,7 +130,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<property name="grand.rpt.dir" value="${common.dir}/grand" />
 	<!-- Hot deploy variables -->
 	<property name="jboss.deploy.dir"  value="${jboss.home}/server/${jboss.server.name}/deploy"/>
-	<property name="camod-webapp.name"  value="camod-webapp"/>
+	<property name="camod-webapp.name"  value="camod"/>
 	<property name="camod-webapp.file.name"  value="${camod-webapp.name}.war"/>
 	<property name="camod-webapp.src.dir" value="${camod-webapp.base.dir}/src/web"/>
 
