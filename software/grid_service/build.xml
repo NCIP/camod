@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ****************************************************************************************************-->
+<!--                                     Configure caGrid Service Build Script	                 -->
+<!-- ****************************************************************************************************-->
+
+
+<project name="Configure caGrid service" default="config-grid-service" basedir=".">
+	<property file="build.properties"/>
+	<property name="temp.dir" value="temp" />
+	<property name="conf.dir" value="conf" />
+    <property name="artifacts.dir" value="artifacts" />
+
+	<!-- ************************************************************************************************-->
+	<!--                                             Configure Index Service                             -->
+	<!-- ************************************************************************************************-->
+	<target name="config-index-service-url" depends="unjar-file">
+		<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/${grid.service.name}_registration.xml" token="http://cagrid-index.nci.nih.gov:8080" value="${grid.index.service.base.url}"/>
+		<replace file="${temp.dir}/WEB-INF/etc/globus_resolution_service/jndi-config.xml" token="localhost:8080" value="${jboss.server.hostname}:${jboss.server.port}"/>
+		<replace file="${temp.dir}/WEB-INF/web.xml" token="8080" value="${jboss.server.port}"/>
+		<copy file="conf/server-config.wsdd.template" tofile="${temp.dir}/WEB-INF/etc/globus_wsrf_core/server-config.wsdd" overwrite="true"/>
+		<replace file="${temp.dir}/WEB-INF/etc/globus_wsrf_core/server-config.wsdd" token="@LOGICAL_HOST@" value="${grid.logicalHost}"/>
+		<copy file="conf/web.xml.template" tofile="${temp.dir}/WEB-INF/web.xml" overwrite="true"/>
+		<replace file="${temp.dir}/WEB-INF/web.xml" token="@SERVER_PORT@" value="${jboss.server.port}"/>
+		<replace file="${temp.dir}/WEB-INF/web.xml" token="@APP_NAME@" value="${grid.service.application.name}"/>		
+		
+
+	</target>
+	<!-- ************************************************************************************************-->
+	<!--                                             Configure Remote Service                             -->
+	<!-- ************************************************************************************************-->
+	<target name="config-remote-service-url" depends="config-index-service-url">
+		    <replaceregexp file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml" match="http://localhost" replace="${remote.app.service}" />
+		    <replaceregexp file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml" match="8080" replace="${jboss.server.port}" />
+	</target>
+	<!-- ************************************************************************************************-->
+	<!--                             Configure   Service    Metadata  (skip for NCICB)                   -->
+	<!-- ************************************************************************************************-->
+	<target name="config-service-metadata" depends="config-remote-service-url">
+		<copy file="conf/serviceMetadata.xml.template" tofile="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" overwrite="true"/>
+		<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@SERVICE_NAME@" value="${grid.service.name}"/>
+	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@DISPLAY_NAME@" value="${displayName}"/>
+   	    <replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@SHORT_NAME@" value="${shortName}"/>
+	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@COUNTRY@" value="${country}"/>
+	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@LOCALITY@" value="${locality}"/>
+	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@POSTAL_CODE@" value="${postalCode}"/>
+	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@STATE@" value="${stateProvince}"/>
+	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@STREET1@" value="${street1}"/>
+	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@STREET2@" value="${street2}"/>
+	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@AFFILIATION@" value="${affiliation}"/>
+	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@EMAIL@" value="${email}"/>
+	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@FIRST_NAME@" value="${firstName}"/>
+	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@LAST_NAME@" value="${lastName}"/>
+	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@PHONE_NUMBER@" value="${phoneNumber}"/>
+	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@ROLE@" value="${role}"/>
+	</target>
+	
+	<!-- Take wsrf.war and change name into wsrf-camod.war -->
+	<target name="war-generated-wsrf-file">
+		<jar destfile="${build.dir}/wsrf-camod.war" basedir="${output.dir}" />
+	</target>
+	
+	<!-- Take grid_service\wsrf-camod.war and unjar the contents into temp.dir -->
+	<target name="unjar-file">
+		<delete dir="${temp.dir}" failonerror="false"/>
+		<mkdir dir="${temp.dir}"/>
+		<unjar src="${grid.service.war.filename}" dest="${temp.dir}"/>
+	</target>
+	
+	<!-- Configure grid service for the various tiers (modify properties file)  -->
+	<target name="config-grid-service" depends="config-remote-service-url"> 
+		<antcall target="jar-grid-service"/>
+	</target>
+	
+	<!-- Jar the grid service after modifying it for the various tiers -->
+	<target name="jar-grid-service" >
+		<delete dir="${artifacts.dir}" failonerror="false"/>
+		<mkdir dir="${artifacts.dir}"/>
+	<jar destfile="${artifacts.dir}/${grid.service.war.filename}" basedir="${temp.dir}"/>
+	</target>
+
+	<!-- ************************************************************************************************-->
+	<!--                          Fix SDK genereated Client (EngineeredGene.hbm.xml)                     -->
+	<!-- ************************************************************************************************-->
+	<target name="unjar-client-orm-file">
+		<delete dir="${temp.dir}" failonerror="false"/>
+		<mkdir dir="${temp.dir}"/>
+		<unjar src="${client.orm.jar.filename}" dest="${temp.dir}" />
+	</target>	
+	<target name="jar-client-orm-file">
+		<jar destfile="${build.dir}/camodSDKClient-orm.jar" basedir="${temp.dir}" />
+	</target>
+	<target name="unwar-sdk-client-file">
+		<delete dir="${temp.dir}" failonerror="false"/>
+		<mkdir dir="${temp.dir}"/>
+		<unjar src="${client.sdk.war.filename}" dest="${temp.dir}"/>
+	</target>	
+	<target name="war-sdk-client-file">
+		<jar destfile="${build.dir}/camodSDKClient.war" basedir="${temp.dir}" />
+	</target>	
+</project>
