@@ -1,4 +1,0 @@
-
-micrograms
-micrograms/animal/day
-mg/kg

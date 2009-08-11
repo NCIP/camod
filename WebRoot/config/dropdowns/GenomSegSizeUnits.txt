@@ -1,6 +1,0 @@
-
-kb (kilo bases)
-nt (nucleotices)
-
-
-
