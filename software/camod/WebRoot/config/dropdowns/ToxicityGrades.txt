@@ -1,0 +1,3 @@
+Mild
+Moderate
+Severe

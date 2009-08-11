@@ -1,0 +1,28 @@
+TYPE=DROPDOWN_OPTION
+Benign neoplasm,Benign neoplasm
+- Hemangioma,Hemangioma
+- Leiomyoma,Leiomyoma
+- Lipoma,Lipoma
+- Papilloma,Papilloma
+- Schwannoma,Schwannoma
+Carcinoma,Carcinoma
+- Cholangiocarcinoma,Cholangiocarcinoma
+- Gill carcinoma,Gill carcinoma
+- Hepatocellular carcinoma,Hepatocellular carcinoma
+- Intestinal carcinoma,Intestinal carcinoma
+- Nasal placode carcinoma,Nasal placode carcinoma
+- Pancreatic adenocarcinoma,Pancreatic adenocarcinoma
+- Renal cell carcinoma,Renal cell carcinoma
+- Thyroid carcinoma,Thyroid carcinoma
+- Ultimobranchial carcinoma,Ultimobranchial carcinoma
+Germ cell tumor,Germ cell tumor
+Sarcoma,Sarcoma
+- Fibrosarcoma,Fibrosarcoma
+- Leiomyosarcoma,Leiomyosarcoma
+- Malignant peripheral nerve-sheath,Malignant peripheral nerve-sheath
+- Osteosarcoma,Osteosarcoma
+- Tumor,Tumor
+Small round blue-cell tumor,Small round blue-cell tumor
+- Leukemia/Lymphoma,Leukemia/Lymphoma
+- Neuroblastoma,Neuroblastoma
+- Retinoblastoma,Retinoblastoma

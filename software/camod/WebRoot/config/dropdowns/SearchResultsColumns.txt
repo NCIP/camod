@@ -1,0 +1,26 @@
+Targeted Modification Type
+Age of Tumor Onset
+Animal Distributor
+Carcinogenic Agent
+Cell Line Organ of Origin
+Diagnosis
+Gender
+Genomic Segment Designator
+Genomic Segment Type
+Image Title
+Journal
+Name of Cell line
+Name of Transplanted Cell Line
+Microarray Experiment Title
+Model Descriptor
+Principal Investigator
+PubMed Identifier
+Site and Diagnosis of Metastasis
+Site of Primary Tumor
+Species
+Spontaneous Mutation in Gene
+Submitted on
+Submitter
+Tumor Sites
+Unique Model Identifier
+Year of Publication

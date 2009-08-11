@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WebWorksHelpTOC version="5.0" xmlns="urn:WebWorks-Help-TOC-Schema">
+  <i t="Welcome to caMOD 2.5" l="0" />
+  <i t="Getting Started with caMOD" l="1">
+    <i t="Introduction to caMOD 2.5" l="2">
+      <i t="caMOD Data" l="3" />
+    </i>
+    <i t="caMOD Welcome and Login Page Tasks" l="4">
+      <i t="Creating a New User Account" l="5">
+        <i t="Guest User" l="6" />
+        <i t="Registered User" l="7" />
+      </i>
+      <i t="Logging into caMOD" l="8" />
+      <i t="User Settings" l="9" />
+      <i t="Using Online Help" l="10" />
+    </i>
+    <i t="What’s New in caMOD" l="11" />
+    <i t="Submit and Edit Models Page" l="12" />
+    <i t="Navigation in caMOD" l="13" />
+  </i>
+  <i t="Searching the caMOD Database" l="14">
+    <i t="caMOD Database Search Overview" l="15">
+      <i t="Types of caMOD Searches" l="16" />
+    </i>
+    <i t="caMOD Table of Contents Search" l="17" />
+    <i t="Simple Search Mode" l="18">
+      <i t="Combining Search Criteria" l="19" />
+    </i>
+    <i t="Advanced Search Mode" l="20">
+      <i t="Combining Search Criteria" l="21" />
+    </i>
+    <i t="caMOD Search Results" l="22">
+      <i t="Search Results with caELMIR Link" l="23" />
+      <i t="Saving a Search Query" l="24">
+        <i t="Search Query History" l="25" />
+        <i t="Customizing Search Results" l="26" />
+      </i>
+    </i>
+    <i t="Drug Screening Search" l="27">
+      <i t="In-Vivo Anti-tumor Screening Data" l="28" />
+      <i t="Yeast Anticancer Drug Screen" l="29" />
+      <i t="Clinical Trials" l="30" />
+      <i t="Pre-Clinical Trials" l="31" />
+      <i t="Launching a Drug Screening Search" l="32" />
+      <i t="Drug Screening Search Results" l="33">
+        <i t="Yeast Screening Search Results" l="34" />
+        <i t="In-Vivo Drug Screening Search Results" l="35">
+          <i t="In-Vivo Drug Screening Search Results Summary Page" l="36" />
+          <i t="In-Vivo Drug Screening Search Results Details Page" l="37" />
+        </i>
+        <i t="Pre-Clinical/Clinical Trials Drug Screening Results" l="38">
+          <i t="Pre-Clinical Trials Results Details" l="39" />
+          <i t="Clinical Trials Results Details" l="40" />
+        </i>
+      </i>
+    </i>
+  </i>
+  <i t="Submitting and Editing Models" l="41">
+    <i t="Submitting Models" l="42">
+      <i t="Notes about Submitting Models" l="43" />
+      <i t="Generic steps for Submitting Models" l="44" />
+      <i t="Structure of the Submission Process" l="45" />
+      <i t="Model Status Page" l="46" />
+      <i t="Editing Data" l="47" />
+      <i t="Model Characteristics" l="48" />
+    </i>
+    <i t="Navigating a Data Tree" l="49" />
+    <i t="Genetic Description" l="50">
+      <i t="Transgene" l="51">
+        <i t="Model Construct" l="52" />
+      </i>
+      <i t="Associated Expression" l="53" />
+      <i t="Genomic Segment" l="54" />
+      <i t="Targeted Modification" l="55" />
+      <i t="Induced Mutation" l="56" />
+      <i t="Spontaneous Mutation" l="57" />
+    </i>
+    <i t="Carcinogenic Interventions" l="58">
+      <i t="Chemical/Drug" l="59" />
+      <i t="Environmental Factor" l="60" />
+      <i t="Gene Delivery" l="61" />
+      <i t="Growth Factor" l="62" />
+      <i t="Hormone" l="63" />
+      <i t="Nutritional Factor" l="64" />
+      <i t="Radiation" l="65" />
+      <i t="Surgery" l="66" />
+      <i t="Viral Treatment" l="67" />
+    </i>
+    <i t="Transient Interference" l="68">
+      <i t="Morpholinos" l="69" />
+      <i t="siRNA" l="70">
+        <i t="siRNA Background" l="70#1237692" />
+        <i t="Entering or Editing siRNA Information" l="71" />
+      </i>
+    </i>
+    <i t="Publications" l="72" />
+    <i t="Histopathology" l="73">
+      <i t="Clinical Marker" l="74" />
+      <i t="Metastasis" l="75" />
+    </i>
+    <i t="Therapy" l="76" />
+    <i t="Cell Lines" l="77" />
+    <i t="Images" l="78">
+      <i t="Viewing MrSID Images" l="79" />
+    </i>
+    <i t="Microarray Data" l="80" />
+    <i t="Model Availability" l="81">
+      <i t="Jackson Lab" l="82" />
+      <i t="MMHCC Repository" l="83" />
+      <i t="Investigator" l="84" />
+      <i t="IMSR" l="85" />
+      <i t="ZFIN" l="86" />
+    </i>
+    <i t="Transplant" l="87" />
+    <i t="Grid Availability" l="88" />
+  </i>
+  <i t="caMOD Administration" l="89">
+    <i t="Administration Functions Overview" l="90">
+      <i t="Coordinator" l="91" />
+      <i t="Screener" l="92" />
+      <i t="Editor" l="93" />
+    </i>
+    <i t="Administration Roles" l="94">
+      <i t="Coordinator" l="95" />
+      <i t="Screener" l="96" />
+      <i t="Editor" l="97" />
+    </i>
+    <i t="User Management" l="98">
+      <i t="Adding a New User" l="99" />
+      <i t="Roles Assignment" l="100" />
+      <i t="Assigning a Screener" l="101">
+        <i t="Screener Responsibilities" l="102" />
+        <i t="Assigning an Editor" l="103" />
+        <i t="Editor Responsibilities" l="104" />
+      </i>
+    </i>
+    <i t="caMOD Permissions" l="105" />
+    <i t="Roles Management" l="106">
+      <i t="Coordinating the Review Process" l="107">
+        <i t="Assigning Functions/Grant Privileges for Screeners and Editors" l="108">
+          <i t="Appointing Screeners and Editors" l="108#1074529" />
+          <i t="Editing or Removing Roles" l="109" />
+        </i>
+        <i t="Reviewing Models" l="110">
+          <i t="Assigning Models to Screeners" l="110#1074575" />
+          <i t="Assigning Models to Editors" l="111" />
+        </i>
+        <i t="Review Follow-Up" l="112" />
+        <i t="Requesting More Information" l="113" />
+      </i>
+      <i t="Models Assignment" l="114" />
+      <i t="Screening a Model" l="115">
+        <i t="Screening Work flow" l="116" />
+        <i t="Comments Assignment" l="117" />
+        <i t="Editing a Model" l="118">
+          <i t="Editing Work flow" l="119" />
+        </i>
+      </i>
+    </i>
+  </i>
+  <i t="Glossary" l="120" />
+  <i t="Application Support" l="121" />
+</WebWorksHelpTOC>

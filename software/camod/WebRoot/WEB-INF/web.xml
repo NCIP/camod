@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+	<display-name>camod</display-name>
+  
+	<!-- You may experience issues in Mozilla < version 1.2 if you use  -->
+	<!-- ports other than 80 and 443, it seems to work fine with v1.2.  -->
+	<!-- For further information see the following article:             -->
+	<!-- http://www.javaworld.com/javaworld/jw-02-2002/jw-0215-ssl.html -->
+	<context-param>
+		<param-name>listenPort_http</param-name>
+		<param-value>8081</param-value>
+	</context-param>
+	<context-param>
+		<param-name>listenPort_https</param-name>
+		<param-value>8443</param-value>
+	</context-param>
+	<!-- Possible values: hibernate (might be more in the future) -->
+	<context-param>
+		<param-name>daoType</param-name>
+		<param-value>hibernate</param-value>
+	</context-param>
+	<!-- Define the basename for a resource bundle for I18N -->
+	<context-param>
+		<param-name>
+			javax.servlet.jsp.jstl.fmt.localizationContext
+		</param-name>
+		<param-value>ApplicationResources</param-value>
+	</context-param>
+	<!-- Fallback locale if no bundles found for browser's preferred locale -->
+	<!-- Force a single locale using param-name 'javax.servlet.jsp.jstl.fmt.locale' -->
+	<context-param>
+		<param-name>
+			javax.servlet.jsp.jstl.fmt.fallbackLocale
+		</param-name>
+		<param-value>en</param-value>
+	</context-param>
+	<!-- Context Configuration locations for Spring XML files -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			/WEB-INF/applicationContext-*.xml
+			classpath*:META-INF/applicationContext-*.xml
+		</param-value>
+	</context-param>
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>
+			org.springframework.web.filter.CharacterEncodingFilter
+		</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter>
+		<filter-name>hibernateFilter</filter-name>
+		<filter-class>
+			gov.nih.nci.common.persistence.hibernate.HibernateFilter
+		</filter-class>
+	</filter>
+	<filter>
+		<filter-name>AuthenticationFilter</filter-name>
+		<filter-class>
+			gov.nih.nci.camod.util.AuthenticationFilter
+		</filter-class>
+		<init-param>
+			<param-name>onFailure</param-name>
+			<param-value>/login.do</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>AuthenticationFilter</filter-name>
+		<url-pattern>/jsp/protected/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>hibernateFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	<listener>
+		<listener-class>
+			org.springframework.web.util.IntrospectorCleanupListener
+		</listener-class>
+	</listener>
+	<listener>
+		<listener-class>
+			gov.nih.nci.camod.webapp.listener.StartupListener
+		</listener-class>
+	</listener>
+    
+    <!--
+    <servlet>
+        <servlet-name>ServletRedirector</servlet-name>
+        <servlet-class>org.apache.cactus.server.ServletTestRedirector</servlet-class>
+    </servlet>
+    -->
+    
+	<!-- Standard Action Servlet Configuration -->
+	<servlet>
+		<servlet-name>action</servlet-name>
+		<servlet-class>
+			org.apache.struts.action.ActionServlet
+		</servlet-class>
+		<init-param>
+			<param-name>config</param-name>
+			<param-value>/WEB-INF/struts-config.xml</param-value>
+		</init-param>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>3</param-value>
+		</init-param>
+		<init-param>
+			<param-name>detail</param-name>
+			<param-value>3</param-value>
+		</init-param>
+		<load-on-startup>0</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>RedirectOldRequestsServlet</servlet-name>
+		<servlet-class>
+			gov.nih.nci.camod.webapp.servlet.RedirectOldRequestsServlet
+		</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+  <servlet>
+    <servlet-name>autocomplete</servlet-name>
+    <servlet-class>gov.nih.nci.camod.webapp.servlet.AutocompleteServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>autocomplete</servlet-name>
+    <url-pattern>/autocomplete.view</url-pattern>
+  </servlet-mapping>
+	
+	<!-- Front Controller Servlet Mapping -->
+	<servlet-mapping>
+		<servlet-name>action</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>RedirectOldRequestsServlet</servlet-name>
+		<url-pattern>/mmhcc/*</url-pattern>
+	</servlet-mapping>
+	
+	<!--
+    <servlet-mapping>
+        <servlet-name>ServletRedirector</servlet-name>
+        <url-pattern>/ServletRedirector</url-pattern>
+    </servlet-mapping>
+    -->
+    
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+
+	<!--
+		To specify mime mappings, create a file named mime-mappings.xml, put it in your project's mergedir.
+		Organize mime-mappings.xml following this DTD slice:
+		
+		<!ELEMENT mime-mapping (extension, mime-type)>
+	-->
+	<welcome-file-list>
+		<welcome-file>/jsp/index.jsp</welcome-file>
+	</welcome-file-list>
+	<taglib>
+		<taglib-uri>/WEB-INF/camod.tld</taglib-uri>
+		<taglib-location>/WEB-INF/camod.tld</taglib-location>
+	</taglib>
+	<resource-ref>
+		<description>DB Connection</description>
+		<res-ref-name>jdbc/camod</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
+	<!--
+		To set up security settings for your web app, create a file named web-security.xml, put it in your project's mergedir.
+		Organize web-security.xml following this DTD slice:
+		
+		<!ELEMENT security-constraint (display-name?, web-resource-collection+, auth-constraint?, user-data-constraint?)>
+		<!ELEMENT web-resource-collection (web-resource-name, description?, url-pattern*, http-method*)>
+		<!ELEMENT web-resource-name (#PCDATA)>
+		<!ELEMENT url-pattern (#PCDATA)>
+		<!ELEMENT http-method (#PCDATA)>
+		<!ELEMENT user-data-constraint (description?, transport-guarantee)>
+		<!ELEMENT transport-guarantee (#PCDATA)>
+		
+		<!ELEMENT login-config (auth-method?, realm-name?, form-login-config?)>
+		<!ELEMENT auth-method (#PCDATA)>
+		<!ELEMENT realm-name (#PCDATA)>
+		<!ELEMENT form-login-config (form-login-page, form-error-page)>
+		<!ELEMENT form-login-page (#PCDATA)>
+		<!ELEMENT form-error-page (#PCDATA)>
+	-->
+	
+</web-app>
+

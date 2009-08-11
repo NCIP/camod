@@ -1,0 +1,7 @@
+Chemically synthesized  
+Enzymatically synthesized
+Vector-mediated (Pol-III promoter)
+Vector-mediated (Pol-II promoter)
+Virus-vector-mediated (lentivirus)
+Virus-vector-mediated (oncoretrovirus)
+Transgene-mediated

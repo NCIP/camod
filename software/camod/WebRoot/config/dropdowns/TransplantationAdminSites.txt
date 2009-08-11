@@ -1,0 +1,11 @@
+ear
+foot pad
+IC (intracerebral)
+IM (intramuscular)
+intrathoracic
+IP (intraperitoneal)
+IR (intrarenal inoculation)
+IV (intravenous)
+not applicable
+SC (subcutaneous)
+spontaneous
