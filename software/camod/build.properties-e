@@ -5,27 +5,27 @@
 source.dir=src
 
 #location of project webapp resources, we don't have it, may need it later
-source.resource.dir=src/resources
+source.resource.dir=WebRoot/WEB-INF/resources
 source.nondeploy.lib.dir=not_deployed_jars
-source.javamail.dir=src/web/WEB-INF/lib/JavaMail
+source.javamail.dir=WebRoot/WEB-INF/lib/JavaMail
 
 #location of project properties, now external
 #source.properties.dir=/local/content/camod/config
 
 #location of project jar files
-source.lib.dir=src/web/WEB-INF/lib
+source.lib.dir=WebRoot/WEB-INF/lib
 
 #location of the project web application files
-webapp.dir=src/web
+webapp.dir=WebRoot
 
 #location of project jar files
-webinf.dir=src/web/WEB-INF
+webinf.dir=WebRoot/WEB-INF
 
 #place to put the jars for the webapp and prior to war
-build.webapp.lib.dir=src/web/WEB-INF/lib
+build.webapp.lib.dir=WebRoot/WEB-INF/lib
 
 #the directory in which to compile and build the project
-build.dir=software/build
+build.dir=.
 
 #place to put the class files when building the project
 build.classes.dir=${webapp.dir}/classes
@@ -43,7 +43,7 @@ xdoclet.force=false
 build.compiler=modern
 
 #location of junit jar files
-junit.jar=web/WEB-INF/lib/junit-3.8.1.jar
+junit.jar=WebRoot/WEB-INF/lib/junit-3.8.1.jar
 
 #location of junit tests
-test.dir=test
+test.dir=test/submission
