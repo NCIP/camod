@@ -67,18 +67,22 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<property name="jboss-conf.dir.src" location="${basedir}/${jboss-conf.dist.relative.dir}" />
 	<property name="jboss-conf.dir.dest" location="${working.dir}/${jboss-conf.dist.relative.dir}" />
 
+	<!-- Added for properteis-service.xml -->
+	<property name="camod.propertyservice.property.value1" value="C:/local/content/camod/config/camod.properties" />
+	<property name="camod.propertyservice.property.value2" value="C:/local/content/camod/config/mail.properties" />
+
 	<!-- *-ds.xml and WAR -->
 	<property name="camod-webapp.dir.dist" location="${basedir}/${camod-webapp.dist.relative.dir}" />
 	<property name="camod-webapp.ds.file" value="camod-ds.xml" />
-	<property name="camod-webapp.name" value="camod-webapp" />
+	<property name="camod-webapp.name" value="camod" />
 	<property name="camod-webapp.war.file" value="${camod-webapp.name}.war" />
 
 	<!-- Grid related properties -->
 	<property name="grid.resource.dir" location="${basedir}/${tools.dist.relative.dir}" />
 	<property name="grid.application.dir" location="${basedir}/${grid-sample.dist.relative.dir}" />
-	<property name="grid.artifact.file" value="sample-wsrf-war.zip" />
+	<property name="grid.artifact.file" value="camod-wsrf-war.zip" />
 	<property name="grid.dir.dest" value="wsrf" />
-	<property name="grid.application.name" value="Sample" />
+	<property name="grid.application.name" value="camod" />
 	<property name="resource.file.jboss-globus-lib" value="${cagrid-libs.binaries.file}" />
 	<property name="resource.file.jboss-globus-war" value="${cagrid-base-war.binaries.file}" />
 
@@ -387,11 +391,16 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<copy file="${jboss-conf.dir.dest}/${jboss.web.xml.file}" todir="${jboss.home}/server/${jboss.server.name}/deploy" overwrite="true" />
 		-->
 		<!-- This code is for updating properties.service.xml, make sure to add ${line.separator} after each property def as the property delimiter, if this is not included you will not get the desired results. If you do not use properties service.xml you can delete this code. -->
-		<var name="property.block" value="property1=${authentication.type}${line.separator}
+		<var name="property.block" 
+			value="${camod.propertyservice.property.name1}=${camod.propertyservice.property.value1}${line.separator}"/>
+		<!--value="${camod.propertyservice.property.name2}=${camod.propertyservice.property.value2}${line.separator}-->
+
+
+		<!--<var name="property.block" value="property1=${authentication.type}${line.separator}
 			property2=${env.name}${line.separator}
 			property3=${jboss.home}${line.separator}
 			property4=${tomcat.home}${line.separator}
-			"/>
+			"/>-->
 		<copy file="${jboss.home}/server/${jboss.server.name}/deploy/properties-service.xml" tofile="${jboss.home}/server/${jboss.server.name}/deploy/properties-service.xml.orig" overwrite="true"/>
 		<jboss-update-properties-service
 			property.block="${property.block}"
