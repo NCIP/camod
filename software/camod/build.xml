@@ -144,8 +144,10 @@
     -->
     <target name="build_war" depends="copy_resource_directory">
         <mkdir dir="${build.dir}/build"/>
-        <delete file="${build.dir}/build/${app.war.name}.war" />
-        <war destfile="${build.dir}/build/${app.war.name}.war" 
+        <delete file="${build.dir}/${app.war.name}.war" />
+    	<!--<delete file="${build.dir}/build/${app.war.name}.war" />-->    	
+        <!--<war destfile="${build.dir}/build/${app.war.name}.war" -->
+            <war destfile="${build.dir}/${app.war.name}.war"         	
              webxml="${webapp.dir}/WEB-INF/web.xml">
             <fileset file="${webapp.dir}/*.*" />
             <zipfileset dir="${webapp.dir}/common" prefix="common" />
