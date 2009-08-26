@@ -67,20 +67,13 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 
 	<!-- Properties that relate to how to call build targets from sub-projects-->
 	<!-- Working directory passed to Ant tasks -->
-	<!-- webapp=camod.war, api=camodSDKClient.war, grid=wsrf-camod.war -->
 	<property name="camod-webapp.base.dir" value="${software.dir}/camod" />
-	<property name="camod-api.base.dir" value="${software.dir}/grid_service" />	
-	<property name="grid.base.dir" value="${software.dir}/grid_service" />
 
 	<!-- Build file names relative working dir above, if the basedir of the sub-project ant script is ".." you should set the *.basdir to and the build file should include the dir and build file name from the *.base.dir -->
 	<property name="camod-webapp.build.file" value="build.xml" />
-	<property name="camod-api.build.file" value="build.xml" />
-	<property name="grid.build.file" value="build.xml" />
 
 	<!-- The target name that should be called from the sub-project build file -->
 	<property name="camod-webapp.build.target" value="build_war" />
-	<property name="camod-api.build.target" value="war-sdk-client-file" />
-	<property name="grid.build.target" value="config-grid-service" />
 
 	<!-- Maven comamnd line arguments, bda profile is inside profiles.xml that gets copied to ear folder before build to override exiting properties -->
 
@@ -94,9 +87,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<!-- Distribution Structure properties, used to copy files into the distribution area.
        		Use project.propertie relative dir names becasue they are used by install also-->
 	<property name="dist.exploded.dir" value="${dist.dir}/exploded" />
-	<property name="camod-api.dist.dir" value="${dist.exploded.dir}/${camod-api.dist.relative.dir}" />
 	<property name="camod-webapp.dist.dir" value="${dist.exploded.dir}/${camod-webapp.dist.relative.dir}" />
-	<property name="grid-sample.dist.dir" value="${dist.exploded.dir}/${grid-sample.dist.relative.dir}"/>
 	<property name="tools.dist.dir" value="${dist.exploded.dir}/${tools.dist.relative.dir}" />
 	<property name="common.dist.dir" value="${dist.exploded.dir}/${common.dist.relative.dir}" />
 	<property name="db-install.dist.dir" value="${dist.exploded.dir}/${db-install.dist.relative.dir}" />
@@ -119,8 +110,6 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<!-- Where to write files retrieved by get, into the distribution area.  The file names come from project.properties  -->
 	<property name="jboss.dest.file" value="${download.dir}/${jboss.binaries.file}" />
 	<property name="jbosscp.dest.file" value="${download.dir}/${jbosscp.binaries.file}" />
-	<property name="cagrid-libs.dest.file" value="${download.dir}/${cagrid-libs.binaries.file}" />
-	<property name="cagrid-base-war.dest.file" value="${download.dir}/${cagrid-base-war.binaries.file}" />
 
 	<!-- Default install time targets passed by deploy targets to the installer, can be overridden by being set on the command line if different target is desitred.  -->
 	<property name="install.target" value="install" />
@@ -214,9 +203,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<mkdir dir="${target.dir}" />
 		<mkdir dir="${dist.dir}" />
 		<mkdir dir="${dist.exploded.dir}" />
-		<mkdir dir="${camod-api.dist.dir}" />
 		<mkdir dir="${camod-webapp.dist.dir}" />
-		<mkdir dir="${grid-sample.dist.dir}"/>
 		<mkdir dir="${common.dist.dir}" />
 		<mkdir dir="${tools.dist.dir}" />
 		<mkdir dir="${temp.dir}" />
@@ -225,8 +212,6 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 
 		<available file="${jboss.dest.file}" property="jboss.tools.exists" />
 		<available file="${jbosscp.dest.file}" property="jbosscp.tools.exists" />
-		<available file="${cagrid-libs.dest.file}" property="cagrid-libs.tools.exists" />
-		<available file="${cagrid-base-war.dest.file}" property="cagrid-base-war.tools.exists" />
 		<!-- If jboss is required to build, then check for jboss in jboss.home, then check for in jboss in working directory, if not found then download it into this that directory.  If found at any point set local.jboss.home to where it is found.  This can be passed to sub-projects so then can compile code against distribution.  This is especially important on AntHillPro server which will not have jboss present, thus will have to use a copy in the working area.  This also makes it easier to start the project, if the developer does not yet have jboss installed, build will download it and install it so build can proceed. -->
 		<if>
 			<equals arg1="${require.jboss}" arg2="true" />
@@ -284,10 +269,9 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 
 	<target name="build:all" description="Builds all the sub projects, putting artifacts in the project level target directory, used by distribution targets to make distributions" depends="
 		validate:pre:build,
-		clean,
-		init,
-		build:camod-webapp,
-		build:grid
+ 		clean,
+ 		init,
+ 		build:camod-webapp
 		" >
 	</target>
 
@@ -299,22 +283,6 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			<property name="env.GLOBUS_LOCATION" value="${env.GLOBUS_LOCATION}"/>
 		</ant>
 		-->
-	</target>
-
-	<target name="build:grid">
-		<!-- Call your build file and grid target
-		<ant inheritAll="false" inheritRefs="false" antfile="${grid.build.file}"
-			target="${grid.build.target}"
-			dir="${grid.base.dir}" >
-			<property name="env.GLOBUS_LOCATION" value="${env.GLOBUS_LOCATION}"/>
-		</ant>
-		-->
-		<!-- or if you have a static file then you copy it from your source -->
-		<copy todir="${grid-sample.dist.dir}">
-			<fileset dir="${grid.base.dir}">
-				<include name="sample-wsrf-war.zip"/>
-			</fileset>
-		</copy>
 	</target>
 
 	<target name="build:camod-webapp" depends="init, build:camod-api" description="Call webapp sub-projects build target to produce artifiacts">
@@ -341,8 +309,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<target name="dist:tools:retrieve" description="Downloads binary applications from commonlibrary repository" depends="
 		init,
  		dist:tools:retrieve:jboss,
- 		dist:tools:retrieve:jbosscp,
- 		dist:tools:retrieve:cagrid
+ 		dist:tools:retrieve:jbosscp
 		" >
 	</target>
 
@@ -374,11 +341,6 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		</if>
 	</target>
 
-	<target name="dist:tools:retrieve:cagrid" unless="cagrid-libs.tools.exists" description="Downloads JBOSS from binary repository and verifies checksum">
-		<get src="${cagrid-libs.src.url}" dest="${cagrid-libs.dest.file}" />
-		<get src="${cagrid-base-war.src.url}" dest="${cagrid-base-war.dest.file}" />
-	</target>
-
 	<target name="dist:tools:retrieve:jboss-bindings"  description="Downloads JBOSS bindings filefrom binary repository and verifies checksum">
 		<get src="${jboss-bindings.src.url}" dest="${dist.exploded.dir}/${jboss-bindings.file}" />
 	</target>
@@ -399,7 +361,6 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<dist-prep />
 		<copy todir="${tools.dist.dir}">
 			<fileset dir="${download.dir}">
-				<include name="cagrid*"/>
 			</fileset>
 		</copy>
 	</target>
@@ -474,7 +435,6 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			<zipfileset dir="${db-upgrade.dist.dir}" prefix="${db-upgrade.dist.relative.dir}" />
 			<!-- not needed for this target
 			<zipfileset dir="${camod-webapp.dist.dir}" prefix="${camod-webapp.dist.relative.dir}"/>
-			<zipfileset dir="${grid-sample.dist.dir}" prefix="${grid-sample.dist.relative.dir}"/>
 			<zipfileset dir="${tools.dist.dir}" prefix="${tools.dist.relative.dir}"/>
 			<zipfileset dir="${common.dist.dir}" prefix="${common.dist.relative.dir}"/>
 			-->
@@ -497,7 +457,6 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<delete file="${dist.dir}/${camod-webapp.install.name}_${camod-webapp.version}-jboss.zip"/>
 		<zip destfile="${dist.dir}/${camod-webapp.install.name}_${camod-webapp.version}-jboss.zip">
 			<zipfileset dir="${camod-webapp.dist.dir}" prefix="${camod-webapp.dist.relative.dir}"/>
-			<zipfileset dir="${grid-sample.dist.dir}" prefix="${grid-sample.dist.relative.dir}"/>
 			<zipfileset dir="${tools.dist.dir}" prefix="${tools.dist.relative.dir}">
 				<include name="*jboss*"/>
 			</zipfileset>

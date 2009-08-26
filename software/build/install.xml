@@ -67,24 +67,18 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<property name="jboss-conf.dir.src" location="${basedir}/${jboss-conf.dist.relative.dir}" />
 	<property name="jboss-conf.dir.dest" location="${working.dir}/${jboss-conf.dist.relative.dir}" />
 
-	<!-- Added for properteis-service.xml -->
-	<property name="camod.propertyservice.property.value1" value="C:/local/content/camod/config/camod.properties" />
-	<property name="camod.propertyservice.property.value2" value="C:/local/content/camod/config/mail.properties" />
-
 	<!-- *-ds.xml and WAR -->
 	<property name="camod-webapp.dir.dist" location="${basedir}/${camod-webapp.dist.relative.dir}" />
 	<property name="camod-webapp.ds.file" value="camod-ds.xml" />
 	<property name="camod-webapp.name" value="camod" />
 	<property name="camod-webapp.war.file" value="${camod-webapp.name}.war" />
+	
+	<!-- Added for properties-service.xml -->
+	<property name="camod.propertyservice.property.value1" value="C:/local/content/camod/config/camod.properties" />
+	<property name="camod.propertyservice.property.value2" value="C:/local/content/camod/config/mail.properties" />
+	
 
 	<!-- Grid related properties -->
-	<property name="grid.resource.dir" location="${basedir}/${tools.dist.relative.dir}" />
-	<property name="grid.application.dir" location="${basedir}/${grid-sample.dist.relative.dir}" />
-	<property name="grid.artifact.file" value="camod-wsrf-war.zip" />
-	<property name="grid.dir.dest" value="wsrf" />
-	<property name="grid.application.name" value="camod" />
-	<property name="resource.file.jboss-globus-lib" value="${cagrid-libs.binaries.file}" />
-	<property name="resource.file.jboss-globus-war" value="${cagrid-base-war.binaries.file}" />
 
 	<!-- Paths -->
 	<path id="bda-utils.classpath">
@@ -174,9 +168,6 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<available file="${jboss.home}/server/${jboss.server.name}/conf/jboss-service.xml" property="jboss.exists"/>
 		<basename file="${jboss.ssl.keystore.location}" property="jboss.ssl.keystore.file"/>
 		<dirname file="${jboss.ssl.keystore.location}" property="jboss.ssl.keystore.dir"/>
-		<basename file="${jboss.grid.secure.cert.location}" property="jboss.grid.secure.cert.file"/>
-		<dirname file="${jboss.grid.secure.cert.location}" property="jboss.grid.secure.dir"/>
-		<basename file="${jboss.grid.secure.key.location}" property="jboss.grid.secure.key.file"/>
 		<property name="jboss.socket.ports" value="${jboss.server.port},${jboss.server.rmi.port},${jboss.server.jndi.port},${jboss.service.rmiobject.port},${jboss.jms.port},${jboss.web.service.port}"/>
 	</target>
 
@@ -392,8 +383,8 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		-->
 		<!-- This code is for updating properties.service.xml, make sure to add ${line.separator} after each property def as the property delimiter, if this is not included you will not get the desired results. If you do not use properties service.xml you can delete this code. -->
 		<var name="property.block" 
-			value="${camod.propertyservice.property.name1}=${camod.propertyservice.property.value1}${line.separator}"/>
-		<!--value="${camod.propertyservice.property.name2}=${camod.propertyservice.property.value2}${line.separator}-->
+			value="${camod.propertyservice.property.name1}=${camod.propertyservice.property.value1}${line.separator}
+			gov.nih.nci.camod.mailProperties=${camod.propertyservice.property.value2}${line.separator}"/>
 
 
 		<!--<var name="property.block" value="property1=${authentication.type}${line.separator}
@@ -574,23 +565,21 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<target name="install:jboss" description="Wrapper scripts that calls all required targets to install the jboss container" unless="exclude.jboss"
 		depends="
 		common:jboss:init,
-		common:init,
-		install:jboss:init,
-		install:jboss:validation:pre-install,
-		install:common:validation:pre-install,
-		install:jboss:stop,
-		install:jboss:validation:pre-install:ports,
-		install:jboss:clean,
-		install:jboss:binaries,
-		install:jboss:camod-webapp:re-configure,
-		install:jboss:camod-webapp,
-		install:jboss:camod-webapp:configure,
-		install:jboss:configure,
-		install:jboss:grid,
-		install:jboss:grid:configure,
-		install:post:jboss,
-		install:jboss:start,
-		install:jboss:validation:post-install
+ 		common:init,
+ 		install:jboss:init,
+ 		install:jboss:validation:pre-install,
+ 		install:common:validation:pre-install,
+ 		install:jboss:stop,
+ 		install:jboss:validation:pre-install:ports,
+ 		install:jboss:clean,
+ 		install:jboss:binaries,
+ 		install:jboss:camod-webapp:re-configure,
+ 		install:jboss:camod-webapp,
+ 		install:jboss:camod-webapp:configure,
+ 		install:jboss:configure,
+ 		install:post:jboss,
+ 		install:jboss:start,
+ 		install:jboss:validation:post-install
 		" >
 	</target>
 
@@ -640,24 +629,22 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<target name="upgrade-dac:jboss" description="Wrapper target to call all targets required to upgrade jboss container." unless="exclude.jboss"
 		depends="
 		upgrade:jboss:init,
-		common:init,
-		common:jboss:init,
-		install:jboss:validation:pre-install,
-		install:common:validation:pre-install,
-		install:jboss:stop,
-		install:jboss:validation:pre-install:ports,
-		install:jboss:clean,
-		install:jboss:binaries,
-		install:jboss:configure,
-		install:jboss:camod-webapp:re-configure,
-		install:jboss:camod-webapp,
-		install:jboss:camod-webapp:configure,
-		install:jboss:grid,
-		install:jboss:grid:configure,
-		upgrade:post:jboss,
-		install:post:jboss,
-		install:jboss:start,
-		install:jboss:validation:post-install
+ 		common:init,
+ 		common:jboss:init,
+ 		install:jboss:validation:pre-install,
+ 		install:common:validation:pre-install,
+ 		install:jboss:stop,
+ 		install:jboss:validation:pre-install:ports,
+ 		install:jboss:clean,
+ 		install:jboss:binaries,
+ 		install:jboss:configure,
+ 		install:jboss:camod-webapp:re-configure,
+ 		install:jboss:camod-webapp,
+ 		install:jboss:camod-webapp:configure,
+ 		upgrade:post:jboss,
+ 		install:post:jboss,
+ 		install:jboss:start,
+ 		install:jboss:validation:post-install
 		">
 	</target>
 
@@ -694,22 +681,20 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<target name="upgrade-cm:jboss" description="Wrapper target to call all targets required to upgrade jboss container." unless="exclude.jboss"
 		depends="
 		upgrade:jboss:init,
-		common:init,
-		common:jboss:init,
-		install:jboss:validation:pre-install,
-		install:common:validation:pre-install,
-		install:jboss:stop,
-		install:jboss:validation:pre-install:ports,
-		install:jboss:configure,
-		install:jboss:camod-webapp:re-configure,
-		install:jboss:camod-webapp,
-		install:jboss:camod-webapp:configure,
-		install:jboss:grid,
-		install:jboss:grid:configure,
-		upgrade:post:jboss,
-		install:post:jboss,
-		install:jboss:start,
-		install:jboss:validation:post-install
+ 		common:init,
+ 		common:jboss:init,
+ 		install:jboss:validation:pre-install,
+ 		install:common:validation:pre-install,
+ 		install:jboss:stop,
+ 		install:jboss:validation:pre-install:ports,
+ 		install:jboss:configure,
+ 		install:jboss:camod-webapp:re-configure,
+ 		install:jboss:camod-webapp,
+ 		install:jboss:camod-webapp:configure,
+ 		upgrade:post:jboss,
+ 		install:post:jboss,
+ 		install:jboss:start,
+ 		install:jboss:validation:post-install
 		">
 	</target>
 
@@ -746,20 +731,18 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<target name="upgrade-ncm:jboss" description="Wrapper target to call all targets required to upgrade jboss container." unless="exclude.jboss"
 		depends="
 		upgrade:jboss:init,
-		common:init,
-		common:jboss:init,
-		install:jboss:validation:pre-install,
-		install:common:validation:pre-install,
-		install:jboss:stop,
-		install:jboss:validation:pre-install:ports,
-		install:jboss:camod-webapp:re-configure,
-		install:jboss:camod-webapp,
-		install:jboss:camod-webapp:configure,
-		install:jboss:grid,
-		install:jboss:grid:configure,
-		install:post:jboss,
-		install:jboss:start,
-		install:jboss:validation:post-install
+ 		common:init,
+ 		common:jboss:init,
+ 		install:jboss:validation:pre-install,
+ 		install:common:validation:pre-install,
+ 		install:jboss:stop,
+ 		install:jboss:validation:pre-install:ports,
+ 		install:jboss:camod-webapp:re-configure,
+ 		install:jboss:camod-webapp,
+ 		install:jboss:camod-webapp:configure,
+ 		install:post:jboss,
+ 		install:jboss:start,
+ 		install:jboss:validation:post-install
 		">
 	</target>
 
@@ -822,27 +805,6 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		install:database:prep
 		">
 		<database-rollback/>
-	</target>
-
-	<target name="install:camod-grid" description="Wrapper target for Grid application targets"
-		depends="
-		
-		common:init,
-		install:jboss:grid,
-		install:jboss:grid:configure
-	">
-	</target>
-
-	<target name="install:jboss:grid" description="Deploy  to jboss" unless="exclude.jboss" depends="common:init">
-		<mkdir dir="${jboss.home}/server/${jboss.server.name}/deploy/${grid.dir.dest}"/>
-		<unzip dest="${jboss.home}/server/${jboss.server.name}/lib" src="${grid.resource.dir}/${resource.file.jboss-globus-lib}" />
-		<unzip dest="${jboss.home}/server/${jboss.server.name}/deploy/${grid.dir.dest}" src="${grid.resource.dir}/${resource.file.jboss-globus-war}" />
-		<unzip dest="${jboss.home}/server/${jboss.server.name}/deploy/${grid.dir.dest}" src="${grid.application.dir}/${grid.artifact.file}" />
-	</target>
-
-	<target name="install:jboss:grid:configure" description="Configure tomcat-application" unless="exclude.jboss" depends="common:init">
-		<jboss-configure-grid
-			/>
 	</target>
 
 	<target name="install:common:post" depends="
@@ -1048,14 +1010,12 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<grid-read-index-url
 			grid.wsrf.dir="${read.jboss.home}/server/${jboss.server.name}/deploy/wsrf"
 			/>              
-		<var name="jboss.grid.secure.dir" value="${working.dir}/keys/jboss"/>
 		<jboss-read-grid-secure
 			jboss.home="${read.jboss.home}"
 			copied.keystore.dir="${jboss.grid.secure.dir}"
 			/>
 		<!-- will have to add code to install:post:jboss to copy this back if exists -->
 		<!-- no longer needed 
-		<property name="copied.jboss.service-metadata.dir" value="${working.dir}/jboss-grid"/>
 		<grid-copy-service-metadata
 			copied.service-metadata.dir="${copied.service-metadata.dir}"
 			/>
