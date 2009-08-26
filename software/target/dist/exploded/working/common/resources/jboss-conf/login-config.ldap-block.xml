@@ -1,0 +1,21 @@
+<application-policy name="camod">
+	<authentication>
+		<login-module code = "gov.nih.nci.security.authentication.loginmodules.LDAPLoginModule" flag = "sufficient" >
+			<module-option name="ldapHost">ldaps://ncids4a.nci.nih.gov:636</module-option>
+			<module-option name="ldapSearchableBase">ou=nci,o=nih</module-option>
+			<module-option name="ldapUserIdLabel">cn</module-option>
+		</login-module>
+		<!--
+		<login-module code="gov.nih.nci.security.authentication.loginmodules.RDBMSLoginModule" flag="required"> 
+			<module-option name="driver">oracle.jdbc.driver.OracleDriver</module-option>
+			<module-option name="url">jdbc:oracle:thin:@cbdb-d1001.nci.nih.gov:1521:NCID1DEV</module-option>
+			<module-option name="user">camoddev22</module-option>
+			<module-option name="passwd">fsb#4625</module-option>
+			<module-option name="query">SELECT * FROM CSM_USER WHERE LOGIN_NAME=? and PASSWORD=?  </module-option>
+			<module-option name="encryption-enabled">YES </module-option>
+		</login-module>
+		-->
+	</authentication>
+</application-policy>
+
+

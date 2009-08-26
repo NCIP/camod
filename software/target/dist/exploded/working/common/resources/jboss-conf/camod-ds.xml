@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ===================================================================== -->
+<!--                                                                       -->
+<!--  JBoss Server Configuration                                           -->
+<!--                                                                       -->
+<!-- ===================================================================== -->
+
+<!-- $Id: bda-blueprints-ds.xml 1497 2009-04-06 15:43:42Z saksass $ -->
+<!-- ==================================================================== -->
+<!--  Datasource config for MySQL using 2.0.11 driver                     -->
+<!-- ==================================================================== -->
+
+
+<datasources>
+	<local-tx-datasource>
+		<jndi-name>camod</jndi-name>
+		<use-java-context>false</use-java-context>
+		<connection-url>jdbc:oracle:thin:@cbdb-d1001.nci.nih.gov:1521:NCID1DEV</connection-url>
+		<user-name>camoddev22</user-name>
+		<password>fsb#4625</password>
+		<driver-class>oracle.jdbc.driver.OracleDriver</driver-class>
+	</local-tx-datasource>
+</datasources>
