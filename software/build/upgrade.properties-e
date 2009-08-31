@@ -10,7 +10,8 @@
 ##############################################################
 
 # for deploy:local
-application.base.path.windows=c:/apps/camod-webapp
+#application.base.path.windows=c:/apps/camod-webapp
+application.base.path.windows=C:/devtools
 application.base.path.linux=${user.home}/apps/camod-webapp
 jboss.relative.path=${jboss.binaries.relative.dir}
 # for deploy:remote and external builds
@@ -22,3 +23,20 @@ jboss.server.name=default
 #jboss.web.password=
 exclude.jboss.backup=true
 env.name=local
+
+exclude.jboss=true
+
+#################################
+###  DATABASE Oracle setting  ###
+#################################
+# Required for local installs
+exclude.database=true
+database.re-create=false
+database.system.user=root
+database.system.password=${database.password}
+database.system.url=jdbc:oracle:thin:@${database.server}:${database.port}:${database.name}
+
+# Require for all installs
+database.type=oracle
+
+

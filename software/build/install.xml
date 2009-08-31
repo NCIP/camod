@@ -620,7 +620,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<target name="upgrade:jboss" description="Wrapper target to call all targets required to upgrade jboss container." unless="exclude.jboss" depends="upgrade:jboss:init,common:init,upgrade-dac:jboss">
 	</target>
 
-	<target name="upgrade" description="Upgrades JBoss and Database" depends="upgrade:common:init,common:init,upgrade-dac">
+	<target name="upgrade" description="Upgrades JBoss and Database" depends="upgrade:common:init,common:init,upgrade-ncm">
 	</target>
 
 	<target name="upgrade-with-dbinstall" description="Upgrades JBoss and Database" depends="upgrade:common:init,common:init,upgrade-dac:with-dbinstall">
@@ -1007,23 +1007,23 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			jboss.home="${read.jboss.home}"
 			copied.jboss.log4j.dir="${copied.jboss.log4j.dir}"
 			/>
-		<grid-read-index-url
+		<!--<grid-read-index-url
 			grid.wsrf.dir="${read.jboss.home}/server/${jboss.server.name}/deploy/wsrf"
-			/>              
-		<jboss-read-grid-secure
+			/> -->             
+		<!--<jboss-read-grid-secure
 			jboss.home="${read.jboss.home}"
 			copied.keystore.dir="${jboss.grid.secure.dir}"
-			/>
+			/>-->
 		<!-- will have to add code to install:post:jboss to copy this back if exists -->
 		<!-- no longer needed 
 		<grid-copy-service-metadata
 			copied.service-metadata.dir="${copied.service-metadata.dir}"
 			/>
 		-->
-		<grid-read-poc
+		<!--<grid-read-poc
 			grid.wsrf.dir="${read.jboss.home}/server/${jboss.server.name}/deploy/wsrf"
 			grid.service.name="Sample"
-			/>                      
+			/> -->                     
 		<read-property-from-properties-service
 			jboss.home="${read.jboss.home}"
 			property.name="property1"

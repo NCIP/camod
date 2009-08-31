@@ -390,17 +390,17 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 				<include name="**/*" />
 			</fileset>
 		</copy>
-		<!-- For non DAC upgrades
+		<!-- For non DAC upgrades-->
 		<dist-prep
 			copy.tools.flag="N"
 			default.target="upgrade"
 			/>
-		-->
-		<!-- For DAC upgrades -->
+		
+		<!-- For DAC upgrades 
 		<dist-prep
 			copy.tools.flag="Y"
 			default.target="upgrade"
-			/>
+			/>-->
 
 	</target>
 
