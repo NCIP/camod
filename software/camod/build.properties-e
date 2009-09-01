@@ -25,7 +25,8 @@ webinf.dir=WebRoot/WEB-INF
 build.webapp.lib.dir=WebRoot/WEB-INF/lib
 
 #the directory in which to compile and build the project
-build.dir=.
+#build.dir=.
+build.dir=../target/dist/exploded/camod-webapp
 #build.dir=./build
 #build.dir=${webapp.dir}/build
 #build.dir=C:/dev/workspace/camod/software/target/dist/exploded/camod-webapp
