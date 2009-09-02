@@ -8,7 +8,7 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
 
-	<!-- Datasource that works in any application server
+	<!-- Data source that works in any application server
 		You could easily use J2EE data source instead if this were
 		running inside of a J2EE container.
 	-->
@@ -20,14 +20,14 @@
 		</property>
 		<property name="jdbcUrl">
 			<value>
-				jdbc:oracle:thin:@cbiodb2-d.nci.nih.gov:1521:CADEV
+				jdbc:oracle:thin:@cbdb-d1001.nci.nih.gov:1521:NCID1DEV
 			</value>
 		</property>
 		<property name="user">
 			<value>camoddev22</value>
 		</property>
 		<property name="password">
-			<value>dev!123</value>
+			<value>fsb#4625</value>
 		</property>
 	</bean>
 
