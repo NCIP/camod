@@ -7,7 +7,16 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 
 <project name="build-camod" default="build:all" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant" xmlns:cs="antlib:com.puppycrawl.tools.checkstyle">
 	<description>
-		This build file is part of the bda-build-template project.  This is the master build file for the project.  It should be placed in project/software/.  This script wrappers sub projects to build, test and inspect code.  Additionally this project manges creation of distributions and deployment locally or remotely.  Deployments will call the install.xml from the distribution to install or upgrade the application.  Lastly this script will run include targets that require manipulation of containers (selenium tests because they require starting the application server container (and require a fully deployed application which this process is responsible for). This build script assumes two sub-projects camod-webapp and camod-api. The API targets are commented out and can be removed if not needed.  Also support for both tomcat and jboss download, install and configure are included.  These scripts require Java, Ant, Database and SVN to work.
+		This build file is part of the bda-build-template project.  
+		This is the master build file for the project.  
+		It should be placed in project/software/.  
+		This script wrappers sub projects to build, test and inspect code.  
+		Additionally this project manges creation of distributions and deployment locally or remotely.  
+		Deployments will call the install.xml from the distribution to install or upgrade the application.  
+		Lastly this script will run include targets that require manipulation of containers (selenium tests because 
+		they require starting the application server container (and require a fully deployed application which this process is responsible for). 
+		This build script assumes two sub-projects camod-webapp and camod-api. The API targets are commented out and can be removed if not needed.  
+		Also support for both tomcat and jboss download, install and configure are included.  These scripts require Java, Ant, Database and SVN to work.
 	</description>
 
 	<!-- Property file related properties and tasks -->
@@ -95,16 +104,17 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<property name="jboss-conf.dist.dir" value="${dist.exploded.dir}/${jboss-conf.dist.relative.dir}" />
 
 	<!-- Selenium settings -->
-	<property name="selenium.jar" value="${lib.dir}/test-selenium/selenium-server-1.0-beta-1.jar" />
+	<!--property name="selenium.jar" value="${lib.dir}/test-selenium/selenium-server-1.0-beta-1.jar" /-->
+	<property name="selenium.jar" value="${lib.dir}/test-selenium/selenium-server.jar" />
 	<property name="selenium.browser" value="*iexplore" />
-	<!--  What you would need for a ci server, recommend setting in local.properties
-	<property name="selenium.browser" value="*firefox /usr/lib64/firefox-1.5.0.12/firefox-bin"/>
-	-->
+	<!--  What you would need for a ci server, recommend setting in local.properties-->
+	<!--<property name="selenium.browser" value="*firefox /usr/lib64/firefox-1.5.0.12/firefox-bin"/>-->
+	
 	<property name="selenium.proxy.port" value="4444" />
 	<property name="selenium.report.dir" value="${reports.dir}/selenium" />
 	<property name="selenium.report.file" value="selenium-rpt.html" />
 	<property name="selenium.test.dir" value="${software.dir}/tests/functional/selenium" />
-	<property name="selenium.test.suite" value="${selenium.test.dir}/bdaTestSuite.html" />
+	<property name="selenium.test.suite" value="${selenium.test.dir}/camodTestSuite.html" />
 	<property name="selenium.url" value="http://${jboss.server.hostname}:${jboss.server.port}" />
 
 	<!-- Where to write files retrieved by get, into the distribution area.  The file names come from project.properties  -->
@@ -636,7 +646,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<target name="init:ivy" description="Initializes ivy-repo.based on ivy definition file and ivy settings file">
 		<mkdir dir="${local.repo.dir}" />
 		<property name="ivy.dep.file" value="${ivy.settings.dir}/ivy-test.xml" />
-		<ivy:settings file="${ivy.settings.dir}/ivy.settings.xml" />
+		<ivy:settings file="${ivy.settings.dir}/ivy-settings.xml" />
 	</target>
 
 	<target name="ivy-test-selenium" depends="init:ivy" description="Downloads selenium libraries from ivy into library directory">
@@ -650,8 +660,8 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	</target>
 
 	<target name="test:seleniumrc:start">
-		<echo message="${lib.dir}/test-selenium/selenium-server-0.9.0.jar" />
-		<java jar="${lib.dir}/test-selenium/selenium-server-0.9.0.jar" fork="true" spawn="true" />
+		<echo message="${lib.dir}/test-selenium/selenium-server.jar" />
+		<java jar="${lib.dir}/test-selenium/selenium-server.jar" fork="true" spawn="true" />
 	</target>
 
 	<target name="test:seleniumrc:stop" description="Stops selenuimrc server when using selenium from java">
@@ -679,7 +689,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	</target>
 
 	<target name="test:selenium:run" description="Executes selenium test suite">
-		<!-- Another optoin  for running tests
+		<!-- Another option  for running tests
 		<java jar="${selenium.jar}" fork="true">
 			<arg line=" -htmlSuite &quot;${selenium.browser}&quot;"/>
 			<arg line=" &quot;${selenium.url}&quot;"/>
