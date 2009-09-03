@@ -77,13 +77,16 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<!-- Properties that relate to how to call build targets from sub-projects-->
 	<!-- Working directory passed to Ant tasks -->
 	<property name="camod-webapp.base.dir" value="${software.dir}/camod" />
+	<property name="camod-remote-api.base.dir" value="${software.dir}/grid_service" />
 
 	<!-- Build file names relative working dir above, if the basedir of the sub-project ant script is ".." you should set the *.basdir to and the build file should include the dir and build file name from the *.base.dir -->
 	<property name="camod-webapp.build.file" value="build.xml" />
+	<property name="camod-remote-api.build.file" value="build.xml" />
 
 	<!-- The target name that should be called from the sub-project build file -->
 	<property name="camod-webapp.build.target" value="build_war" />
-
+	<property name="camod-remote-api.build.target" value="copy_remote_api_war" />
+	
 	<!-- Maven comamnd line arguments, bda profile is inside profiles.xml that gets copied to ear folder before build to override exiting properties -->
 
 	<!-- Used by dist:*:prep to determin list of files to use for incremental build process.
@@ -133,6 +136,9 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<property name="camod-webapp.file.name"  value="${camod-webapp.name}.war"/>
 	<property name="camod-webapp.src.dir" value="${camod-webapp.base.dir}/src/web"/>
 
+	<!-- camodSDKClient.war definitions -->
+	<property name="camod-remmote-api.name"  value="camodSDKClient"/>
+	<property name="camod-remmote-api.file.name"  value="${camod-remmote-api.name}.war"/>
 
 	<!-- retrive ivy.jar.files then retrieve bda files and librarires -->
 	<condition property="commonlibrary.dir" value="">
@@ -286,13 +292,11 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	</target>
 
 	<target name="build:camod-api" depends="init" description="Call api sub-projects build target to produce artifiacts">
-		<!--
-		<ant inheritAll="false" inheritRefs="false" antfile="${camod-api.build.file}"
-			target="${camod-api.build.target}"
-			dir="${camod-api.base.dir}" >
+		<ant inheritAll="false" inheritRefs="false" antfile="${camod-remote-api.build.file}"
+			target="${camod-remote-api.build.target}"
+			dir="${camod-remote-api.base.dir}" >
 			<property name="env.GLOBUS_LOCATION" value="${env.GLOBUS_LOCATION}"/>
 		</ant>
-		-->
 	</target>
 
 	<target name="build:camod-webapp" depends="init, build:camod-api" description="Call webapp sub-projects build target to produce artifiacts">
@@ -502,7 +506,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			/>
 	</target>
 
-	<target name="deploy:local:upgrade" depends="build:all,dist:upgrader:prep" description="Upgrades and configures the application and database  on the local machine. Used for developer desktops and ci environments.">
+	<target name="deploy:local:upgrade" depends="build:all,dist:upgrader:prep" description="Upgrades and configures the application and database on the local machine. Used for developer desktops and ci environments.">
 		<!--
 		  * Requires a database installation.
 		  * Will use the target from install.xml specified in ${upgrade.target} (defaults to install unless passed in on command line).
