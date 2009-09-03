@@ -2,9 +2,11 @@
 <!-- ****************************************************************************************************-->
 <!--                                     Configure caGrid Service Build Script	                 -->
 <!-- ****************************************************************************************************-->
+   
 
 
-<project name="Configure caGrid service" default="config-grid-service" basedir=".">
+
+<project name="Configure caGrid service and API" default="config-grid-service" basedir=".">
 	<property file="build.properties"/>
 	<property name="temp.dir" value="temp" />
 	<property name="conf.dir" value="conf" />
@@ -97,4 +99,13 @@
 	<target name="war-sdk-client-file">
 		<jar destfile="${build.dir}/camodSDKClient.war" basedir="${temp.dir}" />
 	</target>	
+	
+    <!--
+        TARGET: copy_remote_api_war
+        This will copy the SDK-generated war (without changes) to the BDA target folder
+    -->
+    <target name="copy_remote_api_war" >
+        <mkdir dir="${build.dir}"/>
+    	<copy file="${remote.api.war.name}.war" todir="${build.dir}"/>  	
+    </target>	
 </project>
