@@ -75,11 +75,11 @@ public class SubmitEditDeleteTransplantTest extends BaseModelNeededTest {
         
         /* Find Transplant link to Submit */
         WebLink theLink = myWebConversation.getCurrentPage()
-                .getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Transplant");
+                .getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Transplantation");
         WebResponse theCurrentPage = theLink.click(); 
         assertCurrentPageContains("- if transplant type is not listed");
         
-        WebForm theForm = theCurrentPage.getFormWithName("TransplantForm");
+        WebForm theForm = theCurrentPage.getFormWithName("TransplantationForm");
         theForm.setParameter("name", "ABCDEFG");
         theForm.setParameter("sourceType", "Cell Line");        
         theForm.setParameter("donorScientificName", "Mus musculus");
@@ -88,12 +88,12 @@ public class SubmitEditDeleteTransplantTest extends BaseModelNeededTest {
         assertCurrentPageContains("if strain is not listed");
 
         // Set the donorEthnicityStrain and submit again
-        theForm = theCurrentPage.getFormWithName("TransplantForm");
+        theForm = theCurrentPage.getFormWithName("TransplantationForm");
         theForm.setParameter("donorEthinicityStrain", "129");
         theCurrentPage = theForm.submit();
         TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
         
-        assertCurrentPageContains("You have successfully added a Transplant");
+        assertCurrentPageContains("You have successfully added a Transplantation");
         
         
         /* Find Transplant link to Edit 
