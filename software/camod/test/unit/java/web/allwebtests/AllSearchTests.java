@@ -1,6 +1,6 @@
-package web.allwebtests;
+package unit.java.web.allwebtests;
 
-import web.search.*;
+import unit.java.web.search.*;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
