@@ -23,14 +23,12 @@
  *
  * 
  */
-package web.submission;
+package unit.java.web.submission;
 
 import java.util.ResourceBundle;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
-import web.base.BaseModelNeededTest;
-
+import unit.java.web.base.BaseModelNeededTest;
 import com.meterware.httpunit.*;
 
 /** This is a simple example of using HttpUnit to read and understand web pages. * */

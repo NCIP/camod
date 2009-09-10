@@ -26,14 +26,13 @@
  *
  * 
  */
-package web.submission;
+package unit.java.web.submission;
 
 import java.io.File;
 import java.util.ResourceBundle;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
-import web.base.BaseModelNeededTest;
+import unit.java.web.base.BaseModelNeededTest;
 import com.meterware.httpunit.WebForm;
 import com.meterware.httpunit.WebLink;
 import com.meterware.httpunit.WebResponse;
