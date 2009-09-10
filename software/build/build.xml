@@ -717,6 +717,18 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<taskdef resource="selenium-ant.properties" classpathref="project.test.selenium.classpath" />
 		<selenese suite="${selenium.test.suite}" browser="${selenium.browser}" results="${selenium.report.dir}/${selenium.report.file}" multiWindow="falsE" timeoutInSeconds="60" port="${selenium.proxy.port}" startURL="${selenium.url}" />
 	</target>
+	
+	<target name="test:junit:init" description="Sets up environment for running JUnit tests">
+		<mkdir dir="${junit.report.dir}" />
+		<if>
+			<not>
+				<socket server="${jboss.server.hostname}" port="${jboss.server.port}" />
+			</not>
+			<then>
+				<jboss-start-jboss />
+			</then>
+		</if>
+	</target>	
 
 	<target name="ivy-resolve-all" depends="init:ivy" description="Downloads all libraries included in the ivy definition file from ivy into local lib directory">
 		<ivy:resolve refresh="true" />
