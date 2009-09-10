@@ -1,4 +1,4 @@
-package web.search;
+package unit.java.web.search;
 
 import gov.nih.nci.camod.webapp.form.TransientInterferenceForm;
 import java.util.ArrayList;
@@ -9,8 +9,8 @@ import com.meterware.httpunit.WebLink;
 import com.meterware.httpunit.WebResponse;
 import junit.framework.Test;
 import junit.framework.TestSuite;
-import web.base.BaseModelNeededTest;
-import web.util.TestUtil;
+import unit.java.web.base.BaseModelNeededTest;
+import unit.java.web.util.TestUtil;
 
 public class SearchPopulateTransIntTest extends BaseModelNeededTest
 {

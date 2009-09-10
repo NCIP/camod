@@ -57,7 +57,7 @@
  * 
  */
 
-package web.search;
+package unit.java.web.search;
 
 import gov.nih.nci.camod.webapp.form.AssociatedExpressionForm;
 import gov.nih.nci.camod.webapp.form.EngineeredTransgeneForm;
@@ -65,16 +65,13 @@ import gov.nih.nci.camod.webapp.form.GenomicSegmentForm;
 import gov.nih.nci.camod.webapp.form.InducedMutationForm;
 import gov.nih.nci.camod.webapp.form.SpontaneousMutationForm;
 import gov.nih.nci.camod.webapp.form.TargetedModificationForm;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
-import web.util.TestUtil;
-import web.base.BaseModelNeededTest;
-
+import unit.java.web.util.TestUtil;
+import unit.java.web.base.BaseModelNeededTest;
 import com.meterware.httpunit.WebForm;
 import com.meterware.httpunit.WebLink;
 import com.meterware.httpunit.WebResponse;

@@ -55,14 +55,15 @@
  *
  * 
  */
-package web.search;
+package unit.java.web.search;
 
-import gov.nih.nci.camod.webapp.form.TransplantForm;
+import gov.nih.nci.camod.webapp.form.TransplantationForm;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import web.base.BaseModelNeededTest;
-import web.util.TestUtil;
+//import web.base.BaseModelNeededTest;
+import unit.java.web.base.BaseModelNeededTest;
+import unit.java.web.util.TestUtil;
 import com.meterware.httpunit.WebForm;
 import com.meterware.httpunit.WebLink;
 import com.meterware.httpunit.WebResponse;
@@ -126,7 +127,7 @@ public class SearchPopulateTransplantTest extends BaseModelNeededTest
         //theWebForm.setParameter("donorEthinicityStrain", "129");
         theCurrentPage = theWebForm.submit();
         
-        TransplantForm theForm = new TransplantForm();
+        TransplantationForm theForm = new TransplantationForm();
        // theForm.setTransplantName("TESTTransplant");
         theForm.setOrgan("Heart");
         theForm.setOrganTissueName("Heart");
@@ -202,7 +203,7 @@ public class SearchPopulateTransplantTest extends BaseModelNeededTest
         TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
         //theWebForm.setParameter("donorEthinicityStrain", "129");        
 
-        TransplantForm theForm = new TransplantForm();
+        TransplantationForm theForm = new TransplantationForm();
         theForm.setOrgan("Heart");
         theForm.setOrganTissueName("Heart");
         theForm.setOrganTissueCode("C22498");
@@ -250,7 +251,7 @@ public class SearchPopulateTransplantTest extends BaseModelNeededTest
         assertCurrentPageContains("if Transplant type is not listed");
         WebForm theWebForm = theCurrentPage.getFormWithName("TransplantForm");
 
-        TransplantForm theForm = new TransplantForm();
+        TransplantationForm theForm = new TransplantationForm();
         theForm.setOrgan("Heart");
         theForm.setOrganTissueName("Heart");
         theForm.setOrganTissueCode("C22498");

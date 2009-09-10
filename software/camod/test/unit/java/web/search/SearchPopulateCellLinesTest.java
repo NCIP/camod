@@ -30,16 +30,16 @@
  *
  * 
  */
-package web.search;
+ 
+package unit.java.web.search;
 
 import gov.nih.nci.camod.webapp.form.CellLineForm;
 import gov.nih.nci.camod.webapp.form.PublicationForm;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import web.base.BaseModelNeededTest;
-//import web.util.TestUtil;
-import gov.nih.nci.camod.TestUtil;
+import unit.java.web.base.BaseModelNeededTest;
+import unit.java.web.util.TestUtil;
 import com.meterware.httpunit.WebForm;
 import com.meterware.httpunit.WebLink;
 import com.meterware.httpunit.WebResponse;
