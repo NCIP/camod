@@ -27,7 +27,7 @@
  * 
  */
 
-package web.base;
+package unit.java.web.base;
 
 import gov.nih.nci.camod.util.GUIDGenerator;
 

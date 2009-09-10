@@ -35,13 +35,13 @@
  *
  * 
  */
-package web.base;
+package unit.java.web.base;
 
 import gov.nih.nci.camod.Constants;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import web.util.TestUtil;
+import unit.java.web.util.TestUtil;
 import junit.framework.TestCase;
 import com.meterware.httpunit.GetMethodWebRequest;
 import com.meterware.httpunit.WebConversation;
