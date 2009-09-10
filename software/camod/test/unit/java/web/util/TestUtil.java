@@ -27,7 +27,7 @@
  * 
  */
 
-package web.util;
+package unit.java.web.util;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
