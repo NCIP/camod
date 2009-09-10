@@ -1,4 +1,4 @@
-package web.admin;
+package unit.java.web.admin;
 
 /**
  * @author pandyas
@@ -18,8 +18,8 @@ package web.admin;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import web.base.BaseModelNeededTest;
-import web.util.TestUtil;
+import unit.java.web.base.BaseModelNeededTest;
+import unit.java.web.util.TestUtil;
 import com.meterware.httpunit.WebForm;
 import com.meterware.httpunit.WebLink;
 import com.meterware.httpunit.WebResponse;
