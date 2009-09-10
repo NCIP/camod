@@ -84,8 +84,9 @@ public class BaseHttpTest extends TestCase {
 
     protected void navigateToLoginPage() throws Exception {
         
-        System.out.println("<navigateToLoginPage> Enter" );
-
+        System.out.println("<navigateToLoginPage> Entered method" );
+        
+        // this resource refers to test_en.properties file under camod/src
         ResourceBundle theBundle = ResourceBundle.getBundle("test");
 
         String theHost = theBundle.getString("testhost");
@@ -202,7 +203,7 @@ public class BaseHttpTest extends TestCase {
 
     protected void loginToApplication(String inUsername, String inPassword) throws Exception {
 
-        System.out.println("<loginToApplication> Enter" );
+        System.out.println("<loginToApplication> Entered method" );
         navigateToLoginPage();
 
         WebForm theForm = myWebConversation.getCurrentPage().getFormWithName("loginForm");
