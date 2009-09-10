@@ -1,7 +1,7 @@
-package web.alltests;
+package unit.java.web.alltests;
 
-import web.*;
-import web.allwebtests.*;
+import unit.java.web.*;
+import unit.java.web.allwebtests.*;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
