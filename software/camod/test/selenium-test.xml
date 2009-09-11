@@ -9,7 +9,7 @@
 	    </classpath>
 	</taskdef>
 	<selenese 
-	    suite="test\selenium\camodTestSuite.html"
+	    suite="camod\software\camod\test\selenium\camodTestSuite.html"
 	    browser="${browser}"
 	    results="${result_file}"
 	    multiWindow="false"
