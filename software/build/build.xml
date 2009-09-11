@@ -55,7 +55,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<property name="build.dir" location="." />
 	<property name="software.dir" location=".." />
 	<property name="common.dir" location="${software.dir}/common" />
-	<property name="test.dir" location="${software.dir}/tests" />
+	<property name="test.dir" location="${software.dir}/camod/test" />
 	<property name="local.repo.dir" location="${software.dir}/local-ivy-repo" />
 	<property name="target.dir" location="${software.dir}/target" />
 	<property name="bda-download.dir" location="${common.dir}/bda-download" />
@@ -117,7 +117,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<property name="selenium.proxy.port" value="4444" />
 	<property name="selenium.report.dir" value="${reports.dir}/selenium" />
 	<property name="selenium.report.file" value="selenium-rpt.html" />
-	<property name="selenium.test.dir" value="${software.dir}/tests/functional/selenium" />
+	<property name="selenium.test.dir" value="${software.dir}/camod/test/selenium" />
 	<property name="selenium.test.suite" value="${selenium.test.dir}/camodTestSuite.html" />
 	<property name="selenium.url" value="http://${jboss.server.hostname}:${jboss.server.port}" />
 
