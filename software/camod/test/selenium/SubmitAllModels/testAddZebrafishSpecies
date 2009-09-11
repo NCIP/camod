@@ -1,0 +1,3384 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>testAddZebrafishSpecies</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">testAddZebrafishSpecies</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>http://cancermodels-qa.nci.nih.gov/camod/jsp/viewLicense.jsp;jsessionid=29A9A79B85FCF8FA9FE50DBCB716DF48</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=CLICKING HERE</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>camodcurator</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>TB!ontb1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Login']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Add New Model</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a/font/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//form/table/tbody/tr/td/table/tbody/tr[2]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>modelDescriptor</td>
+	<td>This is test Zebrafish specific</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>principalInvestigator</td>
+	<td>label=Thulasiraman, Kavitha</td>
+</tr>
+<tr>
+	<td>selectAndWait</td>
+	<td>scientificName</td>
+	<td>label=Zebrafish (Danio rerio)</td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>ethinicityStrain</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>ethinicityStrain</td>
+	<td>label=Darjeeling</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='Darjeeling']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>developmentalStage</td>
+	<td>label=Embryo (Birth - 3 days)</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>genotype</td>
+	<td>GT</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>nomenclature</td>
+	<td>NC</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>experimentDesign</td>
+	<td>ED</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>description</td>
+	<td>PT</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>type</td>
+	<td>label=Both Sexes</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>breedingNotes</td>
+	<td>BN</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>url</td>
+	<td>www.info</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table[1]/tbody/tr[1]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully created a new model.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>menu2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Enter Transgene</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//form/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>isRandom</td>
+	<td>yes</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>locationOfIntegration</td>
+	<td>Targeted</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>Transgene</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>scientificName</td>
+	<td>label=Zebrafish (Danio rerio)</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>transcriptional1_name</td>
+	<td>Transgene</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>transcriptional1_species</td>
+	<td>label=Zebrafish (Danio rerio)</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>transcriptional2_name</td>
+	<td>Transgene</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>transcriptional2_species</td>
+	<td>label=Zebrafish (Danio rerio)</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>transcriptional3_name</td>
+	<td>Transgene</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>transcriptional3_species</td>
+	<td>label=Rat (Rattus norvegicus)</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>polyASignal_name</td>
+	<td>Poly A signal</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>polyASignal_species</td>
+	<td>label=Mongolian Gerbil (Meriones unguiculatus)</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>spliceSites_name</td>
+	<td>RE</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>spliceSites_species</td>
+	<td>label=Sheep (Ovis aries)</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>geneFunctions</td>
+	<td>Gene Functions</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>conditionedBy</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>description</td>
+	<td>Conditional</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>zfinId</td>
+	<td>ZDB-GENO-050428-1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>fileLocation</td>
+	<td>C:\Documents and Settings\All Users\Documents\My Pictures\Sample Pictures\Water lilies.jpg</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>title</td>
+	<td>TC</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>descriptionOfConstruct</td>
+	<td>DC</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>constructSequence</td>
+	<td>CS</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table[1]/tbody/tr[1]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully added an Engineered Transgene to this model!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Enter Assoc Expression</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//form/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPopUp</td>
+	<td>popup</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>popup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>zebrafish anatomical entity</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='anatomical set [ZFA:0000015]']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Weberian ossicle</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Weberian ossicle</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Confirm Selection: &quot; Weberian ossicle&quot;<br /><br />Click &quot;OK&quot; to select this term, or <br />Click &quot;Cancel&quot; to continue searching for another term.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>expressionLevel</td>
+	<td>label=not detected</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table[1]/tbody/tr[1]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully added an Associated Expression Transgene to this model!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Enter Genomic Segment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//form/table/tbody/tr/td/table/tbody/tr[2]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>isRandom</td>
+	<td>yes</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>locationOfIntegration</td>
+	<td>Targeted</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>segmentName</td>
+	<td>label=Cosmid</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>segmentSize</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cloneDesignator</td>
+	<td>Designator</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>zfinId</td>
+	<td>ZDB-GENO-010924-10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>fileLocation</td>
+	<td>C:\Documents and Settings\All Users\Documents\My Pictures\Sample Pictures\Blue hills.jpg</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>title</td>
+	<td>TC</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>descriptionOfConstruct</td>
+	<td>DC</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>constructSequence</td>
+	<td>CS</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table[1]/tbody/tr[1]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully added a Genomic Segment to this model!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Enter Assoc Expression</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//form/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPopUp</td>
+	<td>popup</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>popup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='anatomical structure [ZFA:0000037]']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=acellular anatomical structure</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=acellular anatomical structure</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Confirm Selection: &quot; acellular anatomical structure&quot;<br /><br />Click &quot;OK&quot; to select this term, or <br />Click &quot;Cancel&quot; to continue searching for another term.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>expressionLevel</td>
+	<td>label=slightly expressed</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table[1]/tbody/tr[1]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully added an Associated Expression Transgene to this model!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Enter Targeted Modification</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//form/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>Targeted Gene</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>modificationType</td>
+	<td>label=Amino Acid</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>geneIdentifier</td>
+	<td>19211</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>esCellLineName</td>
+	<td>ES Cell line</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>blastocystName</td>
+	<td>Blastocyst</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>conditionedBy</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>description</td>
+	<td>Conditional description</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>zfinId</td>
+	<td>ZDB-GENO-010924-10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>fileLocation</td>
+	<td>C:\Documents and Settings\All Users\Documents\My Pictures\Sample Pictures\Blue hills.jpg</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>title</td>
+	<td>TC</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>descriptionOfConstruct</td>
+	<td>DC</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>constructSequence</td>
+	<td>CS</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table[1]/tbody/tr[1]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully added a Targeted Modification to this model!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Enter Assoc Expression</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//form/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPopUp</td>
+	<td>popup</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>popup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='anatomical structure [ZFA:0000037]']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=cell</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=cell</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Confirm Selection: &quot; cell&quot;<br /><br />Click &quot;OK&quot; to select this term, or <br />Click &quot;Cancel&quot; to continue searching for another term.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>expressionLevel</td>
+	<td>label=uniform</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table[1]/tbody/tr[1]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully added an Associated Expression Transgene to this model!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Enter Induced Mutation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//form/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>Inducing agent</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>type</td>
+	<td>label=radiation</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>casNumber</td>
+	<td>50-81-7</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>geneIdentifier</td>
+	<td>632</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>description</td>
+	<td>Description</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>observation</td>
+	<td>Observation</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>methodOfObservation</td>
+	<td>MO</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>zfinId</td>
+	<td>ZDB-GENO-010924-10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table[1]/tbody/tr[1]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully added an Induced Mutation to this model!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Enter Spontaneous Mutation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//form/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>Gene</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>observation</td>
+	<td>Observation</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>methodOfObservation</td>
+	<td>MO</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>geneIdentifier</td>
+	<td>19211</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>zfinId</td>
+	<td>ZDB-GENO-010924-10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table[1]/tbody/tr[1]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully added a Spontaneous Mutation to this model!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>menu3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Enter Chemical/Drug</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//form/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name</td>
+	<td>label=1-aminobenzo[a]pyrene (1-ABaP)</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='1-aminobenzo[a]pyrene (1-ABaP)']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dosage</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>dosageUnit</td>
+	<td>label=1/1000 micrograms/kg/injection</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>nscNumber</td>
+	<td>632</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>casNumber</td>
+	<td>50-81-7</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>administrativeRoute</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>administrativeRoute</td>
+	<td>label=gavage</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='gavage']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>regimen</td>
+	<td>TR</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ageAtTreatment</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>ageAtTreatmentUnit</td>
+	<td>label=Day(s)</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>type</td>
+	<td>label=Both Sexes</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table[1]/tbody/tr[1]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully added a Chemical / Drug to this model!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Enter Environmental Factor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//form/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name</td>
+	<td>label=mainstream cigarette smoke (MCS)</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='mainstream cigarette smoke (MCS)']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dosage</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>dosageUnit</td>
+	<td>label=kJ/m2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>administrativeRoute</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>administrativeRoute</td>
+	<td>label=intravenous</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='intravenous']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>regimen</td>
+	<td>tr</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ageAtTreatment</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>ageAtTreatmentUnit</td>
+	<td>label=Day(s)</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>type</td>
+	<td>label=Both Sexes</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table[1]/tbody/tr[1]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully added an Environmental Factor to this model!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Enter Gene Delivery</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//form/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>viralVector</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>viralVector</td>
+	<td>label=Lentivirus</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='Lentivirus']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>geneInVirus</td>
+	<td>Gene</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>regimen</td>
+	<td>TR</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPopUp</td>
+	<td>popup</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>popup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>zebrafish anatomical entity</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='anatomical set [ZFA:0000015]']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Weberian ossicle</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Weberian ossicle</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Confirm Selection: &quot; Weberian ossicle&quot;<br /><br />Click &quot;OK&quot; to select this term, or <br />Click &quot;Cancel&quot; to continue searching for another term.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ageAtTreatment</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>ageAtTreatmentUnit</td>
+	<td>label=Day(s)</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>type</td>
+	<td>label=Both Sexes</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table[1]/tbody/tr[1]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully added a Gene Delivery to this model!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Enter Growth Factor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Growth Factor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name</td>
+	<td>label=insulin-like growth factor 1 (IGF1) (IGF-1) (human recombinant)</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='insulin-like growth factor 1 (IGF1) (IGF-1) (human recombinant)']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dosage</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>dosageUnit</td>
+	<td>label=micrograms</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>administrativeRoute</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>administrativeRoute</td>
+	<td>label=applied on back</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='applied on back']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>regimen</td>
+	<td>TR</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ageAtTreatment</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>ageAtTreatmentUnit</td>
+	<td>label=Day(s)</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>type</td>
+	<td>label=Both Sexes</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table[1]/tbody/tr[1]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully added a Growth Factor to this model!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Enter Hormone</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//form/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name</td>
+	<td>label=estradiol (17beta-estradiol) (E2)</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='estradiol (17beta-estradiol) (E2)']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dosage</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>dosageUnit</td>
+	<td>label=mg</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>administrativeRoute</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>administrativeRoute</td>
+	<td>label=applied on back</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='applied on back']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>regimen</td>
+	<td>TR</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ageAtTreatment</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>ageAtTreatmentUnit</td>
+	<td>label=Day(s)</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>type</td>
+	<td>label=Both Sexes</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table[1]/tbody/tr[1]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully added a Hormone to this model!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Enter Nutritional Factor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//form/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name</td>
+	<td>label=black tea (decaffeinated)</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='black tea (decaffeinated)']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dosage</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>dosageUnit</td>
+	<td>label=IU/kg</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>regimen</td>
+	<td>TR</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ageAtTreatment</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>ageAtTreatmentUnit</td>
+	<td>label=Day(s)</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>type</td>
+	<td>label=Both Sexes</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table[1]/tbody/tr[1]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully added a Nutritional Factor to this model!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Enter Radiation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//form/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name</td>
+	<td>label=heavy ion radiation</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='heavy ion radiation']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dosage</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>dosageUnit</td>
+	<td>label=Gy/min</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>administrativeRoute</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>administrativeRoute</td>
+	<td>label=applied on back</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='applied on back']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>regimen</td>
+	<td>tr</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ageAtTreatment</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>ageAtTreatmentUnit</td>
+	<td>label=Day(s)</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>type</td>
+	<td>label=Both Sexes</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table[1]/tbody/tr[1]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully added a Radiation to this model!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Enter Surgery/Other</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//form/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name</td>
+	<td>label=splenectomy</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='splenectomy']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>regimen</td>
+	<td>TR</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ageAtTreatment</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>ageAtTreatmentUnit</td>
+	<td>label=Day(s)</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>type</td>
+	<td>label=Both Sexes</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table[1]/tbody/tr[1]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You have successfully added a Surgery / Other to this model!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Enter Viral Treatment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//form/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name</td>
+	<td>label=Gross leukemia virus</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='Gross leukemia virus']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name</td>
+	<td>label=R7 (a MoMuSV 124 variant)</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='R7 (a MoMuSV 124 variant)']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>administrativeRoute</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>administrativeRoute</td>
+	<td>label=intraperitoneal</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='intraperitoneal']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dosage</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>dosageUnit</td>
+	<td>label=pfu</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>regimen</td>
+	<td>TR</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ageAtTreatment</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>ageAtTreatmentUnit</td>
+	<td>label=Day(s)</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>type</td>
+	<td>label=Both Sexes</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table[1]/tbody/tr[1]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully added a Viral Treatment to this model!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>menu4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Enter Morpholino</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//form/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>source</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>source</td>
+	<td>label=Gene Tool</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='Gene Tool']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>type</td>
+	<td>label=Custom</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>sequenceDirection</td>
+	<td>label=3' - 5'</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>targetedRegion</td>
+	<td>TR</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>concentration</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>concentrationUnit</td>
+	<td>label=Molar</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>deliveryMethod</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>deliveryMethod</td>
+	<td>label=Microinjection (yolk)</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='Microinjection (yolk)']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>targetSite</td>
+	<td>label=Splice Site</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>visualLigand</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>visualLigand</td>
+	<td>label=Fluorescein isothiocyanate</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='Fluorescein isothiocyanate']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table[1]/tbody/tr[1]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully added a Transient Interference to this model!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Enter siRNA</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//form/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>source</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>source</td>
+	<td>label=Cenix BioScience</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='Cenix BioScience']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>type</td>
+	<td>label=Vector-mediated (Pol-III promoter)</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>sequenceDirection</td>
+	<td>label=3' - 5'</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>targetedRegion</td>
+	<td>TR</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>concentration</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>concentrationUnit</td>
+	<td>label=Nanomolar</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='SilencerTM siRNA Construction Kit ']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>deliveryMethod</td>
+	<td>label=PolyFect</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='PolyFect ']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>visualLigand</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>visualLigand</td>
+	<td>label=GFP</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='GFP']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table[1]/tbody/tr[1]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully added a Transient Interference to this model!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeElementPresent</td>
+	<td>//tr[6]/td[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>menu5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Enter Publications</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//form/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>authors</td>
+	<td>Doe Jr</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name</td>
+	<td>label=Submitted</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>firstTimeReported</td>
+	<td>yes</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>pmid</td>
+	<td>11223344</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>zfinPubId</td>
+	<td>ZDB-GENO-</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>zfinPubId</td>
+	<td>ZDB-GENO-050428-1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>title</td>
+	<td>11223344</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>year</td>
+	<td>2004</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>journal</td>
+	<td>Journal</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>volume</td>
+	<td>456</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>startPage</td>
+	<td>24</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>endPage</td>
+	<td>28</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table[1]/tbody/tr[1]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully added a Publication to this model!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>menu6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Enter Histopathology</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//form/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPopUp</td>
+	<td>popup</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>popup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='anatomical set [ZFA:0000015]']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Weberian ossicle</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Weberian ossicle</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Confirm Selection: &quot; Weberian ossicle&quot;<br /><br />Click &quot;OK&quot; to select this term, or <br />Click &quot;Cancel&quot; to continue searching for another term.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ageOfOnset</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>ageOfOnsetUnit</td>
+	<td>label=Day(s)</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ageOfDetection</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>ageOfDetectionUnit</td>
+	<td>label=Day(s)</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>weightOfTumor</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>volumeOfTumor</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>survivalInfo</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>grossDescription</td>
+	<td>GD</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>microscopicDescription</td>
+	<td>MD</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>observation</td>
+	<td>GA</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>methodOfObservation</td>
+	<td>MO</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comparativeData</td>
+	<td>CD</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>tumorClassification</td>
+	<td>label=- Leiomyoma</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table[1]/tbody/tr[1]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully added a Histopathology to this model!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Enter Assoc Metastasis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPopUp</td>
+	<td>popup</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>popup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='anatomical structure [ZFA:0000037]']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=cell</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=cell</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Confirm Selection: &quot; cell&quot;<br /><br />Click &quot;OK&quot; to select this term, or <br />Click &quot;Cancel&quot; to continue searching for another term.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>tumorClassification</td>
+	<td>label=- Schwannoma</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ageOfOnset</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>ageOfOnsetUnit</td>
+	<td>label=Day(s)</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ageOfDetection</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>ageOfDetectionUnit</td>
+	<td>label=Day(s)</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>weightOfTumor</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>volumeOfTumor</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tumorIncidenceRate</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>survivalInfo</td>
+	<td>Alive</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>grossDescription</td>
+	<td>GD</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>microscopicDescription</td>
+	<td>MD</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>observation</td>
+	<td>GA</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>methodOfObservation</td>
+	<td>MO</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comparativeData</td>
+	<td>CD</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table[1]/tbody/tr[1]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully added an Associated Metastasis to this model!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Enter Clinical Marker</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//form/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name</td>
+	<td>label=Other</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='Other']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name</td>
+	<td>label=Progesterone Receptor (PR)</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='Progesterone Receptor (PR)']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table[1]/tbody/tr[1]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully added a Clinical Marker to this model!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>menu7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Enter Therapy</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//form/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>Drug</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>nscNumber</td>
+	<td>632</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>casNumber</td>
+	<td>50-81-7</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>chemicalClasses</td>
+	<td>label=Biologicals</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//center/a[1]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>processes</td>
+	<td>label=Apoptosis</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//tr[7]/td[3]/center/a[1]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>targets</td>
+	<td>label=Cytokines and Chemokines</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//tr[8]/td[3]/center/a[1]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>experiment</td>
+	<td>Experiment</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dosage</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>dosageUnit</td>
+	<td>label=micrograms/ml/duration (cell culture)</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>administrativeRoute</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>administrativeRoute</td>
+	<td>label=gavage</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='gavage']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>type</td>
+	<td>label=Both Sexes</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ageAtTreatment</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>ageAtTreatmentUnit</td>
+	<td>label=Day(s)</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//td[2]/a[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPopUp</td>
+	<td>popup</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>popup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=exact:Gastrula:75%-epiboly</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Confirm Selection: &quot; Gastrula:75%-epiboly&quot;<br /><br />Click &quot;OK&quot; to select this term, or <br />Click &quot;Cancel&quot; to continue searching for another term.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>results</td>
+	<td>results</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>toxicityGrade</td>
+	<td>label=Moderate</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tumorResponse</td>
+	<td>tumor response</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table[1]/tbody/tr[1]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully added a Therapy to this model!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Enter Publication for Therapy</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//form/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>authors</td>
+	<td>Doe JR</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name</td>
+	<td>label=Submitted</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>firstTimeReported</td>
+	<td>yes</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>pmid</td>
+	<td>11223344</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>zfinPubId</td>
+	<td>ZDB-GENO-050428-1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>title</td>
+	<td>11223344</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>year</td>
+	<td>2000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>journal</td>
+	<td>journal</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>volume</td>
+	<td>345</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>startPage</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>endPage</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table[1]/tbody/tr[1]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully added a Publication to this model!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>menu8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Enter Cell Lines</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//form/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cellLineName</td>
+	<td>Cell line</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPopUp</td>
+	<td>popup</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>popup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='anatomical structure [ZFA:0000037]']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=acellular anatomical structure</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=acellular anatomical structure</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Confirm Selection: &quot; acellular anatomical structure&quot;<br /><br />Click &quot;OK&quot; to select this term, or <br />Click &quot;Cancel&quot; to continue searching for another term.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>experiment</td>
+	<td>Experiment</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>results</td>
+	<td>Results</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table[1]/tbody/tr[1]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully added a Cell Line to this model!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Enter Publication for Cell Line</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//form/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>authors</td>
+	<td>Doe Jr</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name</td>
+	<td>label=Submitted</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>firstTimeReported</td>
+	<td>yes</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>pmid</td>
+	<td>11223344</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>zfinPubId</td>
+	<td>ZDB-PUB-071009-8</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>title</td>
+	<td>11223344</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>year</td>
+	<td>2000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>journal</td>
+	<td>journall</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>volume</td>
+	<td>345</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>startPage</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>endPage</td>
+	<td>108</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table[1]/tbody/tr[1]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully added a Publication to this model!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>menu9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Enter Images</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Images</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>fileLocation</td>
+	<td>C:\Documents and Settings\All Users\Documents\My Pictures\Sample Pictures\Water lilies.jpg</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>title</td>
+	<td>Title</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>descriptionOfConstruct</td>
+	<td>Description of image</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//td[2]/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPopUp</td>
+	<td>popup</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>popup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Staining_Methods</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Routine_Histology_Staining_Method [C23043]']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Hematoxylin_and_Eosin_Staining_Method</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Hematoxylin_and_Eosin_Staining_Method</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Confirm Selection: &quot; Hematoxylin_and_Eosin_Staining_Method&quot;<br /><br />Click &quot;OK&quot; to select this term, or <br />Click &quot;Cancel&quot; to continue searching for another term.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Model Status</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully added an Image to this model!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>menu11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Available from ZFIN</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//form/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>Strain</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>stockNumber</td>
+	<td>ZDB-GENO-010924-10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table[1]/tbody/tr[1]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully added an Availability to this model!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>menu12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Enter Transplant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//form/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>Transplant</td>
+</tr>
+<tr>
+	<td>selectAndWait</td>
+	<td>donorScientificName</td>
+	<td>label=Horse (Equus Caballus)</td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>donorEthinicityStrain</td>
+	<td>label=Not specified</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>organ</td>
+	<td>Blood Vessel</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>sourceType</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>sourceType</td>
+	<td>label=Cell Line</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='Cell Line']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>parentalCellLineName</td>
+	<td>Parental Cell line</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>atccNumber</td>
+	<td>ATTC-HB-10569</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>conditioningRegimen</td>
+	<td>label=Radiation</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>geneticManipulation</td>
+	<td>GA</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>modificationDescription</td>
+	<td>MOM</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cellAmount</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>growthPeriod</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>administrativeSite</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>administrativeSite</td>
+	<td>label=IP (intraperitoneal)</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='IP (intraperitoneal)']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>c</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table[1]/tbody/tr[1]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully added a Transplant to this model!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=SUBMIT MODELS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Submit and Edit Models</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//tr[6]/td[5]/center/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete this record (This is test Zebrafish specific)?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Log out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,579 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>testAddGenomicSegment</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">testAddGenomicSegment</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>http://cancermodels-qa.nci.nih.gov/camod/jsp/viewLicense.jsp;jsessionid=29A9A79B85FCF8FA9FE50DBCB716DF48</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=CLICKING HERE</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>camodcurator</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>TB!ontb1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Login']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Add New Model</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a/font/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Model Characteristics</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>modelDescriptor</td>
+	<td>This is to test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>modelDescriptor</td>
+	<td>This is to test genomic segment</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>principalInvestigator</td>
+	<td>label=Thulasiraman, Kavitha</td>
+</tr>
+<tr>
+	<td>selectAndWait</td>
+	<td>scientificName</td>
+	<td>label=Mouse (Mus musculus)</td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>ethinicityStrain</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>ethinicityStrain</td>
+	<td>label=AKR</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='AKR']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>description</td>
+	<td>PT</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Model Status</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully created a new model.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>menu2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Enter Genomic Segment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Genomic Segment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>isRandom</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>segmentName</td>
+	<td>label=Cosmid</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>segmentSize</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cloneDesignator</td>
+	<td>designator</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>mgiId</td>
+	<td>MGI:1930612</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>fileLocation</td>
+	<td>C:\Documents and Settings\All Users\Documents\My Pictures\Sample Pictures\Water lilies.jpg</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>title</td>
+	<td>TC</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>descriptionOfConstruct</td>
+	<td>DC</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>constructSequence</td>
+	<td>CS</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Model Status</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully added a Genomic Segment to this model!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Enter Assoc Expression</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Expression</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPopUp</td>
+	<td>popup</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>popup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Murine_Tissue_Type</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Digestive_System_MMHCC [C22500]']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Esophagus_MMHCC</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Esophagus_MMHCC</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Confirm Selection: &quot; Esophagus_MMHCC&quot;<br /><br />Click &quot;OK&quot; to select this term, or <br />Click &quot;Cancel&quot; to continue searching for another term.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>expressionLevel</td>
+	<td>label=not detected</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Model Status</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully added an Associated Expression Transgene to this model!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Esophagus (MMHCC)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Expression</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPopUp</td>
+	<td>popup</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>popup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Murine_Tissue_Type</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Nervous_System_MMHCC [C22604]']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Neuroblast_MMHCC</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Neuroblast_MMHCC</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Confirm Selection: &quot; Neuroblast_MMHCC&quot;<br /><br />Click &quot;OK&quot; to select this term, or <br />Click &quot;Cancel&quot; to continue searching for another term.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>expressionLevel</td>
+	<td>label=overexpressed</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comments</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Model Status</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully edited an Associated Expression.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Neuroblast (MMHCC)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>expressionLevel</td>
+	<td>overexpressed</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>comments</td>
+	<td>comments</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submitAction</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Model Status</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully deleted an Associated Expression.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=designator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>isRandom</td>
+	<td>yes</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>locationOfIntegration</td>
+	<td>LOC</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>segmentName</td>
+	<td>label=YAC</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>segmentSize</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cloneDesignator</td>
+	<td>design</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>mgiId</td>
+	<td>MGI:1930613</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comments</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>fileLocation</td>
+	<td>C:\Documents and Settings\All Users\Documents\My Pictures\Sample Pictures\Sunset.jpg</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>title</td>
+	<td>TOC</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>descriptionOfConstruct</td>
+	<td>DOC</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>constructSequence</td>
+	<td>COS</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Enter Transgene</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=SUBMIT MODELS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//td[5]/center/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Log out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,464 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>testPublication</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">testPublication</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>http://cancermodels-qa.nci.nih.gov/camod/jsp/viewLicense.jsp;jsessionid=29A9A79B85FCF8FA9FE50DBCB716DF48</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=CLICKING HERE</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>camodcurator</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>TB!ontb1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Login']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Add New Model</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a/font/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//form/table/tbody/tr/td/table/tbody/tr[2]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>modelDescriptor</td>
+	<td>This is test for cell line</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>principalInvestigator</td>
+	<td>label=Thulasiraman, Kavitha</td>
+</tr>
+<tr>
+	<td>selectAndWait</td>
+	<td>scientificName</td>
+	<td>label=Mouse (Mus musculus)</td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>ethinicityStrain</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>ethinicityStrain</td>
+	<td>label=A/He</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='A/He']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>genotype</td>
+	<td>GT</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>nomenclature</td>
+	<td>NC</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>experimentDesign</td>
+	<td>ED</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>description</td>
+	<td>PT</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>type</td>
+	<td>label=Both Sexes</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>breedingNotes</td>
+	<td>BN</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Model Status</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully created a new model.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>menu5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Enter Publications</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Publications</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>authors</td>
+	<td>Doe JR</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name</td>
+	<td>label=Submitted</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>firstTimeReported</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>pmid</td>
+	<td>11223344</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>jaxJNumber</td>
+	<td>J:118365</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>title</td>
+	<td>11223344</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>year</td>
+	<td>1999</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>journal</td>
+	<td>Journal</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>volume</td>
+	<td>1340</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>startPage</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>endPage</td>
+	<td>340</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table[1]/tbody/tr[1]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully added a Publication to this model!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Doe JR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Publications</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>authors</td>
+	<td>Joe</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name</td>
+	<td>label=Unpublished</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@name='firstTimeReported' and @value='no']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>pmid</td>
+	<td>112233445</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@name='firstTimeReported' and @value='no']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>jaxJNumber</td>
+	<td>J:118364</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>title</td>
+	<td>112233445</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>year</td>
+	<td>2000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>journal</td>
+	<td>jor</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>volume</td>
+	<td>280</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>startPage</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>endPage</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Joe</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Publications</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>authors</td>
+	<td>Joe</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>name</td>
+	<td>Unpublished</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>pmid</td>
+	<td>112233445</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>jaxJNumber</td>
+	<td>J:118364</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>title</td>
+	<td>112233445</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>year</td>
+	<td>2000</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>journal</td>
+	<td>jor</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>volume</td>
+	<td>280</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>startPage</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>endPage</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>comments</td>
+	<td>com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=SUBMIT MODELS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Submit and Edit Models</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//td[5]/center/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Log out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

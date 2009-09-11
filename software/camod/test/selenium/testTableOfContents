@@ -1,0 +1,704 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>testTableOfContents</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">testTableOfContents</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>http://cancermodels-qa.nci.nih.gov/camod/jsp/viewLicense.jsp;jsessionid=29A9A79B85FCF8FA9FE50DBCB716DF48</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=CLICKING HERE</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>camodcurator</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>TB!ontb1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Login']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Submit and Edit Models</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=SEARCH MODELS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Keyword Search: </td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=TABLE OF CONTENTS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Mouse models with primary tumors in the following organ systems</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Cardiovascular System ( 224 )</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Search Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Mouse (Mus musculus)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=TABLE OF CONTENTS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Mouse models with primary tumors in the following organ systems</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Digestive System ( 935 )</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Search Results </td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Intestine</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Intestine</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=TABLE OF CONTENTS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Mouse models with primary tumors in the following organ systems</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Endocrine Gland System ( 352 )</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Search Results&nbsp;&nbsp;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=TABLE OF CONTENTS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Integument System ( 981 )</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Search Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=TABLE OF CONTENTS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Lymphohematopoietic System ( 955 )</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Search Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=TABLE OF CONTENTS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Musculoskeletal System ( 335 )</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Search Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=TABLE OF CONTENTS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Nervous System ( 311 )</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Search Results </td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=TABLE OF CONTENTS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Mouse models with primary tumors in the following organ systems</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Reproductive System ( 676 )</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Search Results </td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=TABLE OF CONTENTS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Table of Contents </td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Respiratory System ( 985 )</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Search Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=TABLE OF CONTENTS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Mouse models with primary tumors in the following organ systems</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Special Sensory Organs ( 171 )</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Search Results&nbsp;&nbsp;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=TABLE OF CONTENTS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Mouse models with primary tumors in the following organ systems</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Urinary System ( 110 )</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Search Results </td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=TABLE OF CONTENTS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Mouse models with primary tumors in the following organ systems</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Mouse models with tumors in the following sites</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Head or Neck Tumor ( 0 )</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Search Results&nbsp;&nbsp;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=TABLE OF CONTENTS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Mouse models with tumors in the following sites</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Prostate Lesion ( 147 )</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Search Results </td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=TABLE OF CONTENTS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Mouse models with tumors in the following sites</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Mammary Gland Lesion ( 908 )</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Search Results&nbsp;&nbsp;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=TABLE OF CONTENTS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Mouse models with tumors in the following sites</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Brain Tumor ( 260 )</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Search Results&nbsp;&nbsp;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=TABLE OF CONTENTS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Mouse models with tumors in the following sites</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Liver Tumor ( 553 )</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Search Results&nbsp;&nbsp;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=TABLE OF CONTENTS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Mouse models with Metastases</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Metastases ( 281 )</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Search Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=TABLE OF CONTENTS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rat models</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Rattus norvegicus models ( 3 )</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Search Results&nbsp;&nbsp;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=TABLE OF CONTENTS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rat models</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//tr[29]/td/ul/li/a/i</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Search Results&nbsp;&nbsp;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=TABLE OF CONTENTS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Models with Transplants</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Models with Transplants ( 30 )</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Search Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=TABLE OF CONTENTS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=HOME</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

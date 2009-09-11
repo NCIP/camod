@@ -1,0 +1,639 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>testTransplant</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">testTransplant</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>http://cancermodels-qa.nci.nih.gov/camod/jsp/viewLicense.jsp;jsessionid=29A9A79B85FCF8FA9FE50DBCB716DF48</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=CLICKING HERE</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>camodcurator</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>TB!ontb1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Login']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Add New Model</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a/font/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Model Characteristics</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>modelDescriptor</td>
+	<td>This is to test transplant</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>principalInvestigator</td>
+	<td>label=Thulasiraman, Kavitha</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>scientificName</td>
+	<td>label=Hamster (Mesocricetus auratus)</td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectAndWait</td>
+	<td>scientificName</td>
+	<td>label=Mouse (Mus musculus)</td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>ethinicityStrain</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>ethinicityStrain</td>
+	<td>label=AKR</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='AKR']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>genotype</td>
+	<td>Genotype</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>nomenclature</td>
+	<td>nomenclature</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>experimentDesign</td>
+	<td>ED</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>description</td>
+	<td>PT</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>type</td>
+	<td>label=Both Sexes</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>breedingNotes</td>
+	<td>Breeding notes</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Model Status</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully created a new model.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>menu12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Enter Transplant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Transplant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>Transplant</td>
+</tr>
+<tr>
+	<td>selectAndWait</td>
+	<td>donorScientificName</td>
+	<td>label=Mouse (Mus musculus)</td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>donorEthinicityStrain</td>
+	<td>label=NZB</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPopUp</td>
+	<td>popup</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>popup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Murine_Tissue_Type</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Cardiovascular_System_MMHCC [C22497]']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Blood_Vessel_MMHCC</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Blood_Vessel_MMHCC</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Confirm Selection: &quot; Blood_Vessel_MMHCC&quot;<br /><br />Click &quot;OK&quot; to select this term, or <br />Click &quot;Cancel&quot; to continue searching for another term.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>sourceType</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>sourceType</td>
+	<td>label=Cell Line</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='Cell Line']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>parentalCellLineName</td>
+	<td>Parental cell line</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>atccNumber</td>
+	<td>ATTC HB-10569</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>conditioningRegimen</td>
+	<td>label=Chemotherapy</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>geneticManipulation</td>
+	<td>Genetic Alterations</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>modificationDescription</td>
+	<td>MA</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cellAmount</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>growthPeriod</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>administrativeSite</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>administrativeSite</td>
+	<td>label=IM (intramuscular)</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='IM (intramuscular)']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Model Status</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully added a Transplant to this model!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Transplant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Transplant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>Trans</td>
+</tr>
+<tr>
+	<td>selectAndWait</td>
+	<td>donorScientificName</td>
+	<td>label=Hamster (Mesocricetus auratus)</td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>donorEthinicityStrain</td>
+	<td>label=Other</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>otherDonorEthinicityStrain</td>
+	<td>other</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>organ</td>
+	<td>Liver</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>sourceType</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>sourceType</td>
+	<td>label=Fresh Tissue</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='Fresh Tissue']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>parentalCellLineName</td>
+	<td>PC</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>atccNumber</td>
+	<td>ATTC HB-10570</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>conditioningRegimen</td>
+	<td>label=Radiation</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>geneticManipulation</td>
+	<td>GA</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>modificationDescription</td>
+	<td>MOM</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cellAmount</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>growthPeriod</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>administrativeSite</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>administrativeSite</td>
+	<td>label=IV (intravenous)</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='IV (intravenous)']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comme</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Model Status</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully edited a Transplant.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Trans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Transplant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>name</td>
+	<td>Trans</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>donorScientificName</td>
+	<td>Mesocricetus auratus</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>donorEthinicityStrain</td>
+	<td>Other</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>otherDonorEthinicityStrain</td>
+	<td>other</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>organ</td>
+	<td>Liver</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>sourceType</td>
+	<td>Fresh Tissue</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>parentalCellLineName</td>
+	<td>PC</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>atccNumber</td>
+	<td>ATTC HB-10570</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>conditioningRegimen</td>
+	<td>Radiation</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>geneticManipulation</td>
+	<td>GA</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>modificationDescription</td>
+	<td>MOM</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>cellAmount</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>growthPeriod</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>administrativeSite</td>
+	<td>IV (intravenous)</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>comments</td>
+	<td>comme</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submitAction</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Model Status</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully deleted a Transplant.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=SUBMIT MODELS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Add New Model</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//td[5]/center/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Log out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
