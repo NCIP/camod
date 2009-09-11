@@ -288,7 +288,8 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		validate:pre:build,
  		clean,
  		init,
- 		build:camod-webapp
+ 		build:camod-webapp,
+		build:camod-api
 		" >
 	</target>
 
@@ -300,7 +301,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		</ant>
 	</target>
 
-	<target name="build:camod-webapp" depends="init, build:camod-api" description="Call webapp sub-projects build target to produce artifiacts">
+	<target name="build:camod-webapp" depends="init" description="Call webapp sub-projects build target to produce artifiacts">
 		<!-- setting the property in the ant call overrides the property in the sub-project allowing the artifact to be produced where needed -->
 		<ant inheritAll="false" inheritRefs="false" antfile="${camod-webapp.build.file}" target="${camod-webapp.build.target}" dir="${camod-webapp.base.dir}">
 			<property name="dist.dir" value="${camod-webapp.dist.dir}" />
@@ -694,7 +695,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	</target>
 
 	<target name="test:selenium:run" description="Executes selenium test suite">
-		<!-- Another option  for running tests
+		<!-- Another option  for running tests 
 		<java jar="${selenium.jar}" fork="true">
 			<arg line=" -htmlSuite &quot;${selenium.browser}&quot;"/>
 			<arg line=" &quot;${selenium.url}&quot;"/>
