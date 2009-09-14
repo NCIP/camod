@@ -1,0 +1,42 @@
+<project name="Junit" default="test" basedir=".">
+    
+	<property name="src" value="../src" />
+	<property name="lib" value="../WebRoot/WEB-INF/lib" />
+	<property name="classes" value="../WebRoot/WEB-INF/classes" />
+	<property name="test.class.name" value="../selenium/TestSuite.html" />
+
+
+    <!-- stage specific attributes -->
+    <!--filter filtersfile="${tier}_camod.properties" /-->
+    <filter token="db.host" value="${db.host}"/>
+    <filter token="db.port" value="${db.port}"/>
+    <filter token="db.username" value="${db.username}"/>
+    <filter token="db.password" value="${db.password}"/>
+    <filter token="db.dbname" value="${db.dbname}"/>
+
+	<echo>Building for stage: ${tier}</echo>
+	
+    <!-- DEFAULT BUILD, does everything -->
+	
+	<path id="test.classpath">
+	  <pathelement location="${classes}" />
+	  <pathelement location="./WebRoot/WEB-INF/lib/junit-4.7.jar" />
+	  <fileset dir="${lib}">
+	    <include name="**/*.jar"/>
+	  </fileset>
+	</path>
+
+	
+	
+	<target name="test">
+	  <junit fork="yes" haltonfailure="yes">
+	    <test name="${test.class.name}" />
+	    <formatter type="plain" usefile="false" />
+	    <classpath refid="test.classpath" />
+	  </junit>
+	</target>
+
+
+ 
+	
+</project>
