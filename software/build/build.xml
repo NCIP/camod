@@ -118,7 +118,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<property name="selenium.report.dir" value="${reports.dir}/selenium" />
 	<property name="selenium.report.file" value="selenium-rpt.html" />
 	<property name="selenium.test.dir" value="${software.dir}/camod/test/selenium" />
-	<property name="selenium.test.suite" value="${selenium.test.dir}/camodTestSuite.html" />
+	<property name="selenium.test.suite" value="${selenium.test.dir}/TestSuite.html" />
 	<property name="selenium.url" value="http://${jboss.server.hostname}:${jboss.server.port}" />
 
 	<!-- Where to write files retrieved by get, into the distribution area.  The file names come from project.properties  -->
@@ -716,6 +716,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			</then>
 		</if>
 		<taskdef resource="selenium-ant.properties" classpathref="project.test.selenium.classpath" />
+		<echoproperties prefix="selenium"/>
 		<selenese suite="${selenium.test.suite}" browser="${selenium.browser}" results="${selenium.report.dir}/${selenium.report.file}" multiWindow="falsE" timeoutInSeconds="60" port="${selenium.proxy.port}" startURL="${selenium.url}" />
 	</target>
 	
