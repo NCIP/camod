@@ -36,7 +36,7 @@
 <tr>
 	<td>type</td>
 	<td>password</td>
-	<td>TB!ontb1</td>
+	<td>TB!ontb8</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -76,7 +76,7 @@
 <tr>
 	<td>type</td>
 	<td>modelDescriptor</td>
-	<td>This is to test transplant</td>
+	<td>This is to test transplantation</td>
 </tr>
 <tr>
 	<td>select</td>
