@@ -70,6 +70,7 @@ public class TestUtil {
 
         // HQL problem
         List theModelList = Search.query(theQBEAnimalModel);
+        System.out.println("In moveModelToEditedApproved + theModelList: " + theModelList.toString());
         
 //        SearchForm inSearchData = new SearchForm();
 //        inSearchData.setModelDescriptor(inModelName);
@@ -80,8 +81,9 @@ public class TestUtil {
         } else if (theModelList.size() == 0) {
             throw new IllegalArgumentException("No models matched the name: " + inModelName);
         } else {
-
+        	System.out.println("In moveModelToEditedApproved + inModelName: " + inModelName);
             AnimalModel theAnimalModel = (AnimalModel) theModelList.get(0);
+            System.out.println("In moveModelToEditedApproved + theAnimalModel: " + theAnimalModel.toString());
             theAnimalModel.setState("Edited-approved");
             AnimalModelManagerSingleton.instance().save(theAnimalModel);
 
