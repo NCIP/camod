@@ -61,7 +61,6 @@ import gov.nih.nci.camod.webapp.form.TransplantationForm;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-//import web.base.BaseModelNeededTest;
 import unit.java.web.base.BaseModelNeededTest;
 import unit.java.web.util.TestUtil;
 import com.meterware.httpunit.WebForm;
@@ -70,10 +69,10 @@ import com.meterware.httpunit.WebResponse;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-public class SearchPopulateTransplantTest extends BaseModelNeededTest
+public class SearchPopulateTransplantationTest extends BaseModelNeededTest
 {
 
-    public SearchPopulateTransplantTest(String arg0)
+    public SearchPopulateTransplantationTest(String arg0)
     {
         super(arg0);
     }
