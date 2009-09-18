@@ -97,7 +97,7 @@ public class SearchPopulateTransplantationTest extends BaseModelNeededTest
 
     public static Test suite()
     {
-        TestSuite suite = new TestSuite(SearchPopulateTransplantTest.class);
+        TestSuite suite = new TestSuite(SearchPopulateTransplantationTest.class);
         return suite;
     }
 
