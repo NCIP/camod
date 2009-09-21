@@ -12,11 +12,11 @@
  * 
  */
 
-package unit.java.web;
+package unit.web;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
-import unit.java.web.base.BaseHttpTest;
+import unit.web.base.BaseHttpTest;
 
 /** This is a simple example of using HttpUnit to read and understand web pages. * */
 public class LoginTest extends BaseHttpTest {
