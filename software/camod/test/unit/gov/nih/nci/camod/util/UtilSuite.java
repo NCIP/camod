@@ -34,25 +34,25 @@ public class UtilSuite extends TestCase {
    */
   public static Test suite() {
     TestSuite suite = new TestSuite("UtilSuite");
-    suite.addTest(gov.nih.nci.camod.util.AuthenticationFilterTest.suite());
-    suite.addTest(gov.nih.nci.camod.util.ConvertUtilTest.suite());
-    suite.addTest(gov.nih.nci.camod.util.CurrencyConverterTest.suite());
-    suite.addTest(gov.nih.nci.camod.util.CustomRequestProcessorTest.suite());
-    suite.addTest(gov.nih.nci.camod.util.DateConverterTest.suite());
-    suite.addTest(gov.nih.nci.camod.util.DateUtilTest.suite());
-    suite.addTest(gov.nih.nci.camod.util.DrugScreenResultTest.suite());
-    suite.addTest(gov.nih.nci.camod.util.DuplicateUtilTest.suite());
-    suite.addTest(gov.nih.nci.camod.util.EvsTreeUtilTest.suite());
-    suite.addTest(gov.nih.nci.camod.util.FtpUtilTest.suite());
-    suite.addTest(gov.nih.nci.camod.util.GUIDGeneratorTest.suite());
-    suite.addTest(gov.nih.nci.camod.util.HashCodeUtilTest.suite());
-    suite.addTest(gov.nih.nci.camod.util.LDAPUtilTest.suite());
-    suite.addTest(gov.nih.nci.camod.util.LabelValueTest.suite());
-    suite.addTest(gov.nih.nci.camod.util.MailUtilTest.suite());
-    suite.addTest(gov.nih.nci.camod.util.PopulatePubMedUtilTest.suite());
-    suite.addTest(gov.nih.nci.camod.util.RandomGUIDTest.suite());
-    suite.addTest(gov.nih.nci.camod.util.StringUtilTest.suite());
-    suite.addTest(gov.nih.nci.camod.util.TimestampConverterTest.suite());
+    suite.addTest(unit.gov.nih.nci.camod.util.AuthenticationFilterTest.suite());
+    suite.addTest(unit.gov.nih.nci.camod.util.ConvertUtilTest.suite());
+    suite.addTest(unit.gov.nih.nci.camod.util.CurrencyConverterTest.suite());
+    suite.addTest(unit.gov.nih.nci.camod.util.CustomRequestProcessorTest.suite());
+    suite.addTest(unit.gov.nih.nci.camod.util.DateConverterTest.suite());
+    suite.addTest(unit.gov.nih.nci.camod.util.DateUtilTest.suite());
+    suite.addTest(unit.gov.nih.nci.camod.util.DrugScreenResultTest.suite());
+    suite.addTest(unit.gov.nih.nci.camod.util.DuplicateUtilTest.suite());
+    suite.addTest(unit.gov.nih.nci.camod.util.EvsTreeUtilTest.suite());
+    suite.addTest(unit.gov.nih.nci.camod.util.FtpUtilTest.suite());
+    suite.addTest(unit.gov.nih.nci.camod.util.GUIDGeneratorTest.suite());
+    suite.addTest(unit.gov.nih.nci.camod.util.HashCodeUtilTest.suite());
+    suite.addTest(unit.gov.nih.nci.camod.util.LDAPUtilTest.suite());
+    suite.addTest(unit.gov.nih.nci.camod.util.LabelValueTest.suite());
+    suite.addTest(unit.gov.nih.nci.camod.util.MailUtilTest.suite());
+    suite.addTest(unit.gov.nih.nci.camod.util.PopulatePubMedUtilTest.suite());
+    suite.addTest(unit.gov.nih.nci.camod.util.RandomGUIDTest.suite());
+    suite.addTest(unit.gov.nih.nci.camod.util.StringUtilTest.suite());
+    suite.addTest(unit.gov.nih.nci.camod.util.TimestampConverterTest.suite());
     return suite;
   }
   
