@@ -79,7 +79,7 @@ public class SubmitEditDeleteTransplantationTest extends BaseModelNeededTest {
         WebResponse theCurrentPage = theLink.click(); 
         assertCurrentPageContains("- if transplantation type is not listed");
         
-        WebForm theForm = theCurrentPage.getFormWithName("TransplantationationForm");
+        WebForm theForm = theCurrentPage.getFormWithName("TransplantationForm");
         theForm.setParameter("name", "ABCDEFG");
         theForm.setParameter("sourceType", "Cell Line");        
         theForm.setParameter("donorScientificName", "Mus musculus");
