@@ -77,7 +77,6 @@ public class BaseModelNeededTest extends BaseHttpTest
         theForm.setParameter("genotype", "Test Genotype");
         theForm.setParameter("nomenclature", "Test Nomenclature");
         theForm.setParameter("experimentDesign", "Test Experimental Design"); 
-        //theForm.setParameter("type", "Male Only");
         theForm.setParameter("breedingNotes", "Test Breeding Notes");
         theForm.setParameter("url", "http://www.google.com"); 
         theForm.setParameter("comments", "Test Comment");         
