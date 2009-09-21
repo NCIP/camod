@@ -26,8 +26,6 @@
 	}
 %>
 			
-<html:form action="<%= actionName %>" focus="name">
-
 <!-- submitHormone.jsp -->
 <!-- Main Content Begins -->			
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
@@ -35,7 +33,7 @@
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
 	<tr><td valign="top">
 <!-- -->
-
+	<html:form action="<%= actionName %>" focus="name">
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
 	
 	<tr>
@@ -166,14 +164,15 @@
 				  <!--  Done this way since html:hidden doesn't seem to work correctly -->
 				  <input type="hidden" name="aCarcinogenExposureID" value="<%= aCarcinogenExposureID %>">
 				  	
-			  </html:form>			
+		
 			</TABLE>
 		</td>
 	</tr>
 </TABLE>
-
+	</html:form>	
 	</td></tr></TABLE>
-</tr></td></TABLE>
+</td></tr>
+</TABLE>
 
 <SCRIPT>
 chkOtherName();
