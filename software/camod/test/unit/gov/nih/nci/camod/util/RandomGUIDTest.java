@@ -5,7 +5,7 @@
  * Created on November 22, 2005, 2:14 PM
  */
 
-package gov.nih.nci.camod.util;
+package unit.gov.nih.nci.camod.util;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
