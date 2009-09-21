@@ -36,11 +36,11 @@
 					  	  <bean:message key="button.cancel"/>
 	  				  </html:cancel>
 				  
-				  </html:form>			
+				  		
 				</TABLE>
 			</td>
 		</tr>
-		
+		</html:form>	
 	</TABLE>	
 
 </BODY>
