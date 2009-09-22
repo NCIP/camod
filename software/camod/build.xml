@@ -163,14 +163,14 @@
         </war>
     </target>
 	
-    <!-- original copy of build_war before BDA automation
-    <target name="build_war" depends="copy_resource_directory">
+    <!--
+        TARGET: build_war
+        This will build the war file
     -->
-    	<!--<mkdir dir="${build.dir}"/>--> 
-    	<!--<delete file="${build.dir}/${app.war.name}.war" />-->
-    	<!--<delete file="${build.dir}/build/${app.war.name}.war" />-->    	
-        <!--<war destfile="${build.dir}/build/${app.war.name}.war" -->
-            <!--war destfile="${build.dir}/${app.war.name}.war"         	
+    <target name="build_local_war" depends="copy_resource_directory">
+        <mkdir dir="${build.local.dir}"/>
+        <delete file="${build.local.dir}/${app.war.name}.war" />
+        <war destfile="${build.local.dir}/${app.war.name}.war" 
              webxml="${webapp.dir}/WEB-INF/web.xml">
             <fileset file="${webapp.dir}/*.*" />
             <zipfileset dir="${webapp.dir}/common" prefix="common" />
@@ -184,7 +184,7 @@
             <webinf dir="${webapp.dir}/WEB-INF"/>
             <classes dir="${build.classes.dir}" />
         </war>
-    </target-->
+    </target>
     
     <!-- Setup Hibernate Mappings -->
 
