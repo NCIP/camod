@@ -116,11 +116,11 @@ public class EvsTreeUtil
 		ApplicationService appService = null;
 
 		try {
-			log.debug("CaBioApplicationService.getCabioApplicationService Enter : " );
+			log.info("CaBioApplicationService.getCabioApplicationService Enter : " );
 		
 			appService=ApplicationServiceProvider.getApplicationService("ServiceInfo");
 			
-			log.debug("ApplicationService : " + appService.toString());
+			log.info("ApplicationService : " + appService.toString());
 
 		}		
 		catch (FileNotFoundException e) {
@@ -154,21 +154,21 @@ public class EvsTreeUtil
 		camodPropertiesFileName = System.getProperty("gov.nih.nci.camod.camodProperties");
 
 		try {
-			log.debug("EVSApplicationService.getApplicationService Enter : " );
+			log.info("EVSApplicationService.getApplicationService Enter : " );
 			// load properties from external file
 			FileInputStream in = new FileInputStream(camodPropertiesFileName);
 			camodProperties.load(in);
 			String serverURL = camodProperties.getProperty("evs.uri");
 			//String serverURL = "http://lexevsapi.nci.nih.gov/lexevsapi42";
 
-			log.debug("serverURL : " + serverURL);
+			log.info("serverURL : " + serverURL);
 
 			ApplicationServiceProvider applicationServiceProvider = new ApplicationServiceProvider();
 			appService =
 				(EVSApplicationService)applicationServiceProvider.
 				getApplicationService(serverURL);
 
-			log.debug("EVSApplicationService : " + appService.toString());
+			log.info("EVSApplicationService : " + appService.toString());
 		}
 		catch (FileNotFoundException e) {
 			log.error("Caught exception finding file for properties for EVS: ", e);
@@ -252,7 +252,7 @@ public class EvsTreeUtil
 
 	public static String outputPropertyDetails(Property[] properties)
     {
-		log.debug("EvsTreeUtil.outputPropertyDetails Entered");
+		log.info("EvsTreeUtil.outputPropertyDetails Entered");
 
 		String prop_value = "";
 		String evsDisplayNameValue = "";
@@ -261,34 +261,36 @@ public class EvsTreeUtil
 		{
 			Property property = (Property) properties[i];		
 			String prop_name = property.getPropertyName();
-			log.debug("property.getPropertyName(): " + property.getPropertyName());			
+			log.info("prop_name: " + prop_name);			
 			prop_value = property.getText().getContent();
+			log.info("prop_value: " + prop_value);
 			if(property.getPropertyName().equals(Constants.Evs.DISPLAY_NAME_TAG) || property.getPropertyName().equals(Constants.Evs.PREFERRED_NAME_TAG)) {
-				log.debug("property.getPropertyName(): "  + property.getPropertyName());
+				log.info("property.getPropertyName(): "  + property.getPropertyName());
+				log.info("prop_value: " + property.getText().getContent());
 				evsDisplayNameValue = property.getText().getContent();				
-				log.debug("evsDisplayNameValue: " + evsDisplayNameValue);
+				log.info("evsDisplayNameValue: " + evsDisplayNameValue);
 				break;
 			} 
 		}
-		log.debug("EvsTreeUtil.outputPropertyDetails Exit ");
-		log.debug("Final evsDisplayNameValue: " + evsDisplayNameValue);
+		log.info("EvsTreeUtil.outputPropertyDetails Exit ");
+		log.info("Final evsDisplayNameValue: " + evsDisplayNameValue);
 		return evsDisplayNameValue;
 	}
 
 	public static String getConceptDetails(String version, String code)
 	{
-		log.debug("EvsTreeUtil.getConceptDetails Entered: ");
+		log.info("EvsTreeUtil.getConceptDetails Entered: ");
         String scheme = "";
         String theDescription = ""; 
 		
 		if( code != null ){
             if(code.contains("ZFA")){
-                log.debug("Zebrafish modelSpecies");
+                log.info("Zebrafish modelSpecies");
         		scheme = Constants.Evs.ZEBRAFISH_SCHEMA;
         		//DisplayNameTag = Constants.Evs.DISPLAY_NAME_TAG_LOWER_CASE;
         	//Define parameters for all NCI_Thesaurus schema
         	} else {
-                log.debug("NOT Zebrafish modelSpecies");
+                log.info("NOT Zebrafish modelSpecies");
                 scheme = Constants.Evs.NCI_SCHEMA;
         		//DisplayNameTag = Constants.Evs.DISPLAY_NAME_TAG;
         	}
@@ -302,7 +304,7 @@ public class EvsTreeUtil
 		else
 		{
 			log.info("Concept found -- " + code);
-			log.debug("Concept log.debug+ ce.getEntityDescription().getContent()");
+			log.info("Concept ce.getEntityDescription().getContent()");
 
 			int num_properties = 0;
 
@@ -310,9 +312,9 @@ public class EvsTreeUtil
 			num_properties = num_properties + properties.length;
 
 			theDescription = outputPropertyDetails(properties);
-			log.debug("\n theDescription: " + theDescription);
+			log.info("\n theDescription: " + theDescription);
 
-			log.debug("\nTotal number of properties: " + num_properties + "\n\n");
+			log.info("\nTotal number of properties: " + num_properties + "\n\n");
 	    }
         return theDescription;
 	}
