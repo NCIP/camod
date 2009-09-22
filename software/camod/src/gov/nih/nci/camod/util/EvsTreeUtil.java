@@ -264,13 +264,13 @@ public class EvsTreeUtil
 			log.info("prop_name: " + prop_name);			
 			prop_value = property.getText().getContent();
 			log.info("prop_value: " + prop_value);
-			if(property.getPropertyName().equals(Constants.Evs.DISPLAY_NAME_TAG) || property.getPropertyName().equals(Constants.Evs.PREFERRED_NAME_TAG)) {
+			/*if(property.getPropertyName().equals(Constants.Evs.DISPLAY_NAME_TAG) || property.getPropertyName().equals(Constants.Evs.PREFERRED_NAME_TAG)) {
 				log.info("property.getPropertyName(): "  + property.getPropertyName());
 				log.info("prop_value: " + property.getText().getContent());
 				evsDisplayNameValue = property.getText().getContent();				
 				log.info("evsDisplayNameValue: " + evsDisplayNameValue);
 				break;
-			} 
+			} */
 		}
 		log.info("EvsTreeUtil.outputPropertyDetails Exit ");
 		log.info("Final evsDisplayNameValue: " + evsDisplayNameValue);
