@@ -106,28 +106,28 @@ public class SearchPopulateTransplantationTest extends BaseModelNeededTest
 
         navigateToModelForEditing(myModelName);
 
-        // Adding a Transplant
+        // Adding a Transplantation
         WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-                                                                                  "Enter Transplant");
+                                                                                  "Enter Transplantation");
 
-        assertNotNull("Unable to find link to enter a Transplant", theLink);
+        assertNotNull("Unable to find link to enter a Transplantation", theLink);
         WebResponse theCurrentPage = theLink.click();
-        assertCurrentPageContains("- if transplant type is not listed,");
+        assertCurrentPageContains("- if transplantation type is not listed,");
         
         // Fill in the values and hit submit; Should fail the first time and the
         // populate will fill in the ethnicity strain values        
-        WebForm theWebForm = theCurrentPage.getFormWithName("TransplantForm");
+        WebForm theWebForm = theCurrentPage.getFormWithName("transplantationForm");
         
         theWebForm.setParameter("donorScientificName", "Mus musculus");
         theCurrentPage = theWebForm.submit();
-        assertCurrentPageContains("- if transplant type is not listed,");
+        assertCurrentPageContains("- if transplantation type is not listed,");
         // Set the ethnicity strain and submit again
-        theWebForm = theCurrentPage.getFormWithName("TransplantForm");
+        theWebForm = theCurrentPage.getFormWithName("transplantationForm");
         //theWebForm.setParameter("donorEthinicityStrain", "129");
         theCurrentPage = theWebForm.submit();
         
         TransplantationForm theForm = new TransplantationForm();
-       // theForm.setTransplantName("TESTTransplant");
+       // theForm.setTransplantationName("TESTTransplantation");
         theForm.setOrgan("Heart");
         theForm.setOrganTissueName("Heart");
         theForm.setOrganTissueCode("C22498");
@@ -158,20 +158,20 @@ public class SearchPopulateTransplantationTest extends BaseModelNeededTest
         //for debugging validation failures
         TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
 
-        assertCurrentPageContains("You have successfully added a Transplant to this model!");
+        assertCurrentPageContains("You have successfully added a Transplantation to this model!");
         
         // Verify that populate method returns complete and correct data
         navigateToModelForEditing(myModelName);
 
-        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "TESTTransplant");
-        assertNotNull("Unable to find link to verify Transplant", theLink);
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "TESTTransplantation");
+        assertNotNull("Unable to find link to verify Transplantation", theLink);
         theCurrentPage = theLink.click();
-        assertCurrentPageContains("if Transplant type is not listed");
-        theWebForm = theCurrentPage.getFormWithName("TransplantForm");
+        assertCurrentPageContains("if transplantation type is not listed");
+        theWebForm = theCurrentPage.getFormWithName("transplantationForm");
 
         //Add parameters found behind but not populate screen
         theParamsToSkip = new ArrayList<String>();
-        theParamsToSkip.add("aTransplantID");
+        theParamsToSkip.add("aTransplantationID");
         theParamsToSkip.add("submitAction");
         theParamsToSkip.add("otherHostEthinicityStrain");
         theParamsToSkip.add("modificationDescription");
@@ -179,25 +179,31 @@ public class SearchPopulateTransplantationTest extends BaseModelNeededTest
         verifyValuesOnPopulatePage(theWebForm, theParamsToSkip);
     }
 
-    public void testSearchForTransplant() throws Exception
+    public void testSearchForTransplantation() throws Exception
     {
 
         navigateToModelForEditing(myModelName);
 
-        // Adding a Transplant
+        // Adding a Transplantation
         WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-                                                                                  "Enter Transplant");
-        assertNotNull("Unable to find link to enter a Transplant", theLink);
+                                                                                  "Enter Transplantation");
+        assertNotNull("Unable to find link to enter a Transplantation", theLink);
         WebResponse theCurrentPage = theLink.click();
-        assertCurrentPageContains("- if transplant type is not listed,");
-        WebForm theWebForm = theCurrentPage.getFormWithName("TransplantForm");
+        assertCurrentPageContains("if transplantation type is not listed,");
+        WebForm theWebForm = theCurrentPage.getFormWithName("transplantationForm");
         
         // select from species list, then get strain list without violating validation
-        theWebForm.setParameter("name", "Test Transplant");
+        theWebForm.setParameter("name", "Test Transplantation");
         theWebForm.setParameter("donorScientificName", "Mus musculus");
-        theWebForm.setParameter("sourceType", "Cell Line");        
+        theWebForm.setParameter("sourceType", "Cell Line");
+        // submit page to get the ethnicity strain list
         theCurrentPage = theWebForm.submit();
+        
+        // Set the ethnicity strain and submit again
+        theWebForm = theCurrentPage.getFormWithName("transplantationForm");
         theWebForm.setParameter("donorEthinicityStrain", "Not Specified");
+        theCurrentPage = theWebForm.submit();        
+        
         
         TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
         //theWebForm.setParameter("donorEthinicityStrain", "129");        
@@ -228,27 +234,27 @@ public class SearchPopulateTransplantationTest extends BaseModelNeededTest
         //for debugging validation failures
         //TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
 
-        assertCurrentPageContains("You have successfully added a Transplant to this model!");
+        assertCurrentPageContains("You have successfully added a Transplantation to this model!");
 
         TestUtil.moveModelToEditedApproved(myModelName);
 
-        navigateToSpecificSearchPage(myModelName, "Transplant");
+        navigateToSpecificSearchPage(myModelName, "Transplantation");
 
         verifyValuesOnPage(theWebForm, theParamsToSkip);
     }
 
-    public void testSearchForTransplantWithOthers() throws Exception
+    public void testSearchForTransplantationWithOthers() throws Exception
     {
 
         navigateToModelForEditing(myModelName);
 
-        // Adding a Transplant
+        // Adding a Transplantation
         WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-                                                                                  "Enter Transplant");
-        assertNotNull("Unable to find link to enter a Transplant", theLink);
+                                                                                  "Enter Transplantation");
+        assertNotNull("Unable to find link to enter a Transplantation", theLink);
         WebResponse theCurrentPage = theLink.click();
-        assertCurrentPageContains("if Transplant type is not listed");
-        WebForm theWebForm = theCurrentPage.getFormWithName("TransplantForm");
+        assertCurrentPageContains("if transplantation type is not listed");
+        WebForm theWebForm = theCurrentPage.getFormWithName("transplantationForm");
 
         TransplantationForm theForm = new TransplantationForm();
         theForm.setOrgan("Heart");
@@ -257,7 +263,13 @@ public class SearchPopulateTransplantationTest extends BaseModelNeededTest
         theForm.setAtccNumber("2");
         theForm.setCellAmount("10");
         theForm.setDonorScientificName("Mus musculus");
-        theForm.setDonorEthinicityStrain("129");
+        // submit page to get the ethnicity strain list
+        theCurrentPage = theWebForm.submit();
+        
+        // Set the ethnicity strain and submit again
+        theWebForm = theCurrentPage.getFormWithName("transplantationForm");
+        theWebForm.setParameter("donorEthinicityStrain", "129");
+        theCurrentPage = theWebForm.submit();          
 
         List<String> theParamsToIgnore = new ArrayList<String>();
         //textarea fails - investigate if needed
@@ -276,11 +288,11 @@ public class SearchPopulateTransplantationTest extends BaseModelNeededTest
         theCurrentPage = theWebForm.submit();
         TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
 
-        assertCurrentPageContains("You have successfully added a Transplant to this model!");
+        assertCurrentPageContains("You have successfully added a Transplantation to this model!");
 
         TestUtil.moveModelToEditedApproved(myModelName);
 
-        navigateToSpecificSearchPage(myModelName, "Transplant");
+        navigateToSpecificSearchPage(myModelName, "Transplantation");
 
         verifyValuesOnPage(theWebForm, theParamsToSkip);
     }
