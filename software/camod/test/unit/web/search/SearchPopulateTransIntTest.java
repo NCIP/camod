@@ -159,5 +159,11 @@ public class SearchPopulateTransIntTest extends BaseModelNeededTest
         verifyValuesOnPopulatePage(theWebForm, theParamsToSkip);
     }
     
-
+	public void testSearchForMorpholino() throws Exception {
+		
+	}
+    
+	public void testSearchForSirna() throws Exception {
+		
+	}
 }
