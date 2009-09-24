@@ -1,0 +1,564 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>testAddChemicalDrug</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">testAddChemicalDrug</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>http://cancermodels-qa.nci.nih.gov/camod/jsp/viewLicense.jsp;jsessionid=29A9A79B85FCF8FA9FE50DBCB716DF48</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=CLICKING HERE</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>camodcurator</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>TB!ontb1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Login']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//a/font/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a/font/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Model Characteristics</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>modelDescriptor</td>
+	<td>this is to test add chemical drug</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>principalInvestigator</td>
+	<td>label=Thulasiraman, Kavitha</td>
+</tr>
+<tr>
+	<td>selectAndWait</td>
+	<td>scientificName</td>
+	<td>label=Mouse (Mus musculus)</td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>ethinicityStrain</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>ethinicityStrain</td>
+	<td>label=129/Sv</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='129/Sv']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>description</td>
+	<td>PT</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Model Status</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully created a new model.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>menu3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Enter Chemical/Drug</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Chemical/Drug</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name</td>
+	<td>label=1,2,5,6-dibenzanthracene</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='1,2,5,6-dibenzanthracene']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dosage</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>dosageUnit</td>
+	<td>label=1/1000 micrograms/kg/injection</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Find NSC #']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPopUp</td>
+	<td>mywin</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>mywin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>document.forms[0].searchtype[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>searchlist</td>
+	<td>dibenza</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>Submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>DTP Test Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>results were found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>close</td>
+	<td>mywin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>nscNumber</td>
+	<td>137617</td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Find CAS #']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPopUp</td>
+	<td>mywin</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>mywin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>polyQuery</td>
+	<td>ben*</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>ChemFinder.Com</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Benzaldehyde</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>ChemFinder.Com</td>
+	<td></td>
+</tr>
+<tr>
+	<td>close</td>
+	<td>mywin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>casNumber</td>
+	<td>100-52-7</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>administrativeRoute</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>administrativeRoute</td>
+	<td>label=ad lib in water</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='ad lib in water']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>regimen</td>
+	<td>TR</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ageAtTreatment</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>ageAtTreatmentUnit</td>
+	<td>label=Day(s)</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>type</td>
+	<td>label=Male Only</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/table[1]/tbody/tr[1]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have successfully added a Chemical / Drug to this model!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=1,2,5,6-dibenzanthracene</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name</td>
+	<td>label=1,2-dimethylhydrazine-di-HCl (DMH)</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='1,2-dimethylhydrazine-di-HCl (DMH)']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dosage</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>dosageUnit</td>
+	<td>label=Dilution factor 10^2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>nscNumber</td>
+	<td>137618</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>casNumber</td>
+	<td>100-52-8</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>administrativeRoute</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>administrativeRoute</td>
+	<td>label=gavage</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='gavage']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>regimen</td>
+	<td>TU</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ageAtTreatment</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>ageAtTreatmentUnit</td>
+	<td>label=Week(s)</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>type</td>
+	<td>label=Female Only</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comments</td>
+	<td>comment1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[2]/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//form/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotValue</td>
+	<td>name</td>
+	<td>1,2,5,6-dibenzanthracene</td>
+</tr>
+<tr>
+	<td>verifyNotValue</td>
+	<td>dosage</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyNotValue</td>
+	<td>dosageUnit</td>
+	<td>1/1000 micrograms/kg/injection</td>
+</tr>
+<tr>
+	<td>verifyNotValue</td>
+	<td>nscNumber</td>
+	<td>137617</td>
+</tr>
+<tr>
+	<td>verifyNotValue</td>
+	<td>regimen</td>
+	<td>TR</td>
+</tr>
+<tr>
+	<td>verifyNotValue</td>
+	<td>ageAtTreatment</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyNotValue</td>
+	<td>ageAtTreatmentUnit</td>
+	<td>Day(s)</td>
+</tr>
+<tr>
+	<td>verifyNotValue</td>
+	<td>type</td>
+	<td>Male Only</td>
+</tr>
+<tr>
+	<td>verifyNotValue</td>
+	<td>comments</td>
+	<td>comment</td>
+</tr>
+<tr>
+	<td>verifyNotValue</td>
+	<td>casNumber</td>
+	<td>100-52-7</td>
+</tr>
+<tr>
+	<td>verifyNotValue</td>
+	<td>administrativeRoute</td>
+	<td>ad lib in water</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=SUBMIT MODELS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Add New Model</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//td[5]/center/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete this record (this is to test add chemical drug)?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Log out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>caMOD - Cancer Models Database</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
