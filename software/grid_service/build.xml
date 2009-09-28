@@ -11,6 +11,9 @@
 	<property name="temp.dir" value="temp" />
 	<property name="conf.dir" value="conf" />
     <property name="artifacts.dir" value="artifacts" />
+	<property name="grid.service.dir" value="grid_service" />
+	<property name="globus.lib.dir" value="${grid.service.dir}/globus_lib_files" />
+	<property name="resource.file.jboss-globus-lib" value="jboss-globus-libs-cagrid1_2.zip" />
 
 	<!-- ************************************************************************************************-->
 	<!--                                             Configure Index Service                             -->
@@ -71,6 +74,7 @@
 	<!-- Configure grid service for the various tiers (modify properties file)  -->
 	<target name="config-grid-service" depends="config-remote-service-url"> 
 		<antcall target="jar-grid-service"/>
+		<copy file="../${globus.lib.dir}/${resource.file.jboss-globus-lib}" todir="${grid.service.build.dir}/grid"/>  	
 	</target>
 	
 	<!-- Jar the grid service after modifying it for the various tiers (before BDA target) -->
