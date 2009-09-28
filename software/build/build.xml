@@ -147,6 +147,9 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<!-- camod grid service war definitions -->
 	<property name="camod-grid-service.name"  value="wsrf-camod"/>	
 	<property name="camod-grid-service.file.name"  value="${camod-grid-service.name}.war"/>
+	<property name="resource.file.jboss-globus-lib" value="jboss-globus-libs-cagrid1_2.zip" />
+	<property name="camod-resource.artifact.dir" value="$./{software.dir}/common/resources" />
+
 	
 	<!-- retrive ivy.jar.files then retrieve bda files and librarires -->
 	<condition property="commonlibrary.dir" value="">

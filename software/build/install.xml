@@ -69,7 +69,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 
 	<!-- *-ds.xml and WAR -->
 	<property name="camod-webapp.dir.dist" location="${basedir}/${camod-webapp.dist.relative.dir}" />
-	<property name="camod-webapp.ds.file" value="camod-ds.xml" />
+	<property name="camod-webapp.ds.file" value="oracle-ds.xml" />
 	<property name="camod-webapp.name" value="camod" />
 	<property name="camod-webapp.war.file" value="${camod-webapp.name}.war" />
 	
@@ -79,9 +79,15 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<property name="camod-remote-api.war.file" value="${camod-remote-api.name}.war" />
 	
 	<!-- for grid service -->
+	<property name="software.dir" location=".." />
 	<property name="camod-grid-service.dir.dist" location="${basedir}/${camod-grid-service.dist.relative.dir}" />
 	<property name="camod-grid-service.name" value="wsrf-camod" />
-	<property name="camod-grid-service.war.file" value="${camod-grid-service.name}.war" />	
+	<property name="camod-grid-service.war.file" value="${camod-grid-service.name}.war" />
+	<property name="resource.file.jboss-globus-lib" value="jboss-globus-libs-cagrid1_2.zip" />
+	<property name="cammod-resource.artifact.dir" value="${software.dir}/common/resources" />
+
+
+
 	
 	<!-- Added for properties-service.xml -->
 	<property name="camod.propertyservice.property.value1" value="C:/local/content/camod/config/camod.properties" />
@@ -383,7 +389,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	</target>
 	
 	<target name="install:jboss:camod-remote-api" description="Deploy camod-remote-api and common libraries to jboss installation" unless="exclude.jboss" depends="common:jboss:init, common:init">
-		<echoproperties prefix="camod"/>
+		<!--echoproperties prefix="camod"/-->
 		<!-- added to ensure working.dirs are fresh for our install -->
 		<delete dir="${jboss.home}/server/${jboss.server.name}/tmp"/>
 		<delete dir="${jboss.home}/server/${jboss.server.name}/work"/>
@@ -400,6 +406,10 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<move file="${jboss.home}/server/${jboss.server.name}/log/server.log" tofile="${jboss.home}/server/${jboss.server.name}/log/server/log.${install.time}" failonerror="false"/>
 
 		<copy file="${camod-grid-service.dir.dist}/${camod-grid-service.war.file}" todir="${jboss.home}/server/${jboss.server.name}/deploy" overwrite="true" />
+		
+	    <unzip dest="${jboss.home}/server/${jboss.server.name}/lib" 
+	           src="${camod-grid-service.dir.dist}/grid/${resource.file.jboss-globus-lib}" />
+
 	</target>	
 
 	<target name="install:jboss:camod-webapp:configure" description="Configure camod-webapp application, copies over externalized properties or configurations that are not part of the jboss configuration" unless="exclude.jboss" depends="common:jboss:init, common:init">
@@ -968,7 +978,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			/>
 		<jboss-read-dbconfig
 			jboss.home="${read.jboss.home}"
-			jboss.ds-xml.file="camod-ds.xml"
+			jboss.ds-xml.file="oracle-ds.xml"
 			/>
 	</target>
 
@@ -999,7 +1009,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<!-- Reader reqiures that you have only one data source defined in each *-ds.xml file -->
 		<jboss-read-dbconfig
 			jboss.home="${read.jboss.home}"
-			jboss.ds-xml.file="camod-ds.xml"
+			jboss.ds-xml.file="oracle-ds.xml"
 			/>
 		<jboss-read-ldapconfig
 			jboss.home="${read.jboss.home}"
