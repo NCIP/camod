@@ -78,6 +78,11 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<property name="camod-remote-api.name" value="camodSDKClient" />
 	<property name="camod-remote-api.war.file" value="${camod-remote-api.name}.war" />
 	
+	<!-- for grid service -->
+	<property name="camod-grid-service.dir.dist" location="${basedir}/${camod-grid-service.dist.relative.dir}" />
+	<property name="camod-grid-service.name" value="wsrf-camod" />
+	<property name="camod-grid-service.war.file" value="${camod-grid-service.name}.war" />	
+	
 	<!-- Added for properties-service.xml -->
 	<property name="camod.propertyservice.property.value1" value="C:/local/content/camod/config/camod.properties" />
 	<property name="camod.propertyservice.property.value2" value="C:/local/content/camod/config/mail.properties" />
@@ -378,6 +383,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	</target>
 	
 	<target name="install:jboss:camod-remote-api" description="Deploy camod-remote-api and common libraries to jboss installation" unless="exclude.jboss" depends="common:jboss:init, common:init">
+		<echoproperties prefix="camod"/>
 		<!-- added to ensure working.dirs are fresh for our install -->
 		<delete dir="${jboss.home}/server/${jboss.server.name}/tmp"/>
 		<delete dir="${jboss.home}/server/${jboss.server.name}/work"/>
@@ -385,6 +391,16 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 
 		<copy file="${camod-remote-api.dir.dist}/${camod-remote-api.war.file}" todir="${jboss.home}/server/${jboss.server.name}/deploy" overwrite="true" />
 	</target>
+	
+	<target name="install:jboss:camod-grid-service" description="Deploy camod-grid-service and common libraries to jboss installation" unless="exclude.jboss" depends="common:jboss:init, common:init">
+		<echoproperties prefix="camod"/>
+		<!-- added to ensure working.dirs are fresh for our install -->
+		<delete dir="${jboss.home}/server/${jboss.server.name}/tmp"/>
+		<delete dir="${jboss.home}/server/${jboss.server.name}/work"/>
+		<move file="${jboss.home}/server/${jboss.server.name}/log/server.log" tofile="${jboss.home}/server/${jboss.server.name}/log/server/log.${install.time}" failonerror="false"/>
+
+		<copy file="${camod-grid-service.dir.dist}/${camod-grid-service.war.file}" todir="${jboss.home}/server/${jboss.server.name}/deploy" overwrite="true" />
+	</target>	
 
 	<target name="install:jboss:camod-webapp:configure" description="Configure camod-webapp application, copies over externalized properties or configurations that are not part of the jboss configuration" unless="exclude.jboss" depends="common:jboss:init, common:init">
 		<!-- copy over any other files you may need to configure your application -->
@@ -755,6 +771,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
  		install:jboss:camod-webapp,
  		install:jboss:camod-webapp:configure,
 		install:jboss:camod-remote-api,
+		install:jboss:camod-grid-service,
  		install:post:jboss,
  		install:jboss:start,
  		install:jboss:validation:post-install
