@@ -73,11 +73,18 @@
 		<antcall target="jar-grid-service"/>
 	</target>
 	
-	<!-- Jar the grid service after modifying it for the various tiers -->
-	<target name="jar-grid-service" >
+	<!-- Jar the grid service after modifying it for the various tiers (before BDA target) -->
+	<target name="jar-grid-service-local" >
 		<delete dir="${artifacts.dir}" failonerror="false"/>
 		<mkdir dir="${artifacts.dir}"/>
 	<jar destfile="${artifacts.dir}/${grid.service.war.filename}" basedir="${temp.dir}"/>
+	</target>	
+	
+	<!-- Jar the grid service after modifying it for the various tiers - Put in BDA location -->
+	<target name="jar-grid-service" >
+		<delete dir="${grid.service.build.dir}" failonerror="false"/>
+		<mkdir dir="${grid.service.build.dir}"/>
+	<jar destfile="${grid.service.build.dir}/${grid.service.war.filename}" basedir="${temp.dir}"/>
 	</target>
 
 	<!-- ************************************************************************************************-->
@@ -104,7 +111,7 @@
         TARGET: copy_remote_api_war
         This will copy the SDK-generated war (without changes) to the BDA target folder
     -->
-    <target name="copy_remote_api_war" >
+    <target name="copy-remote-api-war" >
         <mkdir dir="${build.dir}"/>
     	<copy file="${remote.api.war.name}.war" todir="${build.dir}"/>  	
     </target>	
