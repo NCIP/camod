@@ -401,7 +401,7 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 		
 		verifyValuesOnPopulatePage(theWebForm, theParamsToSkip);
 	}	
-*/	
+	
 	public void testSearchForGenomicSegment() throws Exception {
 
 		navigateToModelForEditing(myModelName);
@@ -929,5 +929,5 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 		
 		verifyValuesOnPage(theWebForm, theParamsToSkip);
 	}
-	
+*/	
 }

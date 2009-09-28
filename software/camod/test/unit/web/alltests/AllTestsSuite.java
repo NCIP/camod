@@ -10,9 +10,9 @@ import junit.textui.TestRunner;
 /**
  * @author pandyas
  */
-public class AllTests extends TestCase {
+public class AllTestsSuite extends TestCase {
 
-	public AllTests(String arg0) {
+	public AllTestsSuite(String arg0) {
 		super(arg0);
 	}
 	
