@@ -41,6 +41,11 @@ import gov.nih.nci.camod.Constants;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+
+import oracle.jdbc.pool.OracleConnectionPoolDataSource;
 import unit.web.util.TestUtil;
 import junit.framework.TestCase;
 import com.meterware.httpunit.GetMethodWebRequest;
@@ -226,6 +231,28 @@ public class BaseHttpTest extends TestCase {
         // Make sure we logged in
         assertCurrentPageContains("Currently logged in as");
     }
+    
+    protected void setupJNDIdatasource() throws Exception {
+
+        // Create initial context
+        System.setProperty(Context.INITIAL_CONTEXT_FACTORY,
+            "org.apache.naming.java.javaURLContextFactory");
+        System.setProperty(Context.URL_PKG_PREFIXES, 
+            "org.apache.naming");            
+        InitialContext ic = new InitialContext();
+	
+
+        ic.createSubcontext("java:");
+        ic.createSubcontext("java:/camod");
+       
+        // Construct DataSource
+        OracleConnectionPoolDataSource ds = new OracleConnectionPoolDataSource();
+        ds.setURL("jdbc:oracle:thin:@cbdb-d1001.nci.nih.gov:1521:NCID1DEV");
+        ds.setUser("camoddev22");
+        ds.setPassword("fsb#4625");
+        
+        ic.bind("java:/camod", ds);
+    }    
 
     protected String findModelIdOnPage(String inStartText, String inEndText) throws Exception {
 
