@@ -5,6 +5,9 @@ import gov.nih.nci.camod.webapp.form.ModelCharacteristicsForm;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import javax.naming.NamingException;
+
 import unit.web.base.BaseModelNeededTest;
 import unit.web.util.TestUtil;
 import com.meterware.httpunit.WebForm;
@@ -23,6 +26,14 @@ public class SearchPopulateModelCharacteristicsTest extends BaseModelNeededTest
 
     protected void setUp() throws Exception
     {
+    	
+		try {
+			
+			setupJNDIdatasource();
+			
+		} catch (NamingException ex) {
+            System.out.println("NamingException in datasouuce binding: " + SearchPopulateModelCharacteristicsTest.class.getName());
+        }    	
 
         ResourceBundle theBundle = ResourceBundle.getBundle("test");
 
