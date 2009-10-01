@@ -35,6 +35,9 @@ import gov.nih.nci.camod.webapp.form.TherapyForm;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import javax.naming.NamingException;
+
 import unit.web.base.BaseModelNeededTest;
 import unit.web.util.TestUtil;
 import com.meterware.httpunit.WebForm;
@@ -50,7 +53,15 @@ public class SearchPopulateTherapyTest extends BaseModelNeededTest {
 	}
 
 	protected void setUp() throws Exception {
-
+		
+		try {
+			
+			setupJNDIdatasource();
+			
+		} catch (NamingException ex) {
+            System.out.println("NamingException in datasouuce binding: " + SearchPopulateTherapyTest.class.getName());
+        }
+		
         ResourceBundle theBundle = ResourceBundle.getBundle("test");
 
         String theUsername = theBundle.getString("username");
