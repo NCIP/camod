@@ -46,6 +46,12 @@ import gov.nih.nci.camod.webapp.form.ViralTreatmentForm;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+import oracle.jdbc.pool.OracleConnectionPoolDataSource;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 import unit.web.util.TestUtil;
@@ -62,6 +68,14 @@ public class SearchPopulateCITest extends BaseModelNeededTest {
 	}
 
 	protected void setUp() throws Exception {
+		
+		try {
+			
+			setupJNDIdatasource();
+			
+        } catch (NamingException ex) {
+            System.out.println("NamingException in datasouuce binding: " + SearchPopulateCITest.class.getName());
+        }		
 
 		ResourceBundle theBundle = ResourceBundle.getBundle("test");
 
