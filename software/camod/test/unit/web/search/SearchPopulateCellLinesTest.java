@@ -38,6 +38,13 @@ import gov.nih.nci.camod.webapp.form.PublicationForm;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+import oracle.jdbc.pool.OracleConnectionPoolDataSource;
+
 import unit.web.base.BaseModelNeededTest;
 import unit.web.util.TestUtil;
 import com.meterware.httpunit.WebForm;
@@ -53,7 +60,15 @@ public class SearchPopulateCellLinesTest extends BaseModelNeededTest {
 	}
 
 	protected void setUp() throws Exception {
-
+		
+		try {
+			
+			setupJNDIdatasource();
+			
+        } catch (NamingException ex) {
+            System.out.println("NamingException in datasouuce binding: " + SearchPopulateCellLinesTest.class.getName());
+        }
+        
         ResourceBundle theBundle = ResourceBundle.getBundle("test");
 
         String theUsername = theBundle.getString("username");
@@ -87,8 +102,8 @@ public class SearchPopulateCellLinesTest extends BaseModelNeededTest {
 
 		CellLineForm theForm = new CellLineForm();
 		theForm.setCellLineName("ABCDEFGH");		
-		theForm.setOrgan("Heart (MMHCC)");
-		theForm.setOrganTissueName("Heart (MMHCC)");		
+		theForm.setOrgan("Heart");
+		theForm.setOrganTissueName("Heart");		
 		theForm.setOrganTissueCode("C22498");
 
 		/* Add parameters found on submit screen but not displayed on search screen  */
@@ -118,7 +133,10 @@ public class SearchPopulateCellLinesTest extends BaseModelNeededTest {
 		//Add parameters found behind but not populate screen
 		theParamsToSkip = new ArrayList<String>();
 		theParamsToSkip.add("aCellID");
-		theParamsToSkip.add("submitAction");		
+		theParamsToSkip.add("submitAction");
+		//TODO: skipped until error can be fixed in EVS API
+		//theParamsToSkip.add("organ");
+		//theParamsToSkip.add("organTissueName");
 		
 		verifyValuesOnPopulatePage(theWebForm, theParamsToSkip);
 		
