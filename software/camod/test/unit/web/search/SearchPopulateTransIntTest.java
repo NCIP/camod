@@ -4,6 +4,9 @@ import gov.nih.nci.camod.webapp.form.TransientInterferenceForm;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import javax.naming.NamingException;
+
 import com.meterware.httpunit.WebForm;
 import com.meterware.httpunit.WebLink;
 import com.meterware.httpunit.WebResponse;
@@ -21,6 +24,14 @@ public class SearchPopulateTransIntTest extends BaseModelNeededTest
 
     protected void setUp() throws Exception
     {
+    	
+		try {
+			
+			setupJNDIdatasource();
+			
+		} catch (NamingException ex) {
+            System.out.println("NamingException in datasouuce binding: " + SearchPopulateTransIntTest.class.getName());
+        }    	
 
         ResourceBundle theBundle = ResourceBundle.getBundle("test");
 
