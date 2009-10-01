@@ -81,7 +81,7 @@ public class SubmitEditDeleteImageTest extends BaseModelNeededTest
         WebResponse theCurrentPage = theLink.click();
         assertCurrentPageContains("(Image of type .jpg, .jpeg, .gif, .sid or .png)");
         WebForm theForm = theCurrentPage.getFormWithName("imageForm");                
-        theForm.setParameter("fileLocation", new File(theBundle.getString("deploydir").trim() + "images/iconHelp.gif"));
+        theForm.setParameter("fileLocation", new File(theBundle.getString("deploydir").trim() + "iconHelp.gif"));
         theForm.setParameter("title", "test image");
         theCurrentPage = theForm.submit();
         //TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
