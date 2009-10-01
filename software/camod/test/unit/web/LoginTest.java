@@ -38,13 +38,13 @@ public class LoginTest extends BaseHttpTest {
     }
 
     public void testLogin() throws Exception {
-        loginToApplication("georgeda", "Dg1894!");
+        loginToApplication("camodcurator", "TB!ontb9");
         assertCurrentPageContains("Submit and Edit Models");
         logoutOfApplication();
     }
 
     public void testBadPassword() throws Exception {
-        loginToApplication("georgeda", "badpassword");
+        loginToApplication("camodcurator", "TB!ontb8");
         assertCurrentPageContains("Invalid username and/or password"); 
     }
 }
