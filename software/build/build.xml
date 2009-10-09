@@ -556,7 +556,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<remote-ssh remotesshcommand=". .bash_profile;cd ${ssh.dir.temp}; ant -Dproperties.file=${properties.file.name} -Dforce.reinstall=true ${install.target}" />
 	</target>
 
-	<target name="deploy:remote:upgrade" description="Installs and configures the application and required binaries and re-creates the datbase  on a remote machine. Used for NCI tiers (dev, qa, stg, prod)" depends="
+	<target name="deploy:remote:upgrade" description="Installs and configures the application and required binaries and re-creates the datbase on a remote machine. Used for NCI tiers (dev, qa, stg, prod)" depends="
 		build:all,
 		dist:upgrader
 		">
