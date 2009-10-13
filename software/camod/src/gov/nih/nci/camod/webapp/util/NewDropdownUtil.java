@@ -244,8 +244,27 @@ public class NewDropdownUtil
         else if (inDropdownKey.equals(Constants.Dropdowns.ENVIRONFACTORDROP))
         {
             theReturnList = getEnvironmentalFactorList("Environment");
+        }        
+        else if (inDropdownKey.equals(Constants.Dropdowns.ANTIBODYDROP))
+        {
+            theReturnList = getEnvironmentalFactorList("Antibody");
         }
-        
+        else if (inDropdownKey.equals(Constants.Dropdowns.BACTERIADROP))
+        {
+            theReturnList = getEnvironmentalFactorList("Bacteria");
+        }        
+        else if (inDropdownKey.equals(Constants.Dropdowns.PLASMIDDROP))
+        {
+            theReturnList = getEnvironmentalFactorList("Plasmid");
+        }
+        else if (inDropdownKey.equals(Constants.Dropdowns.TRANSPOSONDROP))
+        {
+            theReturnList = getEnvironmentalFactorList("Transposon");
+        }
+        else if (inDropdownKey.equals(Constants.Dropdowns.SIGNALINGMOLECULEDROP))
+        {
+            theReturnList = getEnvironmentalFactorList("Signaling Molecule");
+        }        
         // Dropdown list for main advanced search CI section
         else if (inDropdownKey.equals(Constants.Dropdowns.CARCINOGENICAGENTSQUERYDROP))
         {
@@ -312,32 +331,26 @@ public class NewDropdownUtil
         {
             theReturnList = getUsersList(inRequest, inFilter);
         }
-
         else if (inDropdownKey.equals(Constants.Dropdowns.CURATIONSTATESDROP))
         {
             theReturnList = getCurationStatesList(inRequest, inFilter);
-        }
-        
+        }        
         else if (inDropdownKey.equals(Constants.Dropdowns.CURATIONSTATESWITHBLANKDROP))
         {
             theReturnList = getCurationStatesWithBlankList(inRequest, inFilter);
-        }        
-
+        }  
         else if (inDropdownKey.equals(Constants.Dropdowns.USERSFORROLEDROP))
         {
             theReturnList = getUsersForRoleList(inRequest, inFilter);
-        }
-        
+        }        
         else if (inDropdownKey.equals(Constants.Dropdowns.USERSFOREDITORROLEDROP))
         {
         	theReturnList = getUsersForSpecificRoleList(inRequest, inFilter);
-        }
-        
+        }        
         else if (inDropdownKey.equals(Constants.Dropdowns.USERSFORSCREENERROLEDROP))
         {
         	theReturnList = getUsersForSpecificRoleList(inRequest, inFilter);
-        }        
-
+        }  
         else if (inDropdownKey.equals(Constants.Dropdowns.ROLESDROP))
         {
             theReturnList = getRolesList(inRequest);
@@ -345,17 +358,15 @@ public class NewDropdownUtil
         else if (inDropdownKey.equals(Constants.Dropdowns.STAININGDROP)) 
         {
             theReturnList = getStainingMethod(inRequest);
-        }
-        
+        }        
         else if (inDropdownKey.equals(Constants.Dropdowns.EXTERNALSOURCEQUERYDROP))
         {
             theReturnList = getExternalSourceList(inRequest);
-        }
-        
+        }        
         else
         {
             log.error("No matching dropdown for key: " + inDropdownKey);
-            theReturnList = new ArrayList();
+            theReturnList = new ArrayList<Object>();
         }
 
         log.debug("Exiting NewDropdownUtil.getDatabaseDropdown");
@@ -374,7 +385,7 @@ public class NewDropdownUtil
     {
         log.trace("Entering NewDropdownUtil.getTextFileDropdown");
 
-        List theReturnList = new ArrayList();
+        List theReturnList = new ArrayList<Object>();
 
         if (ourFileBasedLists.containsKey(inDropdownKey))
         {
@@ -404,7 +415,7 @@ public class NewDropdownUtil
     // Read from a file
     static private List readListFromFile(String inFilename) throws Exception
     {
-        List theReturnList = new ArrayList();
+        List theReturnList = new ArrayList<Object>();
 
         log.debug("Filename to read dropdown from: " + inFilename);
 
@@ -702,7 +713,7 @@ public class NewDropdownUtil
      */
     private static List getEnvironmentalFactorList(String inType) throws Exception
     {
-        log.debug("<getEnvironmentalFactorList> inType: " + inType);
+        log.info("<getEnvironmentalFactorList> inType: " + inType);
         List theEnvFactorList = QueryManagerSingleton.instance().getEnvironmentalFactors(inType);
 
         addOther(theEnvFactorList);
@@ -1037,7 +1048,7 @@ public class NewDropdownUtil
     private static List getCurationStatesWithBlankList(HttpServletRequest inRequest,
                                               String inWorkflow) throws Exception
     {
-        List theStateList = new ArrayList(); 
+        List theStateList = new ArrayList<Object>(); 
         log.debug("Entering NewDropdownUtil.getCurationStatesList");
 
         // Get the curation manager workflow XML
@@ -1059,7 +1070,7 @@ public class NewDropdownUtil
     private static List getCurationStatesList(HttpServletRequest inRequest,
                                               String inWorkflow) throws Exception
     {
-        List theStateList = new ArrayList(); 
+        List theStateList = new ArrayList<Object>(); 
         log.debug("Entering NewDropdownUtil.getCurationStatesList");
 
         // Get the curation manager workflow XML
@@ -1084,7 +1095,7 @@ public class NewDropdownUtil
 
         log.trace("Entering NewDropdownUtil.getUsersForRoleList");
 
-        List theUserList = new ArrayList();
+        List theUserList = new ArrayList<String>();
 
         Role theRole = new Role();
         theRole.setName(inRoleName);
@@ -1144,7 +1155,7 @@ public class NewDropdownUtil
 
         log.debug("Entering NewDropdownUtil.getUsersForSpecificRoleList");
 
-        List theUserList = new ArrayList();
+        List theUserList = new ArrayList<Object>();
         List<String> theUserNames = new ArrayList<String>();        
 
         Role theRole = new Role();

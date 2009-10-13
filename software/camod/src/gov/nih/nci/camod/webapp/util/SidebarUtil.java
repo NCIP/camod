@@ -80,6 +80,11 @@ public class SidebarUtil extends gov.nih.nci.camod.webapp.action.BaseAction {
 						jspName.equals("submitNutritionalFactors.jsp") || 
 						jspName.equals("submitGrowthFactors.jsp") ||  
 						jspName.equals("submitHormone.jsp") ||  
+						jspName.equals("submitAntibody.jsp") ||
+						jspName.equals("submitBacteria.jsp") ||
+						jspName.equals("submitPlasmid.jsp") ||
+						jspName.equals("submitSignalingMolecule.jsp") ||
+						jspName.equals("submitTransposon.jsp") ||
 						jspName.equals("submitRadiation.jsp") ||  
 						jspName.equals("submitViralTreatment.jsp")||  
 						jspName.equals("submitTransplantation.jsp") ||  
