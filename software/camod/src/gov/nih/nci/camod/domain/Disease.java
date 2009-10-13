@@ -70,6 +70,7 @@ public class Disease extends BaseObject implements Comparable, Serializable, Dup
     /**
      * @return Returns the EVS Preferred displayName
      * 		if the conceptCode = 000000, then return the name
+     *   	Added code to get the name when EVS is down
      */
     public String getEVSPreferredDescription()
     {
@@ -80,7 +81,13 @@ public class Disease extends BaseObject implements Comparable, Serializable, Dup
         }
         else
         {
-        	thePreferedDesc = EvsTreeUtil.getConceptDetails(null, conceptCode);
+        	if(EvsTreeUtil.getConceptDetails(null, conceptCode) != null & EvsTreeUtil.getConceptDetails(null, conceptCode).length() > 0){
+        		System.out.println("Organ retrieved from EVS: " + thePreferedDesc);
+        		thePreferedDesc = EvsTreeUtil.getConceptDetails(null, conceptCode);
+        	} else {
+        		System.out.println("Organ retrieved from caMOD: " + thePreferedDesc);
+        		thePreferedDesc = name;	
+        	}
         }
         System.out.println("Disease thePreferedDesc: " + thePreferedDesc);
         return thePreferedDesc;
