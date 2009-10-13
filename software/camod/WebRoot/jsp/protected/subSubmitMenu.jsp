@@ -304,6 +304,39 @@
 		src="images/subMenuArrow.gif" width=5> CARCINOGENIC INTERVENTIONS</div>
 	<span class="submasterdiv" class="submenu" id="sub3"> <img
 		src="images/right_arrow.gif" border="0"> 
+		
+		<html:link styleClass="subMenuRed" action="AntibodyPopulateAction.do?method=dropdown">
+			Enter Antibody
+		</html:link><br>
+		<logic:iterate id="aCarcinogenExposure" name="antibody_list"
+			type="CarcinogenExposure">&nbsp;&nbsp;&nbsp;&nbsp;
+			
+			<img src="images/aquadot.jpg" border="0">
+			<html:link styleClass="subMenuBlue"
+				action="AntibodyPopulateAction.do?method=populate"
+				paramId="aCarcinogenExposureID" paramName="aCarcinogenExposure"
+				paramProperty="id">
+				<camod:shorten><bean:write name="aCarcinogenExposure"property="environmentalFactor.displayName" filter="false" /></camod:shorten>
+			</html:link>
+			<br>			
+		</logic:iterate> <img src="images/right_arrow.gif" border="0">
+		
+		<html:link styleClass="subMenuRed" action="BacteriaPopulateAction.do?method=dropdown">
+			Enter Bacteria
+		</html:link><br>
+		<logic:iterate id="aCarcinogenExposure" name="bacteria_list"
+			type="CarcinogenExposure">&nbsp;&nbsp;&nbsp;&nbsp;
+			
+			<img src="images/aquadot.jpg" border="0">
+			<html:link styleClass="subMenuBlue"
+				action="BacteriaPopulateAction.do?method=populate"
+				paramId="aCarcinogenExposureID" paramName="aCarcinogenExposure"
+				paramProperty="id">
+				<camod:shorten><bean:write name="aCarcinogenExposure"property="environmentalFactor.displayName" filter="false" /></camod:shorten>
+			</html:link>
+			<br>			
+		</logic:iterate> <img src="images/right_arrow.gif" border="0"> 		
+
 		<html:link styleClass="subMenuRed" action="ChemicalDrugPopulateAction.do?method=dropdown">
 			Enter Chemical/Drug
 		</html:link><br>
@@ -318,7 +351,9 @@
 				<camod:shorten><bean:write name="aCarcinogenExposure"property="environmentalFactor.displayName" filter="false" /></camod:shorten>
 			</html:link>
 			<br>
+			
 		</logic:iterate> <img src="images/right_arrow.gif" border="0"> 
+		
 		<html:link styleClass="subMenuRed" action="EnvironmentalFactorPopulateAction.do?method=dropdown">
 			Enter Environmental Factor
 		</html:link><br>
@@ -332,8 +367,9 @@
 				paramProperty="id">
 				<camod:shorten><bean:write name="aCarcinogenExposure" property="environmentalFactor.displayName" filter="false" /></camod:shorten>
 			</html:link>
-			<br>
+			<br>			
 		</logic:iterate> <img src="images/right_arrow.gif" border="0"> 
+		
 		<html:link styleClass="subMenuRed" action="GeneDeliveryPopulateAction.do?method=dropdown">
 			Enter Gene Delivery
 		</html:link><br>
@@ -347,8 +383,9 @@
 				paramProperty="id">
 				<camod:shorten><bean:write name="aCarcinogenExposure" property="geneInVirus" filter="false" /> </camod:shorten>
 			</html:link>
-			<br>
+			<br>			
 		</logic:iterate> <img src="images/right_arrow.gif" border="0"> 
+		
 		<html:link styleClass="subMenuRed" action="GrowthFactorPopulateAction.do?method=dropdown">
 			Enter Growth Factor
 		</html:link><br>
@@ -363,6 +400,7 @@
 				<camod:shorten><bean:write name="aCarcinogenExposure" property="environmentalFactor.displayName" filter="false" /></camod:shorten>
 			</html:link>
 			<br>
+			
 		</logic:iterate> <img src="images/right_arrow.gif" border="0"> 
 		<html:link styleClass="subMenuRed" action="HormonePopulateAction.do?method=dropdown">
 			Enter Hormone
@@ -379,6 +417,7 @@
 			</html:link>
 			<br>
 		</logic:iterate> <img src="images/right_arrow.gif" border="0"> 
+		
 		<html:link styleClass="subMenuRed" action="NutritionalFactorPopulateAction.do?method=dropdown">
 			Enter Nutritional Factor
 		</html:link><br>
@@ -394,6 +433,23 @@
 			</html:link>
 			<br>
 		</logic:iterate> <img src="images/right_arrow.gif" border="0"> 
+		
+		<html:link styleClass="subMenuRed" action="PlasmidPopulateAction.do?method=dropdown">
+			Enter Plasmid
+		</html:link><br>
+		<logic:iterate id="aCarcinogenExposure" name="plasmid_list"
+			type="CarcinogenExposure">&nbsp;&nbsp;&nbsp;&nbsp;
+			
+			<img src="images/aquadot.jpg" border="0">
+			<html:link styleClass="subMenuBlue"
+				action="PlasmidPopulateAction.do?method=populate"
+				paramId="aCarcinogenExposureID" paramName="aCarcinogenExposure"
+				paramProperty="id">
+				<camod:shorten><bean:write name="aCarcinogenExposure" property="environmentalFactor.displayName" filter="false" /></camod:shorten>
+			</html:link>
+			<br>
+		</logic:iterate> <img src="images/right_arrow.gif" border="0"> 
+				
 		<html:link styleClass="subMenuRed" action="RadiationPopulateAction.do?method=dropdown">
 			Enter Radiation
 		</html:link><br>
@@ -409,6 +465,23 @@
 			</html:link>
 			<br>
 		</logic:iterate> <img src="images/right_arrow.gif" border="0"> 
+		
+		<html:link styleClass="subMenuRed" action="SignalingMoleculePopulateAction.do?method=dropdown">
+			Enter Signaling Molecule
+		</html:link><br>
+		<logic:iterate id="aCarcinogenExposure" name="signalingmolecule_list"
+			type="CarcinogenExposure">&nbsp;&nbsp;&nbsp;&nbsp;
+			
+			<img src="images/aquadot.jpg" border="0">
+			<html:link styleClass="subMenuBlue"
+				action="SignalingMoleculePopulateAction.do?method=populate"
+				paramId="aCarcinogenExposureID" paramName="aCarcinogenExposure"
+				paramProperty="id">
+				<camod:shorten><bean:write name="aCarcinogenExposure" property="environmentalFactor.displayName" filter="false" /></camod:shorten>
+			</html:link>
+			<br>
+		</logic:iterate> <img src="images/right_arrow.gif" border="0"> 		
+		
 		<html:link styleClass="subMenuRed" action="SurgeryPopulateAction.do?method=dropdown">
 			Enter Surgery/Other
 		</html:link><br>
@@ -424,6 +497,23 @@
 			</html:link>
 			<br>
 		</logic:iterate> <img src="images/right_arrow.gif" border="0"> 
+		
+		<html:link styleClass="subMenuRed" action="TransposonPopulateAction.do?method=dropdown">
+			Enter Transposon
+		</html:link><br>
+		<logic:iterate id="aCarcinogenExposure" name="transposon_list"
+			type="CarcinogenExposure">&nbsp;&nbsp;&nbsp;&nbsp;
+			
+			<img src="images/aquadot.jpg" border="0">
+			<html:link styleClass="subMenuBlue"
+				action="TransposonPopulateAction.do?method=populate"
+				paramId="aCarcinogenExposureID" paramName="aCarcinogenExposure"
+				paramProperty="id">
+				<camod:shorten><bean:write name="aCarcinogenExposure" property="environmentalFactor.displayName" filter="false" /></camod:shorten>
+			</html:link>
+			<br>
+		</logic:iterate> <img src="images/right_arrow.gif" border="0"> 
+				
 		<html:link styleClass="subMenuRed" action="ViralTreatmentPopulateAction.do?method=dropdown">
 			Enter Viral Treatment
 		</html:link><br>
