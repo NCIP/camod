@@ -426,6 +426,11 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 			List<CarcinogenExposure> environFactorList = new ArrayList<CarcinogenExposure>();
 			List<CarcinogenExposure> radiationList = new ArrayList<CarcinogenExposure>();
 			List<CarcinogenExposure> nutritionalFactorList = new ArrayList<CarcinogenExposure>();
+			List<CarcinogenExposure> antibodyList = new ArrayList<CarcinogenExposure>();
+			List<CarcinogenExposure> bacteriaList = new ArrayList<CarcinogenExposure>();
+			List<CarcinogenExposure> plasmidList = new ArrayList<CarcinogenExposure>();
+			List<CarcinogenExposure> transposonList = new ArrayList<CarcinogenExposure>();
+			List<CarcinogenExposure> signalingMoleculeList = new ArrayList<CarcinogenExposure>();
 
 			if (ceSet.size() == 0) {
 			} else {
@@ -459,6 +464,21 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 						if (ef.getType().equals("Radiation")) {
 							radiationList.add(ce);
 						} // end of if
+						if (ef.getType().equals("Antibody")) {
+							antibodyList.add(ce);
+						} // end of if
+						if (ef.getType().equals("Bacteria")) {
+							bacteriaList.add(ce);
+						} // end of if
+						if (ef.getType().equals("Plasmid")) {
+							plasmidList.add(ce);
+						} // end of if
+						if (ef.getType().equals("Signaling Molecule")) {
+							signalingMoleculeList.add(ce);
+						} // end of if
+						if (ef.getType().equals("Transposon")) {
+							transposonList.add(ce);
+						} // end of if						
 					}
 				}
 
@@ -469,6 +489,16 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 					Constants.Submit.GROWTHFACTORS_LIST, growthFactorList);
 			request.getSession().setAttribute(Constants.Submit.HORMONE_LIST,
 					hormoneList);
+			request.getSession().setAttribute(Constants.Submit.ANTIBODY_LIST,
+					antibodyList);
+			request.getSession().setAttribute(Constants.Submit.BACTERIA_LIST,
+					bacteriaList);
+			request.getSession().setAttribute(Constants.Submit.PLASMID_LIST,
+					plasmidList);
+			request.getSession().setAttribute(Constants.Submit.TRANSPOSON_LIST,
+					transposonList);
+			request.getSession().setAttribute(Constants.Submit.SIGNALINGMOLECULE_LIST,
+					signalingMoleculeList);
 			request.getSession().setAttribute(
 					Constants.Submit.SURGERYOTHER_LIST, surgeryList);
 			request.getSession().setAttribute(
