@@ -61,6 +61,9 @@ import gov.nih.nci.camod.webapp.form.TransplantationForm;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import javax.naming.NamingException;
+
 import unit.web.base.BaseModelNeededTest;
 import unit.web.util.TestUtil;
 import com.meterware.httpunit.WebForm;
@@ -79,6 +82,14 @@ public class SearchPopulateTransplantationTest extends BaseModelNeededTest
 
     protected void setUp() throws Exception
     {
+    	
+		try {
+			
+			setupJNDIdatasource();
+			
+		} catch (NamingException ex) {
+            System.out.println("NamingException in datasouuce binding: " + SearchPopulateTransplantationTest.class.getName());
+        }    	
 
         ResourceBundle theBundle = ResourceBundle.getBundle("test");
 
@@ -189,33 +200,29 @@ public class SearchPopulateTransplantationTest extends BaseModelNeededTest
                                                                                   "Enter Transplantation");
         assertNotNull("Unable to find link to enter a Transplantation", theLink);
         WebResponse theCurrentPage = theLink.click();
+        
         assertCurrentPageContains("if transplantation type is not listed,");
-        WebForm theWebForm = theCurrentPage.getFormWithName("transplantationForm");
+        WebForm theForm = theCurrentPage.getFormWithName("transplantationForm");
         
         // select from species list, then get strain list without violating validation
-        theWebForm.setParameter("name", "Test Transplantation");
-        theWebForm.setParameter("donorScientificName", "Mus musculus");
-        theWebForm.setParameter("sourceType", "Cell Line");
+        theForm.setParameter("name", "Test Transplantation");
+        theForm.setParameter("donorScientificName", "Mus musculus");
+        theForm.setParameter("sourceType", "Cell Line");
+        theForm.setParameter("organ", "Heart");
+        theForm.setParameter("organTissueName", "Heart");
+        theForm.setParameter("organTissueCode", "C22498");
+        theForm.setParameter("atccNumber", "2");
+        theForm.setParameter("cellAmount", "10");        
         // submit page to get the ethnicity strain list
-        theCurrentPage = theWebForm.submit();
+        theCurrentPage = theForm.submit();
         
         // Set the ethnicity strain and submit again
-        theWebForm = theCurrentPage.getFormWithName("transplantationForm");
-        theWebForm.setParameter("donorEthinicityStrain", "Not Specified");
-        theCurrentPage = theWebForm.submit();        
+        theForm = theCurrentPage.getFormWithName("transplantationForm");
+        theForm.setParameter("donorEthinicityStrain", "129");
+        //theCurrentPage = theForm.submit();        
         
-        
-        TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
-        //theWebForm.setParameter("donorEthinicityStrain", "129");        
-
-        TransplantationForm theForm = new TransplantationForm();
-        theForm.setOrgan("Heart");
-        theForm.setOrganTissueName("Heart");
-        theForm.setOrganTissueCode("C22498");
-        theForm.setAtccNumber("2");
-        theForm.setCellAmount("10");
-        //theForm.setDonorScientificName("Mus musculus");
-        //theForm.setDonorEthinicityStrain("Not Specified");
+        System.out.println( "Current URL in testSearchForTransplantation: " + theCurrentPage.getURL() );
+        //TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
 
         List<String> theParamsToIgnore = new ArrayList<String>();
         //TODO - remove disabled=true but keep disabled until geneticManipulation is entered
@@ -227,10 +234,10 @@ public class SearchPopulateTransplantationTest extends BaseModelNeededTest
         theParamsToSkip.add("organTissueName");
         theParamsToSkip.add("donorEthinicityStrain");
 
-        TestUtil.setRandomValues(theForm, theWebForm, false, theParamsToIgnore);
-        TestUtil.setValuesOnForm(theForm, theWebForm);
+        TestUtil.setRandomValues(theForm, theForm, false, theParamsToIgnore);
+        TestUtil.setValuesOnForm(theForm, theForm);
 
-        theCurrentPage = theWebForm.submit();
+        theCurrentPage = theForm.submit();
         //for debugging validation failures
         //TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
 
@@ -240,7 +247,7 @@ public class SearchPopulateTransplantationTest extends BaseModelNeededTest
 
         navigateToSpecificSearchPage(myModelName, "Transplantation");
 
-        verifyValuesOnPage(theWebForm, theParamsToSkip);
+        verifyValuesOnPage(theForm, theParamsToSkip);
     }
 
     public void testSearchForTransplantationWithOthers() throws Exception
@@ -257,6 +264,8 @@ public class SearchPopulateTransplantationTest extends BaseModelNeededTest
         WebForm theWebForm = theCurrentPage.getFormWithName("transplantationForm");
 
         TransplantationForm theForm = new TransplantationForm();
+        theWebForm.setParameter("organ", "Heart");
+        
         theForm.setOrgan("Heart");
         theForm.setOrganTissueName("Heart");
         theForm.setOrganTissueCode("C22498");

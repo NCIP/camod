@@ -144,7 +144,7 @@ public class SearchPopulateModelCharacteristicsTest extends BaseModelNeededTest
      * Animal Availability
      */
 
-    public void testSearchForModelCharacteristics() throws Exception
+    public void testSearchForJacksonLab() throws Exception
     {
 
         // Adding Jackson Lab Animal Availability

@@ -41,6 +41,9 @@ import gov.nih.nci.camod.webapp.form.HistopathologyForm;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import javax.naming.NamingException;
+
 import junit.framework.Test;
 import junit.framework.TestSuite;
 import unit.web.base.BaseModelNeededTest;
@@ -59,6 +62,14 @@ public class SearchPopulateHistopathologyTest extends BaseModelNeededTest
 
     protected void setUp() throws Exception
     {
+    	
+		try {
+			
+			setupJNDIdatasource();
+			
+		} catch (NamingException ex) {
+            System.out.println("NamingException in datasouuce binding: " + SearchPopulateHistopathologyTest.class.getName());
+        }    	
 
         ResourceBundle theBundle = ResourceBundle.getBundle("test");
 

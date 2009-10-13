@@ -68,6 +68,9 @@ import gov.nih.nci.camod.webapp.form.TargetedModificationForm;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import javax.naming.NamingException;
+
 import junit.framework.Test;
 import junit.framework.TestSuite;
 import unit.web.util.TestUtil;
@@ -84,6 +87,14 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 	}
 
 	protected void setUp() throws Exception {
+		
+		try {
+			
+			setupJNDIdatasource();
+			
+		} catch (NamingException ex) {
+            System.out.println("NamingException in datasource binding: " + SearchPopulateGeneticDescriptionTest.class.getName());
+        }
 
 		ResourceBundle theBundle = ResourceBundle.getBundle("test");
 
@@ -120,6 +131,7 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 
         EngineeredTransgeneForm theForm = new EngineeredTransgeneForm();
         theForm.setName("TESTENGINEEREDGENE");
+        theForm.setTranscriptional1_name("Mouse Test");
         //set conditionedBy here and skipped description below
         theForm.setConditionedBy("Not Conditional");		
 		
@@ -150,6 +162,8 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 		TestUtil.setRandomValues(theForm, theWebForm, true, theParamsToIgnore);
 		TestUtil.setValuesOnForm(theForm, theWebForm);
 		
+		theWebForm = theCurrentPage.getFormWithName("engineeredTransgeneForm");
+		System.out.println("got form for second time");
 		theCurrentPage = theWebForm.submit();
 		//TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
 		
@@ -328,7 +342,7 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 		verifyValuesOnPage(theWebForm, theParamsToSkip);
 	}	
 
-/*
+
     public void testPopulateGenomicSegmentWithOthers() throws Exception {
 
 		navigateToModelForEditing(myModelName);
@@ -929,5 +943,5 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 		
 		verifyValuesOnPage(theWebForm, theParamsToSkip);
 	}
-*/	
+	
 }
