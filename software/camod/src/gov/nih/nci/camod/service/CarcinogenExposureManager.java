@@ -19,6 +19,12 @@ import gov.nih.nci.camod.webapp.form.NutritionalFactorData;
 import gov.nih.nci.camod.webapp.form.RadiationData;
 import gov.nih.nci.camod.webapp.form.SurgeryData;
 import gov.nih.nci.camod.webapp.form.ViralTreatmentData;
+import gov.nih.nci.camod.webapp.form.AntibodyData;
+import gov.nih.nci.camod.webapp.form.BacteriaData;
+import gov.nih.nci.camod.webapp.form.PlasmidData;
+import gov.nih.nci.camod.webapp.form.SignalingMoleculeData;
+import gov.nih.nci.camod.webapp.form.TransposonData;
+
 
 /**
  * Interface for managing the Carcinogen Exposure objects
@@ -67,4 +73,32 @@ public interface CarcinogenExposureManager
 
     public void update(AnimalModel inAnimalModel, GrowthFactorData inGrowthFactorData, CarcinogenExposure inCarcinogenExposure) throws Exception;
     
+    
+    public CarcinogenExposure create(AnimalModel inAnimalModel, AntibodyData inAntibodyData);
+
+    public void update(AnimalModel inAnimalModel, AntibodyData inAntibodyData, CarcinogenExposure inCarcinogenExposure) throws Exception;
+    
+    
+    public CarcinogenExposure create(AnimalModel inAnimalModel, BacteriaData inBacteriaData);
+
+    public void update(AnimalModel inAnimalModel, BacteriaData inBacteriaData, CarcinogenExposure inCarcinogenExposure) throws Exception;
+    
+    
+    public CarcinogenExposure create(AnimalModel inAnimalModel, PlasmidData inPlasmidData);
+
+    public void update(AnimalModel inAnimalModel, PlasmidData inPlasmidData, CarcinogenExposure inCarcinogenExposure) throws Exception;
+
+    
+    public CarcinogenExposure create(AnimalModel inAnimalModel, SignalingMoleculeData inSignalingMoleculeData);
+
+    public void update(AnimalModel inAnimalModel, SignalingMoleculeData inSignalingMoleculeData, CarcinogenExposure inCarcinogenExposure) throws Exception;
+
+    
+    public CarcinogenExposure create(AnimalModel inAnimalModel, TransposonData inTransposonData);
+
+    public void update(AnimalModel inAnimalModel, TransposonData inTransposonData, CarcinogenExposure inCarcinogenExposure) throws Exception;
+
+    
+
+
 }

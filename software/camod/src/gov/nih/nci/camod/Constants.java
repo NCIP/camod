@@ -507,6 +507,16 @@ public class Constants {
         public static final String RADIATIONUNITSDROP = "RadiationUnits.txt";
 
         public static final String VIRALTREATUNITSDROP = "ViralTreatUnits.txt";
+        
+        public static final String ANTIBODYUNITSDROP = "AntibodyUnits.txt";
+        
+        public static final String BACTERIAUNITSDROP = "BacteriaUnits.txt";
+        
+        public static final String PLASMIDUNITSDROP = "PlasmidUnits.txt";
+        
+        public static final String TRANSPOSONUNITSDROP = "TransposonUnits.txt";
+        
+        public static final String SIGNALINGMOLECULEUNITSDROP = "SignalingMoleculeUnits.txt";
 
         public static final String TARGETEDMODIFICATIONDROP = "TargetedModificationTypes.txt";
 
@@ -536,6 +546,16 @@ public class Constants {
         public static final String SURGERYDROP = "surgerydrop.db";
 
         public static final String VIRUSDROP = "virusdrop.db";
+        
+        public static final String ANTIBODYDROP = "antibodydrop.db";
+
+        public static final String BACTERIADROP = "bacteriadrop.db";
+
+        public static final String PLASMIDDROP = "plasmiddrop.db";
+
+        public static final String TRANSPOSONDROP = "transposondrop.db";
+
+        public static final String SIGNALINGMOLECULEDROP = "signalingmoleculevirusdrop.db";        
 
         public static final String VIRALVECTORDROP = "ViralVectors.txt";
 
@@ -905,6 +925,16 @@ public class Constants {
         public static final String GROWTHFACTORS_LIST = "growthfactors_list";
 
         public static final String HORMONE_LIST = "hormone_list";
+        
+        public static final String ANTIBODY_LIST = "antibody_list";
+        
+        public static final String BACTERIA_LIST = "bacteria_list";
+        
+        public static final String PLASMID_LIST = "plasmid_list";
+        
+        public static final String TRANSPOSON_LIST = "transposon_list";
+        
+        public static final String SIGNALINGMOLECULE_LIST = "signalingmolecule_list";        
 
         public static final String NUTRITIONALFACTORS_LIST = "nutritionalfactors_list";
 

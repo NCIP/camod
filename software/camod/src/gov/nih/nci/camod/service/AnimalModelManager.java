@@ -268,6 +268,16 @@ public interface AnimalModelManager {
 
     public void addCarcinogenExposure(AnimalModel inAnimalModel, SurgeryData inSurgeryData) throws Exception;
     
+    public void addCarcinogenExposure(AnimalModel inAnimalModel, AntibodyData inAntibodyData) throws Exception;
+    
+    public void addCarcinogenExposure(AnimalModel inAnimalModel, BacteriaData inBacteriaData) throws Exception;
+    
+    public void addCarcinogenExposure(AnimalModel inAnimalModel, PlasmidData inPlasmidData) throws Exception;
+    
+    public void addCarcinogenExposure(AnimalModel inAnimalModel, SignalingMoleculeData inSignalingMoleculeData) throws Exception;
+    
+    public void addCarcinogenExposure(AnimalModel inAnimalModel, TransposonData inTransposonData) throws Exception;
+    
     public void addCellLine(AnimalModel inAnimalModel, CellLineData inCellLineData) throws Exception;    
 
     public void addMicroArrayData( AnimalModel inAnimalModel, MicroArrayDataData inMicroArrayData ) throws Exception;
