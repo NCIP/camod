@@ -543,7 +543,276 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
         save(inCarcinogenExposure);
     }
 
+    /**
+     * Create a CarcinogenExposure object with the correct data filled in.
+     * 
+     * @param inAntibodyData
+     *            the interface to create the CarcinogenExposure object from
+     * 
+     * @returns a Antibody
+     */
+    public CarcinogenExposure create(AnimalModel inAnimalModel,
+    		AntibodyData inAntibodyData)
+    {
 
+        log.debug("In CarcinogenExposureManagerImpl.create");
+
+        CarcinogenExposure theCarcinogenExposure = new CarcinogenExposure();
+        populateName(inAnimalModel, inAntibodyData, theCarcinogenExposure, "Antibody");
+        populateInducedMutationTrigger(theCarcinogenExposure);        
+        populateAgeGender(inAntibodyData, theCarcinogenExposure);
+        populateTreatment(inAntibodyData, theCarcinogenExposure);
+        populateDose(inAntibodyData, theCarcinogenExposure);
+        populateAdministration(inAnimalModel, inAntibodyData, theCarcinogenExposure);
+
+        return theCarcinogenExposure;
+    }
+
+    /**
+     * Update a CarcinogenExposure object with the correct data filled in.
+     * 
+     * @param inAntibodyData
+     *            the interface to update the CarcinogenExposure object from
+     * 
+     * @param inCarcinogenExposure
+     *            the CarcinogenExposure object to update
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
+    public void update(AnimalModel inAnimalModel,
+    		AntibodyData inAntibodyData,
+                       CarcinogenExposure inCarcinogenExposure) throws Exception
+    {
+
+        log.debug("In CarcinogenExposureManagerImpl.update");
+
+        populateName(inAnimalModel, inAntibodyData, inCarcinogenExposure, "Antibody");
+        populateAgeGender(inAntibodyData, inCarcinogenExposure);
+        populateTreatment(inAntibodyData, inCarcinogenExposure);
+        populateDose(inAntibodyData, inCarcinogenExposure);
+        populateAdministration(inAnimalModel, inAntibodyData, inCarcinogenExposure);
+
+        save(inCarcinogenExposure);
+    }
+
+    
+    /**
+     * Create a CarcinogenExposure object with the correct data filled in.
+     * 
+     * @param inBacteriaData
+     *            the interface to create the CarcinogenExposure object from
+     * 
+     * @returns a Bacteria
+     */
+    public CarcinogenExposure create(AnimalModel inAnimalModel,
+    		BacteriaData inBacteriaData)
+    {
+
+        log.debug("In CarcinogenExposureManagerImpl.create");
+
+        CarcinogenExposure theCarcinogenExposure = new CarcinogenExposure();
+        populateName(inAnimalModel, inBacteriaData, theCarcinogenExposure, "Bacteria");
+        populateInducedMutationTrigger(theCarcinogenExposure);        
+        populateAgeGender(inBacteriaData, theCarcinogenExposure);
+        populateTreatment(inBacteriaData, theCarcinogenExposure);
+        populateDose(inBacteriaData, theCarcinogenExposure);
+        populateAdministration(inAnimalModel, inBacteriaData, theCarcinogenExposure);
+
+        return theCarcinogenExposure;
+    }
+
+    /**
+     * Update a CarcinogenExposure object with the correct data filled in.
+     * 
+     * @param inBacteriaData
+     *            the interface to update the CarcinogenExposure object from
+     * 
+     * @param inCarcinogenExposure
+     *            the CarcinogenExposure object to update
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
+    public void update(AnimalModel inAnimalModel,
+    		BacteriaData inBacteriaData,
+                       CarcinogenExposure inCarcinogenExposure) throws Exception
+    {
+
+        log.debug("In CarcinogenExposureManagerImpl.update");
+
+        populateName(inAnimalModel, inBacteriaData, inCarcinogenExposure, "Bacteria");
+        populateAgeGender(inBacteriaData, inCarcinogenExposure);
+        populateTreatment(inBacteriaData, inCarcinogenExposure);
+        populateDose(inBacteriaData, inCarcinogenExposure);
+        populateAdministration(inAnimalModel, inBacteriaData, inCarcinogenExposure);
+
+        save(inCarcinogenExposure);
+    }
+
+    
+    /**
+     * Create a CarcinogenExposure object with the correct data filled in.
+     * 
+     * @param inPlasmidData
+     *            the interface to create the CarcinogenExposure object from
+     * 
+     * @returns a Plasmid
+     */
+    public CarcinogenExposure create(AnimalModel inAnimalModel,
+    		PlasmidData inPlasmidData)
+    {
+
+        log.debug("In CarcinogenExposureManagerImpl.create");
+
+        CarcinogenExposure theCarcinogenExposure = new CarcinogenExposure();
+        populateName(inAnimalModel, inPlasmidData, theCarcinogenExposure, "Plasmid");
+        populateInducedMutationTrigger(theCarcinogenExposure);        
+        populateAgeGender(inPlasmidData, theCarcinogenExposure);
+        populateTreatment(inPlasmidData, theCarcinogenExposure);
+        populateDose(inPlasmidData, theCarcinogenExposure);
+        populateAdministration(inAnimalModel, inPlasmidData, theCarcinogenExposure);
+
+        return theCarcinogenExposure;
+    }
+
+    /**
+     * Update a CarcinogenExposure object with the correct data filled in.
+     * 
+     * @param inPlasmidData
+     *            the interface to update the CarcinogenExposure object from
+     * 
+     * @param inCarcinogenExposure
+     *            the CarcinogenExposure object to update
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
+    public void update(AnimalModel inAnimalModel,
+    		PlasmidData inPlasmidData,
+                       CarcinogenExposure inCarcinogenExposure) throws Exception
+    {
+
+        log.debug("In CarcinogenExposureManagerImpl.update");
+
+        populateName(inAnimalModel, inPlasmidData, inCarcinogenExposure, "Plasmid");
+        populateAgeGender(inPlasmidData, inCarcinogenExposure);
+        populateTreatment(inPlasmidData, inCarcinogenExposure);
+        populateDose(inPlasmidData, inCarcinogenExposure);
+        populateAdministration(inAnimalModel, inPlasmidData, inCarcinogenExposure);
+
+        save(inCarcinogenExposure);
+    }
+
+    
+    /**
+     * Create a CarcinogenExposure object with the correct data filled in.
+     * 
+     * @param inSignalingMoleculeData
+     *            the interface to create the CarcinogenExposure object from
+     * 
+     * @returns a therapy
+     */
+    public CarcinogenExposure create(AnimalModel inAnimalModel,
+    		SignalingMoleculeData inSignalingMoleculeData)
+    {
+
+        log.debug("In CarcinogenExposureManagerImpl.create");
+
+        CarcinogenExposure theCarcinogenExposure = new CarcinogenExposure();
+        populateName(inAnimalModel, inSignalingMoleculeData, theCarcinogenExposure, "Signaling Molecule");
+        populateInducedMutationTrigger(theCarcinogenExposure);        
+        populateAgeGender(inSignalingMoleculeData, theCarcinogenExposure);
+        populateTreatment(inSignalingMoleculeData, theCarcinogenExposure);
+        populateDose(inSignalingMoleculeData, theCarcinogenExposure);
+        populateAdministration(inAnimalModel, inSignalingMoleculeData, theCarcinogenExposure);
+
+        return theCarcinogenExposure;
+    }
+
+    /**
+     * Update a CarcinogenExposure object with the correct data filled in.
+     * 
+     * @param inSignalingMoleculeData
+     *            the interface to update the CarcinogenExposure object from
+     * 
+     * @param inCarcinogenExposure
+     *            the CarcinogenExposure object to update
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
+    public void update(AnimalModel inAnimalModel,
+    		SignalingMoleculeData inSignalingMoleculeData,
+                       CarcinogenExposure inCarcinogenExposure) throws Exception
+    {
+
+        log.debug("In CarcinogenExposureManagerImpl.update");
+
+        populateName(inAnimalModel, inSignalingMoleculeData, inCarcinogenExposure, "Signaling Molecule");
+        populateAgeGender(inSignalingMoleculeData, inCarcinogenExposure);
+        populateTreatment(inSignalingMoleculeData, inCarcinogenExposure);
+        populateDose(inSignalingMoleculeData, inCarcinogenExposure);
+        populateAdministration(inAnimalModel, inSignalingMoleculeData, inCarcinogenExposure);
+
+        save(inCarcinogenExposure);
+    }
+
+    
+    /**
+     * Create a CarcinogenExposure object with the correct data filled in.
+     * 
+     * @param inTransposonData
+     *            the interface to create the CarcinogenExposure object from
+     * 
+     * @returns a therapy
+     */
+    public CarcinogenExposure create(AnimalModel inAnimalModel,
+    		TransposonData inTransposonData)
+    {
+
+        log.debug("In CarcinogenExposureManagerImpl.create");
+
+        CarcinogenExposure theCarcinogenExposure = new CarcinogenExposure();
+        populateName(inAnimalModel, inTransposonData, theCarcinogenExposure, "Transposon");
+        populateInducedMutationTrigger(theCarcinogenExposure);        
+        populateAgeGender(inTransposonData, theCarcinogenExposure);
+        populateTreatment(inTransposonData, theCarcinogenExposure);
+        populateDose(inTransposonData, theCarcinogenExposure);
+        populateAdministration(inAnimalModel, inTransposonData, theCarcinogenExposure);
+
+        return theCarcinogenExposure;
+    }
+
+    /**
+     * Update a CarcinogenExposure object with the correct data filled in.
+     * 
+     * @param inTransposonData
+     *            the interface to update the CarcinogenExposure object from
+     * 
+     * @param inCarcinogenExposure
+     *            the CarcinogenExposure object to update
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
+    public void update(AnimalModel inAnimalModel,
+    		TransposonData inTransposonData,
+                       CarcinogenExposure inCarcinogenExposure) throws Exception
+    {
+
+        log.debug("In CarcinogenExposureManagerImpl.update");
+
+        populateName(inAnimalModel, inTransposonData, inCarcinogenExposure, "Transposon");
+        populateAgeGender(inTransposonData, inCarcinogenExposure);
+        populateTreatment(inTransposonData, inCarcinogenExposure);
+        populateDose(inTransposonData, inCarcinogenExposure);
+        populateAdministration(inAnimalModel, inTransposonData, inCarcinogenExposure);
+
+        save(inCarcinogenExposure);
+    }
+
+    
     // ///////////////////////////////////////////////////////
     // Populate methods for the specific interfaces that
     // each interface implements

@@ -325,34 +325,7 @@ import gov.nih.nci.camod.domain.Transplantation;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.util.DuplicateUtil;
 import gov.nih.nci.camod.util.MailUtil;
-import gov.nih.nci.camod.webapp.form.AssociatedExpressionData;
-import gov.nih.nci.camod.webapp.form.AvailabilityData;
-import gov.nih.nci.camod.webapp.form.CellLineData;
-import gov.nih.nci.camod.webapp.form.ChemicalDrugData;
-import gov.nih.nci.camod.webapp.form.ClinicalMarkerData;
-import gov.nih.nci.camod.webapp.form.CurationAssignmentData;
-import gov.nih.nci.camod.webapp.form.EngineeredTransgeneData;
-import gov.nih.nci.camod.webapp.form.EnvironmentalFactorData;
-import gov.nih.nci.camod.webapp.form.GeneDeliveryData;
-import gov.nih.nci.camod.webapp.form.GenomicSegmentData;
-import gov.nih.nci.camod.webapp.form.GrowthFactorData;
-import gov.nih.nci.camod.webapp.form.HistopathologyData;
-import gov.nih.nci.camod.webapp.form.HormoneData;
-import gov.nih.nci.camod.webapp.form.ImageData;
-import gov.nih.nci.camod.webapp.form.InducedMutationData;
-import gov.nih.nci.camod.webapp.form.MicroArrayDataData;
-import gov.nih.nci.camod.webapp.form.ModelCharacteristicsData;
-import gov.nih.nci.camod.webapp.form.NutritionalFactorData;
-import gov.nih.nci.camod.webapp.form.PublicationData;
-import gov.nih.nci.camod.webapp.form.RadiationData;
-import gov.nih.nci.camod.webapp.form.SearchData;
-import gov.nih.nci.camod.webapp.form.SpontaneousMutationData;
-import gov.nih.nci.camod.webapp.form.SurgeryData;
-import gov.nih.nci.camod.webapp.form.TargetedModificationData;
-import gov.nih.nci.camod.webapp.form.TherapyData;
-import gov.nih.nci.camod.webapp.form.TransientInterferenceData;
-import gov.nih.nci.camod.webapp.form.TransplantationData;
-import gov.nih.nci.camod.webapp.form.ViralTreatmentData;
+import gov.nih.nci.camod.webapp.form.*;
 import gov.nih.nci.common.persistence.Persist;
 import gov.nih.nci.common.persistence.Search;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
@@ -1055,6 +1028,106 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         save(inAnimalModel);
         log.debug("Exiting AnimalModelManagerImpl.addCarcinogenExposure (surgery/other)");
     }
+    
+    /**
+     * Add a Antibody
+     * 
+     * @param inAnimalModel
+     *            the animal model that has the addCarcinogenExposure
+     * @param inAntibodyData
+     *            the new chemical drug data
+     * @throws Exception
+     */
+    public void addCarcinogenExposure(AnimalModel inAnimalModel,
+    		AntibodyData inAntibodyData) throws Exception
+    {
+
+        log.debug("Entering AnimalModelManagerImpl.addCarcinogenExposure (Antibody)");
+        CarcinogenExposure theCarcinogenExposure = CarcinogenExposureManagerSingleton.instance().create(inAnimalModel, inAntibodyData);
+        inAnimalModel.addCarcinogenExposure(theCarcinogenExposure);
+        save(inAnimalModel);
+        log.debug("Exiting AnimalModelManagerImpl.addCarcinogenExposure (Antibody)");
+    }
+    
+    /**
+     * Add a Bacteria
+     * 
+     * @param inAnimalModel
+     *            the animal model that has the addCarcinogenExposure
+     * @param inBacteriaData
+     *            the new chemical drug data
+     * @throws Exception
+     */
+    public void addCarcinogenExposure(AnimalModel inAnimalModel,
+    		BacteriaData inBacteriaData) throws Exception
+    {
+
+        log.debug("Entering AnimalModelManagerImpl.addCarcinogenExposure (Bacteria)");
+        CarcinogenExposure theCarcinogenExposure = CarcinogenExposureManagerSingleton.instance().create(inAnimalModel, inBacteriaData);
+        inAnimalModel.addCarcinogenExposure(theCarcinogenExposure);
+        save(inAnimalModel);
+        log.debug("Exiting AnimalModelManagerImpl.addCarcinogenExposure (Bacteria)");
+    }
+    
+    /**
+     * Add a Plasmid 
+     * 
+     * @param inAnimalModel
+     *            the animal model that has the addCarcinogenExposure
+     * @param inPlasmidData
+     *            the new chemical drug data
+     * @throws Exception
+     */
+    public void addCarcinogenExposure(AnimalModel inAnimalModel,
+    		PlasmidData inPlasmidData) throws Exception
+    {
+
+        log.debug("Entering AnimalModelManagerImpl.addCarcinogenExposure (Plasmid)");
+        CarcinogenExposure theCarcinogenExposure = CarcinogenExposureManagerSingleton.instance().create(inAnimalModel, inPlasmidData);
+        inAnimalModel.addCarcinogenExposure(theCarcinogenExposure);
+        save(inAnimalModel);
+        log.debug("Exiting AnimalModelManagerImpl.addCarcinogenExposure (Plasmid)");
+    }
+    
+    /**
+     * Add a SignalingMolecule
+     * 
+     * @param inAnimalModel
+     *            the animal model that has the addCarcinogenExposure
+     * @param inSignalingMoleculeData
+     *            the new chemical drug data
+     * @throws Exception
+     */
+    public void addCarcinogenExposure(AnimalModel inAnimalModel,
+    		SignalingMoleculeData inSignalingMoleculeData) throws Exception
+    {
+
+        log.debug("Entering AnimalModelManagerImpl.addCarcinogenExposure (SignalingMolecule)");
+        CarcinogenExposure theCarcinogenExposure = CarcinogenExposureManagerSingleton.instance().create(inAnimalModel, inSignalingMoleculeData);
+        inAnimalModel.addCarcinogenExposure(theCarcinogenExposure);
+        save(inAnimalModel);
+        log.debug("Exiting AnimalModelManagerImpl.addCarcinogenExposure (SignalingMolecule)");
+    }
+    
+    /**
+     * Add a Transposon
+     * 
+     * @param inAnimalModel
+     *            the animal model that has the addCarcinogenExposure
+     * @param inTransposonData
+     *            the new chemical drug data
+     * @throws Exception
+     */
+    public void addCarcinogenExposure(AnimalModel inAnimalModel,
+    		TransposonData inTransposonData) throws Exception
+    {
+
+        log.debug("Entering AnimalModelManagerImpl.addCarcinogenExposure (Transposon)");
+        CarcinogenExposure theCarcinogenExposure = CarcinogenExposureManagerSingleton.instance().create(inAnimalModel, inTransposonData);
+        inAnimalModel.addCarcinogenExposure(theCarcinogenExposure);
+        save(inAnimalModel);
+        log.debug("Exiting AnimalModelManagerImpl.addCarcinogenExposure (Transposon)");
+    }    
 
     /**
      * Add a cell line
