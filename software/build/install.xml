@@ -780,13 +780,17 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
  		install:jboss:camod-webapp:re-configure,
  		install:jboss:camod-webapp,
  		install:jboss:camod-webapp:configure,
-		install:jboss:camod-remote-api,
-		install:jboss:camod-grid-service,
  		install:post:jboss,
  		install:jboss:start,
  		install:jboss:validation:post-install
 		">
 	</target>
+	
+	<!--Add this back if putting all in same container works 
+		install:jboss:camod-remote-api,
+		install:jboss:camod-grid-service,
+	-->
+	
 
 	<target name="upgrade-ncm" description="Upgrades JBoss and Database"
 		depends="
