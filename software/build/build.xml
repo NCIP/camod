@@ -28,7 +28,8 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<property name="upgrade.properties.file" value="upgrade.properties"/>
 	<echo message="Using properties file of ${properties.file}." />
 	<available file="${properties.file}" property="properties.file.exists" />
-	<fail unless="properties.file.exists" message="The properties.file ${properties.file} does not exist, please make sure that you pass in an accurate file name with the 'ant -Dproperties.file=somepath/somefile', otherwise the build will fail." />
+	<!--Removed for AHP 3 -->
+	<!--fail unless="properties.file.exists" message="The properties.file ${properties.file} does not exist, please make sure that you pass in an accurate file name with the 'ant -Dproperties.file=somepath/somefile', otherwise the build will fail." /-->
 
 	<replaceregexp file="${properties.file}" byline="true" match="^([\w\d.]+)=(.*[\w\d\/\{\}\\]+)[ \t]+\r*$" replace="\1=\2" />
 	<replaceregexp file="${properties.file}" byline="true" match="^([\w\d.]+)=[ \t]+(.*[\w\d\/\{\}\\]+)\r*$" replace="\1=\2" />
@@ -298,11 +299,13 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		validate:pre:build,
  		clean,
  		init,
- 		build:camod-webapp,
-		build:camod-api,
-		build:camod-grid-service
+ 		build:camod-webapp
 		" >
 	</target>
+	
+	<!--Add this back if putting all in same container works
+	build:camod-api,
+	build:camod-grid-service-->
 
 	<target name="build:camod-grid-service" depends="init" description="Call grid_service sub-projects build target to produce artifacts">
 		<ant inheritAll="false" inheritRefs="false" antfile="${camod-grid-service.build.file}"
@@ -556,6 +559,23 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<remote-ssh remotesshcommand=". .bash_profile;cd ${ssh.dir.temp}; ant -Dproperties.file=${properties.file.name} -Dforce.reinstall=true ${install.target}" />
 	</target>
 
+	<target name="deploy:remote:upgrade:ahp" description="Installs and configures the application and required binaries and re-creates the datbase  on a remote machine. Used for NCI tiers (dev, qa, stg, prod)" >
+        <!--
+          * Will use the target from install.xml specified in ${upgrade.target} (defaults to upgrade unless passed in on command line).
+          * Requires specifying -Dproperties.file=@file@ on the command line to point installer to correct enviornment to install into.
+          * Calls ant from exec task to ensure properties are do not carry over from current ant runtime and also to emulate a manual install, if you want properties to be used at install time they must be included in a proeprties file.
+        -->
+        <!-- Call macro to deploy files on desired server -->
+        <echoproperties prefix="ssh"/>
+        <deploy-files dist.file="${bda-blueprints-webapp.upgrade.zip.file}" />
+        <override-properties-prep
+                override.properties="${override.properties}"
+                override.properties.string.property.name="override.properties.string"
+                />
+        <!-- SSH to machine ant run ant command line to install application -->
+        <remote-ssh remotesshcommand=". .bash_profile;cd ${ssh.dir.temp}; ant -Dproperties.file=${properties.file.name} -Dforce.reinstall=true ${override.properties.string} ${upgrade.target}" />
+  	</target>
+	
 	<target name="deploy:remote:upgrade" description="Installs and configures the application and required binaries and re-creates the datbase on a remote machine. Used for NCI tiers (dev, qa, stg, prod)" depends="
 		build:all,
 		dist:upgrader
