@@ -194,7 +194,7 @@ public class TestUtil {
     
     public static void savePropertyNameValue(String inPropertyName, String inPropertyValue){
     	ourPairList.put(inPropertyName, inPropertyValue);
-    	System.out.println("Added Property and Value to map: " + "\t" + inPropertyName + "\t" +  inPropertyValue);
+    	System.out.println("In savePropertyNameValue Added Property and Value to map: " + "\t" + inPropertyName + "\t" +  inPropertyValue);
 
     }
     /*
