@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.7"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.7
+	http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.7.xsd">
+	<preConditions>            
+		<or>
+			<dbms type="oracle" />                     
+			<!-- dbms type="mysql" /-->                     
+			<!--dbms type="postgresql" /-->                     
+		</or>
+	</preConditions>                                       
+	                                                        
+	<changeSet id="1" author="ssaksa">                            
+		<comment>execute 2009_Oct_2_6_1.sql</comment>
+		<sqlFile path="@db-upgrade.run.dir@/2009_Oct_2_6_1.sql"/>
+		<!--rollback>
+			<sqlFile path="@db-upgrade.run.dir@/drop-ssaksa_one.sql"/>
+			<sqlFile path="@db-upgrade.run.dir@/drop-ssaksa_two.sql"/>
+		</rollback-->
+	</changeSet>                                                                                      
+</databaseChangeLog>
+
