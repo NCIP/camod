@@ -13,9 +13,13 @@
 
   <!-- ========== Form Bean Definitions =================================== -->
   <form-beans>
-  		 <form-bean
+   		 <form-bean
 			name="animalModelStateForm"
 		    type="gov.nih.nci.camod.webapp.form.AnimalModelStateForm"/>
+		    
+		<form-bean
+			name="antibodyForm"
+		    type="gov.nih.nci.camod.webapp.form.AntibodyForm"/>		    
   
 		 <form-bean
 			name="associatedExpressionForm"
@@ -28,6 +32,10 @@
 		 <form-bean
 			name="availabilityForm"
 		    type="gov.nih.nci.camod.webapp.form.AvailabilityForm"/>
+		    
+		<form-bean
+			name="bacteriaForm"
+		    type="gov.nih.nci.camod.webapp.form.BacteriaForm"/>		    
 		    
 		 <form-bean
 			name="cellLineForm"
@@ -115,7 +123,11 @@
 		    
 		<form-bean
 			name="nutritionalFactorForm"
-		    type="gov.nih.nci.camod.webapp.form.NutritionalFactorForm"/>		    		    
+		    type="gov.nih.nci.camod.webapp.form.NutritionalFactorForm"/>
+		    
+		<form-bean
+			name="plasmidForm"
+		    type="gov.nih.nci.camod.webapp.form.PlasmidForm"/>
 		
 		<form-bean
 			name="publicationForm"
@@ -124,6 +136,10 @@
 		<form-bean
 			name="radiationForm"
 		    type="gov.nih.nci.camod.webapp.form.RadiationForm"/>
+		    
+		<form-bean
+			name="signalingMoleculeForm"
+		    type="gov.nih.nci.camod.webapp.form.SignalingMoleculeForm"/>		    
 		    
 		<form-bean
 			name="spontaneousMutationForm"
@@ -143,7 +159,11 @@
 		    
 		<form-bean
 			name="transientInterferenceForm"
-		    type="gov.nih.nci.camod.webapp.form.TransientInterferenceForm"/>		    
+		    type="gov.nih.nci.camod.webapp.form.TransientInterferenceForm"/>
+		    
+		<form-bean
+			name="transposonForm"
+		    type="gov.nih.nci.camod.webapp.form.TransposonForm"/>
 		
 		<form-bean
 			name="userSettingsForm"
@@ -377,6 +397,10 @@
 		<forward
 			name="subAdminMenu"
 			path="/jsp/protected/subAdminMenu.jsp"></forward>
+			
+		<forward
+			name="submitAntibody"
+			path="/jsp/protected/submitAntibody.jsp"></forward>			
 		
 		<forward
 			name="submitAssocExpression"
@@ -385,6 +409,10 @@
 		<forward
 			name="submitAssocMetastasis"
 			path="/jsp/protected/submitAssocMetastasis.jsp"></forward>
+			
+		<forward
+			name="submitBacteria"
+			path="/jsp/protected/submitBacteria.jsp"></forward>				
 		
 		<forward
 			name="submitCellLines"
@@ -485,6 +513,10 @@
 		<forward
 			name="submitOverview"
 			path="/jsp/protected/submitOverview.jsp"></forward>
+			
+		<forward
+			name="submitPlasmid"
+			path="/jsp/protected/submitPlasmid.jsp"></forward>				
 		
 		<forward
 			name="submitPublications"
@@ -493,6 +525,10 @@
 		<forward
 			name="submitRadiation"
 			path="/jsp/protected/submitRadiation.jsp"></forward>
+			
+		<forward
+			name="submitSignalingMolecule"
+			path="/jsp/protected/submitSignalingMolecule.jsp"></forward>			
 			
 		<forward
 			name="submitSirna"
@@ -516,7 +552,11 @@
 		
 		<forward
 			name="submitTransplantation"
-			path="/jsp/protected/submitTransplantation.jsp"></forward>
+			path="/jsp/protected/submitTransplantation.jsp"></forward>			
+			
+		<forward
+			name="submitTransposon"
+			path="/jsp/protected/submitTransposon.jsp"></forward>				
 		
 		<forward
 			name="submitViralTreatment"
@@ -657,6 +697,12 @@
 			<set-property property="secure" value="false"/>
 		</action>
 		<action
+			path="/submitAntibody"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/protected/submitAntibody.jsp">
+			<set-property property="secure" value="false"/>
+		</action>		
+		<action
 			path="/submitAssocExpression"
 			type="org.apache.struts.actions.ForwardAction"
 			parameter="/jsp/protected/submitAssocExpression.jsp">
@@ -667,7 +713,13 @@
 			type="org.apache.struts.actions.ForwardAction"
 			parameter="/jsp/protected/submitAssocMetastasis.jsp">
 			<set-property property="secure" value="false"/>
-		</action>
+		</action>		
+		<action
+			path="/submitBacteria"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/protected/submitBacteria.jsp">
+			<set-property property="secure" value="false"/>
+		</action>			
 		<action
 			path="/submitCellLines"
 			type="org.apache.struts.actions.ForwardAction"
@@ -783,6 +835,24 @@
 			parameter="/jsp/protected/submitMMHCCRepo.jsp">
 			<set-property property="secure" value="false"/>
 		</action>
+		<action
+			path="/submitPlasmid"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/protected/submitPlasmid.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
+		<action
+			path="/submitTransposon"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/protected/submitTransposon.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
+		<action
+			path="/submitSignalingMolecule"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/protected/submitPlasmid.jsp">
+			<set-property property="secure" value="false"/>
+		</action>		
 		<action
 			path="/submitZFIN"
 			type="org.apache.struts.actions.ForwardAction"
@@ -1266,6 +1336,31 @@
         </forward>
     </action>
      
+     
+   	 <!-- AntibodyForm -->
+   	 <action path="/AntibodyAction"
+	        type="gov.nih.nci.camod.webapp.action.AntibodyAction"
+	        name="antibodyForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="true"
+	        input="input">
+	    <set-property property="secure" value="false" />
+	    <forward
+            name="input"
+            path="/submitAntibody.do">
+        </forward>     	  	
+    </action>
+
+    <action path="/AntibodyPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.AntibodyPopulateAction"
+    		name="antibodyForm"    		
+            scope="request"
+            parameter="method"
+			validate="false">
+		<set-property property="secure" value="false" />
+    </action>
+         
      <!-- AssociatedExpressionForm -->
      <action path="/AssociatedExpressionAction"
 	        type="gov.nih.nci.camod.webapp.action.AssociatedExpressionAction"
@@ -1393,7 +1488,31 @@
     		name="next"
     		path="/submitZFIN.do">
     	 </forward>		
-     </action>         
+     </action>  
+     
+     <!-- BacteriaForm -->
+   	 <action path="/BacteriaAction"
+	        type="gov.nih.nci.camod.webapp.action.BacteriaAction"
+	        name="bacteriaForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="true"
+	        input="input">
+	    <set-property property="secure" value="false" />
+	    <forward
+            name="input"
+            path="/submitBacteria.do">
+        </forward>     	  	
+    </action>
+
+    <action path="/BacteriaPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.BacteriaPopulateAction"
+    		name="bacteriaForm"    		
+            scope="request"
+            parameter="method"
+			validate="false">
+		<set-property property="secure" value="false" />
+    </action>
 
       
      <!-- CellLineForm -->
@@ -1787,6 +1906,54 @@
 		<set-property property="secure" value="false" />
     </action>    
     
+     <!-- PlasmidForm -->
+   	 <action path="/PlasmidAction"
+	        type="gov.nih.nci.camod.webapp.action.PlasmidAction"
+	        name="plasmidForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="true"
+	        input="input">
+	    <set-property property="secure" value="false" />
+	    <forward
+            name="input"
+            path="/submitPlasmid.do">
+        </forward>     	  	
+    </action>
+
+    <action path="/PlasmidPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.PlasmidPopulateAction"
+    		name="plasmidForm"    		
+            scope="request"
+            parameter="method"
+			validate="false">
+		<set-property property="secure" value="false" />
+    </action>  
+        
+     <!-- SignalingMoleculeForm -->
+   	 <action path="/SignalingMoleculeAction"
+	        type="gov.nih.nci.camod.webapp.action.SignalingMoleculeAction"
+	        name="signalingMoleculeForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="true"
+	        input="input">
+	    <set-property property="secure" value="false" />
+	    <forward
+            name="input"
+            path="/submitSignalingMolecule.do">
+        </forward>     	  	
+    </action>
+
+    <action path="/SignalingMoleculePopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.SignalingMoleculePopulateAction"
+    		name="signalingMoleculeForm"    		
+            scope="request"
+            parameter="method"
+			validate="false">
+		<set-property property="secure" value="false" />
+    </action> 
+        
      <!-- TransientInterference Form(s) -->
      <action path="/MorpholinoAction"
 	        type="gov.nih.nci.camod.webapp.action.TransientInterferenceAction"
@@ -1833,6 +2000,30 @@
 			validate="false">
 		<set-property property="secure" value="false" />
     </action>
+    
+     <!-- TransposonForm -->
+   	 <action path="/TransposonAction"
+	        type="gov.nih.nci.camod.webapp.action.TransposonAction"
+	        name="transposonForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="true"
+	        input="input">
+	    <set-property property="secure" value="false" />
+	    <forward
+            name="input"
+            path="/submitTransposon.do">
+        </forward>     	  	
+    </action>
+
+    <action path="/TransposonPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.TransposonPopulateAction"
+    		name="transposonForm"    		
+            scope="request"
+            parameter="method"
+			validate="false">
+		<set-property property="secure" value="false" />
+    </action>    
     
     <!--  Generate the list of items on the submission subMenu -->
 	<action path="/AnimalModelTreePopulateAction"
