@@ -104,23 +104,26 @@ public class ChemicalDrugPopulateAction extends BaseAction
             {
                 chemicalDrugForm.setName(ce.getEnvironmentalFactor().getName());
             }
-
-            // Set the other flag or the selected administrative route from
-            // database
-            if (ce.getTreatment().getAdminRouteAlternEntry() != null)
-            {
-                chemicalDrugForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
-                chemicalDrugForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteAlternEntry());
-            }
-            else
-            {
-                chemicalDrugForm.setAdministrativeRoute(ce.getTreatment().getAdministrativeRoute());
-            }
-
-            chemicalDrugForm.setDosage(ce.getTreatment().getDosage());
-            chemicalDrugForm.setDosageUnit(ce.getTreatment().getDosageUnit());
-            chemicalDrugForm.setRegimen(ce.getTreatment().getRegimen());
-            chemicalDrugForm.setCasNumber(ce.getEnvironmentalFactor().getCasNumber());
+            
+			// Added for MTB models that do not have a treatment id
+			if (ce.getTreatment() != null ) {
+	            // Set the other flag or the selected administrative route from
+	            // database
+	            if (ce.getTreatment().getAdminRouteAlternEntry() != null)
+	            {
+	                chemicalDrugForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
+	                chemicalDrugForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteAlternEntry());
+	            }
+	            else
+	            {
+	                chemicalDrugForm.setAdministrativeRoute(ce.getTreatment().getAdministrativeRoute());
+	            }
+	
+	            chemicalDrugForm.setDosage(ce.getTreatment().getDosage());
+	            chemicalDrugForm.setDosageUnit(ce.getTreatment().getDosageUnit());
+	            chemicalDrugForm.setRegimen(ce.getTreatment().getRegimen());
+	            chemicalDrugForm.setCasNumber(ce.getEnvironmentalFactor().getCasNumber());
+			}
 
             if (ce.getEnvironmentalFactor().getNscNumber() != null)
             {

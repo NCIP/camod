@@ -56,22 +56,25 @@ public class PlasmidPopulateAction extends BaseAction {
 
 			// Set the other administrative route and/or the selected
 			// administrative route
-			if (ce.getTreatment().getAdminRouteAlternEntry() != null) {
-				plasmidForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
-				plasmidForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteAlternEntry());
-			} else {
-				plasmidForm.setAdministrativeRoute(ce.getTreatment().getAdministrativeRoute());
+			// Added for MTB models that do not have a treatment id
+			if (ce.getTreatment() != null ) {			
+				if (ce.getTreatment().getAdminRouteAlternEntry() != null) {
+					plasmidForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
+					plasmidForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteAlternEntry());
+				} else {
+					plasmidForm.setAdministrativeRoute(ce.getTreatment().getAdministrativeRoute());
+				}
+	
+				if (ce.getTreatment().getSexDistribution() != null) {
+					plasmidForm.setType(ce.getTreatment().getSexDistribution().getType());
+				}
+				plasmidForm.setDosage(ce.getTreatment().getDosage());
+	            plasmidForm.setDosageUnit(ce.getTreatment().getDosageUnit());
+				plasmidForm.setRegimen(ce.getTreatment().getRegimen());
+				plasmidForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
+	            plasmidForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit());
 			}
-
-			if (ce.getTreatment().getSexDistribution() != null) {
-				plasmidForm.setType(ce.getTreatment().getSexDistribution().getType());
-			}
-			plasmidForm.setDosage(ce.getTreatment().getDosage());
-            plasmidForm.setDosageUnit(ce.getTreatment().getDosageUnit());
-			plasmidForm.setRegimen(ce.getTreatment().getRegimen());
-			plasmidForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
-            plasmidForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit());
-            
+			
             if (ce.getEnvironmentalFactor().getComments() != null)
             {
             	plasmidForm.setComments(ce.getEnvironmentalFactor().getComments());

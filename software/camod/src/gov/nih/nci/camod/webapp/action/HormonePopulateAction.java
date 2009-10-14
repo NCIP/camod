@@ -77,22 +77,25 @@ public class HormonePopulateAction extends BaseAction {
 
 			// Set the other administrative route and/or the selected
 			// administrative route
-			if (ce.getTreatment().getAdminRouteAlternEntry() != null) {
-				hormoneForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
-				hormoneForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteAlternEntry());
-			} else {
-				hormoneForm.setAdministrativeRoute(ce.getTreatment().getAdministrativeRoute());
+			// Added for MTB models that do not have a treatment id
+			if (ce.getTreatment() != null ) {			
+				if (ce.getTreatment().getAdminRouteAlternEntry() != null) {
+					hormoneForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
+					hormoneForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteAlternEntry());
+				} else {
+					hormoneForm.setAdministrativeRoute(ce.getTreatment().getAdministrativeRoute());
+				}
+	
+				if (ce.getTreatment().getSexDistribution() != null) {
+					hormoneForm.setType(ce.getTreatment().getSexDistribution().getType());
+				}
+				hormoneForm.setDosage(ce.getTreatment().getDosage());
+	            hormoneForm.setDosageUnit(ce.getTreatment().getDosageUnit());
+				hormoneForm.setRegimen(ce.getTreatment().getRegimen());
+				hormoneForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
+	            hormoneForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit());
 			}
-
-			if (ce.getTreatment().getSexDistribution() != null) {
-				hormoneForm.setType(ce.getTreatment().getSexDistribution().getType());
-			}
-			hormoneForm.setDosage(ce.getTreatment().getDosage());
-            hormoneForm.setDosageUnit(ce.getTreatment().getDosageUnit());
-			hormoneForm.setRegimen(ce.getTreatment().getRegimen());
-			hormoneForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
-            hormoneForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit());
-            
+			
             if (ce.getEnvironmentalFactor().getComments() != null)
             {
             	hormoneForm.setComments(ce.getEnvironmentalFactor().getComments());

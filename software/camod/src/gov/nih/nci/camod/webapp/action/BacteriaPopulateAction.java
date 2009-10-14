@@ -56,23 +56,26 @@ public class BacteriaPopulateAction extends BaseAction {
 
 			// Set the other administrative route and/or the selected
 			// administrative route
-			if (ce.getTreatment().getAdminRouteAlternEntry() != null & ce.getTreatment().getAdminRouteAlternEntry().length() > 0) {
-				log.info("ce.getTreatment().getAdminRouteAlternEntry: "  + ce.getTreatment().getAdminRouteAlternEntry().toString());
-				bacteriaForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
-				bacteriaForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteAlternEntry());
-			} else {
-				bacteriaForm.setAdministrativeRoute(ce.getTreatment().getAdministrativeRoute());
+			// Added for MTB models that do not have a treatment id
+			if (ce.getTreatment() != null ) {			
+				if (ce.getTreatment().getAdminRouteAlternEntry() != null & ce.getTreatment().getAdminRouteAlternEntry().length() > 0) {
+					log.info("ce.getTreatment().getAdminRouteAlternEntry: "  + ce.getTreatment().getAdminRouteAlternEntry().toString());
+					bacteriaForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
+					bacteriaForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteAlternEntry());
+				} else {
+					bacteriaForm.setAdministrativeRoute(ce.getTreatment().getAdministrativeRoute());
+				}
+	
+				if (ce.getTreatment().getSexDistribution() != null) {
+					bacteriaForm.setType(ce.getTreatment().getSexDistribution().getType());
+				}
+				bacteriaForm.setDosage(ce.getTreatment().getDosage());
+	            bacteriaForm.setDosageUnit(ce.getTreatment().getDosageUnit());
+				bacteriaForm.setRegimen(ce.getTreatment().getRegimen());
+				bacteriaForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
+	            bacteriaForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit());
 			}
-
-			if (ce.getTreatment().getSexDistribution() != null) {
-				bacteriaForm.setType(ce.getTreatment().getSexDistribution().getType());
-			}
-			bacteriaForm.setDosage(ce.getTreatment().getDosage());
-            bacteriaForm.setDosageUnit(ce.getTreatment().getDosageUnit());
-			bacteriaForm.setRegimen(ce.getTreatment().getRegimen());
-			bacteriaForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
-            bacteriaForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit());
-            
+			
             if (ce.getEnvironmentalFactor().getComments() != null)
             {
             	bacteriaForm.setComments(ce.getEnvironmentalFactor().getComments());

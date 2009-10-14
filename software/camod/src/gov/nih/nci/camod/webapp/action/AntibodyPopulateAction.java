@@ -77,9 +77,7 @@ public class AntibodyPopulateAction extends BaseAction {
 				if (ce.getTreatment().getSexDistribution() != null) {
 					antibodyForm.setType(ce.getTreatment().getSexDistribution().getType());
 				}
-		    }
-			
-			if (ce.getTreatment() != null ) {
+
 				antibodyForm.setDosage(ce.getTreatment().getDosage());
 	            antibodyForm.setDosageUnit(ce.getTreatment().getDosageUnit());
 				antibodyForm.setRegimen(ce.getTreatment().getRegimen());

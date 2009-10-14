@@ -79,24 +79,26 @@ public class EnvironmentalFactorPopulateAction extends BaseAction {
             }
 
             // Set the other administrative route and/or the selected
-            // administrative
-            // route
-            if (ce.getTreatment().getAdminRouteAlternEntry() != null) {
-                envForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
-                envForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteAlternEntry());
-            } else {
-                envForm.setAdministrativeRoute(ce.getTreatment().getAdministrativeRoute());
-            }
-
-            if (ce.getTreatment().getSexDistribution() != null) {
-                envForm.setType(ce.getTreatment().getSexDistribution().getType());
-            }
-            envForm.setDosage(ce.getTreatment().getDosage());
-            envForm.setDosageUnit(ce.getTreatment().getDosageUnit());
-            envForm.setRegimen(ce.getTreatment().getRegimen());
-            envForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
-            envForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit()); 
-            
+            // administrative route
+			// Added for MTB models that do not have a treatment id
+			if (ce.getTreatment() != null ) {            
+	            if (ce.getTreatment().getAdminRouteAlternEntry() != null) {
+	                envForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
+	                envForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteAlternEntry());
+	            } else {
+	                envForm.setAdministrativeRoute(ce.getTreatment().getAdministrativeRoute());
+	            }
+	
+	            if (ce.getTreatment().getSexDistribution() != null) {
+	                envForm.setType(ce.getTreatment().getSexDistribution().getType());
+	            }
+	            envForm.setDosage(ce.getTreatment().getDosage());
+	            envForm.setDosageUnit(ce.getTreatment().getDosageUnit());
+	            envForm.setRegimen(ce.getTreatment().getRegimen());
+	            envForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
+	            envForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit()); 
+			}
+			
             if (ce.getEnvironmentalFactor().getComments() != null)
             {
             	envForm.setComments(ce.getEnvironmentalFactor().getComments());

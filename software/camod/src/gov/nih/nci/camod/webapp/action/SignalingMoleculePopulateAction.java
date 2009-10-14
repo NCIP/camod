@@ -56,22 +56,25 @@ public class SignalingMoleculePopulateAction extends BaseAction {
 
 			// Set the other administrative route and/or the selected
 			// administrative route
-			if (ce.getTreatment().getAdminRouteAlternEntry() != null) {
-				signalingMoleculeForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
-				signalingMoleculeForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteAlternEntry());
-			} else {
-				signalingMoleculeForm.setAdministrativeRoute(ce.getTreatment().getAdministrativeRoute());
-			}
-
-			if (ce.getTreatment().getSexDistribution() != null) {
-				signalingMoleculeForm.setType(ce.getTreatment().getSexDistribution().getType());
-			}
-			signalingMoleculeForm.setDosage(ce.getTreatment().getDosage());
-            signalingMoleculeForm.setDosageUnit(ce.getTreatment().getDosageUnit());
-			signalingMoleculeForm.setRegimen(ce.getTreatment().getRegimen());
-			signalingMoleculeForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
-            signalingMoleculeForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit());
-            
+			// Added for MTB models that do not have a treatment id
+			if (ce.getTreatment() != null ) {			
+				if (ce.getTreatment().getAdminRouteAlternEntry() != null) {
+					signalingMoleculeForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
+					signalingMoleculeForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteAlternEntry());
+				} else {
+					signalingMoleculeForm.setAdministrativeRoute(ce.getTreatment().getAdministrativeRoute());
+				}
+	
+				if (ce.getTreatment().getSexDistribution() != null) {
+					signalingMoleculeForm.setType(ce.getTreatment().getSexDistribution().getType());
+				}
+				signalingMoleculeForm.setDosage(ce.getTreatment().getDosage());
+	            signalingMoleculeForm.setDosageUnit(ce.getTreatment().getDosageUnit());
+				signalingMoleculeForm.setRegimen(ce.getTreatment().getRegimen());
+				signalingMoleculeForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
+	            signalingMoleculeForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit());
+			} 
+			
             if (ce.getEnvironmentalFactor().getComments() != null)
             {
             	signalingMoleculeForm.setComments(ce.getEnvironmentalFactor().getComments());

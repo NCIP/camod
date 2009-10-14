@@ -108,18 +108,21 @@ public class GeneDeliveryPopulateAction extends BaseAction {
 				geneDeliveryForm.setViralVector(gene.getViralVector());
 			}
 
-			geneDeliveryForm.setGeneInVirus(gene.getGeneInVirus());
-			geneDeliveryForm.setRegimen(gene.getTreatment().getRegimen());
-
-			if (gene.getTreatment().getSexDistribution() != null) {
-				geneDeliveryForm.setType(gene.getTreatment()
-						.getSexDistribution().getType());
-			}
-			geneDeliveryForm.setAgeAtTreatment(gene.getTreatment()
-					.getAgeAtTreatment());
-			geneDeliveryForm.setAgeAtTreatmentUnit(gene.getTreatment()
-					.getAgeAtTreatmentUnit());
-
+			// Added for MTB models that do not have a treatment id
+			if (gene.getTreatment() != null ) {			
+				geneDeliveryForm.setGeneInVirus(gene.getGeneInVirus());
+				geneDeliveryForm.setRegimen(gene.getTreatment().getRegimen());
+	
+				if (gene.getTreatment().getSexDistribution() != null) {
+					geneDeliveryForm.setType(gene.getTreatment()
+							.getSexDistribution().getType());
+				}
+				geneDeliveryForm.setAgeAtTreatment(gene.getTreatment()
+						.getAgeAtTreatment());
+				geneDeliveryForm.setAgeAtTreatmentUnit(gene.getTreatment()
+						.getAgeAtTreatmentUnit());
+			} 
+			
 			/* set Organ attributes */
 			log.debug("<GeneDeliveryPopulateAction> get the Organ attributes");
 

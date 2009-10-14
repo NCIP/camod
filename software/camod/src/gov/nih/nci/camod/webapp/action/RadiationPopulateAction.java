@@ -80,31 +80,33 @@ public class RadiationPopulateAction extends BaseAction {
 			}
 
 			// Set the other administrative route and/or the selected
-			// administrative
-			// route
-			if (ce.getTreatment().getAdminRouteAlternEntry() != null) {
-				radiationForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
-				radiationForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteAlternEntry());
-			} else {
+			// administrative route
+			// Added for MTB models that do not have a treatment id
+			if (ce.getTreatment() != null ) {			
+				if (ce.getTreatment().getAdminRouteAlternEntry() != null) {
+					radiationForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
+					radiationForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteAlternEntry());
+				} else {
+					radiationForm.setAdministrativeRoute(ce.getTreatment().getAdministrativeRoute());
+				}
+	
+				if (ce.getTreatment().getSexDistribution() != null) {
+					radiationForm.setType(ce.getTreatment().getSexDistribution().getType());
+				}
+				radiationForm.setDosage(ce.getTreatment().getDosage());
+	            radiationForm.setDosageUnit(ce.getTreatment().getDosageUnit());
+				radiationForm.setRegimen(ce.getTreatment().getRegimen());
 				radiationForm.setAdministrativeRoute(ce.getTreatment().getAdministrativeRoute());
-			}
-
-			if (ce.getTreatment().getSexDistribution() != null) {
-				radiationForm.setType(ce.getTreatment().getSexDistribution().getType());
-			}
-			radiationForm.setDosage(ce.getTreatment().getDosage());
-            radiationForm.setDosageUnit(ce.getTreatment().getDosageUnit());
-			radiationForm.setRegimen(ce.getTreatment().getRegimen());
-			radiationForm.setAdministrativeRoute(ce.getTreatment().getAdministrativeRoute());
-            
-            if (ce.getTreatment().getAdminRouteAlternEntry() != null) {
-                radiationForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
-                radiationForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteAlternEntry());
-            }
-            
-			radiationForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
-            radiationForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit()); 
-            
+	            
+	            if (ce.getTreatment().getAdminRouteAlternEntry() != null) {
+	                radiationForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
+	                radiationForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteAlternEntry());
+	            }
+	            
+				radiationForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
+	            radiationForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit()); 
+			} 
+			
             if (ce.getEnvironmentalFactor().getComments() != null)
             {
             	radiationForm.setComments(ce.getEnvironmentalFactor().getComments());

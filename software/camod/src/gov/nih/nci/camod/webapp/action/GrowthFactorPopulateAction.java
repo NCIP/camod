@@ -74,23 +74,25 @@ public class GrowthFactorPopulateAction extends BaseAction {
 			}
 
 			// Set the other administrative route and/or the selected
-			// administrative
-			// route
-			if (ce.getTreatment().getAdminRouteAlternEntry() != null) {
-				growthFactorForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
-				growthFactorForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteAlternEntry());
-			} else {
-				growthFactorForm.setAdministrativeRoute(ce.getTreatment().getAdministrativeRoute());
+			// administrative route
+			// Added for MTB models that do not have a treatment id
+			if (ce.getTreatment() != null ) {			
+				if (ce.getTreatment().getAdminRouteAlternEntry() != null) {
+					growthFactorForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
+					growthFactorForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteAlternEntry());
+				} else {
+					growthFactorForm.setAdministrativeRoute(ce.getTreatment().getAdministrativeRoute());
+				}
+	
+				if (ce.getTreatment().getSexDistribution() != null) {
+					growthFactorForm.setType(ce.getTreatment().getSexDistribution().getType());
+				}
+				growthFactorForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
+	            growthFactorForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit());
+				growthFactorForm.setDosage(ce.getTreatment().getDosage());
+	            growthFactorForm.setDosageUnit(ce.getTreatment().getDosageUnit());
+				growthFactorForm.setRegimen(ce.getTreatment().getRegimen());
 			}
-
-			if (ce.getTreatment().getSexDistribution() != null) {
-				growthFactorForm.setType(ce.getTreatment().getSexDistribution().getType());
-			}
-			growthFactorForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
-            growthFactorForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit());
-			growthFactorForm.setDosage(ce.getTreatment().getDosage());
-            growthFactorForm.setDosageUnit(ce.getTreatment().getDosageUnit());
-			growthFactorForm.setRegimen(ce.getTreatment().getRegimen());
 			
             if (ce.getEnvironmentalFactor().getComments() != null)
             {

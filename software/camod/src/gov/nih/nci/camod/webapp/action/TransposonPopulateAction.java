@@ -56,22 +56,25 @@ public class TransposonPopulateAction extends BaseAction {
 
 			// Set the other administrative route and/or the selected
 			// administrative route
-			if (ce.getTreatment().getAdminRouteAlternEntry() != null) {
-				transposonForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
-				transposonForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteAlternEntry());
-			} else {
-				transposonForm.setAdministrativeRoute(ce.getTreatment().getAdministrativeRoute());
-			}
-
-			if (ce.getTreatment().getSexDistribution() != null) {
-				transposonForm.setType(ce.getTreatment().getSexDistribution().getType());
-			}
-			transposonForm.setDosage(ce.getTreatment().getDosage());
-            transposonForm.setDosageUnit(ce.getTreatment().getDosageUnit());
-			transposonForm.setRegimen(ce.getTreatment().getRegimen());
-			transposonForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
-            transposonForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit());
-            
+			// Added for MTB models that do not have a treatment id
+			if (ce.getTreatment() != null ) {			
+				if (ce.getTreatment().getAdminRouteAlternEntry() != null) {
+					transposonForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
+					transposonForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteAlternEntry());
+				} else {
+					transposonForm.setAdministrativeRoute(ce.getTreatment().getAdministrativeRoute());
+				}
+	
+				if (ce.getTreatment().getSexDistribution() != null) {
+					transposonForm.setType(ce.getTreatment().getSexDistribution().getType());
+				}
+				transposonForm.setDosage(ce.getTreatment().getDosage());
+	            transposonForm.setDosageUnit(ce.getTreatment().getDosageUnit());
+				transposonForm.setRegimen(ce.getTreatment().getRegimen());
+				transposonForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
+	            transposonForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit());
+			} 
+			
             if (ce.getEnvironmentalFactor().getComments() != null)
             {
             	transposonForm.setComments(ce.getEnvironmentalFactor().getComments());

@@ -79,19 +79,23 @@ public class ViralTreatmentPopulateAction extends BaseAction {
 			if (ce.getTreatment().getSexDistribution() != null) {
 				viralTreatmentForm.setType(ce.getTreatment().getSexDistribution().getType());
 			}
-			viralTreatmentForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
-            viralTreatmentForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit());            
-			viralTreatmentForm.setDosage(ce.getTreatment().getDosage());
-            viralTreatmentForm.setDosageUnit(ce.getTreatment().getDosageUnit());
-
-			viralTreatmentForm.setRegimen(ce.getTreatment().getRegimen());
-			viralTreatmentForm.setAdministrativeRoute(ce.getTreatment().getAdministrativeRoute());
-
-            if (ce.getTreatment().getAdminRouteAlternEntry() != null) {
-                viralTreatmentForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
-                viralTreatmentForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteAlternEntry());
-            }
-            
+			
+			// Added for MTB models that do not have a treatment id
+			if (ce.getTreatment() != null ) {			
+				viralTreatmentForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
+	            viralTreatmentForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit());            
+				viralTreatmentForm.setDosage(ce.getTreatment().getDosage());
+	            viralTreatmentForm.setDosageUnit(ce.getTreatment().getDosageUnit());
+	
+				viralTreatmentForm.setRegimen(ce.getTreatment().getRegimen());
+				viralTreatmentForm.setAdministrativeRoute(ce.getTreatment().getAdministrativeRoute());
+	
+	            if (ce.getTreatment().getAdminRouteAlternEntry() != null) {
+	                viralTreatmentForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
+	                viralTreatmentForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteAlternEntry());
+	            }
+			}
+			
             if (ce.getEnvironmentalFactor().getComments() != null)
             {
             	viralTreatmentForm.setComments(ce.getEnvironmentalFactor().getComments());

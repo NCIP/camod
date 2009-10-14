@@ -76,15 +76,18 @@ public class NutritionalFactorPopulateAction extends BaseAction {
 				nutritForm.setName(ce.getEnvironmentalFactor().getName());
 			}
 
-			if (ce.getTreatment().getSexDistribution() != null) {
-				nutritForm.setType(ce.getTreatment().getSexDistribution().getType());
+			// Added for MTB models that do not have a treatment id
+			if (ce.getTreatment() != null ) {			
+				if (ce.getTreatment().getSexDistribution() != null) {
+					nutritForm.setType(ce.getTreatment().getSexDistribution().getType());
+				}
+				nutritForm.setDosage(ce.getTreatment().getDosage());
+	            nutritForm.setDosageUnit(ce.getTreatment().getDosageUnit());
+				nutritForm.setRegimen(ce.getTreatment().getRegimen());
+				nutritForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
+	            nutritForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit());
 			}
-			nutritForm.setDosage(ce.getTreatment().getDosage());
-            nutritForm.setDosageUnit(ce.getTreatment().getDosageUnit());
-			nutritForm.setRegimen(ce.getTreatment().getRegimen());
-			nutritForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
-            nutritForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit());
-            
+			
             if (ce.getEnvironmentalFactor().getComments() != null)
             {
             	nutritForm.setComments(ce.getEnvironmentalFactor().getComments());
