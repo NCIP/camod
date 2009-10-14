@@ -14,11 +14,14 @@
 	<property name="grid.service.dir" value="grid_service" />
 	<property name="globus.lib.dir" value="${grid.service.dir}/globus_lib_files" />
 	<property name="resource.file.jboss-globus-lib" value="jboss-globus-libs-cagrid1_2.zip" />
+	
+	<property name="client.orm.jar.filename" value="caGRID-sdkQuery4-processor-1.2.jar" />
+	<property name="any.filename" value="camod.war" />
 
 	<!-- ************************************************************************************************-->
 	<!--                                             Configure Index Service                             -->
 	<!-- ************************************************************************************************-->
-	<target name="config-index-service-url" depends="unjar-file">
+	<target name="config-index-service-url" depends="unjar-grid-file">
 		<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/${grid.service.name}_registration.xml" token="http://cagrid-index.nci.nih.gov:8080" value="${grid.index.service.base.url}"/>
 		<replace file="${temp.dir}/WEB-INF/etc/globus_resolution_service/jndi-config.xml" token="localhost:8080" value="${jboss.server.hostname}:${jboss.server.port}"/>
 		<replace file="${temp.dir}/WEB-INF/web.xml" token="8080" value="${jboss.server.port}"/>
@@ -65,10 +68,17 @@
 	</target>
 	
 	<!-- Take grid_service\wsrf-camod.war and unjar the contents into temp.dir -->
-	<target name="unjar-file">
+	<target name="unjar-grid-file">
 		<delete dir="${temp.dir}" failonerror="false"/>
 		<mkdir dir="${temp.dir}"/>
 		<unjar src="${grid.service.war.filename}" dest="${temp.dir}"/>
+	</target>
+	
+	<!-- Take any and unjar the contents into temp.dir -->
+	<target name="unjar-any-file">
+		<delete dir="${temp.dir}" failonerror="false"/>
+		<mkdir dir="${temp.dir}"/>
+		<unjar src="${any.filename}" dest="${temp.dir}"/>
 	</target>
 	
 	<!-- Configure grid service for the various tiers (modify properties file)  -->
@@ -106,7 +116,8 @@
 		<delete dir="${temp.dir}" failonerror="false"/>
 		<mkdir dir="${temp.dir}"/>
 		<unjar src="${client.sdk.war.filename}" dest="${temp.dir}"/>
-	</target>	
+	</target>
+	
 	<target name="war-sdk-client-file">
 		<jar destfile="${build.dir}/camodSDKClient.war" basedir="${temp.dir}" />
 	</target>	
