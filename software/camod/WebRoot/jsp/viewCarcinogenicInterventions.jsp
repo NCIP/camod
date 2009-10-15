@@ -513,6 +513,7 @@
 			<!--   End of if externalSource is empty (caMOD data) -->
 			</c:if>			
 			</TABLE>
+			<br>
 			</c:if>
 			
 			<!--   Start Surgery / Other Section ------------------------------------------------>
@@ -841,7 +842,10 @@
 			</tr>
 			</c:forEach>
 			</TABLE>
+			<br>
 			</c:if>
+			
+
 
 
 			<!--   Start Nutritional Factor Section  (caMOD data) ------------------------------------------------>
