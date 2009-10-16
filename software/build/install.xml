@@ -196,7 +196,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 				<property name="database.dialect" value="org.hibernate.dialect.OracleDialect"/>
 				<property name="database.driver.file" value="${bda-utils.dir}/ojdbc14-10.2.0.4.0.jar"/>
 				<property name="database.driver" value="oracle.jdbc.driver.OracleDriver"/>
-				<property name="database.schema" value="${database.name}"/>
+				<property name="database.schema" value="${database.user}"/>
 			</case>
 			<case value="mysql">
 				<property name="database.dialect" value="org.hibernate.dialect.MySQLDialect"/>
@@ -947,6 +947,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	</target>
 
 	<target name="upgrade:jboss:init:prep" depends="upgrade:common:init:prep" unless="install.running">
+		<echoproperties prefix="jboss"/>
 		<property name="jboss.home" value="${application.base.path}/${jboss.relative.path}"/>
 		<if>
 			<equals arg1="${jboss.ncicb-standard.port-config}" arg2="true"/>
@@ -987,7 +988,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	</target>
 
 	<target name="upgrade:jboss:readers:bda" if="jboss.exists">
-
+		<echoproperties prefix="jboss"/>
 		<!-- Make sure the ${properties.file} has at least the following props -->
 		<properties-exist
 			properties.list="application.base.path,jboss.home,jboss.server.name"
@@ -1010,7 +1011,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			</then>
 		</if>
 		<!-- Begin JBoss Readers -->
-		<!-- Reader reqiures that you have only one data source defined in each *-ds.xml file -->
+		<!-- Reader requires that you have only one data source defined in each *-ds.xml file -->
 		<jboss-read-dbconfig
 			jboss.home="${read.jboss.home}"
 			jboss.ds-xml.file="oracle-ds.xml"
