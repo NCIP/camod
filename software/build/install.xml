@@ -526,7 +526,8 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<if>
 			<isset property="jboss.exists"/>
 			<then>
-				<jboss-stop-jboss jboss.server.jndi.port="${jboss.server.jndi.port}"/>
+				<!--jboss-stop-jboss jboss.server.jndi.port="${jboss.server.jndi.port}"/-->
+				<jboss-stop-jboss jboss.server.jndi.port="${jboss.server.port}"/>
 			</then>
 		</if>
 	</target>
