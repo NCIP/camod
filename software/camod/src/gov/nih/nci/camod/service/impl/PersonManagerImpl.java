@@ -150,7 +150,7 @@ public class PersonManagerImpl extends BaseManager implements PersonManager {
 	 */
 	public List getByRole(String inRole) throws Exception {
 
-		List thePeople = new ArrayList();
+		List thePeople = new ArrayList<Object>();
 
 		if (inRole != null && inRole.length() > 0) {
 			try {
