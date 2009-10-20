@@ -781,7 +781,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         // validate for PI
         if (piName != null && piName.length() > 0 )
         {
-            List piNameList = new ArrayList();
+            List piNameList = new ArrayList<String>();
             piNameList = (List)request.getSession().getAttribute(Constants.Dropdowns.PRINCIPALINVESTIGATORQUERYDROP);
             request.getSession().setAttribute(Constants.Dropdowns.SEARCHPIDROP, piNameList);            
             
@@ -814,7 +814,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         // validate genomicSegDesignator against malicious characters to prevent blind SQL injection attacks
         if (genomicSegDesignator != null && genomicSegDesignator.length() > 0 )
         {
-            List genomicSegDesigList = new ArrayList();
+            List genomicSegDesigList = new ArrayList<String>();
             genomicSegDesigList = (List)request.getSession().getAttribute(Constants.Dropdowns.CLONEDESIGNATORQUERYDROP);
             request.getSession().setAttribute(Constants.Dropdowns.SEARCHGENOMICSEGMENTDROP, genomicSegDesigList);            
             
@@ -829,7 +829,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         // validate for inducedMutationAgent
         if (inducedMutationAgent != null && inducedMutationAgent.length() > 0 )
         { 
-            List inducedMutationAgentList = new ArrayList();
+            List inducedMutationAgentList = new ArrayList<String>();
             inducedMutationAgentList = (List)request.getSession().getAttribute(Constants.Dropdowns.INDUCEDMUTATIONAGENTQUERYDROP);
             request.getSession().setAttribute(Constants.Dropdowns.SEARCHINDUCEDMUTATIONDROP, inducedMutationAgentList);
 
@@ -843,7 +843,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         // validate for carcinogenicIntervention
         if (carcinogenicIntervention != null && carcinogenicIntervention.length() > 0 )
         {   
-        	List envFactorAgentNameList = new ArrayList();        
+        	List envFactorAgentNameList = new ArrayList<String>();        
             envFactorAgentNameList = (List)request.getSession().getAttribute(Constants.Dropdowns.CARCINOGENICAGENTSQUERYDROP);
             request.getSession().setAttribute(Constants.Dropdowns.SEARCHCARCINOGENEXPOSUREDROP, envFactorAgentNameList);
 
@@ -856,7 +856,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             // validate for agentName            
             if (agentName != null && agentName.length() > 0 )
             {
-                List agentNameList = new ArrayList();
+                List agentNameList = new ArrayList<String>();
                 agentNameList = (List)request.getSession().getAttribute(Constants.Dropdowns.ENVIRONMENTALFACTORNAMESDROP);
                 request.getSession().setAttribute(Constants.Dropdowns.SEARCHENVIRONFACTORDROP, agentNameList);            
                 
@@ -873,7 +873,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         // validate for cellLine            
         if (cellLine != null && cellLine.length() > 0 )
         {
-            List cellLineList = new ArrayList();
+            List cellLineList = new ArrayList<String>();
             cellLineList = (List)request.getSession().getAttribute(Constants.Dropdowns.CELLLINENAMEQUERYDROP);
             request.getSession().setAttribute(Constants.Dropdowns.SEARCHCELLLINEDROP, cellLineList);            
             
@@ -890,7 +890,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         // validate therpy compound/drug against malicious characters to prevent blind SQL injection attacks
         if (therapeuticApproach != null   )
         { 
-            List drugNameList = new ArrayList();
+            List drugNameList = new ArrayList<String>();
             drugNameList = (List)request.getSession().getAttribute(Constants.Dropdowns.THERAPEUTICAPPROACHDRUGQUERYDROP);
             request.getSession().setAttribute(Constants.Dropdowns.SEARCHTHERAPEUTICDRUGNAMEDROP, drugNameList);            
             
