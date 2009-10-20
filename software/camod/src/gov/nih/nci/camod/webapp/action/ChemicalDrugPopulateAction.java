@@ -79,20 +79,7 @@ public class ChemicalDrugPopulateAction extends BaseAction
         }
         else
         {
-            request.setAttribute("aCarcinogenExposureID", aCarcinogenExposureID);
-
-            if (ce.getTreatment().getSexDistribution() != null)
-            {
-                chemicalDrugForm.setType(ce.getTreatment().getSexDistribution().getType());
-            }
-            if (ce.getTreatment().getAgeAtTreatment() != null)
-            {
-                chemicalDrugForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
-            }
-            if (ce.getTreatment().getAgeAtTreatmentUnit() != null)
-            {
-                chemicalDrugForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit());                
-            }            
+            request.setAttribute("aCarcinogenExposureID", aCarcinogenExposureID);            
 
             // Set the other name and/or selected name from database
             if (ce.getEnvironmentalFactor().getNameAlternEntry() != null)
@@ -107,6 +94,19 @@ public class ChemicalDrugPopulateAction extends BaseAction
             
 			// Added for MTB models that do not have a treatment id
 			if (ce.getTreatment() != null ) {
+	            if (ce.getTreatment().getSexDistribution() != null)
+	            {
+	                chemicalDrugForm.setType(ce.getTreatment().getSexDistribution().getType());
+	            }
+	            if (ce.getTreatment().getAgeAtTreatment() != null)
+	            {
+	                chemicalDrugForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
+	            }
+	            if (ce.getTreatment().getAgeAtTreatmentUnit() != null)
+	            {
+	                chemicalDrugForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit());                
+	            }
+	            
 	            // Set the other flag or the selected administrative route from
 	            // database
 	            if (ce.getTreatment().getAdminRouteAlternEntry() != null)

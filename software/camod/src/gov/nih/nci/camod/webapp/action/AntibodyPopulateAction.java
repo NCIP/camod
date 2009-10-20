@@ -30,12 +30,7 @@ public class AntibodyPopulateAction extends BaseAction {
 	public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-        log.info("<AntibodyPopulateAction populate> Entered ");
-
-        log.info("<AntibodyPopulateAction populate> Entered ");
-        log.info("<AntibodyPopulateAction populate> Entered ");
-        log.info("<AntibodyPopulateAction populate> Entered ");
-        
+        log.info("<AntibodyPopulateAction populate> Entered ");        
 
 		AntibodyForm antibodyForm = (AntibodyForm) form;
 
@@ -65,7 +60,7 @@ public class AntibodyPopulateAction extends BaseAction {
 			// administrative route
 			// Added for MTB models that do not have a treatment id
 			if (ce.getTreatment() != null ) {
-				if (ce.getTreatment().getAdminRouteAlternEntry() != null & ce.getTreatment().getAdminRouteAlternEntry().length() > 0) {
+				if (ce.getTreatment().getAdminRouteAlternEntry() != null ) {
 					log.info("ce.getTreatment().getAdminRouteAlternEntry(): " + ce.getTreatment().getAdminRouteAlternEntry());				
 					antibodyForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
 					antibodyForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteAlternEntry());

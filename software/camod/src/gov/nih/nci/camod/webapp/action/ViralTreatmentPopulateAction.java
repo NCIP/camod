@@ -75,13 +75,13 @@ public class ViralTreatmentPopulateAction extends BaseAction {
 			} else {
 				viralTreatmentForm.setName(ce.getEnvironmentalFactor().getName());
 			}
-
-			if (ce.getTreatment().getSexDistribution() != null) {
-				viralTreatmentForm.setType(ce.getTreatment().getSexDistribution().getType());
-			}
 			
 			// Added for MTB models that do not have a treatment id
-			if (ce.getTreatment() != null ) {			
+			if (ce.getTreatment() != null ) {
+				if (ce.getTreatment().getSexDistribution() != null) {
+					viralTreatmentForm.setType(ce.getTreatment().getSexDistribution().getType());
+				}				
+				
 				viralTreatmentForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
 	            viralTreatmentForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit());            
 				viralTreatmentForm.setDosage(ce.getTreatment().getDosage());

@@ -62,12 +62,13 @@ public class SurgeryPopulateAction extends BaseAction {
 				surgeryForm.setName(ce.getEnvironmentalFactor().getName());
 			}
 
-			if (ce.getTreatment().getSexDistribution() != null) {
-				surgeryForm.setType(ce.getTreatment().getSexDistribution().getType());
-			}
 			
 			// Added for MTB models that do not have a treatment id
-			if (ce.getTreatment() != null ) {			
+			if (ce.getTreatment() != null ) {
+				if (ce.getTreatment().getSexDistribution() != null) {
+					surgeryForm.setType(ce.getTreatment().getSexDistribution().getType());
+				}
+				
 				surgeryForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
 	            surgeryForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit());            
 				surgeryForm.setRegimen(ce.getTreatment().getRegimen());

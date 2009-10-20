@@ -58,7 +58,7 @@ public class BacteriaPopulateAction extends BaseAction {
 			// administrative route
 			// Added for MTB models that do not have a treatment id
 			if (ce.getTreatment() != null ) {			
-				if (ce.getTreatment().getAdminRouteAlternEntry() != null & ce.getTreatment().getAdminRouteAlternEntry().length() > 0) {
+				if (ce.getTreatment().getAdminRouteAlternEntry() != null ) {
 					log.info("ce.getTreatment().getAdminRouteAlternEntry: "  + ce.getTreatment().getAdminRouteAlternEntry().toString());
 					bacteriaForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
 					bacteriaForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteAlternEntry());
