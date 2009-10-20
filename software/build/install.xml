@@ -526,8 +526,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<if>
 			<isset property="jboss.exists"/>
 			<then>
-				<!--jboss-stop-jboss jboss.server.jndi.port="${jboss.server.jndi.port}"/-->
-				<jboss-stop-jboss jboss.server.jndi.port="${jboss.server.port}"/>
+				<jboss-stop-jboss jboss.server.jndi.port="${jboss.server.jndi.port}"/>
 			</then>
 		</if>
 	</target>
@@ -861,6 +860,8 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	</target>
 
 	<target name="install:post:jboss" unless="exclude.jboss" depends="common:init">
+		<!-- Jboss backup, do not compress until install is finished -->
+		<property name="backup.jboss.base.dir" location="${application.base.path}/backup/jboss"/>
 		<if>
 			<not>
 				<equals arg1="${exclude.jboss.backup}" arg2="true"/>
