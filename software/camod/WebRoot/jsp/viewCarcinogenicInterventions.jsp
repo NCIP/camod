@@ -128,8 +128,8 @@
 				</c:if>		
 				<!--   End of if externalSource is Jax MTB -->
 			
-			<!--   Start of if externalSource is empty (caMOD data) -->	
-			<c:if test="${empty mdl.externalSource}">
+				<!--   Start of if externalSource is empty (caMOD data) -->	
+				<c:if test="${empty mdl.externalSource}">
 				<tr>
 					<td class="greySubTitleLeft" width="17%">Chemical / Drug</td>
 					<td class="greySubTitleLeft" width="17%">Dose</td>
@@ -204,8 +204,9 @@
 				<!--   End of if externalSource is empty (caMOD data) -->
 				</c:if>
 				</TABLE>
-				<br>				
-			</c:if>
+				<br>								
+				</c:if>
+
 			
 			
 			<!--   Start Growth Factor Section (caMOD and Jackson Lab data) ------------------------------------------------>
@@ -307,7 +308,7 @@
 			<!--   End of if externalSource is empty (caMOD data) -->
 			</c:if>			
 			</TABLE>		
-			<br>
+			<br>								
 			</c:if>
 
 
@@ -410,7 +411,7 @@
 			<!--   End of if externalSource is empty (caMOD data) -->
 			</c:if>			
 			</TABLE>
-			<br>
+			<br>								
 			</c:if>			
 			
 			
@@ -513,21 +514,19 @@
 			<!--   End of if externalSource is empty (caMOD data) -->
 			</c:if>			
 			</TABLE>
-			<br>
+			<br>								
 			</c:if>
 			
 			<!--   Start Surgery / Other Section ------------------------------------------------>
 			<c:set var="environmentalFactorType" value="Other"/>
 			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
 			<c:if test="${not empty cdList}">
-			<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">
-			
+			<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
+			<tr>
+				<td class="formTitleBlue" height="20" colspan="7">Other Agents</td>
+			</tr>
 			<!--   Start of if externalSource is Jax MTB -->
 			<c:if test="${mdl.externalSource == 'Jax MTB'}">
-			<!-- Moved Header inside each loop - Different for Jax and caMOD  -->
-			<tr>
-				<td class="formTitleBlue" height="20" colspan="4">Other Agents</td>
-			</tr>			
 			<tr>
 				<td class="greySubTitleLeft" width="17%">Agent Type</td>
 				<td class="greySubTitleLeft" width="17%">Agent Name</td>				
@@ -544,23 +543,19 @@
 				</c:choose>
 			<tr>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.typeAlternEntry}" escapeXml="false"/></camod:highlight>
+					<camod:highlight><c:out value="${cd.environmentalFactor.type}" escapeXml="false"/></camod:highlight>
 				</td>
 
 				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
+					<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
 				</td>
-			</tr>
-			</c:forEach>			
+			</tr>			
+			</c:forEach>
 			</c:if>		
 			<!--   End of if externalSource is Jax MTB -->
-						
+
 			<!--   Start of if externalSource is empty (caMOD data) -->	
-			<c:if test="${empty mdl.externalSource}">
-			<tr>
-				<td class="formTitleBlue" height="20" colspan="5">Surgery</td>
-			</tr>			
-						
+			<c:if test="${empty mdl.externalSource}">									
 			<tr>
 				<td class="greySubTitleLeft" width="30%">Surgery</td>
 				<td class="greySubTitleLeft" width="30%">Treatment Regimen</td>
@@ -568,7 +563,6 @@
 				<td class="greySubTitle" width="20%">Gender</td>
 				<td class="greySubTitle" width="17%">Comment</td>				
 			</tr>
-			
 			<c:forEach var="cd" items="${cdList}" varStatus="stat">
 				<c:choose>
 					<c:when test = "${stat.count % 2 == 0}">
@@ -577,7 +571,7 @@
 					<c:otherwise>
 						<c:set var="tdClass" value="resultsBoxGrey"/>
 					</c:otherwise>
-				</c:choose>&nbsp;
+				</c:choose>
 			<tr>
 				<td class="<c:out value="${tdClass}"/>" width="30%">
 					<c:choose>
@@ -606,8 +600,10 @@
 			<!--   End of if externalSource is empty (caMOD data) -->
 			</c:if>			
 			</TABLE>
-			<br>
-			</c:if>
+			<br>								
+			</c:if>			
+			
+
 
      		<!--   Start Viral Treatment Section (caMOD and Jackson Lab data) ------------------------------------------------>
 			<c:set var="environmentalFactorType" value="Viral"/>
@@ -710,7 +706,7 @@
 			<!--   End of if externalSource is empty (caMOD data) -->
 			</c:if>			
 			</TABLE>
-			<br>
+			<br>								
 			</c:if>	
 					
 
@@ -781,8 +777,8 @@
 			</tr>
 			</c:forEach>
 			</TABLE>		
-	        <br>
-	        </c:if>
+			<br>								
+			</c:if>
 
 			<!--   Start Gene Delivery Section (caMOD data) ------------------------------------------------>
 			<c:set var="environmentalFactorType" value="GeneDelivery"/>
@@ -842,12 +838,11 @@
 			</tr>
 			</c:forEach>
 			</TABLE>
-			<br>
+			<br>								
 			</c:if>
+				
 			
-
-
-
+			
 			<!--   Start Nutritional Factor Section  (caMOD data) ------------------------------------------------>
 			<c:set var="environmentalFactorType" value="Nutrition"/>
 			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
@@ -903,7 +898,7 @@
 			</tr>
 			</c:forEach>
 			</TABLE>
-			<br>
+			<br>								
 			</c:if>
 
 			
@@ -947,7 +942,7 @@
 			<!--   Start of if externalSource is empty (caMOD data) -->	
 			<c:if test="${empty mdl.externalSource}">									
 			<tr>
-				<td class="greySubTitleLeft" width="17%">Hormone</td>
+				<td class="greySubTitleLeft" width="17%">Antibody</td>
 				<td class="greySubTitleLeft" width="17%">Dose</td>
 				<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
 				<td class="greySubTitleLeft" width="17%">Administrative Route</td>
@@ -1005,7 +1000,7 @@
 			<!--   End of if externalSource is empty (caMOD data) -->
 			</c:if>			
 			</TABLE>
-			<br>
+			<br>								
 			</c:if>
 			
      		<!--   Start Bacteria Section (caMOD and Jackson Lab data) ------------------------------------------------>
@@ -1048,7 +1043,7 @@
 			<!--   Start of if externalSource is empty (caMOD data) -->	
 			<c:if test="${empty mdl.externalSource}">									
 			<tr>
-				<td class="greySubTitleLeft" width="17%">Hormone</td>
+				<td class="greySubTitleLeft" width="17%">Bacteria</td>
 				<td class="greySubTitleLeft" width="17%">Dose</td>
 				<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
 				<td class="greySubTitleLeft" width="17%">Administrative Route</td>
@@ -1106,7 +1101,7 @@
 			<!--   End of if externalSource is empty (caMOD data) -->
 			</c:if>			
 			</TABLE>
-			<br>
+			<br>								
 			</c:if>
 
 
@@ -1150,7 +1145,7 @@
 			<!--   Start of if externalSource is empty (caMOD data) -->	
 			<c:if test="${empty mdl.externalSource}">									
 			<tr>
-				<td class="greySubTitleLeft" width="17%">Hormone</td>
+				<td class="greySubTitleLeft" width="17%">Plasmid</td>
 				<td class="greySubTitleLeft" width="17%">Dose</td>
 				<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
 				<td class="greySubTitleLeft" width="17%">Administrative Route</td>
@@ -1208,7 +1203,7 @@
 			<!--   End of if externalSource is empty (caMOD data) -->
 			</c:if>			
 			</TABLE>
-			<br>
+			<br>								
 			</c:if>	
 			
      		<!--   Start Transposon Section (caMOD and Jackson Lab data) ------------------------------------------------>
@@ -1251,7 +1246,7 @@
 			<!--   Start of if externalSource is empty (caMOD data) -->	
 			<c:if test="${empty mdl.externalSource}">									
 			<tr>
-				<td class="greySubTitleLeft" width="17%">Hormone</td>
+				<td class="greySubTitleLeft" width="17%">Transposon</td>
 				<td class="greySubTitleLeft" width="17%">Dose</td>
 				<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
 				<td class="greySubTitleLeft" width="17%">Administrative Route</td>
@@ -1309,7 +1304,7 @@
 			<!--   End of if externalSource is empty (caMOD data) -->
 			</c:if>			
 			</TABLE>
-			<br>
+			<br>								
 			</c:if>		
 
      		<!--   Start Signaling Molecule Section (caMOD and Jackson Lab data) ------------------------------------------------>
@@ -1352,7 +1347,7 @@
 			<!--   Start of if externalSource is empty (caMOD data) -->	
 			<c:if test="${empty mdl.externalSource}">									
 			<tr>
-				<td class="greySubTitleLeft" width="17%">Hormone</td>
+				<td class="greySubTitleLeft" width="17%">Signaling Molecule</td>
 				<td class="greySubTitleLeft" width="17%">Dose</td>
 				<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
 				<td class="greySubTitleLeft" width="17%">Administrative Route</td>
@@ -1410,8 +1405,8 @@
 			<!--   End of if externalSource is empty (caMOD data) -->
 			</c:if>			
 			</TABLE>
-			<br>
-			</c:if>
+			<br>								
+			</c:if>	
 
 
 		</td></tr></TABLE>
