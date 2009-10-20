@@ -158,7 +158,7 @@ public final class DrugScreenSearchAction extends BaseAction {
             request.getSession().setAttribute("nscNumber", theNscNumber);
         } catch (Exception e) {
             log.error("Exception occurred in DrugScreenSearchAction.execute()", e);
-            request.getSession().setAttribute(Constants.DRUG_SCREEN_SEARCH_RESULTS, new ArrayList());
+            request.getSession().setAttribute(Constants.DRUG_SCREEN_SEARCH_RESULTS, new ArrayList<Object>());
             // Set the error message
             ActionMessages msg = new ActionMessages();
             msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
