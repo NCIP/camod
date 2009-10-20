@@ -1698,7 +1698,7 @@ public class QueryManagerImpl extends BaseManager
         if (theComments == null)
         {
         	log.debug("theComments == null: " );
-            theComments = new ArrayList();
+            theComments = new ArrayList<Comments>();
         }
 
         log.debug("Exiting QueryManagerImpl.getCommentsBySection");
@@ -1760,7 +1760,7 @@ public class QueryManagerImpl extends BaseManager
         if (theComments == null)
         {
             log.debug("theComments == null: " );
-            theComments = new ArrayList();
+            theComments = new ArrayList<Comments>();
         }
 
         log.debug("Exiting QueryManagerImpl.getCommentsBySection");
@@ -1823,7 +1823,7 @@ public class QueryManagerImpl extends BaseManager
         if (theComments == null)
         {
             log.debug("theComments == null: " );
-            theComments = new ArrayList();
+            theComments = new ArrayList<Comments>();
         }
 
         log.debug("Exiting QueryManagerImpl.getCommentsBySection");
@@ -1855,14 +1855,14 @@ public class QueryManagerImpl extends BaseManager
         theQuery.setParameter("username", inUsername);
 
         log.debug("Entering QueryManagerImpl.getModelsByUser here");
-        List theComments = new ArrayList();
+        List theComments = new ArrayList<Comments>();
 
         // breaks before this line
         theComments = theQuery.list();
 
         if (theComments == null)
         {
-            theComments = new ArrayList();
+            theComments = new ArrayList<Comments>();
         }
 
         return theComments;
