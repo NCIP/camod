@@ -88,22 +88,22 @@ import java.util.List;
 public class NameValueList
 {
     // stores a list of species
-    private static List approvedSpeciesList = new ArrayList();
+    private static List approvedSpeciesList = new ArrayList<String>();
 
     // stores a list of induced mutation agents
-    private static List inducedMutationAgentList = new ArrayList();
+    private static List inducedMutationAgentList = new ArrayList<String>();
 
     // stores a list of external Sources
-    private static List externalSourceList = new ArrayList(); 
+    private static List externalSourceList = new ArrayList<String>(); 
     
     // stores a list of Table of Content query names
-    private static List tableOfContentsList = new ArrayList();    
+    private static List tableOfContentsList = new ArrayList<String>();    
     
 
     
     public static void generateTableOfContentsList() {
 
-    	tableOfContentsList = new ArrayList();
+    	tableOfContentsList = new ArrayList<String>();
     	tableOfContentsList.add(new NameValue("Cardiovascular_System_Query","Cardiovascular_System_Query"));
     	tableOfContentsList.add(new NameValue("Digestive_System_Query","Digestive_System_Query"));    	
     	tableOfContentsList.add(new NameValue("Endocrine_Gland_Query","Endocrine_Gland_Query"));
@@ -127,24 +127,24 @@ public class NameValueList
     	
     }
 
-    public static List getTableOfContentsList()  {
+    public static List<String> getTableOfContentsList()  {
     	generateTableOfContentsList();
-        return  tableOfContentsList ;
+        return  tableOfContentsList;
     }    
     
     public static void generateExternalSourceList() {
 
-        externalSourceList = new ArrayList();
+        externalSourceList = new ArrayList<String>();
         externalSourceList.add(new NameValue("Jax MTB","Jax MTB"));
     }
 
-    public static List getExternalSourceList()  {
+    public static List<String> getExternalSourceList()  {
         generateExternalSourceList();
-        return  externalSourceList ;
+        return  externalSourceList;
     }    
     
     public static void generateApprovedSpeciesList() {
-        approvedSpeciesList = new ArrayList();
+        approvedSpeciesList = new ArrayList<Object>();
         // Put in order of most entered
         approvedSpeciesList.add(new NameValue("Mus musculus","Mus musculus"));  
         approvedSpeciesList.add(new NameValue("Rattus norvegicus","Rattus norvegicus"));
