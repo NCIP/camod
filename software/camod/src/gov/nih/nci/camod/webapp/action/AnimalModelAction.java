@@ -472,7 +472,7 @@ public final class AnimalModelAction extends BaseAction {
 
 			log.error("Unable to fetch models for user: ", e);
 			request.getSession().setAttribute(Constants.USERMODELLIST,
-					new ArrayList());
+					new ArrayList<Object>());
 
 			// Set the error message
 			ActionMessages msg = new ActionMessages();
