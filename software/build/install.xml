@@ -190,7 +190,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<target name="common:init" depends="common:init:pre">
 		<property name="install.running" value="true"/>
 		<!-- camod-webapp can use either Oracle or MySQL or PostgreSQL as its database platform, this is controled by the database.type property.  Based on the value of this property sent several variables for use during install -->
-		<echoproperties prefix="database"/>
+		<!--echoproperties prefix="database"/-->
 		<switch value="${database.type}">
 			<case value="oracle">
 				<property name="database.dialect" value="org.hibernate.dialect.OracleDialect"/>
@@ -304,7 +304,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<property name="db.prop.list" value="database.url,database.user,database.password,database.name"/>
 		<echo  message="Checking if database properties exist: ${db.prop.list}"/>
 		<properties-exist properties.list="${db.prop.list}"/>
-		<echoproperties prefix="database"/>
+		<!--echoproperties prefix="database"/-->
 		<copy todir="${db.dir.dest}" filtering="true">
 			<fileset dir="${db.dir.src}">
 				<include name="**/*"/>
@@ -399,7 +399,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	</target>
 	
 	<target name="install:jboss:camod-grid-service" description="Deploy camod-grid-service and common libraries to jboss installation" unless="exclude.jboss" depends="common:jboss:init, common:init">
-		<echoproperties prefix="camod"/>
+		<!--echoproperties prefix="camod"/-->
 		<!-- added to ensure working.dirs are fresh for our install -->
 		<delete dir="${jboss.home}/server/${jboss.server.name}/tmp"/>
 		<delete dir="${jboss.home}/server/${jboss.server.name}/work"/>
@@ -949,7 +949,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	</target>
 
 	<target name="upgrade:jboss:init:prep" depends="upgrade:common:init:prep" unless="install.running">
-		<echoproperties prefix="jboss"/>
+		<!--echoproperties prefix="jboss"/-->
 		<property name="jboss.home" value="${application.base.path}/${jboss.relative.path}"/>
 		<if>
 			<equals arg1="${jboss.ncicb-standard.port-config}" arg2="true"/>
@@ -990,7 +990,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	</target>
 
 	<target name="upgrade:jboss:readers:bda" if="jboss.exists">
-		<echoproperties prefix="jboss"/>
+		<!--echoproperties prefix="jboss"/-->
 		<!-- Make sure the ${properties.file} has at least the following props -->
 		<properties-exist
 			properties.list="application.base.path,jboss.home,jboss.server.name"
