@@ -583,7 +583,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		depends="
 		common:init
 		">
-		<validate-post-common />
+		<validate-post-common propertyfile.backup.location="${logs.dir}" />
 	</target>
 
 	<target name="install:jboss:validation:post-install" description="Run post-install checks from bda-utils"
@@ -870,7 +870,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 				<report-dir-diff
 					dir1="${backup.jboss.base.dir}/backup/${jboss.binaries.relative.dir}"
 					dir2="${jboss.home}"
-					reportFile="${install-logs.dir}/chagneLog-jboss-${install.time}.diff"
+					reportFile="${install-logs.dir}/changeLog-jboss-${install.time}.diff"
 					/>
 				<!-- Copy app server logs -->
 				<mkdir dir="${jboss.home}/server/${jboss.server.name}/log"/>
