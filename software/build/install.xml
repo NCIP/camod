@@ -84,17 +84,11 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<property name="camod-grid-service.name" value="wsrf-camod" />
 	<property name="camod-grid-service.war.file" value="${camod-grid-service.name}.war" />
 	<property name="resource.file.jboss-globus-lib" value="jboss-globus-libs-cagrid1_2.zip" />
-	<property name="cammod-resource.artifact.dir" value="${software.dir}/common/resources" />
-
-
-
+	<property name="camod-resource.artifact.dir" value="${software.dir}/common/resources" />
 	
 	<!-- Added for properties-service.xml -->
 	<property name="camod.propertyservice.property.value1" value="C:/local/content/camod/config/camod.properties" />
 	<property name="camod.propertyservice.property.value2" value="C:/local/content/camod/config/mail.properties" />
-	
-
-	<!-- Grid related properties -->
 
 	<!-- Paths -->
 	<path id="bda-utils.classpath">
@@ -111,6 +105,9 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 
 	<!-- Includes-->
 	<import file="${bda-utils.dir}/bda-build-utils-${bda.version}.xml" />
+
+	<!-- Import install.xml for grid service and api -->	
+	<!--import file="install-grid.xml"/ -->
 
 	<!-- Clean/make working dir -->
 	<delete dir="${working.dir}" failonerror="false"/>
@@ -367,15 +364,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			/>                                      
 	</target>
 
-	<target name="install:jboss:camod-webapp:filesystem-data"  depends="common:jboss:init, common:init">
-		<!-- This target is a place holder for creating a file-system data repository.  If you do not use one you can remove this target and all targets that refer to it. If you require a certain directory structure be sure to create it here.  If you need to copy in files, make sure to check them into svn, copy them into the distribution and then copy them to thier ultimate directory.  If your data needs to be refreshed with each install make sure to delete the base directory, then create the structure and copy in data.  Also you can use an archive file with relative pathing inside to build out the structure if you like, using an archive like zip may shrink the footprint in svn.
-		<mkdir dir="${fs-data.base.dir}"/>
-		<mkdir dir="${fs-data.base.dir}/scratch"/>
-		<copy file="${camod-webapp.dir.dist}/${camod-webapp.war.file}" todir="${fs-data.base.dir}/scratch" overwrite="true" />
-		-->
-	</target>
-
-	<target name="install:jboss:camod-webapp" description="Deploy camod-webapp and common libraries to jboss installation" unless="exclude.jboss" depends="common:jboss:init, common:init,install:jboss:camod-webapp:filesystem-data">
+	<target name="install:jboss:camod-webapp" description="Deploy camod-webapp and common libraries to jboss installation" unless="exclude.jboss" depends="common:jboss:init, common:init">
 		<!-- added to ensure working.dirs are fresh for our install -->
 		<delete dir="${jboss.home}/server/${jboss.server.name}/tmp"/>
 		<delete dir="${jboss.home}/server/${jboss.server.name}/work"/>
@@ -613,7 +602,6 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
  		install:jboss:validation:pre-install:ports,
  		install:jboss:clean,
  		install:jboss:binaries,
- 		install:jboss:camod-webapp:re-configure,
  		install:jboss:camod-webapp,
  		install:jboss:camod-webapp:configure,
  		install:jboss:configure,
@@ -642,26 +630,17 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		">
 	</target>
 
-	<target name="install:jboss:camod-webapp:re-configure" description="Update contents of artifacts if not all properties have been externalized, by extracting artifact, modify it as needed and re-archive it." unless="exclude.jboss"  depends="common:init">
-		<!-- This is only required if configuration files are not externalized, below is a sample of what you may do.
-		<delete dir="${working.dir}/camod-webapp"/>
-		<unzip src="${camod-webapp.dir.dist}/${camod-webapp.war.file}" dest="${working.dir}/camod-webapp"/>
-		<copy todir="${working.dir}/camod-webapp/WEB-INF/classes" file="${jboss-conf.dir.dest}/hibernate.cfg.xml"/>
-		
-		<move file="${camod-webapp.dir.dist}/${camod-webapp.war.file}" tofile="${camod-webapp.dir.dist}/${camod-webapp.war.file}.orig"/>
-		<war destfile="${camod-webapp.dir.dist}/${camod-webapp.war.file}" compress="false" webxml="${working.dir}/camod-webapp/WEB-INF/web.xml" >
-			<fileset dir="${working.dir}/camod-webapp">
-				<include name="*/**" />
-			</fileset>
-		</war>  
-		-->
-	</target>
 
 	<target name="upgrade:jboss" description="Wrapper target to call all targets required to upgrade jboss container." unless="exclude.jboss" depends="upgrade:jboss:init,common:init,upgrade-ncm:jboss">
 	</target>
 
 	<target name="upgrade" description="Upgrades JBoss and Database" depends="upgrade:common:init,common:init,upgrade-ncm">
 	</target>
+	
+	  <!--target name="upgrade:all:init" 
+	          depends="upgrade:jboss:init, 
+	                   upgrade:jboss:camod-grid:init">
+	  </target-->	
 
 	<target name="upgrade-with-dbinstall" description="Upgrades JBoss and Database" depends="upgrade:common:init,common:init,upgrade-ncm:with-dbinstall">
 	</target>
@@ -678,7 +657,6 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
  		install:jboss:clean,
  		install:jboss:binaries,
  		install:jboss:configure,
- 		install:jboss:camod-webapp:re-configure,
  		install:jboss:camod-webapp,
  		install:jboss:camod-webapp:configure,
  		upgrade:post:jboss,
@@ -728,7 +706,6 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
  		install:jboss:stop,
  		install:jboss:validation:pre-install:ports,
  		install:jboss:configure,
- 		install:jboss:camod-webapp:re-configure,
  		install:jboss:camod-webapp,
  		install:jboss:camod-webapp:configure,
  		upgrade:post:jboss,
@@ -777,7 +754,6 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
  		install:common:validation:pre-install,
  		install:jboss:stop,
  		install:jboss:validation:pre-install:ports,
- 		install:jboss:camod-webapp:re-configure,
  		install:jboss:camod-webapp,
  		install:jboss:camod-webapp:configure,
  		install:post:jboss,
