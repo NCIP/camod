@@ -13,13 +13,37 @@
 		</or>
 	</preConditions>                                       
 	                                                        
-	<changeSet id="1" author="ssaksa">                            
-		<comment>execute 2009_Oct_2_6_1.sql</comment>
-		<sqlFile path="@db-upgrade.run.dir@/2009_Oct_2_6_1.sql"/>
+	<changeSet id="1" author="pandyas">                            
+		<comment>execute 2009_Oct_2_6_1_a.sql</comment>
+		<sqlFile path="@db-upgrade.run.dir@/2009_Oct_2_6_1_a.sql"/>
 		<!--rollback>
 			<sqlFile path="@db-upgrade.run.dir@/drop-ssaksa_one.sql"/>
 			<sqlFile path="@db-upgrade.run.dir@/drop-ssaksa_two.sql"/>
 		</rollback-->
-	</changeSet>                                                                                      
+	</changeSet> 
+	<changeSet id="2" author="pandyas">                            
+		<comment>execute 2009_Oct_2_6_1_b.sql</comment>
+		<sqlFile path="@db-upgrade.run.dir@/2009_Oct_2_6_1_b.sql"/>
+		<!--rollback>
+			<sqlFile path="@db-upgrade.run.dir@/drop-ssaksa_one.sql"/>
+			<sqlFile path="@db-upgrade.run.dir@/drop-ssaksa_two.sql"/>
+		</rollback-->
+	</changeSet>
+	<changeSet id="3" author="pandyas">                            
+		<comment>execute 2009_Oct_2_6_1_c.sql</comment>
+		<sqlFile path="@db-upgrade.run.dir@/2009_Oct_2_6_1_c.sql"/>
+		<!--rollback>
+			<sqlFile path="@db-upgrade.run.dir@/drop-ssaksa_one.sql"/>
+			<sqlFile path="@db-upgrade.run.dir@/drop-ssaksa_two.sql"/>
+		</rollback-->
+	</changeSet>
+	<changeSet id="4" author="pandyas">                            
+		<comment>execute 2009_Oct_2_6_1_d.sql</comment>
+		<sqlFile path="@db-upgrade.run.dir@/2009_Oct_2_6_1_d.sql"/>
+		<!--rollback>
+			<sqlFile path="@db-upgrade.run.dir@/drop-ssaksa_one.sql"/>
+			<sqlFile path="@db-upgrade.run.dir@/drop-ssaksa_two.sql"/>
+		</rollback-->
+	</changeSet>	
 </databaseChangeLog>
 
