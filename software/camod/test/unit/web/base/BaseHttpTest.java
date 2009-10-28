@@ -262,19 +262,20 @@ public class BaseHttpTest extends TestCase {
         
 
         String thePageText = myWebConversation.getCurrentPage().getText();
-        //System.out.println("<findModelIdOnPage> thePageText: " + thePageText);
+        System.out.println("<findModelIdOnPage> thePageText: " + thePageText);
 
         int theFirstIndex = thePageText.indexOf(inStartText);
-        //System.out.println("<findModelIdOnPage> theFirstIndex: " + theFirstIndex);
+        System.out.println("<findModelIdOnPage> theFirstIndex: " + theFirstIndex);
         int theLastIndex = thePageText.indexOf(inEndText);
-        //System.out.println("<findModelIdOnPage> theLastIndex: " + theLastIndex);
+        System.out.println("<findModelIdOnPage> theLastIndex: " + theLastIndex);
 
         if (theFirstIndex < theLastIndex) {
             thePageText = thePageText.substring(theFirstIndex, theLastIndex);
-            //System.out.println("<findModelIdOnPage> thePageText: " + thePageText);
+            System.out.println("<findModelIdOnPage> thePageText: " + thePageText);
 
             // Parse out the modelId
             int theModelIdIndex = thePageText.indexOf(Constants.Parameters.MODELID);
+            System.out.println("<findModelIdOnPage> theModelIdIndex: " + theModelIdIndex);
             if (theModelIdIndex != -1) {
 
                 thePageText = thePageText.substring(theModelIdIndex);
@@ -288,7 +289,7 @@ public class BaseHttpTest extends TestCase {
             throw new Exception("Unable to locate text with starting string: " + inStartText + " and ending string: "
                     + inEndText);
         }
-
+        System.out.println("<findModelIdOnPage> return theModelId: " + theModelId);
         return theModelId;
     }
     
