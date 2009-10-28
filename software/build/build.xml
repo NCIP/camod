@@ -47,6 +47,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<os family="windows" />
 	</condition>
 	<property name="jboss.home" value="${application.base.path}/${jboss.relative.path}"/>
+	<property name="camod.grid.jboss.home" value="${application.base.path}/${camod.grid.jboss.relative.path}"/>
 
 
 	<!-- added for remote deployments since file is copied to root of install dir -->
@@ -403,6 +404,15 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			<fileset dir="${download.dir}">
 			</fileset>
 		</copy>
+		<!-- added code to this target to copy over any extra .xml files created when spliting targets for api and grid service and create new conf directory
+		This is done in the bda utils 1.2.12.xml for all default file names -->		
+	    <!--copy todir="${dist.exploded.dir}" overwrite="true">
+	      <fileset dir=".">
+	        <include name="install-grid.xml" />
+	        <include name="jboss.xml" /> 
+	      	<include name="database.xml" />
+	      </fileset>
+	    </copy--> 
 	</target>
 
 	<target name="dist:installer" depends="dist:installer:prep" description="Produces zip file based on installer distribution area. Zip is used by deploy:remote:* or external installations">
@@ -537,7 +547,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		  * Requires a database installation.
 		  * Will use the target from install.xml specified in ${upgrade.target} (defaults to install unless passed in on command line).
 		  * Calls ant from exec task to ensure properties are do not carry over from current ant runtime and also to emulate a manual install, if you want properties to be used at install time they must be included in a proeprties file.
-		  * This target will use differnt properties based on linux (linux-upgrade.properties) or windows (windows-upgrade.properties) installs.
+		  * This target will use different properties based on linux (linux-upgrade.properties) or windows (windows-upgrade.properties) installs.
 		  * It only supports using those properties files for now, so if you want to change install time properites edit these files.
 		-->
 		<deploy-local
