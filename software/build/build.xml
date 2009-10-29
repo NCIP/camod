@@ -47,7 +47,11 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<os family="windows" />
 	</condition>
 	<property name="jboss.home" value="${application.base.path}/${jboss.relative.path}"/>
-	<property name="camod.grid.jboss.home" value="${application.base.path}/${camod.grid.jboss.relative.path}"/>
+	
+	<condition property="camod.grid.application.base.path" value="${camod.grid.application.base.path.windows}">
+		<os family="windows" />
+	</condition>
+	<property name="camod.grid.jboss.home" value="${camod.grid.application.base.path}/${jboss.relative.path}"/>	
 
 
 	<!-- added for remote deployments since file is copied to root of install dir -->
