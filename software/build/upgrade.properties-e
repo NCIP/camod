@@ -102,7 +102,7 @@ camod.grid.jboss.server.name=default
 camod.grid.jboss.web.user=admin
 camod.grid.jboss.web.password=ncia1234!
 
-camod.grid.jboss.server.ports.name=camod-grid-ports
+camod.grid.jboss.server.ports.name=bda-ports
 camod.grid.jboss.ejbinvoker.port=21150
 camod.grid.jboss.hajndi.port=21160
 camod.grid.jboss.jms.port=21170
