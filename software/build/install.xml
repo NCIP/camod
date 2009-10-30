@@ -192,7 +192,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		unless="exclude.camod-grid">
 		<!-- determine if port configurations or port lists are being called -->
 		<if>
-			<isset property="camod.grid.jboss.ncicb-standard.port-config"/>
+			<isset property="ncicb-standard.port-config"/>
 			<then>
 				<!-- Read some port properties from standard bindings file -->
 				<echo message="Using JBoss NCICB Standard port configurations"/>
@@ -504,8 +504,10 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			/>
 	</target>
 	
-	<target name="install:jboss:camod-grid:configure" description="Configure camod-webapp application, copies over externalized properties or configurations that are not part of the jboss configuration" 
-		unless="exclude.camod-grid" depends="common:jboss:camod-grid:init, common:common:init">
+	<target name="install:jboss:camod-grid:configure" 
+		description="Configure JBoss (change ports)" 
+		unless="exclude.camod-grid" 
+		depends="common:jboss:camod-grid:init, common:common:init">
 		<!-- copy over any other files you may need to configure your application -->
 		
 		<!-- copy datasource file (reuse copy from camod.war -->
@@ -707,8 +709,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 				<isset property="exclude.start.servers"/>
 			</not>
 			<then>
-				<validate-post-jboss jboss.home="${camod.grid.jboss.home}" jboss.hostname="${camod.grid.jboss.hostname}" 
-					jboss.application.url="${camod.grid.jboss.application.url}" />
+				<validate-post-jboss jboss.home="${camod.grid.jboss.home}" jboss.hostname="${camod.grid.jboss.hostname}" />
 			</then>
 		</if>
 	</target>	
@@ -770,7 +771,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
  		install:database,
  		install:jboss,
 		install:jboss:camod-grid,
- 		install:common:post,
+		install:all:post,
  		install:jboss:start,
 		install:jboss:camod-grid:start,
  		install:common:common:validation:post-install,
@@ -890,10 +891,10 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<database-rollback/>
 	</target>
 
-	<target name="install:common:post" depends="
-		common:common:init,
- 		install:post:jboss,
-		install:post:jboss:camod-grid
+   <target name="install:all:post" 
+	          depends="common:common:init,
+	  					install:post:jboss, 
+	  					install:post:jboss:camod-grid
 		">
 	</target>
 
@@ -945,7 +946,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 				<mkdir dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/log"/>
 				<mkdir dir="${backup.jboss.base.dir}/backup/${jboss.binaries.relative.dir}/server/${camod.grid.jboss.server.name}/log"/>
 				<!-- so the logs wont be included in the zip -->
-				<move todir="${camod.grid.jboss.home}/server/${cammod.grid.jboss.server.name}/log">
+				<move todir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/log">
 					<fileset dir="${backup.jboss.base.dir}/backup/${jboss.binaries.relative.dir}/server/${camod.grid.jboss.server.name}/log">
 						<include name="*"/>
 					</fileset>
