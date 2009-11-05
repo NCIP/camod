@@ -1092,7 +1092,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	</target>
 	
 	<target name="upgrade:jboss:camod-grid:init" unless="exclude.camod-grid"
-		depends="upgrade:jboss:camod-grid:init:prep,upgrade:jboss:camod-grid:readers:bda,upgrade:jboss:readers:custom">
+		depends="upgrade:jboss:camod-grid:init:prep,upgrade:jboss:readers:custom">
 		<properties-print
 			properties.list="${read.properties.list},camod.grid.jboss.server.hostname"
 			/>
@@ -1209,31 +1209,16 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			jboss.home="${read.jboss.home}"
 			jboss.ds-xml.file="oracle-ds.xml"
 			/>
-		<jboss-read-ldapconfig
-			jboss.home="${read.jboss.home}"
-			/>
-		<jboss-read-bindings-file-location
-			jboss.home="${read.jboss.home}"
-			/>
-		<jboss-read-ports
-			/>
+		<jboss-read-ldapconfig jboss.home="${read.jboss.home}" 	/>
+		<jboss-read-bindings-file-location jboss.home="${read.jboss.home}" 	/>
+		<jboss-read-ports />
 		<!-- Setting this variable will cause install to copy it into place if using CM/DAC, not modified in NCM -->
 		<var name="jboss.ssl.keystore.dir" value="${working.dir}/keys/jboss"/>
 		<jboss-read-ssl
 			jboss.home="${read.jboss.home}"
-			copied.keystore.dir="${jboss.ssl.keystore.dir}"
-			/>
-		<!-- No longer needed now reading all the ports
-		<jboss-copy-bindings
-			copied.jboss.server.bindingfile.dir="${working.dir}/copied-bindings"
-			copied.jboss.bindings.file.property.name="copied.jboss.bindings.file"
-			/>
-		# Setting this will cause install to copy this file into place if using CM/DAC, not modified in NCM 
-		<var name="jboss.server.binding.template.location" value="${working.dir}/copied-bindings/${copied.jboss.bindings.file}"/>
-		-->
-		<jboss-read-external-hostname
-			jboss.home="${read.jboss.home}"
-			/>
+			copied.keystore.dir="${jboss.ssl.keystore.dir}" />
+
+		<jboss-read-external-hostname jboss.home="${read.jboss.home}" />
 		<!-- for tier installs, should be done first, since it is set first it will be the one used if it exists -->
 		<jboss-read-java_opts
 			jboss.bin.dir="${read.jboss.home}/server/${jboss.server.name}/bin"
@@ -1246,124 +1231,18 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<jboss-copy-log4j
 			copied.jboss.log4j.dir="${copied.jboss.log4j.dir}"
 			/>
-		<!--<grid-read-index-url
-			grid.wsrf.dir="${read.jboss.home}/server/${jboss.server.name}/deploy/wsrf"
-			/> -->             
-		<!--<jboss-read-grid-secure
-			jboss.home="${read.jboss.home}"
-			copied.keystore.dir="${jboss.grid.secure.dir}"
-			/>-->
-		<!-- will have to add code to install:post:jboss to copy this back if exists -->
-		<!-- no longer needed 
-		<grid-copy-service-metadata
-			copied.service-metadata.dir="${copied.service-metadata.dir}"
-			/>
-		-->
-		<!--<grid-read-poc
-			grid.wsrf.dir="${read.jboss.home}/server/${jboss.server.name}/deploy/wsrf"
-			grid.service.name="Sample"
-			/> -->                     
-		<read-property-from-properties-service
-			jboss.home="${read.jboss.home}"
-			property.name="property1"
-			/>
-		<read-property-from-properties-service
-			jboss.home="${read.jboss.home}"
-			property.name="property2"
-			/>
-	</target>
-	
-	<!-- NOT MODIFIED - JUST COPIED - IF DB DELETE -->
-	<target name="upgrade:jboss:camod-grid:readers:bda" if="jboss.exists" unless="exclude.camod-grid">
-		<!--echoproperties prefix="jboss"/-->
-		<!-- Make sure the ${properties.file} has at least the following props -->
-		<properties-exist
-			properties.list="camod.grid.application.base.path,camod.grid.jboss.home,camod.grid.jboss.server.name"
-			/>
-		<!-- Set these -->
-		<osfamily property="os.family"/>
-		<if>
-			<or>
-				<equals arg1="${os.family}" arg2="unix"/>
-				<equals arg1="${os.family}" arg2="mac"/>
-			</or>
-			<then>
-				<property name="camod.grid.jboss.server.hostname" value="${env.HOSTNAME}"/>
-			</then>
-		</if>
-		<if>
-			<equals arg1="${os.family}" arg2="windows"/>
-			<then>
-				<property name="camod.grid.jboss.server.hostname" value="${env.COMPUTERNAME}"/>
-			</then>
-		</if>
-		<!-- Begin JBoss Readers -->
-		<!-- Reader requires that you have only one data source defined in each *-ds.xml file -->
-		<jboss-read-ports jboss.server.ports.name="${camod.grid.jboss.server.ports.name}"          
-            jboss.server.jndi.port.property.name="camod.grid.jboss.server.jndi.port"
-            jboss.server.port.property.name="camod.grid.jboss.server.port"
-            jboss.ejbinvoker.port.property.name="camod.grid.jboss.ejbinvoker.port"
-            jboss.server.rmi.port.property.name="camod.grid.jboss.server.rmi.port"
-            jboss.web.service.port.property.name="camod.grid.jboss.web.service.port"
-            jboss.service.rmiobject.port.property.name="camod.grid.jboss.service.rmiobject.port"
-            jboss.server.bind.port.property.name="camod.grid.jboss.server.bind.port"
-            jboss.hajndi.port.property.name="camod.grid.jboss.hajndi.port"
-            jboss.hajrmi.port.property.name="camod.grid.jboss.hajrmi.port"
-            jboss.pooledha.port.property.name="camod.grid.jboss.pooledha.port"
-            jboss.cobraorb.port.property.name="camod.grid.jboss.cobraorb.port"
-            jboss.jmx-rmi.port.property.name="camod.grid.jboss.jmx-rmi.port"
-            jboss.snmp-trapd.port.property.name="camod.grid.jboss.snmp-trapd.port"
-            jboss.snmp.port.property.name="camod.grid.jboss.snmp.port"
-            jboss.jms.port.property.name="camod.grid.jboss.jms.port"
-            jboss.remoting.port.property.name="camod.grid.jboss.remoting.port"
-            jboss.messaging.port.property.name="camod.grid.jboss.messaging.port"
-			/>
-		<!-- Setting this variable will cause install to copy it into place if using CM/DAC, not modified in NCM -->
-		<var name="jboss.ssl.keystore.dir" value="${working.dir}/keys/jboss"/>
-		<jboss-read-ssl
-			jboss.home="${read.jboss.home}"
-			copied.keystore.dir="${jboss.ssl.keystore.dir}"
-			/>
-		<!-- No longer needed now reading all the ports
-		<jboss-copy-bindings
-			copied.jboss.server.bindingfile.dir="${working.dir}/copied-bindings"
-			copied.jboss.bindings.file.property.name="copied.jboss.bindings.file"
-			/>
-		# Setting this will cause install to copy this file into place if using CM/DAC, not modified in NCM 
-		<var name="jboss.server.binding.template.location" value="${working.dir}/copied-bindings/${copied.jboss.bindings.file}"/>
-		-->
-		<jboss-read-external-hostname
-			jboss.home="${read.jboss.home}"
-			/>
-		<!-- for tier installs, should be done first, since it is set first it will be the one used if it exists -->
-		<jboss-read-java_opts
-			jboss.bin.dir="${read.jboss.home}/server/${jboss.server.name}/bin"
-			/>              
-		<jboss-read-java_opts
-			jboss.home="${read.jboss.home}"
-			/>
-		<!-- will have to add code to install:post:jboss to copy this back if exists -->
-		<property name="copied.jboss.log4j.dir" value="${working.dir}/copied-log4j"/>
-		<jboss-copy-log4j
-			copied.jboss.log4j.dir="${copied.jboss.log4j.dir}"
-			/>
-		<!--<grid-read-index-url
-			grid.wsrf.dir="${read.jboss.home}/server/${jboss.server.name}/deploy/wsrf"
-			/> -->             
-		<!--<jboss-read-grid-secure
-			jboss.home="${read.jboss.home}"
-			copied.keystore.dir="${jboss.grid.secure.dir}"
-			/>-->
-		<!-- will have to add code to install:post:jboss to copy this back if exists -->
-		<!-- no longer needed 
-		<grid-copy-service-metadata
-			copied.service-metadata.dir="${copied.service-metadata.dir}"
-			/>
-		-->
-		<!--<grid-read-poc
-			grid.wsrf.dir="${read.jboss.home}/server/${jboss.server.name}/deploy/wsrf"
-			grid.service.name="Sample"
-			/> -->                     
+		
+		<echo message="All properties after readers"/>
+	    <properties-print
+	            properties.list="${read.properties.list},jboss.server.hostname"
+	            />
+	    <properties-exist
+	            properties.list="${read.properties.list},jboss.server.hostname"
+	            />
+	    <properties-write
+	            properties.list="${read.properties.list},jboss.server.hostname"
+	            />
+		
 		<read-property-from-properties-service
 			jboss.home="${read.jboss.home}"
 			property.name="property1"
@@ -1373,6 +1252,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			property.name="property2"
 			/>
 	</target>	
+
 
 	<target name="upgrade:post:jboss" unless="install.running">
 		<copy file="${copied.jboss.log4j.dir}/log4j.xml" todir="${jboss.home}/server/${jboss.server.name}/conf"/>
