@@ -86,7 +86,6 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<property name="camod-grid-service.dir.dist" location="${basedir}/${camod-grid-service.dist.relative.dir}" />
 	<property name="camod-grid-service.name" value="wsrf-camod" />
 	<property name="camod-grid-service.war.file" value="${camod-grid-service.name}.war" />
-	<property name="camod-grid-service.zip.file" value="${camod-grid-service.name}.zip" />
 	<property name="resource.file.jboss-globus-lib" value="jboss-globus-libs-cagrid1_2.zip" />
 	<property name="camod-resource.artifact.dir" value="${software.dir}/common/resources" />
 	
@@ -539,7 +538,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		
 		<!-- camod.grid.jboss.home=C\:/devtools/grid/jboss-4.0.5.GA + server + camod.grid.jboss.server.name=default + lib-->
 	    <unzip dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/lib" 
-	           src="${camod-grid-service.dir.dist}/${resource.file.jboss-globus-lib}/grid"/>
+	           src="${camod-grid-service.dir.dist}/grid/${resource.file.jboss-globus-lib}"/>
 		
 		<!-- copy datasource file (reuse copy from camod.war) moved from install:jboss:camod-grid:configure to here -->
 		<copy file="${jboss-conf.dir.dest}/${camod-webapp.ds.file}" todir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy" overwrite="true" />
