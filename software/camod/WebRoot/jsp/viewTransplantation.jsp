@@ -145,6 +145,12 @@
 				<c:out value="${mdl.strain.displayName}" escapeXml="false"/>&nbsp;
 			</td>
 		</tr>
+		<tr>
+			<td class="WhiteBox"><b>Comment</b></td>
+			<td class="WhiteBoxRightEnd">
+					<c:out value="${t.comments}" escapeXml="false"/>&nbsp;
+			</td>
+		</tr>		
 		<tr><td>&nbsp;</td></tr>
 	</c:forEach>
 	</TABLE>
