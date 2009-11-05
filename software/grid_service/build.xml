@@ -13,11 +13,31 @@
 	<property name="resource.file.jboss-globus-lib" value="jboss-globus-libs-cagrid1_2.zip" />
 	
 	<property name="any.filename" value="camod.war" />
+	
+	<!-- Configure grid service for the various tiers (modify properties file)  -->
+	<target name="config-grid-service" depends="zip-globus-lib-files-to-bda"> 
+		<jar destfile="${grid.service.build.dir}/${camod-grid-service.name}" basedir="${temp.dir}"/>
+	</target>
+	
+	<!-- Configure grid service for the various tiers (modify properties file)  -->
+	<target name="zip-globus-lib-files-to-bda" depends="config-remote-service-url"> 
+		<delete dir="${grid.service.build.dir}" failonerror="false"/>
+		<mkdir dir="${grid.service.build.dir}/grid"/>		
+		<zip destfile="${grid.service.build.dir}/grid/${resource.file.jboss-globus-lib}" basedir="../${globus.lib.dir}/" />	
+	</target>	
 
+	<!-- ************************************************************************************************-->
+	<!--                                             Configure Remote Service                             -->
+	<!-- ************************************************************************************************-->
+	<target name="config-remote-service-url" depends="config-index-service-url">
+		    <replaceregexp file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml" match="http://localhost" replace="http://${camod.grid.jboss.server.hostname}" />
+		    <replaceregexp file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml" match="8080" replace="${camod.grid.jboss.server.port}" />
+	</target>	
+	
 	<!-- ************************************************************************************************-->
 	<!--                                             Configure Index Service                             -->
 	<!-- ************************************************************************************************-->
-	<target name="config-index-service-url" depends="unjar-grid-file">
+	<target name="config-index-service-url" depends="config-service-metadata">
 		<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/${grid.service.name}_registration.xml" token="http://cagrid-index.nci.nih.gov:8080" value="${camod.grid.index.url}"/>
 		<replace file="${temp.dir}/WEB-INF/etc/globus_resolution_service/jndi-config.xml" token="localhost:8080" value="localhost:${camod.grid.jboss.server.port}"/>
 		<replace file="${temp.dir}/WEB-INF/web.xml" token="8080" value="${camod.grid.jboss.server.port}"/>
@@ -28,17 +48,11 @@
 		<replace file="${temp.dir}/WEB-INF/web.xml" token="@APP_NAME@" value="${camod-grid-service.name}"/>		
 	
 	</target>
-	<!-- ************************************************************************************************-->
-	<!--                                             Configure Remote Service                             -->
-	<!-- ************************************************************************************************-->
-	<target name="config-remote-service-url" depends="config-index-service-url">
-		    <replaceregexp file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml" match="http://localhost" replace="http://${camod.grid.jboss.server.hostname}" />
-		    <replaceregexp file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml" match="8080" replace="${camod.grid.jboss.server.port}" />
-	</target>	
+	
 	<!-- ************************************************************************************************-->
 	<!--                             Configure   Service    Metadata  (skip for NCICB)                   -->
 	<!-- ************************************************************************************************-->
-	<target name="config-service-metadata" depends="config-remote-service-url">
+	<target name="config-service-metadata" depends="unwar-grid-file">
 		<copy file="conf/serviceMetadata.xml.template" tofile="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" overwrite="true"/>
 		<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@SERVICE_NAME@" value="${grid.service.name}"/>
 	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@DISPLAY_NAME@" value="${displayName}"/>
@@ -57,29 +71,19 @@
 	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@ROLE@" value="${role}"/>
 	</target>	
 
-	<!-- Take wsrf.war and change name into wsrf-camod.war -->
-	<target name="war-generated-wsrf-file">
-		<jar destfile="${build.dir}/wsrf-camod.war" basedir="${output.dir}" />
-	</target>
-
 	<!-- Take grid_service\wsrf-camod.war and unjar the contents into temp.dir -->
-	<target name="unjar-grid-file">
-		<delete dir="${temp.dir}" failonerror="false"/>
-		<mkdir dir="${temp.dir}"/>
+	<target name="unwar-grid-file">
 		<unjar src="${camod-grid-service.name}" dest="${temp.dir}"/>
 	</target>
+	
+	
+	<!-- EXTRA targets ************************ -->	
 	
 	<!-- Take any and unjar the contents into temp.dir -->
 	<target name="unjar-any-file">
 		<delete dir="${temp.dir}" failonerror="false"/>
 		<mkdir dir="${temp.dir}"/>
 		<unjar src="${any.filename}" dest="${temp.dir}"/>
-	</target>
-	
-	<!-- Configure grid service for the various tiers (modify properties file)  -->
-	<target name="config-grid-service" depends="config-remote-service-url"> 
-		<antcall target="jar-grid-service"/>
-		<copy file="../${globus.lib.dir}/${resource.file.jboss-globus-lib}" todir="${grid.service.build.dir}/grid"/>  	
 	</target>
 
 	<!-- Jar the grid service after modifying it for the various tiers (before BDA target) -->
@@ -89,13 +93,6 @@
 	<jar destfile="${artifacts.dir}/${grid.service.war.filename}" basedir="${temp.dir}"/>
 	</target>	
 	
-	<!-- Jar the grid service after modifying it for the various tiers - Put in BDA location -->
-	<target name="jar-grid-service" >
-		<delete dir="${grid.service.build.dir}" failonerror="false"/>
-		<mkdir dir="${grid.service.build.dir}"/>
-	<jar destfile="${grid.service.build.dir}/${camod-grid-service.name}" basedir="${temp.dir}"/>
-	</target>
-
 	<!-- ************************************************************************************************-->
 	<!--                          Fix SDK genereated Client (EngineeredGene.hbm.xml)                     -->
 	<!-- ************************************************************************************************-->
