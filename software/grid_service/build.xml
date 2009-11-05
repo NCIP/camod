@@ -12,7 +12,7 @@
 	<property name="globus.lib.dir" value="${grid.service.dir}/globus_lib_files" />
 	<property name="resource.file.jboss-globus-lib" value="jboss-globus-libs-cagrid1_2.zip" />
 	
-	<property name="any.filename" value="camod.war" />
+	<property name="any.filename" value="wsrf-camod.war" />
 	
 	<!-- Configure grid service for the various tiers (modify properties file)  -->
 	<target name="config-grid-service" depends="zip-globus-lib-files-to-bda">
@@ -21,7 +21,7 @@
 	      <fileset dir="${temp.dir}/WEB-INF/lib"
 	               includes="commons-logging*.jar"/>
 	    </delete>
-		<jar destfile="${grid.service.build.dir}/${camod-grid-service.name}" basedir="${temp.dir}"/>
+		<jar destfile="${grid.service.build.dir}/${camod-grid-service.war.file}" basedir="${temp.dir}"/>
 	</target>
 	
 	<!-- Configure grid service for the various tiers (modify properties file)  -->
@@ -35,19 +35,21 @@
 	<!--                                             Configure Remote Service                             -->
 	<!-- ************************************************************************************************-->
 	<target name="config-remote-service-url" depends="config-index-service-url">
-		    <replaceregexp file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml" match="http://localhost" replace="http://${camod.grid.jboss.server.hostname}" />
-		    <replaceregexp file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml" match="8080" replace="${camod.grid.jboss.server.port}" />
+		    <replaceregexp file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml" match="http://cbiovdev5058.nci.nih.gov" replace="http://${camod.grid.jboss.server.hostname}" />
+		    <replaceregexp file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml" match="19080" replace="${camod.grid.jboss.server.port}" />
 	</target>	
 	
 	<!-- ************************************************************************************************-->
 	<!--                                             Configure Index Service                             -->
 	<!-- ************************************************************************************************-->
 	<target name="config-index-service-url" depends="config-service-metadata">
-		<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/${grid.service.name}_registration.xml" token="http://cagrid-index.nci.nih.gov:8080" value="${camod.grid.index.url}"/>
-		<replace file="${temp.dir}/WEB-INF/etc/globus_resolution_service/jndi-config.xml" token="localhost:8080" value="localhost:${camod.grid.jboss.server.port}"/>
-		<replace file="${temp.dir}/WEB-INF/web.xml" token="8080" value="${camod.grid.jboss.server.port}"/>
+		<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/${grid.service.name}_registration.xml" token="http://cagrid-index-dev.nci.nih.gov:8080/wsrf/services/DefaultIndexService" value="${camod.grid.index.url}"/>
+		<replace file="${temp.dir}/WEB-INF/etc/globus_resolution_service/jndi-config.xml" token="localhost:19080" value="localhost:${camod.grid.jboss.server.port}"/>
+		<replace file="${temp.dir}/WEB-INF/web.xml" token="19080" value="${camod.grid.jboss.server.port}"/>
+		
 		<copy file="conf/server-config.wsdd.template" tofile="${temp.dir}/WEB-INF/etc/globus_wsrf_core/server-config.wsdd" overwrite="true"/>
 		<replace file="${temp.dir}/WEB-INF/etc/globus_wsrf_core/server-config.wsdd" token="@LOGICAL_HOST@" value="${camod.grid.jboss.server.hostname}"/>
+		
 		<copy file="conf/web.xml.template" tofile="${temp.dir}/WEB-INF/web.xml" overwrite="true"/>
 		<replace file="${temp.dir}/WEB-INF/web.xml" token="@SERVER_PORT@" value="${camod.grid.jboss.server.port}"/>
 		<replace file="${temp.dir}/WEB-INF/web.xml" token="@APP_NAME@" value="${camod-grid-service.name}"/>		
@@ -78,7 +80,7 @@
 
 	<!-- Take grid_service\wsrf-camod.war and unjar the contents into temp.dir -->
 	<target name="unwar-grid-file">
-		<unjar src="${camod-grid-service.name}" dest="${temp.dir}"/>
+		<unjar src="${camod-grid-service.war.file}" dest="${temp.dir}"/>
 	</target>
 	
 	
@@ -88,7 +90,7 @@
 	<target name="unjar-any-file">
 		<delete dir="${temp.dir}" failonerror="false"/>
 		<mkdir dir="${temp.dir}"/>
-		<unjar src="${any.filename}" dest="${temp.dir}"/>
+		<unjar src="artifacts/${any.filename}" dest="${temp.dir}"/>
 	</target>
 
 	<!-- Jar the grid service after modifying it for the various tiers (before BDA target) -->
