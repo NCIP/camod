@@ -5,41 +5,36 @@
    
 
 
-
 <project name="Configure caGrid service and API" default="config-grid-service" basedir=".">
 	<property file="build.properties"/>
-	<property name="temp.dir" value="temp" />
-	<property name="conf.dir" value="conf" />
-    <property name="artifacts.dir" value="artifacts" />
+	<property name="temp.dir" value="temp" />	
 	<property name="grid.service.dir" value="grid_service" />
 	<property name="globus.lib.dir" value="${grid.service.dir}/globus_lib_files" />
 	<property name="resource.file.jboss-globus-lib" value="jboss-globus-libs-cagrid1_2.zip" />
 	
-	<property name="client.orm.jar.filename" value="caGRID-sdkQuery4-processor-1.2.jar" />
 	<property name="any.filename" value="camod.war" />
 
 	<!-- ************************************************************************************************-->
 	<!--                                             Configure Index Service                             -->
 	<!-- ************************************************************************************************-->
 	<target name="config-index-service-url" depends="unjar-grid-file">
-		<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/${grid.service.name}_registration.xml" token="http://cagrid-index.nci.nih.gov:8080" value="${grid.index.service.base.url}"/>
-		<replace file="${temp.dir}/WEB-INF/etc/globus_resolution_service/jndi-config.xml" token="localhost:8080" value="${jboss.server.hostname}:${jboss.server.port}"/>
-		<replace file="${temp.dir}/WEB-INF/web.xml" token="8080" value="${jboss.server.port}"/>
+		<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/${grid.service.name}_registration.xml" token="http://cagrid-index.nci.nih.gov:8080" value="${camod.grid.index.url}"/>
+		<replace file="${temp.dir}/WEB-INF/etc/globus_resolution_service/jndi-config.xml" token="localhost:8080" value="localhost:${camod.grid.jboss.server.port}"/>
+		<replace file="${temp.dir}/WEB-INF/web.xml" token="8080" value="${camod.grid.jboss.server.port}"/>
 		<copy file="conf/server-config.wsdd.template" tofile="${temp.dir}/WEB-INF/etc/globus_wsrf_core/server-config.wsdd" overwrite="true"/>
-		<replace file="${temp.dir}/WEB-INF/etc/globus_wsrf_core/server-config.wsdd" token="@LOGICAL_HOST@" value="${grid.logicalHost}"/>
+		<replace file="${temp.dir}/WEB-INF/etc/globus_wsrf_core/server-config.wsdd" token="@LOGICAL_HOST@" value="${camod.grid.jboss.server.hostname}"/>
 		<copy file="conf/web.xml.template" tofile="${temp.dir}/WEB-INF/web.xml" overwrite="true"/>
-		<replace file="${temp.dir}/WEB-INF/web.xml" token="@SERVER_PORT@" value="${jboss.server.port}"/>
-		<replace file="${temp.dir}/WEB-INF/web.xml" token="@APP_NAME@" value="${grid.service.application.name}"/>		
-		
-
+		<replace file="${temp.dir}/WEB-INF/web.xml" token="@SERVER_PORT@" value="${camod.grid.jboss.server.port}"/>
+		<replace file="${temp.dir}/WEB-INF/web.xml" token="@APP_NAME@" value="${camod-grid-service.name}"/>		
+	
 	</target>
 	<!-- ************************************************************************************************-->
 	<!--                                             Configure Remote Service                             -->
 	<!-- ************************************************************************************************-->
 	<target name="config-remote-service-url" depends="config-index-service-url">
-		    <replaceregexp file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml" match="http://localhost" replace="${remote.app.service}" />
-		    <replaceregexp file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml" match="8080" replace="${jboss.server.port}" />
-	</target>
+		    <replaceregexp file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml" match="http://localhost" replace="http://${camod.grid.jboss.server.hostname}" />
+		    <replaceregexp file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml" match="8080" replace="${camod.grid.jboss.server.port}" />
+	</target>	
 	<!-- ************************************************************************************************-->
 	<!--                             Configure   Service    Metadata  (skip for NCICB)                   -->
 	<!-- ************************************************************************************************-->
@@ -60,18 +55,18 @@
 	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@LAST_NAME@" value="${lastName}"/>
 	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@PHONE_NUMBER@" value="${phoneNumber}"/>
 	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@ROLE@" value="${role}"/>
-	</target>
-	
+	</target>	
+
 	<!-- Take wsrf.war and change name into wsrf-camod.war -->
 	<target name="war-generated-wsrf-file">
 		<jar destfile="${build.dir}/wsrf-camod.war" basedir="${output.dir}" />
 	</target>
-	
+
 	<!-- Take grid_service\wsrf-camod.war and unjar the contents into temp.dir -->
 	<target name="unjar-grid-file">
 		<delete dir="${temp.dir}" failonerror="false"/>
 		<mkdir dir="${temp.dir}"/>
-		<unjar src="${grid.service.war.filename}" dest="${temp.dir}"/>
+		<unjar src="${camod-grid-service.name}" dest="${temp.dir}"/>
 	</target>
 	
 	<!-- Take any and unjar the contents into temp.dir -->
@@ -86,7 +81,7 @@
 		<antcall target="jar-grid-service"/>
 		<copy file="../${globus.lib.dir}/${resource.file.jboss-globus-lib}" todir="${grid.service.build.dir}/grid"/>  	
 	</target>
-	
+
 	<!-- Jar the grid service after modifying it for the various tiers (before BDA target) -->
 	<target name="jar-grid-service-local" >
 		<delete dir="${artifacts.dir}" failonerror="false"/>
@@ -98,7 +93,7 @@
 	<target name="jar-grid-service" >
 		<delete dir="${grid.service.build.dir}" failonerror="false"/>
 		<mkdir dir="${grid.service.build.dir}"/>
-	<jar destfile="${grid.service.build.dir}/${grid.service.war.filename}" basedir="${temp.dir}"/>
+	<jar destfile="${grid.service.build.dir}/${camod-grid-service.name}" basedir="${temp.dir}"/>
 	</target>
 
 	<!-- ************************************************************************************************-->
@@ -130,4 +125,6 @@
         <mkdir dir="${build.dir}"/>
     	<copy file="${remote.api.war.name}.war" todir="${build.dir}"/>  	
     </target>	
+
+
 </project>
