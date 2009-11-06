@@ -44,6 +44,7 @@
 	<!-- ************************************************************************************************-->
 	<target name="config-index-service-url" depends="config-service-metadata">
 		<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/${grid.service.name}_registration.xml" token="http://cagrid-index-dev.nci.nih.gov:8080/wsrf/services/DefaultIndexService" value="${camod.grid.index.url}"/>
+		
 		<replace file="${temp.dir}/WEB-INF/etc/globus_resolution_service/jndi-config.xml" token="localhost:19080" value="localhost:${camod.grid.jboss.server.port}"/>
 		<replace file="${temp.dir}/WEB-INF/web.xml" token="19080" value="${camod.grid.jboss.server.port}"/>
 		
@@ -83,6 +84,13 @@
 		<unjar src="${camod-grid-service.war.file}" dest="${temp.dir}"/>
 	</target>
 	
+    <!-- TARGET: copy_remote_api_war (used by BDA)
+     This will copy the SDK-generated war (without changes) to the BDA target folder     -->
+    <target name="copy-remote-api-war" >
+        <mkdir dir="${build.dir}"/>
+    	<copy file="${remote.api.war.name}.war" todir="${build.dir}"/>  	
+    </target>
+	
 	
 	<!-- EXTRA targets ************************ -->	
 	
@@ -90,7 +98,7 @@
 	<target name="unjar-any-file">
 		<delete dir="${temp.dir}" failonerror="false"/>
 		<mkdir dir="${temp.dir}"/>
-		<unjar src="artifacts/${any.filename}" dest="${temp.dir}"/>
+		<unjar src="${any.filename}" dest="${temp.dir}"/>
 	</target>
 
 	<!-- Jar the grid service after modifying it for the various tiers (before BDA target) -->
@@ -100,35 +108,4 @@
 	<jar destfile="${artifacts.dir}/${grid.service.war.filename}" basedir="${temp.dir}"/>
 	</target>	
 	
-	<!-- ************************************************************************************************-->
-	<!--                          Fix SDK genereated Client (EngineeredGene.hbm.xml)                     -->
-	<!-- ************************************************************************************************-->
-	<target name="unjar-client-orm-file">
-		<delete dir="${temp.dir}" failonerror="false"/>
-		<mkdir dir="${temp.dir}"/>
-		<unjar src="${client.orm.jar.filename}" dest="${temp.dir}" />
-	</target>	
-	<target name="jar-client-orm-file">
-		<jar destfile="${build.dir}/camodSDKClient-orm.jar" basedir="${temp.dir}" />
-	</target>
-	<target name="unwar-sdk-client-file">
-		<delete dir="${temp.dir}" failonerror="false"/>
-		<mkdir dir="${temp.dir}"/>
-		<unjar src="${client.sdk.war.filename}" dest="${temp.dir}"/>
-	</target>
-	
-	<target name="war-sdk-client-file">
-		<jar destfile="${build.dir}/camodSDKClient.war" basedir="${temp.dir}" />
-	</target>	
-	
-    <!--
-        TARGET: copy_remote_api_war
-        This will copy the SDK-generated war (without changes) to the BDA target folder
-    -->
-    <target name="copy-remote-api-war" >
-        <mkdir dir="${build.dir}"/>
-    	<copy file="${remote.api.war.name}.war" todir="${build.dir}"/>  	
-    </target>	
-
-
 </project>
