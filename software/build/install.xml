@@ -542,6 +542,10 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		
 		<!-- copy datasource file (reuse copy from camod.war) moved from install:jboss:camod-grid:configure to here -->
 		<copy file="${jboss-conf.dir.dest}/${camod-webapp.ds.file}" todir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy" overwrite="true" />
+		
+		<!-- clean up temp directory for next deployment >
+		<delete dir="${camod-grid-service.dir.dist}/temp"/ -->
+		
 		<!-- copy JBoss-web.xml file -->
 		<!--
 		<copy file="${jboss-conf.dir.dest}/${jboss.web.xml.file}" todir="${camod.grid.jboss.home}/server/${jboss.server.name}/deploy" overwrite="true" />
@@ -553,11 +557,11 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			property3=${camod.grid.jboss.home}${line.separator}
 			property4=${tomcat.home}${line.separator}
 			"/>-->
-		<echo message="Updating properties-service.xml for grid jboss instance"/>
+		<!--echo message="Updating properties-service.xml for grid jboss instance"/>
 		<copy file="${camod.grid.jboss.home}/server/${jboss.server.name}/deploy/properties-service.xml" tofile="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/properties-service.xml.orig" overwrite="true"/>
 		<jboss-update-properties-service jboss.home="${camod.grid.jboss.home}" jboss.server.name="${camod.grid.jboss.server.name}"
 			property.block="${property.block}"
-			/>		
+			/ -->		
 	</target>	
 
 	<target name="install:jboss:camod-webapp:configure" description="Configure camod-webapp application, copies over externalized properties or configurations that are not part of the jboss configuration" unless="exclude.jboss" depends="common:jboss:init, common:common:init">
@@ -592,7 +596,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<!-- copy over any other files you may need to configure your application -->
 		
 		<echoproperties prefix="camod"/>
-	    <jboss-configure jboss.server.ports.name="${camod.grid.jboss.server.ports.name}"
+	    <!-- jboss-configure jboss.server.ports.name="${camod.grid.jboss.server.ports.name}"
 	                     jboss.home="${camod.grid.jboss.home}"
 	                     jboss.server.name="${camod.grid.jboss.server.name}"
 	                     jboss.server.bindingfile.location="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/conf/bindings.xml"                     
@@ -623,7 +627,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	                     jboss.external.http.port="${camod.grid.jboss.external.http.port}"
 	                     jboss.server.hostname="${camod.grid.jboss.server.hostname}"
 	                     jboss.java.opts="${camod.grid.jboss.java.opts}"
-	                     jboss.logs.dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/log"/>
+	                     jboss.logs.dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/log"/ -->
 		
 	    <!--jboss-configure-grid jboss.conf.dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/conf"
 	                          jboss.webapp.dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy"
@@ -639,84 +643,58 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		
 	    <!-- with bda 1.0.2 this must come after the jboss-configure-grid call, otherwise
 	         the gridServiceUrl will be corrupted by what jboss-configure-grid does -->
+
+		<unjar src="${camod-grid-service.dir.dist}/${camod-grid-service.war.file}" dest="${camod-grid-service.dir.dist}/temp" />
 		
-		<echo message="un jar the wsrf-camod.war to a temp directory."/>
-		<!-- un jar the wsrf-camod.war to a temp directory -->
-		<unjar src="${camod-grid-service.dir.dist}/${camod-grid-service.war.file}" dest="${camod-grid-service.dir.dist}/temp"/>
-		
-		<echo message="Modify /WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml properties."/>
-		<!-- Modify /WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml properties-->
+		<!-- Modify /WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml properties -->
 	    <xmltask source="camod-grid-service/temp/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml"
-	             dest="camod-grid-service/temp/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml"> 	    	
-	     <!-- no xmlcatalog necessary -->
-		 <replace path="//:parameter[:name='cqlQueryProcessorConfig_applicationName']/:value/text()" 
-		          withtext="${sdk.service.name}" />  
-		  
-		 <replace path="//:parameter[:name='cqlQueryProcessorConfig_applicationHostPort']/:value/text()" 
-		          withtext="${camod.grid.jboss.server.port}" />                 
-		               
-		 <replace path="//:parameter[:name='cqlQueryProcessorConfig_applicationHostName']/:value/text()" 
-		          withtext="http://${camod.grid.jboss.server.hostname}" /> 
-	    	
+	             dest="camod-grid-service/temp/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml"> 
+			 <replace path="//:parameter[:name='cqlQueryProcessorConfig_applicationName']/:value/text()" 
+			          withtext="${sdk.service.name}" />  		  
+			 <replace path="//:parameter[:name='cqlQueryProcessorConfig_applicationHostPort']/:value/text()" 
+			          withtext="${camod.grid.jboss.server.port}" />   		               
+			 <replace path="//:parameter[:name='cqlQueryProcessorConfig_applicationHostName']/:value/text()" 
+			          withtext="http://${camod.grid.jboss.server.hostname}" /> 	    	
 	     </xmltask> 
-
-		<echo message="Modify /WEB-INF/etc/cagrid_${grid.service.name}/${grid.service.name}_registration.xml."/>
-		<!-- Modify /WEB-INF/etc/cagrid_${grid.service.name}/${grid.service.name}_registration.xml properties-->
+		
+		<!-- Modify /WEB-INF/etc/cagrid_${grid.service.name}/${grid.service.name}_registration.xml -->
 	    <xmltask source="camod-grid-service/temp/WEB-INF/etc/cagrid_${grid.service.name}/${grid.service.name}_registration.xml"
-	             dest="camod-grid-service/temp/WEB-INF/etc/cagrid_${grid.service.name}/${grid.service.name}_registration.xml"> 
-
-	        <replace path="//:ServiceGroupEPR/:Address/text()" 
-	                 withtext="${camod.grid.index.url}" /> 	    	
-	     </xmltask>
-
-		<echo message="Modify /WEB-INF/etc/globus_resolution_service/jndi-config.xml properties."/>
-		<!-- Modify /WEB-INF/etc/globus_resolution_service/jndi-config.xml properties-->
+	             dest="camod-grid-service/temp/WEB-INF/etc/cagrid_${grid.service.name}/${grid.service.name}_registration.xml">      
+		      <!-- no xmlcatalog necessary -->       
+		      <replace path="//:ServiceGroupEPR/:Address/text()" 
+		               withtext="${camod.grid.index.url}" />  
+	     </xmltask> 
+		
+		<!-- Modify /WEB-INF/etc/globus_resolution_service/jndi-config.xml -->
 	    <xmltask source="camod-grid-service/temp/WEB-INF/etc/globus_resolution_service/jndi-config.xml"
 	             dest="camod-grid-service/temp/WEB-INF/etc/globus_resolution_service/jndi-config.xml"> 
-	    	
 			 <replace path="//:parameter[:name='address']/:value/text()" 
-			          withtext="http://localhost:${camod.grid.jboss.server.port}/ServiceToResolve" />	    	
-	     </xmltask>		
-
-		<echo message="Modify /WEB-INF/web.xml properties."/>
-		<!-- Modify /WEB-INF/web.xml properties-->
-	    <xmltask source="camod-grid-service/temp/WEB-INF/web.xml"
-	             dest="camod-grid-service/temp/WEB-INF/web.xml"> 
-
-			 <!--replace path="//:param-name[:param-value='defaultPort']/:value/text()" 
-			          withtext="${camod.grid.jboss.server.port}" />
-				 <replace path="//:param-name[:param-value='webContext']/:value/text()" 
-				          withtext="${camod-grid-service.name}" / -->	    	
-	    	
-			<replace file="camod-grid-service/temp/WEB-INF/web.xml" token="8080" value="${camod.grid.jboss.server.port}"/>
-			<replace file="camod-grid-service/temp/WEB-INF/web.xml" token="wsrf" value="${camod-grid-service.name}"/>
-
-	    </xmltask>
+			          withtext="http://localhost:${camod.grid.jboss.server.port}/ServiceToResolve" />   		    	
+	     </xmltask>
 		
-		<echo message="Modify /WEB-INF/etc/globus_wsrf_core/server-config.wsdd properties."/>
-		<!-- Modify /WEB-INF/etc/globus_wsrf_core/server-config.wsdd properties-->
+		<!-- Modify /WEB-INF/etc/globus_wsrf_core/server-config.wsdd -->
 	    <xmltask source="camod-grid-service/temp/WEB-INF/etc/globus_wsrf_core/server-config.wsdd"
 	             dest="camod-grid-service/temp/WEB-INF/etc/globus_wsrf_core/server-config.wsdd"> 
-
 			 <replace path="//:parameter[:name='logicalHost']/:value/text()" 
-			          withtext="${camod.grid.jboss.server.hostname}" />	 	    	
-			<!--replace file="$camod-grid-service/temp/WEB-INF/etc/globus_wsrf_core/server-config.wsdd" token="@LOGICAL_HOST@" 
-				value="${camod.grid.jboss.server.hostname}"/ -->
-	    	
+			          withtext="http://${camod.grid.jboss.server.hostname}" /> 	    	
+	     </xmltask> 
+		
+		<!-- Modify /WEB-INF/web.xml -->
+	    <xmltask source="camod-grid-service/temp/WEB-INF/web.xml"
+	             dest="camod-grid-service/temp/WEB-INF/web.xml"> 
+			 <replace path="//:param-name[:name='webContext']/:value/text()" 
+			          withtext="${camod-grid-service.name}" /> 	
+			 <replace path="//:param-name[:name='defaultPort']/:value/text()" 
+			          withtext="${camod.grid.jboss.server.port}" /> 	    	
 	     </xmltask>	
 		
-		<echo message="JBoss complains about multiple commons-logging.jar's in container."/>
-	    <!-- JBoss complains about multiple commons-logging.jar's in container -->       
+		<!-- JBoss (BDA) complains about multiple commons-logging.jar files in the container -->
 	    <delete>      
 	      <fileset dir="camod-grid-service/temp/WEB-INF/lib"
 	               includes="commons-logging*.jar"/>
 	    </delete>
 		
-		<echo message="jar wsrf-camod.war after modifying contents."/>
-		<!-- jar wsrf-camod.war after modifying contents -->
-		<jar destfile="${camod-grid-service.dir.dist}/temp/${camod-grid-service.war.file}" basedir="camod-grid-service/temp"/>		
-		<!-- copy wsrf-camod.war to deploy folder after modifying contents -->
-		<copy file="${camod-grid-service.dir.dist}/temp/${camod-grid-service.war.file}" todir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy" overwrite="true" />
+		 <jar destfile="${camod-grid-service.dir.dist}/${camod-grid-service.war.file}" basedir="${camod-grid-service.dir.dist}/temp" update="true" />		
 		
 	</target>	
 
@@ -987,6 +965,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		 		install:jboss:validation:pre-install:ports,
 		 		install:jboss:clean,
 		 		install:jboss:camod-grid:binaries,
+			    install:jboss:camod-grid:configure,
 				install:jboss:camod-grid-api,
 		 		install:jboss:configure,
 		 		install:post:jboss:camod-grid,
@@ -1029,6 +1008,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		upgrade:jboss:camod-grid:init,
 		common:jboss:camod-grid:init,
 		install:jboss:camod-grid:stop,
+		install:jboss:camod-grid:configure,
  		install:jboss:camod-grid-api,
 		install:post:jboss:camod-grid, 		
 		install:jboss:camod-grid:start

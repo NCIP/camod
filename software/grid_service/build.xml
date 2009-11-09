@@ -16,23 +16,18 @@
 	
 	<!-- Configure grid service for the various tiers (modify properties file)  -->
 	<target name="config-grid-service" depends="zip-globus-lib-files-to-bda">
-	    <!-- JBoss (BDA) complains about multiple commons-logging.jar files in teh container -->       
-	    <delete>      
-	      <fileset dir="${temp.dir}/WEB-INF/lib"
-	               includes="commons-logging*.jar"/>
-	    </delete>
 		<jar destfile="${grid.service.build.dir}/${camod-grid-service.war.file}" basedir="${temp.dir}"/>
 	</target>
 	
 	<!-- Configure grid service for the various tiers (modify properties file)  -->
-	<target name="zip-globus-lib-files-to-bda" depends="config-remote-service-url"> 
+	<target name="zip-globus-lib-files-to-bda"  depends="config-service-metadata" > 
 		<delete dir="${grid.service.build.dir}" failonerror="false"/>
 		<mkdir dir="${grid.service.build.dir}/grid"/>		
 		<zip destfile="${grid.service.build.dir}/grid/${resource.file.jboss-globus-lib}" basedir="../${globus.lib.dir}/" />	
 	</target>	
 
 	<!-- ************************************************************************************************-->
-	<!--                                             Configure Remote Service                             -->
+	<!--                    Configure Remote Service  (Moved to BDA install.xml)                         -->
 	<!-- ************************************************************************************************-->
 	<target name="config-remote-service-url" depends="config-index-service-url">
 		    <replaceregexp file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml" match="http://cbiovdev5058.nci.nih.gov" replace="http://${camod.grid.jboss.server.hostname}" />
@@ -40,7 +35,7 @@
 	</target>	
 	
 	<!-- ************************************************************************************************-->
-	<!--                                             Configure Index Service                             -->
+	<!--                     Configure Index Service  (Moved to BDA install.xml)                         -->
 	<!-- ************************************************************************************************-->
 	<target name="config-index-service-url" depends="config-service-metadata">
 		<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/${grid.service.name}_registration.xml" token="http://cagrid-index-dev.nci.nih.gov:8080/wsrf/services/DefaultIndexService" value="${camod.grid.index.url}"/>
