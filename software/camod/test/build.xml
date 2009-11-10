@@ -1,47 +1,97 @@
-<project name="Junit" default="test" basedir=".">
-    
+<?xml version="1.0"?>
+<!-- ***************************************************************************
+                             caMOD unit tests
+**************************************************************************** -->
+<project name="caMOD Unit Tests" default="alltests" basedir=".">
 
+	<property name="test" value="AllTests" />
+    <property name="client.dir" value="../output/remote-client" />
+    <property name="lib.dir" value="lib" />
+    <property name="src.dir" value="src" />
+    <property name="build.dir" value="build" />
+    <property name="report.dir" value="report" />
+    <property name="coverage.port" value="47654" />
+    <property name="coverage.file" value="../output/coverage/client.ec" />
 
+    <path id="libs">
+        <pathelement location="${client.dir}/conf"/>
+        <pathelement location="${build.dir}"/>
+        <fileset dir="${lib.dir}">
+            <include name="**/*.jar"/>
+        </fileset>
+        <fileset dir="${client.dir}/lib">
+            <include name="**/*.jar"/>
+        </fileset>
+        <fileset dir="../lib">
+            <include name="**/*.jar"/>
+        </fileset>
+    </path>
 
-    <!-- stage specific attributes -->
-    <!--filter filtersfile="${tier}_camod.properties" /-->
-    <filter token="db.host" value="${db.host}"/>
-    <filter token="db.port" value="${db.port}"/>
-    <filter token="db.username" value="${db.username}"/>
-    <filter token="db.password" value="${db.password}"/>
-    <filter token="db.dbname" value="${db.dbname}"/>
+	<!-- ********************************************************************-->
+	<!--    Targets for building the tests                                   -->
+	<!-- ********************************************************************-->
 
-	<echo>Building for stage: ${tier}</echo>
-	
-    <!-- Define any properties -->
-	<property name="src" value="../src" />
-	<property name="lib" value="../WebRoot/WEB-INF/lib" />
-	<property name="classes" value="../WebRoot/WEB-INF/classes" />
-	<property name="test.class.name" value="unit.web.alltests.AllTestsSuite" />
-	
-	<!--   Set up the CLASSPATH to be used by JUnit -->
-	<path id="test.classpath">
-	  <pathelement location="${classes}" />
-	  <pathelement location="../WebRoot/WEB-INF/lib/junit-4.7.jar" />
-	  <fileset dir="${lib}">
-	    <include name="**/*.jar"/>
-	  </fileset>
-	</path>
-
-
-	<!--  Define the Ant task for running JUnit:  -->
-	<target name="test">
-	  <junit fork="yes" haltonfailure="yes">
-	    <test name="${test.class.name}" />
-	    <formatter type="plain" usefile="false" />
-	    <classpath refid="test.classpath" />
-	  </junit>
+	<target name="check-built-condition">
+		<condition property="system-built">
+			<available file="${client.dir}"/>
+		</condition>
 	</target>
-		  
+		
+	<target name="check-built" depends="check-built-condition" 
+			unless="system-built">
+		<echo message="System must be built before running demos." />
+	</target>
+	
+    <target name="clean"
+    		description="Removes generated artifacts">
+        <delete dir="${build.dir}" quiet="true"/>
+    </target>
+        	
+	<target name="init" depends="clean" 
+			description="Creates necessary directories">
+		<mkdir dir="${build.dir}"/>
+		<mkdir dir="${report.dir}"/>
+	</target>
+				
+    <target name="compile" depends="init,check-built" if="system-built"
+            description="Compiles the unit tests">
+        <javac srcdir="${src.dir}" destdir="${build.dir}" 
+            encoding="cp1252" debug="true" debuglevel="lines,source">
+            <classpath refid="libs"/>
+        </javac>        
+    </target>
 
+	<!-- ********************************************************************-->
+	<!--    Targets for running the tests                                    -->
+	<!-- ********************************************************************-->
 
+    <target name="report" depends="alltests">
+		<junitreport todir="${report.dir}">
+		    <fileset dir="${basedir}">
+		      <include name="TEST-*.xml" />
+		    </fileset>
+		    <report todir="${report.dir}" />
+		</junitreport>
+	</target>
+		
+    <target name="alltests" depends="compile" if="system-built">
+		<junit printsummary="yes" fork="yes" dir="${basedir}">
+	      <classpath refid="libs" />
+		  <formatter type="xml"/>
+          <jvmarg value="-Demma.rt.control.port=${coverage.port}"/>
+          <jvmarg value="-Demma.coverage.out.file=${coverage.file}"/>
+		  <test name="unit.web.alltests.AllTestsSuite"/>
+		</junit>
+	</target>
 
-
- 
+    <target name="run" depends="compile" if="system-built">
+		<junit printsummary="yes" fork="yes" dir="${basedir}">
+	      <classpath refid="libs" />
+          <jvmarg value="-Demma.rt.control.port=${coverage.port}"/>
+          <jvmarg value="-Demma.coverage.out.file=${coverage.file}"/>
+		  <formatter type="plain"/>
+		  <test name="gov.nih.nci.camod.${test}"/>
+		</junit>
+	</target>
 	
 </project>
