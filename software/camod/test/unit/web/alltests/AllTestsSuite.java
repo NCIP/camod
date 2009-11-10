@@ -22,7 +22,7 @@ public class AllTestsSuite extends TestCase {
 
         // Submission tests
         suite.addTest(AllSearchTests.suite());
-        suite.addTest(AllSubmissionTests.suite());
+        //suite.addTest(AllSubmissionTests.suite());
 
         return suite;
     }
