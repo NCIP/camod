@@ -91,6 +91,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<property name="camod-webapp.build.file" value="build.xml" />
 	<property name="camod-remote-api.build.file" value="build.xml" />
 	<property name="camod-grid-service.build.file" value="build.xml" />
+	<property name="camod-webapp.static-analysis.build.file" value="static-analysis-build.xml" />
 	
 	<!-- The target name that should be called from the sub-project build file -->
 	<property name="camod-webapp.build.target" value="build_war" />
@@ -653,11 +654,15 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<target name="test:all" description="Runs test target for all sub-projects" depends="
 		clean,
 		init,
-		test:camod-api,
-		test:camod-webapp,
-		test:camod-grid-service
+		test:camod-webapp		
 		" >
 	</target>
+	
+	
+	<!--   
+			test:camod-api,
+	test:camod-grid-service
+	-->
 	
 	<target name="test:camod-grid-service" depends="init" description="Calls test target for sub-project">
 		<!--
@@ -680,9 +685,11 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	</target>
 
 	<target name="test:camod-webapp" depends="init" description="Calls test target for sub-project">
-		<ant inheritAll="false" inheritRefs="false" antfile="${camod-webapp.test.file}" target="test" dir="${camod-webapp.base.dir}">
+		<!--ant inheritAll="false" inheritRefs="false" antfile="${camod-webapp.test.file}" target="test" dir="${camod-webapp.base.dir}">
 			<property name="dist.dir" value="${camod-webapp.dist.dir}" />
-		</ant>
+		</ant -->
+	<ant inheritAll="false" inheritRefs="false" antfile="${camod-webapp.static-analysis.build.file}" target="static-analysis:junit" dir="${camod-webapp.base.dir}">
+	</ant>		
 	</target>
 
 	<target name="static-analysis:all" description="Runs static-analysis target for all sub-projects" depends="
