@@ -13,37 +13,83 @@
 		</or>
 	</preConditions>                                       
 	                                                        
-	<changeSet id="1" author="pandyas">                            
-		<comment>execute 2009_Oct_2_6_1_a.sql</comment>
-		<sqlFile path="@db-upgrade.run.dir@/2009_Oct_2_6_1_a.sql"/>
-		<!--rollback>
-			<sqlFile path="@db-upgrade.run.dir@/drop-ssaksa_one.sql"/>
-			<sqlFile path="@db-upgrade.run.dir@/drop-ssaksa_two.sql"/>
-		</rollback-->
+	<changeSet id="2.6.1_INDUCED_MUTATION_TRIGGER" author="pandyas">                            
+		<comment>INDUCED_MUTATION_TRIGGER can not be null for MTB data</comment>
+    <sql>
+		update ENVIRONMENTAL_FACTOR ef
+		set ef.IS_INDUCED_MUTATION_TRIGGER = '0'
+		where ef.IS_INDUCED_MUTATION_TRIGGER is null
+    </sql> 
 	</changeSet> 
-	<changeSet id="2" author="pandyas">                            
-		<comment>execute 2009_Oct_2_6_1_b.sql</comment>
-		<sqlFile path="@db-upgrade.run.dir@/2009_Oct_2_6_1_b.sql"/>
-		<!--rollback>
-			<sqlFile path="@db-upgrade.run.dir@/drop-ssaksa_one.sql"/>
-			<sqlFile path="@db-upgrade.run.dir@/drop-ssaksa_two.sql"/>
-		</rollback-->
-	</changeSet>
-	<changeSet id="3" author="pandyas">                            
-		<comment>execute 2009_Oct_2_6_1_c.sql</comment>
-		<sqlFile path="@db-upgrade.run.dir@/2009_Oct_2_6_1_c.sql"/>
-		<!--rollback>
-			<sqlFile path="@db-upgrade.run.dir@/drop-ssaksa_one.sql"/>
-			<sqlFile path="@db-upgrade.run.dir@/drop-ssaksa_two.sql"/>
-		</rollback-->
-	</changeSet>
-	<changeSet id="4" author="pandyas">                            
-		<comment>execute 2009_Oct_2_6_1_d.sql</comment>
-		<sqlFile path="@db-upgrade.run.dir@/2009_Oct_2_6_1_d.sql"/>
-		<!--rollback>
-			<sqlFile path="@db-upgrade.run.dir@/drop-ssaksa_one.sql"/>
-			<sqlFile path="@db-upgrade.run.dir@/drop-ssaksa_two.sql"/>
-		</rollback-->
-	</changeSet>	
+	
+	<changeSet id="2.6.2_move_TYPE_ALTERN_ENTRY" author="pandyas">                            
+		<comment>move ef.TYPE_ALTERN_ENTRY data to ef.TYPE for MTB records</comment>
+    <sql>
+		update ENVIRONMENTAL_FACTOR ef
+		set ef.TYPE = ef.TYPE_ALTERN_ENTRY
+		where ef.TYPE is null
+		and ef.ENVIRONMENTAL_FACTOR_ID IN (
+		select ef.ENVIRONMENTAL_FACTOR_ID 
+		From environmental_factor ef, abs_cancer_model ac, carcinogen_exposure ce 
+		where ef.ENVIRONMENTAL_FACTOR_ID = ce.ENVIRONMENTAL_FACTOR_ID
+		and ce.ABS_CANCER_MODEL_ID = ac.ABS_CANCER_MODEL_ID
+		and ac.EXTERNAL_SOURCE = 'Jax MTB')
+    </sql>
+     <sql>
+		update ENVIRONMENTAL_FACTOR ef
+		set ef.TYPE_ALTERN_ENTRY = null
+		where ef.ENVIRONMENTAL_FACTOR_ID IN (
+		select ef.ENVIRONMENTAL_FACTOR_ID 
+		From environmental_factor ef, abs_cancer_model ac, carcinogen_exposure ce 
+		where ef.ENVIRONMENTAL_FACTOR_ID = ce.ENVIRONMENTAL_FACTOR_ID
+		and ce.ABS_CANCER_MODEL_ID = ac.ABS_CANCER_MODEL_ID
+		and ac.EXTERNAL_SOURCE = 'Jax MTB')
+    </sql> 
+	</changeSet> 
+	
+	<changeSet id="2.6.3_move_NAME_ALTERN_ENTRY" author="pandyas">                            
+		<comment>move ef.NAME_ALTERN_ENTRY data to ef.NAME for MTB records</comment>
+    <sql>
+		update ENVIRONMENTAL_FACTOR ef
+		set ef.NAME = ef.NAME_ALTERN_ENTRY
+		where ef.NAME is null
+		and ef.ENVIRONMENTAL_FACTOR_ID IN (
+		select ef.ENVIRONMENTAL_FACTOR_ID 
+		From environmental_factor ef, abs_cancer_model ac, carcinogen_exposure ce 
+		where ef.ENVIRONMENTAL_FACTOR_ID = ce.ENVIRONMENTAL_FACTOR_ID
+		and ce.ABS_CANCER_MODEL_ID = ac.ABS_CANCER_MODEL_ID
+		and ac.EXTERNAL_SOURCE = 'Jax MTB')
+    </sql>
+     <sql>
+		update ENVIRONMENTAL_FACTOR ef
+		set ef.NAME_ALTERN_ENTRY = null
+		where ef.ENVIRONMENTAL_FACTOR_ID IN (
+		select ef.ENVIRONMENTAL_FACTOR_ID 
+		from environmental_factor ef, abs_cancer_model ac, carcinogen_exposure ce 
+		where ef.ENVIRONMENTAL_FACTOR_ID = ce.ENVIRONMENTAL_FACTOR_ID
+		and ce.ABS_CANCER_MODEL_ID = ac.ABS_CANCER_MODEL_ID
+		and ac.EXTERNAL_SOURCE = 'Jax MTB')
+    </sql> 
+	</changeSet> 
+	
+	<changeSet id="2.6.4_delete_duplicate_MICRO_ARRAY_DATA_entries" author="pandyas">                            
+		<comment>delete duplicate micro_array_data records from table</comment>
+    <sql>
+		delete from MICRO_ARRAY_DATA
+		where experiment_id is not null
+    </sql>
+	</changeSet> 
+	
+	<changeSet id="2.6.5_delete_orphan_DISEASE_entries" author="pandyas">                            
+		<comment>Delete disease entries without parent record in histopathology</comment>
+    <sql>
+		delete from DISEASE d 
+		where d.NAME is null
+		and d.NAME_ALTERN_ENTRY is null
+		and d.DISEASE_ID NOT IN
+		(select disease_id from HISTOPATHOLOGY h)
+    </sql>
+	</changeSet> 
+	
 </databaseChangeLog>
 
