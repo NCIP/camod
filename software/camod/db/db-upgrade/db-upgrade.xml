@@ -23,14 +23,14 @@
 	</changeSet> 
 	
 	<changeSet id="2.6.2_move_TYPE_ALTERN_ENTRY" author="pandyas">                            
-		<comment>move ef.TYPE_ALTERN_ENTRY data to ef.TYPE for MTB records</comment>
+		<comment>Move ef.TYPE_ALTERN_ENTRY data to ef.TYPE for MTB records</comment>
     <sql>
 		update ENVIRONMENTAL_FACTOR ef
 		set ef.TYPE = ef.TYPE_ALTERN_ENTRY
 		where ef.TYPE is null
 		and ef.ENVIRONMENTAL_FACTOR_ID IN (
 		select ef.ENVIRONMENTAL_FACTOR_ID 
-		From environmental_factor ef, abs_cancer_model ac, carcinogen_exposure ce 
+		From ENVIRONMENTAL_FACTOR ef, ABS_CANCER_MODEL ac, CARCINOGEN_EXPOSURE ce 
 		where ef.ENVIRONMENTAL_FACTOR_ID = ce.ENVIRONMENTAL_FACTOR_ID
 		and ce.ABS_CANCER_MODEL_ID = ac.ABS_CANCER_MODEL_ID
 		and ac.EXTERNAL_SOURCE = 'Jax MTB')
@@ -40,7 +40,7 @@
 		set ef.TYPE_ALTERN_ENTRY = null
 		where ef.ENVIRONMENTAL_FACTOR_ID IN (
 		select ef.ENVIRONMENTAL_FACTOR_ID 
-		From environmental_factor ef, abs_cancer_model ac, carcinogen_exposure ce 
+		from ENVIRONMENTAL_FACTOR ef, ABS_CANCER_MODEL ac, CARCINOGEN_EXPOSURE ce 
 		where ef.ENVIRONMENTAL_FACTOR_ID = ce.ENVIRONMENTAL_FACTOR_ID
 		and ce.ABS_CANCER_MODEL_ID = ac.ABS_CANCER_MODEL_ID
 		and ac.EXTERNAL_SOURCE = 'Jax MTB')
@@ -48,14 +48,14 @@
 	</changeSet> 
 	
 	<changeSet id="2.6.3_move_NAME_ALTERN_ENTRY" author="pandyas">                            
-		<comment>move ef.NAME_ALTERN_ENTRY data to ef.NAME for MTB records</comment>
+		<comment>Move ef.NAME_ALTERN_ENTRY data to ef.NAME for MTB records</comment>
     <sql>
 		update ENVIRONMENTAL_FACTOR ef
 		set ef.NAME = ef.NAME_ALTERN_ENTRY
 		where ef.NAME is null
 		and ef.ENVIRONMENTAL_FACTOR_ID IN (
 		select ef.ENVIRONMENTAL_FACTOR_ID 
-		From environmental_factor ef, abs_cancer_model ac, carcinogen_exposure ce 
+		from ENVIRONMENTAL_FACTOR ef, ABS_CANCER_MODEL ac, CARCINOGEN_EXPOSURE ce 
 		where ef.ENVIRONMENTAL_FACTOR_ID = ce.ENVIRONMENTAL_FACTOR_ID
 		and ce.ABS_CANCER_MODEL_ID = ac.ABS_CANCER_MODEL_ID
 		and ac.EXTERNAL_SOURCE = 'Jax MTB')
@@ -65,7 +65,7 @@
 		set ef.NAME_ALTERN_ENTRY = null
 		where ef.ENVIRONMENTAL_FACTOR_ID IN (
 		select ef.ENVIRONMENTAL_FACTOR_ID 
-		from environmental_factor ef, abs_cancer_model ac, carcinogen_exposure ce 
+		from ENVIRONMENTAL_FACTOR ef, ABS_CANCER_MODEL ac, carcinogen_exposure ce 
 		where ef.ENVIRONMENTAL_FACTOR_ID = ce.ENVIRONMENTAL_FACTOR_ID
 		and ce.ABS_CANCER_MODEL_ID = ac.ABS_CANCER_MODEL_ID
 		and ac.EXTERNAL_SOURCE = 'Jax MTB')
@@ -73,15 +73,15 @@
 	</changeSet> 
 	
 	<changeSet id="2.6.4_delete_duplicate_MICRO_ARRAY_DATA_entries" author="pandyas">                            
-		<comment>delete duplicate micro_array_data records from table</comment>
+		<comment>Delete duplicate MICRO_ARRAY_DATA records from table</comment>
     <sql>
 		delete from MICRO_ARRAY_DATA
-		where experiment_id is not null
+		where EXPERIMENT_ID is not null
     </sql>
 	</changeSet> 
 	
 	<changeSet id="2.6.5_delete_orphan_DISEASE_entries" author="pandyas">                            
-		<comment>Delete disease entries without parent record in histopathology</comment>
+		<comment>Delete DISEASE entries without parent record in HISTOPATHOLOGY</comment>
     <sql>
 		delete from DISEASE d 
 		where d.NAME is null
