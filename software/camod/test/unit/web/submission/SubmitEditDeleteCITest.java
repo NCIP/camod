@@ -59,6 +59,74 @@ public class SubmitEditDeleteCITest extends BaseModelNeededTest {
         return suite;
     }
 
+    public void testAddAntibody() throws Exception {
+        navigateToModelForEditing(myModelName);
+        
+        //Adding
+        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Antibody");        
+        assertNotNull("Unable to find link to add a Antibody", theLink);        
+        WebResponse theCurrentPage = theLink.click();        
+        assertCurrentPageContains("(if Antibody is not listed, then please");
+        WebForm theForm = theCurrentPage.getFormWithName("antibodyForm");
+        theForm.setParameter("name", "anti-CTLA-4 antibody");        
+        theCurrentPage = theForm.submit();        
+        assertCurrentPageContains("You have successfully added an Antibody to this model!");
+        
+        //Editing
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "anti-CTLA-4 antibody");        
+        assertNotNull("Unable to find link to edit a Antibody", theLink);        
+        theCurrentPage = theLink.click();        
+        assertCurrentPageContains("(if Antibody is not listed, then please");
+        theForm = theCurrentPage.getFormWithName("antibodyForm");
+        theForm.setParameter("name", "anti-CTLA-4 antibody");
+        theForm.setParameter("type", "Male Only");        
+        theCurrentPage = theForm.submit();        
+        assertCurrentPageContains("You have successfully edited an Antibody.");
+        
+        //Deleting
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "anti-CTLA-4 antibody");        
+        assertNotNull("Unable to find link to delete a Antibody", theLink);        
+        theCurrentPage = theLink.click();        
+        assertCurrentPageContains("(if Antibody is not listed, then please");
+        theForm = theCurrentPage.getFormWithName("antibodyForm");     
+        theForm.getSubmitButton( "submitAction", "Delete" ).click();        
+        assertCurrentPageContains("You have successfully deleted an Antibody.");
+    }    
+ 
+    public void testAddBacteria() throws Exception {
+        navigateToModelForEditing(myModelName);
+        
+        //Adding
+        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Bacteria");        
+        assertNotNull("Unable to find link to add a Bacteria", theLink);        
+        WebResponse theCurrentPage = theLink.click();        
+        assertCurrentPageContains("(if Bacteria is not listed, then please");
+        WebForm theForm = theCurrentPage.getFormWithName("bacteriaForm");
+        theForm.setParameter("name", "helicobacter felis");        
+        theCurrentPage = theForm.submit();        
+        assertCurrentPageContains("You have successfully added a Bacteria to this model!");
+        
+        //Editing
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "helicobacter felis");        
+        assertNotNull("Unable to find link to edit a Bacteria", theLink);        
+        theCurrentPage = theLink.click();        
+        assertCurrentPageContains("(if Antibody is not listed, then please");
+        theForm = theCurrentPage.getFormWithName("bacteriaForm");
+        theForm.setParameter("name", "helicobacter felis");
+        theForm.setParameter("type", "Male Only");        
+        theCurrentPage = theForm.submit();        
+        assertCurrentPageContains("You have successfully edited a Bacteria.");
+        
+        //Deleting
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "helicobacter felis");        
+        assertNotNull("Unable to find link to delete a Bacteria", theLink);        
+        theCurrentPage = theLink.click();        
+        assertCurrentPageContains("(if Bacteria is not listed, then please");
+        theForm = theCurrentPage.getFormWithName("bacteriaForm");     
+        theForm.getSubmitButton( "submitAction", "Delete" ).click();        
+        assertCurrentPageContains("You have successfully deleted a Bacteria.");
+    } 
+    
     public void testAddChemicalDrug() throws Exception {
         navigateToModelForEditing(myModelName);
         
@@ -265,6 +333,40 @@ public class SubmitEditDeleteCITest extends BaseModelNeededTest {
         theForm.getSubmitButton( "submitAction", "Delete" ).click();        
         assertCurrentPageContains("You have successfully deleted a Nutritional Factor.");
     }
+  
+    public void testAddPlasmid() throws Exception {
+        navigateToModelForEditing(myModelName);
+        
+        //Adding
+        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Plasmid");        
+        assertNotNull("Unable to find link to add a Plasmid", theLink);        
+        WebResponse theCurrentPage = theLink.click();        
+        assertCurrentPageContains("(if Plasmid is not listed, then please");
+        WebForm theForm = theCurrentPage.getFormWithName("plasmidForm");
+        theForm.setParameter("name", "control plasmid pPGK");        
+        theCurrentPage = theForm.submit();        
+        assertCurrentPageContains("You have successfully added a Plasmid to this model!");
+        
+        //Editing
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "estrone");        
+        assertNotNull("Unable to find link to edit a Plasmid", theLink);        
+        theCurrentPage = theLink.click();        
+        assertCurrentPageContains("(if Plasmid is not listed, then please");
+        theForm = theCurrentPage.getFormWithName("plasmidForm");
+        theForm.setParameter("name", "control plasmid pPGK");
+        theForm.setParameter("type", "Male Only");        
+        theCurrentPage = theForm.submit();        
+        assertCurrentPageContains("You have successfully edited a Plasmid.");
+        
+        //Deleting
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "estrone");        
+        assertNotNull("Unable to find link to delete a Plasmid", theLink);        
+        theCurrentPage = theLink.click();        
+        assertCurrentPageContains("(if Plasmid is not listed, then please");
+        theForm = theCurrentPage.getFormWithName("plasmidForm");     
+        theForm.getSubmitButton( "submitAction", "Delete" ).click();        
+        assertCurrentPageContains("You have successfully deleted a Plasmid.");
+    }
     
     public void testAddRadiation() throws Exception {
         navigateToModelForEditing(myModelName);
@@ -300,6 +402,40 @@ public class SubmitEditDeleteCITest extends BaseModelNeededTest {
         theForm.getSubmitButton( "submitAction", "Delete" ).click();        
         assertCurrentPageContains("You have successfully deleted a Radiation.");
     }
+ 
+    public void testAddSignalingMolecule() throws Exception {
+        navigateToModelForEditing(myModelName);
+        
+        //Adding
+        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Signaling Molecule");        
+        assertNotNull("Unable to find link to add a Signaling Molecule", theLink);        
+        WebResponse theCurrentPage = theLink.click();        
+        assertCurrentPageContains("(if Signaling Molecule is not listed, then please");
+        WebForm theForm = theCurrentPage.getFormWithName("signalingMoleculeForm");
+        theForm.setParameter("name", "uroguanylin");        
+        theCurrentPage = theForm.submit();        
+        assertCurrentPageContains("You have successfully added a Signaling Molecule to this model!");
+        
+        //Editing
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "uroguanylin");        
+        assertNotNull("Unable to find link to edit a Signaling Molecule", theLink);        
+        theCurrentPage = theLink.click();        
+        assertCurrentPageContains("(if Signaling Molecule is not listed, then please");
+        theForm = theCurrentPage.getFormWithName("signalingMoleculeForm");
+        theForm.setParameter("name", "uroguanylin");
+        theForm.setParameter("type", "Male Only");        
+        theCurrentPage = theForm.submit();        
+        assertCurrentPageContains("You have successfully edited a Signaling Molecule.");
+        
+        //Deleting
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "uroguanylin");        
+        assertNotNull("Unable to find link to delete a Signaling Molecule", theLink);        
+        theCurrentPage = theLink.click();        
+        assertCurrentPageContains("(if Signaling Molecule is not listed, then please");
+        theForm = theCurrentPage.getFormWithName("signalingMoleculeForm");     
+        theForm.getSubmitButton( "submitAction", "Delete" ).click();        
+        assertCurrentPageContains("You have successfully deleted a Signaling Molecule.");
+    }    
     
     public void testAddSurgeryOther() throws Exception {
         navigateToModelForEditing(myModelName);
@@ -334,6 +470,40 @@ public class SubmitEditDeleteCITest extends BaseModelNeededTest {
         theForm = theCurrentPage.getFormWithName("surgeryForm");     
         theForm.getSubmitButton( "submitAction", "Delete" ).click();        
         assertCurrentPageContains("You have successfully deleted a Surgery / Other.");
+    }
+ 
+    public void testAddTransposon() throws Exception {
+        navigateToModelForEditing(myModelName);
+        
+        //Adding
+        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Transposon");        
+        assertNotNull("Unable to find link to add a Transposon", theLink);        
+        WebResponse theCurrentPage = theLink.click();        
+        assertCurrentPageContains("(if Transposon is not listed, then please");
+        WebForm theForm = theCurrentPage.getFormWithName("hormoneForm");
+        theForm.setParameter("name", "firefly luciferase");        
+        theCurrentPage = theForm.submit();        
+        assertCurrentPageContains("You have successfully added a Transposon to this model!");
+        
+        //Editing
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "firefly luciferase");        
+        assertNotNull("Unable to find link to edit a Transposon", theLink);        
+        theCurrentPage = theLink.click();        
+        assertCurrentPageContains("(if Transposon is not listed, then please");
+        theForm = theCurrentPage.getFormWithName("hormoneForm");
+        theForm.setParameter("name", "firefly luciferase");
+        theForm.setParameter("type", "Male Only");        
+        theCurrentPage = theForm.submit();        
+        assertCurrentPageContains("You have successfully edited a Transposon.");
+        
+        //Deleting
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "firefly luciferase");        
+        assertNotNull("Unable to find link to delete a Transposon", theLink);        
+        theCurrentPage = theLink.click();        
+        assertCurrentPageContains("(if Transposon is not listed, then please");
+        theForm = theCurrentPage.getFormWithName("hormoneForm");     
+        theForm.getSubmitButton( "submitAction", "Delete" ).click();        
+        assertCurrentPageContains("You have successfully deleted a Transposon.");
     }
     
     public void testAddViralTreatment() throws Exception {
