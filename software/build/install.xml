@@ -519,7 +519,15 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<!--  Many NCI applications require clm for csm, so you can point this to where you have the version you want to use
 		<copy file="${bda-utils.dir}/clm-3.2.jar" todir="${jboss.home}/server/${jboss.server.name}/lib" overwrite="true" />
 		-->
-		<copy file="${database.driver.file}" todir="${jboss.home}/server/${jboss.server.name}/lib" overwrite="true" />
+		<!-- Do not copy a second version of odjbc*.jar
+		copy file="${database.driver.file}" todir="${jboss.home}/server/${jboss.server.name}/lib" overwrite="true" / -->
+		
+	    <!-- will be two copies of log4j.jar in lib folder - remove the copy not from grid service (log4j.jar)  -->       
+	    <delete>      
+	      <fileset dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/lib"
+	               includes="log4j.jar"/>
+	    </delete>	
+		
 	</target>
 	
 	<target name="install:jboss:camod-grid-api" description="Deploy camod-remote-api and common libraries to jboss installation" 
@@ -537,8 +545,13 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 
 	    <!-- will be two copies of log4j.jar in lib folder - remove the copy not from grid service (log4j.jar)  -->       
 	    <delete>      
-	      <fileset dir="$${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/lib"
+	      <fileset dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/lib"
 	               includes="log4j.jar"/>
+	    </delete>
+		
+	    <delete>      
+	      <fileset dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/lib"
+	               includes="ojdbc14*.jar"/>
 	    </delete> 		
 		
 		<!-- camod.grid.jboss.home=C\:/devtools/grid/jboss-4.0.5.GA + server + camod.grid.jboss.server.name=default + lib-->
