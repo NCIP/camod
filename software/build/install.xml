@@ -534,6 +534,12 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<copy file="${camod-remote-api.dir.dist}/${camod-remote-api.war.file}" todir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy" overwrite="true" />
 
 		<copy file="${camod-grid-service.dir.dist}/${camod-grid-service.war.file}" todir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy" overwrite="true" />
+
+	    <!-- will be two copies of log4j.jar in lib folder - remove the copy not from grid service (log4j.jar)  -->       
+	    <delete>      
+	      <fileset dir="$${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/lib"
+	               includes="log4j.jar"/>
+	    </delete> 		
 		
 		<!-- camod.grid.jboss.home=C\:/devtools/grid/jboss-4.0.5.GA + server + camod.grid.jboss.server.name=default + lib-->
 	    <unzip dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/lib" 
@@ -694,7 +700,8 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	    </delete>
 		
 		 <jar destfile="${camod-grid-service.dir.dist}/${camod-grid-service.war.file}" basedir="${camod-grid-service.dir.dist}/temp" update="true" />		
-		
+	
+ 		
 	</target>	
 
 	<target name="install:jboss:configure:log4j" description="Configure custom entries in system wide log4j" unless="exclude.jboss"  depends="common:jboss:init, common:common:init">
