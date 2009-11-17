@@ -188,9 +188,7 @@
     
     <!-- Setup Hibernate Mappings -->
 
-    <!-- import properties (app settings, classpath, jar file locations) -->
-    <import file="properties.xml"/>
-    
+ 
     <!-- =================================================================== -->
     <!-- The "db-prepare" target generates the database schema and creates   --> 
     <!-- tables based on the mapping files                                   -->
