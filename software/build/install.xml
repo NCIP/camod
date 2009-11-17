@@ -543,16 +543,13 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 
 		<copy file="${camod-grid-service.dir.dist}/${camod-grid-service.war.file}" todir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy" overwrite="true" />
 
+		<copy file="${database.driver.file}" todir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/lib" overwrite="true" />		
+		
 	    <!-- will be two copies of log4j.jar in lib folder - remove the copy not from grid service (log4j.jar)  -->       
 	    <delete>      
 	      <fileset dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/lib"
 	               includes="log4j.jar"/>
 	    </delete>
-		
-	    <delete>      
-	      <fileset dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/lib"
-	               includes="ojdbc14*.jar"/>
-	    </delete> 		
 		
 		<!-- camod.grid.jboss.home=C\:/devtools/grid/jboss-4.0.5.GA + server + camod.grid.jboss.server.name=default + lib-->
 	    <unzip dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/lib" 
