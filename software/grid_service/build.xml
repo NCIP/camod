@@ -43,7 +43,7 @@
 	<!--                     Configure Index Service  (Moved to BDA install.xml)                         -->
 	<!-- ************************************************************************************************-->
 	<target name="config-index-service-url" depends="config-service-metadata">
-		<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/${grid.service.name}_registration.xml" token="http://cagrid-index-dev.nci.nih.gov:8080/wsrf/services/DefaultIndexService" value="${camod.grid.index.url}"/>
+		<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/${grid.service.name}_registration.xml" token="http://cagrid-index.nci.nih.gov:8080/wsrf/services/DefaultIndexService" value="${camod.grid.index.url}"/>
 		
 		<replace file="${temp.dir}/WEB-INF/etc/globus_resolution_service/jndi-config.xml" token="localhost:19080" value="localhost:${camod.grid.jboss.server.port}"/>
 		<replace file="${temp.dir}/WEB-INF/web.xml" token="19080" value="${camod.grid.jboss.server.port}"/>
