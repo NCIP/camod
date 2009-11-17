@@ -19,5 +19,6 @@
 		<user-name>@database.user@</user-name>
 		<password>@database.password@</password>
 		<driver-class>@database.driver@</driver-class>
+		<exception-sorter-class-name>@database.exception-sorter-class-name@</exception-sorter-class-name>
 	</local-tx-datasource>
 </datasources>
