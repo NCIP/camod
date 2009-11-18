@@ -927,13 +927,16 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		 		install:jboss:validation:pre-install:ports,
 		 		install:jboss:clean,
 		 		install:jboss:camod-grid:binaries,
-			    install:jboss:camod-grid:configure,
 				install:jboss:camod-grid-api,
 		 		install:jboss:configure,
 		 		install:post:jboss:camod-grid,
 		 		install:jboss:camod-grid:start
 		" >
-	</target>		
+	</target>
+	
+	<!-- Put back
+				    install:jboss:camod-grid:configure,
+	-->
 
 	<target name="upgrade:jboss" description="Wrapper target to call all targets required to upgrade jboss container." unless="exclude.jboss" 
 		depends="upgrade:jboss:init,upgrade:jboss:camod-grid:init,common:common:init,upgrade-ncm:jboss">
@@ -970,16 +973,15 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		upgrade:jboss:camod-grid:init,
 		common:jboss:camod-grid:init,
 		install:jboss:camod-grid:stop,
-		install:jboss:camod-grid:configure,
+		
  		install:jboss:camod-grid-api,
 		install:post:jboss:camod-grid, 		
 		install:jboss:camod-grid:start
 		">
 	</target>
 	
-	<!--Add this back if putting all in same container works 
-		install:jboss:camod-remote-api,
-		install:jboss:camod-grid-service,
+	<!--Put back in 
+		install:jboss:camod-grid:configure,
 	-->
 	
 
