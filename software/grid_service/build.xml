@@ -111,7 +111,7 @@
 	<target name="jar-grid-service-local" depends="config-remote-service-url">
 		<delete dir="${artifacts.dir}" failonerror="false"/>
 		<mkdir dir="${artifacts.dir}"/>
-	<jar destfile="${artifacts.dir}/${grid.service.application.name}.war" basedir="${temp.dir}"/>
+	<jar destfile="${grid.service.build.dir}/${camod-grid-service.war.file}" basedir="${temp.dir}"/>
 	</target>	
 	
 </project>
