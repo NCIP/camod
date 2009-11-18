@@ -96,7 +96,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<!-- The target name that should be called from the sub-project build file -->
 	<property name="camod-webapp.build.target" value="build_war" />
 	<property name="camod-remote-api.build.target" value="copy-remote-api-war" />
-	<property name="camod-grid-service.build.target" value="config-grid-service" />
+	<property name="camod-grid-service.build.target" value="copy-grid-service" />
 	
 	<!-- Maven comamnd line arguments, bda profile is inside profiles.xml that gets copied to ear folder before build to override exiting properties -->
 
