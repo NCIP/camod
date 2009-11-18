@@ -146,8 +146,8 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="WhiteBox"><b>Comment</b></td>
-			<td class="WhiteBoxRightEnd">
+			<td class="GreyBox"><b>Comment</b></td>
+			<td class="GreyBoxRightEnd">
 					<c:out value="${t.comments}" escapeXml="false"/>&nbsp;
 			</td>
 		</tr>		
