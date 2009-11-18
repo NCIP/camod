@@ -17,11 +17,12 @@
 		
 	<!-- Copy grid service to BDA folder (modify properties file in install.xml)  -->
 	<target name="copy-grid-service" depends="zip-globus-lib-files-to-bda">		
-		<copy file="${camod-grid-service.name}.war" tofile="${grid.service.build.dir}/${camod-grid-service.war.file}" />
+		<!--copy file="${camod-grid-service.name}.war" tofile="${grid.service.build.dir}/${camod-grid-service.war.file}" /-->
+		<zip destfile="${grid.service.build.dir}/${camod-grid-service.war.file}" basedir="temp" />	
 	</target>
 	
 	<!-- Configure grid service for the various tiers (modify properties file)  -->
-	<target name="zip-globus-lib-files-to-bda"  depends="config-service-metadata" > 
+	<target name="zip-globus-lib-files-to-bda"  depends="config-remote-service-url" > 
 		<delete dir="${grid.service.build.dir}" failonerror="false"/>
 		<mkdir dir="${grid.service.build.dir}/grid"/>		
 		<zip destfile="${grid.service.build.dir}/grid/${resource.file.jboss-globus-lib}" basedir="../${globus.lib.dir}/" />	
