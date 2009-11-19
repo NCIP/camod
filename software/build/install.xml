@@ -539,17 +539,6 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 
 		<copy file="${database.driver.file}" todir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/lib" overwrite="true" />		
 		
-	    <!-- will be two copies of log4j.jar in lib folder - remove the copy not from grid service (log4j.jar)  -->       
-	    <delete>      
-	      <fileset dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/lib"
-	               includes="log4j.jar"/>
-	    </delete>
-		<!-- JBoss (BDA) complains about multiple commons-logging.jar files in the container -->
-	    <delete>      
-	      <fileset dir="${temp.dir}/WEB-INF/lib"
-	               includes="commons-logging*.jar"/>
-	    </delete>		
-		
 		<!-- camod.grid.jboss.home=C\:/devtools/grid/jboss-4.0.5.GA + server + camod.grid.jboss.server.name=default + lib-->
 	    <unzip dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/lib" 
 	           src="${camod-grid-service.dir.dist}/grid/${resource.file.jboss-globus-lib}"/>
@@ -573,22 +562,24 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			value="${camod.propertyservice.property.name1}=${camod.propertyservice.property.value1}${line.separator}
 			gov.nih.nci.camod.mailProperties=${camod.propertyservice.property.value2}${line.separator}"/>
 
+		<!-- Update properties-service.xml -->
 		<copy file="${jboss.home}/server/${jboss.server.name}/deploy/properties-service.xml" tofile="${jboss.home}/server/${jboss.server.name}/deploy/properties-service.xml.orig" overwrite="true"/>
 		<jboss-update-properties-service
 			property.block="${property.block}"
 			/>
 		
-	    <!-- will be two copies of log4j.jar in lib folder - remove the copy not from grid service (log4j.jar)  -->       
+	    <!-- will be two copies of log4j.jar in lib folder - remove the older version (log4j.jar)  -->       
 	    <delete>      
 	      <fileset dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/lib"
 	               includes="log4j.jar"/>
 	    </delete>
 		
-		<!-- will be two copies of ojdbc*.jar in lib folder - remove the copy from grid service (ojdbc14-10.2.0.4.0.jar)  -->       
+		<!-- will be two copies of ojdbc*.jar in lib folder - remove the older version (ojdbc14.jar vs ojdbc14-10.2.0.4.0.jar)  -->       
 		<delete>      
 		  <fileset dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/lib"
 		           includes="ojdbc14.jar"/>
-		</delete>		
+		</delete>
+		
 	</target>
 	
 	<target name="install:jboss:camod-grid:configure" 
@@ -597,7 +588,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		depends="common:jboss:camod-grid:init, common:common:init">
 		<!-- copy over any other files you may need to configure your application -->
 		
-		<echoproperties prefix="camod"/>
+		<echo message="Before fixed xmltask."/>
 	
 	    <!-- with bda 1.0.2 this must come after the jboss-configure-grid call, otherwise
 	         the gridServiceUrl will be corrupted by what jboss-configure-grid does -->
@@ -608,52 +599,53 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<xmltask source="camod-grid-service/temp/WEB-INF/etc/cagrid_${grid.service.name}/${grid.service.name}_registration.xml"
 	             dest="camod-grid-service/temp/WEB-INF/etc/cagrid_${grid.service.name}/${grid.service.name}_registration.xml">      
 		      <!-- no xmlcatalog necessary -->       
-		      <replace path="//:ServiceGroupEPR/:Address/text()" 
+		      <replace path="*[local-name()='wsa:Address']/:value/text()" 
 		               withtext="${camod.grid.index.url}" />  
 	     </xmltask>
+		
 		
 		<!--replace file="camod-grid-service/temp/WEB-INF/etc/cagrid_${grid.service.name}/${grid.service.name}_registration.xml" token="http://cagrid-index.nci.nih.gov:8080/wsrf/services/DefaultIndexService" value="${camod.grid.index.url}"/-->
 		
 		<!-- Modify /WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml properties -->
 	    <xmltask source="camod-grid-service/temp/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml"
 	             dest="camod-grid-service/temp/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml"> 
-			 <replace path="//:parameter[:name='cqlQueryProcessorConfig_applicationName']/:value/text()" 
+			 <replace path="*[local-name()='cqlQueryProcessorConfig_applicationName']/:value/text()" 
 			          withtext="${sdk.service.name}" />  		  
-			 <replace path="//:parameter[:name='cqlQueryProcessorConfig_applicationHostPort']/:value/text()" 
+			 <replace path="//*[local-name()='cqlQueryProcessorConfig_applicationHostPort']/:value/text()" 
 			          withtext="${camod.grid.jboss.server.port}" />   		               
-			 <replace path="//:parameter[:name='cqlQueryProcessorConfig_applicationHostName']/:value/text()" 
+			 <replace path="//*[local-name()='cqlQueryProcessorConfig_applicationHostName']/:value/text()" 
 			          withtext="http://${camod.grid.jboss.server.hostname}" />     	
 	     </xmltask>
-
+		<echo message="After fixed xmltask."/>
 		
 		<!-- Modify /WEB-INF/etc/globus_resolution_service/jndi-config.xml -->
 	    <xmltask source="camod-grid-service/temp/WEB-INF/etc/globus_resolution_service/jndi-config.xml"
 	             dest="camod-grid-service/temp/WEB-INF/etc/globus_resolution_service/jndi-config.xml"> 
-			 <replace path="//:parameter[:name='address']/:value/text()" 
+			 <replace path="*[local-name()='address']/:value/text()" 
 			          withtext="http://localhost:${camod.grid.jboss.server.port}/ServiceToResolve" />   		    	
 	     </xmltask>
 		
 		<!-- Modify /WEB-INF/etc/globus_wsrf_core/server-config.wsdd -->
 	    <xmltask source="camod-grid-service/temp/WEB-INF/etc/globus_wsrf_core/server-config.wsdd"
 	             dest="camod-grid-service/temp/WEB-INF/etc/globus_wsrf_core/server-config.wsdd"> 
-			 <replace path="//:parameter[:name='logicalHost']/:value/text()" 
+			 <replace path="//*[local-name()='logicalHost']/:value/text()" 
 			          withtext="http://${camod.grid.jboss.server.hostname}" /> 	    	
 	     </xmltask> 
 		
 		<!-- Modify /WEB-INF/web.xml -->
 	    <xmltask source="camod-grid-service/temp/WEB-INF/web.xml"
 	             dest="camod-grid-service/temp/WEB-INF/web.xml"> 
-			 <replace path="//:param-name[:name='webContext']/:value/text()" 
+			 <replace path="//*[local-name()='webContext']/:value/text()" 
 			          withtext="${camod-grid-service.name}" /> 	
-			 <replace path="//:param-name[:name='defaultPort']/:value/text()" 
+			 <replace path="//*[local-name()='defaultPort']/:value/text()" 
 			          withtext="${camod.grid.jboss.server.port}" /> 	    	
 	     </xmltask>	
 		
-		<!-- JBoss (BDA) complains about multiple commons-logging.jar files in the container -->
+		<!-- JBoss (BDA) complains about multiple commons-logging.jar files in the container - took out in wsrf-camod.war before moving to BDA folder>
 	    <delete>      
 	      <fileset dir="camod-grid-service/temp/WEB-INF/lib"
 	               includes="commons-logging*.jar"/>
-	    </delete>
+	    </delete-->
 		
 		 <jar destfile="${camod-grid-service.dir.dist}/${camod-grid-service.war.file}" basedir="${camod-grid-service.dir.dist}/temp" update="true" />		
 	
@@ -927,17 +919,18 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		 		install:jboss:validation:pre-install:ports,
 		 		install:jboss:clean,
 		 		install:jboss:camod-grid:binaries,
-				install:jboss:camod-grid-api,
+
+				install:jboss:camod-grid-api,				
 		 		install:jboss:configure,
 		 		install:post:jboss:camod-grid,
 		 		install:jboss:camod-grid:start
 		" >
 	</target>
 	
-	<!-- Put back
-				    install:jboss:camod-grid:configure,
+	<!--  put back if fixed
+	install:jboss:camod-grid:configure,
 	-->
-
+	
 	<target name="upgrade:jboss" description="Wrapper target to call all targets required to upgrade jboss container." unless="exclude.jboss" 
 		depends="upgrade:jboss:init,upgrade:jboss:camod-grid:init,common:common:init,upgrade-ncm:jboss">
 	</target>
@@ -973,17 +966,17 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		upgrade:jboss:camod-grid:init,
 		common:jboss:camod-grid:init,
 		install:jboss:camod-grid:stop,
-		
+
  		install:jboss:camod-grid-api,
 		install:post:jboss:camod-grid, 		
 		install:jboss:camod-grid:start
 		">
 	</target>
+
 	
-	<!--Put back in 
-		install:jboss:camod-grid:configure,
+	<!--  put back if fixed
+	install:jboss:camod-grid:configure,
 	-->
-	
 
 	<target name="upgrade-ncm" description="Upgrades JBoss and Database"
 		depends="
