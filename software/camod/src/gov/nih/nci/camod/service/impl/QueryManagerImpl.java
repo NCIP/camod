@@ -708,6 +708,12 @@ public class QueryManagerImpl extends BaseManager
 					if (!theAlternType.equals("Not Specified")) {
 					theEFAgentTypesList.add(theAlternType);
 					}
+				} else if (theType != null
+						&& theType.length() > 0
+						&& !theEFAgentTypesList.contains(theType)) {
+					if (!theType.equals("Not Specified")) {
+					theEFAgentTypesList.add(theType);
+					}					
 				}
 			}
 
