@@ -90,6 +90,17 @@
 		(select disease_id from HISTOPATHOLOGY h)
     </sql>
 	</changeSet> 
-	
+
+	<changeSet id="2.6.6_delete_orphan_HISTOPATHOLOGY_entries" author="pandyas">                            
+		<comment>Delete HISTOPATHOLOGY entries without parent record in ABSTRACT_CANCER_MODEL</comment>
+    <sql>	
+	delete FROM histopathology h
+ 	WHERE h.disease_id IN (SELECT disease_id
+                          FROM disease
+                         WHERE NAME IS NULL AND name_altern_entry IS NULL)
+   	AND h.abs_cancer_model_id IS NULL
+   	AND h.parent_histopathology_id IS NULL
+    </sql>
+	</changeSet> 	
 </databaseChangeLog>
 
