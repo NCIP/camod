@@ -523,7 +523,7 @@
 			<c:if test="${not empty cdList}">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
 			<tr>
-				<td class="formTitleBlue" height="20" colspan="7">Other Agents</td>
+				<td class="formTitleBlue" height="20" colspan="7">Other / Surgery</td>
 			</tr>
 			<!--   Start of if externalSource is Jax MTB -->
 			<c:if test="${mdl.externalSource == 'Jax MTB'}">
