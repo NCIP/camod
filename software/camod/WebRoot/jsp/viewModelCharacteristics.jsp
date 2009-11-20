@@ -289,8 +289,8 @@
 		</tr>	
 		
 			<tr>
-				<td class="resultsBoxWhite" width="25%"><b>Comment</b></td>
-				<td class="resultsBoxWhiteEnd">
+				<td class="GreyBox" width="25%"><b>Comment</b></td>
+				<td class="GreyBoxRightEnd">
 					<camod:highlight><c:out value="${mdl.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>			               
