@@ -699,7 +699,7 @@ public class QueryManagerImpl extends BaseManager
 				// Remove ADMIN and Not Specified in appropriate lists
 				if (theType != null && theType.length() > 0
 						&& !theEFAgentTypesList.contains(theType)) {
-					if (!theType.equals("ADMIN") || !theType.equals("Not Specified")) {
+					if (!theType.equals("ADMIN") && !theType.equals("Not Specified")) {
 					theEFAgentTypesList.add(theType);
 					}
 				} else if (theAlternType != null
