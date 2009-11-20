@@ -101,6 +101,15 @@
    		AND h.ABS_CANCER_MODEL_ID IS NULL
    		AND h.PARENT_HISTOPATHOLOGY_ID IS NULL
     </sql>
-	</changeSet> 	
+	</changeSet>
+	
+	 <changeSet id="2.6.7_delete_orphan_ENVIRONMENTAL_FACTOR_entries" author="pandyas">                            
+		<comment>Delete HISTOPATHOLOGY entries without parent record in ABSTRACT_CANCER_MODEL</comment>
+    <sql>	
+		delete from ENVIRONMENTAL_FACTOR ef
+		where ef.TYPE_ALTERN_ENTRY is null
+		and ef.TYPE is null 
+    </sql>
+	</changeSet> 
 </databaseChangeLog>
 
