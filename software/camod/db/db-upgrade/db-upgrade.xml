@@ -99,7 +99,7 @@
               FROM DISEASE
               WHERE d.NAME IS NULL AND d.NAME_ALTERN_ENTRY IS NULL)
    		AND h.ABS_CANCER_MODEL_ID IS NULL
-   		AND h.PARENT_HISTOPATHOLOGY_ID IS NUL
+   		AND h.PARENT_HISTOPATHOLOGY_ID IS NULL
     </sql>
 	</changeSet> 	
 </databaseChangeLog>
