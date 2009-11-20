@@ -699,7 +699,7 @@ public class QueryManagerImpl extends BaseManager
 				// Remove ADMIN and Not Specified in appropriate lists
 				if (theType != null && theType.length() > 0
 						&& !theEFAgentTypesList.contains(theType)) {
-					if (!theType.equals("ADMIN")) {
+					if (!theType.equals("ADMIN") || !theType.equals("Not Specified")) {
 					theEFAgentTypesList.add(theType);
 					}
 				} else if (theAlternType != null
@@ -707,13 +707,7 @@ public class QueryManagerImpl extends BaseManager
 						&& !theEFAgentTypesList.contains(theAlternType)) {
 					if (!theAlternType.equals("Not Specified")) {
 					theEFAgentTypesList.add(theAlternType);
-					}
-				} else if (theType != null
-						&& theType.length() > 0
-						&& !theEFAgentTypesList.contains(theType)) {
-					if (!theType.equals("Not Specified")) {
-					theEFAgentTypesList.add(theType);
-					}					
+					}			
 				}
 			}
 
