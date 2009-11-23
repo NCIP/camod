@@ -814,7 +814,7 @@
 				</var>
 			</field>
 			<field property="comments" depends="maxlength">
-				<arg0 key="PlasmidFormForm.comments" />
+				<arg0 key="PlasmidForm.comments" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
