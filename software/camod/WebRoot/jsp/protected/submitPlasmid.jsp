@@ -43,7 +43,7 @@
 	
 	<tr>
 		<td class="formTitle" height="20" colspan="3">Plasmid 
-			<camod:cshelp topic="hormone_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
+			<!--camod:cshelp topic="plasmid_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td-->
 	</tr>
 
 	<tr>
