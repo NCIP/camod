@@ -43,7 +43,7 @@
 	
 	<tr>
 		<td class="formTitle" height="20" colspan="3">Bacteria 
-			<camod:cshelp topic="bacteria_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
+			<!--camod:cshelp topic="bacteria_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td-->
 	</tr>
 
 	<tr>
