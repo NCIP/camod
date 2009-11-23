@@ -43,7 +43,7 @@
 	
 	<tr>
 		<td class="formTitle" height="20" colspan="3">Signaling Molecule 
-			<camod:cshelp topic="signaling_molecule_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
+			<!--camod:cshelp topic="signaling_molecule_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td-->
 	</tr>
 
 	<tr>
