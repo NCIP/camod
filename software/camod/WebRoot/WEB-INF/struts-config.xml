@@ -850,7 +850,7 @@
 		<action
 			path="/submitSignalingMolecule"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitPlasmid.jsp">
+			parameter="/jsp/protected/submitSignalingMolecule.jsp">
 			<set-property property="secure" value="false"/>
 		</action>		
 		<action
