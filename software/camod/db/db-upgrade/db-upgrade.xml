@@ -111,5 +111,16 @@
 		and ef.TYPE is null 
     </sql>
 	</changeSet> 
+	
+	<changeSet id="2.6.8_delete_remainder_fo_orphan_DISEASE_entries" author="pandyas">                            
+		<comment>Delete DISEASE entries without parent record in HISTOPATHOLOGY (after removing orphan HISTOPATHOLOGY records)</comment>
+    <sql>
+		delete from DISEASE d 
+		where d.NAME is null
+		and d.NAME_ALTERN_ENTRY is null
+		and d.DISEASE_ID NOT IN
+		(select disease_id from HISTOPATHOLOGY h)
+    </sql>
+	</changeSet>	
 </databaseChangeLog>
 
