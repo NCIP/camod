@@ -273,6 +273,156 @@
 			</field>
 		</form>
 
+		<form name="antibodyForm">
+			<field property="name" depends="required">
+				<arg0 key="AntibodyForm.name" />
+			</field>
+			<field property="otherName"
+				depends="validwhen, maxlength">
+				<arg0 key="AntibodyForm.otherName" />
+				<var>
+					<var-name>test</var-name>
+					<var-value>
+						((name != 'Other') or (*this* != null))
+					</var-value>
+				</var>
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>
+			<field property="comments" depends="maxlength">
+				<arg0 key="AntibodyForm.comments" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>2000</var-value>
+				</var>
+			</field>				
+			<field property="ageAtTreatment" depends="maxlength">
+				<arg0 key="CarcinogenExposure.ageAtTreatment" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>
+			<field property="regimen" depends="maxlength">
+				<arg0 key="CarcinogenExposure.regimen" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>
+			<field property="dosage" depends="maxlength">
+				<arg0 key="CarcinogenExposure.dosage" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>
+			<field property="otherAdministrativeRoute"
+				depends="validwhen, maxlength">
+				<arg0 key="CarcinogenExposure.otherAdministrativeRoute" />
+				<var>
+					<var-name>test</var-name>
+					<var-value>
+						((administrativeRoute != 'Other') or (*this* !=
+						null))
+					</var-value>
+				</var>
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>
+		</form>
+		
+		<form name="bacteriaForm">
+			<field property="name" depends="required">
+				<arg0 key="BacteriaForm.name" />
+			</field>
+			<field property="otherName"
+				depends="validwhen, maxlength">
+				<arg0 key="BacteriaForm.otherName" />
+				<var>
+					<var-name>test</var-name>
+					<var-value>
+						((name != 'Other') or (*this* != null))
+					</var-value>
+				</var>
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>
+			<field property="comments" depends="maxlength">
+				<arg0 key="BacteriaForm.comments" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>2000</var-value>
+				</var>
+			</field>				
+			<field property="ageAtTreatment" depends="maxlength">
+				<arg0 key="CarcinogenExposure.ageAtTreatment" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>
+			<field property="regimen" depends="maxlength">
+				<arg0 key="CarcinogenExposure.regimen" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>
+			<field property="dosage" depends="maxlength">
+				<arg0 key="CarcinogenExposure.dosage" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>
+			<field property="otherAdministrativeRoute"
+				depends="validwhen, maxlength">
+				<arg0 key="CarcinogenExposure.otherAdministrativeRoute" />
+				<var>
+					<var-name>test</var-name>
+					<var-value>
+						((administrativeRoute != 'Other') or (*this* !=
+						null))
+					</var-value>
+				</var>
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>
+		</form>		
+
 		<form name="chemicalDrugForm">
 			<field property="name" depends="required">
 				<arg0 key="ChemicalDrugForm.name" />
@@ -643,6 +793,81 @@
 			</field>
 		</form>
 
+		<form name="plasmidForm">
+			<field property="name" depends="required">
+				<arg0 key="PlasmidForm.name" />
+			</field>
+			<field property="otherName"
+				depends="validwhen, maxlength">
+				<arg0 key="PlasmidForm.otherName" />
+				<var>
+					<var-name>test</var-name>
+					<var-value>
+						((name != 'Other') or (*this* != null))
+					</var-value>
+				</var>
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>
+			<field property="comments" depends="maxlength">
+				<arg0 key="PlasmidFormForm.comments" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>2000</var-value>
+				</var>
+			</field>				
+			<field property="ageAtTreatment" depends="maxlength">
+				<arg0 key="CarcinogenExposure.ageAtTreatment" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>
+			<field property="regimen" depends="maxlength">
+				<arg0 key="CarcinogenExposure.regimen" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>
+			<field property="dosage" depends="maxlength">
+				<arg0 key="CarcinogenExposure.dosage" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>
+			<field property="otherAdministrativeRoute"
+				depends="validwhen, maxlength">
+				<arg0 key="CarcinogenExposure.otherAdministrativeRoute" />
+				<var>
+					<var-name>test</var-name>
+					<var-value>
+						((administrativeRoute != 'Other') or (*this* !=
+						null))
+					</var-value>
+				</var>
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>
+		</form>	
+		
 		<form name="radiationForm">
 			<field property="name" depends="required">
 				<arg0 key="RadiationForm.name" />
@@ -717,6 +942,81 @@
 				</var>
 			</field>
 		</form>
+		
+		<form name="signalingMoleculeForm">
+			<field property="name" depends="required">
+				<arg0 key="SignalingMoleculeForm.name" />
+			</field>
+			<field property="otherName"
+				depends="validwhen, maxlength">
+				<arg0 key="SignalingMoleculeForm.otherName" />
+				<var>
+					<var-name>test</var-name>
+					<var-value>
+						((name != 'Other') or (*this* != null))
+					</var-value>
+				</var>
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>
+			<field property="comments" depends="maxlength">
+				<arg0 key="SignalingMoleculeForm.comments" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>2000</var-value>
+				</var>
+			</field>				
+			<field property="ageAtTreatment" depends="maxlength">
+				<arg0 key="CarcinogenExposure.ageAtTreatment" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>
+			<field property="regimen" depends="maxlength">
+				<arg0 key="CarcinogenExposure.regimen" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>
+			<field property="dosage" depends="maxlength">
+				<arg0 key="CarcinogenExposure.dosage" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>
+			<field property="otherAdministrativeRoute"
+				depends="validwhen, maxlength">
+				<arg0 key="CarcinogenExposure.otherAdministrativeRoute" />
+				<var>
+					<var-name>test</var-name>
+					<var-value>
+						((administrativeRoute != 'Other') or (*this* !=
+						null))
+					</var-value>
+				</var>
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>
+		</form>			
 
 		<form name="surgeryForm">
 			<field property="name" depends="required">
@@ -766,6 +1066,81 @@
 				</var>
 			</field>
 		</form>
+		
+		<form name="transposonForm">
+			<field property="name" depends="required">
+				<arg0 key="TransposonForm.name" />
+			</field>
+			<field property="otherName"
+				depends="validwhen, maxlength">
+				<arg0 key="TransposonForm.otherName" />
+				<var>
+					<var-name>test</var-name>
+					<var-value>
+						((name != 'Other') or (*this* != null))
+					</var-value>
+				</var>
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>
+			<field property="comments" depends="maxlength">
+				<arg0 key="TransposonForm.comments" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>2000</var-value>
+				</var>
+			</field>				
+			<field property="ageAtTreatment" depends="maxlength">
+				<arg0 key="CarcinogenExposure.ageAtTreatment" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>
+			<field property="regimen" depends="maxlength">
+				<arg0 key="CarcinogenExposure.regimen" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>
+			<field property="dosage" depends="maxlength">
+				<arg0 key="CarcinogenExposure.dosage" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>
+			<field property="otherAdministrativeRoute"
+				depends="validwhen, maxlength">
+				<arg0 key="CarcinogenExposure.otherAdministrativeRoute" />
+				<var>
+					<var-name>test</var-name>
+					<var-value>
+						((administrativeRoute != 'Other') or (*this* !=
+						null))
+					</var-value>
+				</var>
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>
+		</form>			
 
 		<form name="viralTreatmentForm">
 			<field property="name" depends="required">
