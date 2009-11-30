@@ -532,7 +532,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		
 		<!-- camod.grid.jboss.home=C\:/devtools/grid/jboss-4.0.5.GA + server + camod.grid.jboss.server.name=default + lib-->
 	    <unzip dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/lib" 
-	           src="${camod-grid-service.dir.dist}/grid/${resource.file.jboss-globus-lib}"/>
+	           src="${camod-grid-service.dir.dist}/lib/${resource.file.jboss-globus-lib}"/>
 		
 		<!-- copy datasource file (reuse copy from camod.war) moved from install:jboss:camod-grid:configure to here -->
 		<copy file="${jboss-conf.dir.dest}/${camod-webapp.ds.file}" todir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy" overwrite="true" />
@@ -578,7 +578,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 
 		<!-- Copy wsrf.war to the deploy folder  -->
 		<copy todir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/${camod-grid-service.war.file}" overwrite="true">
-		    <fileset dir="wsrf.war"/>
+		    <fileset dir="./camod-grid-service/grid/wsrf.war"/>
 		</copy>	
 		
 	    <!-- wsrf.war complains about commons-logging in war file - took out of original wsrf.war before copy to BDA folder -->      
@@ -587,7 +587,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	               includes="commons-logging.jar"/>
 	    </delete> 		
 		
-	    <!--jboss-configure jboss.server.ports.name="${camod.grid.jboss.server.ports.name}"
+	    <jboss-configure jboss.server.ports.name="${camod.grid.jboss.server.ports.name}"
 	                     jboss.home="${camod.grid.jboss.home}"
 	                     jboss.server.name="${camod.grid.jboss.server.name}"
 	                     jboss.server.bindingfile.location="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/conf/bindings.xml"                     
@@ -618,8 +618,8 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	                     jboss.external.http.port="${camod.grid.jboss.external.http.port}"
 	                     jboss.server.hostname="${camod.grid.jboss.server.hostname}"
 	                     jboss.java.opts="${camod.grid.jboss.java.opts}"
-	                     jboss.logs.dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/log"/ -->
-		<echo message="Minus jboss-configure macro call"/>
+	                     jboss.logs.dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/log"/>
+		<echo message="After jboss-configure macro call"/>
 		
 	    <jboss-configure-grid jboss.conf.dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/conf"
 	                          jboss.webapp.dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy"
@@ -637,8 +637,8 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		
 	        <!-- with bda 1.0.2 this must come after the jboss-configure-grid call, otherwise
 	             the gridServiceUrl will be corrupted by what jboss-configure-grid does -->
-	        <xmltask source="wsrf.war/WEB-INF/etc/cagrid_CamodGridService/jndi-config.xml"
-	                 dest="wsrf.war/WEB-INF/etc/cagrid_CamodGridService/jndi-config.xml">     
+	        <xmltask source="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf.war/WEB-INF/etc/cagrid_CamodGridService/jndi-config.xml"
+	                 dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf.war/WEB-INF/etc/cagrid_CamodGridService/jndi-config.xml">     
          
 	          <replace path="//:parameter[:name='cqlQueryProcessorConfig_applicationHostPort']/:value/text()" 
 	                   withtext="${camod.grid.jboss.server.port}" />                 
@@ -646,10 +646,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	          <replace path="//:parameter[:name='cqlQueryProcessorConfig_applicationHostName']/:value/text()" 
 	                   withtext="http://${camod.grid.jboss.server.hostname}" />   
 	        	
-	         </xmltask>       	    	
-
- 		
-		
+	         </xmltask>  		
 	</target>	
 
 	<target name="install:jboss:configure:log4j" description="Configure custom entries in system wide log4j" unless="exclude.jboss"  depends="common:jboss:init, common:common:init">
