@@ -28,7 +28,7 @@ env.name=local
 camod-webbapp.name=camod
 
 #################################
-###  DATABASE Oracle setting  ###
+###  ORACLE DATABASE SETTINGS  ###
 #################################
 # Required for local installs
 database.re-create=false
@@ -48,7 +48,7 @@ database.url=jdbc:oracle:thin:@${database.server}:${database.port}:${database.na
 database.exception-sorter-class-name=org.jboss.resource.adapter.jdbc.vendor.OracleExceptionSorter
 
 ########################
-###  JBOSS SETTINGS  ###
+###  APPLICATION JBOSS SETTINGS  ###
 ########################
 # jboss.home will be generated as ${application.base.path}/${jboss.relateive.path}
 jboss.relative.path=${jboss.binaries.relative.dir}
@@ -93,7 +93,7 @@ jboss.external.ssl.port=
 
 
 #############################
-###  CAMOD-GRID JBOSS ###
+###  CAMOD GRID JBOSS SETTINGS ###
 #############################
 # tomcat.ncia-core-grid.home will be generated as ${application.base.path}/${tomcat.ncia-core-grid.relateive.path}
 camod.grid.jboss.server.hostname=localhost
@@ -134,14 +134,33 @@ camod.grid.jboss.external.ssl.port=
 camod.grid.jboss.grid.secure.enable=false
 
 ##################################
-#  Grid Service registration URL #
+#  GRID SERVICE TIER-SPECIFIC SETTINGS #
 ##################################
 # Production Grid
 #    grid.index.url=http://cagrid-index.nci.nih.gov:8080/wsrf/services/DefaultIndexService
 # QA Grid
 #    grid.index.url=http://cagrid-index-qa.nci.nih.gov:8080/wsrf/services/DefaultIndexService
-camod.grid.index.url=http://cagrid-index-qa.nci.nih.gov:8080/wsrf/services/DefaultIndexService
-
+grid.index.url=http://cagrid-index-qa.nci.nih.gov:8080/wsrf/services/DefaultIndexService
+grid.poc.tech.researchCenter.displayname=NCI CBITT
+grid.poc.tech.researchCenter.shortname=NCICB
+grid.poc.tech.addr.country=USA
+grid.poc.tech.addr.locality=Rockville
+grid.poc.tech.addr.postalCode=20852
+grid.poc.tech.addr.stateProvince=MD
+grid.poc.tech.addr.street1=2115 East Jefferson Street
+grid.poc.tech.addr.street2=
+grid.poc.tech.affiliation=BDA
+grid.poc.tech.name.last=Pandya
+grid.poc.tech.name.first=Sima
+grid.poc.tech.phone=
+grid.poc.tech.email=pandyas@mail.nih.gov
+grid.poc.tech.role=software engineer
+grid.poc.science.affiliation=NCICB
+grid.poc.science.name.last=Wagner
+grid.poc.science.name.first=Ulli
+grid.poc.science.phone=
+grid.poc.science.email=ulrike@mail.nih.gov
+grid.poc.science.role=business analyst
 
 ##################################
 ### Filesystem Data Repository ###
