@@ -9,7 +9,7 @@
 	<property file="build.properties"/>
 	<property name="temp.dir" value="temp" />	
 	<property name="grid.service.dir" value="grid_service" />
-	<property name="grid.service.war" value="grid_service/wsrf.war" />
+	<property name="grid.service.war" value="grid_service/wsrf-camod.war" />
 	<property name="globus.lib.dir" value="${grid.service.dir}/globus_lib_files" />
 	<property name="resource.file.jboss-globus-lib" value="jboss-globus-libs-cagrid1_2.zip" />
 	
@@ -19,7 +19,7 @@
 	<target name="copy-grid-service" depends="zip-globus-lib-files-to-bda">	
 		<echoproperties prefix="grid"/>
 		  <copy todir="${grid.service.build.dir}/${camod-grid-service.war.folder}">
-		    <fileset dir="wsrf.war"/>
+		    <fileset dir="wsrf-camod.war"/>
 		  </copy>	
 	</target>
 	
