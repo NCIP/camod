@@ -578,7 +578,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 
 		<!-- Copy wsrf.war to the deploy folder  -->
 		<copy todir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/${camod-grid-service.war.file}" overwrite="true">
-		    <fileset dir="./camod-grid-service/grid/wsrf.war"/>
+		    <fileset dir="./camod-grid-service/wsrf.war"/>
 		</copy>	
 		
 	    <!-- wsrf.war complains about commons-logging in war file - took out of original wsrf.war before copy to BDA folder -->      
