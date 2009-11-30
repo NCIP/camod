@@ -58,7 +58,7 @@
 	<!-- ************************************************************************************************-->
 	<!--                             Configure   Service    Metadata  (skip for NCICB)                   -->
 	<!-- ************************************************************************************************-->
-	<target name="config-service-metadata" depends="unwar-grid-file">
+	<target name="config-service-metadata" >
 		<copy file="conf/serviceMetadata.xml.template" tofile="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" overwrite="true"/>
 		<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@SERVICE_NAME@" value="${grid.service.name}"/>
 	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@DISPLAY_NAME@" value="${displayName}"/>
@@ -77,13 +77,6 @@
 	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@ROLE@" value="${role}"/>
 	</target>	
 
-	<!-- Take grid_service\wsrf-camod.war and unjar the contents into temp.dir -->
-	<target name="unwar-grid-file">
-		<delete dir="${temp.dir}" failonerror="false"/>
-		<mkdir dir="${temp.dir}"/>		
-		<unjar src="${camod-grid-service.war.file}" dest="${temp.dir}"/>
-	</target>
-	
     <!-- TARGET: copy_remote_api_war (used by BDA)
      This will copy the SDK-generated war (without changes) to the BDA target folder     -->
     <target name="copy-remote-api-war" >
@@ -109,10 +102,9 @@
 	</target>	
 
 	<!-- LOCAL: Jar the grid service after modifying it for the various tiers (used outside BDA) -->
-	<target name="jar-grid-service-local" depends="config-remote-service-url">
+	<target name="update-grid-service-local" depends="config-remote-service-url">
 		<delete dir="${artifacts.dir}" failonerror="false"/>
 		<mkdir dir="${artifacts.dir}"/>
-	<!--jar destfile="${artifacts.dir}" basedir="${temp.dir}"/-->
 	</target>	
 	
 </project>
