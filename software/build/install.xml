@@ -83,7 +83,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<property name="software.dir" location=".." />
 	<property name="grid.service.name" value="CamodGridService" />
 	<property name="camod-grid-service.dir.dist" location="${basedir}/${camod-grid-service.dist.relative.dir}" />
-	<property name="camod-grid-service.name" value="wsrf" />
+	<property name="camod-grid-service.name" value="wsrf-camod" />
 	<property name="camod-grid-service.war.file" value="${camod-grid-service.name}.war" />
 	<property name="resource.file.jboss-globus-lib" value="jboss-globus-libs-cagrid1_2.zip" />
 	<property name="camod-resource.artifact.dir" value="${software.dir}/common/resources" />
@@ -578,7 +578,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 
 		<!-- Copy wsrf.war to the deploy folder  -->
 		<copy todir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/${camod-grid-service.war.file}" overwrite="true">
-		    <fileset dir="./camod-grid-service/wsrf.war"/>
+		    <fileset dir="./camod-grid-service/wsrf-camod.war"/>
 		</copy>	
 		
 	    <!-- wsrf.war complains about commons-logging in war file - took out of original wsrf.war before copy to BDA folder -->      
@@ -631,14 +631,14 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	                          jboss.external.http.port="${camod.grid.jboss.external.http.port}"
 	                          jboss.grid.secure.enable="false"
 	                          grid.application.name="CamodGridService"
-	                          grid.application.relative.dir="wsrf.war"/>
+	                          grid.application.relative.dir="wsrf-camod.war"/>
 		
 		<echo message="After jboss-configure-grid macro call"/>
 		
 	        <!-- with bda 1.0.2 this must come after the jboss-configure-grid call, otherwise
 	             the gridServiceUrl will be corrupted by what jboss-configure-grid does -->
-	        <xmltask source="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf.war/WEB-INF/etc/cagrid_CamodGridService/jndi-config.xml"
-	                 dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf.war/WEB-INF/etc/cagrid_CamodGridService/jndi-config.xml">     
+	        <xmltask source="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/etc/cagrid_CamodGridService/jndi-config.xml"
+	                 dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/etc/cagrid_CamodGridService/jndi-config.xml">     
          
 	          <replace path="//:parameter[:name='cqlQueryProcessorConfig_applicationHostPort']/:value/text()" 
 	                   withtext="${camod.grid.jboss.server.port}" />                 
