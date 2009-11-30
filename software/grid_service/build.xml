@@ -16,8 +16,9 @@
 	<property name="any.filename" value="wsrf-camod.war" />
 		
 	<!-- Copy grid service to BDA folder (modify properties file in install.xml)  -->
-	<target name="copy-grid-service" depends="zip-globus-lib-files-to-bda">		
-		  <copy todir="${wsrf.war.build.dir}/${camod-grid-service.war.folder}">
+	<target name="copy-grid-service" depends="zip-globus-lib-files-to-bda">	
+		<mkdir dir="${grid.service.build.dir}/grid"/>
+		  <copy todir="${grid.service.build.dir}/grid/${camod-grid-service.war.folder}">
 		    <fileset dir="wsrf.war"/>
 		  </copy>	
 	</target>
@@ -25,8 +26,8 @@
 	<!-- Configure grid service for the various tiers (modify properties file)  -->
 	<target name="zip-globus-lib-files-to-bda"  depends="config-service-metadata" > 
 		<delete dir="${grid.service.build.dir}" failonerror="false"/>
-		<mkdir dir="${grid.service.build.dir}/grid"/>		
-		<zip destfile="${grid.service.build.dir}/grid/${resource.file.jboss-globus-lib}" basedir="../${globus.lib.dir}/" />	
+		<mkdir dir="${grid.service.build.dir}/lib"/>		
+		<zip destfile="${grid.service.build.dir}/lib/${resource.file.jboss-globus-lib}" basedir="../${globus.lib.dir}/" />	
 	</target>	
 
 	<!-- ************************************************************************************************-->
