@@ -19,7 +19,7 @@
 	<target name="copy-grid-service" depends="zip-globus-lib-files-to-bda">	
 		<echoproperties prefix="grid"/>
 		  <copy todir="${grid.service.build.dir}/${camod-grid-service.war.folder}">
-		    <fileset dir="wsrf-camod.war"/>
+		    <fileset dir="${temp.dir}/wsrf-camod.war"/>
 		  </copy>	
 	</target>
 	
