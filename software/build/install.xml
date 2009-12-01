@@ -584,11 +584,11 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	    <delete>      
 	      <fileset dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/${camod-grid-service.war.file}/WEB-INF/lib"
 	               includes="commons-logging.jar"/>
-	    </delete> 		
-		<echo message="After unzip of wsrf-camod.war into JBoss deploy folder"/>
-
+	    </delete> 	
+		
+		
 	    <jboss-configure jboss.server.ports.name="${camod.grid.jboss.server.ports.name}"
-	                     jboss.home="${camod.grid.jboss.home}"		
+	                     jboss.home="${camod.grid.jboss.home}"
 	                     jboss.server.name="${camod.grid.jboss.server.name}"
 	                     jboss.server.bindingfile.location="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/conf/bindings.xml"                     
 	                     jboss.server.binding.template.location="${jboss.server.binding.template.location}"                     
@@ -646,16 +646,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	          <replace path="//:parameter[:name='cqlQueryProcessorConfig_applicationHostName']/:value/text()" 
 	                   withtext="http://${camod.grid.jboss.server.hostname}" />   
 	        	
-	         </xmltask> 
-		
-        <!--xmltask source="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/etc/globus_wsrf_core/server-config.wsdd"
-                 dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/etc/globus_wsrf_core/server-config.wsdd">     
-                   
-          <replace path="//:parameter[:name='logicalHost']/:value/text()" 
-                   withtext="http://${camod.grid.jboss.server.hostname}" />   
-        	
-        </xmltask-->
-		
+	         </xmltask>  		
 	</target>	
 
 	<target name="install:jboss:configure:log4j" description="Configure custom entries in system wide log4j" unless="exclude.jboss"  depends="common:jboss:init, common:common:init">
