@@ -586,9 +586,9 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	               includes="commons-logging.jar"/>
 	    </delete> 		
 		<echo message="After unzip of wsrf-camod.war into JBoss deploy folder"/>
-		
+
 	    <jboss-configure jboss.server.ports.name="${camod.grid.jboss.server.ports.name}"
-	                     jboss.home="${camod.grid.jboss.home}"
+	                     jboss.home="${camod.grid.jboss.home}"		
 	                     jboss.server.name="${camod.grid.jboss.server.name}"
 	                     jboss.server.bindingfile.location="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/conf/bindings.xml"                     
 	                     jboss.server.binding.template.location="${jboss.server.binding.template.location}"                     
