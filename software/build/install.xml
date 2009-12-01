@@ -85,6 +85,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<property name="camod-grid-service.dir.dist" location="${basedir}/${camod-grid-service.dist.relative.dir}" />
 	<property name="camod-grid-service.name" value="wsrf-camod" />
 	<property name="camod-grid-service.war.file" value="${camod-grid-service.name}.war" />
+	<property name="camod-grid-service.war.file.zip" value="wsrf.zip" />
 	<property name="resource.file.jboss-globus-lib" value="jboss-globus-libs-cagrid1_2.zip" />
 	<property name="camod-resource.artifact.dir" value="${software.dir}/common/resources" />
 	
@@ -514,8 +515,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<copy file="${camod-webapp.dir.dist}/${camod-webapp.war.file}" todir="${jboss.home}/server/${jboss.server.name}/deploy" overwrite="true" />
 		<!--  Many NCI applications require clm for csm, so you can point this to where you have the version you want to use
 		<copy file="${bda-utils.dir}/clm-3.2.jar" todir="${jboss.home}/server/${jboss.server.name}/lib" overwrite="true" />
-		-->
-		
+		-->		
 	</target>
 	
 	<target name="install:jboss:camod-grid-api" description="Deploy camod-remote-api and common libraries to jboss installation" 
@@ -577,15 +577,15 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<!-- copy over any other files you may need to configure your application -->
 
 		<!-- Copy wsrf.war to the deploy folder  -->
-		<copy todir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/${camod-grid-service.war.file}" overwrite="true">
-		    <fileset dir="./camod-grid-service/wsrf-camod.war"/>
-		</copy>	
+	    <unzip dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy" 
+	           src="${camod-grid-service.dir.dist}/${camod-grid-service.war.file.zip}"/>
 		
-	    <!-- wsrf.war complains about commons-logging in war file - took out of original wsrf.war before copy to BDA folder -->      
+	    <!-- JBoss complains about a second commons-logging.jar in container - remove from wsrf-camod.war -->      
 	    <delete>      
 	      <fileset dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/${camod-grid-service.war.file}/WEB-INF/lib"
 	               includes="commons-logging.jar"/>
 	    </delete> 		
+		<echo message="After unzip of wsrf-camod.war into JBoss deploy folder"/>
 		
 	    <jboss-configure jboss.server.ports.name="${camod.grid.jboss.server.ports.name}"
 	                     jboss.home="${camod.grid.jboss.home}"
@@ -646,7 +646,16 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	          <replace path="//:parameter[:name='cqlQueryProcessorConfig_applicationHostName']/:value/text()" 
 	                   withtext="http://${camod.grid.jboss.server.hostname}" />   
 	        	
-	         </xmltask>  		
+	         </xmltask> 
+		
+        <!--xmltask source="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/etc/globus_wsrf_core/server-config.wsdd"
+                 dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/etc/globus_wsrf_core/server-config.wsdd">     
+                   
+          <replace path="//:parameter[:name='logicalHost']/:value/text()" 
+                   withtext="http://${camod.grid.jboss.server.hostname}" />   
+        	
+        </xmltask-->
+		
 	</target>	
 
 	<target name="install:jboss:configure:log4j" description="Configure custom entries in system wide log4j" unless="exclude.jboss"  depends="common:jboss:init, common:common:init">
