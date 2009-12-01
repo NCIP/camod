@@ -1,0 +1,1285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain" targetNamespace="gme://caMOD_2.5.caBIG/2.5/gov.nih.nci.camod.domain" elementFormDefault="qualified">
+  <xs:element name="ExpressionLevelDesc" type="ExpressionLevelDesc" />
+  <xs:complexType name="ExpressionLevelDesc">
+    <xs:sequence />
+    <xs:attribute name="expressionLevel" type="xs:string" />
+    <xs:attribute name="id" type="xs:long" />
+  </xs:complexType>
+  <xs:element name="TransientInterferenceMethod" type="TransientInterferenceMethod" />
+  <xs:complexType name="TransientInterferenceMethod">
+    <xs:sequence />
+    <xs:attribute name="conceptCode" type="xs:string" />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="name" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="YeastModel" type="YeastModel" />
+  <xs:complexType name="YeastModel">
+    <xs:complexContent>
+      <xs:extension base="AbstractCancerModel">
+        <xs:sequence>
+          <xs:element name="screeningResultCollection" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="ScreeningResult" minOccurs="0" maxOccurs="unbounded" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="targetedModificationCollection" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="TargetedModification" minOccurs="0" maxOccurs="unbounded" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CarcinogenExposure" type="CarcinogenExposure" />
+  <xs:complexType name="CarcinogenExposure">
+    <xs:sequence>
+      <xs:element name="treatment" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Treatment" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="environmentalFactor" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="EnvironmentalFactor" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:long" />
+  </xs:complexType>
+  <xs:element name="AgentTarget" type="AgentTarget" />
+  <xs:complexType name="AgentTarget">
+    <xs:sequence>
+      <xs:element name="agentCollection" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Agent" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="name" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="Role" type="Role" />
+  <xs:complexType name="Role">
+    <xs:sequence>
+      <xs:element name="partyCollection" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Party" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="name" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="GeneticAlteration" type="GeneticAlteration" />
+  <xs:complexType name="GeneticAlteration">
+    <xs:sequence />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="methodOfObservation" type="xs:string" />
+    <xs:attribute name="observation" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="ProteomicsData" type="ProteomicsData" />
+  <xs:complexType name="ProteomicsData">
+    <xs:sequence />
+    <xs:attribute name="comments" type="xs:string" />
+    <xs:attribute name="experimentId" type="xs:string" />
+    <xs:attribute name="experimentName" type="xs:string" />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="otherLocationURL" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="AnimalModel" type="AnimalModel" />
+  <xs:complexType name="AnimalModel">
+    <xs:complexContent>
+      <xs:extension base="AbstractCancerModel">
+        <xs:sequence>
+          <xs:element name="transientInterferenceCollection" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="TransientInterference" minOccurs="0" maxOccurs="unbounded" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="cellLineCollection" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="CellLine" minOccurs="0" maxOccurs="unbounded" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="engineeredGeneCollection" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="EngineeredGene" minOccurs="0" maxOccurs="unbounded" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="animalAvailabilityCollection" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="AnimalAvailability" minOccurs="0" maxOccurs="unbounded" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="therapyCollection" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="Therapy" minOccurs="0" maxOccurs="unbounded" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="microArrayDataCollection" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="MicroArrayData" minOccurs="0" maxOccurs="unbounded" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="geneDeliveryCollection" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="GeneDelivery" minOccurs="0" maxOccurs="unbounded" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="proteomicsDataCollection" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="ProteomicsData" minOccurs="0" maxOccurs="unbounded" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="genotypeCollection" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="Genotype" minOccurs="0" maxOccurs="unbounded" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="nomenclatureCollection" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="Nomenclature" minOccurs="0" maxOccurs="unbounded" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="carcinogenExposureCollection" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="CarcinogenExposure" minOccurs="0" maxOccurs="unbounded" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="spontaneousMutationCollection" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="SpontaneousMutation" minOccurs="0" maxOccurs="unbounded" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="histopathologyCollection" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="Histopathology" minOccurs="0" maxOccurs="unbounded" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="imageCollection" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="Image" minOccurs="0" maxOccurs="unbounded" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="phenotype" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="Phenotype" minOccurs="0" maxOccurs="1" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute name="comments" type="xs:string" />
+        <xs:attribute name="developmentalStage" type="xs:string" />
+        <xs:attribute name="externalSource" type="xs:string" />
+        <xs:attribute name="externalSourceIdentifier" type="xs:string" />
+        <xs:attribute name="isToolStrain" type="xs:boolean" />
+        <xs:attribute name="url" type="xs:string" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Treatment" type="Treatment" />
+  <xs:complexType name="Treatment">
+    <xs:sequence>
+      <xs:element name="sexDistribution" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="SexDistribution" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="administrativeRoute" type="xs:string" />
+    <xs:attribute name="adminRouteAlternEntry" type="xs:string" />
+    <xs:attribute name="ageAtTreatment" type="xs:string" />
+    <xs:attribute name="ageAtTreatmentUnit" type="xs:string" />
+    <xs:attribute name="dosage" type="xs:string" />
+    <xs:attribute name="dosageUnit" type="xs:string" />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="regimen" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="TargetedModification" type="TargetedModification" />
+  <xs:complexType name="TargetedModification">
+    <xs:complexContent>
+      <xs:extension base="EngineeredGene">
+        <xs:sequence>
+          <xs:element name="yeastModel" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="YeastModel" minOccurs="0" maxOccurs="1" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="modificationTypeCollection" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="ModificationType" minOccurs="0" maxOccurs="unbounded" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute name="blastocystName" type="xs:string" />
+        <xs:attribute name="constructSequence" type="xs:string" />
+        <xs:attribute name="esCellLineName" type="xs:string" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SegmentType" type="SegmentType" />
+  <xs:complexType name="SegmentType">
+    <xs:sequence />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="name" type="xs:string" />
+    <xs:attribute name="nameAlternEntry" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="Conditionality" type="Conditionality" />
+  <xs:complexType name="Conditionality">
+    <xs:sequence />
+    <xs:attribute name="conditionedBy" type="xs:string" />
+    <xs:attribute name="description" type="xs:string" />
+    <xs:attribute name="id" type="xs:long" />
+  </xs:complexType>
+  <xs:element name="SexDistribution" type="SexDistribution" />
+  <xs:complexType name="SexDistribution">
+    <xs:sequence />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="type" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="EnvironmentalFactor" type="EnvironmentalFactor" />
+  <xs:complexType name="EnvironmentalFactor">
+    <xs:sequence />
+    <xs:attribute name="casNumber" type="xs:string" />
+    <xs:attribute name="comments" type="xs:string" />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="isInducedMutationTrigger" type="xs:boolean" />
+    <xs:attribute name="name" type="xs:string" />
+    <xs:attribute name="nameAlternEntry" type="xs:string" />
+    <xs:attribute name="nscNumber" type="xs:float" />
+    <xs:attribute name="type" type="xs:string" />
+    <xs:attribute name="typeAlternEntry" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="CellLine" type="CellLine" />
+  <xs:complexType name="CellLine">
+    <xs:sequence>
+      <xs:element name="publicationCollection" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Publication" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="organ" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Organ" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="comments" type="xs:string" />
+    <xs:attribute name="experiment" type="xs:string" />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="name" type="xs:string" />
+    <xs:attribute name="results" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="Person" type="Person" />
+  <xs:complexType name="Person">
+    <xs:complexContent>
+      <xs:extension base="Party">
+        <xs:sequence />
+        <xs:attribute name="firstName" type="xs:string" />
+        <xs:attribute name="isPrincipalInvestigator" type="xs:boolean" />
+        <xs:attribute name="lastName" type="xs:string" />
+        <xs:attribute name="middleName" type="xs:string" />
+        <xs:attribute name="username" type="xs:string" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AbstractCancerModel" type="AbstractCancerModel" />
+  <xs:complexType name="AbstractCancerModel">
+    <xs:sequence>
+      <xs:element name="strain" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Strain" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="availability" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Availability" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="publicationCollection" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Publication" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="commentsCollection" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Comments" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="logCollection" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Log" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="submitter" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Person" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="principalInvestigator" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Person" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="experimentDesign" type="xs:string" />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="modelDescriptor" type="xs:string" />
+    <xs:attribute name="state" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="ClinicalMarker" type="ClinicalMarker" />
+  <xs:complexType name="ClinicalMarker">
+    <xs:sequence />
+    <xs:attribute name="comments" type="xs:string" />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="name" type="xs:string" />
+    <xs:attribute name="nameAlternEntry" type="xs:string" />
+    <xs:attribute name="value" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="InducedMutation" type="InducedMutation" />
+  <xs:complexType name="InducedMutation">
+    <xs:complexContent>
+      <xs:extension base="EngineeredGene">
+        <xs:sequence>
+          <xs:element name="geneticAlteration" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="GeneticAlteration" minOccurs="0" maxOccurs="1" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="environmentalFactor" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="EnvironmentalFactor" minOccurs="0" maxOccurs="1" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute name="description" type="xs:string" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="InvivoResult" type="InvivoResult" />
+  <xs:complexType name="InvivoResult">
+    <xs:sequence>
+      <xs:element name="agent" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Agent" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="endpoint" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Endpoint" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="treatment" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Treatment" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="evaluationDay" type="xs:string" />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="percentTreatedControl" type="xs:float" />
+    <xs:attribute name="toxicityEvalDay" type="xs:string" />
+    <xs:attribute name="toxicitySurvivors" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="GenomicSegment" type="GenomicSegment" />
+  <xs:complexType name="GenomicSegment">
+    <xs:complexContent>
+      <xs:extension base="EngineeredGene">
+        <xs:sequence>
+          <xs:element name="segmentType" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="SegmentType" minOccurs="0" maxOccurs="1" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute name="cloneDesignator" type="xs:string" />
+        <xs:attribute name="constructSequence" type="xs:string" />
+        <xs:attribute name="isRandom" type="xs:boolean" />
+        <xs:attribute name="locationOfIntegration" type="xs:string" />
+        <xs:attribute name="segmentSize" type="xs:string" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="DevelopmentalStage" type="DevelopmentalStage" />
+  <xs:complexType name="DevelopmentalStage">
+    <xs:sequence>
+      <xs:element name="therapyCollection" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Therapy" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="conceptCode" type="xs:string" />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="name" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="BiologicalProcess" type="BiologicalProcess" />
+  <xs:complexType name="BiologicalProcess">
+    <xs:sequence>
+      <xs:element name="agentCollection" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Agent" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="name" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="ModificationType" type="ModificationType" />
+  <xs:complexType name="ModificationType">
+    <xs:sequence />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="name" type="xs:string" />
+    <xs:attribute name="nameAlternEntry" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="Species" type="Species" />
+  <xs:complexType name="Species">
+    <xs:sequence>
+      <xs:element name="strainCollection" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Strain" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="abbreviation" type="xs:string" />
+    <xs:attribute name="commonName" type="xs:string" />
+    <xs:attribute name="commonNameAlternEntry" type="xs:string" />
+    <xs:attribute name="conceptCode" type="xs:string" />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="scientificName" type="xs:string" />
+    <xs:attribute name="scientificNameAlternEntry" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="Agent" type="Agent" />
+  <xs:complexType name="Agent">
+    <xs:sequence>
+      <xs:element name="agentTargetCollection" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="AgentTarget" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="chemicalClassCollection" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="ChemicalClass" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="biologicalProcessCollection" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="BiologicalProcess" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="casNumber" type="xs:string" />
+    <xs:attribute name="comments" type="xs:string" />
+    <xs:attribute name="conceptCode" type="xs:string" />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="isCMAPAgent" type="xs:boolean" />
+    <xs:attribute name="name" type="xs:string" />
+    <xs:attribute name="nscNumber" type="xs:long" />
+    <xs:attribute name="source" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="Transplantation" type="Transplantation" />
+  <xs:complexType name="Transplantation">
+    <xs:complexContent>
+      <xs:extension base="AbstractCancerModel">
+        <xs:sequence>
+          <xs:element name="organ" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="Organ" minOccurs="0" maxOccurs="1" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="tumorCode" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="TumorCode" minOccurs="0" maxOccurs="1" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="donorSpecies" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="Species" minOccurs="0" maxOccurs="1" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="invivoResultCollection" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="InvivoResult" minOccurs="0" maxOccurs="unbounded" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute name="administrativeSite" type="xs:string" />
+        <xs:attribute name="adminSiteAlternEntry" type="xs:string" />
+        <xs:attribute name="atccNumber" type="xs:string" />
+        <xs:attribute name="cellAmount" type="xs:string" />
+        <xs:attribute name="conditioningRegimen" type="xs:string" />
+        <xs:attribute name="condRegimenAlternEntry" type="xs:string" />
+        <xs:attribute name="geneticManipulation" type="xs:string" />
+        <xs:attribute name="growthPeriod" type="xs:string" />
+        <xs:attribute name="modificationDescription" type="xs:string" />
+        <xs:attribute name="name" type="xs:string" />
+        <xs:attribute name="parentalCellLineName" type="xs:string" />
+        <xs:attribute name="sourceType" type="xs:string" />
+        <xs:attribute name="sourceTypeAlternEntry" type="xs:string" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Endpoint" type="Endpoint" />
+  <xs:complexType name="Endpoint">
+    <xs:sequence />
+    <xs:attribute name="code" type="xs:string" />
+    <xs:attribute name="description" type="xs:string" />
+    <xs:attribute name="id" type="xs:long" />
+  </xs:complexType>
+  <xs:element name="Organization" type="Organization" />
+  <xs:complexType name="Organization">
+    <xs:complexContent>
+      <xs:extension base="Party">
+        <xs:sequence />
+        <xs:attribute name="name" type="xs:string" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="EngineeredGene" type="EngineeredGene" />
+  <xs:complexType name="EngineeredGene">
+    <xs:sequence>
+      <xs:element name="image" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Image" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="geneFunctionCollection" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="GeneFunction" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="expressionFeatureCollection" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="ExpressionFeature" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="conditionality" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Conditionality" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="geneIdentifier" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="GeneIdentifier" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="mutationIdentifier" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="MutationIdentifier" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="comments" type="xs:string" />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="name" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="SpontaneousMutation" type="SpontaneousMutation" />
+  <xs:complexType name="SpontaneousMutation">
+    <xs:sequence>
+      <xs:element name="geneticAlteration" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="GeneticAlteration" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="geneIdentifier" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="GeneIdentifier" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="mutationIdentifier" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="MutationIdentifier" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="comments" type="xs:string" />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="name" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="TransientInterference" type="TransientInterference" />
+  <xs:complexType name="TransientInterference">
+    <xs:sequence>
+      <xs:element name="transientInterferenceMethod" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="TransientInterferenceMethod" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="comments" type="xs:string" />
+    <xs:attribute name="concentration" type="xs:string" />
+    <xs:attribute name="concentrationUnit" type="xs:string" />
+    <xs:attribute name="deliveryMethod" type="xs:string" />
+    <xs:attribute name="deliveryMethodAlternEntry" type="xs:string" />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="sequenceDirection" type="xs:string" />
+    <xs:attribute name="source" type="xs:string" />
+    <xs:attribute name="sourceAlternEntry" type="xs:string" />
+    <xs:attribute name="targetedRegion" type="xs:string" />
+    <xs:attribute name="targetSite" type="xs:string" />
+    <xs:attribute name="type" type="xs:string" />
+    <xs:attribute name="visualLigand" type="xs:string" />
+    <xs:attribute name="visualLigandAlternEntry" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="TumorCode" type="TumorCode" />
+  <xs:complexType name="TumorCode">
+    <xs:sequence />
+    <xs:attribute name="abbreviation" type="xs:string" />
+    <xs:attribute name="description" type="xs:string" />
+    <xs:attribute name="id" type="xs:long" />
+  </xs:complexType>
+  <xs:element name="Therapy" type="Therapy" />
+  <xs:complexType name="Therapy">
+    <xs:sequence>
+      <xs:element name="treatment" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Treatment" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="agent" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Agent" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="publicationCollection" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Publication" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="developmentalStage" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="DevelopmentalStage" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="biomarker" type="xs:string" />
+    <xs:attribute name="comments" type="xs:string" />
+    <xs:attribute name="experiment" type="xs:string" />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="results" type="xs:string" />
+    <xs:attribute name="toxicityGrade" type="xs:string" />
+    <xs:attribute name="tumorResponse" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="Image" type="Image" />
+  <xs:complexType name="Image">
+    <xs:sequence>
+      <xs:element name="stainingMethod" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="StainingMethod" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="comments" type="xs:string" />
+    <xs:attribute name="description" type="xs:string" />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="title" type="xs:string" />
+    <xs:attribute name="url" type="xs:string" />
+    <xs:attribute name="urlAlternEntry" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="RegulatoryElement" type="RegulatoryElement" />
+  <xs:complexType name="RegulatoryElement">
+    <xs:sequence>
+      <xs:element name="regulatoryElementType" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="RegulatoryElementType" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="species" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Species" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="name" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="Transgene" type="Transgene" />
+  <xs:complexType name="Transgene">
+    <xs:complexContent>
+      <xs:extension base="EngineeredGene">
+        <xs:sequence>
+          <xs:element name="regulatoryElementCollection" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="RegulatoryElement" minOccurs="0" maxOccurs="unbounded" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="species" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="Species" minOccurs="0" maxOccurs="1" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute name="constructSequence" type="xs:string" />
+        <xs:attribute name="isRandom" type="xs:boolean" />
+        <xs:attribute name="locationOfIntegration" type="xs:string" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Comments" type="Comments" />
+  <xs:complexType name="Comments">
+    <xs:sequence>
+      <xs:element name="availability" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Availability" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="submitter" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Person" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="modelSection" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="ModelSection" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="remark" type="xs:string" />
+    <xs:attribute name="state" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="Histopathology" type="Histopathology" />
+  <xs:complexType name="Histopathology">
+    <xs:sequence>
+      <xs:element name="organ" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Organ" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="disease" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Disease" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="metastasisCollection" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Histopathology" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="clinicalMarkerCollection" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="ClinicalMarker" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="geneticAlteration" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="GeneticAlteration" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="ageOfDetection" type="xs:string" />
+    <xs:attribute name="ageOfDetectionUnit" type="xs:string" />
+    <xs:attribute name="ageOfOnset" type="xs:string" />
+    <xs:attribute name="ageOfOnsetUnit" type="xs:string" />
+    <xs:attribute name="comments" type="xs:string" />
+    <xs:attribute name="comparativeData" type="xs:string" />
+    <xs:attribute name="grossDescription" type="xs:string" />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="microscopicDescription" type="xs:string" />
+    <xs:attribute name="relationalOperation" type="xs:string" />
+    <xs:attribute name="survivalInfo" type="xs:string" />
+    <xs:attribute name="tumorIncidenceRate" type="xs:string" />
+    <xs:attribute name="volumeOfTumor" type="xs:string" />
+    <xs:attribute name="weightOfTumor" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="StainingMethod" type="StainingMethod" />
+  <xs:complexType name="StainingMethod">
+    <xs:sequence />
+    <xs:attribute name="conceptCode" type="xs:string" />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="name" type="xs:string" />
+    <xs:attribute name="nameAlternEntry" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="MicroArrayData" type="MicroArrayData" />
+  <xs:complexType name="MicroArrayData">
+    <xs:sequence />
+    <xs:attribute name="comments" type="xs:string" />
+    <xs:attribute name="experimentId" type="xs:long" />
+    <xs:attribute name="experimentName" type="xs:string" />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="url" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="Nomenclature" type="Nomenclature" />
+  <xs:complexType name="Nomenclature">
+    <xs:sequence />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="name" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="PublicationStatus" type="PublicationStatus" />
+  <xs:complexType name="PublicationStatus">
+    <xs:sequence />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="name" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="RegulatoryElementType" type="RegulatoryElementType" />
+  <xs:complexType name="RegulatoryElementType">
+    <xs:sequence />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="name" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="GeneFunction" type="GeneFunction" />
+  <xs:complexType name="GeneFunction">
+    <xs:sequence>
+      <xs:element name="engineeredGene" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="EngineeredGene" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="function" type="xs:string" />
+    <xs:attribute name="id" type="xs:long" />
+  </xs:complexType>
+  <xs:element name="Disease" type="Disease" />
+  <xs:complexType name="Disease">
+    <xs:sequence />
+    <xs:attribute name="conceptCode" type="xs:string" />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="name" type="xs:string" />
+    <xs:attribute name="nameAlternEntry" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="AnimalAvailability" type="AnimalAvailability" />
+  <xs:complexType name="AnimalAvailability">
+    <xs:sequence>
+      <xs:element name="principalInvestigator" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Person" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="animalDistributor" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="AnimalDistributor" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="comments" type="xs:string" />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="name" type="xs:string" />
+    <xs:attribute name="stockNumber" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="Availability" type="Availability" />
+  <xs:complexType name="Availability">
+    <xs:sequence />
+    <xs:attribute name="enteredDate" type="xs:dateTime" />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="modifiedDate" type="xs:dateTime" />
+    <xs:attribute name="releaseDate" type="xs:dateTime" />
+    <xs:attribute name="visibleTo" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="Publication" type="Publication" />
+  <xs:complexType name="Publication">
+    <xs:sequence>
+      <xs:element name="publicationStatus" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="PublicationStatus" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="authors" type="xs:string" />
+    <xs:attribute name="comments" type="xs:string" />
+    <xs:attribute name="endPage" type="xs:long" />
+    <xs:attribute name="firstTimeReported" type="xs:boolean" />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="jaxJNumber" type="xs:string" />
+    <xs:attribute name="journal" type="xs:string" />
+    <xs:attribute name="pmid" type="xs:long" />
+    <xs:attribute name="rgdPubId" type="xs:string" />
+    <xs:attribute name="startPage" type="xs:long" />
+    <xs:attribute name="title" type="xs:string" />
+    <xs:attribute name="volume" type="xs:string" />
+    <xs:attribute name="year" type="xs:long" />
+    <xs:attribute name="zfinPubId" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="ModelSection" type="ModelSection" />
+  <xs:complexType name="ModelSection">
+    <xs:sequence />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="name" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="ExpressionFeature" type="ExpressionFeature" />
+  <xs:complexType name="ExpressionFeature">
+    <xs:sequence>
+      <xs:element name="organ" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Organ" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="expressionLevelDesc" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="ExpressionLevelDesc" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="comments" type="xs:string" />
+    <xs:attribute name="id" type="xs:long" />
+  </xs:complexType>
+  <xs:element name="MutationIdentifier" type="MutationIdentifier" />
+  <xs:complexType name="MutationIdentifier">
+    <xs:sequence />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="mgiId" type="xs:string" />
+    <xs:attribute name="rgdId" type="xs:string" />
+    <xs:attribute name="zfinId" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="GeneIdentifier" type="GeneIdentifier" />
+  <xs:complexType name="GeneIdentifier">
+    <xs:sequence />
+    <xs:attribute name="entrezGeneID" type="xs:string" />
+    <xs:attribute name="id" type="xs:long" />
+  </xs:complexType>
+  <xs:element name="Log" type="Log" />
+  <xs:complexType name="Log">
+    <xs:sequence>
+      <xs:element name="submitter" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Person" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="abstractCancerModel" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="AbstractCancerModel" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="comments" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Comments" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="reviewNote" type="xs:string" />
+    <xs:attribute name="state" type="xs:string" />
+    <xs:attribute name="timestamp" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="Party" type="Party" />
+  <xs:complexType name="Party">
+    <xs:sequence>
+      <xs:element name="contactInfoCollection" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="ContactInfo" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="roleCollection" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Role" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:long" />
+  </xs:complexType>
+  <xs:element name="Organ" type="Organ" />
+  <xs:complexType name="Organ">
+    <xs:sequence />
+    <xs:attribute name="conceptCode" type="xs:string" />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="name" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="AnimalDistributor" type="AnimalDistributor" />
+  <xs:complexType name="AnimalDistributor">
+    <xs:sequence />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="name" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="ContactInfo" type="ContactInfo" />
+  <xs:complexType name="ContactInfo">
+    <xs:sequence>
+      <xs:element name="partyCollection" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Party" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="address" type="xs:string" />
+    <xs:attribute name="city" type="xs:string" />
+    <xs:attribute name="email" type="xs:string" />
+    <xs:attribute name="fax" type="xs:string" />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="institute" type="xs:string" />
+    <xs:attribute name="lab" type="xs:string" />
+    <xs:attribute name="phone" type="xs:string" />
+    <xs:attribute name="state" type="xs:string" />
+    <xs:attribute name="zip" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="GeneDelivery" type="GeneDelivery" />
+  <xs:complexType name="GeneDelivery">
+    <xs:sequence>
+      <xs:element name="treatment" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Treatment" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="organ" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Organ" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="comments" type="xs:string" />
+    <xs:attribute name="geneInVirus" type="xs:string" />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="viralVector" type="xs:string" />
+    <xs:attribute name="viralVectorAlternEntry" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="ScreeningResult" type="ScreeningResult" />
+  <xs:complexType name="ScreeningResult">
+    <xs:sequence>
+      <xs:element name="agent" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Agent" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="treatment" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Treatment" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="aveinh" type="xs:float" />
+    <xs:attribute name="diffinh" type="xs:float" />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="stage" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="Genotype" type="Genotype" />
+  <xs:complexType name="Genotype">
+    <xs:sequence />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="name" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="ChemicalClass" type="ChemicalClass" />
+  <xs:complexType name="ChemicalClass">
+    <xs:sequence>
+      <xs:element name="agentCollection" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Agent" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="name" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="Phenotype" type="Phenotype" />
+  <xs:complexType name="Phenotype">
+    <xs:sequence>
+      <xs:element name="sexDistribution" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="SexDistribution" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="breedingNotes" type="xs:string" />
+    <xs:attribute name="description" type="xs:string" />
+    <xs:attribute name="id" type="xs:long" />
+  </xs:complexType>
+  <xs:element name="Strain" type="Strain" />
+  <xs:complexType name="Strain">
+    <xs:sequence>
+      <xs:element name="mutationIdentifier" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="MutationIdentifier" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="species" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="Species" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="abbreviation" type="xs:string" />
+    <xs:attribute name="conceptCode" type="xs:string" />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="name" type="xs:string" />
+    <xs:attribute name="nameAlternEntry" type="xs:string" />
+  </xs:complexType>
+</xs:schema>
+
