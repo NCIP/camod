@@ -396,13 +396,13 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		unless="exclude.camod-grid">
 		<!-- determine if port configurations or port lists are being called -->
 		<if>
-			<isset property="ncicb-standard.port-config"/>
+			<isset property="camod.grid.jboss.ncicb-standard.port-config"/>
 			<then>
 				<!-- Read some port properties from standard bindings file -->
 				<echo message="Using JBoss NCICB Standard port configurations"/>
-				<property name="jboss.server.binding.template.location" value="${basedir}/${jboss-bindings.file}"/>
+				<property name="camod.grid.jboss.server.binding.template.location" value="${basedir}/${jboss-bindings.file}"/>
 				<jboss-read-ports
-					jboss.server.bindingfile.location="${jboss.server.binding.template.location}"
+					jboss.server.bindingfile.location="${camod.grid.jboss.server.binding.template.location}"
 					/>
 				<echo message="http -${camod.grid.jboss.server.port} "/>
 				<echo message="http -${camod.grid.jboss.server.jndi.port} "/>
@@ -411,14 +411,14 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 					/>
 				<!-- Make sure there are not unexpanded tokens and that the jboss.server.ports.name is a configuration in the bindings file. -->
 				<jboss-bindings-validate
-					jboss.server.bindingfile.location="${jboss.server.binding.template.location}"
+					jboss.server.bindingfile.location="${camod.grid.jboss.server.binding.template.location}"
 					/>
 
 			</then>
 			<else>
 				<!-- else ensure that all ports are set, since these will be removed from install-properties.template we will verify here.  They have to be removed so the validator works with or without the properties or we have to change the format of the file. -->
 				<echo message="Using custom JBoss port configurations"/>
-				<property name="jboss.server.binding.template.location" value="${bda-utils.dir}/resource/${jboss.binaries.relative.dir}/bindings.xml"/>
+				<property name="camod.grid.jboss.server.binding.template.location" value="${bda-utils.dir}/resource/${jboss.binaries.relative.dir}/bindings.xml"/>
 				<properties-exist
 					properties.list="camod.grid.jboss.server.jndi.port,camod.grid.jboss.server.port,camod.grid.jboss.cobraorb.port,camod.grid.jboss.ejbinvoker.port,camod.grid.jboss.hajndi.port,camod.grid.jboss.hajrmi.port,camod.grid.jboss.jms.port,camod.grid.jboss.jmx-rmi.port,camod.grid.jboss.messaging.port,camod.grid.jboss.pooledha.port,camod.grid.jboss.remoting.port,camod.grid.jboss.server.bind.port,camod.grid.jboss.server.rmi.port,camod.grid.jboss.service.rmiobject.port,camod.grid.jboss.snmp.port,camod.grid.jboss.snmp-trapd.port,camod.grid.jboss.web.service.port"
 					/>
@@ -590,7 +590,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	    <jboss-configure jboss.server.ports.name="${camod.grid.jboss.server.ports.name}"
 	                     jboss.home="${camod.grid.jboss.home}"
 	                     jboss.server.name="${camod.grid.jboss.server.name}"
-	                     jboss.server.bindingfile.location="${jboss.home}/server/${jboss.server.name}/conf/bindings.xml"                     
+	                     jboss.server.bindingfile.location="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/conf/bindings.xml"                     
 	                     jboss.server.binding.template.location="${jboss.server.binding.template.location}"                     
 	                     jboss.web.user="${camod.grid.jboss.web.user}"
 	                     jboss.web.password="${camod.grid.jboss.web.password}"
