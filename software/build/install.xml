@@ -587,7 +587,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	    </delete> 	
 		
 		
-	    <!--jboss-configure jboss.server.ports.name="${camod.grid.jboss.server.ports.name}"
+	    <jboss-configure jboss.server.ports.name="${camod.grid.jboss.server.ports.name}"
 	                     jboss.home="${camod.grid.jboss.home}"
 	                     jboss.server.name="${camod.grid.jboss.server.name}"
 	                     jboss.server.bindingfile.location="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/conf/bindings.xml"                     
@@ -618,7 +618,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	                     jboss.external.http.port="${camod.grid.jboss.external.http.port}"
 	                     jboss.server.hostname="${camod.grid.jboss.server.hostname}"
 	                     jboss.java.opts="${camod.grid.jboss.java.opts}"
-	                     jboss.logs.dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/log"/-->
+	                     jboss.logs.dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/log"/>
 		<echo message="Before jboss-configure-grid macro call"/>
 		
 	    <jboss-configure-grid jboss.conf.dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/conf"
@@ -648,22 +648,6 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	                   withtext="http://${camod.grid.jboss.server.hostname}" />   
 	        	
 	         </xmltask>  
-		
-			<echo message="Modify /WEB-INF/etc/globus_resolution_service/jndi-config.xml"/>
-			<!-- corrupted by BDA [set to http://cbiovdev5058.nci.nih.gov:${camod.grid.jboss.external.http.port}/ServiceToResolve] - fixed here -->
-		    <xmltask source="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/etc/globus_resolution_service/jndi-config.xml"
-		             dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/etc/globus_resolution_service/jndi-config.xml"> 
-				 <replace path="//:parameter[:name='address']/:value/text()" 
-				          withtext="http://localhost:${camod.grid.jboss.server.port}/ServiceToResolve" />   		    	
-		     </xmltask>
-		
-			<echo message="Modify /WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml"/>
-			<!-- (YES, done in BDA - uses jboss.external.http.port ) Modify /WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml properties -->
-		    <xmltask source="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml"
-		             dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml"> 
-				 <replace path="//:parameter[:name='cqlQueryProcessorConfig_applicationHostPort']/:value/text()" 
-				          withtext="${camod.grid.jboss.server.port}" />   		               
-		     </xmltask>
 		
 	</target>	
 	
