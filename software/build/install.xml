@@ -587,7 +587,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	    </delete> 	
 		
 		
-	    <jboss-configure jboss.server.ports.name="${camod.grid.jboss.server.ports.name}"
+	    <!--jboss-configure jboss.server.ports.name="${camod.grid.jboss.server.ports.name}"
 	                     jboss.home="${camod.grid.jboss.home}"
 	                     jboss.server.name="${camod.grid.jboss.server.name}"
 	                     jboss.server.bindingfile.location="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/conf/bindings.xml"                     
@@ -618,7 +618,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	                     jboss.external.http.port="${camod.grid.jboss.external.http.port}"
 	                     jboss.server.hostname="${camod.grid.jboss.server.hostname}"
 	                     jboss.java.opts="${camod.grid.jboss.java.opts}"
-	                     jboss.logs.dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/log"/>
+	                     jboss.logs.dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/log"/ -->
 		<echo message="Before jboss-configure-grid macro call"/>
 		
 	    <jboss-configure-grid jboss.conf.dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/conf"
@@ -637,7 +637,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		
 		   <echo message="Modify /WEB-INF/etc/globus_resolution_service/jndi-config.xml"/>
 	        <!-- with bda 1.0.2 this must come after the jboss-configure-grid call, otherwise
-	             the gridServiceUrl will be corrupted by what jboss-configure-grid does -->
+	             the gridServiceUrl will be corrupted by what jboss-configure-grid does 
 	        <xmltask source="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml"
 	                 dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml">     
          
@@ -647,7 +647,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	          <replace path="//:parameter[:name='cqlQueryProcessorConfig_applicationHostName']/:value/text()" 
 	                   withtext="http://${camod.grid.jboss.server.hostname}" />   
 	        	
-	         </xmltask>  
+	         </xmltask>  --> 
 		
 	</target>	
 	
