@@ -590,7 +590,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	    <jboss-configure jboss.server.ports.name="${camod.grid.jboss.server.ports.name}"
 	                     jboss.home="${camod.grid.jboss.home}"
 	                     jboss.server.name="${camod.grid.jboss.server.name}"
-	                     jboss.server.bindingfile.location="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/conf/bindings.xml"                     
+	                     jboss.server.bindingfile.location="${jboss.home}/server/${jboss.server.name}/conf/bindings.xml"                     
 	                     jboss.server.binding.template.location="${jboss.server.binding.template.location}"                     
 	                     jboss.web.user="${camod.grid.jboss.web.user}"
 	                     jboss.web.password="${camod.grid.jboss.web.password}"
