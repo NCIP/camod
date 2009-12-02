@@ -18,6 +18,10 @@
         <parameter name="containerThreadsMax" value="20"/>
 
         <parameter name="sendXsiTypes" value="true"/>
+        
+        <parameter name="logicalHost" value="http://cbiovdev5058.nci.nih.gov"/>
+        
+    	<parameter name="publishHostName" value="true"/>        
 
         <!-- @CONTAINER_SECURITY_DESCRIPTOR@ -->
 
