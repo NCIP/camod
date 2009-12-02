@@ -633,12 +633,13 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	                          grid.application.name="CamodGridService"
 	                          grid.application.relative.dir="wsrf-camod.war"/>
 		
-		<echo message="After jboss-configure-grid macro call"/>
+		   <echo message="After jboss-configure-grid macro call"/>
 		
+		   <echo message="Modify /WEB-INF/etc/globus_resolution_service/jndi-config.xml"/>
 	        <!-- with bda 1.0.2 this must come after the jboss-configure-grid call, otherwise
 	             the gridServiceUrl will be corrupted by what jboss-configure-grid does -->
-	        <xmltask source="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/etc/cagrid_CamodGridService/jndi-config.xml"
-	                 dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/etc/cagrid_CamodGridService/jndi-config.xml">     
+	        <xmltask source="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml"
+	                 dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml">     
          
 	          <replace path="//:parameter[:name='cqlQueryProcessorConfig_applicationHostPort']/:value/text()" 
 	                   withtext="${camod.grid.jboss.server.port}" />                 
@@ -646,8 +647,28 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	          <replace path="//:parameter[:name='cqlQueryProcessorConfig_applicationHostName']/:value/text()" 
 	                   withtext="http://${camod.grid.jboss.server.hostname}" />   
 	        	
-	         </xmltask>  		
+	         </xmltask>  
+		
+			<echo message="Modify /WEB-INF/etc/globus_resolution_service/jndi-config.xml"/>
+			<!-- corrupted by BDA [set to http://cbiovdev5058.nci.nih.gov:${camod.grid.jboss.external.http.port}/ServiceToResolve] - fixed here -->
+		    <xmltask source="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/etc/globus_resolution_service/jndi-config.xml"
+		             dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/etc/globus_resolution_service/jndi-config.xml"> 
+				 <replace path="//:parameter[:name='address']/:value/text()" 
+				          withtext="http://localhost:${camod.grid.jboss.server.port}/ServiceToResolve" />   		    	
+		     </xmltask>
+		
+			<echo message="Modify /WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml"/>
+			<!-- (YES, done in BDA - uses jboss.external.http.port ) Modify /WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml properties -->
+		    <xmltask source="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml"
+		             dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml"> 
+				 <replace path="//:parameter[:name='cqlQueryProcessorConfig_applicationHostPort']/:value/text()" 
+				          withtext="${camod.grid.jboss.server.port}" />   		               
+		     </xmltask>
+		
 	</target>	
+	
+
+	
 
 	<target name="install:jboss:configure:log4j" description="Configure custom entries in system wide log4j" unless="exclude.jboss"  depends="common:jboss:init, common:common:init">
 		<!--
