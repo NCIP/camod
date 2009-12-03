@@ -86,7 +86,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<property name="camod-grid-service.name" value="wsrf-camod" />
 	<property name="camod-grid-service.war.file" value="${camod-grid-service.name}.war" />
 	<property name="camod-grid-service.war.file.zip" value="wsrf.zip" />
-	<property name="resource.file.jboss-globus-lib" value="jboss-globus-libs-cagrid1_2.zip" />
+	<property name="camod-grid-service.jboss-globus-lib.zip" value="jboss-globus-libs-cagrid1_2.zip" />
 	<property name="camod-resource.artifact.dir" value="${software.dir}/common/resources" />
 	
 	<!-- Added for properties-service.xml -->
@@ -532,7 +532,11 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		
 		<!-- camod.grid.jboss.home=C\:/devtools/grid/jboss-4.0.5.GA + server + camod.grid.jboss.server.name=default + lib-->
 	    <unzip dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/lib" 
-	           src="${camod-grid-service.dir.dist}/lib/${resource.file.jboss-globus-lib}"/>
+	           src="${camod-grid-service.dir.dist}/lib/${camod-grid-service.jboss-globus-lib.zip}"/>
+		
+		<!-- camod.grid.jboss.home=C\:/devtools/grid/jboss-4.0.5.GA + server + camod.grid.jboss.server.name=default + lib-->
+	    <unzip dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy" 
+	           src="${camod-grid-service.dir.dist}/${camod-grid-service.war.file.zip}"/>		
 		
 		<!-- copy datasource file (reuse copy from camod.war) moved from install:jboss:camod-grid:configure to here -->
 		<copy file="${jboss-conf.dir.dest}/${camod-webapp.ds.file}" todir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy" overwrite="true" />
@@ -576,9 +580,10 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		depends="common:jboss:camod-grid:init, common:common:init">
 		<!-- copy over any other files you may need to configure your application -->
 
-		<!-- Copy wsrf.war to the deploy folder  -->
+		<!-- Copy wsrf.war to the deploy folder  - moved to just after unzip of lib files in install:jboss:camod-grid-api target
 	    <unzip dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy" 
 	           src="${camod-grid-service.dir.dist}/${camod-grid-service.war.file.zip}"/>
+		-->
 		
 	    <!-- JBoss complains about a second commons-logging.jar in container - remove from wsrf-camod.war -->      
 	    <delete>      
@@ -885,9 +890,9 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		 		install:jboss:camod-grid:stop,
 		 		install:jboss:validation:pre-install:ports,
 		 		install:jboss:clean,
-		 		install:jboss:camod-grid:binaries,
+		 		install:jboss:camod-grid:binaries,				
+				install:jboss:camod-grid-api,
 				install:jboss:camod-grid:configure,
-				install:jboss:camod-grid-api,				
 		 		install:jboss:configure,
 		 		install:post:jboss:camod-grid,
 		 		install:jboss:camod-grid:start
@@ -932,9 +937,9 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		install:jboss:validation:post-install,		
 		upgrade:jboss:camod-grid:init,
 		common:jboss:camod-grid:init,
-		install:jboss:camod-grid:stop,
-		install:jboss:camod-grid:configure,
+		install:jboss:camod-grid:stop,		
  		install:jboss:camod-grid-api,
+		install:jboss:camod-grid:configure,
 		install:post:jboss:camod-grid, 		
 		install:jboss:camod-grid:start
 		">
