@@ -534,9 +534,9 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	    <unzip dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/lib" 
 	           src="${camod-grid-service.dir.dist}/lib/${camod-grid-service.jboss-globus-lib.zip}"/>
 		
-		<!-- camod.grid.jboss.home=C\:/devtools/grid/jboss-4.0.5.GA + server + camod.grid.jboss.server.name=default + lib-->
+		<!-- camod.grid.jboss.home=C\:/devtools/grid/jboss-4.0.5.GA + server + camod.grid.jboss.server.name=default + deploy-->
 	    <unzip dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy" 
-	           src="${camod-grid-service.dir.dist}/${camod-grid-service.war.file.zip}"/>		
+	           src="${camod-grid-service.dir.dist}/${camod-grid-service.war.file.zip}" overwrite="true"/>		
 		
 		<!-- copy datasource file (reuse copy from camod.war) moved from install:jboss:camod-grid:configure to here -->
 		<copy file="${jboss-conf.dir.dest}/${camod-webapp.ds.file}" todir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy" overwrite="true" />
@@ -579,11 +579,6 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		unless="exclude.camod-grid" 
 		depends="common:jboss:camod-grid:init, common:common:init">
 		<!-- copy over any other files you may need to configure your application -->
-
-		<!-- Copy wsrf.war to the deploy folder  - moved to just after unzip of lib files in install:jboss:camod-grid-api target
-	    <unzip dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy" 
-	           src="${camod-grid-service.dir.dist}/${camod-grid-service.war.file.zip}"/>
-		-->
 		
 	    <!-- JBoss complains about a second commons-logging.jar in container - remove from wsrf-camod.war -->      
 	    <delete>      
@@ -591,7 +586,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	               includes="commons-logging.jar"/>
 	    </delete> 	
 		
-		
+		<echoproperties />
 	    <jboss-configure-grid jboss.conf.dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/conf"
 	                          jboss.webapp.dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy"
 	                          jboss.server-xml.file="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/jbossweb-tomcat55.sar/server.xml"
@@ -606,35 +601,36 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		
 		   <echo message="After jboss-configure-grid macro call"/>
 		
-		   <echo message="Modify /WEB-INF/etc/globus_resolution_service/jndi-config.xml"/>
-	        <!-- Not done in jboss-configure-grid (only cqlQueryProcessorConfig_applicationName already set before BDA -->
-	        <xmltask source="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml"
-	                 dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml">     
+		   
+	        <!-- Not done in jboss-configure-grid (only cqlQueryProcessorConfig_applicationName already set before BDA 
+			<echo message="Modify /WEB-INF/etc/globus_resolution_service/jndi-config.xml"/>
+	        <xmltask source="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/etc/cagrid_CamodGridService/jndi-config.xml"
+	                 dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/etc/cagrid_CamodGridService/jndi-config.xml">     
          
-	          <replace path="//:parameter[:name='cqlQueryProcessorConfig_applicationHostPort']/:value/text()" 
-	                   withtext="${camod.grid.jboss.server.port}" />                 
+	        	<replace path="//:parameter[:name='cqlQueryProcessorConfig_applicationHostPort']/:value/text()" 
+	                   withtext="${camod.grid.jboss.server.port}"/>                 
 	                   
-	          <replace path="//:parameter[:name='cqlQueryProcessorConfig_applicationHostName']/:value/text()" 
-	                   withtext="http://${camod.grid.jboss.server.hostname}" />   
+	        	<replace path="//:parameter[:name='cqlQueryProcessorConfig_applicationHostName']/:value/text()" 
+	                   withtext="http://${camod.grid.jboss.server.hostname}"/>   
 	        	
-	         </xmltask> 
+	         </xmltask> -->
 		
 		<!-- (YES, done in BDA and uses jboss.external.http.port ) 
-                     Modify /WEB-INF/etc/globus_resolution_service/jndi-config.xml -->
+                     Modify /WEB-INF/etc/globus_resolution_service/jndi-config.xml 
 	    <xmltask source="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/etc/globus_resolution_service/jndi-config.xml"
 	             dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/etc/globus_resolution_service/jndi-config.xml"> 
 			 <replace path="//:parameter[:name='address']/:value/text()" 
 			          withtext="http://localhost:${camod.grid.jboss.server.port}/ServiceToResolve" />   		    	
-	     </xmltask>	
+	     </xmltask>	-->
 		
 		<!-- Modify /WEB-INF/web.xml 
-		(YES, done in BDA - uses jboss.external.http.port)-->
+		(YES, done in BDA - uses jboss.external.http.port)
 	    <xmltask source="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/web.xml"
 	             dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/web.xml"> 
 		 	
 			 <replace path="//:param-name[:param-value=defaultPort']/:value/text()" 
 			          withtext="${camod.grid.jboss.server.port}" /> 	    	
-	     </xmltask>			
+	     </xmltask>	-->		
 		
 	</target>	
 	
@@ -770,10 +766,18 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 
 	<target name="install:jboss:validation:pre-install" description="Runs pre-install validation checks bda-utils" 
 		depends="
-		common:jboss:init,common:jboss:camod-grid:init,common:common:init,install:common:common:validation:pre-install
+		common:jboss:init,common:common:init,install:common:common:validation:pre-install
 		">
 		<validate-pre-install-jboss	/>
 	</target>
+		
+	<target name="install:jboss:camod-grid:validation:pre-install" description="Runs pre-install validation checks bda-utils" 
+		unless="exclude-camod-grid"
+		depends="
+		common:jboss:camod-grid:init,common:common:init,install:common:common:validation:pre-install
+		">
+		<validate-pre-install-jboss	/>
+	</target>		
 
 	<target name="install:jboss:validation:pre-install:ports" description="Checks to see if configured ports are listenting and fails buld, meant to be run after jboss:stop"
 		depends="
@@ -808,7 +812,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		</if>
 	</target>
 	
-	<!--target name="install:jboss:camod-grid:validation:post-install" description="Run post-install checks from bda-utils"
+	<target name="install:jboss:camod-grid:validation:post-install" description="Run post-install checks from bda-utils"
 		unless="exclude.camod-grid"
 		depends="
 		common:jboss:camod-grid:init,
@@ -821,11 +825,11 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			</not>
 			<then>
 				<validate-post-jboss jboss.home="${camod.grid.jboss.home}" jboss.hostname="${camod.grid.jboss.hostname}" 
-					jboss.application.url="${camod.grid.jboss.application.url}" jboss.socket.list="${camod.grid.jboss.server.port}"								
+					jboss.socket.list="${camod.grid.validation.post.socket.list}"								
 					/>
 			</then>
 		</if>
-	</target-->	
+	</target>	
 
 	   <target name="install:all:post" 
 		          depends="common:common:init,
@@ -921,22 +925,25 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	-->
 	
 	<target name="upgrade:jboss" description="Wrapper target to call all targets required to upgrade jboss container." unless="exclude.jboss" 
-		depends="upgrade:jboss:init,upgrade:jboss:camod-grid:init,common:common:init,upgrade-ncm:jboss">
+		depends="upgrade:jboss:init,upgrade:jboss:camod-grid:init,common:common:init,upgrade-ncm:jboss,upgrade-ncm:jboss:camod-grid">
 	</target>
 
 	<target name="upgrade" description="Upgrades JBoss and Database" 
-		depends="upgrade:common:common:init,
+		depends="upgrade:camod-grid,
+				 upgrade:camod">
+	</target>
+		
+	<target name="upgrade:camod" description="Upgrades JBoss and Database" 
+		depends="upgrade:common:init,
 				common:common:init,
 				upgrade-ncm">
 	</target>
-	
-	  <!--target name="upgrade:all:init" 
-	          depends="upgrade:jboss:init, 
-	                   upgrade:jboss:camod-grid:init">
-	  </target-->	
-
-	<target name="upgrade-with-dbinstall" description="Upgrades JBoss and Database" depends="upgrade:common:common:init,common:common:init,upgrade-ncm:with-dbinstall">
-	</target>
+		
+	<target name="upgrade:camod-grid" description="Upgrades JBoss and Database" 
+		depends="upgrade:common:camod-grid:init,
+				common:common:init,
+				upgrade-ncm:camod-grid">
+	</target>			
 
 	<target name="upgrade-ncm:jboss" description="Wrapper target to call all targets required to upgrade jboss container." unless="exclude.jboss"
 		depends="
@@ -951,25 +958,42 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
  		install:jboss:camod-webapp:configure,
  		install:post:jboss,
 		install:jboss:start,		
-		install:jboss:validation:post-install,		
-		upgrade:jboss:camod-grid:init,
+		install:jboss:validation:post-install
+		">
+	</target>
+	
+	<!-- Don't call install:jboss:validation:post-install for the grid - no hostname -->
+	<target name="upgrade-ncm:jboss:camod-grid" description="Wrapper target to call all targets required to upgrade jboss container." 
+		unless="exclude.camod-grid"
+		depends="upgrade:jboss:camod-grid:init,
+ 		common:common:init,
 		common:jboss:camod-grid:init,
+ 		install:jboss:camod-grid:validation:pre-install,
+		install:common:common:validation:pre-install,		
 		install:jboss:camod-grid:stop,		
  		install:jboss:camod-grid-api,
 		install:jboss:camod-grid:configure,
-		install:post:jboss:camod-grid, 		
-		install:jboss:camod-grid:start
-		">
-	</target>
-
-	
-	<!--  put back if fixed
-	install:jboss:camod-grid:configure,
-	-->
+		install:post:jboss:camod-grid, 
+ 		install:post:jboss,
+		install:jboss:camod-grid:start,
+ 		install:jboss:camod-grid:validation:post-install">
+	</target>	
 
 	<target name="upgrade-ncm" description="Upgrades JBoss and Database"
-		depends="
-		upgrade:common:common:init,
+		depends="upgrade:common:init,
+ 		common:common:init,
+ 		common:jboss:init,
+		install:common:common:validation:pre-install,
+ 		install:jboss:validation:pre-install,
+ 		install:database:validation:pre-install,
+ 		install:jboss:stop,
+ 		upgrade:database,
+ 		upgrade:jboss,
+ 		install:common:common:validation:post-install">
+	</target>
+ 			
+	<target name="upgrade-ncm:camod-grid" description="Upgrades JBoss and Database" unless="exclude.camod-grid"
+		depends="upgrade:common:camod-grid:init,
  		common:common:init,
  		common:jboss:init,
 		install:common:common:validation:pre-install,
@@ -979,28 +1003,18 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		install:jboss:camod-grid:stop,
  		upgrade:database,
  		upgrade:jboss,
- 		install:common:common:validation:post-install
-		">
-	</target>
+ 		install:common:common:validation:post-install">
+	</target> 			
 
-	<target name="upgrade-ncm:with-dbinstall" description="Upgrades JBoss and Database"
-		depends="
-		upgrade:common:common:init,
- 		common:common:init,
- 		common:jboss:init,
-		install:common:common:validation:pre-install,
- 		install:jboss:validation:pre-install,
- 		install:database:validation:pre-install,
- 		install:jboss:stop,
- 		upgrade:jboss,
- 		install:common:common:validation:post-install
-		">
-	</target>
-
-	<target name="upgrade:common:common:init" depends="
-		upgrade:jboss:init, upgrade:jboss:camod-grid:init
+	<target name="upgrade:common:init" depends="
+		upgrade:jboss:init
 		" unless="install.running">
 	</target>
+			
+	<target name="upgrade:common:camod-grid:init" depends="
+		upgrade:jboss:camod-grid:init
+		" unless="install.running">
+	</target>			
 
 	<target name="upgrade:jboss:init" unless="install.running"
 		depends="upgrade:jboss:init:prep,upgrade:jboss:readers:bda,upgrade:jboss:readers:custom">
@@ -1016,7 +1030,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	</target>
 	
 	<target name="upgrade:jboss:camod-grid:init" unless="exclude.camod-grid"
-		depends="upgrade:jboss:camod-grid:init:prep,upgrade:jboss:readers:custom">
+		depends="upgrade:jboss:camod-grid:init:prep,upgrade:jboss:camod-grid:readers:bda, upgrade:jboss:readers:custom">
 		<properties-print
 			properties.list="${read.properties.list},camod.grid.jboss.server.hostname"
 			/>
@@ -1028,7 +1042,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			/>
 	</target>	
 
-	<target name="upgrade:common:common:init:prep" unless="install.running">
+	<target name="upgrade:common:init:prep" unless="install.running">
 		<if>
 			<not>
 				<isset property="application.base.path"/>
@@ -1041,24 +1055,30 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 				<echo message="application.base.path=${application.base.path}"/>
 			</then>
 		</if>
+		<properties-print properties.list="application.base.path,jboss.home,jboss.server.name"/>
+		<var name="read.properties.list" value=""/>
+		<property name="upgrade.running" value="true"/>
+	</target>
+					
+	<target name="upgrade:common:camod-grid:init:prep" unless="exclude.camod-grid">
 		<if>
 			<not>
 				<isset property="camod.grid.application.base.path"/>
 			</not>
 			<then>
-				<!-- Set application.base.path based on platform -->		
+			<!-- Set application.base.path based on platform -->		
 				<condition property="camod.grid.application.base.path" value="${camod.grid.application.base.path.windows}">
 					<os family="windows" />
 				</condition>
 				<echo message="camod.grid.application.base.path=${camod.grid.application.base.path}"/>
 			</then>
 		</if>		
-		<properties-print properties.list="application.base.path,jboss.home,jboss.server.name,camod.grid.application.base.path,camod.grid.jboss.home,camod.grid.jboss.server.name"/>
+		<properties-print properties.list="camod.grid.application.base.path,camod.grid.jboss.home,camod.grid.jboss.server.name"/>
 		<var name="read.properties.list" value=""/>
 		<property name="upgrade.running" value="true"/>
-	</target>
+	</target>					
 
-	<target name="upgrade:jboss:init:prep" depends="upgrade:common:common:init:prep" unless="install.running">
+	<target name="upgrade:jboss:init:prep" depends="upgrade:common:init:prep" unless="install.running">
 		<!--echoproperties prefix="jboss"/-->
 		<property name="jboss.home" value="${application.base.path}/${jboss.relative.path}"/>
 		<if>
@@ -1079,11 +1099,11 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 
 	</target>
 	
-	<target name="upgrade:jboss:camod-grid:init:prep" depends="upgrade:common:common:init:prep" unless="install.running">
+	<target name="upgrade:jboss:camod-grid:init:prep" depends="upgrade:common:camod-grid:init:prep" unless="install.running">
 		<!--echoproperties prefix="jboss"/-->
 		<property name="camod.grid.jboss.home" value="${camod.grid.application.base.path}/${jboss.relative.path}"/>
 		<if>
-			<equals arg1="${jboss.ncicb-standard.port-config}" arg2="true"/>
+			<equals arg1="${camod.grid.jboss.ncicb-standard.port-config}" arg2="true"/>
 			<then>
 				<property name="jboss.server.binding.template.location" value="${basedir}/${jboss-bindings.file}"/>
 			</then>
@@ -1094,7 +1114,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 						
 		<property name="upgrade.running" value="true"/>
 		<!-- Upgrades always use port configs -->
-		<property name="jboss.ncicb-standard.port-config" value="true"/>
+		<property name="camod.grid.jboss.ncicb-standard.port-config" value="true"/>
 		<available file="${camod.grid.jboss.home}" property="camod.grid.jboss.exists"/>
 		<property name="read.camod.grid.jboss.home" value="${camod.grid.jboss.home}"/>
 
@@ -1130,25 +1150,38 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<!-- Begin JBoss Readers -->
 		<!-- Reader requires that you have only one data source defined in each *-ds.xml file -->
 		<jboss-read-dbconfig
-			jboss.home="${read.jboss.home}"
+			jboss.home="${jboss.home}"
 			jboss.ds-xml.file="oracle-ds.xml"
 			/>
-		<jboss-read-ldapconfig jboss.home="${read.jboss.home}" 	/>
-		<jboss-read-bindings-file-location jboss.home="${read.jboss.home}" 	/>
-		<jboss-read-ports />
+		<jboss-read-ldapconfig jboss.home="${jboss.home}" />
+		<jboss-read-bindings-file-location jboss.home="${jboss.home}" 	/>
+		<if>
+			<equals arg1="${jboss.major.version}" arg2="4"/>
+			<then>
+				<jboss-read-ports
+					/>
+			</then>
+		</if>
+		<if>
+			<equals arg1="${jboss.major.version}" arg2="5"/>
+			<then>
+				<jboss51-read-ports
+				/>
+			</then>
+		</if>		
 		<!-- Setting this variable will cause install to copy it into place if using CM/DAC, not modified in NCM -->
 		<var name="jboss.ssl.keystore.dir" value="${working.dir}/keys/jboss"/>
 		<jboss-read-ssl
-			jboss.home="${read.jboss.home}"
+			jboss.home="${jboss.home}"
 			copied.keystore.dir="${jboss.ssl.keystore.dir}" />
 
-		<jboss-read-external-hostname jboss.home="${read.jboss.home}" />
+		<jboss-read-external-hostname jboss.home="${jboss.home}" />
 		<!-- for tier installs, should be done first, since it is set first it will be the one used if it exists -->
 		<jboss-read-java_opts
-			jboss.bin.dir="${read.jboss.home}/server/${jboss.server.name}/bin"
+			jboss.bin.dir="${jboss.home}/server/${jboss.server.name}/bin"
 			/>              
 		<jboss-read-java_opts
-			jboss.home="${read.jboss.home}"
+			jboss.home="${jboss.home}"
 			/>
 		<!-- will have to add code to install:post:jboss to copy this back if exists -->
 		<property name="copied.jboss.log4j.dir" value="${working.dir}/copied-log4j"/>
@@ -1168,15 +1201,106 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	            />
 		
 		<read-property-from-properties-service
-			jboss.home="${read.jboss.home}"
+			jboss.home="${jboss.home}"
 			property.name="property1"
 			/>
 		<read-property-from-properties-service
-			jboss.home="${read.jboss.home}"
+			jboss.home="${jboss.home}"
 			property.name="property2"
 			/>
 	</target>	
 
+	<target name="upgrade:jboss:camod-grid:readers:bda" if="jboss.exists">
+		<!--echoproperties prefix="jboss"/-->
+		<!-- Make sure the ${properties.file} has at least the following props -->
+		<properties-exist
+			properties.list="camod.grid.application.base.path,camod.grid.jboss.home,camod.grid.jboss.server.name"
+			/>
+		<!-- Set these -->
+		<osfamily property="os.family"/>
+		<if>
+			<or>
+				<equals arg1="${os.family}" arg2="unix"/>
+				<equals arg1="${os.family}" arg2="mac"/>
+			</or>
+			<then>
+				<property name="camod.grid.jboss.server.hostname" value="${env.HOSTNAME}"/>
+			</then>
+		</if>
+		<if>
+			<equals arg1="${os.family}" arg2="windows"/>
+			<then>
+				<property name="camod.grid.jboss.server.hostname" value="${env.COMPUTERNAME}"/>
+			</then>
+		</if>
+		<!-- Begin JBoss Readers -->
+		<!-- Reader requires that you have only one data source defined in each *-ds.xml file -->
+		<jboss-read-dbconfig
+			jboss.home="${camod.grid.jboss.home}"
+			jboss.ds-xml.file="oracle-ds.xml"
+			/>
+		<!--(SKIP) checks if LDAP is installed
+		jboss-read-ldapconfig jboss.home="${camod.grid.jboss.home}" /-->
+		<jboss-read-bindings-file-location jboss.home="${camod.grid.jboss.home}" jboss.server.name="${camod.grid.jboss.server.name}"
+            jboss.bindings.file.location.property.name="camod.grid.jboss.server.bindingfile.location"
+            jboss.server.ports.name.property.name="camod.grid.jboss.server.ports.name"/>
+            	
+                <jboss-read-ports jboss.server.ports.name="${camod.grid.jboss.server.ports.name}"
+                                  jboss.server.bindingfile.location="${camod.grid.jboss.server.bindingfile.location}"
+                                  
+                                  jboss.server.jndi.port.property.name="camod.grid.jboss.server.jndi.port"
+                                  jboss.server.port.property.name="camod.grid.jboss.server.port"
+                                  jboss.ejbinvoker.port.property.name="camod.grid.jboss.ejbinvoker.port"
+                                  jboss.server.rmi.port.property.name="camod.grid.jboss.server.rmi.port"
+                                  jboss.web.service.port.property.name="camod.grid.jboss.web.service.port"
+                                  jboss.service.rmiobject.port.property.name="camod.grid.jboss.service.rmiobject.port"
+                                  jboss.server.bind.port.property.name="camod.grid.jboss.server.bind.port"
+                                  jboss.hajndi.port.property.name="camod.grid.jboss.hajndi.port"
+                                  jboss.hajrmi.port.property.name="camod.grid.jboss.hajrmi.port"
+                                  jboss.pooledha.port.property.name="camod.grid.jboss.pooledha.port"
+                                  jboss.cobraorb.port.property.name="camod.grid.jboss.cobraorb.port"
+                                  jboss.jmx-rmi.port.property.name="camod.grid.jboss.jmx-rmi.port"
+                                  jboss.snmp-trapd.port.property.name="camod.grid.jboss.snmp-trapd.port"
+                                  jboss.snmp.port.property.name="camod.grid.jboss.snmp.port"
+                                  jboss.jms.port.property.name="camod.grid.jboss.jms.port"
+                                  jboss.remoting.port.property.name="camod.grid.jboss.remoting.port"
+                                  jboss.messaging.port.property.name="camod.grid.jboss.messaging.port"/>
+
+		<!-- Setting this variable will cause install to copy it into place if using CM/DAC, not modified in NCM -->
+		<var name="jboss.ssl.keystore.dir" value="${working.dir}/keys/jboss"/>
+		<jboss-read-ssl
+			jboss.home="${camod.grid.jboss.home}"
+			copied.keystore.dir="${jboss.ssl.keystore.dir}" />
+
+		<jboss-read-external-hostname jboss.server-xml.file="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/jbossweb-tomcat55.sar/server.xml"
+                                  jboss.external.http.host.property.name="camod.grid.jboss.external.http.host"
+                                  jboss.external.http.port.property.name="camod.grid.jboss.external.http.port"/>
+
+		<!-- for tier installs, should be done first, since it is set first it will be the one used if it exists -->
+		<jboss-read-java_opts
+			jboss.bin.dir="${camod.grid.jboss.home}/server/${camod-grid.jboss.server.name}/bin"
+			/>              
+		<jboss-read-java_opts
+			jboss.home="${camod.grid.jboss.home}"
+			/>
+		<!-- will have to add code to install:post:jboss to copy this back if exists -->
+		<property name="copied.jboss.log4j.dir" value="${working.dir}/copied-log4j"/>
+		<jboss-copy-log4j
+			copied.jboss.log4j.dir="${copied.jboss.log4j.dir}"
+			/>
+		
+		<echo message="All properties after readers"/>
+	    <properties-print
+	            properties.list="${read.properties.list},camod.grid.jboss.server.hostname"
+	            />
+	    <properties-exist
+	            properties.list="${read.properties.list},camod.grid.jboss.server.hostname"
+	            />
+	    <properties-write
+	            properties.list="${read.properties.list},camod.grid.jboss.server.hostname"
+	            />
+
+	</target>	
 
 	<target name="upgrade:post:jboss" unless="install.running">
 		<copy file="${copied.jboss.log4j.dir}/log4j.xml" todir="${jboss.home}/server/${jboss.server.name}/conf"/>
@@ -1267,7 +1391,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			properties.list="application.base.path,jboss.home,jboss.server.name"
 			/>
 		<jboss-read-dbconfig
-			jboss.home="${read.jboss.home}"
+			jboss.home="${jboss.home}"
 			jboss.ds-xml.file="oracle-ds.xml"
 			/>
 	</target>
