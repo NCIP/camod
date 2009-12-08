@@ -528,7 +528,8 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 
 		<copy file="${camod-remote-api.dir.dist}/${camod-remote-api.war.file}" todir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy" overwrite="true" />
 
-		<copy file="${database.driver.file}" todir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/lib" overwrite="true" />
+		<!-- copy datasource file (same one created in camod-webapp target)-->
+		<copy file="${jboss-conf.dir.dest}/${camod-webapp.ds.file}" todir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy" overwrite="true" />		
 		
 		<!-- camod.grid.jboss.home=C\:/devtools/grid/jboss-4.0.5.GA + server + camod.grid.jboss.server.name=default + lib-->
 	    <unzip dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/lib" 
