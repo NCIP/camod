@@ -7,7 +7,8 @@
 
 <project name="Configure caGrid service and API" default="copy-grid-service" basedir=".">
 	<property file="build.properties"/>
-	<property name="temp.dir" value="temp" />	
+	<property name="temp.dir" value="temp" />
+	<property name="war.dir" value="war" />
 	<property name="grid.service.dir" value="grid_service" />
 	<property name="grid.service.war" value="grid_service/wsrf-camod.war" />
 	<property name="globus.lib.dir" value="${grid.service.dir}/globus_lib_files" />
@@ -88,9 +89,9 @@
 	
 	<!-- Take any and unjar the contents into temp.dir -->
 	<target name="unjar-any-file">
-		<delete dir="${temp.dir}" failonerror="false"/>
-		<mkdir dir="${temp.dir}"/>
-		<unjar src="${any.filename}" dest="${temp.dir}"/>
+		<delete dir="${war.dir}" failonerror="false"/>
+		<mkdir dir="${war.dir}"/>
+		<unjar src="${any.filename}" dest="${war.dir}"/>
 	</target>
 	
 	<!-- Take any and unjar the contents into temp.dir -->
