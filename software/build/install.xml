@@ -628,21 +628,14 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	         </xmltask> 
 		
 		<!-- (YES, done in BDA and uses jboss.external.http.port ) 
-                     Modify /WEB-INF/etc/globus_resolution_service/jndi-config.xml 
+                     Modify /WEB-INF/etc/globus_resolution_service/jndi-config.xml -->
 	    <xmltask source="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/etc/globus_resolution_service/jndi-config.xml"
 	             dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/etc/globus_resolution_service/jndi-config.xml"> 
 			 <replace path="//:parameter[:name='address']/:value/text()" 
 			          withtext="http://localhost:${camod.grid.jboss.server.port}/ServiceToResolve" />   		    	
-	     </xmltask>	-->
+	     </xmltask>	
 		
-		<!-- Modify /WEB-INF/web.xml 
-		(YES, done in BDA - uses jboss.external.http.port)
-	    <xmltask source="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/web.xml"
-	             dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/web.xml"> 
-		 	
-			 <replace path="//:param-name[:param-value=defaultPort']/:value/text()" 
-			          withtext="${camod.grid.jboss.server.port}" /> 	    	
-	     </xmltask>	-->		
+
 		
 	</target>	
 	
