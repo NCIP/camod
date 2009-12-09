@@ -60,7 +60,7 @@ are "on" and "off".  The default is "autodetect".
     <diskStore path="java.io.tmpdir"/>
     -->
 
- 	<diskStore path="/local/content/camod/cache"/> 
+ 	<diskStore path="/local/content/camod/ehcache"/> 
     <!--
     CacheManagerEventListener
     =========================
