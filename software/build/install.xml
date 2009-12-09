@@ -739,9 +739,8 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 				<isset property="exclude.start.servers"/>
 			</not>
 			<then>
-				<jboss-start-jboss jboss.home="${camod.grid.jboss.home}" 
-                    jboss.server.name="${camod.grid.jboss.server.name}"
-					jboss.server.jndi.port="${camod.grid.jboss.server.jndi.port}"
+				<jboss-start-jboss 
+					jboss.home="${camod.grid.jboss.home}"
 					jboss.server.hostname="${camod.grid.jboss.server.hostname}"
 					jboss.web.user="${camod.grid.jboss.web.user}"
 					jboss.web.password="${camod.grid.jboss.web.password}"/>
@@ -763,7 +762,9 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 				<jboss-stop-jboss jboss.home="${camod.grid.jboss.home}" 
                     jboss.server.hostname="${camod.grid.jboss.server.hostname}" 
                     jboss.server.jndi.port="${camod.grid.jboss.server.jndi.port}" 
-                    jboss.server.name="${camod.grid.jboss.server.name}"/>
+                    jboss.server.name="${camod.grid.jboss.server.name}"
+					jboss.web.user="${camod.grid.grid.jboss.web.user}" 
+                    jboss.web.password="${camod.grid.grid.jboss.web.password}" />	
 	</target>	
 	
 	<target name="install:common:common:validation:pre-install" description="Runs pre-install validation checks bda-utils" depends="common:common:init">
