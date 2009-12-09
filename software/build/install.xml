@@ -629,6 +629,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		
 		<!-- (YES, done in BDA and uses jboss.external.http.port ) 
                      Modify /WEB-INF/etc/globus_resolution_service/jndi-config.xml -->
+		<echo message="Fix /WEB-INF/etc/globus_resolution_service/jndi-config.xml value after BDA"/>
 	    <xmltask source="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/etc/globus_resolution_service/jndi-config.xml"
 	             dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/etc/globus_resolution_service/jndi-config.xml"> 
 			 <replace path="//:parameter[:name='address']/:value/text()" 
@@ -739,7 +740,11 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			</not>
 			<then>
 				<jboss-start-jboss jboss.home="${camod.grid.jboss.home}" 
-                    jboss.server.name="${camod.grid.jboss.server.name}"/>
+                    jboss.server.name="${camod.grid.jboss.server.name}"
+					jboss.server.jndi.port="${camod.grid.jboss.server.jndi.port}"
+					jboss.server.hostname="${camod.grid.jboss.server.hostname}"
+					jboss.web.user="${camod.grid.jboss.web.user}"
+					jboss.web.password="${camod.grid.jboss.web.password}"/>
 				<sleep seconds="15"/>
 			</then>
 		</if>
