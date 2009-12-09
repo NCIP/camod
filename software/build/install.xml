@@ -739,11 +739,8 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 				<isset property="exclude.start.servers"/>
 			</not>
 			<then>
-				<jboss-start-jboss 
-					jboss.home="${camod.grid.jboss.home}"
-					jboss.server.hostname="${camod.grid.jboss.server.hostname}"
-					jboss.web.user="${camod.grid.jboss.web.user}"
-					jboss.web.password="${camod.grid.jboss.web.password}"/>
+		        <jboss-start-jboss jboss.home="${camod.grid.jboss.home}" 
+		                           jboss.server.name="${camod.grid.jboss.server.name}"/>
 				<sleep seconds="15"/>
 			</then>
 		</if>
