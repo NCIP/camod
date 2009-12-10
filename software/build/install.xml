@@ -615,7 +615,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		
 		   
 	        <!-- Not done in jboss-configure-grid (only cqlQueryProcessorConfig_applicationName already set before BDA -->
-			<echo message="Modify /WEB-INF/etc/globus_resolution_service/jndi-config.xml"/>
+			<echo message="Modify /WEB-INF/etc/cagrid_CamodGridService/jndi-config.xml"/>
 	        <xmltask source="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/etc/cagrid_CamodGridService/jndi-config.xml"
 	                 dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/etc/cagrid_CamodGridService/jndi-config.xml">     
          
