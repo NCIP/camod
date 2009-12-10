@@ -545,7 +545,8 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	    <unzip dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/lib" 
 	           src="${camod-grid-service.dir.dist}/lib/${camod-grid-service.jboss-globus-lib.zip}" overwrite="true"/>
 		
-		<echo message="Before unzip wsrf-camod.war"/>
+		<echo message="Before unzip of wsrf-camod.war directory"/>
+		<delete file="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war" failonerror="false"/>
 		<!-- camod.grid.jboss.home=C\:/devtools/grid/jboss-4.0.5.GA + server + camod.grid.jboss.server.name=default + deploy-->
 	    <unzip dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy" 
 	           src="${camod-grid-service.dir.dist}/${camod-grid-service.war.file.zip}" overwrite="true"/>
