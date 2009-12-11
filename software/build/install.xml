@@ -637,7 +637,11 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			          withtext="http://localhost:${camod.grid.jboss.server.port}/ServiceToResolve" />   		    	
 	     </xmltask>	
 		
-
+		<!-- Fix all /WEB-INF/etc/globus_wsrf_core/server-config.wsdd host property -->
+		<echo message="Fix /WEB-INF/etc/globus_wsrf_core/server-config.wsdd host value after BDA"/>
+		<replace dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/etc/globus_wsrf_core/" token="localhost" value="${jboss.server.hostname}">
+			<include name="server-config.wsdd" />
+		</replace>
 		
 	</target>	
 	
