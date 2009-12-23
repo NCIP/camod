@@ -519,7 +519,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<!--  Many NCI applications require clm for csm, so you can point this to where you have the version you want to use
 		<copy file="${bda-utils.dir}/clm-3.2.jar" todir="${jboss.home}/server/${jboss.server.name}/lib" overwrite="true" />
 		-->	
-		
+		<copy file="${database.driver.file}" todir="${jboss.home}/server/${jboss.server.name}/lib" overwrite="true" />
 		<!-- Make directory for ehcache to use for creating temp files for caMOD -->
 		<mkdir dir="${ehcache.dir}" />	
 		
@@ -550,6 +550,8 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<!-- camod.grid.jboss.home=C\:/devtools/grid/jboss-4.0.5.GA + server + camod.grid.jboss.server.name=default + deploy-->
 	    <unzip dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy" 
 	           src="${camod-grid-service.dir.dist}/${camod-grid-service.war.file.zip}" overwrite="true"/>
+		
+		<copy file="${database.driver.file}" todir="${jboss.home}/server/${jboss.server.name}/lib" overwrite="true" />
 		
 		<!-- Make directory for ehcache to use for grid service files -->
 		<mkdir dir="${ehcache.dir}" />
