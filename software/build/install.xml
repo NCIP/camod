@@ -551,7 +551,14 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	    <unzip dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy" 
 	           src="${camod-grid-service.dir.dist}/${camod-grid-service.war.file.zip}" overwrite="true"/>
 		
+		<!-- will be two copies of ojdbc*.jar in lib folder - remove the older version (ojdbc14.jar vs ojdbc14-10.2.0.4.0.jar)  -->       
+		<delete>      
+		  <fileset dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/lib"
+		           includes="ojdbc14.jar"/>
+		</delete>
+		<echo message="Deleted old copy of ojdbc14.jar"/>		
 		<copy file="${database.driver.file}" todir="${jboss.home}/server/${jboss.server.name}/lib" overwrite="true" />
+		<echo message="Added new version of ojdbc14.jar"/>
 		
 		<!-- Make directory for ehcache to use for grid service files -->
 		<mkdir dir="${ehcache.dir}" />
@@ -580,12 +587,14 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	      <fileset dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/lib"
 	               includes="log4j.jar"/>
 	    </delete>
+		<echo message="Deleted old copy of log4j.jar"/>
 		
 		<!-- will be two copies of ojdbc*.jar in lib folder - remove the older version (ojdbc14.jar vs ojdbc14-10.2.0.4.0.jar)  -->       
 		<delete>      
 		  <fileset dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/lib"
 		           includes="ojdbc14.jar"/>
 		</delete>
+		<echo message="Deleted old copy of ojdbc14.jar"/>
 		
 	</target>
 	
