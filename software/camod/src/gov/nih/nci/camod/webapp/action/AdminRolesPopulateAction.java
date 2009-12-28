@@ -37,6 +37,7 @@ import gov.nih.nci.camod.domain.Person;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.service.CommentsManager;
 import gov.nih.nci.camod.service.PersonManager;
+import gov.nih.nci.camod.util.SafeHTMLUtil;
 
 import java.util.List;
 
@@ -64,6 +65,28 @@ public class AdminRolesPopulateAction extends BaseAction {
 			HttpServletResponse inResponse) throws Exception {
 
 		log.trace("Entering AdminRolesPopulateAction.execute");
+    	// get and clean header to prevent SQL injection
+       	String sID = null;
+        if (inRequest.getHeader("X-Forwarded-For") != null){
+        	sID = inRequest.getHeader("X-Forwarded-For");
+            log.info("sID: " + sID);
+            sID = SafeHTMLUtil.clean(sID);
+        }
+        
+        // get and clean Referer header to prevent SQL injection
+        if (inRequest.getHeader("Referer") != null){
+        	sID = inRequest.getHeader("Referer");
+            log.info("sID: " + sID);
+            sID = SafeHTMLUtil.clean(sID);
+        }            
+        
+        // Get and clean method to prevent Cross-Site Scripting 
+        String methodName = inRequest.getParameter("unprotected_method");
+        log.info("methodName: " + methodName);
+        if (!methodName.equals("execute")){
+	        methodName = SafeHTMLUtil.clean(methodName);
+	        log.info("methodName: " + methodName);
+        } 
 
 		AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
 		CommentsManager theCommentsManager = (CommentsManager) getBean("commentsManager");
