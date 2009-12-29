@@ -94,7 +94,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<property name="camod-webapp.static-analysis.build.file" value="static-analysis-build.xml" />
 	
 	<!-- The target name that should be called from the sub-project build file -->
-	<property name="camod-webapp.build.target" value="build_war" />
+	<property name="camod-webapp.build.target" value="build_resources" />
 	<property name="camod-remote-api.build.target" value="copy-remote-api-war" />
 	<property name="camod-grid-service.build.target" value="copy-grid-service" />
 	
