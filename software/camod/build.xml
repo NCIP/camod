@@ -1,4 +1,4 @@
-<project name="caMOD" default="clean-build-compile" basedir=".">
+<project name="caMOD" default="build_resources" basedir=".">
     
     <property file="localbuild.properties" />
         
@@ -14,8 +14,56 @@
 
 	<echo>Building for stage: ${tier}</echo>
 	
-    <!-- DEFAULT BUILD, does everything -->    
-    <target name="clean-build-compile" depends="build_war" /> 
+    <!--
+        TARGET: build_resources
+        This will build the war file and copy the server.xml cleaned for session fixation
+    -->	
+    <target name="build_resources" depends="build_war">
+    	<copy file="${clean.server.xml.file}" todir="${build.dir}"/>    
+    </target>	
+    <!--
+        TARGET: build_war
+        This will build the war file
+    -->
+    <target name="build_war" depends="copy_resource_directory">
+        <mkdir dir="${build.dir}"/>
+        <delete file="${build.dir}/${app.war.name}.war" />
+    	<!--<delete file="${build.dir}/build/${app.war.name}.war" />-->    	
+        <!--<war destfile="${build.dir}/build/${app.war.name}.war" -->
+            <war destfile="${build.dir}/${app.war.name}.war"         	
+             webxml="${webapp.dir}/WEB-INF/web.xml">
+            <fileset file="${webapp.dir}/*.*" />
+            <zipfileset dir="${webapp.dir}/common" prefix="common" />
+            <zipfileset dir="${webapp.dir}/images" prefix="images" />
+            <zipfileset dir="${webapp.dir}/scripts" prefix="scripts" />
+            <zipfileset dir="${webapp.dir}/styles" prefix="styles" />
+            <zipfileset dir="${webapp.dir}/config" prefix="config" />
+            <zipfileset dir="${webapp.dir}/WebHelp" prefix="WebHelp" />
+            <zipfileset dir="${webapp.dir}/jsp" prefix="jsp" />
+        	<zipfileset dir="${webapp.dir}/js" prefix="js" />
+            <webinf dir="${webapp.dir}/WEB-INF"/>
+            <classes dir="${build.classes.dir}" />
+        </war>
+    </target>
+
+    <!--
+        TARGET: copy_resource_directory
+        Copies all the bundle resources to the WEB-INF/classes/ folder
+    -->
+    <target name="copy_resource_directory" depends="compile">
+        <copy todir="${build.classes.dir}" filtering="true" >
+            <fileset dir="${source.dir}">                                
+                <include name="**/*.xml" />
+                <include name="**/*.properties" />
+                <include name="*.dtd" />
+                <include name="*.xsd" />
+            </fileset>
+        	<!-- fileset dir="${source.properties.dir}">
+                <include name="**/*.properties" />        		
+            </fileset -->        		
+        </copy>
+    </target>	
+	
     
     <!--
     TARGET: COMPILE
@@ -28,7 +76,7 @@
 			<include name="**/*.jar"/>
 		</fileset>
 	</path>
-    <target name="compile">
+    <target name="compile" >
         <delete dir="${build.classes.dir}" />
         <mkdir dir="${build.classes.dir}" />
         <javac srcdir="${source.dir}" 
@@ -51,8 +99,31 @@
                 </fileset>	
          </classpath>
         </javac>
+    </target>	
+	
+    <!--
+        TARGET: build_war
+        This will build the war file
+    -->
+    <target name="build_local_war" depends="copy_resource_directory">
+        <mkdir dir="${build.local.dir}"/>
+        <delete file="${build.local.dir}/${app.war.name}.war" />
+        <war destfile="${build.local.dir}/${app.war.name}.war" 
+             webxml="${webapp.dir}/WEB-INF/web.xml">
+            <fileset file="${webapp.dir}/*.*" />
+            <zipfileset dir="${webapp.dir}/common" prefix="common" />
+            <zipfileset dir="${webapp.dir}/images" prefix="images" />
+            <zipfileset dir="${webapp.dir}/scripts" prefix="scripts" />
+            <zipfileset dir="${webapp.dir}/styles" prefix="styles" />
+            <zipfileset dir="${webapp.dir}/config" prefix="config" />
+            <zipfileset dir="${webapp.dir}/WebHelp" prefix="WebHelp" />
+            <zipfileset dir="${webapp.dir}/jsp" prefix="jsp" />
+        	<zipfileset dir="${webapp.dir}/js" prefix="js" />
+            <webinf dir="${webapp.dir}/WEB-INF"/>
+            <classes dir="${build.classes.dir}" />
+        </war>
     </target>
-
+	
     <target name="compile-unit-tests" depends="compile">
         <mkdir dir="${build.dir}/build"/>
         <javac srcdir="test" destdir="${build.dir}/build" source="1.5" 
@@ -87,23 +158,7 @@
 	<!-- add above classpath to print out to console
 		formatter type="plain" usefile="false"/ -->
 
-    <!--
-        TARGET: copy_resource_directory
-        Copies all the bundle resources to the WEB-INF/classes/ folder
-    -->
-    <target name="copy_resource_directory" depends="compile">
-        <copy todir="${build.classes.dir}" filtering="true" >
-            <fileset dir="${source.dir}">                                
-                <include name="**/*.xml" />
-                <include name="**/*.properties" />
-                <include name="*.dtd" />
-                <include name="*.xsd" />
-            </fileset>
-        	<!-- fileset dir="${source.properties.dir}">
-                <include name="**/*.properties" />        		
-            </fileset -->        		
-        </copy>
-    </target>
+
 
     <!-- =================================================================== -->
     <!-- The "db-prepare" target generates the database schema and creates   --> 
@@ -137,54 +192,7 @@
             	<include name="struts-config.xml" />
             </fileset>
         </move>
-    </target>
-    <!--
-        TARGET: build_war
-        This will build the war file
-    -->
-    <target name="build_war" depends="copy_resource_directory">
-        <mkdir dir="${build.dir}"/>
-        <delete file="${build.dir}/${app.war.name}.war" />
-    	<!--<delete file="${build.dir}/build/${app.war.name}.war" />-->    	
-        <!--<war destfile="${build.dir}/build/${app.war.name}.war" -->
-            <war destfile="${build.dir}/${app.war.name}.war"         	
-             webxml="${webapp.dir}/WEB-INF/web.xml">
-            <fileset file="${webapp.dir}/*.*" />
-            <zipfileset dir="${webapp.dir}/common" prefix="common" />
-            <zipfileset dir="${webapp.dir}/images" prefix="images" />
-            <zipfileset dir="${webapp.dir}/scripts" prefix="scripts" />
-            <zipfileset dir="${webapp.dir}/styles" prefix="styles" />
-            <zipfileset dir="${webapp.dir}/config" prefix="config" />
-            <zipfileset dir="${webapp.dir}/WebHelp" prefix="WebHelp" />
-            <zipfileset dir="${webapp.dir}/jsp" prefix="jsp" />
-        	<zipfileset dir="${webapp.dir}/js" prefix="js" />
-            <webinf dir="${webapp.dir}/WEB-INF"/>
-            <classes dir="${build.classes.dir}" />
-        </war>
-    </target>
-	
-    <!--
-        TARGET: build_war
-        This will build the war file
-    -->
-    <target name="build_local_war" depends="copy_resource_directory">
-        <mkdir dir="${build.local.dir}"/>
-        <delete file="${build.local.dir}/${app.war.name}.war" />
-        <war destfile="${build.local.dir}/${app.war.name}.war" 
-             webxml="${webapp.dir}/WEB-INF/web.xml">
-            <fileset file="${webapp.dir}/*.*" />
-            <zipfileset dir="${webapp.dir}/common" prefix="common" />
-            <zipfileset dir="${webapp.dir}/images" prefix="images" />
-            <zipfileset dir="${webapp.dir}/scripts" prefix="scripts" />
-            <zipfileset dir="${webapp.dir}/styles" prefix="styles" />
-            <zipfileset dir="${webapp.dir}/config" prefix="config" />
-            <zipfileset dir="${webapp.dir}/WebHelp" prefix="WebHelp" />
-            <zipfileset dir="${webapp.dir}/jsp" prefix="jsp" />
-        	<zipfileset dir="${webapp.dir}/js" prefix="js" />
-            <webinf dir="${webapp.dir}/WEB-INF"/>
-            <classes dir="${build.classes.dir}" />
-        </war>
-    </target>
+    </target>	
     
     <!-- Setup Hibernate Mappings -->
 

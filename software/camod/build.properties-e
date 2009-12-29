@@ -4,6 +4,8 @@
 #location of the java files in the project
 source.dir=src
 
+clean.server.xml.file=./server.xml
+
 #location of project webapp resources, we don't have it, may need it later
 source.resource.dir=WebRoot/WEB-INF/resources
 source.nondeploy.lib.dir=not_deployed_jars
