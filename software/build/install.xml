@@ -406,7 +406,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 				<echo message="Using JBoss NCICB Standard port configurations"/>
 				<property name="camod.grid.jboss.server.binding.template.location" value="${basedir}/${jboss-bindings.file}"/>
 				<jboss-read-ports
-					jboss.server.bindingfile.location="${camod.grid.jboss.server.binding.template.location}"
+					jboss.server.bindingfile.location="${jboss.server.binding.template.location}"
 					/>
 				<echo message="http -${camod.grid.jboss.server.port} "/>
 				<echo message="http -${camod.grid.jboss.server.jndi.port} "/>
@@ -415,7 +415,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 					/>
 				<!-- Make sure there are not unexpanded tokens and that the jboss.server.ports.name is a configuration in the bindings file. -->
 				<jboss-bindings-validate
-					jboss.server.bindingfile.location="${camod.grid.jboss.server.binding.template.location}"
+					jboss.server.bindingfile.location="${jboss.server.binding.template.location}"
 					/>
 
 			</then>
@@ -1190,6 +1190,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<jboss-read-ports
 			/>
 		<echo message="upgrade:jboss:readers:bda 3."/>
+		<property name="jboss.server.bindingfile.location" value="${jboss.server.binding.template.location}"/>
 		<!-- Setting this variable will cause install to copy it into place if using CM/DAC, not modified in NCM -->
 		<var name="jboss.ssl.keystore.dir" value="${working.dir}/keys/jboss"/>
 		<jboss-read-ssl
