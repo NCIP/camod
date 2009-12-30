@@ -75,7 +75,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<property name="camod-webapp.ds.file" value="oracle-ds.xml" />
 	<property name="camod-webapp.name" value="camod" />
 	<property name="camod-webapp.war.file" value="${camod-webapp.name}.war" />
-	<property name="camod-webapp.server.xml.file" value="server.xml" />
+	<property name="camod-webapp.file" value="log4j-1.2.13.jar" />
 	
 	<!-- for remote api -->
 	<property name="camod-remote-api.dir.dist" location="${basedir}/${camod-api.dist.relative.dir}" />
@@ -524,7 +524,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<!-- Make directory for ehcache to use for creating temp files for caMOD -->
 		<mkdir dir="${ehcache.dir}" />
 
-		<!--copy file="${camod-webapp.dir.dist}/${camod-webapp.server.xml.file}" todir="${jboss.home}/server/${jboss.server.name}/deploy/jbossweb-tomcat55.sar/" overwrite="true" /-->		
+		<copy file="${camod-webapp.dir.dist}/${camod-webapp.file}" todir="${jboss.home}/server/${jboss.server.name}/deploy/lib" overwrite="true" />		
 	
 		<echo message="Commented out server.xml modified for session fixation"/>
 		<!--replaceregexp file="@{jboss.server-xml.file}" byline="true" match="emptySessionPath=&quot;true&quot;" replace="emptySessionPath=&quot;false&quot;" /-->
