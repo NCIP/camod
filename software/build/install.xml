@@ -588,12 +588,13 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			property.block="${property.block}"
 			/>
 		
-	    <!-- will be two copies of log4j.jar in lib folder - remove the older version (log4j.jar)  -->       
+	    <!-- not two copies of log4j.jar in lib folder on dev (check other tiers) - remove the older version (log4j.jar)        
 	    <delete>      
 	      <fileset dir="${jboss.home}/server/${jboss.server.name}/lib"
 	               includes="log4j.jar"/>
 	    </delete>
 		<echo message="Deleted old copy of log4j.jar"/>
+		--> 
 		
 		<!-- will be two copies of ojdbc*.jar in lib folder - remove the older version (ojdbc14.jar vs ojdbc14-10.2.0.4.0.jar)  -->       
 		<delete>      
