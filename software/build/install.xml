@@ -1190,8 +1190,10 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			jboss.home="${jboss.home}"
 			/>
 		<echo message="upgrade:jboss:readers:bda 3."/>
-		<jboss-read-bindings-file-location
-			/>
+	    <jboss-read-bindings-file-location jboss.home="${jboss.home}"
+	                                       jboss.server.name="${jboss.server.name}"
+	                                       jboss.bindings.file.location.property.name="jboss.server.bindingfile.location"
+	                                       jboss.server.ports.name.property.name="jboss.server.ports.name"/>
 		<jboss-read-ports
 			/>
 		<echo message="upgrade:jboss:readers:bda 4."/>
