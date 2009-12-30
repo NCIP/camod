@@ -1048,15 +1048,15 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 
 	<target name="upgrade:jboss:init" unless="install.running"
 		depends="upgrade:jboss:init:prep,upgrade:jboss:readers:bda,upgrade:jboss:readers:custom">
-		<!--properties-print
+		<properties-print
 			properties.list="${read.properties.list},jboss.server.hostname"
-			/-->
+			/>
 		<properties-exist
 			properties.list="${read.properties.list},jboss.server.hostname"
 			/>
-		<!--properties-write
+		<properties-write
 			properties.list="${read.properties.list},jboss.server.hostname"
-			/-->
+			/>
 	</target>
 	
 	<target name="upgrade:jboss:camod-grid:init" unless="exclude.camod-grid"
