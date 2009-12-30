@@ -1254,11 +1254,11 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			jboss.ds-xml.file="oracle-ds.xml"
 			/>
 		<!--(SKIP) checks if LDAP is installed
-		jboss-read-ldapconfig jboss.home="${camod.grid.jboss.home}" /-->
+		jboss-read-ldapconfig jboss.home="${camod.grid.jboss.home}" /
 		<jboss-read-bindings-file-location jboss.home="${camod.grid.jboss.home}" jboss.server.name="${camod.grid.jboss.server.name}"
             jboss.bindings.file.location.property.name="camod.grid.jboss.server.bindingfile.location"
             jboss.server.ports.name.property.name="camod.grid.jboss.server.ports.name"/>
-            	
+          -->  	
                 <jboss-read-ports jboss.server.ports.name="${camod.grid.jboss.server.ports.name}"
                                   jboss.server.bindingfile.location="${camod.grid.jboss.server.bindingfile.location}"
                                   
