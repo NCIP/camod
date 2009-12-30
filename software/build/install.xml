@@ -1176,6 +1176,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 				<property name="jboss.server.hostname" value="${env.COMPUTERNAME}"/>
 			</then>
 		</if>
+		<var name="read.properties.list" value=""/>
 		<!-- Begin JBoss Readers -->
 		<!-- Reader requires that you have only one data source defined in each *-ds.xml file -->
 		<jboss-read-dbconfig
@@ -1270,6 +1271,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 				<property name="camod.grid.jboss.server.hostname" value="${env.COMPUTERNAME}"/>
 			</then>
 		</if>
+		<var name="read.properties.list" value=""/>
 		<!-- Begin JBoss Readers -->
 		<!-- Reader requires that you have only one data source defined in each *-ds.xml file -->
 		<jboss-read-dbconfig
