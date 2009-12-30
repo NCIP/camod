@@ -1049,13 +1049,13 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<target name="upgrade:jboss:init" unless="install.running"
 		depends="upgrade:jboss:init:prep,upgrade:jboss:readers:bda,upgrade:jboss:readers:custom">
 		<properties-print
-			properties.list="${read.properties.list},jboss.server.hostname"
+			properties.list="${read.properties.list}"
 			/>
 		<properties-exist
-			properties.list="${read.properties.list},jboss.server.hostname"
+			properties.list="${read.properties.list}"
 			/>
 		<properties-write
-			properties.list="${read.properties.list},jboss.server.hostname"
+			properties.list="${read.properties.list}"
 			/>
 	</target>
 	
@@ -1155,7 +1155,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	</target>
 
 	<target name="upgrade:jboss:readers:bda" if="jboss.exists">
-
+		<echoproperties prefix="jboss"/>
 		<!-- Make sure the ${properties.file} has at least the following props -->
 		<properties-exist
 			properties.list="application.base.path,jboss.home,jboss.server.name"
@@ -1186,9 +1186,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			jboss.ds-xml.file="oracle-ds.xml"
 			/>
 		<echo message="upgrade:jboss:readers:bda 2."/>
-		<jboss-read-ldapconfig
-			jboss.home="${jboss.home}"
-			/>
+		<jboss-read-ldapconfig jboss.home="${jboss.home}" />
 		<echo message="upgrade:jboss:readers:bda 3."/>
 	    <jboss-read-bindings-file-location jboss.home="${jboss.home}"
 	                                       jboss.server.name="${jboss.server.name}"
@@ -1204,18 +1202,6 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			copied.keystore.dir="${jboss.ssl.keystore.dir}"
 			/>
 		<echo message="upgrade:jboss:readers:bda 5."/>
-		<!-- No longer needed now reading all the ports
-		<jboss-copy-bindings
-			copied.jboss.server.bindingfile.dir="${working.dir}/copied-bindings"
-			copied.jboss.bindings.file.property.name="copied.jboss.bindings.file"
-			/>
-		# Setting this will cause install to copy this file into place if using CM/DAC, not modified in NCM 
-		<var name="jboss.server.binding.template.location" value="${working.dir}/copied-bindings/${copied.jboss.bindings.file}"/>
-		-->
-		<jboss-read-external-hostname
-			jboss.home="${jboss.home}"
-			/>
-		<echo message="upgrade:jboss:readers:bda 6."/>
 		<!-- for tier installs, should be done first, since it is set first it will be the one used if it exists -->
 		<jboss-read-java_opts
 			jboss.bin.dir="${jboss.home}/server/${jboss.server.name}/bin"
@@ -1223,31 +1209,14 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<jboss-read-java_opts
 			jboss.home="${jboss.home}"
 			/>
-		<echo message="upgrade:jboss:readers:bda 7."/>
+		<echo message="upgrade:jboss:readers:bda 6."/>
 		<!-- will have to add code to install:post:jboss to copy this back if exists -->
 		<property name="copied.jboss.log4j.dir" value="${working.dir}/copied-log4j"/>
 		<jboss-copy-log4j
 			jboss.home="${jboss.home}"
 			copied.jboss.log4j.dir="${copied.jboss.log4j.dir}"
 			/>
-		<echo message="upgrade:jboss:readers:bda 8."/>
-		<!--<grid-read-index-url
-			grid.wsrf.dir="${jboss.home}/server/${jboss.server.name}/deploy/wsrf"
-			/> -->             
-		<!--<jboss-read-grid-secure
-			jboss.home="${jboss.home}"
-			copied.keystore.dir="${jboss.grid.secure.dir}"
-			/>-->
-		<!-- will have to add code to install:post:jboss to copy this back if exists -->
-		<!-- no longer needed 
-		<grid-copy-service-metadata
-			copied.service-metadata.dir="${copied.service-metadata.dir}"
-			/>
-		-->
-		<!--<grid-read-poc
-			grid.wsrf.dir="${jboss.home}/server/${jboss.server.name}/deploy/wsrf"
-			grid.service.name="Sample"
-			/> -->                     
+		<echo message="upgrade:jboss:readers:bda 7."/>
 		<read-property-from-properties-service
 			jboss.home="${jboss.home}"
 			property.name="property1"
