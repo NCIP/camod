@@ -1191,7 +1191,6 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			/>
 		<echo message="upgrade:jboss:readers:bda 3."/>
 		<jboss-read-bindings-file-location
-			jboss.home="${jboss.home}"
 			/>
 		<jboss-read-ports
 			/>
