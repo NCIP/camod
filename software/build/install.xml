@@ -1135,7 +1135,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<if>
 			<equals arg1="${camod.grid.jboss.ncicb-standard.port-config}" arg2="true"/>
 			<then>
-				<property name="jboss.server.binding.template.location" value="${basedir}/${jboss-bindings.file}"/>
+				<property name="camod.grid.jboss.server.binding.template.location" value="${basedir}/${jboss-bindings.file}"/>
 			</then>
 			<else>
 				<property name="jboss.server.binding.template.location" value="${bda-utils.dir}/resource/${jboss.binaries.relative.dir}/bindings.xml"/>
