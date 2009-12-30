@@ -1326,17 +1326,36 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			copied.jboss.log4j.dir="${copied.jboss.log4j.dir}"
 			/>
 		
-		<echo message="All properties after readers"/>
-	    <properties-print
-	            properties.list="${read.properties.list},camod.grid.jboss.server.hostname"
-	            />
-	    <properties-exist
-	            properties.list="${read.properties.list},camod.grid.jboss.server.hostname"
-	            />
-	    <properties-write
-	            properties.list="${read.properties.list},camod.grid.jboss.server.hostname"
-	            />
-
+		<grid-read-index-url
+			grid.wsrf.dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf"
+			/> 
+		
+		<!-- not needed - grid not secured
+		<jboss-read-grid-secure
+			jboss.home="${read.jboss.home}"
+			copied.keystore.dir="${jboss.grid.secure.dir}"
+			/>
+		-->
+		
+		<grid-copy-service-metadata
+			copied.service-metadata.dir="${copied.service-metadata.dir}"
+			/>
+		
+		<grid-read-poc
+			grid.wsrf.dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod"
+			grid.service.name="CamodGridService"
+			/> 
+		
+		<!-- not needed on this instance
+			<read-property-from-properties-service
+				jboss.home="${read.jboss.home}"
+				property.name="property1"
+				/>
+			<read-property-from-properties-service
+				jboss.home="${read.jboss.home}"
+				property.name="property2"
+				/>		
+		-->
 	</target>	
 
 	<target name="upgrade:post:jboss" unless="install.running">
