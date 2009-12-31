@@ -523,7 +523,9 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<!--copy file="${database.driver.file}" todir="${jboss.home}/server/${jboss.server.name}/lib" overwrite="true" / -->
 		<!-- Make directory for ehcache to use for creating temp files for caMOD -->
 		<mkdir dir="${ehcache.dir}" />
-
+		
+		<!-- Copy a new log4j*.jar version back to lib (took out of dev and qa by mistake so server does not run) -->
+		<echo message="Copy a new log4j*.jar version into lib dir"/>
 		<copy file="${camod-webapp.dir.dist}/${camod-webapp.file}" todir="${jboss.home}/server/${jboss.server.name}/deploy/lib" overwrite="true" />		
 	
 		<echo message="Commented out server.xml modified for session fixation"/>
