@@ -74,14 +74,6 @@
 			<param-value>/login.do</param-value>
 		</init-param>
 	</filter>
-	<filter>
-		<filter-name>sessionFixation</filter-name>
-		<filter-class>com.fiveamsolutions.nci.commons.web.filter.SessionFixationProtectionFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>sessionFixation</filter-name>
-		<url-pattern>*.action</url-pattern>
-	</filter-mapping>	
 	<filter-mapping>
 		<filter-name>AuthenticationFilter</filter-name>
 		<url-pattern>/jsp/protected/*</url-pattern>
