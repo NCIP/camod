@@ -1186,9 +1186,9 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			jboss.ds-xml.file="oracle-ds.xml"
 			/>
 		<echo message="upgrade:jboss:readers:bda 2."/>
-		<jboss-read-bindings-file-location
+		<!--jboss-read-bindings-file-location
 			jboss.home="${jboss.home}"  jboss.bindings.file.location.property.name="${jboss.server.binding.template.location}"
-			/>
+			/-->
 		<echo message="upgrade:jboss:readers:bda 2.5"/>
 		<jboss-read-ldapconfig/>
 		<echo message="upgrade:jboss:readers:bda 3."/>
