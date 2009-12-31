@@ -520,7 +520,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<!--  Many NCI applications require clm for csm, so you can point this to where you have the version you want to use
 		<copy file="${bda-utils.dir}/clm-3.2.jar" todir="${jboss.home}/server/${jboss.server.name}/lib" overwrite="true" />
 		-->	
-		<copy file="${database.driver.file}" todir="${jboss.home}/server/${jboss.server.name}/lib" overwrite="true" />
+		<!--copy file="${database.driver.file}" todir="${jboss.home}/server/${jboss.server.name}/lib" overwrite="true" / -->
 		<!-- Make directory for ehcache to use for creating temp files for caMOD -->
 		<mkdir dir="${ehcache.dir}" />
 
@@ -552,20 +552,21 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	           src="${camod-grid-service.dir.dist}/lib/${camod-grid-service.jboss-globus-lib.zip}" overwrite="true"/>
 		
 		<echo message="Before unzip of wsrf-camod.war directory"/>
-		<!--delete file="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war" failonerror="false"/ -->
+		<delete file="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war" failonerror="false"/>
 		<!-- camod.grid.jboss.home=C\:/devtools/grid/jboss-4.0.5.GA + server + camod.grid.jboss.server.name=default + deploy-->
 	    <unzip dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy" 
 	           src="${camod-grid-service.dir.dist}/${camod-grid-service.war.file.zip}" overwrite="true"/>
-		
-		<!-- will be two copies of ojdbc*.jar in lib folder - remove the older version (ojdbc14.jar vs ojdbc14-10.2.0.4.0.jar)  -->       
+
+		<copy file="${database.driver.file}" todir="${jboss.home}/server/${jboss.server.name}/lib" overwrite="true" />
+		<echo message="Added new version of ojdbc14*.jar"/>
+				
+		<!-- will be two copies of ojdbc*.jar in lib folder - remove the older version (ojdbc14.jar vs ojdbc14-10.2.0.4.0.jar) -->        
 		<delete>      
 		  <fileset dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/lib"
 		           includes="ojdbc14.jar"/>
 		</delete>
 		<echo message="Deleted old copy of ojdbc14.jar"/>		
-		<copy file="${database.driver.file}" todir="${jboss.home}/server/${jboss.server.name}/lib" overwrite="true" />
-		<echo message="Added new version of ojdbc14.jar"/>
-		
+
 		<!-- Make directory for ehcache to use for grid service files -->
 		<mkdir dir="${ehcache.dir}" />
 		
@@ -588,13 +589,12 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			property.block="${property.block}"
 			/>
 		
-	    <!-- not two copies of log4j.jar in lib folder on dev (check other tiers) - remove the older version (log4j.jar)        
+	    <!-- will be two copies of log4j.jar in lib folder - remove the older version (log4j.jar)  -->       
 	    <delete>      
 	      <fileset dir="${jboss.home}/server/${jboss.server.name}/lib"
 	               includes="log4j.jar"/>
 	    </delete>
 		<echo message="Deleted old copy of log4j.jar"/>
-		--> 
 		
 		<!-- will be two copies of ojdbc*.jar in lib folder - remove the older version (ojdbc14.jar vs ojdbc14-10.2.0.4.0.jar)  -->       
 		<delete>      
@@ -1135,7 +1135,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<if>
 			<equals arg1="${camod.grid.jboss.ncicb-standard.port-config}" arg2="true"/>
 			<then>
-				<property name="camod.grid.jboss.server.binding.template.location" value="${basedir}/${jboss-bindings.file}"/>
+				<property name="jboss.server.binding.template.location" value="${basedir}/${jboss-bindings.file}"/>
 			</then>
 			<else>
 				<property name="jboss.server.binding.template.location" value="${bda-utils.dir}/resource/${jboss.binaries.relative.dir}/bindings.xml"/>
@@ -1238,7 +1238,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			jboss.home="${jboss.home}"
 			property.name="property2"
 			/>
-	</target>
+	</target>	
 
 	<target name="upgrade:jboss:camod-grid:readers:bda" if="jboss.exists">
 		<!--echoproperties prefix="jboss"/-->
@@ -1263,7 +1263,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 				<property name="camod.grid.jboss.server.hostname" value="${env.COMPUTERNAME}"/>
 			</then>
 		</if>
-		<var name="read.properties.list" value=""/>
+		<!--var name="read.properties.list" value=""/ -->
 		<!-- Begin JBoss Readers -->
 		<!-- Reader requires that you have only one data source defined in each *-ds.xml file -->
 		<jboss-read-dbconfig
@@ -1271,11 +1271,11 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			jboss.ds-xml.file="oracle-ds.xml"
 			/>
 		<!--(SKIP) checks if LDAP is installed
-		jboss-read-ldapconfig jboss.home="${camod.grid.jboss.home}" /
+		jboss-read-ldapconfig jboss.home="${camod.grid.jboss.home}" /-->
 		<jboss-read-bindings-file-location jboss.home="${camod.grid.jboss.home}" jboss.server.name="${camod.grid.jboss.server.name}"
             jboss.bindings.file.location.property.name="camod.grid.jboss.server.bindingfile.location"
             jboss.server.ports.name.property.name="camod.grid.jboss.server.ports.name"/>
-          -->  	
+            	
                 <jboss-read-ports jboss.server.ports.name="${camod.grid.jboss.server.ports.name}"
                                   jboss.server.bindingfile.location="${camod.grid.jboss.server.bindingfile.location}"
                                   
@@ -1320,36 +1320,17 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			copied.jboss.log4j.dir="${copied.jboss.log4j.dir}"
 			/>
 		
-		<grid-read-index-url
-			grid.wsrf.dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf"
-			/> 
-		
-		<!-- not needed - grid not secured
-		<jboss-read-grid-secure
-			jboss.home="${read.jboss.home}"
-			copied.keystore.dir="${jboss.grid.secure.dir}"
-			/>
-		-->
-		
-		<grid-copy-service-metadata
-			copied.service-metadata.dir="${copied.service-metadata.dir}"
-			/>
-		
-		<grid-read-poc
-			grid.wsrf.dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod"
-			grid.service.name="CamodGridService"
-			/> 
-		
-		<!-- not needed on this instance
-			<read-property-from-properties-service
-				jboss.home="${read.jboss.home}"
-				property.name="property1"
-				/>
-			<read-property-from-properties-service
-				jboss.home="${read.jboss.home}"
-				property.name="property2"
-				/>		
-		-->
+		<echo message="All properties after readers"/>
+	    <properties-print
+	            properties.list="${read.properties.list},camod.grid.jboss.server.hostname"
+	            />
+	    <properties-exist
+	            properties.list="${read.properties.list},camod.grid.jboss.server.hostname"
+	            />
+	    <properties-write
+	            properties.list="${read.properties.list},camod.grid.jboss.server.hostname"
+	            />
+
 	</target>	
 
 	<target name="upgrade:post:jboss" unless="install.running">
