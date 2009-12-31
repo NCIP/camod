@@ -1187,7 +1187,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			/>
 		<echo message="upgrade:jboss:readers:bda 2."/>
 		<jboss-read-bindings-file-location
-			jboss.home="${read.jboss.home}"  jboss.server.bindingfile.location="${jboss.server.binding.template.location}"
+			jboss.home="${read.jboss.home}"  jboss.bindings.file.location.property.name="${jboss.server.binding.template.location}"
 			/>
 		<echo message="upgrade:jboss:readers:bda 2.5"/>
 		<jboss-read-ldapconfig/>
