@@ -1188,7 +1188,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<echo message="upgrade:jboss:readers:bda 2."/>
 		<jboss-read-ldapconfig/>
 		<echo message="upgrade:jboss:readers:bda 3."/>
-		<jboss-read-ports jboss.home="${jboss.home}" jboss.server.bindingfile.location="${jboss.server.binding.template.location}"/>
+		<jboss-read-ports  jboss.server.bindingfile.location="${jboss.server.binding.template.location}"/>
 		<echo message="upgrade:jboss:readers:bda 4."/>
 		<!--property name="jboss.server.bindingfile.location" value="${jboss.server.binding.template.location}"/ -->
 		<!-- Setting this variable will cause install to copy it into place if using CM/DAC, not modified in NCM -->
