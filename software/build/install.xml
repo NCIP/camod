@@ -75,7 +75,8 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<property name="camod-webapp.ds.file" value="oracle-ds.xml" />
 	<property name="camod-webapp.name" value="camod" />
 	<property name="camod-webapp.war.file" value="${camod-webapp.name}.war" />
-	<property name="camod-webapp.file" value="log4j-1.2.13.jar" />
+	<property name="log4j.lib.file" value="log4j-1.2.13.jar" />
+	<property name="ojdbc14.lib.file" value="ojdbc14.jar" />
 	
 	<!-- for remote api -->
 	<property name="camod-remote-api.dir.dist" location="${basedir}/${camod-api.dist.relative.dir}" />
@@ -526,11 +527,11 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		
 		<!-- Copy a new log4j*.jar version back to lib (took out of dev and qa by mistake so server does not run) -->
 		<echo message="Copy a new log4j*.jar version into lib dir"/>
-		<copy file="${camod-webapp.dir.dist}/${camod-webapp.file}" todir="${jboss.home}/server/${jboss.server.name}/lib" overwrite="true" />		
-	
-		<echo message="Commented out server.xml modified for session fixation"/>
-		<!--replaceregexp file="@{jboss.server-xml.file}" byline="true" match="emptySessionPath=&quot;true&quot;" replace="emptySessionPath=&quot;false&quot;" /-->
+		<copy file="${camod-webapp.dir.dist}/${log4j.lib.file}" todir="${jboss.home}/server/${jboss.server.name}/lib" overwrite="true" />
 		
+		<replaceregexp file="${jboss.home}/server/${jboss.server.name}/deploy/jbossweb-tomcat55.sar/server.xml" 
+			byline="true" match="emptySessionPath=&quot;true&quot;" replace="emptySessionPath=&quot;false&quot;" />
+		<echo message="Modified server.xml emptySessionPath= property for session fixation"/>
 	</target>
 	
 	<target name="install:jboss:camod-grid-api" description="Deploy camod-remote-api and common libraries to jboss installation" 
@@ -558,16 +559,20 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<!-- camod.grid.jboss.home=C\:/devtools/grid/jboss-4.0.5.GA + server + camod.grid.jboss.server.name=default + deploy-->
 	    <unzip dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy" 
 	           src="${camod-grid-service.dir.dist}/${camod-grid-service.war.file.zip}" overwrite="true"/>
-
-		<copy file="${database.driver.file}" todir="${jboss.home}/server/${jboss.server.name}/lib" overwrite="true" />
-		<echo message="Added new version of ojdbc14*.jar"/>
+		
+		<!--copy file="${database.driver.file}" todir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/lib" overwrite="true" />
+		<echo message="Added new version of ojdbc14*.jar"/ -->
+		
+		<!-- Copy the original ojdbc14.jar version back to lib for grid service error (took out of dev, qa, and stage to upgrade) -->
+		<echo message="Copy original ojdbc14.jar version into lib dir"/>
+		<copy file="${camod-remote-api.dir.dist}/${ojdbc14.lib.file}" todir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/lib" overwrite="true" />			
 				
-		<!-- will be two copies of ojdbc*.jar in lib folder - remove the older version (ojdbc14.jar vs ojdbc14-10.2.0.4.0.jar) -->        
+		<!-- will be two copies of ojdbc*.jar in lib folder - remove the newer version (ojdbc14.jar vs ojdbc14-10.2.0.4.0.jar) -->        
 		<delete>      
 		  <fileset dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/lib"
-		           includes="ojdbc14.jar"/>
+		           includes="ojdbc14-10.2.0.4.0.jar"/>
 		</delete>
-		<echo message="Deleted old copy of ojdbc14.jar"/>		
+		<echo message="Deleted new copy of ojdbc14*.jar"/>		
 
 		<!-- Make directory for ehcache to use for grid service files -->
 		<mkdir dir="${ehcache.dir}" />
