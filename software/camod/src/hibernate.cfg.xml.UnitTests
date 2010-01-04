@@ -32,7 +32,7 @@
         <property name="hibernate.cache.region_prefix">hibernate.test</property>
         
 		<!-- CGLIB reflection_optimizer -->
-		<property name="hibernate.cglib.use_reflection_optimizer">false</property>        
+		<property name="hibernate.bytecode.use_reflection_optimizer">false</property>        
 	
         <!-- Mapping files -->
         <mapping resource="gov/nih/nci/camod/domain/GeneticAlteration.hbm.xml"/>
