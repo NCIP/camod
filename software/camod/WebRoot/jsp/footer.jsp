@@ -78,5 +78,7 @@
 </TBODY></TD></TR></TABLE>  <!-- end table that was started at the beginning of the header.jsp -->
 
 </BODY>
+<head>
 <meta HTTP-EQUIV="Pragma" CONTENT="no-cache">
+</head>
 </HTML>
