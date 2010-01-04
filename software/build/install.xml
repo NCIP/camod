@@ -526,7 +526,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		
 		<!-- Copy a new log4j*.jar version back to lib (took out of dev and qa by mistake so server does not run) -->
 		<echo message="Copy a new log4j*.jar version into lib dir"/>
-		<copy file="${camod-webapp.dir.dist}/${camod-webapp.file}" todir="${jboss.home}/server/${jboss.server.name}/deploy/lib" overwrite="true" />		
+		<copy file="${camod-webapp.dir.dist}/${camod-webapp.file}" todir="${jboss.home}/server/${jboss.server.name}/lib" overwrite="true" />		
 	
 		<echo message="Commented out server.xml modified for session fixation"/>
 		<!--replaceregexp file="@{jboss.server-xml.file}" byline="true" match="emptySessionPath=&quot;true&quot;" replace="emptySessionPath=&quot;false&quot;" /-->
