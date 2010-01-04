@@ -26,10 +26,8 @@
         This will build the war file
     -->
     <target name="build_war" depends="copy_resource_directory">
+    	<delete dir="${build.dir}" />
         <mkdir dir="${build.dir}"/>
-        <delete file="${build.dir}/${app.war.name}.war" />
-    	<!--<delete file="${build.dir}/build/${app.war.name}.war" />-->    	
-        <!--<war destfile="${build.dir}/build/${app.war.name}.war" -->
             <war destfile="${build.dir}/${app.war.name}.war"         	
              webxml="${webapp.dir}/WEB-INF/web.xml">
             <fileset file="${webapp.dir}/*.*" />
