@@ -653,13 +653,13 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	         </xmltask> 
 		
 		<!-- (YES, done in BDA and uses jboss.external.http.port ) 
-                     Modify /WEB-INF/etc/globus_resolution_service/jndi-config.xml -->
+                     Modify /WEB-INF/etc/globus_resolution_service/jndi-config.xml 
 		<echo message="Fix /WEB-INF/etc/globus_resolution_service/jndi-config.xml value after BDA"/>
 	    <xmltask source="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/etc/globus_resolution_service/jndi-config.xml"
 	             dest="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/wsrf-camod.war/WEB-INF/etc/globus_resolution_service/jndi-config.xml"> 
 			 <replace path="//:parameter[:name='address']/:value/text()" 
 			          withtext="http://localhost:${camod.grid.jboss.server.port}/ServiceToResolve" />   		    	
-	     </xmltask>	
+	     </xmltask>	-->
 		
 		<!-- Fix all /WEB-INF/etc/globus_wsrf_core/server-config.wsdd host property -->
 		<echo message="Fix /WEB-INF/etc/globus_wsrf_core/server-config.wsdd host value after BDA"/>
