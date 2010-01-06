@@ -521,14 +521,34 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<!--  Many NCI applications require clm for csm, so you can point this to where you have the version you want to use
 		<copy file="${bda-utils.dir}/clm-3.2.jar" todir="${jboss.home}/server/${jboss.server.name}/lib" overwrite="true" />
 		-->	
-		<!--copy file="${database.driver.file}" todir="${jboss.home}/server/${jboss.server.name}/lib" overwrite="true" / -->
+		<!-- Do not add newer version of odjbc14*.jar (error on server)
+		copy file="${database.driver.file}" todir="${jboss.home}/server/${jboss.server.name}/lib" overwrite="true" / -->
 		<!-- Make directory for ehcache to use for creating temp files for caMOD -->
 		<mkdir dir="${ehcache.dir}" />
+		
+		<!-- Copy the original ojdbc14.jar version back to lib for camod error (tried to upgrade on dev, qa, and stage) -->
+		<echo message="Copy original ojdbc14.jar version into lib dir"/>
+		<copy file="${camod-remote-api.dir.dist}/${ojdbc14.lib.file}" todir="${jboss.home}/server/${jboss.server.name}/lib" overwrite="true" />			
+				
+		<!-- will be two copies of ojdbc*.jar in lib folder - remove the newer version (ojdbc14.jar vs ojdbc14-10.2.0.4.0.jar) -->        
+		<delete>      
+		  <fileset dir="${jboss.home}/server/${jboss.server.name}/lib"
+		           includes="ojdbc14-10.2.0.4.0.jar"/>
+		</delete>
+		<echo message="Deleted new copy of ojdbc14*.jar"/>		
 		
 		<!-- Copy a new log4j*.jar version back to lib (took out of dev and qa by mistake so server does not run) -->
 		<echo message="Copy a new log4j*.jar version into lib dir"/>
 		<copy file="${camod-webapp.dir.dist}/${log4j.lib.file}" todir="${jboss.home}/server/${jboss.server.name}/lib" overwrite="true" />
 		
+	    <!-- will be two copies of log4j.jar in lib folder - remove the older version (log4j.jar)  -->       
+	    <delete>      
+	      <fileset dir="${jboss.home}/server/${jboss.server.name}/lib"
+	               includes="log4j.jar"/>
+	    </delete>
+		<echo message="Deleted old copy of log4j.jar"/>		
+		
+		<!-- Fix server.xml for session fixation security scan error -->
 		<replaceregexp file="${jboss.home}/server/${jboss.server.name}/deploy/jbossweb-tomcat55.sar/server.xml" 
 			byline="true" match="emptySessionPath=&quot;true&quot;" replace="emptySessionPath=&quot;false&quot;" />
 		<echo message="Modified server.xml emptySessionPath= property for session fixation"/>
@@ -596,19 +616,6 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			property.block="${property.block}"
 			/>
 		
-	    <!-- will be two copies of log4j.jar in lib folder - remove the older version (log4j.jar)  -->       
-	    <delete>      
-	      <fileset dir="${jboss.home}/server/${jboss.server.name}/lib"
-	               includes="log4j.jar"/>
-	    </delete>
-		<echo message="Deleted old copy of log4j.jar"/>
-		
-		<!-- will be two copies of ojdbc*.jar in lib folder - remove the older version (ojdbc14.jar vs ojdbc14-10.2.0.4.0.jar)  -->       
-		<delete>      
-		  <fileset dir="${jboss.home}/server/${jboss.server.name}/lib"
-		           includes="ojdbc14.jar"/>
-		</delete>
-		<echo message="Deleted old copy of ojdbc14.jar"/>
 	</target>
 	
 	<target name="install:jboss:camod-grid:configure" 
