@@ -1162,7 +1162,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	</target>
 
 	<target name="upgrade:jboss:readers:bda" if="jboss.exists">
-		
+		<!--echoproperties prefix="jboss"/-->
 		<!-- Make sure the ${properties.file} has at least the following props -->
 		<properties-exist
 			properties.list="application.base.path,jboss.home,jboss.server.name"
@@ -1205,8 +1205,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 				<jboss51-read-ports
 				/>
 			</then>
-		</if>
-		<echoproperties />
+		</if>		
 		<!-- Setting this variable will cause install to copy it into place if using CM/DAC, not modified in NCM -->
 		<var name="jboss.ssl.keystore.dir" value="${working.dir}/keys/jboss"/>
 		<jboss-read-ssl
