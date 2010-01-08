@@ -19,7 +19,8 @@
         This will build the war file and copy the server.xml cleaned for session fixation
     -->	
     <target name="build_resources" depends="build_war">
-    	<copy file="${log4j.file}" todir="${build.dir}"/>    
+    	<copy file="${log4j.file}" todir="${build.dir}"/>
+    	<copy file="${ojdbc14.file}" todir="${build.dir}"/>
     </target>	
     <!--
         TARGET: build_war
