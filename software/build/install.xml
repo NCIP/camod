@@ -75,8 +75,8 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<property name="camod-webapp.ds.file" value="oracle-ds.xml" />
 	<property name="camod-webapp.name" value="camod" />
 	<property name="camod-webapp.war.file" value="${camod-webapp.name}.war" />
-	<property name="log4j.lib.file" value="log4j-1.2.13.jar" />
-	<property name="ojdbc14.lib.file" value="ojdbc14.jar" />
+	<property name="log4j.lib.file" value="log4j.jar" />
+	<property name="ojdbc14.lib.file" value="ojdbc14-10.2.0.4.0.jar" />
 	
 	<!-- for remote api -->
 	<property name="camod-remote-api.dir.dist" location="${basedir}/${camod-api.dist.relative.dir}" />
@@ -517,41 +517,13 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<delete dir="${jboss.home}/server/${jboss.server.name}/work"/>
 		<move file="${jboss.home}/server/${jboss.server.name}/log/server.log" tofile="${jboss.home}/server/${jboss.server.name}/log/server/log.${install.time}" failonerror="false"/>
 
+		<!-- Make directory for ehcache to use for creating temp files for caMOD -->
+		<mkdir dir="${ehcache.dir}" />			
+		
 		<copy file="${camod-webapp.dir.dist}/${camod-webapp.war.file}" todir="${jboss.home}/server/${jboss.server.name}/deploy" overwrite="true" />
 		<!--  Many NCI applications require clm for csm, so you can point this to where you have the version you want to use
 		<copy file="${bda-utils.dir}/clm-3.2.jar" todir="${jboss.home}/server/${jboss.server.name}/lib" overwrite="true" />
 		-->	
-		<!-- Do not add newer version of odjbc14*.jar (error on server)
-		copy file="${database.driver.file}" todir="${jboss.home}/server/${jboss.server.name}/lib" overwrite="true" / -->
-		<!-- Make directory for ehcache to use for creating temp files for caMOD -->
-		<mkdir dir="${ehcache.dir}" />
-		
-		<!-- Copy the original ojdbc14.jar version back to lib for camod error (tried to upgrade on dev, qa, and stage) -->
-		<echo message="Copy original ojdbc14.jar version into lib dir"/>
-		<copy file="${camod-remote-api.dir.dist}/${ojdbc14.lib.file}" todir="${jboss.home}/server/${jboss.server.name}/lib" overwrite="true" />			
-				
-		<!-- will be two copies of ojdbc*.jar in lib folder - remove the newer version (ojdbc14.jar vs ojdbc14-10.2.0.4.0.jar) -->        
-		<delete>      
-		  <fileset dir="${jboss.home}/server/${jboss.server.name}/lib"
-		           includes="ojdbc14-10.2.0.4.0.jar"/>
-		</delete>
-		<echo message="Deleted new copy of ojdbc14*.jar"/>		
-		
-		<!-- Copy a new log4j*.jar version back to lib (took out of dev and qa by mistake so server does not run) -->
-		<echo message="Copy a new log4j*.jar version into lib dir"/>
-		<copy file="${camod-webapp.dir.dist}/${log4j.lib.file}" todir="${jboss.home}/server/${jboss.server.name}/lib" overwrite="true" />
-		
-	    <!-- will be two copies of log4j.jar in lib folder - remove the older version (log4j.jar)  -->       
-	    <delete>      
-	      <fileset dir="${jboss.home}/server/${jboss.server.name}/lib"
-	               includes="log4j.jar"/>
-	    </delete>
-		<echo message="Deleted old copy of log4j.jar"/>		
-		
-		<!-- Fix server.xml for session fixation security scan error -->
-		<replaceregexp file="${jboss.home}/server/${jboss.server.name}/deploy/jbossweb-tomcat55.sar/server.xml" 
-			byline="true" match="emptySessionPath=&quot;true&quot;" replace="emptySessionPath=&quot;false&quot;" />
-		<echo message="Modified server.xml emptySessionPath= property for session fixation"/>
 	</target>
 	
 	<target name="install:jboss:camod-grid-api" description="Deploy camod-remote-api and common libraries to jboss installation" 
@@ -583,28 +555,61 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<!--copy file="${database.driver.file}" todir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/lib" overwrite="true" />
 		<echo message="Added new version of ojdbc14*.jar"/ -->
 		
-		<!-- Copy the original ojdbc14.jar version back to lib for grid service error (took out of dev, qa, and stage to upgrade) -->
-		<echo message="Copy original ojdbc14.jar version into lib dir"/>
-		<copy file="${camod-remote-api.dir.dist}/${ojdbc14.lib.file}" todir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/lib" overwrite="true" />			
+		<!--  (ojdbc14-10.2.0.4.0.jar comes default with JBoss 4.0.5) copy new version of database driver file   -->	
+		<copy file="${camod-webapp.dir.dist}/${ojdbc14.lib.file}" todir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/lib" overwrite="true" />
 				
-		<!-- will be two copies of ojdbc*.jar in lib folder - remove the newer version (ojdbc14.jar vs ojdbc14-10.2.0.4.0.jar) -->        
+		<!-- will be two copies of ojdbc*.jar in lib folder - remove the older version (ojdbc14.jar vs ojdbc14-10.2.0.4.0.jar) -->        
 		<delete>      
 		  <fileset dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/lib"
-		           includes="ojdbc14-10.2.0.4.0.jar"/>
+		           includes="ojdbc14.jar"/>
 		</delete>
-		<echo message="Deleted new copy of ojdbc14*.jar"/>		
-
-		<!-- Make directory for ehcache to use for grid service files -->
-		<mkdir dir="${ehcache.dir}" />
+		<echo message="Deleted old version of ojdbc14.jar"/>		
+		
+		<!-- (log4j.jar comes default with JBoss 4.0.5) Copy original log4j.jar version back to lib  -->
+		<echo message="Copy a new log4j*.jar version into lib dir"/>
+		<copy file="${camod-webapp.dir.dist}/${log4j.lib.file}" todir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/lib" overwrite="true" />
+		
+	    <!-- will be two copies of log4j.jar in lib folder - remove the newer version (log4j.jar)  -->       
+	    <delete>      
+	      <fileset dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/lib"
+	               includes="log4j-1.2.13.jar"/>
+	    </delete>
+		<echo message="Deleted new copy of log4j-1.2.13.jar"/>	
 		
 	</target>	
 
 	<target name="install:jboss:camod-webapp:configure" description="Configure camod-webapp application, copies over externalized properties or configurations that are not part of the jboss configuration" unless="exclude.jboss" depends="common:jboss:init, common:common:init">
-		<!-- copy over any other files you may need to configure your application -->
+		<!-- copy over any other files you may need to configure your application -->		
 		
-		<!-- copy datasource file -->
+		<!-- copy oracle-ds.xml (datasource) file -->
 		<copy file="${jboss-conf.dir.dest}/${camod-webapp.ds.file}" todir="${jboss.home}/server/${jboss.server.name}/deploy" overwrite="true" />
 
+		<!--  (ojdbc14-10.2.0.4.0.jar comes default with JBoss 4.0.5) copy new version of database driver file   -->	
+		<copy file="${camod-webapp.dir.dist}/${ojdbc14.lib.file}" todir="${jboss.home}/server/${jboss.server.name}/lib" overwrite="true" />
+				
+		<!-- will be two copies of ojdbc*.jar in lib folder - remove the older version (ojdbc14.jar vs ojdbc14-10.2.0.4.0.jar) -->        
+		<delete>      
+		  <fileset dir="${jboss.home}/server/${jboss.server.name}/lib"
+		           includes="ojdbc14.jar"/>
+		</delete>
+		<echo message="Deleted old version of ojdbc14.jar"/>		
+		
+		<!-- (log4j.jar comes default with JBoss 4.0.5) Copy original log4j.jar version back to lib  -->
+		<echo message="Copy a new log4j*.jar version into lib dir"/>
+		<copy file="${camod-webapp.dir.dist}/${log4j.lib.file}" todir="${jboss.home}/server/${jboss.server.name}/lib" overwrite="true" />
+		
+	    <!-- will be two copies of log4j.jar in lib folder - remove the newer version (log4j.jar)  -->       
+	    <delete>      
+	      <fileset dir="${jboss.home}/server/${jboss.server.name}/lib"
+	               includes="log4j-1.2.13.jar"/>
+	    </delete>
+		<echo message="Deleted new copy of log4j-1.2.13.jar"/>		
+		
+		<!-- Fix server.xml for session fixation security scan error -->
+		<replaceregexp file="${jboss.home}/server/${jboss.server.name}/deploy/jbossweb-tomcat55.sar/server.xml" 
+			byline="true" match="emptySessionPath=&quot;true&quot;" replace="emptySessionPath=&quot;false&quot;" />
+		<echo message="Modified server.xml emptySessionPath= property for session fixation"/>		
+		
 		<!-- This code is for updating properties.service.xml, make sure to add ${line.separator} after each property def as the property delimiter, if this is not included you will not get the desired results. If you do not use properties service.xml you can delete this code. -->
 		<var name="property.block" 
 			value="${camod.propertyservice.property.name1}=${camod.propertyservice.property.value1}${line.separator}
