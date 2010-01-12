@@ -21,5 +21,6 @@
 		<password>@database.password@</password>
 		<driver-class>@database.driver@</driver-class>
 		<exception-sorter-class-name>@database.exception-sorter-class-name@</exception-sorter-class-name>
+		<valid-connection-checker-class-name>@database.valid-connection-checker-class-name@</valid-connection-checker-class-name>
 	</local-tx-datasource>
 </datasources>
