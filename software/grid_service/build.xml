@@ -82,7 +82,6 @@
     <target name="copy-remote-api-war" >
         <mkdir dir="${build.dir}"/>
     	<copy file="${remote.api.war.name}.war" todir="${build.dir}"/>
-    	<copy file="${ojdbc14.file}" todir="${build.dir}"/> 
     </target>
 	
 	
