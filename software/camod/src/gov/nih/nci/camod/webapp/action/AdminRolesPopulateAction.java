@@ -80,14 +80,6 @@ public class AdminRolesPopulateAction extends BaseAction {
             sID = SafeHTMLUtil.clean(sID);
         }            
         
-        // Get and clean method to prevent Cross-Site Scripting 
-        String methodName = inRequest.getParameter("unprotected_method");
-        log.info("methodName: " + methodName);
-        if (!methodName.equals("execute")){
-	        methodName = SafeHTMLUtil.clean(methodName);
-	        log.info("methodName: " + methodName);
-        } 
-
 		AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
 		CommentsManager theCommentsManager = (CommentsManager) getBean("commentsManager");
 
