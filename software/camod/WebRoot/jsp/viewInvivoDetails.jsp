@@ -5,7 +5,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="gov.nih.nci.camod.domain.AnimalModel" %>	
 
-<bean:define id="mdl" name="transplantmodel"/>
+<bean:define id="mdl" name="transplantationmodel"/>
 <bean:define id="nsc" name="nsc"/>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
@@ -55,7 +55,7 @@
 
 			<c:set var="tdClass" value="resultsBoxGrey"/>
 			
-			<c:forEach var="r" items="${transplantresultlist}" varStatus="stat">
+			<c:forEach var="r" items="${transplantationresultlist}" varStatus="stat">
 				<c:if test="${r.agent.nscNumber == nsc}">
 				
 				<c:choose>
@@ -74,31 +74,31 @@
 					<td class="<c:out value="${tdClass}"/>"><c:out value="${r.treatment.dosage}"/>&nbsp;
 					<c:out value="${cd.treatment.dosageUnit}"/></td>
 			
-					<td class="<c:out value="${tdClass}"/>">												
-						<c:choose>
-							<c:when test="${r.toxicityEvalDay == '0'}">
-								usually day 5&nbsp;
-							</c:when>
-							<c:otherwise>
-								<c:out value="${r.toxicityEvalDay}"/>&nbsp;
-							</c:otherwise>
-						</c:choose>						
-					</td>
+						<td class="<c:out value="${tdClass}"/>">												
+							<c:choose>
+								<c:when test="${r.toxicityEvalDay == '0'}">
+									usually day 5&nbsp;
+								</c:when>
+								<c:otherwise>
+									<c:out value="${r.toxicityEvalDay}"/>&nbsp;
+								</c:otherwise>
+							</c:choose>						
+						</td>
 					
-					<td class="<c:out value="${tdClass}"/>"><c:out value="${r.toxicitySurvivors}"/>&nbsp;</td>
-			
-					<td class="<c:out value="${tdClass}"/>"><c:out value="${r.endpoint.description}"/>&nbsp;</td>
-					
-					<td class="<c:out value="${tdClass}"/>">
-						<c:choose>
-							<c:when test="${r.evaluationDay == 'Z'}">
-								animals followed until death&nbsp;
-							</c:when>
-							<c:otherwise>
-								<c:out value="${r.evaluationDay}"/>&nbsp;
-							</c:otherwise>
-						</c:choose>						
-					</td>
+						<td class="<c:out value="${tdClass}"/>"><c:out value="${r.toxicitySurvivors}"/>&nbsp;</td>
+				
+						<td class="<c:out value="${tdClass}"/>"><c:out value="${r.endpoint.description}"/>&nbsp;</td>
+						
+						<td class="<c:out value="${tdClass}"/>">
+							<c:choose>
+								<c:when test="${r.evaluationDay == 'Z'}">
+									animals followed until death&nbsp;
+								</c:when>
+								<c:otherwise>
+									<c:out value="${r.evaluationDay}"/>&nbsp;
+								</c:otherwise>
+							</c:choose>						
+						</td>
 					
 					</td>
 					<td class="<c:out value="${tdClass}"/>End"><c:out value="${r.percentTreatedControl}"/>&nbsp;</td>
@@ -109,6 +109,6 @@
 			</TABLE>
 		</td></tr></TABLE>
 	</td></tr></TABLE>
-</tr></td></TABLE>
+</td></tr></TABLE>
 
 <%@ include file="/jsp/footer.jsp" %>
