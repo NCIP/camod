@@ -3,7 +3,7 @@ function FileData_Pairs(x)
 x.t("courteously","provided");
 x.t("camod","introduction");
 x.t("camod","data");
-x.t("camod","2.5");
+x.t("camod","2.6");
 x.t("colleagues","mtb");
 x.t("debbie","krupke");
 x.t("program","jackson");
@@ -64,7 +64,7 @@ x.t("genome","informatics");
 x.t("informatics","program");
 x.t("world","wide");
 x.t("2002","mouse");
-x.t("2.5","camod");
 x.t("biology","database");
+x.t("2.6","camod");
 x.t("vincent","mouse");
 }

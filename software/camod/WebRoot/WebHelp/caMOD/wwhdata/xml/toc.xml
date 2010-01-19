@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WebWorksHelpTOC version="5.0" xmlns="urn:WebWorks-Help-TOC-Schema">
-  <i t="Welcome to caMOD 2.5" l="0" />
+  <i t="Welcome to caMOD 2.6" l="0" />
   <i t="Getting Started with caMOD" l="1">
-    <i t="Introduction to caMOD 2.5" l="2">
+    <i t="Introduction to caMOD 2.6" l="2">
       <i t="caMOD Data" l="3" />
     </i>
     <i t="caMOD Welcome and Login Page Tasks" l="4">
@@ -76,88 +76,93 @@
       <i t="Spontaneous Mutation" l="57" />
     </i>
     <i t="Carcinogenic Interventions" l="58">
-      <i t="Chemical/Drug" l="59" />
-      <i t="Environmental Factor" l="60" />
-      <i t="Gene Delivery" l="61" />
-      <i t="Growth Factor" l="62" />
-      <i t="Hormone" l="63" />
-      <i t="Nutritional Factor" l="64" />
-      <i t="Radiation" l="65" />
-      <i t="Surgery" l="66" />
-      <i t="Viral Treatment" l="67" />
+      <i t="Antibody" l="59" />
+      <i t="Bacteria" l="60" />
+      <i t="Chemical/Drug" l="61" />
+      <i t="Environmental Factor" l="62" />
+      <i t="Gene Delivery" l="63" />
+      <i t="Growth Factor" l="64" />
+      <i t="Hormone" l="65" />
+      <i t="Nutritional Factor" l="66" />
+      <i t="Plasmid" l="67" />
+      <i t="Radiation" l="68" />
+      <i t="Surgery" l="69" />
+      <i t="Transposon" l="70" />
+      <i t="Signaling Molecule" l="71" />
+      <i t="Viral Treatment" l="72" />
     </i>
-    <i t="Transient Interference" l="68">
-      <i t="Morpholinos" l="69" />
-      <i t="siRNA" l="70">
-        <i t="siRNA Background" l="70#1237692" />
-        <i t="Entering or Editing siRNA Information" l="71" />
+    <i t="Transient Interference" l="73">
+      <i t="Morpholinos" l="74" />
+      <i t="siRNA" l="75">
+        <i t="siRNA Background" l="76" />
+        <i t="Entering or Editing siRNA Information" l="77" />
       </i>
     </i>
-    <i t="Publications" l="72" />
-    <i t="Histopathology" l="73">
-      <i t="Clinical Marker" l="74" />
-      <i t="Metastasis" l="75" />
+    <i t="Publications" l="78" />
+    <i t="Histopathology" l="79">
+      <i t="Clinical Marker" l="80" />
+      <i t="Metastasis" l="81" />
     </i>
-    <i t="Therapy" l="76" />
-    <i t="Cell Lines" l="77" />
-    <i t="Images" l="78">
-      <i t="Viewing MrSID Images" l="79" />
+    <i t="Therapy" l="82" />
+    <i t="Cell Lines" l="83" />
+    <i t="Images" l="84">
+      <i t="Viewing MrSID Images" l="85" />
     </i>
-    <i t="Microarray Data" l="80" />
-    <i t="Model Availability" l="81">
-      <i t="Jackson Lab" l="82" />
-      <i t="MMHCC Repository" l="83" />
-      <i t="Investigator" l="84" />
-      <i t="IMSR" l="85" />
-      <i t="ZFIN" l="86" />
+    <i t="Microarray Data" l="86" />
+    <i t="Model Availability" l="87">
+      <i t="Jackson Lab" l="88" />
+      <i t="MMHCC Repository" l="89" />
+      <i t="Investigator" l="90" />
+      <i t="IMSR" l="91" />
+      <i t="ZFIN" l="92" />
     </i>
-    <i t="Transplant" l="87" />
-    <i t="Grid Availability" l="88" />
+    <i t="Transplantation" l="93" />
+    <i t="Grid Availability" l="94" />
   </i>
-  <i t="caMOD Administration" l="89">
-    <i t="Administration Functions Overview" l="90">
-      <i t="Coordinator" l="91" />
-      <i t="Screener" l="92" />
-      <i t="Editor" l="93" />
+  <i t="caMOD Administration" l="95">
+    <i t="Administration Functions Overview" l="96">
+      <i t="Coordinator" l="97" />
+      <i t="Screener" l="98" />
+      <i t="Editor" l="99" />
     </i>
-    <i t="Administration Roles" l="94">
-      <i t="Coordinator" l="95" />
-      <i t="Screener" l="96" />
-      <i t="Editor" l="97" />
+    <i t="Administration Roles" l="100">
+      <i t="Coordinator" l="101" />
+      <i t="Screener" l="102" />
+      <i t="Editor" l="103" />
     </i>
-    <i t="User Management" l="98">
-      <i t="Adding a New User" l="99" />
-      <i t="Roles Assignment" l="100" />
-      <i t="Assigning a Screener" l="101">
-        <i t="Screener Responsibilities" l="102" />
-        <i t="Assigning an Editor" l="103" />
-        <i t="Editor Responsibilities" l="104" />
+    <i t="User Management" l="104">
+      <i t="Adding a New User" l="105" />
+      <i t="Roles Assignment" l="106" />
+      <i t="Assigning a Screener" l="107">
+        <i t="Screener Responsibilities" l="108" />
+        <i t="Assigning an Editor" l="109" />
+        <i t="Editor Responsibilities" l="110" />
       </i>
     </i>
-    <i t="caMOD Permissions" l="105" />
-    <i t="Roles Management" l="106">
-      <i t="Coordinating the Review Process" l="107">
-        <i t="Assigning Functions/Grant Privileges for Screeners and Editors" l="108">
-          <i t="Appointing Screeners and Editors" l="108#1074529" />
-          <i t="Editing or Removing Roles" l="109" />
+    <i t="caMOD Permissions" l="111" />
+    <i t="Roles Management" l="112">
+      <i t="Coordinating the Review Process" l="113">
+        <i t="Assigning Functions/Grant Privileges for Screeners and Editors" l="114">
+          <i t="Appointing Screeners and Editors" l="114#1074529" />
+          <i t="Editing or Removing Roles" l="115" />
         </i>
-        <i t="Reviewing Models" l="110">
-          <i t="Assigning Models to Screeners" l="110#1074575" />
-          <i t="Assigning Models to Editors" l="111" />
+        <i t="Reviewing Models" l="116">
+          <i t="Assigning Models to Screeners" l="116#1074575" />
+          <i t="Assigning Models to Editors" l="117" />
         </i>
-        <i t="Review Follow-Up" l="112" />
-        <i t="Requesting More Information" l="113" />
+        <i t="Review Follow-Up" l="118" />
+        <i t="Requesting More Information" l="119" />
       </i>
-      <i t="Models Assignment" l="114" />
-      <i t="Screening a Model" l="115">
-        <i t="Screening Work flow" l="116" />
-        <i t="Comments Assignment" l="117" />
-        <i t="Editing a Model" l="118">
-          <i t="Editing Work flow" l="119" />
+      <i t="Models Assignment" l="120" />
+      <i t="Screening a Model" l="121">
+        <i t="Screening Work flow" l="122" />
+        <i t="Comments Assignment" l="123" />
+        <i t="Editing a Model" l="124">
+          <i t="Editing Work flow" l="125" />
         </i>
       </i>
     </i>
   </i>
-  <i t="Glossary" l="120" />
-  <i t="Application Support" l="121" />
+  <i t="Glossary" l="126" />
+  <i t="Application Support" l="127" />
 </WebWorksHelpTOC>
