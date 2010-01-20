@@ -18,7 +18,7 @@
         <j l="104#1073847" />
       </i>
     </i>
-    <i t="antibody form">
+    <i t="Antibody form">
       <j l="59#1237851" />
     </i>
     <i t="Application Support, caMOD">
@@ -32,7 +32,7 @@
     </i>
   </g>
   <g t="B" o="002">
-    <i t="bacteria form">
+    <i t="Bacteria form">
       <j l="60#1237258" />
     </i>
   </g>
@@ -90,7 +90,7 @@
         <j l="4#1082748" />
       </i>
     </i>
-    <i t="chemical/drug form">
+    <i t="Chemical/Drug form">
       <j l="61#1074527" />
     </i>
     <i t="Comments Assignment page">
@@ -150,7 +150,7 @@
         <j l="38" />
       </i>
       <i t="search">
-        <j l="27#1168460" />
+        <j l="27#1170539" />
       </i>
       <i t="yeast search results">
         <j l="34" />
@@ -293,11 +293,6 @@
         <j l="43#1104264" />
       </i>
     </i>
-    <i t="Model">
-      <i t="Characteristics">
-        <j l="48" />
-      </i>
-    </i>
     <i t="Model Characteristics page">
       <i t="description">
         <j l="12#1069299" />
@@ -324,7 +319,7 @@
     <i t="Models Assignment page">
       <j l="120#1074929" />
     </i>
-    <i t="Morpholino">
+    <i t="Morpholino form">
       <j l="74#1107162" />
     </i>
     <i t="Mouse Tumor biology (MTB) data">
@@ -346,6 +341,7 @@
   </g>
   <g t="P" o="002">
     <i t="plasmid form">
+      <j l="67#1237394" />
       <j l="67#1237397" />
     </i>
   </g>
@@ -370,11 +366,13 @@
         <j l="116#1074578" />
       </i>
     </i>
-    <i t="Roles Management page">
-      <j l="112#1075238" />
-    </i>
-    <i t="Roles management, modifying user assignments">
-      <j l="112#1075238" />
+    <i t="Roles Management">
+      <i t="modifying user assignments">
+        <j l="112#1075238" />
+      </i>
+      <i t="page description">
+        <j l="112#1075238" />
+      </i>
     </i>
   </g>
   <g t="S" o="002">
@@ -417,7 +415,7 @@
         <j l="19#1068971" />
       </i>
       <i t="drug screening">
-        <j l="27#1168460" />
+        <j l="27#1170539" />
       </i>
       <i t="EVS data tree">
         <j l="49#1101845" />
@@ -447,15 +445,21 @@
         <j l="34" />
       </i>
     </i>
-    <i t="signaling molecule form">
+    <i t="Signaling Molecule form">
       <j l="71#1237721" />
     </i>
     <i t="siRNA">
       <i t="background">
-        <j l="75#1244989" />
+        <j l="75#1253578" />
       </i>
       <i t="entering information">
         <j l="77" />
+      </i>
+      <i t="entering model information">
+        <j l="77#1107206" />
+      </i>
+      <i t="form">
+        <j l="75#1253578" />
       </i>
     </i>
     <i t="Spontaneous Mutation form">
@@ -486,6 +490,9 @@
     </i>
     <i t="transplantation">
       <j l="93#1088995" />
+    </i>
+    <i t="transposon form">
+      <j l="70#1237540" />
     </i>
     <i t="Transposon form">
       <j l="70#1237540" />

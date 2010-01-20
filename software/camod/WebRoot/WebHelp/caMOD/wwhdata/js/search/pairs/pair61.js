@@ -1,6 +1,5 @@
 function FileData_Pairs(x)
 {
-x.t("hemical/drug","enter");
 x.t("nsc","button");
 x.t("nsc","number");
 x.t("unmodified","state");
@@ -115,10 +114,10 @@ x.t("entry","gender");
 x.t("entry","fields");
 x.t("entry","selected");
 x.t("entry","added");
-x.t("chemical/drug","hemical/drug");
 x.t("chemical/drug","form");
 x.t("chemical/drug","listed");
 x.t("chemical/drug","text");
+x.t("chemical/drug","chemical/drug");
 x.t("chemical/drug","fields");
 x.t("chemical/drug","red");
 x.t("chemical/drug","select");

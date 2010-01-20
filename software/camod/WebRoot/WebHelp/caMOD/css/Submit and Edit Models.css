@@ -2532,6 +2532,98 @@ div.Cover_title
   padding-bottom: 0pt;
 }
 
+div.CoverDateRight
+{
+  color: #000000;
+  font-family: Arial;
+  font-size: 11.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  margin-bottom: 9.0pt;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0.0pt;
+  text-align: Right;
+  text-indent: 0pt;
+  text-transform: none;
+  vertical-align: baseline;
+}
+
+.CoverDateRight_outer
+{
+  margin-bottom: 9.0pt;
+  margin-right: 0pt;
+  margin-top: 0.0pt;
+}
+
+.CoverDateRight_inner
+{
+  color: #000000;
+  font-family: Arial;
+  font-size: 11.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  text-align: Right;
+  text-transform: none;
+  vertical-align: baseline;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+}
+
+div.CoverText
+{
+  color: #000000;
+  font-family: Arial;
+  font-size: 10.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  margin-bottom: 0.0pt;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0.0pt;
+  text-align: Left;
+  text-indent: 0pt;
+  text-transform: none;
+  vertical-align: baseline;
+}
+
+.CoverText_outer
+{
+  margin-bottom: 0.0pt;
+  margin-right: 0pt;
+  margin-top: 0.0pt;
+}
+
+.CoverText_inner
+{
+  color: #000000;
+  font-family: Arial;
+  font-size: 10.0pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  text-align: Left;
+  text-transform: none;
+  vertical-align: baseline;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+}
+
 div.Example
 {
   color: #000000;
