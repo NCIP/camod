@@ -27,11 +27,20 @@ public class AuthenticationFilter implements Filter {
     private String onFailure = "login.jsp";
     private FilterConfig filterConfig;
 
+    /**
+     * Called by the web container to indicate to a filter that it is being
+     * placed into service.
+     */
     public void init(FilterConfig filterConfig) throws ServletException {
         this.filterConfig = filterConfig;
         onFailure = this.filterConfig.getInitParameter("onFailure");
     }
 
+    /**
+     * The doFilter method of the Filter is called by the web container each time a
+     * request/response pair is passed through the chain due to a client request
+     * for a resource at the end of the chain.
+     */
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
             ServletException {
 
