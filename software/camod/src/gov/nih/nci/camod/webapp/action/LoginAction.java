@@ -93,7 +93,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -163,7 +162,7 @@ public final class LoginAction extends BaseAction {
         
                 if ( inResultSettings != null ) 
                 {
-                    log.info("queryString: " + request.getQueryString());                	
+                    log.debug("Customized queryString: " + request.getQueryString());                	
                     Set<ResultSettingsColumns> resultSettingsColumnsList = inResultSettings.getResultSettingsColumns();
                     Iterator <ResultSettingsColumns> setIter = resultSettingsColumnsList.iterator();                  
                     itemsPerPage = "" + inResultSettings.getItemsPerPage();
