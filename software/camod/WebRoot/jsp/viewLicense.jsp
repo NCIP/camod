@@ -1,22 +1,26 @@
 <%@ include file="/jsp/header.jsp" %>
 
+<!-- Should not be loggedin if first entering the site from this jsp -->
+<c:if test="${loggedin == 'true'}">
+	<c:set var="loggedin" value="false" scope="session"/>
+</c:if>
 
 <!-- Following cell is for main content -->
 <TR><TD valign=top width="100%"> 
 
 <!-- Following table is ended at the end of the Application footer -->
 <TABLE height="100%" cellSpacing=0 cellPadding=0 width="100%" summary="" border=0>
-	<TBODY>	
-<TR><TD valign=top width="100%">
+<TBODY>	
+	<TR><TD valign=top width="100%">
 
 <!-- Main Content Begins -->
 <TABLE class=contentPage cellSpacing=0 cellPadding=0 width=95% summary="" border=0>
 <TBODY>
-<TR>
-<TD valign="top">
+	<TR>
+	<TD valign="top">
 
 
-<B><FONT FACE="Arial" SIZE=2><P>LEGAL RULES OF THE ROAD</P>
+<B><FONT FACE="Arial" SIZE=2><P>LEGAL RULES OF THE ROAD</P></FONT>
 </B>
 <P align="justify">
 This Cancer Models Database is provided as a public service by the National Cancer Institute (NCI) to foster the rapid dissemination of information to the scientific community and the public. 
@@ -32,18 +36,19 @@ By submitting data to the NCI Cancer Models Database, you are certifying that yo
 <html:link action="infoPrivacyNotice">Use Guidelines</html:link>
 by clicking on the buttons below.</P>
 
-<B><P align="justify">I HAVE READ AND UNDERSTOOD THE ABOVE PROVISIONS, AND SIGNIFY MY AGREEMENT BY <a href="/camod/login.do">CLICKING HERE</a>.</P>
+<B><P align="justify">I HAVE READ AND UNDERSTOOD THE ABOVE PROVISIONS, AND SIGNIFY MY AGREEMENT BY <a href="/camod/loginMain.do">CLICKING HERE</a>.</P>
 
 </B>
 
 <P>&nbsp;</P>
-<p align="justify">
+<P align="justify">
 <html:link action="infoPrivacyNotice">USE GUIDELINES</html:link>: Posting of Data and Results/Downloading of Materials/Copyright Status/Privacy Notice/Monitoring of Website/External Links/Disclaimer of Liability/Disclaimer of Endorsement
       <P>Please send comments and suggestions to <A 
       href="mailto:ncicb@pop.nci.nih.gov?subject=Cancer Model Database(caMOD)">ncicb@pop.nci.nih.gov</A> 
       | <A 
       href="http://www.nih.gov/about/privacy.htm">Privacy Notice</A> | <A 
       href="http://cancer.gov/accessibility/nci508.htm">Accessibility 
-      Information</A> </P>
+      Information</A> 
+</P>
 
 <%@ include file="footer.jsp" %>

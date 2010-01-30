@@ -81,8 +81,8 @@
 								                                          </font></b>
 				                                                      </tr>
 				                                              </logic:messagesPresent>
-				                                              <c:if test="${notloggedin == 'true'}">
-				                                                  <c:set var="notloggedin" value="false" scope="session"/>
+				                                              <c:if test="${loggedin == 'false'}">
+				                                                  <c:set var="loggedin" value="true" scope="session"/>
 				                                      			  <tr><td colspan="3">					                                      				
 					                                      		      <span id="errorsHeader">
 					                                      			      <bean:message key="error.login.required"/>
