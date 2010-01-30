@@ -15,16 +15,17 @@
 
 package gov.nih.nci.camod.util;
 
-import gov.nih.nci.camod.Constants;
-
 import java.io.IOException;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 
 public class AuthenticationFilter implements Filter {
 
-    private String onFailure = "login.jsp";
+
     private FilterConfig filterConfig;
 
     /**
@@ -32,8 +33,9 @@ public class AuthenticationFilter implements Filter {
      * placed into service.
      */
     public void init(FilterConfig filterConfig) throws ServletException {
+    	System.out.println("AuthenticationFilter.init");
         this.filterConfig = filterConfig;
-        onFailure = this.filterConfig.getInitParameter("onFailure");
+        
     }
 
     /**
@@ -43,30 +45,90 @@ public class AuthenticationFilter implements Filter {
      */
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
             ServletException {
+    	System.out.println("AuthenticationFilter.doFilter");
 
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
+        System.out.println("req.getServletPath()= " + req.getServletPath());
+        System.out.println("Enter doFilter req.getSession().getId()= " + req.getSession().getId());
+        System.out.println("Enter doFilter notloggedin= " + (String)req.getSession().getAttribute("notloggedin"));
 
-        // if the requested page is the onFailure page continue
-        // down the chain to avoid an infinite redirect loop
-        if (req.getServletPath().equals(onFailure)) {
+        boolean authorized = false;
+    	String isloginpage = ((HttpServletRequest) request).getRequestURI();
+    	System.out.println("AuthenticationFilter.doFilter isloginpage= " + isloginpage);
+        boolean isRequestedSessionIdFromURL = ((HttpServletRequest) request).isRequestedSessionIdFromURL();
+        System.out.println("AuthenticationFilter.doFilter isRequestedSessionIdFromURL= " + isRequestedSessionIdFromURL);        
+        
+        if (request instanceof HttpServletRequest) {
+
+        	if(isloginpage!=null && !isRequestedSessionIdFromURL &&( 
+        			isloginpage.endsWith("loginMain.do") ||
+        			isloginpage.endsWith("/login.do")
+        			))	{
+        		System.out.println("AuthenticationFilter.doFilter login.do loop ");
+        		//just continue, so they can login
+        		generateNewSession((HttpServletRequest) request);
+        		chain.doFilter(request, response);
+                return;
+        	}  
+        	System.out.println("AuthenticationFilter.doFilter NOT login.do or loginMain.do ");        	
+        
+        	//check login for caMOD
+            HttpSession session = ((HttpServletRequest) request).getSession(false);
+            System.out.println("AuthenticationFilter.doFilter session= " + session);
+            if (session != null && !isRequestedSessionIdFromURL){
+	            String loggedin = (String)session.getAttribute("loggedin");
+	            System.out.println("AuthenticationFilter loggedin= " + loggedin);
+	            // reverse this property in application when this code works
+	            if(loggedin != null && loggedin.equals("true")){
+	            	System.out.println("AuthenticationFilter set authorized = true: " );
+	                	authorized = true;
+	            }
+            }
+        }
+        
+        if (authorized) {
+        	System.out.println("AuthenticationFilter.doFilter authorized loop");
             chain.doFilter(request, response);
             return;
-        }
-
-        HttpSession session = req.getSession(); // get the session or create it
-        String user = (String) session.getAttribute(Constants.CURRENTUSER);
-
-        if (user == null) {
-
-            session.setAttribute(Constants.LOGINFAILED, "true");
-
-            // redirect to the login page
-            res.sendRedirect(req.getContextPath() + onFailure);
-        } else {
-            chain.doFilter(request, response);
+        } else if (filterConfig != null) {
+        	// redirect to login.jsp from any unauthorized pages (external bookmarks to secure pages, ect)
+            String unauthorizedPage = filterConfig.getInitParameter("unauthorizedPage");
+            System.out.println("AuthenticationFilter.doFilter not authorized loop unauthorizedPage= " + unauthorizedPage);
+            
+            if (unauthorizedPage != null && !"".equals(unauthorizedPage)) {
+            	//System.out.println("unauthorizedPage != null && !.equals(unauthorizedPage) loop: ");
+            	generateNewSession((HttpServletRequest) request);
+            	System.out.println("Generated new session for request ");
+            	//chain.doFilter(request, response); 
+            	chain.doFilter(request, response);             
+                return; 
+            } 
+            
         }
     }
+    
+    private void generateNewSession(HttpServletRequest httpRequest){
+    	System.out.println("AuthenticationFilter generateNewSession 1");
+   	 HttpSession session = httpRequest.getSession();
+        HashMap<String, Object> old = new HashMap<String, Object>();
+        Enumeration<String> keys = (Enumeration<String>) session.getAttributeNames();
+        System.out.println("AuthenticationFilter generateNewSession 2");
+        while (keys.hasMoreElements()) {
+          String key = keys.nextElement();
+          old.put(key, session.getAttribute(key));
+        }
+        System.out.println("AuthenticationFilter generateNewSession 3");
+        //session invalidated 
+        session.invalidate();
+        session = httpRequest.getSession(true);
+        System.out.println("AuthenticationFilter generateNewSession 4");
+        for (Map.Entry<String, Object> entry : old.entrySet()) {
+          session.setAttribute(entry.getKey(), entry.getValue());
+        }
+        System.out.println("AuthenticationFilter generateNewSession 5");
+        
+   }    
 
     public void destroy() {
     }
