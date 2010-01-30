@@ -116,6 +116,7 @@ public final class LoginAction extends BaseAction {
 
         String theUsername = loginForm.getUsername().toLowerCase(); 
         
+        // added for the security scan for some reason
         Cookie validUserCookie = new Cookie("validUserKey", "123456789");
         response.addCookie(validUserCookie);        
         
