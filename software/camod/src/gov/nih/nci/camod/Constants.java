@@ -811,7 +811,7 @@ public class Constants {
 
     public static final String LOGINFAILED = "loginfailed";
     
-    public static final String NOTLOGGEDIN = "notloggedin";
+    public static final String LOGGEDIN = "loggedin";
 
     /**
      * Used for search results
