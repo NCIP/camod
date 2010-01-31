@@ -67,7 +67,7 @@ public class CustomRequestProcessor extends SecureRequestProcessor {
 
             if (user == null) {
                 log.debug("User not authorized.  Sending to login page");
-                request.getSession().setAttribute(Constants.NOTLOGGEDIN, "true");
+                request.getSession().setAttribute(Constants.LOGGEDIN, "false");
                 return mapping.findForward("login");
             }
         }
