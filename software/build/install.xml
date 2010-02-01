@@ -95,8 +95,8 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<property name="camod-resource.artifact.dir" value="${software.dir}/common/resources" />
 	
 	<!-- Added for properties-service.xml -->
-	<property name="camod.propertyservice.property.value1" value="C:/local/content/camod/config/camod.properties" />
-	<property name="camod.propertyservice.property.value2" value="C:/local/content/camod/config/mail.properties" />
+	<property name="camod.propertyservice.property.value1" value="/local/content/camod/config/camod.properties" />
+	<property name="camod.propertyservice.property.value2" value="/local/content/camod/config/mail.properties" />
 
 	<!-- Paths -->
 	<path id="bda-utils.classpath">
