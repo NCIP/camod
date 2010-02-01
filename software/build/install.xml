@@ -612,7 +612,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		
 		<!-- This code is for updating properties.service.xml, make sure to add ${line.separator} after each property def as the property delimiter, if this is not included you will not get the desired results. If you do not use properties service.xml you can delete this code. -->
 		<var name="property.block" 
-			value="${camod.propertyservice.property.name1}=${camod.propertyservice.property.value1}${line.separator}
+			value="gov.nih.nci.camod.camodProperties=${camod.propertyservice.property.value1}${line.separator}
 			gov.nih.nci.camod.mailProperties=${camod.propertyservice.property.value2}${line.separator}"/>
 
 		<!-- Update properties-service.xml -->
