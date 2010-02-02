@@ -95,7 +95,7 @@ public final class SearchAction extends BaseAction {
 			HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
-		log.info("<SearchAction> entered ");
+		log.debug("<SearchAction> entered ");
 
 		SearchForm theForm = new SearchForm();
 		SavedQuery resubmittedSavedQuery = null;
@@ -152,7 +152,7 @@ public final class SearchAction extends BaseAction {
 		}
 
 		if (theForm.getKeyword() != null && theForm.getKeyword().length() > 0) {
-			log.info("<SearchAction> Keyword: " + theForm.getKeyword());
+			log.debug("<SearchAction> Keyword: " + theForm.getKeyword());
 			request.getSession().setAttribute(Constants.KEYWORD_HIGHLIGHT,
 					theForm.getKeyword());
 		}
@@ -171,18 +171,18 @@ public final class SearchAction extends BaseAction {
 		else {
 
 			try {
-				log.info("<SearchAction> In search loop: ");
+				log.debug("<SearchAction> In search loop: ");
 				AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
 
 				// Calculate the elasped time of search
 				long start = System.currentTimeMillis();
-				log.info("<SearchAction> start: " + start);
+				log.debug("<SearchAction> start: " + start);
 
 				// Perform the search
 				List results = animalModelManager.search(theForm);
 
 				long elapsedTimeMillis = System.currentTimeMillis() - start;
-				log.info("<SearchAction> elapsedTimeMillis: " + elapsedTimeMillis);
+				log.debug("<SearchAction> elapsedTimeMillis: " + elapsedTimeMillis);
 
 				// Set search results constant
 				request.getSession().setAttribute(Constants.SEARCH_RESULTS,
@@ -197,7 +197,7 @@ public final class SearchAction extends BaseAction {
 				savedQuery.setNumberResults(results.size());
 
 				log
-						.info("<SearchAction>: savedQuery.setQueryName( No Name Provided )");
+						.debug("<SearchAction>: savedQuery.setQueryName( No Name Provided )");
 				savedQuery.setQueryName("No Name Provided");
 
 				if (resubmittedSavedQuery != null) {
@@ -229,7 +229,7 @@ public final class SearchAction extends BaseAction {
 				String currentUser = (String) request.getSession()
 						.getAttribute(Constants.CURRENTUSER);
 				
-				log.info("<SearchAction>: currentUser: " + currentUser);				
+				log.debug("<SearchAction>: currentUser: " + currentUser);				
 
 				if (currentUser != null && currentUser.length() >0) {
 					// Set the user for this save
@@ -249,7 +249,7 @@ public final class SearchAction extends BaseAction {
 				// Save the current form data into constants
 				request.getSession().setAttribute(Constants.SEARCH_FORM,
 						theForm);
-				log.info("<SearchAction>: Set form: " );
+				log.debug("<SearchAction>: Set form: " );
 
 			} catch (Exception e) {
 				log.info(e);
@@ -264,14 +264,14 @@ public final class SearchAction extends BaseAction {
 		// Create the Criteria HTML table to be display on the search result
 		// page
 		try {
-			log.info("<SearchAction>: Create the Criteria HTML: " );
+			log.debug("<SearchAction>: Create the Criteria HTML: " );
 			request.getSession().setAttribute(Constants.CRITERIATABLE,
 					CriteriaTableUtil.buildCriteriaDisplayTable(theForm));
 
 			request.getSession().setAttribute(Constants.DUP_NAME, "false");
 
 			request.getSession().setAttribute(Constants.NOSAVEOPTION, "false");
-			log.info("<SearchAction>: Finished Creating the Criteria HTML: " );
+			log.debug("<SearchAction>: Finished Creating the Criteria HTML: " );
 
 		} catch (Exception e) {
 			// Set the error message
@@ -280,8 +280,8 @@ public final class SearchAction extends BaseAction {
 					"errors.admin.message"));
 			saveErrors(request, msg);
 		}
-		log.info("<SearchAction>: Exiting: " );
-		log.info("<SearchAction>: theForward: " + theForward);
+		log.debug("<SearchAction>: Exiting: " );
+		log.debug("<SearchAction>: theForward: " + theForward);
 		return mapping.findForward(theForward);
 	}
 }
