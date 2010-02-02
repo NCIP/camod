@@ -50,7 +50,6 @@ public class LDAPUtil {
 	
     static public String getEmailAddressForUser(String inUsername) {
         String theSearchFilter = "(" + "cn" + "=" + inUsername + ")";
-        log.debug("LDAPUtil.getEmailAddressForUser inUsername: " + inUsername);
 
         String theEmailAddress = "";
         
@@ -108,7 +107,7 @@ public class LDAPUtil {
                     if (theAttribute.getID().equals("mail"))
                     {
                         theEmailAddress = theAttribute.get().toString();
-                        log.debug("theEmailAddress as mail from LDAP: " + theEmailAddress);
+                        log.info("theEmailAddress as mail from LDAP: " + theEmailAddress);
                         break;
                     }
                 }
