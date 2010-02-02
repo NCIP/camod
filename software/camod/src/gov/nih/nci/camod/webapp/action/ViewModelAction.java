@@ -409,6 +409,15 @@ public class ViewModelAction extends BaseAction
                                                 HttpServletResponse response) throws Exception
     {
         log.debug("<populateEngineeredGene> modelID" + request.getParameter("aModelID"));
+        
+        // Get and clean method to prevent Cross-Site Scripting 
+        String methodName = request.getParameter("unprotected_method");
+        log.debug("methodName: " + methodName);
+        if (!methodName.equals("populateEngineeredGene")){
+	        methodName = SafeHTMLUtil.clean(methodName);
+	        log.debug("methodName: " + methodName);
+        }
+        
         String modelID = request.getParameter("aModelID");
 
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
@@ -527,6 +536,14 @@ public class ViewModelAction extends BaseAction
                                                            HttpServletRequest request,
                                                            HttpServletResponse response) throws Exception
     {
+        // Get and clean method to prevent Cross-Site Scripting 
+        String methodName = request.getParameter("unprotected_method");
+        log.debug("methodName: " + methodName);
+        if (!methodName.equals("populateCarcinogenicInterventions")){
+	        methodName = SafeHTMLUtil.clean(methodName);
+	        log.debug("methodName: " + methodName);
+        }
+        
         setCancerModel(request);
         String modelID = request.getParameter(Constants.Parameters.MODELID);
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
@@ -595,6 +612,14 @@ public class ViewModelAction extends BaseAction
                                               HttpServletRequest request,
                                               HttpServletResponse response) throws Exception
     {
+        // Get and clean method to prevent Cross-Site Scripting 
+        String methodName = request.getParameter("unprotected_method");
+        log.debug("methodName: " + methodName);
+        if (!methodName.equals("populatePublications")){
+	        methodName = SafeHTMLUtil.clean(methodName);
+	        log.debug("methodName: " + methodName);
+        }    	
+    	
         setCancerModel(request);
         String modelID = request.getParameter("aModelID");
         List pubs = null;
@@ -633,6 +658,14 @@ public class ViewModelAction extends BaseAction
                                                 HttpServletRequest request,
                                                 HttpServletResponse response) throws Exception
     {
+        // Get and clean method to prevent Cross-Site Scripting 
+        String methodName = request.getParameter("unprotected_method");
+        log.debug("methodName: " + methodName);
+        if (!methodName.equals("populateHistopathology")){
+	        methodName = SafeHTMLUtil.clean(methodName);
+	        log.debug("methodName: " + methodName);
+        }     	
+    	
         setCancerModel(request);
         setComments(request, Constants.Pages.HISTOPATHOLOGY);
 
@@ -660,6 +693,14 @@ public class ViewModelAction extends BaseAction
                                                        HttpServletResponse response) throws Exception
     {
         log.debug("<ViewModelAction>  populateTherapeuticApproaches");
+        
+        // Get and clean method to prevent Cross-Site Scripting 
+        String methodName = request.getParameter("unprotected_method");
+        log.debug("methodName: " + methodName);
+        if (!methodName.equals("populateTherapeuticApproaches")){
+	        methodName = SafeHTMLUtil.clean(methodName);
+	        log.debug("methodName: " + methodName);
+        }          
         
         setCancerModel(request);
         //
@@ -744,7 +785,15 @@ public class ViewModelAction extends BaseAction
 	public ActionForward populateCaelmirTherapyDetails(ActionMapping mapping,
 			ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		//log.debug<"<ViewModelAction>  populateCaelmirTherapyDetails Enter");
+		log.debug("<ViewModelAction>  populateCaelmirTherapyDetails Enter");
+		
+        // Get and clean method to prevent Cross-Site Scripting 
+        String methodName = request.getParameter("unprotected_method");
+        log.debug("methodName: " + methodName);
+        if (!methodName.equals("populateCaelmirTherapyDetails")){
+	        methodName = SafeHTMLUtil.clean(methodName);
+	        log.debug("methodName: " + methodName);
+        } 		
 
 		setCancerModel(request);
 		JSONArray jsonArray = new JSONArray();
@@ -851,6 +900,14 @@ public class ViewModelAction extends BaseAction
                                            HttpServletRequest request,
                                            HttpServletResponse response) throws Exception
     {
+        // Get and clean method to prevent Cross-Site Scripting 
+        String methodName = request.getParameter("unprotected_method");
+        log.debug("methodName: " + methodName);
+        if (!methodName.equals("populateCellLines")){
+	        methodName = SafeHTMLUtil.clean(methodName);
+	        log.debug("methodName: " + methodName);
+        }     	
+    	
         setCancerModel(request);
         setComments(request, Constants.Pages.CELL_LINES);
 
@@ -877,6 +934,14 @@ public class ViewModelAction extends BaseAction
                                                        HttpServletRequest request,
                                                        HttpServletResponse response) throws Exception
     {
+        // Get and clean method to prevent Cross-Site Scripting 
+        String methodName = request.getParameter("unprotected_method");
+        log.debug("methodName: " + methodName);
+        if (!methodName.equals("populateTransientInterference")){
+	        methodName = SafeHTMLUtil.clean(methodName);
+	        log.debug("methodName: " + methodName);
+        }     	
+    	
         setCancerModel(request);
         setComments(request, Constants.Pages.TRANSIENT_INTERFERENCE);
 
@@ -904,6 +969,14 @@ public class ViewModelAction extends BaseAction
                                         HttpServletRequest request,
                                         HttpServletResponse response) throws Exception
     {
+        // Get and clean method to prevent Cross-Site Scripting 
+        String methodName = request.getParameter("unprotected_method");
+        log.debug("methodName: " + methodName);
+        if (!methodName.equals("populateImages")){
+	        methodName = SafeHTMLUtil.clean(methodName);
+	        log.debug("methodName: " + methodName);
+        }      	
+    	
         setCancerModel(request);
         setComments(request, Constants.Pages.IMAGES);
 
@@ -930,6 +1003,14 @@ public class ViewModelAction extends BaseAction
                                              HttpServletRequest request,
                                              HttpServletResponse response) throws Exception
     {
+        // Get and clean method to prevent Cross-Site Scripting 
+        String methodName = request.getParameter("unprotected_method");
+        log.debug("methodName: " + methodName);
+        if (!methodName.equals("populateMicroarrays")){
+	        methodName = SafeHTMLUtil.clean(methodName);
+	        log.debug("methodName: " + methodName);
+        } 
+        
         setCancerModel(request);
         //Get external properties file
 		Properties camodProperties = new Properties();
@@ -979,7 +1060,16 @@ public class ViewModelAction extends BaseAction
                                                      HttpServletRequest request,
                                                      HttpServletResponse response) throws Exception
     {
-        log.debug("<populateTransplantation> Enter:");    	
+        log.debug("<populateTransplantation> Enter:"); 
+        
+        // Get and clean method to prevent Cross-Site Scripting 
+        String methodName = request.getParameter("unprotected_method");
+        log.debug("methodName: " + methodName);
+        if (!methodName.equals("populateTransplantation")){
+	        methodName = SafeHTMLUtil.clean(methodName);
+	        log.debug("methodName: " + methodName);
+        }         
+        
         setCancerModel(request);
         setComments(request, Constants.Pages.TRANSPLANTATION);
         log.debug("<populateTransplantation> Exit:"); 
@@ -1006,7 +1096,16 @@ public class ViewModelAction extends BaseAction
                                                   HttpServletRequest request,
                                                   HttpServletResponse response) throws Exception
     {
-        log.debug("<populateTransplantationDetails> Enter:");    	
+        log.debug("<populateTransplantationDetails> Enter:"); 
+        
+        // Get and clean method to prevent Cross-Site Scripting 
+        String methodName = request.getParameter("unprotected_method");
+        log.debug("methodName: " + methodName);
+        if (!methodName.equals("populateTransplantationDetails")){
+	        methodName = SafeHTMLUtil.clean(methodName);
+	        log.debug("methodName: " + methodName);
+        }        
+        
         String modelID = request.getParameter("tModelID");
         request.getSession().setAttribute(Constants.MODELID, modelID);
         String nsc = request.getParameter("nsc");
