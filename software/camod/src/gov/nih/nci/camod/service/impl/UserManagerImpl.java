@@ -148,7 +148,7 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 	 * @throws Exception
 	 */
 	public List getRolesForUser(String inUsername) throws Exception {
-		log.info("Entering getRolesForUser");
+		log.debug("Entering getRolesForUser");
 
 		List<String> theRoles = new ArrayList<String>();
 
@@ -231,7 +231,7 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 	 * @throws Exception
 	 */
 	public List<String> getUsersForRole(String inRoleName) throws Exception {
-		log.info("Entering getUsersForRole");
+		log.debug("Entering getUsersForRole");
 
 		List<String> theUsersForRole = new ArrayList<String>();
 
@@ -281,19 +281,19 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 	 * @return the list of users associated with the role
 	 */
 	public String getEmailForUser(String inUsername) {
-		log.info("Entering getEmailForUser");
-		log.info("Username: " + inUsername);
+		log.debug("Entering getEmailForUser");
+		log.debug("Username: " + inUsername);
 
 		String theEmail = "";
 
 		try {
 			theEmail = LDAPUtil.getEmailAddressForUser(inUsername);
-			log.info("<getEmailForUser> theEmail: " + theEmail.toString());
+			log.debug("<getEmailForUser> theEmail: " + theEmail.toString());
 		} catch (Exception e) {
-			log.info("Could not fetch user from LDAP", e);
+			log.debug("Could not fetch user from LDAP", e);
 		}
 
-		log.info("Exiting getEmailForUser");
+		log.debug("Exiting getEmailForUser");
 
 		return theEmail;
 	}
@@ -319,7 +319,7 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 	 * @return the list of users associated with the role
 	 */
 	public String getEmailForCoordinator() {
-		log.info("Entering getEmailForCoordinator");
+		log.debug("Entering getEmailForCoordinator");
 
 		String theEmail = "";
 
@@ -347,14 +347,14 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 
 			String theCoordinator = camodProperties
 					.getProperty("coordinator.username");
-			log.info("theCoordinator: " + theCoordinator.toString());
+			log.debug("theCoordinator: " + theCoordinator.toString());
 
 			theEmail = getEmailForUser(theCoordinator);
 		} catch (Exception e) {
 			log.warn("Unable to get coordinator email: ", e);
 		}
 
-		log.info("Exiting getEmailForCoordinator");
+		log.debug("Exiting getEmailForCoordinator");
 
 		return theEmail;
 	}
@@ -375,7 +375,7 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 			HttpServletRequest inRequest) {
 		boolean loginOk = true;
 		try {
-            log.info("login method inside try");
+            log.debug("login method inside try");
 			// Work around bug in CSM. Empty passwords pass
 			if (inPassword.trim().length() != 0) {
 				//loginOk = theAuthenticationMgr.login(inUsername, inPassword);
