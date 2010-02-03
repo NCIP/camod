@@ -64,7 +64,7 @@ public class AvailabilityInvestigatorPopulateAction extends BaseAction {
     public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.info("<AvailabilityInvestigatorPopulateAction populate> Entering ");
+        log.debug("<AvailabilityInvestigatorPopulateAction populate> Entering ");
 
         // Create a form to edit
         AvailabilityForm availabilityForm = (AvailabilityForm) form;
@@ -74,7 +74,7 @@ public class AvailabilityInvestigatorPopulateAction extends BaseAction {
         String aAvailabilityID = request.getParameter("aAvailabilityID");
 
         AnimalAvailability avilablity = AvailabilityManagerSingleton.instance().get(aAvailabilityID);
-        log.info("avilablity (id and name): " + avilablity);
+        log.debug("avilablity (id and name): " + avilablity);
 
         if (avilablity == null) {
             request.setAttribute(Constants.Parameters.DELETED, "true");
@@ -91,7 +91,7 @@ public class AvailabilityInvestigatorPopulateAction extends BaseAction {
                     if (avilablity.getStockNumber() != null){
                     	if(avilablity.getStockNumber().equals("-1")) {
 
-                        log.info("Old 2-tier format.  Setting the stock number to the PI");
+                        log.debug("Old 2-tier format.  Setting the stock number to the PI");
 
                         // Get the PI from the model
                         String theModelID = "" + request.getSession().getAttribute(Constants.MODELID);
@@ -107,7 +107,7 @@ public class AvailabilityInvestigatorPopulateAction extends BaseAction {
                     // AnimalAvailability table
                     availabilityForm.setPrincipalInvestigator(avilablity
             					.getPrincipalInvestigator().getUsername());
-            		log.info("am.getPrincipalInvestigator().getUsername(): " + avilablity
+            		log.debug("am.getPrincipalInvestigator().getUsername(): " + avilablity
             					.getPrincipalInvestigator().getUsername());
                         
                     }
