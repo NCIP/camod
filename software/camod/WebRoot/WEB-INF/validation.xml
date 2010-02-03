@@ -101,11 +101,23 @@
 		</form>
 
 		<form name="loginForm">
-			<field property="username" depends="required">
+			<field property="username" depends="required,minlength">
 				<arg0 key="loginForm.username" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>7</var-value>
+				</var>				
 			</field>
-			<field property="password" depends="required">
+			<field property="password" depends="required,minlength">
 				<arg0 key="loginForm.password" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>7</var-value>
+				</var>				
 			</field>
 		</form>
 
