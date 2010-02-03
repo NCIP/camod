@@ -618,6 +618,7 @@ public class ViewModelAction extends BaseAction
         setCancerModel(request);
         String modelID = request.getParameter("aModelID");
         List pubs = null;
+        
         try
         {
             pubs = QueryManagerSingleton.instance().getAllPublications(Long.valueOf(modelID).longValue());
