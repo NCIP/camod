@@ -39,6 +39,7 @@ import gov.nih.nci.camod.service.CommentsManager;
 import gov.nih.nci.camod.service.PersonManager;
 import gov.nih.nci.camod.util.SafeHTMLUtil;
 
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -65,18 +66,28 @@ public class AdminRolesPopulateAction extends BaseAction {
 			HttpServletResponse inResponse) throws Exception {
 
 		log.trace("Entering AdminRolesPopulateAction.execute");
+		
+        // Clean all headers for security scan (careful about what chars you allow)
+    	String headername = "";
+    	for(Enumeration e = inRequest.getHeaderNames(); e.hasMoreElements();){
+    		headername = (String)e.nextElement();
+    		log.debug("AdminRolesPopulateAction headername: " + headername);
+    		String cleanHeaders = SafeHTMLUtil.clean(headername);
+    		log.debug("AdminRolesPopulateAction cleaned headername: " + headername);
+    	}
+    	
     	// get and clean header to prevent SQL injection
        	String sID = null;
         if (inRequest.getHeader("X-Forwarded-For") != null){
         	sID = inRequest.getHeader("X-Forwarded-For");
-            log.info("sID: " + sID);
+            log.debug("sID: " + sID);
             sID = SafeHTMLUtil.clean(sID);
         }
         
         // get and clean Referer header to prevent SQL injection
         if (inRequest.getHeader("Referer") != null){
         	sID = inRequest.getHeader("Referer");
-            log.info("sID: " + sID);
+            log.debug("sID: " + sID);
             sID = SafeHTMLUtil.clean(sID);
         }            
         
