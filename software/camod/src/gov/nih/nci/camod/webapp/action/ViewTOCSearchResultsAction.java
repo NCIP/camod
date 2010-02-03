@@ -58,22 +58,22 @@ public class ViewTOCSearchResultsAction extends BaseAction {
     public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
     	
-    	log.info("In ViewTOCSearchResultsAction.execute");
+    	log.debug("In ViewTOCSearchResultsAction.execute");
     	
         // Clean all headers for security scan (careful about what chars you allow)
     	String headername = "";
     	for(Enumeration e = request.getHeaderNames(); e.hasMoreElements();){
     		headername = (String)e.nextElement();
-    		log.info("ViewTOCSearchResultsAction headername: " + headername);
+    		log.debug("ViewTOCSearchResultsAction headername: " + headername);
     		String cleanHeaders = SafeHTMLUtil.clean(headername);
-    		log.info("ViewTOCSearchResultsAction cleaned headername: " + headername);
+    		log.debug("ViewTOCSearchResultsAction cleaned headername: " + headername);
     	}    	
         
         String theForward = "next";
         
         // check for TOC query names inside try
         String theKey = (String) request.getParameter(Constants.Parameters.TOCQUERYKEY);
-        log.info("theKey: " + theKey);
+        log.info("ViewTOCSearchResultsAction theKey: " + theKey);
   
 
         try {
