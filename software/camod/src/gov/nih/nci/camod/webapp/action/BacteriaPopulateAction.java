@@ -30,7 +30,7 @@ public class BacteriaPopulateAction extends BaseAction {
 	public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-        log.info("<BacteriaPopulateAction populate> Entered ");
+        log.debug("<BacteriaPopulateAction populate> Entered ");
 
 		BacteriaForm bacteriaForm = (BacteriaForm) form;
 
@@ -59,7 +59,7 @@ public class BacteriaPopulateAction extends BaseAction {
 			// Added for MTB models that do not have a treatment id
 			if (ce.getTreatment() != null ) {			
 				if (ce.getTreatment().getAdminRouteAlternEntry() != null ) {
-					log.info("ce.getTreatment().getAdminRouteAlternEntry: "  + ce.getTreatment().getAdminRouteAlternEntry().toString());
+					log.debug("ce.getTreatment().getAdminRouteAlternEntry: "  + ce.getTreatment().getAdminRouteAlternEntry().toString());
 					bacteriaForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
 					bacteriaForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteAlternEntry());
 				} else {
@@ -82,7 +82,7 @@ public class BacteriaPopulateAction extends BaseAction {
             }
             
 		}
-        log.info("<BacteriaPopulateAction populate> Got fields ");
+        log.debug("<BacteriaPopulateAction populate> Got fields ");
 		// Prepopulate all dropdown fields, set the global Constants to the
 		// following
 		this.dropdown(request, response);
