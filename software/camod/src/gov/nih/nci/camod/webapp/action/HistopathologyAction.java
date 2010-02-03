@@ -95,7 +95,7 @@ public class HistopathologyAction extends BaseAction {
     public ActionForward editHistopathology(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.info("<HistopathologyAction> Entering 'edit' method");
+        log.debug("<HistopathologyAction> Entering 'edit' method");
 
         // Grab the current aHistopathID from the session
         String aHistopathologyID = request.getParameter("aHistopathologyID");
@@ -271,7 +271,7 @@ public class HistopathologyAction extends BaseAction {
     public ActionForward saveHistopathology(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.info("<HistopathologyAction> Entering 'save' method");
+        log.debug("<HistopathologyAction> Entering 'save' method");
 
         // Grab the current modelID from the session
         String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
