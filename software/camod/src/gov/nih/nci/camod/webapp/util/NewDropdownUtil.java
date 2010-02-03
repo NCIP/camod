@@ -713,7 +713,7 @@ public class NewDropdownUtil
      */
     private static List getEnvironmentalFactorList(String inType) throws Exception
     {
-        log.info("<getEnvironmentalFactorList> inType: " + inType);
+        log.debug("<getEnvironmentalFactorList> inType: " + inType);
         List theEnvFactorList = QueryManagerSingleton.instance().getEnvironmentalFactors(inType);
 
         addOther(theEnvFactorList);
