@@ -107,14 +107,14 @@ public class HistopathologyPopulateAction extends BaseAction {
     public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.info("<HistopathologyPopulateAction populate> Entered");
+        log.debug("<HistopathologyPopulateAction populate> Entered");
 
         HistopathologyForm histopathologyForm = (HistopathologyForm) form;
-        log.info("histopathologyForm: " + histopathologyForm);
+        log.debug("histopathologyForm: " + histopathologyForm);
 
         // Grab the current aHistopathID from the session
         String aHistopatholgyID = request.getParameter("aHistopathologyID");
-        log.info("aHistopatholgyID: " + aHistopatholgyID);
+        log.debug("aHistopatholgyID: " + aHistopatholgyID);
 
         Histopathology theHistopathology = HistopathologyManagerSingleton.instance().get(aHistopatholgyID);
 
@@ -128,19 +128,19 @@ public class HistopathologyPopulateAction extends BaseAction {
             this.dropdown(request, response);
 
             /* set Organ attributes */
-            log.info("<HistopathologyPopulateAction populate> get the Organ attributes");
+            log.debug("<HistopathologyPopulateAction populate> get the Organ attributes");
 
             // since we are always querying from concept code (save and edit),
             // simply display EVSPreferredDescription, unless concept code is '00000'
             if (theHistopathology.getOrgan().getConceptCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)) {
 	            histopathologyForm.setOrgan(theHistopathology.getOrgan().getName());
-	            log.info("theHistopathology.getOrgan().getName(): " + theHistopathology.getOrgan().getName());	
+	            log.debug("theHistopathology.getOrgan().getName(): " + theHistopathology.getOrgan().getName());	
 	            histopathologyForm.setOrganTissueCode(theHistopathology.getOrgan().getConceptCode());
-	            log.info("OrganTissueCode: " + theHistopathology.getOrgan().getConceptCode()); 	            
+	            log.debug("OrganTissueCode: " + theHistopathology.getOrgan().getConceptCode()); 	            
             	
             } else {
 	            histopathologyForm.setOrgan(theHistopathology.getOrgan().getEVSPreferredDescription());
-	            log.info("theHistopathology.getOrgan().getEVSPreferredDescription(): " + theHistopathology.getOrgan().getEVSPreferredDescription());	
+	            log.debug("theHistopathology.getOrgan().getEVSPreferredDescription(): " + theHistopathology.getOrgan().getEVSPreferredDescription());	
 	            histopathologyForm.setOrganTissueCode(theHistopathology.getOrgan().getConceptCode());
             }
             
@@ -148,7 +148,7 @@ public class HistopathologyPopulateAction extends BaseAction {
             Disease disease = theHistopathology.getDisease();
             // get disease for Zebrafish models when 'Other' is selected from list
             if(disease.getNameAlternEntry() != null  && disease.getNameAlternEntry().length() >0) {
-            	log.info("disease is other in DB for Zebrafish");
+            	log.debug("disease is other in DB for Zebrafish");
             	histopathologyForm.setTumorClassification(Constants.Dropdowns.OTHER_OPTION);
             	histopathologyForm.setDiagnosisCode(disease.getConceptCode());            	
             	histopathologyForm.setOtherTumorClassification(disease.getNameAlternEntry());
@@ -156,18 +156,18 @@ public class HistopathologyPopulateAction extends BaseAction {
             } else {
             	// get disease for models (i.e. Zebrafish diagnosis selected from list) and Mouse entered manually
             	if (disease.getConceptCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS) ){
-                	log.info("disease getConceptCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS");
+                	log.debug("disease getConceptCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS");
             		// Concept code is 00000, so just use name
 	            	histopathologyForm.setDiagnosisName(disease.getName());
-	            	log.info("disease.getName(): " + disease.getName());
+	            	log.debug("disease.getName(): " + disease.getName());
 	            	histopathologyForm.setDiagnosisCode(disease.getConceptCode());
-	            	log.info("disease.getConceptCode(): " + disease.getConceptCode());
+	            	log.debug("disease.getConceptCode(): " + disease.getConceptCode());
 	            	histopathologyForm.setTumorClassification(disease.getName());
-	            	log.info("disease.getName(): " + disease.getName());
+	            	log.debug("disease.getName(): " + disease.getName());
             		
             	} else {
             		// get disease for models selected from the EVS tree (i.e. Mouse, Rat)
-            		log.info("disease getConceptCode() not equal to Constants.Dropdowns.CONCEPTCODEZEROS");
+            		log.debug("disease getConceptCode() not equal to Constants.Dropdowns.CONCEPTCODEZEROS");
             		// Concept code is not 000000, so get preferred name from EVS 
 	            	histopathologyForm.setDiagnosisName(disease.getEVSPreferredDescription());
 	            	histopathologyForm.setDiagnosisCode(disease.getConceptCode());
@@ -224,7 +224,7 @@ public class HistopathologyPopulateAction extends BaseAction {
     public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.info("<HistopathologyPopulateAction dropdown> Entering ActionForward dropdown()");
+        log.debug("<HistopathologyPopulateAction dropdown> Entering ActionForward dropdown()");
 
         // setup dropdown menus
         this.dropdown(request, response);
@@ -241,7 +241,7 @@ public class HistopathologyPopulateAction extends BaseAction {
      */
     public void dropdown(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        log.info("<HistopathologyPopulateAction dropdown> Entering void dropdown()");
+        log.debug("<HistopathologyPopulateAction dropdown> Entering void dropdown()");
 
         // Prepopulate all dropdown fields, set the global Constants to the
         // following
