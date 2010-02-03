@@ -84,7 +84,7 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>AuthenticationFilter</filter-name>
-		<url-pattern>/LoginAction.do</url-pattern>
+		<url-pattern>/login.do</url-pattern>
 	</filter-mapping>	
 	<filter-mapping>
 		<filter-name>hibernateFilter</filter-name>
