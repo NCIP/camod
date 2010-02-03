@@ -245,6 +245,7 @@
   <StrutsActivity path="infoWhatsNew;6" location="2845,3118" dimension="149,75" />
   <StrutsActivity path="loggedOut;6" location="4908,3118" dimension="129,75" />
   <StrutsActivity path="login;6" location="25168,715" dimension="81,75" />
+  <StrutsActivity path="loginMain;6" location="4250,1150" dimension="100,81" />
   <StrutsActivity path="viewLicense;6" location="4546,3118" dimension="136,75" />
   <StrutsActivity path="loginMenu;6" location="5255,3118" dimension="127,75" />
   <StrutsActivity path="loginSuccess;6" location="4180,3118" dimension="139,75" />
@@ -1177,6 +1178,12 @@
       <AbsolutePoint location="1928,3293" />
     </AutomaticBendpoints>
   </StrutsTransition>
+  <StrutsTransition id="/LoginAction.do,success,/ReturnUserModels.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="26073,753" />
+      <AbsolutePoint location="2663,1411" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
   <StrutsTransition id="/SaveQueryAction.do,noSaveOption,/searchResults.do,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="4262,1455" />
@@ -1555,6 +1562,12 @@
     <AutomaticBendpoints>
       <AbsolutePoint location="2724,3193" />
       <AbsolutePoint location="2724,3293" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="loginMain;6,null,/login.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="0,0" />
+      <AbsolutePoint location="5628,1920" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="input,null,/PlasmidAction.do,2" routingType="0">
