@@ -73,7 +73,8 @@ public class SafeHTMLUtil {
         clean = StringUtils.replace(clean, ")", "");
         clean = StringUtils.replace(clean, "/", "");
         clean = StringUtils.replace(clean, "\\", "");
-        clean = StringUtils.replace(clean, "javascript", "");        
+        clean = StringUtils.replace(clean, "javascript", "");
+        clean = StringUtils.replace(clean, "alert", "cleanName"); 
         if(clean.length()==0){
                 clean = "empty";
         }
