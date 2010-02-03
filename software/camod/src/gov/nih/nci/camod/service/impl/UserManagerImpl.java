@@ -373,12 +373,12 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 	 */
 	public boolean login(String inUsername, String inPassword,
 			HttpServletRequest inRequest) {
-		boolean loginOk = true;
+		boolean loginOk = false;
 		try {
             log.debug("login method inside try");
 			// Work around bug in CSM. Empty passwords pass
 			if (inPassword.trim().length() != 0) {
-				//loginOk = theAuthenticationMgr.login(inUsername, inPassword);
+				loginOk = theAuthenticationMgr.login(inUsername, inPassword);
 				// Does the user exist? Must also be in our database to login
 				List theRoles = getRolesForUser(inUsername);
 				inRequest.getSession().setAttribute(Constants.CURRENTUSERROLES,
