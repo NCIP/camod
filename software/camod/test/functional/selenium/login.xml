@@ -18,12 +18,12 @@
 <tr>
 	<td>type</td>
 	<td>MAINbody:loginForm:username</td>
-	<td>camodcurator</td>
+	<td>camodcurator2</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>MAINbody:loginForm:password</td>
-	<td>TB!ontb8</td>
+	<td>DataEntry1!</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
