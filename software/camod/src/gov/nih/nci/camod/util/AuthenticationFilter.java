@@ -109,27 +109,29 @@ public class AuthenticationFilter implements Filter {
     }
     
     private void generateNewSession(HttpServletRequest httpRequest){
-    	System.out.println("AuthenticationFilter generateNewSession 1");
+    	System.out.println("AuthenticationFilter generateNewSession enter");
    	 HttpSession session = httpRequest.getSession();
         HashMap<String, Object> old = new HashMap<String, Object>();
         Enumeration<String> keys = (Enumeration<String>) session.getAttributeNames();
-        System.out.println("AuthenticationFilter generateNewSession 2");
         while (keys.hasMoreElements()) {
           String key = keys.nextElement();
           old.put(key, session.getAttribute(key));
         }
-        System.out.println("AuthenticationFilter generateNewSession 3");
         //session invalidated 
         session.invalidate();
         session = httpRequest.getSession(true);
-        System.out.println("AuthenticationFilter generateNewSession 4");
         for (Map.Entry<String, Object> entry : old.entrySet()) {
           session.setAttribute(entry.getKey(), entry.getValue());
         }
-        System.out.println("AuthenticationFilter generateNewSession 5");
+        System.out.println("AuthenticationFilter generateNewSession exit");
         
-   }    
-
+   } 
+    
+    /**
+     * Called by the web container to indicate to a filter that it is being
+     * taken out of service.
+     */
     public void destroy() {
+        filterConfig = null;
     }
 }
