@@ -84,8 +84,10 @@ import gov.nih.nci.camod.domain.ResultSettingsColumns;
 import gov.nih.nci.camod.service.SavedQueryManager;
 import gov.nih.nci.camod.service.ResultSettingsManager;
 import gov.nih.nci.camod.service.impl.UserManagerSingleton;
+import gov.nih.nci.camod.util.SafeHTMLUtil;
 import gov.nih.nci.camod.webapp.form.LoginForm;
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -120,6 +122,15 @@ public final class LoginAction extends BaseAction {
         Cookie validUserCookie = new Cookie("validUserKey", "123456789");
         response.addCookie(validUserCookie);        
         
+
+        // Clean all headers for security scan (careful about what chars you allow)
+    	String headername = "";
+    	for(Enumeration e = request.getHeaderNames(); e.hasMoreElements();){
+    		headername = (String)e.nextElement();
+    		log.debug("LoginAction headername: " + headername);
+    		String cleanHeaders = SafeHTMLUtil.clean(headername);
+    		log.debug("LoginAction cleaned headername: " + headername);
+    	}        
         
         //  Example to secure a cookie, i.e. instruct the browser to
         //  Send the cookie using a secure protocol
@@ -144,6 +155,7 @@ public final class LoginAction extends BaseAction {
             
             forward = "success";
             request.getSession().setAttribute(Constants.CURRENTUSER, theUsername);
+            log.info("Session id= " + request.getSession().getId());
             
 		    //Used for sidebar, number of saved queries
             SavedQueryManager savedQueryManager = (SavedQueryManager) getBean("savedQueryManager");   
