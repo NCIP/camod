@@ -51,12 +51,14 @@
 
 package gov.nih.nci.camod.webapp.action;
 
+import java.util.Enumeration;
 import java.util.Set;
 import gov.nih.nci.camod.domain.SavedQuery;
 import gov.nih.nci.camod.domain.SavedQueryAttribute;
 import gov.nih.nci.camod.domain.Species;
 import gov.nih.nci.camod.service.SavedQueryManager;
 import gov.nih.nci.camod.service.impl.SpeciesManagerSingleton;
+import gov.nih.nci.camod.util.SafeHTMLUtil;
 import gov.nih.nci.camod.webapp.form.SearchForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 import gov.nih.nci.camod.Constants;
@@ -79,7 +81,16 @@ public class AdvancedSearchPopulateAction extends BaseAction {
     public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.debug("In AdvancedSearchPopulateAction.populate");		       
+        log.debug("In AdvancedSearchPopulateAction.populate");	
+        
+        // Clean all headers for security scan (careful about what chars you allow)
+    	String headername = "";
+    	for(Enumeration e = request.getHeaderNames(); e.hasMoreElements();){
+    		headername = (String)e.nextElement();
+    		log.debug("AdvancedSearchPopulateAction headername: " + headername);
+    		String cleanHeaders = SafeHTMLUtil.clean(headername);
+    		log.debug("AdvancedSearchPopulateAction cleaned headername: " + headername);
+    	}
 
         // Reset the non-simple-search options
         SearchForm theSearchForm = (SearchForm) form;
