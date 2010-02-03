@@ -141,13 +141,13 @@ public class SimpleSearchPopulateAction extends BaseAction {
     }
     public ActionForward setSpeciesForOrganTree(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
-    	
+    	log.info("theSearchForm.setSpeciesForOrganTree(): " );
     	String theSearchSpecies = null;    	
         SearchForm theSearchForm = (SearchForm) form;
         
         // Check if null - if user goes from species to empty this correctly redirects to screen        
         if (theSearchForm.getSpecies() !=null && theSearchForm.getSpecies().length() > 0){
-            log.debug("theSearchForm.getSpecies(): "+ theSearchForm.getSpecies());
+            log.info("theSearchForm.getSpecies(): "+ theSearchForm.getSpecies());
             
             // Set selected species to a constant to determine which organ tree displays 
             // using common name because Rat has two species
