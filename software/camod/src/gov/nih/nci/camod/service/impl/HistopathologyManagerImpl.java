@@ -285,7 +285,7 @@ public class HistopathologyManagerImpl extends BaseManager implements
             HistopathologyData inHistopathologyData,
             Histopathology inHistopathology) throws Exception { 
 
-        log.info("<HistopathologyManagerImpl> Entering populateDisease");
+        log.debug("<HistopathologyManagerImpl> Entering populateDisease");
         log.debug("DiagnosisCode: " + inHistopathologyData.getDiagnosisCode());
         log.debug("DiagnosisName: " + inHistopathologyData.getDiagnosisName()); 
         log.debug("TumorClassification: " + inHistopathologyData.getTumorClassification());
