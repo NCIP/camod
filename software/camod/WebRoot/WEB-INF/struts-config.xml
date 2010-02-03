@@ -266,7 +266,7 @@
 			path="/login.do"></forward>
 			
 		<forward name="loginMain" 
-			path="/login.jsp"></forward>		
+			path="/jsp/login.jsp"></forward>		
 		
 		<forward
 			name="viewLicense"
