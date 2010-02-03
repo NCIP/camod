@@ -23,7 +23,7 @@ public class SearchAdminAssignmentAction extends BaseAction {
 			HttpServletRequest inRequest, HttpServletResponse inResponse)
 			throws IOException, ServletException {
 
-		log.info("<SearchAdminAssignmentAction> entered ");
+		log.debug("<SearchAdminAssignmentAction> entered ");
 
 		CurationAssignmentForm theForm = (CurationAssignmentForm)inForm;
 		theForm.toString();
