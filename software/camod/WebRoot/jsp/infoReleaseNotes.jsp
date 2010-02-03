@@ -22,7 +22,7 @@
      
                              caMOD
                           Version 2.6
-                           January 2010
+                          February 2010
 
        National Cancer Institute's Center for Biomedical Informatics and Information Technology 
  
@@ -64,7 +64,7 @@
     2.0 Release History 
 ================================================================ 
      caMOD Version 2.6 
-    --	January 2010
+    --	February 2010
     
     caMOD Version 2.5.1  
     --	June 2009
