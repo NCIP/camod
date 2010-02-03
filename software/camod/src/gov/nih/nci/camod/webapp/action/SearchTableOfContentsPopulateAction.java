@@ -14,7 +14,9 @@ package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.service.impl.TOCManager;
+import gov.nih.nci.camod.util.SafeHTMLUtil;
 
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +35,16 @@ public class SearchTableOfContentsPopulateAction extends BaseAction {
     public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.info("In SearchTableOfContentsPopulateAction.populate");
+        log.debug("In SearchTableOfContentsPopulateAction.populate");
+        
+        // Clean all headers for security scan (careful about what chars you allow)
+    	String headername = "";
+    	for(Enumeration e = request.getHeaderNames(); e.hasMoreElements();){
+    		headername = (String)e.nextElement();
+    		log.debug("SearchTableOfContentsPopulateAction headername: " + headername);
+    		String cleanHeaders = SafeHTMLUtil.clean(headername);
+    		log.debug("SearchTableOfContentsPopulateAction cleaned headername: " + headername);
+    	}          
 
         // Get the curation manager workflow XML
         TOCManager theTOCManager = new TOCManager(getServlet().getServletContext().getRealPath("/")
@@ -43,7 +54,7 @@ public class SearchTableOfContentsPopulateAction extends BaseAction {
 
         request.getSession().setAttribute(Constants.TOCSearch.TOC_QUERY_RESULTS, theResults);
         
-        log.info("Exiting SearchTableOfContentsPopulateAction.populate");
+        log.debug("Exiting SearchTableOfContentsPopulateAction.populate");
         return mapping.findForward("next");
     }
 
