@@ -359,32 +359,27 @@ public class ViewModelAction extends BaseAction
                                                       HttpServletRequest request,
                                                       HttpServletResponse response) throws Exception
     {
-        request.getSession(true);    	
+        request.getSession(true); 
         
-        try {
-        	// get and clean header to prevent SQL injection
-           	String sID = null;
-            if (request.getHeader("X-Forwarded-For") != null){
-            	sID = request.getHeader("X-Forwarded-For");
-	            log.debug("sID: " + sID);
-	            sID = SafeHTMLUtil.clean(sID);
-            }
-            
-            // get and clean Referer header to prevent SQL injection
-            if (request.getHeader("Referer") != null){
-            	sID = request.getHeader("Referer");
-	            log.debug("sID: " + sID);
-	            sID = SafeHTMLUtil.clean(sID);
-            }            
-            
-	        // Get and clean method to prevent Cross-Site Scripting 
-	        String methodName = request.getParameter("unprotected_method");
+        // Clean all headers for security scan (careful about what chars you allow)
+    	String headername = "";
+    	for(Enumeration e = request.getHeaderNames(); e.hasMoreElements();){
+    		headername = (String)e.nextElement();
+    		log.debug("populateModelCharacteristics headername: " + headername);
+    		String cleanHeaders = SafeHTMLUtil.clean(headername);
+    		log.debug("populateModelCharacteristics cleaned headername: " + headername);
+    	}
+       
+        
+        // Get and clean method to prevent Cross-Site Scripting 
+        String methodName = request.getParameter("unprotected_method");
+        log.debug("methodName: " + methodName);
+        if (!methodName.equals("populateModelCharacteristics")){
+	        methodName = SafeHTMLUtil.clean(methodName);
 	        log.debug("methodName: " + methodName);
-	        if (!methodName.equals("populateModelCharacteristics")){
-		        methodName = SafeHTMLUtil.clean(methodName);
-		        log.debug("methodName: " + methodName);
-	        }            
-            
+        }      	
+        
+        try {      
         	
 	        setCancerModel(request);
 	        setComments(request, Constants.Pages.MODEL_CHARACTERISTICS);
