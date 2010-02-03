@@ -97,14 +97,14 @@ public class SubmitAction extends BaseAction {
             
             AnimalModelStateForm theForm = new AnimalModelStateForm();
             theForm.setModelId(am.getId().toString());
-            log.info("setModelId: " + am.getId().toString());
+            log.debug("setModelId: " + am.getId().toString());
             
             // Get the coordinator
     		Properties camodProperties = new Properties();
     		String camodPropertiesFileName = null;
 
     		camodPropertiesFileName = System.getProperty("gov.nih.nci.camod.camodProperties");
-    		log.info("camodPropertiesFileName: " + camodPropertiesFileName.toString());
+    		log.debug("camodPropertiesFileName: " + camodPropertiesFileName.toString());
     		
     		try {
 			
