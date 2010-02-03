@@ -72,11 +72,11 @@ public class SubmitAction extends BaseAction {
     public ActionForward setModelConstants(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.info("<SubmitAction setModelConstants> Constants.Parameters.MODELID="
+        log.debug("<SubmitAction setModelConstants> Constants.Parameters.MODELID="
                 + request.getParameter(Constants.Parameters.MODELID));
 
         String modelID = request.getParameter(Constants.Parameters.MODELID);
-        log.info("modelID: " + modelID);
+        log.debug("modelID: " + modelID);
 
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
 
