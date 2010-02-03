@@ -30,7 +30,7 @@ public class AntibodyPopulateAction extends BaseAction {
 	public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-        log.info("<AntibodyPopulateAction populate> Entered ");        
+        log.debug("<AntibodyPopulateAction populate> Entered ");        
 
 		AntibodyForm antibodyForm = (AntibodyForm) form;
 
@@ -48,12 +48,12 @@ public class AntibodyPopulateAction extends BaseAction {
 
 			// Set the otherName and/or the selected name attribute
 			if (ce.getEnvironmentalFactor().getNameAlternEntry() != null) {
-		        log.info("ce.getEnvironmentalFactor().getNameAlternEntry(): " + ce.getEnvironmentalFactor().getNameAlternEntry());				
+		        log.debug("ce.getEnvironmentalFactor().getNameAlternEntry(): " + ce.getEnvironmentalFactor().getNameAlternEntry());				
 				antibodyForm.setName(Constants.Dropdowns.OTHER_OPTION);
 				antibodyForm.setOtherName(ce.getEnvironmentalFactor().getNameAlternEntry());
 			} else {
 				antibodyForm.setName(ce.getEnvironmentalFactor().getName());
-		        log.info("ce.getEnvironmentalFactor().getName(): " + ce.getEnvironmentalFactor().getName());				
+		        log.debug("ce.getEnvironmentalFactor().getName(): " + ce.getEnvironmentalFactor().getName());				
 			}
 
 			// Set the other administrative route and/or the selected
@@ -61,12 +61,12 @@ public class AntibodyPopulateAction extends BaseAction {
 			// Added for MTB models that do not have a treatment id
 			if (ce.getTreatment() != null ) {
 				if (ce.getTreatment().getAdminRouteAlternEntry() != null ) {
-					log.info("ce.getTreatment().getAdminRouteAlternEntry(): " + ce.getTreatment().getAdminRouteAlternEntry());				
+					log.debug("ce.getTreatment().getAdminRouteAlternEntry(): " + ce.getTreatment().getAdminRouteAlternEntry());				
 					antibodyForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
 					antibodyForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteAlternEntry());
 				} else {
 					antibodyForm.setAdministrativeRoute(ce.getTreatment().getAdministrativeRoute());
-					log.info("ce.getTreatment().getAdminRouteAlternEntry(): " + ce.getTreatment().getAdminRouteAlternEntry());				
+					log.debug("ce.getTreatment().getAdminRouteAlternEntry(): " + ce.getTreatment().getAdminRouteAlternEntry());				
 				}
 	
 				if (ce.getTreatment().getSexDistribution() != null) {
