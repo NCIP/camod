@@ -154,7 +154,7 @@ public class EvsTreeUtil
 		camodPropertiesFileName = System.getProperty("gov.nih.nci.camod.camodProperties");
 
 		try {
-			log.log.debug("EVSApplicationService.getApplicationService Enter : " );
+			log.debug("EVSApplicationService.getApplicationService Enter : " );
 			// load properties from external file
 			FileInputStream in = new FileInputStream(camodPropertiesFileName);
 			camodProperties.load(in);
