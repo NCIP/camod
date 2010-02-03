@@ -75,6 +75,7 @@ import gov.nih.nci.camod.service.impl.CurationManagerImpl;
 import gov.nih.nci.camod.util.SafeHTMLUtil;
 import gov.nih.nci.camod.webapp.form.ModelCharacteristicsForm;
 import java.util.*;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.*;
@@ -449,17 +450,27 @@ public final class AnimalModelAction extends BaseAction {
 			ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) {
 		log.debug("<AnimalModelAction returnUserModels> Entering... ");
+		
+        // Clean all headers for security scan (careful about what chars you allow)
+    	String headername = "";
+    	for(Enumeration e = request.getHeaderNames(); e.hasMoreElements();){
+    		headername = (String)e.nextElement();
+    		log.debug("populateModelCharacteristics headername: " + headername);
+    		String cleanHeaders = SafeHTMLUtil.clean(headername);
+    		log.debug("populateModelCharacteristics cleaned headername: " + headername);
+    	}
+    	
+        // Get and clean method to prevent Cross-Site Scripting
+        String methodName = request.getParameter("method");
+        log.debug("methodName: " + methodName);
+        if (!methodName.equals("returnUserModels")){
+	        methodName = SafeHTMLUtil.clean(methodName);
+	        log.debug("methodName: " + methodName);
+        }    	
 
 		AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
 
 		try {
-	        // Get and clean method to prevent Cross-Site Scripting
-	        String methodName = request.getParameter("method");
-	        log.debug("methodName: " + methodName);
-	        if (!methodName.equals("returnUserModels")){
-		        methodName = SafeHTMLUtil.clean(methodName);
-		        log.debug("methodName: " + methodName);
-	        }				
 
 			List amList = animalModelManager.getAllByUser((String) request
 					.getSession().getAttribute(Constants.CURRENTUSER));
