@@ -1838,7 +1838,7 @@
           <forward
 	            name="success"
 	            redirect="true"
-	            path="/loginRedirect.do">
+	            path="/ReturnUserModels.do?method=returnUserModels">
 	      </forward>
           <forward 
 	            name="failure"  
