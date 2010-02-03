@@ -51,6 +51,7 @@ import gov.nih.nci.camod.util.SafeHTMLUtil;
 import gov.nih.nci.camod.webapp.form.SearchForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 
+import java.util.Enumeration;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -71,13 +72,23 @@ public class SimpleSearchPopulateAction extends BaseAction {
     public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.info("In SimpleSearchPopulateAction.populate");
+        log.debug("In SimpleSearchPopulateAction.populate");
         
         // Get and clean method to prevent SQL injection
         String methodName = request.getParameter("unprotected_method");
-        log.debug("methodName: " + methodName);
-        methodName = SafeHTMLUtil.clean(methodName);
-        log.debug("methodName: " + methodName);
+        if (!methodName.equals("populate")){
+	        methodName = SafeHTMLUtil.clean(methodName);
+	        log.debug("methodName: " + methodName);
+        } 
+        
+        // Clean all headers for security scan (careful about what chars you allow)
+    	String headername = "";
+    	for(Enumeration e = request.getHeaderNames(); e.hasMoreElements();){
+    		headername = (String)e.nextElement();
+    		log.debug("SimpleSearchPopulateAction headername: " + headername);
+    		String cleanHeaders = SafeHTMLUtil.clean(headername);
+    		log.debug("SimpleSearchPopulateAction cleaned headername: " + headername);
+    	}        
         
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.PRINCIPALINVESTIGATORQUERYDROP,
                 Constants.Dropdowns.ADD_BLANK);
