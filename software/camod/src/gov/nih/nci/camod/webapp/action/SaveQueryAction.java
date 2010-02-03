@@ -27,11 +27,13 @@ import gov.nih.nci.camod.domain.SavedQuery;
 import gov.nih.nci.camod.domain.SavedQueryAttribute;
 import gov.nih.nci.camod.service.PersonManager;
 import gov.nih.nci.camod.service.SavedQueryManager;
+import gov.nih.nci.camod.util.SafeHTMLUtil;
 import gov.nih.nci.camod.webapp.form.SaveQueryForm;
 import gov.nih.nci.camod.webapp.form.SearchForm;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Set;
 
@@ -72,6 +74,24 @@ public class SaveQueryAction extends BaseAction
         
         SaveQueryForm theForm = (SaveQueryForm) form;
         SavedQueryManager savedQueryManager = (SavedQueryManager) getBean("savedQueryManager");
+        
+        // Added for security scan to Filter out hazardous characters from user input 
+       	String cleanQueryName = theForm.getQueryName();
+        if (theForm.getQueryName() != null && theForm.getQueryName().length() > 0){
+        	log.debug("QueryName: " + theForm.getQueryName()); 
+        	cleanQueryName = SafeHTMLUtil.clean(theForm.getQueryName());
+        	theForm.setQueryName(cleanQueryName);
+            log.debug("cleanQueryName: " + cleanQueryName);            
+        }
+        
+        // Clean all headers for security scan (careful about what chars you allow)
+    	String headername = "";
+    	for(Enumeration e = request.getHeaderNames(); e.hasMoreElements();){
+    		headername = (String)e.nextElement();
+    		log.debug("populateModelCharacteristics headername: " + headername);
+    		String cleanHeaders = SafeHTMLUtil.clean(headername);
+    		log.debug("populateModelCharacteristics cleaned headername: " + headername);
+    	}        
         
         log.info("SaveQueryForm\n" + 
         							"Page=" + theForm.getPage() + "\n" +
