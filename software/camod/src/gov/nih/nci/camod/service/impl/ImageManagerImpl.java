@@ -71,12 +71,12 @@ import org.apache.struts.upload.FormFile;
 public class ImageManagerImpl extends BaseManager implements ImageManager {
 
 	public List getAll() throws Exception {
-		log.trace("In ImageManagerImpl.getAll");
+		log.debug("In ImageManagerImpl.getAll");
 		return super.getAll(Image.class);
 	}
 
 	public Image get(String id) throws Exception {
-		log.trace("In ImageManagerImpl.get");
+		log.debug("In ImageManagerImpl.get");
 		return (Image) super.get(id, Image.class);
 	}
 
@@ -86,7 +86,7 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
 	}
 
 	public void remove(String id, AnimalModel inAnimalModel) throws Exception {
-		log.trace("In ImageManagerImpl.remove");
+		log.debug("In ImageManagerImpl.remove");
 
 		inAnimalModel.getImageCollection().remove(get(id));
 		super.save(inAnimalModel);
@@ -110,7 +110,7 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
 			Image inImage, String inPath, String inStorageDirKey)
 			throws Exception {
 
-		log.trace("Entering ImageManagerImpl.update");
+		log.debug("Entering ImageManagerImpl.update");
 		log.debug("Updating ImageForm: " + inImage.getId());
 
 		// Populate w/ the new values and save
@@ -118,7 +118,7 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
 				inStorageDirKey);
 		save(inImage);
 
-		log.trace("Exiting ImageManagerImpl.update");
+		log.debug("Exiting ImageManagerImpl.update");
 	}
 
 	private void populateImage(AnimalModel inAnimalModel,
@@ -326,7 +326,7 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
 			}
 		}
 
-		log.trace("Exiting populateImage");
+		log.info("Exiting populateImage");
 	}
 
 
