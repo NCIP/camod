@@ -117,9 +117,9 @@ public class NewDropdownUtil
                                         String inFilter) throws Exception
     {
 
-        log.trace("Entering NewDropdownUtil.populateDropdown");
+        log.info("Entering NewDropdownUtil.populateDropdown");
 
-        log.debug("Generating a dropdown for the following key: " + inDropdownKey);
+        log.info("Generating a dropdown for the following key: " + inDropdownKey);
 
         List theList = null;
         if (inDropdownKey.indexOf(".txt") != -1)
@@ -540,7 +540,7 @@ public class NewDropdownUtil
     private static List getQueryNonHumanSpeciesList(HttpServletRequest inRequest,
                                                 String inAddBlank) throws Exception
     {
-        log.trace("Entering NewDropdownUtil.getQueryNonHumanSpeciesList");
+        log.info("Entering NewDropdownUtil.getQueryNonHumanSpeciesList");
 
         // Get values for dropdown lists for Species
         // for each Species, get it's commonName (scientificName)
@@ -555,6 +555,7 @@ public class NewDropdownUtil
                 if (theSpecies.getScientificName() != null && !theSpecies.getScientificName().equals(Constants.Dropdowns.HUMANSCIENTIFICNAME))
                 {
                     String theDisplayName = theSpecies.getDisplayName();
+                    log.info("Entering NewDropdownUtil.getQueryNonHumanSpeciesList  :" + theDisplayName);
                     if (theDisplayName.length() > 0)
                     {
                         DropdownOption theOption = new DropdownOption(theDisplayName, theSpecies.getScientificName());
