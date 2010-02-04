@@ -91,9 +91,10 @@
 				                                      		  </c:if>
 				                                      		  <c:if test="${loginfailed == 'true'}">
 					                                      	      <c:set var="loginfailed" value="false" scope="session"/>
-				                                      		      <tr><td colspan="3">					                                      				
+				                                      		      <tr><td colspan="3">
+				                                      		      		<html:errors/>					                                      				
 					                                      		      <span id="errorsHeader">
-					                                      		          <bean:message key="errors.validation.header"/>
+					                                      		          <bean:message key="error.login.invalid"/>
 				                                      			      </span>
 			                                      				  </td></tr>
 					                                      	  </c:if> 
