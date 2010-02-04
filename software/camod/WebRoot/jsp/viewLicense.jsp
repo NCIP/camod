@@ -1,10 +1,5 @@
 <%@ include file="/jsp/header.jsp" %>
 
-<!-- Should not be loggedin if first entering the site from this jsp -->
-<c:if test="${loggedin == 'true'}">
-	<c:set var="loggedin" value="false" scope="session"/>
-</c:if>
-
 <!-- Following cell is for main content -->
 <TR><TD valign=top width="100%"> 
 
