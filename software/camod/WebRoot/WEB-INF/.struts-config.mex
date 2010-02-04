@@ -27,7 +27,6 @@
   <StrutsActivity path="/submitEngineeredTransgene.do" location="14726,1367" dimension="238,88" />
   <StrutsActivity path="/submitEnvironmentalFactors.do" location="4588,1367" dimension="238,88" />
   <StrutsActivity path="/submitGeneDelivery.do" location="6220,1367" dimension="238,88" />
-  <StrutsActivity path="/loginRedirect.do" location="26020,1367" dimension="238,88" />
   <StrutsActivity path="/submitGenomicSegment.do" location="13923,1367" dimension="238,88" />
   <StrutsActivity path="/submitGrowthFactors.do" location="19297,1367" dimension="238,88" />
   <StrutsActivity path="/submitHistopathology.do" location="15151,1367" dimension="238,88" />
@@ -245,7 +244,6 @@
   <StrutsActivity path="infoWhatsNew;6" location="2845,3118" dimension="149,75" />
   <StrutsActivity path="loggedOut;6" location="4908,3118" dimension="129,75" />
   <StrutsActivity path="login;6" location="25168,715" dimension="81,75" />
-  <StrutsActivity path="loginMain;6" location="4250,1150" dimension="100,81" />
   <StrutsActivity path="viewLicense;6" location="4546,3118" dimension="136,75" />
   <StrutsActivity path="loginMenu;6" location="5255,3118" dimension="127,75" />
   <StrutsActivity path="loginSuccess;6" location="4180,3118" dimension="139,75" />
@@ -448,6 +446,8 @@
   <StrutsActivity path="/jsp/viewTransplant.jsp" location="3650,2250" dimension="142,49" />
   <StrutsActivity path="submitTransplant;6" location="5750,2250" dimension="132,51" />
   <StrutsActivity path="/jsp/protected/submitTransplant.jsp" location="1550,2350" dimension="222,51" />
+  <StrutsActivity path="/jsp/login.jsp" location="950,2250" dimension="100,51" />
+  <StrutsActivity path="/loginMain.do" />
   <StrutsTransition id="loggedOut;6,null,/jsp/loggedOut.jsp,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="4972,3193" />
@@ -482,9 +482,9 @@
   <StrutsTransition id="input,null,/SearchSimpleAction.do,2" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="14976,49" />
-      <AbsolutePoint location="14976,154" />
-      <AbsolutePoint location="8562,154" />
-      <AbsolutePoint location="8562,1367" />
+      <AbsolutePoint location="14976,631" />
+      <AbsolutePoint location="8592,631" />
+      <AbsolutePoint location="8592,1367" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="submitPlasmid;6,null,/jsp/protected/submitPlasmid.jsp,1" routingType="0">
@@ -495,10 +495,10 @@
   </StrutsTransition>
   <StrutsTransition id="/SubmitAction.do,failure,/ReturnUserModels.do,1" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="1339,797" />
-      <AbsolutePoint location="1339,1025" />
-      <AbsolutePoint location="2603,1025" />
-      <AbsolutePoint location="2603,1367" />
+      <AbsolutePoint location="1369,709" />
+      <AbsolutePoint location="1369,295" />
+      <AbsolutePoint location="2736,295" />
+      <AbsolutePoint location="2736,1367" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/AdminEditUserAction.do,next,/AdminUserManagementPopulateAction.do,1" routingType="0">
@@ -516,9 +516,9 @@
   </StrutsTransition>
   <StrutsTransition id="/SearchAdvancedAction.do,input,/searchAdvanced.do,1" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="3333,1367" />
-      <AbsolutePoint location="3333,1251" />
-      <AbsolutePoint location="2112,1251" />
+      <AbsolutePoint location="3303,1455" />
+      <AbsolutePoint location="3303,1500" />
+      <AbsolutePoint location="2112,1500" />
       <AbsolutePoint location="2112,1575" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -548,8 +548,8 @@
   </StrutsTransition>
   <StrutsTransition id="input,null,/GrowthFactorAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="15025,39" />
-      <AbsolutePoint location="19416,39" />
+      <AbsolutePoint location="15025,32" />
+      <AbsolutePoint location="19416,32" />
       <AbsolutePoint location="19416,709" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -621,8 +621,8 @@
   </StrutsTransition>
   <StrutsTransition id="/DuplicateAnimalModelAction.do,failure,/ReturnUserModels.do,1" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="2082,797" />
-      <AbsolutePoint location="2082,1394" />
+      <AbsolutePoint location="2112,797" />
+      <AbsolutePoint location="2112,1394" />
       <AbsolutePoint location="2516,1394" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -636,8 +636,8 @@
     <AutomaticBendpoints>
       <AbsolutePoint location="8946,797" />
       <AbsolutePoint location="8946,812" />
-      <AbsolutePoint location="2693,812" />
-      <AbsolutePoint location="2693,1367" />
+      <AbsolutePoint location="2633,812" />
+      <AbsolutePoint location="2633,1367" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/AssociatedMetastasisAction.do,input,/submitAssocMetastasis.do,1" routingType="0">
@@ -649,8 +649,8 @@
   <StrutsTransition id="/TransposonAction.do,input,/submitTransposon.do,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="3809,4050" />
-      <AbsolutePoint location="3809,3964" />
-      <AbsolutePoint location="4976,3964" />
+      <AbsolutePoint location="3809,3972" />
+      <AbsolutePoint location="4976,3972" />
       <AbsolutePoint location="4976,3946" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -674,8 +674,8 @@
   </StrutsTransition>
   <StrutsTransition id="input,null,/AdminUserSettingsAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="14972,40" />
-      <AbsolutePoint location="10985,40" />
+      <AbsolutePoint location="14972,42" />
+      <AbsolutePoint location="10985,42" />
       <AbsolutePoint location="10985,753" />
       <AbsolutePoint location="10975,753" />
     </AutomaticBendpoints>
@@ -695,8 +695,8 @@
   <StrutsTransition id="/SirnaAction.do,input,/submitSirna.do,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="4499,797" />
-      <AbsolutePoint location="4499,1697" />
-      <AbsolutePoint location="5146,1697" />
+      <AbsolutePoint location="4499,1617" />
+      <AbsolutePoint location="5146,1617" />
       <AbsolutePoint location="5146,1455" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -709,10 +709,11 @@
   </StrutsTransition>
   <StrutsTransition id="input,null,/AssociatedExpressionAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="14976,0" />
-      <AbsolutePoint location="14976,-75" />
-      <AbsolutePoint location="10055,-75" />
-      <AbsolutePoint location="10055,709" />
+      <AbsolutePoint location="15025,46" />
+      <AbsolutePoint location="16580,46" />
+      <AbsolutePoint location="16580,155" />
+      <AbsolutePoint location="10025,155" />
+      <AbsolutePoint location="10025,709" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/RegisterUserAction.do,cancel,/login.do,1" routingType="0">
@@ -735,39 +736,38 @@
   </StrutsTransition>
   <StrutsTransition id="/SavedQueriesPopulateAction.do,next,/savedSearchQueries.do,1" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="5267,1896" />
-      <AbsolutePoint location="5267,1778" />
-      <AbsolutePoint location="1117,1778" />
+      <AbsolutePoint location="5281,1896" />
+      <AbsolutePoint location="5281,1790" />
+      <AbsolutePoint location="1117,1790" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="input,null,/PublicationAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="15025,36" />
-      <AbsolutePoint location="20245,36" />
+      <AbsolutePoint location="15025,30" />
+      <AbsolutePoint location="20245,30" />
       <AbsolutePoint location="20245,709" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="input,null,/BacteriaAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="14998,49" />
-      <AbsolutePoint location="14998,2240" />
-      <AbsolutePoint location="6199,2240" />
-      <AbsolutePoint location="6199,2250" />
+      <AbsolutePoint location="15023,49" />
+      <AbsolutePoint location="15023,2298" />
+      <AbsolutePoint location="6349,2298" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="input,null,/GenomicSegmentAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="15011,49" />
-      <AbsolutePoint location="15011,665" />
-      <AbsolutePoint location="14042,665" />
+      <AbsolutePoint location="15008,49" />
+      <AbsolutePoint location="15008,670" />
+      <AbsolutePoint location="14042,670" />
       <AbsolutePoint location="14042,709" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="input,null,/TransposonAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="15025,24" />
-      <AbsolutePoint location="15035,24" />
-      <AbsolutePoint location="15035,4156" />
+      <AbsolutePoint location="15025,42" />
+      <AbsolutePoint location="15055,42" />
+      <AbsolutePoint location="15055,4156" />
       <AbsolutePoint location="3809,4156" />
       <AbsolutePoint location="3809,4146" />
     </AutomaticBendpoints>
@@ -786,8 +786,8 @@
   </StrutsTransition>
   <StrutsTransition id="input,null,/CustomizeSearchResultsPopulateAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="15025,41" />
-      <AbsolutePoint location="18236,41" />
+      <AbsolutePoint location="15025,36" />
+      <AbsolutePoint location="18236,36" />
       <AbsolutePoint location="18236,709" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -832,8 +832,8 @@
   </StrutsTransition>
   <StrutsTransition id="input,null,/AdminEditUserAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="15025,29" />
-      <AbsolutePoint location="22719,29" />
+      <AbsolutePoint location="15025,26" />
+      <AbsolutePoint location="22719,26" />
       <AbsolutePoint location="22719,709" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -939,9 +939,9 @@
   <StrutsTransition id="/AdminUserSettingsAction.do,cancel,/ReturnUserModels.do,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="10782,797" />
-      <AbsolutePoint location="10782,1065" />
-      <AbsolutePoint location="2710,1065" />
-      <AbsolutePoint location="2710,1367" />
+      <AbsolutePoint location="10782,1125" />
+      <AbsolutePoint location="2693,1125" />
+      <AbsolutePoint location="2693,1367" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/PlasmidAction.do,input,/submitPlasmid.do,1" routingType="0">
@@ -977,8 +977,9 @@
   </StrutsTransition>
   <StrutsTransition id="input,null,/ImageAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="15025,34" />
-      <AbsolutePoint location="20622,34" />
+      <AbsolutePoint location="15020,0" />
+      <AbsolutePoint location="15020,-7" />
+      <AbsolutePoint location="20622,-7" />
       <AbsolutePoint location="20622,709" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -991,16 +992,16 @@
   <StrutsTransition id="/AnimalModelAction.do,input,/AnimalModelPopulateAction.do,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="9034,797" />
-      <AbsolutePoint location="9034,1308" />
-      <AbsolutePoint location="11358,1308" />
+      <AbsolutePoint location="9034,1192" />
+      <AbsolutePoint location="11358,1192" />
       <AbsolutePoint location="11358,1367" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="input,null,/MicroArrayDataAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="15009,0" />
-      <AbsolutePoint location="15009,-20" />
-      <AbsolutePoint location="220,-20" />
+      <AbsolutePoint location="15002,0" />
+      <AbsolutePoint location="15002,-10" />
+      <AbsolutePoint location="220,-10" />
       <AbsolutePoint location="220,850" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -1018,16 +1019,16 @@
   </StrutsTransition>
   <StrutsTransition id="input,null,/TargetedModificationAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="14972,46" />
-      <AbsolutePoint location="12279,46" />
-      <AbsolutePoint location="12279,753" />
-      <AbsolutePoint location="12269,753" />
+      <AbsolutePoint location="15000,49" />
+      <AbsolutePoint location="15000,67" />
+      <AbsolutePoint location="12100,67" />
+      <AbsolutePoint location="12100,709" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="input,null,/MorpholinoAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="14972,38" />
-      <AbsolutePoint location="9765,38" />
+      <AbsolutePoint location="14972,40" />
+      <AbsolutePoint location="9765,40" />
       <AbsolutePoint location="9765,753" />
       <AbsolutePoint location="9755,753" />
     </AutomaticBendpoints>
@@ -1040,16 +1041,17 @@
   </StrutsTransition>
   <StrutsTransition id="input,null,/AntibodyAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="15025,42" />
-      <AbsolutePoint location="15035,42" />
-      <AbsolutePoint location="15035,4024" />
-      <AbsolutePoint location="356,4024" />
+      <AbsolutePoint location="14976,0" />
+      <AbsolutePoint location="14976,-75" />
+      <AbsolutePoint location="-105,-75" />
+      <AbsolutePoint location="-105,3998" />
+      <AbsolutePoint location="50,3998" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="input,null,/TherapyAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="15025,46" />
-      <AbsolutePoint location="17393,46" />
+      <AbsolutePoint location="15025,40" />
+      <AbsolutePoint location="17393,40" />
       <AbsolutePoint location="17393,709" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -1101,8 +1103,8 @@
   <StrutsTransition id="/ViewTOCSearchResultsAction.do,next,/searchResults.do,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="5538,1455" />
-      <AbsolutePoint location="5538,1640" />
-      <AbsolutePoint location="4411,1640" />
+      <AbsolutePoint location="5538,1600" />
+      <AbsolutePoint location="4411,1600" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="submitTargetedModification;6,null,/jsp/protected/submitTargetedModification.jsp,1" routingType="0">
@@ -1120,8 +1122,8 @@
   <StrutsTransition id="/MicroArrayDataAction.do,input,/submitMicroarrayData.do,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="50,898" />
-      <AbsolutePoint location="-75,898" />
-      <AbsolutePoint location="-75,3490" />
+      <AbsolutePoint location="-45,898" />
+      <AbsolutePoint location="-45,3490" />
       <AbsolutePoint location="5951,3490" />
       <AbsolutePoint location="5951,3520" />
     </AutomaticBendpoints>
@@ -1135,8 +1137,8 @@
   <StrutsTransition id="/ChangeAnimalModelToCompleteNotScreenedAction.do,next,/AdminEditModelsPopulateAction.do,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="1464,1984" />
-      <AbsolutePoint location="1464,2029" />
-      <AbsolutePoint location="1035,2029" />
+      <AbsolutePoint location="1464,1999" />
+      <AbsolutePoint location="1035,1999" />
       <AbsolutePoint location="1035,2084" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -1154,9 +1156,10 @@
   </StrutsTransition>
   <StrutsTransition id="/AntibodyAction.do,input,/submitAntibody.do,1" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="203,3950" />
-      <AbsolutePoint location="203,3933" />
-      <AbsolutePoint location="3050,3933" />
+      <AbsolutePoint location="253,3950" />
+      <AbsolutePoint location="253,3756" />
+      <AbsolutePoint location="3176,3756" />
+      <AbsolutePoint location="3176,3850" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="viewHistopathology;6,null,/jsp/viewHistopathology.jsp,1" routingType="0">
@@ -1180,8 +1183,10 @@
   </StrutsTransition>
   <StrutsTransition id="/LoginAction.do,success,/ReturnUserModels.do,1" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="26073,753" />
-      <AbsolutePoint location="2663,1411" />
+      <AbsolutePoint location="26090,797" />
+      <AbsolutePoint location="26090,1306" />
+      <AbsolutePoint location="2710,1306" />
+      <AbsolutePoint location="2710,1367" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/SaveQueryAction.do,noSaveOption,/searchResults.do,1" routingType="0">
@@ -1213,16 +1218,16 @@
   </StrutsTransition>
   <StrutsTransition id="input,null,/EditAnimalModel.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="15007,49" />
-      <AbsolutePoint location="15007,77" />
-      <AbsolutePoint location="13629,77" />
+      <AbsolutePoint location="15005,49" />
+      <AbsolutePoint location="15005,660" />
+      <AbsolutePoint location="13629,660" />
       <AbsolutePoint location="13629,709" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="input,null,/SpontaneousMutationAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="14972,44" />
-      <AbsolutePoint location="11661,44" />
+      <AbsolutePoint location="14972,46" />
+      <AbsolutePoint location="11661,46" />
       <AbsolutePoint location="11661,709" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -1314,9 +1319,9 @@
   <StrutsTransition id="/InducedMutationAction.do,input,/submitInducedMutation.do,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="5284,797" />
-      <AbsolutePoint location="5284,1328" />
-      <AbsolutePoint location="5931,1328" />
-      <AbsolutePoint location="5931,1367" />
+      <AbsolutePoint location="5284,1697" />
+      <AbsolutePoint location="5931,1697" />
+      <AbsolutePoint location="5931,1455" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/SearchAdminAssignmentAction.do,next,/adminModelsAssignment.do,1" routingType="0">
@@ -1336,8 +1341,8 @@
   <StrutsTransition id="/RegisterUserAction.do,next,/registerSuccess.do,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="25498,709" />
-      <AbsolutePoint location="25498,571" />
-      <AbsolutePoint location="25062,571" />
+      <AbsolutePoint location="25498,214" />
+      <AbsolutePoint location="25062,214" />
       <AbsolutePoint location="25062,1367" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -1350,15 +1355,15 @@
   <StrutsTransition id="submitTransposon;6,null,/jsp/protected/submitTransposon.jsp,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="2269,2331" />
-      <AbsolutePoint location="2269,2405" />
-      <AbsolutePoint location="5564,2405" />
+      <AbsolutePoint location="2269,2416" />
+      <AbsolutePoint location="5564,2416" />
       <AbsolutePoint location="5564,2301" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/AssociatedExpressionAction.do,input,/AssociatedExpressionPopulateAction.do,1" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="10025,709" />
-      <AbsolutePoint location="10025,421" />
+      <AbsolutePoint location="9995,709" />
+      <AbsolutePoint location="9995,421" />
       <AbsolutePoint location="8167,421" />
       <AbsolutePoint location="8167,1367" />
     </AutomaticBendpoints>
@@ -1372,8 +1377,8 @@
   <StrutsTransition id="/NutritionalFactorAction.do,input,/submitNutritionalFactors.do,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="11233,797" />
-      <AbsolutePoint location="11233,1281" />
-      <AbsolutePoint location="9713,1281" />
+      <AbsolutePoint location="11233,1165" />
+      <AbsolutePoint location="9713,1165" />
       <AbsolutePoint location="9713,1367" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -1392,15 +1397,16 @@
   <StrutsTransition id="/CustomizeSearchResultsAction.do,failed,/customizeSearchResults.do,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="15777,797" />
-      <AbsolutePoint location="15777,1191" />
-      <AbsolutePoint location="18177,1191" />
+      <AbsolutePoint location="15777,995" />
+      <AbsolutePoint location="18177,995" />
       <AbsolutePoint location="18177,1367" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="input,null,/RadiationAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="15025,26" />
-      <AbsolutePoint location="23112,26" />
+      <AbsolutePoint location="15016,0" />
+      <AbsolutePoint location="15016,-15" />
+      <AbsolutePoint location="23112,-15" />
       <AbsolutePoint location="23112,709" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -1412,9 +1418,9 @@
   </StrutsTransition>
   <StrutsTransition id="input,null,/RegisterUserAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="15019,0" />
-      <AbsolutePoint location="15019,-10" />
-      <AbsolutePoint location="25657,-10" />
+      <AbsolutePoint location="15011,0" />
+      <AbsolutePoint location="15011,-23" />
+      <AbsolutePoint location="25657,-23" />
       <AbsolutePoint location="25657,753" />
       <AbsolutePoint location="25647,753" />
     </AutomaticBendpoints>
@@ -1428,9 +1434,8 @@
   </StrutsTransition>
   <StrutsTransition id="input,null,/InducedMutationAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="15003,0" />
-      <AbsolutePoint location="15003,-10" />
-      <AbsolutePoint location="5284,-10" />
+      <AbsolutePoint location="14972,32" />
+      <AbsolutePoint location="5284,32" />
       <AbsolutePoint location="5284,709" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -1442,8 +1447,8 @@
   </StrutsTransition>
   <StrutsTransition id="input,null,/ViralTreatmentAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="15025,31" />
-      <AbsolutePoint location="21867,31" />
+      <AbsolutePoint location="15025,28" />
+      <AbsolutePoint location="21867,28" />
       <AbsolutePoint location="21867,709" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -1456,9 +1461,19 @@
   </StrutsTransition>
   <StrutsTransition id="input,null,/CellLineAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="14972,24" />
-      <AbsolutePoint location="12505,24" />
+      <AbsolutePoint location="14972,46" />
+      <AbsolutePoint location="12505,46" />
       <AbsolutePoint location="12505,709" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="loginMain;6,null,/jsp/login.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4250,1190" />
+      <AbsolutePoint location="3612,1190" />
+      <AbsolutePoint location="3612,1876" />
+      <AbsolutePoint location="2116,1876" />
+      <AbsolutePoint location="2116,2257" />
+      <AbsolutePoint location="1050,2257" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="input,null,/SirnaAction.do,2" routingType="0">
@@ -1471,8 +1486,8 @@
   <StrutsTransition id="/MorpholinoAction.do,input,/submitMorpholino.do,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="9584,709" />
-      <AbsolutePoint location="9584,95" />
-      <AbsolutePoint location="7742,95" />
+      <AbsolutePoint location="9584,482" />
+      <AbsolutePoint location="7742,482" />
       <AbsolutePoint location="7742,1367" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -1523,9 +1538,9 @@
   </StrutsTransition>
   <StrutsTransition id="input,null,/HistopathologyAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="15020,49" />
-      <AbsolutePoint location="15020,699" />
-      <AbsolutePoint location="15270,699" />
+      <AbsolutePoint location="15019,49" />
+      <AbsolutePoint location="15019,59" />
+      <AbsolutePoint location="15270,59" />
       <AbsolutePoint location="15270,709" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -1537,8 +1552,8 @@
   </StrutsTransition>
   <StrutsTransition id="input,null,/HormoneAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="14972,34" />
-      <AbsolutePoint location="6523,34" />
+      <AbsolutePoint location="14972,36" />
+      <AbsolutePoint location="6523,36" />
       <AbsolutePoint location="6523,709" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -1553,8 +1568,8 @@
   <StrutsTransition id="/EnvironmentalFactorAction.do,input,/submitEnvironmentalFactors.do,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="4060,797" />
-      <AbsolutePoint location="4060,995" />
-      <AbsolutePoint location="4707,995" />
+      <AbsolutePoint location="4060,996" />
+      <AbsolutePoint location="4707,996" />
       <AbsolutePoint location="4707,1367" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -1572,16 +1587,17 @@
   </StrutsTransition>
   <StrutsTransition id="input,null,/PlasmidAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="14998,49" />
-      <AbsolutePoint location="14998,4014" />
-      <AbsolutePoint location="1549,4014" />
+      <AbsolutePoint location="15025,46" />
+      <AbsolutePoint location="15035,46" />
+      <AbsolutePoint location="15035,3998" />
+      <AbsolutePoint location="1549,3998" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="input,null,/ZFINAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="15023,49" />
-      <AbsolutePoint location="15023,299" />
-      <AbsolutePoint location="23496,299" />
+      <AbsolutePoint location="14998,49" />
+      <AbsolutePoint location="14998,381" />
+      <AbsolutePoint location="23496,381" />
       <AbsolutePoint location="23496,709" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -1607,18 +1623,16 @@
   </StrutsTransition>
   <StrutsTransition id="input,null,/JacksonLabAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="15025,46" />
-      <AbsolutePoint location="16580,46" />
-      <AbsolutePoint location="16580,631" />
-      <AbsolutePoint location="961,631" />
+      <AbsolutePoint location="14972,2" />
+      <AbsolutePoint location="961,2" />
       <AbsolutePoint location="961,709" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/SearchAdminAction.do,back,/adminEditModels.do,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="5787,938" />
-      <AbsolutePoint location="5787,1808" />
-      <AbsolutePoint location="1265,1808" />
+      <AbsolutePoint location="5787,2029" />
+      <AbsolutePoint location="1265,2029" />
       <AbsolutePoint location="1265,2272" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -1630,9 +1644,9 @@
   </StrutsTransition>
   <StrutsTransition id="input,null,/RegisterUserPopulateAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="15014,0" />
-      <AbsolutePoint location="15014,-20" />
-      <AbsolutePoint location="25750,-20" />
+      <AbsolutePoint location="15007,0" />
+      <AbsolutePoint location="15007,-31" />
+      <AbsolutePoint location="25750,-31" />
       <AbsolutePoint location="25750,1367" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -1644,8 +1658,8 @@
   </StrutsTransition>
   <StrutsTransition id="input,null,/SignalingMoleculeAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="15025,35" />
-      <AbsolutePoint location="15045,35" />
+      <AbsolutePoint location="15025,44" />
+      <AbsolutePoint location="15045,44" />
       <AbsolutePoint location="15045,4040" />
       <AbsolutePoint location="2627,4040" />
       <AbsolutePoint location="2627,4050" />
@@ -1659,10 +1673,9 @@
   </StrutsTransition>
   <StrutsTransition id="/searchResults,null,/SaveQueryAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="3743,728" />
-      <AbsolutePoint location="3743,295" />
-      <AbsolutePoint location="4313,295" />
-      <AbsolutePoint location="4313,1367" />
+      <AbsolutePoint location="3743,777" />
+      <AbsolutePoint location="3743,1411" />
+      <AbsolutePoint location="4172,1411" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="submitModels;6,null,/jsp/protected/submitModels.jsp,1" routingType="0">
@@ -1686,9 +1699,9 @@
   </StrutsTransition>
   <StrutsTransition id="input,null,/DrugScreenSearchAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="15002,49" />
-      <AbsolutePoint location="15002,67" />
-      <AbsolutePoint location="13219,67" />
+      <AbsolutePoint location="15003,49" />
+      <AbsolutePoint location="15003,77" />
+      <AbsolutePoint location="13219,77" />
       <AbsolutePoint location="13219,709" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -1700,8 +1713,8 @@
   </StrutsTransition>
   <StrutsTransition id="/SearchSimpleAction.do,input,/searchSimple.do,1" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="8592,1367" />
-      <AbsolutePoint location="8592,541" />
+      <AbsolutePoint location="8562,1367" />
+      <AbsolutePoint location="8562,541" />
       <AbsolutePoint location="15439,541" />
       <AbsolutePoint location="15439,1575" />
     </AutomaticBendpoints>
@@ -1722,8 +1735,8 @@
   <StrutsTransition id="/CellLineAction.do,input,/submitCellLines.do,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="12505,797" />
-      <AbsolutePoint location="12505,995" />
-      <AbsolutePoint location="10856,995" />
+      <AbsolutePoint location="12505,1095" />
+      <AbsolutePoint location="10856,1095" />
       <AbsolutePoint location="10856,1367" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -1737,10 +1750,10 @@
   </StrutsTransition>
   <StrutsTransition id="/BacteriaAction.do,input,/submitBacteria.do,1" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="6349,2298" />
-      <AbsolutePoint location="8171,2298" />
-      <AbsolutePoint location="8171,3786" />
-      <AbsolutePoint location="3776,3786" />
+      <AbsolutePoint location="6349,2320" />
+      <AbsolutePoint location="8171,2320" />
+      <AbsolutePoint location="8171,3831" />
+      <AbsolutePoint location="3776,3831" />
       <AbsolutePoint location="3776,3850" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -1792,15 +1805,9 @@
   <StrutsTransition id="/SearchAdvancedAction.do,back,/searchAdvanced.do,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="3333,1455" />
-      <AbsolutePoint location="3333,1500" />
-      <AbsolutePoint location="2142,1500" />
-      <AbsolutePoint location="2142,1575" />
-    </AutomaticBendpoints>
-  </StrutsTransition>
-  <StrutsTransition id="/LoginAction.do,success,/loginRedirect.do,1" routingType="0">
-    <AutomaticBendpoints>
-      <AbsolutePoint location="26139,797" />
-      <AbsolutePoint location="26139,1367" />
+      <AbsolutePoint location="3333,1808" />
+      <AbsolutePoint location="2116,1808" />
+      <AbsolutePoint location="2116,1663" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="searchResultsDrugScreen;6,null,/jsp/searchResultsDrugScreen.jsp,1" routingType="0">
@@ -1824,22 +1831,22 @@
   </StrutsTransition>
   <StrutsTransition id="input,null,/NutritionalFactorAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="14972,42" />
-      <AbsolutePoint location="11233,42" />
+      <AbsolutePoint location="14972,44" />
+      <AbsolutePoint location="11233,44" />
       <AbsolutePoint location="11233,709" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/AdminUserSettingsAction.do,input,/adminUserSettings.do,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="10722,797" />
-      <AbsolutePoint location="10722,1619" />
-      <AbsolutePoint location="9478,1619" />
+      <AbsolutePoint location="10722,1634" />
+      <AbsolutePoint location="9478,1634" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="input,null,/AnimalModelAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="14972,36" />
-      <AbsolutePoint location="9034,36" />
+      <AbsolutePoint location="14972,38" />
+      <AbsolutePoint location="9034,38" />
       <AbsolutePoint location="9034,709" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -1894,17 +1901,17 @@
   </StrutsTransition>
   <StrutsTransition id="/TargetedModificationAction.do,input,/submitTargetedModification.do,1" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="12100,709" />
-      <AbsolutePoint location="12100,211" />
-      <AbsolutePoint location="10485,211" />
-      <AbsolutePoint location="10485,1367" />
+      <AbsolutePoint location="12100,797" />
+      <AbsolutePoint location="12100,1617" />
+      <AbsolutePoint location="10485,1617" />
+      <AbsolutePoint location="10485,1455" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/AdminUserSettingsAction.do,failure,/AdminUserSettingsPopulateAction.do,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="10812,709" />
-      <AbsolutePoint location="10812,676" />
-      <AbsolutePoint location="9349,676" />
+      <AbsolutePoint location="10812,95" />
+      <AbsolutePoint location="9349,95" />
       <AbsolutePoint location="9349,1367" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -1934,32 +1941,31 @@
   </StrutsTransition>
   <StrutsTransition id="input,null,/EngineeredTransgeneAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="14972,46" />
-      <AbsolutePoint location="14845,46" />
-      <AbsolutePoint location="14845,709" />
+      <AbsolutePoint location="15013,49" />
+      <AbsolutePoint location="15013,709" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/DuplicateAnimalModelAction.do,duplicatesuccessful,/ReturnUserModels.do,1" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="2112,797" />
-      <AbsolutePoint location="2112,895" />
-      <AbsolutePoint location="2633,895" />
-      <AbsolutePoint location="2633,1367" />
+      <AbsolutePoint location="2142,797" />
+      <AbsolutePoint location="2142,895" />
+      <AbsolutePoint location="2603,895" />
+      <AbsolutePoint location="2603,1367" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/SaveQueryAction.do,querydeleted,/SaveQueryAction.do,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="4352,1455" />
       <AbsolutePoint location="4352,1471" />
-      <AbsolutePoint location="4516,1471" />
-      <AbsolutePoint location="4516,1411" />
+      <AbsolutePoint location="4546,1471" />
+      <AbsolutePoint location="4546,1411" />
       <AbsolutePoint location="4462,1411" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/ChangeAnimalModelToInactiveAction.do,next,/AdminEditModelsPopulateAction.do,1" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="975,1984" />
-      <AbsolutePoint location="975,2084" />
+      <AbsolutePoint location="1005,1984" />
+      <AbsolutePoint location="1005,2084" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/AdminSubmitOverviewPopulateAction.do,next,/adminEditModels.do,1" routingType="0">
@@ -1971,8 +1977,8 @@
   <StrutsTransition id="submitAntibody;6,null,/jsp/protected/submitAntibody.jsp,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="4062,2331" />
-      <AbsolutePoint location="4062,2446" />
-      <AbsolutePoint location="4657,2446" />
+      <AbsolutePoint location="4062,2492" />
+      <AbsolutePoint location="4657,2492" />
       <AbsolutePoint location="4657,2301" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -2108,16 +2114,16 @@
   </StrutsTransition>
   <StrutsTransition id="input,null,/GeneDeliveryAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="14972,32" />
-      <AbsolutePoint location="5693,32" />
+      <AbsolutePoint location="14972,34" />
+      <AbsolutePoint location="5693,34" />
       <AbsolutePoint location="5693,709" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/AdminUserSettingsAction.do,next,/adminUserSettingsSent.do,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="10812,797" />
-      <AbsolutePoint location="10812,1125" />
-      <AbsolutePoint location="8946,1125" />
+      <AbsolutePoint location="10812,1209" />
+      <AbsolutePoint location="8946,1209" />
       <AbsolutePoint location="8946,1367" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -2167,8 +2173,8 @@
   </StrutsTransition>
   <StrutsTransition id="input,null,/AssociatedMetastasisAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="15025,44" />
-      <AbsolutePoint location="17785,44" />
+      <AbsolutePoint location="15025,38" />
+      <AbsolutePoint location="17785,38" />
       <AbsolutePoint location="17785,709" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -2186,9 +2192,9 @@
   </StrutsTransition>
   <StrutsTransition id="input,null,/SurgeryAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="15016,49" />
-      <AbsolutePoint location="15016,675" />
-      <AbsolutePoint location="14438,675" />
+      <AbsolutePoint location="15011,49" />
+      <AbsolutePoint location="15011,680" />
+      <AbsolutePoint location="14438,680" />
       <AbsolutePoint location="14438,709" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -2207,8 +2213,8 @@
   <StrutsTransition id="/SearchSimpleAction.do,back,/searchSimple.do,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="8622,1367" />
-      <AbsolutePoint location="8622,1095" />
-      <AbsolutePoint location="15409,1095" />
+      <AbsolutePoint location="8622,1276" />
+      <AbsolutePoint location="15409,1276" />
       <AbsolutePoint location="15409,1575" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -2251,17 +2257,16 @@
   </StrutsTransition>
   <StrutsTransition id="input,null,/ClinicalMarkerAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="14998,49" />
-      <AbsolutePoint location="14998,485" />
-      <AbsolutePoint location="19014,485" />
+      <AbsolutePoint location="15025,34" />
+      <AbsolutePoint location="19014,34" />
       <AbsolutePoint location="19014,709" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/ViewTOCSearchResultsAction.do,failure,/searchTableOfContents.do,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="5568,1455" />
-      <AbsolutePoint location="5568,1610" />
-      <AbsolutePoint location="5973,1610" />
+      <AbsolutePoint location="5568,1634" />
+      <AbsolutePoint location="5973,1634" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="submitTherapy;6,null,/jsp/protected/submitTherapy.jsp,1" routingType="0">
@@ -2284,9 +2289,9 @@
   </StrutsTransition>
   <StrutsTransition id="input,null,/SearchAdvancedAction.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="14972,2" />
-      <AbsolutePoint location="3235,2" />
-      <AbsolutePoint location="3235,1367" />
+      <AbsolutePoint location="14972,24" />
+      <AbsolutePoint location="3333,24" />
+      <AbsolutePoint location="3333,1367" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="input,null,/EnvironmentalFactorAction.do,2" routingType="0">
@@ -2298,10 +2303,10 @@
   </StrutsTransition>
   <StrutsTransition id="/ChangeAnimalModelToScreenedApprovedAction.do,next,/AdminEditModelsPopulateAction.do,1" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="1922,1984" />
-      <AbsolutePoint location="1922,1999" />
-      <AbsolutePoint location="1005,1999" />
-      <AbsolutePoint location="1005,2084" />
+      <AbsolutePoint location="1757,1984" />
+      <AbsolutePoint location="1757,2187" />
+      <AbsolutePoint location="1005,2187" />
+      <AbsolutePoint location="1005,2172" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="submitTransplantation;6,null,/jsp/protected/submitTransplantation.jsp,1" routingType="0">
