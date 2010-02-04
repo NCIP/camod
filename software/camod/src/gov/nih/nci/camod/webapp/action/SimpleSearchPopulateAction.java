@@ -75,24 +75,23 @@ public class SimpleSearchPopulateAction extends BaseAction {
         log.info("In SimpleSearchPopulateAction.populate");
         
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.PRINCIPALINVESTIGATORQUERYDROP,
-                Constants.Dropdowns.ADD_BLANK);        
+                Constants.Dropdowns.ADD_BLANK);  
         
+        String name = null;
         // Get and clean method to prevent SQL injection
-        String methodName = request.getParameter("unprotected_method");
-        if (!methodName.equals("populate")){
-	        methodName = SafeHTMLUtil.clean(methodName);
-	        log.debug("methodName: " + methodName);
+        name = request.getParameter("unprotected_method");
+        if (!name.equals("populate")){
+        	name = SafeHTMLUtil.clean(name);
+	        log.info("methodName: " + name);
         } 
         
         // Clean all headers for security scan (careful about what chars you allow)
-    	String headername = "";
     	for(Enumeration e = request.getHeaderNames(); e.hasMoreElements();){
-    		headername = (String)e.nextElement();
-    		log.debug("SimpleSearchPopulateAction headername: " + headername);
-    		String cleanHeaders = SafeHTMLUtil.clean(headername);
-    		log.debug("SimpleSearchPopulateAction cleaned headername: " + headername);
-    	}        
-
+    		name = (String)e.nextElement();
+    		log.info("SimpleSearchPopulateAction headername: " + name);
+    		String cleanHeaders = SafeHTMLUtil.clean(name);
+    		log.info("SimpleSearchPopulateAction cleaned headername: " + name);
+    	} 
 
         // Reset the non-simple-search options
         SearchForm theSearchForm = (SearchForm) form;
