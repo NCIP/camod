@@ -33,7 +33,7 @@ public class AuthenticationFilter implements Filter {
      * placed into service.
      */
     public void init(FilterConfig filterConfig) throws ServletException {
-    	System.out.println("AuthenticationFilter.init");
+    	//System.out.println("AuthenticationFilter.init");
         this.filterConfig = filterConfig;
         
     }
@@ -62,8 +62,8 @@ public class AuthenticationFilter implements Filter {
         if (request instanceof HttpServletRequest) {
 
         	if(isloginpage!=null && !isRequestedSessionIdFromURL &&( 
-        			isloginpage.endsWith("loginMain.do") ||
-        			isloginpage.endsWith("login.do")
+        			isloginpage.endsWith("login.do") ||
+        			isloginpage.endsWith("LoginAction.do")
         			))	{
         		System.out.println("AuthenticationFilter.doFilter login.do loop ");
         		//just continue, so they can login
@@ -89,6 +89,7 @@ public class AuthenticationFilter implements Filter {
         
         if (authorized) {
         	System.out.println("AuthenticationFilter.doFilter authorized loop");
+        	generateNewSession((HttpServletRequest) request);
             chain.doFilter(request, response);
             return;
         } else if (filterConfig != null) {
@@ -119,6 +120,8 @@ public class AuthenticationFilter implements Filter {
         }
         //session invalidated 
         session.invalidate();
+        
+        // get new session
         session = httpRequest.getSession(true);
         for (Map.Entry<String, Object> entry : old.entrySet()) {
           session.setAttribute(entry.getKey(), entry.getValue());
