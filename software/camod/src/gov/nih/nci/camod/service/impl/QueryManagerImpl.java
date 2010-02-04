@@ -1344,7 +1344,7 @@ public class QueryManagerImpl extends BaseManager
      */
     public List getQueryOnlyPrincipalInvestigators() throws PersistenceException
     {
-        log.debug("Entering QueryManagerImpl.getQueryOnlyPrincipalInvestigators");
+        log.info("Entering QueryManagerImpl.getQueryOnlyPrincipalInvestigators");
 
         // Format the query
         String theSQLString = "SELECT last_name, first_name " + "FROM party " + "WHERE is_principal_investigator = 1 " + "  AND first_name IS NOT NULL " + "  AND last_name IS NOT NULL " + "  AND party_id IN (SELECT DISTINCT principal_investigator_id FROM abs_cancer_model WHERE state = 'Edited-approved')" + "ORDER BY last_name ASC";
@@ -1355,7 +1355,7 @@ public class QueryManagerImpl extends BaseManager
 
         try
         {
-            log.debug("getQueryOnlyPrincipalInvestigators - SQL: " + theSQLString);
+            log.info("getQueryOnlyPrincipalInvestigators - SQL: " + theSQLString);
 
             Object[] params = new Object[0];
             theResultSet = Search.query(theSQLString, params);
