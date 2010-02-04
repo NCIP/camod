@@ -264,6 +264,10 @@
 		<forward
 			name="login" 
 			path="/login.do"></forward>
+			
+		<forward
+			name="loginMain" 
+			path="/jsp/login.jsp"></forward>			
 		
 		<forward
 			name="viewLicense"
@@ -1118,7 +1122,6 @@
 			parameter="/jsp/login.jsp">
 			<set-property property="secure" value="true"/>
 		</action>
-		
 		<action
 			path="/loginMenu"
 			type="org.apache.struts.actions.ForwardAction"
