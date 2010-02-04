@@ -219,7 +219,6 @@
 package gov.nih.nci.camod.webapp.form;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.util.NameValue;
 import gov.nih.nci.camod.util.NameValueList;
 import gov.nih.nci.camod.util.SafeHTMLUtil;
 
