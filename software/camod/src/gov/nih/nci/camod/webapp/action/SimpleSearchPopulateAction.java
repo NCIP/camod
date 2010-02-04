@@ -82,15 +82,15 @@ public class SimpleSearchPopulateAction extends BaseAction {
         name = request.getParameter("unprotected_method");
         if (!name.equals("populate")){
         	name = SafeHTMLUtil.clean(name);
-	        log.info("methodName: " + name);
+	        log.debug("methodName: " + name);
         } 
         
         // Clean all headers for security scan (careful about what chars you allow)
     	for(Enumeration e = request.getHeaderNames(); e.hasMoreElements();){
     		name = (String)e.nextElement();
-    		log.info("SimpleSearchPopulateAction headername: " + name);
+    		log.debug("SimpleSearchPopulateAction headername: " + name);
     		String cleanHeaders = SafeHTMLUtil.clean(name);
-    		log.info("SimpleSearchPopulateAction cleaned headername: " + name);
+    		log.debug("SimpleSearchPopulateAction cleaned headername: " + name);
     	} 
 
         // Reset the non-simple-search options
