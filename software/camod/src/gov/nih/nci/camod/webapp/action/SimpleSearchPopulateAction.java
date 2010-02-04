@@ -72,7 +72,10 @@ public class SimpleSearchPopulateAction extends BaseAction {
     public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.debug("In SimpleSearchPopulateAction.populate");
+        log.info("In SimpleSearchPopulateAction.populate");
+        
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.PRINCIPALINVESTIGATORQUERYDROP,
+                Constants.Dropdowns.ADD_BLANK);        
         
         // Get and clean method to prevent SQL injection
         String methodName = request.getParameter("unprotected_method");
@@ -89,9 +92,7 @@ public class SimpleSearchPopulateAction extends BaseAction {
     		String cleanHeaders = SafeHTMLUtil.clean(headername);
     		log.debug("SimpleSearchPopulateAction cleaned headername: " + headername);
     	}        
-        
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.PRINCIPALINVESTIGATORQUERYDROP,
-                Constants.Dropdowns.ADD_BLANK);
+
 
         // Reset the non-simple-search options
         SearchForm theSearchForm = (SearchForm) form;
@@ -139,6 +140,7 @@ public class SimpleSearchPopulateAction extends BaseAction {
 
         return mapping.findForward("next");
     }
+    
     public ActionForward setSpeciesForOrganTree(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
     	log.info("theSearchForm.setSpeciesForOrganTree(): " );
@@ -153,7 +155,7 @@ public class SimpleSearchPopulateAction extends BaseAction {
             // using common name because Rat has two species
             Species species = SpeciesManagerSingleton.instance().getByName(theSearchForm.getSpecies());
             theSearchSpecies = species.getCommonName();
-            log.debug("<setSpeciesForOrganTree> theSearchSpecies: "+ theSearchSpecies);        	
+            log.info("<setSpeciesForOrganTree> theSearchSpecies: "+ theSearchSpecies);        	
         }
 
         request.getSession().setAttribute(Constants.SEARCHSPECIESCOMMONNAME, theSearchSpecies);
