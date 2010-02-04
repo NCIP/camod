@@ -39,47 +39,39 @@
 
 package gov.nih.nci.camod.webapp.action;
 
-import gov.nih.nci.camod.webapp.form.LoginForm;
-
 import java.io.IOException;
-
-import javax.servlet.ServletException;
+import java.util.Enumeration;import javax.servlet.ServletException;
 import javax.servlet.http.*;
-
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 public class LogoutAction extends BaseAction {
+
 	
-	public ActionForward execute(ActionMapping mapping,
-            ActionForm form,
-            HttpServletRequest request,
-            HttpServletResponse response)
-	throws IOException, ServletException
+	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws IOException, ServletException
 	{
+		log.info("Entered LogoutAction: " );
+		// Remove the logged in credential attributes
+		request.getSession().removeAttribute("camod.loggedon.username");
+		request.getSession().removeAttribute("camod.loggedon.userroles");		
+		request.getSession().removeAttribute("loggedin");
+		request.getSession().removeAttribute("validUserKey");
 		
-        // Original code before security scan changes
-		request.getSession().setAttribute( "camod.loggedon.username", null );
-		//If we wanted to remove everything from the session that might be stored for the
+		request.getSession().setMaxInactiveInterval(0);
+		// If we wanted to remove everything from the session that might be stored for the
 		// user, we could simply invalidate the session instead
 		request.getSession().invalidate();
+
 		
-		//	Remove attribute set in LoginAction
-		HttpSession session = request.getSession(true);
-        session.removeAttribute("validUserKey");
-        
-		// Remove user login key set in LoginAction
-		request.getSession().removeAttribute("validUserKey");
-        
-        //  Example to secure a cookie, i.e. instruct the browser to
-        //  Send the cookie using a secure protocol
-        Cookie[] cookieArray = request.getCookies(); 
-        for(int i = 0; i < cookieArray.length; i++){           	
-        	if(cookieArray[i].getName().equals("validUserKey")) {       		
-            	cookieArray[i].setValue("000000");             	
-        	}
-        }
+        // Clean all headers for security scan (careful about what chars you allow)
+    	String headername = "";
+    	for(Enumeration e = request.getHeaderNames(); e.hasMoreElements();){
+    		headername = (String)e.nextElement();
+    		request.setAttribute(headername, null);
+    	}		
+		        
 		return mapping.findForward( "loggedOut" );
 	}
 
