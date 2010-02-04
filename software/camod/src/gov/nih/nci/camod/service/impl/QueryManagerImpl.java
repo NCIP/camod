@@ -1181,17 +1181,18 @@ public class QueryManagerImpl extends BaseManager
      */
     public List getQueryOnlySpecies(HttpServletRequest inRequest) throws PersistenceException
     {
-        log.debug("Entering QueryManagerImpl.getQueryOnlySpecies");
+        log.info("Entering QueryManagerImpl.getQueryOnlySpecies");
 
         // Format the query
         HQLParameter[] theParams = new HQLParameter[0];
         String theHQLQuery = "from Species where scientificName is not null order by scientificName asc";
-
+        log.info("Entering QueryManagerImpl.getQueryOnlySpecies theHQLQuery: " + theHQLQuery.toString());
+        
         List theList = Search.query(theHQLQuery, theParams);
 
-        log.debug("Found matching items: " + theList.size());
+        log.info("Found " + theList.size() + " matching items: " + theList.toString());
 
-        log.debug("Exiting QueryManagerImpl.getQueryOnlySpecies");
+        log.info("Exiting QueryManagerImpl.getQueryOnlySpecies");
         return theList;
     }
 
