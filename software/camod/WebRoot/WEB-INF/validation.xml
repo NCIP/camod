@@ -107,7 +107,7 @@
 					resource="false" />
 				<var>
 					<var-name>minlength</var-name>
-					<var-value>7</var-value>
+					<var-value>6</var-value>
 				</var>				
 			</field>
 			<field property="password" depends="required,minlength">
