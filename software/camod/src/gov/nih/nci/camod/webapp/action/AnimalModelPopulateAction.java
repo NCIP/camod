@@ -274,6 +274,7 @@ public class AnimalModelPopulateAction extends BaseAction {
 		NewDropdownUtil.populateDropdown(request,
 				Constants.Dropdowns.STRAINDROP, modelCharForm
 						.getScientificName());
+		log.info("setStrainDropdown method");
 
 		// Must Reset both fields when new species is chosen
 		modelCharForm.setEthinicityStrain("");
