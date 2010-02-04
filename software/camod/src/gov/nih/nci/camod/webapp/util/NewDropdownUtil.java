@@ -874,11 +874,11 @@ public class NewDropdownUtil
                                                               String inAddBlank) throws Exception
     {
 
-        log.debug("Entering NewDropdownUtil.getQueryOnlyPrincipalInvestigatorList");
+        log.info("Entering NewDropdownUtil.getQueryOnlyPrincipalInvestigatorList");
         
         //Assign list to a constant so simple search can validate against cross-site scripting in searchForm.validate
         List thePIOnlyList = QueryManagerSingleton.instance().getQueryOnlyPrincipalInvestigators(); 
-        log.debug("In NewDropdownUtil.getQueryOnlyPrincipalInvestigatorList - set SEARCHPIDROP constant ");
+        log.info("In NewDropdownUtil.getQueryOnlyPrincipalInvestigatorList - set SEARCHPIDROP constant ");
         inRequest.getSession().setAttribute(Constants.Dropdowns.PRINCIPALINVESTIGATORQUERYDROP, thePIOnlyList);        
         
         return thePIOnlyList;
