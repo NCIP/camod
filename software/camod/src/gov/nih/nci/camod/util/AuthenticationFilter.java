@@ -63,7 +63,8 @@ public class AuthenticationFilter implements Filter {
 
         	if(isloginpage!=null && !isRequestedSessionIdFromURL &&( 
         			isloginpage.endsWith("login.do") ||
-        			isloginpage.endsWith("LoginAction.do")
+        			isloginpage.endsWith("/LoginAction.do")||
+        			isloginpage.endsWith("loginMain.do")
         			))	{
         		System.out.println("AuthenticationFilter.doFilter login.do loop ");
         		//just continue, so they can login
@@ -89,7 +90,6 @@ public class AuthenticationFilter implements Filter {
         
         if (authorized) {
         	System.out.println("AuthenticationFilter.doFilter authorized loop");
-        	generateNewSession((HttpServletRequest) request);
             chain.doFilter(request, response);
             return;
         } else if (filterConfig != null) {
