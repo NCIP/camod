@@ -62,9 +62,8 @@ public class AuthenticationFilter implements Filter {
         if (request instanceof HttpServletRequest) {
 
         	if(isloginpage!=null && !isRequestedSessionIdFromURL &&( 
-        			isloginpage.endsWith("login.do") ||
-        			isloginpage.endsWith("/LoginAction.do")||
-        			isloginpage.endsWith("loginMain.do")
+        			isloginpage.endsWith("loginMain.do") ||
+        			isloginpage.endsWith("LoginAction.do")
         			))	{
         		System.out.println("AuthenticationFilter.doFilter login.do loop ");
         		//just continue, so they can login
