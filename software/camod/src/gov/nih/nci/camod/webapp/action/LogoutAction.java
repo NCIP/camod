@@ -57,21 +57,12 @@ public class LogoutAction extends BaseAction {
 		request.getSession().removeAttribute("camod.loggedon.username");
 		request.getSession().removeAttribute("camod.loggedon.userroles");		
 		request.getSession().removeAttribute("loggedin");
-		request.getSession().removeAttribute("validUserKey");
 		
-		request.getSession().setMaxInactiveInterval(0);
 		// If we wanted to remove everything from the session that might be stored for the
 		// user, we could simply invalidate the session instead
 		request.getSession().invalidate();
-
 		
-        // Clean all headers for security scan (careful about what chars you allow)
-    	String headername = "";
-    	for(Enumeration e = request.getHeaderNames(); e.hasMoreElements();){
-    		headername = (String)e.nextElement();
-    		request.setAttribute(headername, null);
-    	}		
-		        
+       
 		return mapping.findForward( "loggedOut" );
 	}
 
