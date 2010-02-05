@@ -448,7 +448,6 @@
   <StrutsActivity path="/jsp/protected/submitTransplant.jsp" location="1550,2350" dimension="222,51" />
   <StrutsActivity path="/jsp/login.jsp" location="950,2250" dimension="100,51" />
   <StrutsActivity path="/loginRedirect.do" location="4850,4050" dimension="252,96" />
-  <StrutsActivity path="loginMain;6" location="5450,4050" dimension="110,81" />
   <StrutsTransition id="loggedOut;6,null,/jsp/loggedOut.jsp,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="4972,3193" />
@@ -2177,6 +2176,12 @@
     <AutomaticBendpoints>
       <AbsolutePoint location="4550,2924" />
       <AbsolutePoint location="4550,3024" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/LoginAction.do,success,/AnimalModelAction.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="26073,753" />
+      <AbsolutePoint location="9034,753" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="register;6,null,/jsp/register.jsp,1" routingType="0">
