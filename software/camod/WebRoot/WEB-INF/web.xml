@@ -80,10 +80,6 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>AuthenticationFilter</filter-name>
-		<url-pattern>/login.do</url-pattern>
-	</filter-mapping>
-		<filter-mapping>
-		<filter-name>AuthenticationFilter</filter-name>
 		<url-pattern>/loginMain.do</url-pattern>
 	</filter-mapping>	
 	<filter-mapping>
