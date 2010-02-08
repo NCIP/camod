@@ -70,26 +70,34 @@ public class ViewTOCSearchResultsAction extends BaseAction {
     	}    	
         
         String theForward = "next";
-        try {        
-	        // check for TOC query names inside try
-	        String theKey = (String) request.getParameter(Constants.Parameters.TOCQUERYKEY);
-	        if (theKey != null && theKey.length() > 0)
-	        {         
-		        log.info("ViewTOCSearchResultsAction theKey: " + theKey);    
-		        NameValueList.generateTableOfContentsList();
-		        request.getSession().setAttribute(Constants.Dropdowns.SEARCHTOCDROP, NameValueList.getTableOfContentsList());
-		        if (!SafeHTMLUtil.isValidValue(theKey,Constants.Dropdowns.SEARCHTOCDROP,request))
-		        {
-		            // set theForward to failure - fail gracefully but do not let query continue
-		            theForward = "failure";
-		        }  else {
-	        	
-		            log.info("theKey is a valid value - continue with querry: " + theKey); 
-		            
-		        	//Remove any retained criteriatable values
-		    		request.getSession().setAttribute(Constants.CRITERIATABLE, "" );    		
-		    		request.getSession().setAttribute(Constants.NOSAVEOPTION, "false");	            
-	            
+        
+        // clean TOCQUERYKEY ahead of try loop - then loop checks if it is a valid choice - security scan code
+        String theKey = (String) request.getParameter(Constants.Parameters.TOCQUERYKEY);
+        if (theKey != null && theKey.length() > 0) {
+        	theKey = SafeHTMLUtil.clean(theKey);
+        log.info("ViewTOCSearchResultsAction theKey: " + theKey);
+        }
+  
+
+        try {
+            
+        	//Remove any retained criteriatable values
+    		request.getSession().setAttribute(Constants.CRITERIATABLE, "" );    		
+    		request.getSession().setAttribute(Constants.NOSAVEOPTION, "false");
+    		
+            // This is meant to prevent SQL injection into the key value of the TOC queries
+        	// Security scan failed so this is checked first and the query will not run unless clean
+            if (theKey != null && theKey.length() > 0)
+            { 
+	            NameValueList.generateTableOfContentsList();
+	            request.getSession().setAttribute(Constants.Dropdowns.SEARCHTOCDROP, NameValueList.getTableOfContentsList());
+	            if (!SafeHTMLUtil.isValidValue(theKey,Constants.Dropdowns.SEARCHTOCDROP,request))
+	            {
+	                // set theForward to failure - fail gracefully but do not let query continue
+	                theForward = "failure";
+	            } else {	            
+		            log.debug("theKey is a valid value - continue with querry: " + theKey); 
+            
 		            // Handle external linkage
 		            if (request.getSession().getAttribute(Constants.TOCSearch.TOC_QUERY_RESULTS) == null) {
 		 
@@ -99,28 +107,27 @@ public class ViewTOCSearchResultsAction extends BaseAction {
 		
 		                List theResults = theTOCManager.process();
 		                log.debug("TOC: " + theResults); 
-		                request.getSession().setAttribute(Constants.TOCSearch.TOC_QUERY_RESULTS, theResults);	
-		                
-			            List theGroupList = (List) request.getSession().getAttribute(Constants.TOCSearch.TOC_QUERY_RESULTS);
-			            log.debug("theGroupList: " + theGroupList); 
-
-			            for (int i = 0; i < theGroupList.size(); i++) {
-			                TOCQueryGroup theQueryGroup = (TOCQueryGroup) theGroupList.get(i);
-			                List theQueryList = theQueryGroup.getQueries();
-			                for (int j = 0; j < theQueryList.size(); j++) {
-			                    TOCQuery theQuery = (TOCQuery) theQueryList.get(j);              
-			
-			                    if (theQuery.getKey().equals(theKey)) {                   	
-			                        request.getSession().setAttribute(Constants.SEARCH_RESULTS, theQuery.getResults());
-			                        log.debug("TOC theQuery.getResults(): " + theQuery.getResults());
-			                        break;
-			                    }
-			                }
-			            }		                
-	        	
+		                request.getSession().setAttribute(Constants.TOCSearch.TOC_QUERY_RESULTS, theResults);		                
 		            }
-		        }   // end of theKey != null         
-	        }         
+
+		            List theGroupList = (List) request.getSession().getAttribute(Constants.TOCSearch.TOC_QUERY_RESULTS);
+		            log.debug("theGroupList: " + theGroupList); 
+
+		            for (int i = 0; i < theGroupList.size(); i++) {
+		                TOCQueryGroup theQueryGroup = (TOCQueryGroup) theGroupList.get(i);
+		                List theQueryList = theQueryGroup.getQueries();
+		                for (int j = 0; j < theQueryList.size(); j++) {
+		                    TOCQuery theQuery = (TOCQuery) theQueryList.get(j);              
+		
+		                    if (theQuery.getKey().equals(theKey)) {                   	
+		                        request.getSession().setAttribute(Constants.SEARCH_RESULTS, theQuery.getResults());
+		                        log.debug("TOC theQuery.getResults(): " + theQuery.getResults());
+		                        break;
+		                    }
+		                }
+		            }
+	            }  // end of SafeHTMLUtil.isValidValue
+          }   // end of theKey != null         
         } catch (Exception e) {
 
             theForward = "failure";
