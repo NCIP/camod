@@ -155,7 +155,7 @@ public final class LoginAction extends BaseAction {
             
             forward = "success";
             request.getSession().setAttribute(Constants.CURRENTUSER, theUsername);
-            log.info("current user= " + request.getSession().getAttribute(Constants.CURRENTUSER));
+            log.debug("current user= " + request.getSession().getAttribute(Constants.CURRENTUSER));
             log.info("Session id= " + request.getSession().getId());
             
 		    //Used for sidebar, number of saved queries
