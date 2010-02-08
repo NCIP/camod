@@ -67,8 +67,12 @@ public class CustomRequestProcessor extends SecureRequestProcessor {
             HttpSession session = request.getSession();
             String user = (String) session.getAttribute(Constants.CURRENTUSER);
             log.info("user= " + request.getSession().getAttribute(Constants.CURRENTUSER));
-    
-            if (user == null ) {                
+
+        	// set from submitNewModel
+            String aCurrentUser = request.getParameter("aCurrentUser");
+            log.info("aCurrentUser from submitNewModel= " + aCurrentUser);
+            
+            if (user == null && aCurrentUser==null ) {                
                 log.info("User not authorized.  Sending to login page");
                 request.getSession().setAttribute(Constants.LOGGEDIN, "false");
                 return mapping.findForward("login");
