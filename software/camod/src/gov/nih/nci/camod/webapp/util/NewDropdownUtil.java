@@ -117,9 +117,9 @@ public class NewDropdownUtil
                                         String inFilter) throws Exception
     {
 
-        log.info("Entering NewDropdownUtil.populateDropdown");
+        log.debug("Entering NewDropdownUtil.populateDropdown");
 
-        log.info("Generating a dropdown for the following key: " + inDropdownKey);
+        log.debug("Generating a dropdown for the following key: " + inDropdownKey);
 
         List theList = null;
         if (inDropdownKey.indexOf(".txt") != -1)
@@ -540,7 +540,7 @@ public class NewDropdownUtil
     private static List getQueryNonHumanSpeciesList(HttpServletRequest inRequest,
                                                 String inAddBlank) throws Exception
     {
-        log.info("Entering NewDropdownUtil.getQueryNonHumanSpeciesList");
+        log.debug("Entering NewDropdownUtil.getQueryNonHumanSpeciesList");
 
         // Get values for dropdown lists for Species
         // for each Species, get it's commonName (scientificName)
@@ -555,7 +555,7 @@ public class NewDropdownUtil
                 if (theSpecies.getScientificName() != null && !theSpecies.getScientificName().equals(Constants.Dropdowns.HUMANSCIENTIFICNAME))
                 {
                     String theDisplayName = theSpecies.getDisplayName();
-                    log.info("Entering NewDropdownUtil.getQueryNonHumanSpeciesList  :" + theDisplayName);
+                    log.debug("Entering NewDropdownUtil.getQueryNonHumanSpeciesList  :" + theDisplayName);
                     if (theDisplayName.length() > 0)
                     {
                         DropdownOption theOption = new DropdownOption(theDisplayName, theSpecies.getScientificName());
@@ -875,11 +875,11 @@ public class NewDropdownUtil
                                                               String inAddBlank) throws Exception
     {
 
-        log.info("Entering NewDropdownUtil.getQueryOnlyPrincipalInvestigatorList");
+        log.debug("Entering NewDropdownUtil.getQueryOnlyPrincipalInvestigatorList");
         
         //Assign list to a constant so simple search can validate against cross-site scripting in searchForm.validate
         List thePIOnlyList = QueryManagerSingleton.instance().getQueryOnlyPrincipalInvestigators(); 
-        log.info("In NewDropdownUtil.getQueryOnlyPrincipalInvestigatorList - set SEARCHPIDROP constant ");
+        log.debug("In NewDropdownUtil.getQueryOnlyPrincipalInvestigatorList - set SEARCHPIDROP constant ");
         inRequest.getSession().setAttribute(Constants.Dropdowns.PRINCIPALINVESTIGATORQUERYDROP, thePIOnlyList);        
         
         return thePIOnlyList;
