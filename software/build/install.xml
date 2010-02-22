@@ -94,6 +94,9 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<property name="camod-grid-service.jboss-globus-lib.zip" value="jboss-globus-libs-cagrid1_2.zip" />
 	<property name="camod-resource.artifact.dir" value="${software.dir}/common/resources" />
 	
+	<!-- for external properties -->
+	<property name="camod.external.properties.dir" value="/local/content/camod/config" />
+	
 	<!-- Added for properties-service.xml -->
 	<property name="camod.propertyservice.property.value1" value="/local/content/camod/config/camod.properties" />
 	<property name="camod.propertyservice.property.value2" value="/local/content/camod/config/mail.properties" />
@@ -620,6 +623,12 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<jboss-update-properties-service
 			property.block="${property.block}"
 			/>
+		
+		<!-- Update camod.properties on each tier -->
+		<replaceregexp file="${camod.external.properties.dir}/camod.properties" byline="true"
+			match="^(superuser.usernames)=(.*)"
+			replace="\1=${superuser.usernames}"/>
+		<echo message="Updated superuser.usernames"/>	
 		
 	</target>
 	
