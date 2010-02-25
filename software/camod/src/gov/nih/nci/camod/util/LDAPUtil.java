@@ -107,7 +107,7 @@ public class LDAPUtil {
                     if (theAttribute.getID().equals("mail"))
                     {
                         theEmailAddress = theAttribute.get().toString();
-                        log.info("theEmailAddress as mail from LDAP: " + theEmailAddress);
+                        log.debug("theEmailAddress as mail from LDAP: " + theEmailAddress);
                         break;
                     }
                 }
