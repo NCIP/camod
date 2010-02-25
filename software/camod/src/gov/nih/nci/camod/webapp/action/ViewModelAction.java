@@ -359,27 +359,42 @@ public class ViewModelAction extends BaseAction
                                                       HttpServletRequest request,
                                                       HttpServletResponse response) throws Exception
     {
+
         request.getSession(true); 
         
+        try {  
+        
+    	// get and clean header to prevent SQL injection
+       	String sID = null;
+        if (request.getHeader("X-Forwarded-For") != null){
+        	sID = request.getHeader("X-Forwarded-For");
+            log.info("cleaned X-Forwarded-For: " + sID);
+            sID = SafeHTMLUtil.clean(sID);
+        }
+        
+    	// get and clean header to prevent SQL injection
+        if (request.getHeader("Referer") != null){
+        	sID = request.getHeader("Referer");
+            log.info("cleaned Referer: " + sID);
+            sID = SafeHTMLUtil.clean(sID);
+        }    
+    
         // Clean all headers for security scan (careful about what chars you allow)
     	String headername = "";
     	for(Enumeration e = request.getHeaderNames(); e.hasMoreElements();){
     		headername = (String)e.nextElement();
-    		log.debug("populateModelCharacteristics headername: " + headername);
+    		log.info("populateModelCharacteristics headername: " + headername);
     		String cleanHeaders = SafeHTMLUtil.clean(headername);
-    		log.debug("populateModelCharacteristics cleaned headername: " + headername);
-    	}
-       
+    		log.info("populateModelCharacteristics cleaned headername: " + headername);
+    	}       
         
         // Get and clean method to prevent Cross-Site Scripting 
         String methodName = request.getParameter("unprotected_method");
-        log.debug("methodName: " + methodName);
+        log.info("methodName: " + methodName);
         if (!methodName.equals("populateModelCharacteristics")){
 	        methodName = SafeHTMLUtil.clean(methodName);
-	        log.debug("methodName: " + methodName);
-        }      	
-        
-        try {      
+	        log.info("cleaned methodName: " + methodName);
+        }                
         	
 	        setCancerModel(request);
 	        setComments(request, Constants.Pages.MODEL_CHARACTERISTICS);
