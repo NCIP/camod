@@ -45,13 +45,13 @@ public class AuthenticationFilter implements Filter {
      */
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
             ServletException {
-    	System.out.println("AuthenticationFilter.doFilter");
+    	//System.out.println("AuthenticationFilter.doFilter");
 
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         System.out.println("req.getServletPath()= " + req.getServletPath());
         System.out.println("Enter doFilter req.getSession().getId()= " + req.getSession().getId());
-        System.out.println("Enter doFilter notloggedin= " + (String)req.getSession().getAttribute("notloggedin"));
+      System.out.println("Enter doFilter notloggedin= " + (String)req.getSession().getAttribute("notloggedin"));
 
         boolean authorized = false;
     	String isloginpage = ((HttpServletRequest) request).getRequestURI();
@@ -62,9 +62,11 @@ public class AuthenticationFilter implements Filter {
         if (request instanceof HttpServletRequest) {
 
         	if(isloginpage!=null && !isRequestedSessionIdFromURL &&( 
-        			isloginpage.endsWith("loginMain.do") 
+        			isloginpage.endsWith("loginMain.do") || 
+        			isloginpage.endsWith("LoginAction.do") ||
+        			isloginpage.endsWith("/camod/LoginAction.do")
         			))	{
-        		System.out.println("AuthenticationFilter.doFilter login.do loop ");
+        		System.out.println("AuthenticationFilter.doFilter loginMain.do,LoginAction.do,/camod/LoginAction.do  loop ");
         		//just continue, so they can login
         		generateNewSession((HttpServletRequest) request);
         		chain.doFilter(request, response);
@@ -96,7 +98,7 @@ public class AuthenticationFilter implements Filter {
             System.out.println("AuthenticationFilter.doFilter not authorized loop unauthorizedPage= " + unauthorizedPage);
             
             if (unauthorizedPage != null && !"".equals(unauthorizedPage)) {
-            	//System.out.println("unauthorizedPage != null && !.equals(unauthorizedPage) loop: ");
+            	System.out.println("unauthorizedPage != null && !.equals(unauthorizedPage) loop: ");
             	generateNewSession((HttpServletRequest) request);
             	System.out.println("Generated new session for request ");
             	//chain.doFilter(request, response); 
