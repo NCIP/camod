@@ -113,7 +113,7 @@ public final class LoginAction extends BaseAction {
      */
     public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws IOException, ServletException {
-    	log.debug("Enter LoginAction.execute");
+    	log.info("Enter LoginAction.execute");
         LoginForm loginForm = (LoginForm) form;
 
         String theUsername = loginForm.getUsername().toLowerCase(); 
@@ -155,7 +155,7 @@ public final class LoginAction extends BaseAction {
             
             forward = "success";
             request.getSession().setAttribute(Constants.CURRENTUSER, theUsername);
-            log.debug("current user= " + request.getSession().getAttribute(Constants.CURRENTUSER));
+            log.info("set current user in LoginAction= " + request.getSession().getAttribute(Constants.CURRENTUSER));
             log.info("Session id= " + request.getSession().getId());
             
 		    //Used for sidebar, number of saved queries
