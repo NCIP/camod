@@ -36,17 +36,19 @@ public class RegisterUserPopulateAction extends BaseAction {
             HttpServletResponse inResponse) throws Exception {
 
         log.trace("Entering execute");
-        
-        // Clean all headers for security scan (careful about what chars you allow)
-    	String headername = "";
-    	for(Enumeration e = inRequest.getHeaderNames(); e.hasMoreElements();){
-    		headername = (String)e.nextElement();
-    		log.debug("RegisterUserPopulateAction headername: " + headername);
-    		String cleanHeaders = SafeHTMLUtil.clean(headername);
-    		log.debug("RegisterUserPopulateAction cleaned headername: " + headername);
-    	}        
+       
 
         try {
+            
+            // Clean all headers for security scan (careful about what chars you allow)
+        	String headername = "";
+        	for(Enumeration e = inRequest.getHeaderNames(); e.hasMoreElements();){
+        		headername = (String)e.nextElement();
+        		log.debug("RegisterUserPopulateAction headername: " + headername);
+        		String cleanHeaders = SafeHTMLUtil.clean(headername);
+        		log.debug("RegisterUserPopulateAction cleaned headername: " + headername);
+        	} 
+        	
             NewDropdownUtil.populateDropdown(inRequest, Constants.Dropdowns.PRINCIPALINVESTIGATORDROP, Constants.Dropdowns.ADD_BLANK_OPTION);
         } catch (Exception e) {
 
