@@ -50,6 +50,7 @@ import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.Agent;
 import gov.nih.nci.camod.service.AgentManager;
 import gov.nih.nci.camod.service.impl.QueryManagerSingleton;
+import gov.nih.nci.camod.util.SafeHTMLUtil;
 import gov.nih.nci.camod.webapp.form.DrugScreenSearchForm;
 import gov.nih.nci.common.persistence.Search;
 import gov.nih.nci.common.persistence.hibernate.HQLParameter;
@@ -57,6 +58,7 @@ import gov.nih.nci.common.persistence.hibernate.HQLParameter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 
@@ -82,10 +84,50 @@ public final class DrugScreenSearchAction extends BaseAction {
             HttpServletResponse response) throws IOException, ServletException {
         DrugScreenSearchForm theForm = (DrugScreenSearchForm) form;
         log.debug("the form=" + theForm);
+        
+        //Clean the nsc number to prevent SQL injection
+        String nscNumberEntered = theForm.getNSCNumber();
+        if (nscNumberEntered != null && nscNumberEntered.length() > 0) {
+        	String nscNumber = SafeHTMLUtil.clean(theForm.getNSCNumber());
+        	theForm.setNSCNumber(nscNumber);
+            log.info("DrugScreenSearchAction cleaned ndcNumber: " + nscNumber);
+        }
+        
         request.getSession().setAttribute(Constants.DRUG_SCREEN_OPTIONS, theForm);
 
 		// The following two objects are needed for eQBE.
         try {
+            String name = null;
+            // Get and clean method to prevent SQL injection
+            name = request.getParameter("unprotected_method");
+            if (!name.equals("populate")){
+            	name = SafeHTMLUtil.clean(name);
+    	        log.debug("methodName: " + name);
+            } 
+        	
+            // Clean all headers for security scan (careful about what chars you allow)
+        	for(Enumeration e = request.getHeaderNames(); e.hasMoreElements();){
+        		name = (String)e.nextElement();
+        		log.debug("SimpleSearchPopulateAction headername: " + name);
+        		String cleanHeaders = SafeHTMLUtil.clean(name);
+        		log.debug("SimpleSearchPopulateAction cleaned headername: " + name);
+        	} 
+        	
+        	// get and clean header to prevent SQL injection
+           	String sID = null;
+            if (request.getHeader("X-Forwarded-For") != null){
+            	sID = request.getHeader("X-Forwarded-For");
+                log.info("cleaned X-Forwarded-For: " + sID);
+                sID = SafeHTMLUtil.clean(sID);
+            }
+            
+        	// get and clean header to prevent SQL injection
+            if (request.getHeader("Referer") != null){
+            	sID = request.getHeader("Referer");
+                log.info("cleaned Referer: " + sID);
+                sID = SafeHTMLUtil.clean(sID);
+            }        	
+        	
 			HQLParameter[] theParams = new HQLParameter[1];
 			theParams[0] = new HQLParameter();
 			theParams[0].setName("nscNumber");
