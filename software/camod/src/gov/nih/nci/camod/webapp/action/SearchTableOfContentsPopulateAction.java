@@ -35,7 +35,7 @@ public class SearchTableOfContentsPopulateAction extends BaseAction {
     public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.debug("In SearchTableOfContentsPopulateAction.populate");
+        log.info("In SearchTableOfContentsPopulateAction.populate");
         
         // Clean all headers for security scan (careful about what chars you allow)
     	String headername = "";
@@ -54,7 +54,7 @@ public class SearchTableOfContentsPopulateAction extends BaseAction {
 
         request.getSession().setAttribute(Constants.TOCSearch.TOC_QUERY_RESULTS, theResults);
         
-        log.debug("Exiting SearchTableOfContentsPopulateAction.populate");
+        log.info("Exiting SearchTableOfContentsPopulateAction.populate");
         return mapping.findForward("next");
     }
 
