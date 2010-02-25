@@ -67,6 +67,8 @@ public class RegisterUserAction extends BaseAction {
 		log.info("<RegisterUserAction> Entering execute");
 
 		String theForward = "next";
+		
+		
 
 		// The user didn't press the cancel button
 		if (isCancelled(inRequest)) {
@@ -126,7 +128,31 @@ public class RegisterUserAction extends BaseAction {
 			if(theForm.getPiUsername() != null & theForm.getPiUsername().length() >0){				
 				String piUserName = SafeHTMLUtil.clean(theForm.getPiUsername());
 	            theForm.setPiUsername(piUserName);
-			}			
+			}
+			
+	    	// get and clean header to prevent SQL injection
+	       	String sID = null;
+	        if (inRequest.getHeader("X-Forwarded-For") != null){
+	        	sID = inRequest.getHeader("X-Forwarded-For");
+	            log.info("cleaned X-Forwarded-For: " + sID);
+	            sID = SafeHTMLUtil.clean(sID);
+	        }
+	        
+	    	// get and clean header to prevent SQL injection
+	        if (inRequest.getHeader("Referer") != null){
+	        	sID = inRequest.getHeader("Referer");
+	            log.info("cleaned Referer: " + sID);
+	            sID = SafeHTMLUtil.clean(sID);
+	        } 
+	        
+	        // Clean all headers for security scan (careful about what chars you allow)
+	    	String headername = "";
+	    	for(Enumeration e = inRequest.getHeaderNames(); e.hasMoreElements();){
+	    		headername = (String)e.nextElement();
+	    		log.info("RegisterUserAction headername: " + headername);
+	    		String cleanHeaders = SafeHTMLUtil.clean(headername);
+	    		log.info("RegisterUserAction cleaned headername: " + headername);
+	    	} 	        
 			
 			try {
 				// Get from default bundle
