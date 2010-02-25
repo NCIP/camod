@@ -32,9 +32,11 @@
  */
 package gov.nih.nci.camod.webapp.action;
 
+import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.Person;
 import gov.nih.nci.camod.service.impl.PersonManagerSingleton;
 import gov.nih.nci.camod.util.MailUtil;
+import gov.nih.nci.camod.util.SafeHTMLUtil;
 import gov.nih.nci.camod.webapp.form.UserSettingsForm;
 
 import java.io.FileInputStream;
@@ -62,7 +64,7 @@ public class RegisterUserAction extends BaseAction {
 			HttpServletRequest inRequest, HttpServletResponse inResponse)
 			throws Exception {
 
-		log.debug("<RegisterUserAction> Entering execute");
+		log.info("<RegisterUserAction> Entering execute");
 
 		String theForward = "next";
 
@@ -71,7 +73,61 @@ public class RegisterUserAction extends BaseAction {
 			theForward = "cancel";
 		} else {
 			UserSettingsForm theForm = (UserSettingsForm) inForm;
-
+			
+			// clean all the entered values to prevent nonsense injection of text by security scan
+			if(theForm.getAffiliation() != null & theForm.getAffiliation().length() >0){
+				log.info("theForm.getAffiliation(): " + theForm.getAffiliation());
+				String affilation = SafeHTMLUtil.clean(theForm.getAffiliation());
+				log.info("affilation: " + affilation);
+				theForm.setAffiliation(affilation);
+			}
+			if(theForm.getFirstName() != null & theForm.getFirstName().length() >0){
+				log.info("theForm.getFirstName(): " + theForm.getFirstName());
+				String firstName = SafeHTMLUtil.clean(theForm.getFirstName());
+				log.info("firstName: " + firstName);				
+				theForm.setFirstName(firstName);
+			}
+			if(theForm.getLastName() != null & theForm.getLastName().length() >0){
+				log.info("theForm.getLastName(): " + theForm.getLastName());				
+				String lastName = SafeHTMLUtil.clean(theForm.getLastName());
+				log.info("lastName: " + lastName);				
+				theForm.setLastName(lastName);
+			}
+			if(theForm.getPhone() != null & theForm.getPhone().length() >0){
+				log.info("theForm.getPhone(): " + theForm.getPhone());				
+				String phone = SafeHTMLUtil.clean(theForm.getPhone());
+				log.info("phone: " + phone);				
+				theForm.setPhone(phone);
+			}
+			if(theForm.getEmail() != null & theForm.getEmail().length() >0){
+				log.info("theForm.getEmail(): " + theForm.getEmail());				
+				String email = SafeHTMLUtil.clean(theForm.getEmail());
+				log.info("email: " + email);				
+				theForm.setEmail(email);
+			}
+			if(theForm.getPiFirstName() != null & theForm.getPiFirstName().length() >0){
+				log.info("theForm.getPiFirstName(): " + theForm.getPiFirstName());				
+				String piFirstName = SafeHTMLUtil.clean(theForm.getPiFirstName());
+				log.info("piFirstName: " + piFirstName);
+				theForm.setPiFirstName(piFirstName);
+			}
+			if(theForm.getPiLastName() != null & theForm.getPiLastName().length() >0){
+				log.info("theForm.getPiLastName(): " + theForm.getPiLastName());				
+				String piLastName = SafeHTMLUtil.clean(theForm.getPiLastName());
+				log.info("piLastName: " + piLastName);				
+				theForm.setPiLastName(piLastName);
+			}
+			if(theForm.getPiEmail() != null & theForm.getPiEmail().length() >0){
+				String piEmail = SafeHTMLUtil.clean(theForm.getPiEmail());
+				theForm.setPiEmail(piEmail);
+			}
+			// Do not check if it matches DB since it just get sent via e-mail
+			// Let systems figure out PI if any illegal characters are missing
+			if(theForm.getPiUsername() != null & theForm.getPiUsername().length() >0){				
+				String piUserName = SafeHTMLUtil.clean(theForm.getPiUsername());
+	            theForm.setPiUsername(piUserName);
+			}			
+			
 			try {
 				// Get from default bundle
 				Properties camodProperties = new Properties();
