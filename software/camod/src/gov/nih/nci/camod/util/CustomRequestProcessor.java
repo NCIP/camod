@@ -49,27 +49,27 @@ public class CustomRequestProcessor extends SecureRequestProcessor {
 
     public void process(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-        log.debug("Entering process");
-        log.debug("current user= " + request.getSession().getAttribute(Constants.CURRENTUSER));
+        log.info("Entering process");
+        log.info("current user= " + request.getSession().getAttribute(Constants.CURRENTUSER));
         super.process(request, response);
-        log.debug("Exiting process");
+        log.info("Exiting process");
     }
 
     protected ActionForward processActionPerform(HttpServletRequest request, HttpServletResponse response,
             Action action, ActionForm form, ActionMapping mapping) throws IOException, ServletException {
 
-        log.debug("Entering processActionPerform");
-    	log.debug("current user= " + request.getSession().getAttribute(Constants.CURRENTUSER));
+        log.info("Entering processActionPerform");
+    	log.info("current user= " + request.getSession().getAttribute(Constants.CURRENTUSER));
     	
         // Check custom ActionMapping Parameter
         if (mapping.getParameter().toString().equals("method") || mapping.getParameter().toString().equals("protected")) {
 
             HttpSession session = request.getSession();
             String user = (String) session.getAttribute(Constants.CURRENTUSER);
-            log.debug("user= " + request.getSession().getAttribute(Constants.CURRENTUSER));
+            log.info("user= " + request.getSession().getAttribute(Constants.CURRENTUSER));
             
             if (user == null ) {                
-                log.debug("User not authorized.  Sending to login page");
+                log.info("User not authorized.  Sending to login page");
                 request.getSession().setAttribute(Constants.LOGGEDIN, "false");
                 return mapping.findForward("login");
             }
@@ -89,7 +89,7 @@ public class CustomRequestProcessor extends SecureRequestProcessor {
             List theRoles = (List) request.getSession().getAttribute(Constants.CURRENTUSERROLES);
 
             if (theRoles == null || !theRoles.contains(Constants.Admin.Roles.COORDINATOR)) {
-                log.debug("Accessing page: " + thePath + " without proper role");
+                log.info("Accessing page: " + thePath + " without proper role");
 
                 return mapping.findForward("noAccess");
             }
@@ -98,41 +98,41 @@ public class CustomRequestProcessor extends SecureRequestProcessor {
         // Print the forwards and mapping
         String[] theForwards = mapping.findForwards();
         for (int i = 0, j = theForwards.length; i < j; i++) {
-            log.debug("Forward: " + theForwards[i]);
+            log.info("Forward: " + theForwards[i]);
         }
-        log.debug("Mapping: " + mapping);
+        log.info("Mapping: " + mapping);
 
         // Process the action
         ActionForward theForward = super.processActionPerform(request, response, action, form, mapping);
-        log.debug("ActionForward : " + theForward);
+        log.info("ActionForward : " + theForward);
 
-        log.debug("Exiting processActionPerform");
+        log.info("Exiting processActionPerform");
         return theForward;
     }
 
     protected ActionForward processException(HttpServletRequest request, HttpServletResponse response,
             Exception exception, ActionForm form, ActionMapping mapping) throws IOException, ServletException {
 
-        log.debug("Entering processException");
+        log.info("Entering processException");
 
         ActionForward theForward = super.processException(request, response, exception, form, mapping);
 
-        log.debug("ActionForward:" + theForward);
+        log.info("ActionForward:" + theForward);
 
-        log.debug("Exiting processException");
+        log.info("Exiting processException");
         return theForward;
     }
 
     protected boolean processValidate(HttpServletRequest request, HttpServletResponse response, ActionForm form,
             ActionMapping mapping) throws IOException, ServletException {
 
-        log.debug("Entering processValidate");
-        log.debug("current user= " + request.getSession().getAttribute(Constants.CURRENTUSER));
+        log.info("Entering processValidate");
+        log.info("current user= " + request.getSession().getAttribute(Constants.CURRENTUSER));
 
         boolean validate = super.processValidate(request, response, form, mapping);
-        log.debug("Validate result: " + validate);
+        log.info("Validate result: " + validate);
 
-        log.debug("Exiting validate");
+        log.info("Exiting validate");
 
         return validate;
     }
@@ -140,13 +140,13 @@ public class CustomRequestProcessor extends SecureRequestProcessor {
     protected boolean processForward(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping)
             throws IOException, ServletException {
 
-        log.debug("Entering processForward");
-        log.debug("current user= " + request.getSession().getAttribute(Constants.CURRENTUSER));
+        log.info("Entering processForward");
+        log.info("current user= " + request.getSession().getAttribute(Constants.CURRENTUSER));
 
         boolean forward = super.processForward(request, response, mapping);
-        log.debug("Forward result: " + forward);
+        log.info("Forward result: " + forward);
 
-        log.debug("Exiting processForward");
+        log.info("Exiting processForward");
 
         return forward;
     }
@@ -154,12 +154,12 @@ public class CustomRequestProcessor extends SecureRequestProcessor {
     protected void processForwardConfig(HttpServletRequest request, HttpServletResponse response, ForwardConfig config)
             throws IOException, ServletException {
 
-        log.debug("Entering processForwardConfig");
-        log.debug("current user= " + request.getSession().getAttribute(Constants.CURRENTUSER));
+        log.info("Entering processForwardConfig");
+        log.info("current user= " + request.getSession().getAttribute(Constants.CURRENTUSER));
 
         super.processForwardConfig(request, response, config);
 
-        log.debug("The ForwardConfig: " + config);
-        log.debug("Exiting processForwardConfig");
+        log.info("The ForwardConfig: " + config);
+        log.info("Exiting processForwardConfig");
     }
 }
