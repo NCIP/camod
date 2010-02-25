@@ -77,6 +77,10 @@
 	<filter-mapping>
 		<filter-name>AuthenticationFilter</filter-name>
 		<url-pattern>/loginMain.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AuthenticationFilter</filter-name>
+		<url-pattern>/LoginAction.do</url-pattern>
 	</filter-mapping>	
 	<filter-mapping>
 		<filter-name>AuthenticationFilter</filter-name>
