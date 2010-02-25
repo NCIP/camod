@@ -44,7 +44,22 @@ public class SearchTableOfContentsPopulateAction extends BaseAction {
     		log.debug("SearchTableOfContentsPopulateAction headername: " + headername);
     		String cleanHeaders = SafeHTMLUtil.clean(headername);
     		log.debug("SearchTableOfContentsPopulateAction cleaned headername: " + headername);
-    	}          
+    	}    
+    	
+    	// get and clean header to prevent SQL injection
+       	String sID = null;
+        if (request.getHeader("X-Forwarded-For") != null){
+        	sID = request.getHeader("X-Forwarded-For");
+            log.info("cleaned X-Forwarded-For: " + sID);
+            sID = SafeHTMLUtil.clean(sID);
+        }
+        
+    	// get and clean header to prevent SQL injection
+        if (request.getHeader("Referer") != null){
+        	sID = request.getHeader("Referer");
+            log.info("cleaned Referer: " + sID);
+            sID = SafeHTMLUtil.clean(sID);
+        }     	
 
         // Get the curation manager workflow XML
         TOCManager theTOCManager = new TOCManager(getServlet().getServletContext().getRealPath("/")
