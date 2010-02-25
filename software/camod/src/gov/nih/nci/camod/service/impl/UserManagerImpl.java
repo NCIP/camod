@@ -126,7 +126,7 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 		try {
             log.info("set lockout parameters for AuthenticationManager");
 			theAuthenticationMgr = SecurityServiceProvider
-				.getAuthenticationManager(Constants.UPT_CONTEXT_NAME, "180000", 
+				.getAuthenticationManager(Constants.UPT_CONTEXT_NAME, "1800000", 
 					"60000", "75"); 
             
             log.debug("theAuthenticationMgrtoString(): " + theAuthenticationMgr.toString());
