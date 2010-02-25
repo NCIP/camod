@@ -58,28 +58,35 @@ public class ViewTOCSearchResultsAction extends BaseAction {
     public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
     	
-    	log.debug("In ViewTOCSearchResultsAction.execute");
-    	
-        // Clean all headers for security scan (careful about what chars you allow)
-    	String headername = "";
-    	for(Enumeration e = request.getHeaderNames(); e.hasMoreElements();){
-    		headername = (String)e.nextElement();
-    		log.debug("ViewTOCSearchResultsAction headername: " + headername);
-    		String cleanHeaders = SafeHTMLUtil.clean(headername);
-    		log.debug("ViewTOCSearchResultsAction cleaned headername: " + headername);
-    	}    	
-        
+    	log.info("In ViewTOCSearchResultsAction.execute");
+  
         String theForward = "next";
         
-        // clean TOCQUERYKEY ahead of try loop - then loop checks if it is a valid choice - security scan code
-        String theKey = (String) request.getParameter(Constants.Parameters.TOCQUERYKEY);
-        if (theKey != null && theKey.length() > 0) {
-        	theKey = SafeHTMLUtil.clean(theKey);
-        log.info("ViewTOCSearchResultsAction theKey: " + theKey);
-        }
-  
-
         try {
+        	
+            // Clean all headers for security scan (careful about what chars you allow)
+        	String headername = "";
+        	for(Enumeration e = request.getHeaderNames(); e.hasMoreElements();){
+        		headername = (String)e.nextElement();
+        		log.debug("ViewTOCSearchResultsAction headername: " + headername);
+        		String cleanHeaders = SafeHTMLUtil.clean(headername);
+        		log.debug("ViewTOCSearchResultsAction cleaned headername: " + headername);
+        	}    
+            
+        	// get and clean header to prevent SQL injection
+           	String sID = null;
+            if (request.getHeader("X-Forwarded-For") != null){
+            	sID = request.getHeader("X-Forwarded-For");
+            	log.info("cleaned X-Forwarded-For: " + sID);
+                sID = SafeHTMLUtil.clean(sID);
+            }        
+      
+            // clean TOCQUERYKEY ahead of try loop - then loop checks if it is a valid choice - security scan code
+            String theKey = (String) request.getParameter(Constants.Parameters.TOCQUERYKEY);
+            if (theKey != null && theKey.length() > 0) {
+            	theKey = SafeHTMLUtil.clean(theKey);
+            log.debug("ViewTOCSearchResultsAction theKey: " + theKey);
+            }        	
             
         	//Remove any retained criteriatable values
     		request.getSession().setAttribute(Constants.CRITERIATABLE, "" );    		
@@ -121,7 +128,7 @@ public class ViewTOCSearchResultsAction extends BaseAction {
 		
 		                    if (theQuery.getKey().equals(theKey)) {                   	
 		                        request.getSession().setAttribute(Constants.SEARCH_RESULTS, theQuery.getResults());
-		                        log.debug("TOC theQuery.getResults(): " + theQuery.getResults());
+		                        log.info("TOC theQuery.getResults(): " + theQuery.getResults());
 		                        break;
 		                    }
 		                }
@@ -138,7 +145,7 @@ public class ViewTOCSearchResultsAction extends BaseAction {
             theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
             saveErrors(request, theMsg);
         }
-        log.debug("Exiting ViewTOCSearchResultsAction theForward: "+ theForward);
+        log.info("Exiting ViewTOCSearchResultsAction theForward: "+ theForward);
         return mapping.findForward(theForward);
     }
     
