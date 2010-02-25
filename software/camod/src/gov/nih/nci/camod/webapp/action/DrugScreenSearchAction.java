@@ -97,20 +97,13 @@ public final class DrugScreenSearchAction extends BaseAction {
 
 		// The following two objects are needed for eQBE.
         try {
-            String name = null;
-            // Get and clean method to prevent SQL injection
-            name = request.getParameter("unprotected_method");
-            if (!name.equals("populate")){
-            	name = SafeHTMLUtil.clean(name);
-    	        log.debug("methodName: " + name);
-            } 
-        	
+            String name = null;        	
             // Clean all headers for security scan (careful about what chars you allow)
         	for(Enumeration e = request.getHeaderNames(); e.hasMoreElements();){
         		name = (String)e.nextElement();
         		log.debug("SimpleSearchPopulateAction headername: " + name);
         		String cleanHeaders = SafeHTMLUtil.clean(name);
-        		log.debug("SimpleSearchPopulateAction cleaned headername: " + name);
+        		log.info("SimpleSearchPopulateAction cleaned headername: " + name);
         	} 
         	
         	// get and clean header to prevent SQL injection
