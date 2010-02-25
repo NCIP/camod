@@ -72,7 +72,7 @@ public class SimpleSearchPopulateAction extends BaseAction {
     public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.info("In SimpleSearchPopulateAction.populate");
+        log.debug("In SimpleSearchPopulateAction.populate");
         
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.PRINCIPALINVESTIGATORQUERYDROP,
                 Constants.Dropdowns.ADD_BLANK);  
@@ -142,19 +142,19 @@ public class SimpleSearchPopulateAction extends BaseAction {
     
     public ActionForward setSpeciesForOrganTree(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
-    	log.info("theSearchForm.setSpeciesForOrganTree(): " );
+    	log.debug("theSearchForm.setSpeciesForOrganTree(): " );
     	String theSearchSpecies = null;    	
         SearchForm theSearchForm = (SearchForm) form;
         
         // Check if null - if user goes from species to empty this correctly redirects to screen        
         if (theSearchForm.getSpecies() !=null && theSearchForm.getSpecies().length() > 0){
-            log.info("theSearchForm.getSpecies(): "+ theSearchForm.getSpecies());
+            log.debug("theSearchForm.getSpecies(): "+ theSearchForm.getSpecies());
             
             // Set selected species to a constant to determine which organ tree displays 
             // using common name because Rat has two species
             Species species = SpeciesManagerSingleton.instance().getByName(theSearchForm.getSpecies());
             theSearchSpecies = species.getCommonName();
-            log.info("<setSpeciesForOrganTree> theSearchSpecies: "+ theSearchSpecies);        	
+            log.debug("<setSpeciesForOrganTree> theSearchSpecies: "+ theSearchSpecies);        	
         }
 
         request.getSession().setAttribute(Constants.SEARCHSPECIESCOMMONNAME, theSearchSpecies);
@@ -165,7 +165,7 @@ public class SimpleSearchPopulateAction extends BaseAction {
     public ActionForward clearSpeciesForOrganTree(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
     	
-    	log.info( "Clearing Species for Organ Tree" );
+    	log.debug( "Clearing Species for Organ Tree" );
     	
     	String theSearchSpecies = null;
     	SearchForm theSearchForm = (SearchForm) form;
