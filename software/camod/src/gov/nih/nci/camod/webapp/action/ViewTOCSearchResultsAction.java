@@ -79,7 +79,14 @@ public class ViewTOCSearchResultsAction extends BaseAction {
             	sID = request.getHeader("X-Forwarded-For");
             	log.info("cleaned X-Forwarded-For: " + sID);
                 sID = SafeHTMLUtil.clean(sID);
-            }        
+            }  
+            
+        	// get and clean header to prevent SQL injection
+            if (request.getHeader("Referer") != null){
+            	sID = request.getHeader("Referer");
+            	log.info("cleaned Referer: " + sID);
+                sID = SafeHTMLUtil.clean(sID);
+            }             
       
             // clean TOCQUERYKEY ahead of try loop - then loop checks if it is a valid choice - security scan code
             String theKey = (String) request.getParameter(Constants.Parameters.TOCQUERYKEY);
