@@ -1181,18 +1181,18 @@ public class QueryManagerImpl extends BaseManager
      */
     public List getQueryOnlySpecies(HttpServletRequest inRequest) throws PersistenceException
     {
-        log.info("Entering QueryManagerImpl.getQueryOnlySpecies");
+        log.debug("Entering QueryManagerImpl.getQueryOnlySpecies");
 
         // Format the query
         HQLParameter[] theParams = new HQLParameter[0];
         String theHQLQuery = "from Species where scientificName is not null order by scientificName asc";
-        log.info("Entering QueryManagerImpl.getQueryOnlySpecies theHQLQuery: " + theHQLQuery.toString());
+        log.debug("Entering QueryManagerImpl.getQueryOnlySpecies theHQLQuery: " + theHQLQuery.toString());
         
         List theList = Search.query(theHQLQuery, theParams);
 
-        log.info("Found " + theList.size() + " matching items: " + theList.toString());
+        log.debug("Found " + theList.size() + " matching items: " + theList.toString());
 
-        log.info("Exiting QueryManagerImpl.getQueryOnlySpecies");
+        log.debug("Exiting QueryManagerImpl.getQueryOnlySpecies");
         return theList;
     }
 
@@ -1345,7 +1345,7 @@ public class QueryManagerImpl extends BaseManager
      */
     public List getQueryOnlyPrincipalInvestigators() throws PersistenceException
     {
-        log.info("Entering QueryManagerImpl.getQueryOnlyPrincipalInvestigators");
+        log.debug("Entering QueryManagerImpl.getQueryOnlyPrincipalInvestigators");
 
         // Format the query
         String theSQLString = "SELECT last_name, first_name " + "FROM party " + "WHERE is_principal_investigator = 1 " + "  AND first_name IS NOT NULL " + "  AND last_name IS NOT NULL " + "  AND party_id IN (SELECT DISTINCT principal_investigator_id FROM abs_cancer_model WHERE state = 'Edited-approved')" + "ORDER BY last_name ASC";
@@ -1356,7 +1356,7 @@ public class QueryManagerImpl extends BaseManager
 
         try
         {
-            log.info("getQueryOnlyPrincipalInvestigators - SQL: " + theSQLString);
+            log.debug("getQueryOnlyPrincipalInvestigators - SQL: " + theSQLString);
 
             Object[] params = new Object[0];
             theResultSet = Search.query(theSQLString, params);
