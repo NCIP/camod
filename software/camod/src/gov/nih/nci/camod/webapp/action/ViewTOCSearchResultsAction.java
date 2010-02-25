@@ -108,6 +108,7 @@ public class ViewTOCSearchResultsAction extends BaseAction {
 	            if (!SafeHTMLUtil.isValidValue(theKey,Constants.Dropdowns.SEARCHTOCDROP,request))
 	            {
 	                // set theForward to failure - fail gracefully but do not let query continue
+	            	log.info("TOC: The key is not an accepted value - end query " + theKey);  
 	                theForward = "failure";
 	            } else {	            
 		            log.debug("theKey is a valid value - continue with querry: " + theKey); 
