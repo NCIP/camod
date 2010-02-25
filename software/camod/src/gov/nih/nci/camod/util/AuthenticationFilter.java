@@ -55,9 +55,9 @@ public class AuthenticationFilter implements Filter {
 
         boolean authorized = false;
     	String isloginpage = ((HttpServletRequest) request).getRequestURI();
-    	System.out.println("AuthenticationFilter.doFilter isloginpage= " + isloginpage);
+    	//System.out.println("AuthenticationFilter.doFilter isloginpage= " + isloginpage);
         boolean isRequestedSessionIdFromURL = ((HttpServletRequest) request).isRequestedSessionIdFromURL();
-        System.out.println("AuthenticationFilter.doFilter isRequestedSessionIdFromURL= " + isRequestedSessionIdFromURL);        
+        //System.out.println("AuthenticationFilter.doFilter isRequestedSessionIdFromURL= " + isRequestedSessionIdFromURL);        
         
         if (request instanceof HttpServletRequest) {
 
@@ -72,17 +72,17 @@ public class AuthenticationFilter implements Filter {
         		chain.doFilter(request, response);
                 return;
         	}  
-        	System.out.println("AuthenticationFilter.doFilter NOT login.do or loginMain.do ");        	
+        	//System.out.println("AuthenticationFilter.doFilter NOT login.do or loginMain.do ");        	
         
         	//check login for caMOD
             HttpSession session = ((HttpServletRequest) request).getSession(false);
-            System.out.println("AuthenticationFilter.doFilter session= " + session);
+            //System.out.println("AuthenticationFilter.doFilter session= " + session);
             if (session != null && !isRequestedSessionIdFromURL){
 	            String loggedin = (String)session.getAttribute("loggedin");
-	            System.out.println("AuthenticationFilter loggedin= " + loggedin);
+	            //System.out.println("AuthenticationFilter loggedin= " + loggedin);
 	            // reverse this property in application when this code works
 	            if(loggedin != null && loggedin.equals("true")){
-	            	System.out.println("AuthenticationFilter set authorized = true: " );
+	            	//System.out.println("AuthenticationFilter set authorized = true: " );
 	                	authorized = true;
 	            }
             }
@@ -98,7 +98,7 @@ public class AuthenticationFilter implements Filter {
             System.out.println("AuthenticationFilter.doFilter not authorized loop unauthorizedPage= " + unauthorizedPage);
             
             if (unauthorizedPage != null && !"".equals(unauthorizedPage)) {
-            	System.out.println("unauthorizedPage != null && !.equals(unauthorizedPage) loop: ");
+            	//System.out.println("unauthorizedPage != null && !.equals(unauthorizedPage) loop: ");
             	generateNewSession((HttpServletRequest) request);
             	System.out.println("Generated new session for request ");
             	//chain.doFilter(request, response); 
