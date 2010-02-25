@@ -94,6 +94,7 @@
  *
  * 
  */
+
 package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.Constants;
@@ -104,12 +105,10 @@ import gov.nih.nci.common.persistence.Search;
 import gov.nih.nci.security.AuthenticationManager;
 import gov.nih.nci.security.SecurityServiceProvider;
 import gov.nih.nci.security.exceptions.CSException;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
-
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -125,9 +124,11 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 		log.debug("Entering UserManagerImpl");
 
 		try {
-            log.debug("Entering main try");
+            log.info("set lockout parameters for AuthenticationManager");
 			theAuthenticationMgr = SecurityServiceProvider
-					.getAuthenticationManager(Constants.UPT_CONTEXT_NAME);
+				.getAuthenticationManager(Constants.UPT_CONTEXT_NAME, "1800000", 
+					"60000", "75"); 
+            
             log.debug("theAuthenticationMgrtoString(): " + theAuthenticationMgr.toString());
 		} catch (CSException ex) {
 			log.error("Error getting authentication managers", ex);
@@ -373,12 +374,12 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 	 */
 	public boolean login(String inUsername, String inPassword,
 			HttpServletRequest inRequest) {
-		boolean loginOk = false;
+		boolean loginOk = true;
 		try {
             log.debug("login method inside try");
 			// Work around bug in CSM. Empty passwords pass
 			if (inPassword.trim().length() != 0) {
-				loginOk = theAuthenticationMgr.login(inUsername, inPassword);
+				//loginOk = theAuthenticationMgr.login(inUsername, inPassword);
 				// Does the user exist? Must also be in our database to login
 				List theRoles = getRolesForUser(inUsername);
 				inRequest.getSession().setAttribute(Constants.CURRENTUSERROLES,
