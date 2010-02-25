@@ -101,9 +101,9 @@ public final class DrugScreenSearchAction extends BaseAction {
             // Clean all headers for security scan (careful about what chars you allow)
         	for(Enumeration e = request.getHeaderNames(); e.hasMoreElements();){
         		name = (String)e.nextElement();
-        		log.debug("SimpleSearchPopulateAction headername: " + name);
+        		log.debug("DrugScreenSearchAction headername: " + name);
         		String cleanHeaders = SafeHTMLUtil.clean(name);
-        		log.info("SimpleSearchPopulateAction cleaned headername: " + name);
+        		log.info("DrugScreenSearchAction cleaned headername: " + name);
         	} 
         	
         	// get and clean header to prevent SQL injection
