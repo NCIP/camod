@@ -1,39 +1,3 @@
-<%
-
-/**
- * 
- * $Id: sidebar.jsp,v 1.20 2008-11-19 19:02:03 pandyas Exp $
- * 
- * $Log: not supported by cvs2svn $
- * Revision 1.19  2008/09/22 16:06:04  schroedn
- * Bug #7028
- * Changed link to 'CAMOD USER GUIDE'
- *
- * Revision 1.18  2008/07/11 17:31:56  schroedn
- * Bug 7028
- * Add link
- *
- * Revision 1.17  2006/12/28 18:27:37  pandyas
- * Renamed folder !SSL!( from robohelp) to caMOD (folder name not used in ePublisher)
- *
- * Revision 1.16  2006/10/17 16:08:28  pandyas
- * modified during development of caMOD 2.2 - various
- *
- * Revision 1.15  2006/08/13 18:17:54  pandyas
- * Minor change - added file name (eventually to all Jsps)
- *
- * Revision 1.14  2006/07/31 20:08:12  pandyas
- * Modified page link for Help file:
- * Swapped the new online help generated from ePublisher with the current online help generated from RoboHelp.  From Jill Hadfield
- *
- * Revision 1.13  2006/04/28 19:40:44  schroedn
- * Defect #261
- * Added links to Saved Queries and Query History when user is logged in
- *
- *
- */
-
-%>
 
 <TR><TD height="100%" class=subMenu valign=top width="210">
 <script language="JavaScript" src="scripts/global.js"></script>
