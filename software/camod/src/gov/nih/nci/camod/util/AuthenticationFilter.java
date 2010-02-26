@@ -78,6 +78,7 @@ public class AuthenticationFilter implements Filter {
             HttpSession session = ((HttpServletRequest) request).getSession(false);
             //System.out.println("AuthenticationFilter.doFilter session= " + session);
             if (session != null && !isRequestedSessionIdFromURL){
+            	System.out.println("session != null && !isRequestedSessionIdFromURL loop ");
 	            String loggedin = (String)session.getAttribute("loggedin");
 	            //System.out.println("AuthenticationFilter loggedin= " + loggedin);
 	            // reverse this property in application when this code works
