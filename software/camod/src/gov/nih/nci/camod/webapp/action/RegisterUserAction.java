@@ -107,19 +107,19 @@ public class RegisterUserAction extends BaseAction {
 				log.info("email: " + email);				
 				theForm.setEmail(email);
 			}
-			if(theForm.getPiFirstName() != null & theForm.getPiFirstName().length() >0){
+			if(theForm.getPiFirstName() != null & theForm.getPiUsername() == null){
 				log.info("theForm.getPiFirstName(): " + theForm.getPiFirstName());				
 				String piFirstName = SafeHTMLUtil.clean(theForm.getPiFirstName());
 				log.info("piFirstName: " + piFirstName);
 				theForm.setPiFirstName(piFirstName);
 			}
-			if(theForm.getPiLastName() != null & theForm.getPiLastName().length() >0){
+			if(theForm.getPiLastName() != null & theForm.getPiUsername() == null){
 				log.info("theForm.getPiLastName(): " + theForm.getPiLastName());				
 				String piLastName = SafeHTMLUtil.clean(theForm.getPiLastName());
 				log.info("piLastName: " + piLastName);				
 				theForm.setPiLastName(piLastName);
 			}
-			if(theForm.getPiEmail() != null & theForm.getPiEmail().length() >0){
+			if(theForm.getPiEmail() != null & theForm.getPiUsername() == null){
 				String piEmail = SafeHTMLUtil.clean(theForm.getPiEmail());
 				theForm.setPiEmail(piEmail);
 			}
@@ -128,8 +128,8 @@ public class RegisterUserAction extends BaseAction {
 			if(theForm.getPiUsername() != null & theForm.getPiUsername().length() >0){				
 				String piUserName = SafeHTMLUtil.clean(theForm.getPiUsername());
 	            theForm.setPiUsername(piUserName);
-			}
-			
+			} 
+					
 	    	// get and clean header to prevent SQL injection
 	       	String sID = null;
 	        if (inRequest.getHeader("X-Forwarded-For") != null){
