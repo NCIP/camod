@@ -49,10 +49,10 @@ public class CustomRequestProcessor extends SecureRequestProcessor {
 
     public void process(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-        log.info("Entering process");
-        log.info("current user= " + request.getSession().getAttribute(Constants.CURRENTUSER));
+        log.debug("Entering process");
+        log.info("process current user= " + request.getSession().getAttribute(Constants.CURRENTUSER));
         super.process(request, response);
-        log.info("Exiting process");
+        log.debug("Exiting process");
     }
 
     protected ActionForward processActionPerform(HttpServletRequest request, HttpServletResponse response,
@@ -128,13 +128,13 @@ public class CustomRequestProcessor extends SecureRequestProcessor {
     protected boolean processValidate(HttpServletRequest request, HttpServletResponse response, ActionForm form,
             ActionMapping mapping) throws IOException, ServletException {
 
-        log.info("Entering processValidate");
+        log.debug("Entering processValidate");
         log.info("processValidate current user= " + request.getSession().getAttribute(Constants.CURRENTUSER));
 
         boolean validate = super.processValidate(request, response, form, mapping);
         log.info("processValidate Validate result: " + validate);
 
-        log.info("Exiting validate");
+        log.debug("Exiting validate");
 
         return validate;
     }
