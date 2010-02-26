@@ -82,7 +82,7 @@ public class AuthenticationFilter implements Filter {
 	            //System.out.println("AuthenticationFilter loggedin= " + loggedin);
 	            // reverse this property in application when this code works
 	            if(loggedin != null && loggedin.equals("true")){
-	            	//System.out.println("AuthenticationFilter set authorized = true: " );
+	            	System.out.println("AuthenticationFilter set authorized = true: " );
 	                	authorized = true;
 	            }
             }
