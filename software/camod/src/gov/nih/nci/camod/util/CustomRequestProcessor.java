@@ -59,17 +59,19 @@ public class CustomRequestProcessor extends SecureRequestProcessor {
             Action action, ActionForm form, ActionMapping mapping) throws IOException, ServletException {
 
         log.info("Entering processActionPerform");
-    	log.info("current user= " + request.getSession().getAttribute(Constants.CURRENTUSER));
-    	
+        log.info("processActionPerform current user= " + request.getSession().getAttribute(Constants.CURRENTUSER));
+        log.info("processActionPerform mapping.getParameter().toString()= " + mapping.getParameter().toString());
+        log.info("processActionPerform loggedin= " + request.getSession().getAttribute(Constants.LOGGEDIN));
+        
         // Check custom ActionMapping Parameter
         if (mapping.getParameter().toString().equals("method") || mapping.getParameter().toString().equals("protected")) {
 
             HttpSession session = request.getSession();
             String user = (String) session.getAttribute(Constants.CURRENTUSER);
-            log.info("user= " + request.getSession().getAttribute(Constants.CURRENTUSER));
+            log.info("processActionPerform user= " + request.getSession().getAttribute(Constants.CURRENTUSER));
             
             if (user == null ) {                
-                log.info("User not authorized.  Sending to login page");
+                log.info("User not authorized (processActionPerform).  Sending to login page");
                 request.getSession().setAttribute(Constants.LOGGEDIN, "false");
                 return mapping.findForward("login");
             }
@@ -100,11 +102,11 @@ public class CustomRequestProcessor extends SecureRequestProcessor {
         for (int i = 0, j = theForwards.length; i < j; i++) {
             log.info("Forward: " + theForwards[i]);
         }
-        log.info("Mapping: " + mapping);
+        log.info("processActionPerform Mapping: " + mapping);
 
         // Process the action
         ActionForward theForward = super.processActionPerform(request, response, action, form, mapping);
-        log.info("ActionForward : " + theForward);
+        log.info("processActionPerform ActionForward : " + theForward);
 
         log.info("Exiting processActionPerform");
         return theForward;
@@ -117,7 +119,7 @@ public class CustomRequestProcessor extends SecureRequestProcessor {
 
         ActionForward theForward = super.processException(request, response, exception, form, mapping);
 
-        log.info("ActionForward:" + theForward);
+        log.info("processException ActionForward:" + theForward);
 
         log.info("Exiting processException");
         return theForward;
@@ -127,10 +129,10 @@ public class CustomRequestProcessor extends SecureRequestProcessor {
             ActionMapping mapping) throws IOException, ServletException {
 
         log.info("Entering processValidate");
-        log.info("current user= " + request.getSession().getAttribute(Constants.CURRENTUSER));
+        log.info("processValidate current user= " + request.getSession().getAttribute(Constants.CURRENTUSER));
 
         boolean validate = super.processValidate(request, response, form, mapping);
-        log.info("Validate result: " + validate);
+        log.info("processValidate Validate result: " + validate);
 
         log.info("Exiting validate");
 
@@ -141,10 +143,10 @@ public class CustomRequestProcessor extends SecureRequestProcessor {
             throws IOException, ServletException {
 
         log.info("Entering processForward");
-        log.info("current user= " + request.getSession().getAttribute(Constants.CURRENTUSER));
+        log.info("processForward current user= " + request.getSession().getAttribute(Constants.CURRENTUSER));
 
         boolean forward = super.processForward(request, response, mapping);
-        log.info("Forward result: " + forward);
+        log.info("processForward Forward result: " + forward);
 
         log.info("Exiting processForward");
 
@@ -155,11 +157,11 @@ public class CustomRequestProcessor extends SecureRequestProcessor {
             throws IOException, ServletException {
 
         log.info("Entering processForwardConfig");
-        log.info("current user= " + request.getSession().getAttribute(Constants.CURRENTUSER));
+        log.info("processForwardConfig current user= " + request.getSession().getAttribute(Constants.CURRENTUSER));
 
         super.processForwardConfig(request, response, config);
 
-        log.info("The ForwardConfig: " + config);
+        log.info("processForwardConfig The ForwardConfig: " + config);
         log.info("Exiting processForwardConfig");
     }
 }
