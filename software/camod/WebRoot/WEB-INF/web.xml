@@ -76,10 +76,6 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>AuthenticationFilter</filter-name>
-		<url-pattern>/jsp/protected/</url-pattern>
-	</filter-mapping>	
-	<filter-mapping>
-		<filter-name>AuthenticationFilter</filter-name>
 		<url-pattern>/LoginAction.do</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
