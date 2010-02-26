@@ -101,7 +101,8 @@ public final class AnimalModelAction extends BaseAction {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 
-		log.trace("Entering save");
+		log.info("Entering AnimalModelAction.save");
+		log.info("AnimalModelAction.delete current user= " + request.getSession().getAttribute(Constants.CURRENTUSER));
 
 		ModelCharacteristicsForm theModelChar = (ModelCharacteristicsForm) form;
 
@@ -216,8 +217,9 @@ public final class AnimalModelAction extends BaseAction {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 
-		log.trace("Entering edit");
-
+		log.trace("Entering AnimalModelAction.edit");
+		log.info("AnimalModelAction.edit current user= " + request.getSession().getAttribute(Constants.CURRENTUSER));
+		
 		// Grab the current modelID from the session
 		String theModelId = (String) request.getSession().getAttribute(
 				Constants.MODELID);
@@ -397,8 +399,10 @@ public final class AnimalModelAction extends BaseAction {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 
-		log.debug("<AnimalModelAction Delete> modelID="
+		log.info("<AnimalModelAction Delete> modelID="
 				+ request.getParameter("aModelID"));
+		
+		log.info("AnimalModelAction.delete current user= " + request.getSession().getAttribute(Constants.CURRENTUSER));
 
 		String theForward = "modeldeleted";
 		try {
