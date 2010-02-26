@@ -644,7 +644,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	               includes="commons-logging.jar"/>
 	    </delete> 	
 		
-		<echoproperties />
+		<!--echoproperties / -->
 	    <jboss-configure-grid jboss.conf.dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/conf"
 	                          jboss.webapp.dir="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy"
 	                          jboss.server-xml.file="${camod.grid.jboss.home}/server/${camod.grid.jboss.server.name}/deploy/jbossweb-tomcat55.sar/server.xml"
