@@ -80,8 +80,8 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>AuthenticationFilter</filter-name>
-		<url-pattern>/loginMain.do</url-pattern>
-	</filter-mapping>
+		<url-pattern>/jsp/protected/*</url-pattern>
+	</filter-mapping>	
 	<filter-mapping>
 		<filter-name>hibernateFilter</filter-name>
 		<url-pattern>*.do</url-pattern>
