@@ -15,6 +15,8 @@
 
 package gov.nih.nci.camod.util;
 
+import gov.nih.nci.camod.Constants;
+
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -62,9 +64,7 @@ public class AuthenticationFilter implements Filter {
         if (request instanceof HttpServletRequest) {
 
         	if(isloginpage!=null && !isRequestedSessionIdFromURL &&( 
-        			isloginpage.endsWith("loginMain.do") || 
-        			isloginpage.endsWith("LoginAction.do") ||
-        			isloginpage.endsWith("/camod/LoginAction.do")
+        			isloginpage.endsWith("LoginAction.do")
         			))	{
         		System.out.println("AuthenticationFilter.doFilter loginMain.do,LoginAction.do,/camod/LoginAction.do  loop ");
         		//just continue, so they can login
@@ -80,9 +80,11 @@ public class AuthenticationFilter implements Filter {
             if (session != null && !isRequestedSessionIdFromURL){
             	System.out.println("session != null && !isRequestedSessionIdFromURL loop ");
 	            String loggedin = (String)session.getAttribute("loggedin");
-	            //System.out.println("AuthenticationFilter loggedin= " + loggedin);
+	            System.out.println("AuthenticationFilter loggedin= " + loggedin);
+	            String theUsername = (String) session.getAttribute(Constants.CURRENTUSER);
+	            System.out.println("AuthenticationFilter theUsername= " + theUsername);	            
 	            // reverse this property in application when this code works
-	            if(loggedin != null && loggedin.equals("true")){
+	            if(theUsername != null && theUsername.length() >0 ){
 	            	System.out.println("AuthenticationFilter set authorized = true: " );
 	                	authorized = true;
 	            }
@@ -113,6 +115,8 @@ public class AuthenticationFilter implements Filter {
     private void generateNewSession(HttpServletRequest httpRequest){
     	System.out.println("AuthenticationFilter generateNewSession enter");
    	 HttpSession session = httpRequest.getSession();
+   	 	String theUsername = (String) session.getAttribute(Constants.CURRENTUSER);
+   	 	System.out.println("generateNewSession theUsername: " + theUsername);
         HashMap<String, Object> old = new HashMap<String, Object>();
         Enumeration<String> keys = (Enumeration<String>) session.getAttributeNames();
         while (keys.hasMoreElements()) {
@@ -127,6 +131,7 @@ public class AuthenticationFilter implements Filter {
         for (Map.Entry<String, Object> entry : old.entrySet()) {
           session.setAttribute(entry.getKey(), entry.getValue());
         }
+        httpRequest.getSession().setAttribute(Constants.CURRENTUSER, theUsername);
         System.out.println("AuthenticationFilter generateNewSession exit");
         
    } 
