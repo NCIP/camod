@@ -59,6 +59,10 @@
 		<filter-name>AuthenticationFilter</filter-name>
 		<url-pattern>/jsp/Protected/*</url-pattern>
 	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AuthenticationFilter</filter-name>
+		<url-pattern>/camod/LoginAction.do</url-pattern>
+	</filter-mapping>	
 	
 	<filter>
 		<filter-name>encodingFilter</filter-name>
