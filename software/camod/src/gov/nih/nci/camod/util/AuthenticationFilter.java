@@ -49,20 +49,11 @@ public class AuthenticationFilter implements Filter {
             ServletException {
     	//System.out.println("AuthenticationFilter.doFilter");
 
-        HttpServletRequest req = (HttpServletRequest) request;
-        HttpServletResponse res = (HttpServletResponse) response;
-        System.out.println("req.getServletPath()= " + req.getServletPath());
-        System.out.println("Enter doFilter req.getSession().getId()= " + req.getSession().getId());
-      System.out.println("Enter doFilter notloggedin= " + (String)req.getSession().getAttribute("notloggedin"));
-
         boolean authorized = false;
     	String isloginpage = ((HttpServletRequest) request).getRequestURI();
-    	//System.out.println("AuthenticationFilter.doFilter isloginpage= " + isloginpage);
-        boolean isRequestedSessionIdFromURL = ((HttpServletRequest) request).isRequestedSessionIdFromURL();
-        //System.out.println("AuthenticationFilter.doFilter isRequestedSessionIdFromURL= " + isRequestedSessionIdFromURL);        
+        boolean isRequestedSessionIdFromURL = ((HttpServletRequest) request).isRequestedSessionIdFromURL();       
         
         if (request instanceof HttpServletRequest) {
-
         	if(isloginpage!=null && !isRequestedSessionIdFromURL &&( 
         			isloginpage.endsWith("LoginAction.do")
         			))	{
@@ -71,19 +62,13 @@ public class AuthenticationFilter implements Filter {
         		generateNewSession((HttpServletRequest) request);
         		chain.doFilter(request, response);
                 return;
-        	}  
-        	//System.out.println("AuthenticationFilter.doFilter NOT login.do or loginMain.do ");        	
+        	}          	
         
         	//check login for caMOD
             HttpSession session = ((HttpServletRequest) request).getSession(false);
-            //System.out.println("AuthenticationFilter.doFilter session= " + session);
             if (session != null && !isRequestedSessionIdFromURL){
-            	System.out.println("session != null && !isRequestedSessionIdFromURL loop ");
-	            String loggedin = (String)session.getAttribute("loggedin");
-	            System.out.println("AuthenticationFilter loggedin= " + loggedin);
-	            String theUsername = (String) session.getAttribute(Constants.CURRENTUSER);
-	            System.out.println("AuthenticationFilter theUsername= " + theUsername);	            
-	            // reverse this property in application when this code works
+            	System.out.println("AuthenticationFilter session != null && !isRequestedSessionIdFromURL loop: " );
+	            String theUsername = (String) session.getAttribute(Constants.CURRENTUSER);         
 	            if(theUsername != null && theUsername.length() >0 ){
 	            	System.out.println("AuthenticationFilter set authorized = true: " );
 	                	authorized = true;
@@ -115,8 +100,6 @@ public class AuthenticationFilter implements Filter {
     private void generateNewSession(HttpServletRequest httpRequest){
     	System.out.println("AuthenticationFilter generateNewSession enter");
    	 HttpSession session = httpRequest.getSession();
-   	 	String theUsername = (String) session.getAttribute(Constants.CURRENTUSER);
-   	 	System.out.println("generateNewSession theUsername: " + theUsername);
         HashMap<String, Object> old = new HashMap<String, Object>();
         Enumeration<String> keys = (Enumeration<String>) session.getAttributeNames();
         while (keys.hasMoreElements()) {
@@ -131,7 +114,6 @@ public class AuthenticationFilter implements Filter {
         for (Map.Entry<String, Object> entry : old.entrySet()) {
           session.setAttribute(entry.getKey(), entry.getValue());
         }
-        httpRequest.getSession().setAttribute(Constants.CURRENTUSER, theUsername);
         System.out.println("AuthenticationFilter generateNewSession exit");
         
    } 
