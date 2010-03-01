@@ -63,7 +63,19 @@
 		<filter-class>
 			gov.nih.nci.common.persistence.hibernate.HibernateFilter
 		</filter-class>
-	</filter>
+	</filter>	
+	<filter-mapping>
+		<filter-name>hibernateFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
 	<filter>
 		<filter-name>AuthenticationFilter</filter-name>
 		<filter-class>
@@ -78,22 +90,7 @@
 		<filter-name>AuthenticationFilter</filter-name>
 		<url-pattern>/LoginAction.do</url-pattern>
 	</filter-mapping>
-	<filter-mapping>
-		<filter-name>AuthenticationFilter</filter-name>
-		<url-pattern>/jsp/protected</url-pattern>
-	</filter-mapping>	
-	<filter-mapping>
-		<filter-name>hibernateFilter</filter-name>
-		<url-pattern>*.do</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>encodingFilter</filter-name>
-		<url-pattern>*.do</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>encodingFilter</filter-name>
-		<url-pattern>*.jsp</url-pattern>
-	</filter-mapping>
+	
 	<listener>
 		<listener-class>
 			org.springframework.web.util.IntrospectorCleanupListener
