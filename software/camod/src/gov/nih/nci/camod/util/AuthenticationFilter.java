@@ -55,9 +55,9 @@ public class AuthenticationFilter implements Filter {
         
         if (request instanceof HttpServletRequest) {
         	if(isloginpage!=null && !isRequestedSessionIdFromURL &&( 
-        			isloginpage.endsWith("LoginAction.do")
+        			isloginpage.endsWith("/ReturnUserModels.do") 
         			))	{
-        		System.out.println("AuthenticationFilter.doFilter loginMain.do,LoginAction.do,/camod/LoginAction.do  loop ");
+        		System.out.println("AuthenticationFilter.doFilter /ReturnUserModels.do loop ");
         		//just continue, so they can login
         		generateNewSession((HttpServletRequest) request);
         		chain.doFilter(request, response);
@@ -100,6 +100,7 @@ public class AuthenticationFilter implements Filter {
     private void generateNewSession(HttpServletRequest httpRequest){
     	System.out.println("AuthenticationFilter generateNewSession enter");
    	 HttpSession session = httpRequest.getSession();
+   	 	System.out.println("AuthenticationFilter generateNewSession session_id  " + session.getId());
         HashMap<String, Object> old = new HashMap<String, Object>();
         Enumeration<String> keys = (Enumeration<String>) session.getAttributeNames();
         while (keys.hasMoreElements()) {
@@ -114,6 +115,7 @@ public class AuthenticationFilter implements Filter {
         for (Map.Entry<String, Object> entry : old.entrySet()) {
           session.setAttribute(entry.getKey(), entry.getValue());
         }
+        System.out.println("AuthenticationFilter generateNewSession new (reused) session_id  " + session.getId());
         System.out.println("AuthenticationFilter generateNewSession exit");
         
    } 
