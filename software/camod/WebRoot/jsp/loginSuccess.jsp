@@ -26,6 +26,6 @@
 			</TABLE>
 		</td></tr></TABLE>
 	</td></tr></TABLE>
-</tr></td></TABLE>
+</td></tr></TABLE>
 
-<%@ include file="footer.jsp" %>
+<%@ include file="/jsp/footer.jsp" %>

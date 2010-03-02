@@ -46,4 +46,4 @@ by clicking on the buttons below.</P>
       Information</A> 
 </P>
 
-<%@ include file="footer.jsp" %>
+<%@ include file="/jsp/footer.jsp" %>
