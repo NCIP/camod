@@ -193,4 +193,4 @@
 
 <!-- Main Content Ends  -->
 
-<%@ include file="footer.jsp" %>
+<%@ include file="/jsp/footer.jsp" %>
