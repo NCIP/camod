@@ -933,9 +933,9 @@ To <b>enter additional images</b> select again the link &quot;Enter Image&quot; 
 			</TABLE>
 		</td></tr></TABLE>
 	</td></tr></TABLE>
-</tr></td></TABLE>
+</td></tr></TABLE>
 
-<%@ include file="footer.jsp" %>
+<%@ include file="/jsp/footer.jsp" %>
 
 
 
