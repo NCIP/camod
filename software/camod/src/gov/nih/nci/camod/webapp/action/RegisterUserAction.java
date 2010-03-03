@@ -107,27 +107,35 @@ public class RegisterUserAction extends BaseAction {
 				log.info("email: " + email);				
 				theForm.setEmail(email);
 			}
-			if(theForm.getPiFirstName() != null & theForm.getPiUsername() == null){
+			if(theForm.getPiFirstName() != null ){
 				log.info("theForm.getPiFirstName(): " + theForm.getPiFirstName());				
 				String piFirstName = SafeHTMLUtil.clean(theForm.getPiFirstName());
 				log.info("piFirstName: " + piFirstName);
 				theForm.setPiFirstName(piFirstName);
 			}
-			if(theForm.getPiLastName() != null & theForm.getPiUsername() == null){
+			if(theForm.getPiLastName() != null){
 				log.info("theForm.getPiLastName(): " + theForm.getPiLastName());				
 				String piLastName = SafeHTMLUtil.clean(theForm.getPiLastName());
 				log.info("piLastName: " + piLastName);				
 				theForm.setPiLastName(piLastName);
 			}
-			if(theForm.getPiEmail() != null & theForm.getPiUsername() == null){
+			if(theForm.getPiEmail() != null ){
 				String piEmail = SafeHTMLUtil.clean(theForm.getPiEmail());
 				theForm.setPiEmail(piEmail);
 			}
-			// Do not check if it matches DB since it just get sent via e-mail
-			// Let systems figure out PI if any illegal characters are missing
-			if(theForm.getPiUsername() != null & theForm.getPiUsername().length() >0){				
-				String piUserName = SafeHTMLUtil.clean(theForm.getPiUsername());
-	            theForm.setPiUsername(piUserName);
+			// Validate if PI username is a valid option from the DB to 
+			// prevent SQL injection for the security scan
+			ActionErrors errors = new ActionErrors();
+			if(theForm.getPiUsername() != null ){
+	            List piNameList = new ArrayList<String>();
+	            piNameList = (List)inRequest.getSession().getAttribute(Constants.Dropdowns.PRINCIPALINVESTIGATORQUERYDROP);
+	            inRequest.getSession().setAttribute(Constants.Dropdowns.SEARCHPIDROP, piNameList);				
+				
+	            if (!SafeHTMLUtil.isValidStringValue(theForm.getPiUsername(),Constants.Dropdowns.SEARCHPIDROP,inRequest))
+	            {
+	               // populate the validation message
+	               errors.add("piName", new ActionMessage("error.piName.validValue"));
+	            }				
 			} 
 					
 	    	// get and clean header to prevent SQL injection
