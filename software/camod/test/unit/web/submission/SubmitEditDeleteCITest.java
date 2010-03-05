@@ -110,7 +110,7 @@ public class SubmitEditDeleteCITest extends BaseModelNeededTest {
         theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "helicobacter felis");        
         assertNotNull("Unable to find link to edit a Bacteria", theLink);        
         theCurrentPage = theLink.click();        
-        assertCurrentPageContains("(if Antibody is not listed, then please");
+        assertCurrentPageContains("(if Bacteria is not listed, then please");
         theForm = theCurrentPage.getFormWithName("bacteriaForm");
         theForm.setParameter("name", "helicobacter felis");
         theForm.setParameter("type", "Male Only");        
@@ -348,7 +348,7 @@ public class SubmitEditDeleteCITest extends BaseModelNeededTest {
         assertCurrentPageContains("You have successfully added a Plasmid to this model!");
         
         //Editing
-        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "estrone");        
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "control plasmid pPGK");        
         assertNotNull("Unable to find link to edit a Plasmid", theLink);        
         theCurrentPage = theLink.click();        
         assertCurrentPageContains("(if Plasmid is not listed, then please");
@@ -359,7 +359,7 @@ public class SubmitEditDeleteCITest extends BaseModelNeededTest {
         assertCurrentPageContains("You have successfully edited a Plasmid.");
         
         //Deleting
-        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "estrone");        
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "control plasmid pPGK");        
         assertNotNull("Unable to find link to delete a Plasmid", theLink);        
         theCurrentPage = theLink.click();        
         assertCurrentPageContains("(if Plasmid is not listed, then please");
