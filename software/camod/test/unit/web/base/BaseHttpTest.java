@@ -99,9 +99,11 @@ public class BaseHttpTest extends TestCase {
         
         // Obtain the main page on the meterware web site
         WebRequest theRequest = new GetMethodWebRequest(theHost);
-
+        System.out.println("<navigateToLoginPage> theRequest: " + theRequest);
+        
         WebResponse theResponse = myWebConversation.getResponse(theRequest);
-
+        System.out.println("<navigateToLoginPage> theResponse: " + theResponse);
+        
         if (theResponse.getText().indexOf("Currently logged in as") != -1) {
             logoutOfApplication();
             navigateToLoginPage();
@@ -109,10 +111,11 @@ public class BaseHttpTest extends TestCase {
 
         // We may or may not have to hit the agreement link
         WebLink theLink = theResponse.getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "CLICKING HERE");
-
+        System.out.println("<navigateToLoginPage> theLink: " + theLink);
         if (theLink != null) {
             theLink.click();
         }
+        System.out.println("<navigateToLoginPage> after theLink: " );
     }
 
     protected void navigateToModelForEditing(String inModel) throws Exception {
@@ -215,17 +218,19 @@ public class BaseHttpTest extends TestCase {
         System.out.println("<loginToApplication> theForm: " + theForm.toString() );
 
         theForm.setParameter("username", inUsername);
+        System.out.println("<loginToApplication> inUsername: " + inUsername.toString() );
         theForm.setParameter("password", inPassword);
+        System.out.println("<loginToApplication> inPassword: " + inPassword.toString() );
         
         //Handling re-direct in HttpUnit
         WebResponse response = theForm.submit();
-        WebRequest refreshReq;
-        refreshReq =  response.getRefreshRequest();
-        
-        System.out.println("refresh request: " + refreshReq.getURL());
+        System.out.println("<loginToApplication> response: " + response.toString() );
+        //WebRequest refreshReq = null;
+        //refreshReq =  response.getRefreshRequest();
+        //System.out.println("refresh request: " + refreshReq.getURL());
         
         // get new response using refreshReq URL
-        response = myWebConversation.getResponse(refreshReq.getURL().toString());
+        //response = myWebConversation.getResponse(refreshReq.getURL().toString());
         assertNotNull("Response from Refresh Request: ", response);
 
         // Make sure we logged in
