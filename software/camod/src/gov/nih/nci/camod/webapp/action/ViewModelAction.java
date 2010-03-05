@@ -368,14 +368,14 @@ public class ViewModelAction extends BaseAction
        	String sID = null;
         if (request.getHeader("X-Forwarded-For") != null){
         	sID = request.getHeader("X-Forwarded-For");
-            log.info("cleaned X-Forwarded-For: " + sID);
+            log.debug("cleaned X-Forwarded-For: " + sID);
             sID = SafeHTMLUtil.clean(sID);
         }
         
     	// get and clean header to prevent SQL injection
         if (request.getHeader("Referer") != null){
         	sID = request.getHeader("Referer");
-            log.info("cleaned Referer: " + sID);
+            log.debug("cleaned Referer: " + sID);
             sID = SafeHTMLUtil.clean(sID);
         }    
     
@@ -383,9 +383,9 @@ public class ViewModelAction extends BaseAction
     	String headername = "";
     	for(Enumeration e = request.getHeaderNames(); e.hasMoreElements();){
     		headername = (String)e.nextElement();
-    		log.info("populateModelCharacteristics headername: " + headername);
+    		log.debug("populateModelCharacteristics headername: " + headername);
     		String cleanHeaders = SafeHTMLUtil.clean(headername);
-    		log.info("populateModelCharacteristics cleaned headername: " + headername);
+    		log.debug("populateModelCharacteristics cleaned headername: " + headername);
     	}       
         
         // Get and clean method to prevent Cross-Site Scripting 
@@ -393,7 +393,7 @@ public class ViewModelAction extends BaseAction
         log.info("methodName: " + methodName);
         if (!methodName.equals("populateModelCharacteristics")){
 	        methodName = SafeHTMLUtil.clean(methodName);
-	        log.info("cleaned methodName: " + methodName);
+	        log.debug("cleaned methodName: " + methodName);
         }                
         	
 	        setCancerModel(request);
