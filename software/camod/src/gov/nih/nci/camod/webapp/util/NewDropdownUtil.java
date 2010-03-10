@@ -213,58 +213,59 @@ public class NewDropdownUtil
         }   
 
         // Dropdown lists for submission pages of Carciogenic Intervention section
-        else if (inDropdownKey.equals(Constants.Dropdowns.SURGERYDROP))
-        {
-            theReturnList = getEnvironmentalFactorList("Other");
-        }
-        else if (inDropdownKey.equals(Constants.Dropdowns.HORMONEDROP))
-        {
-            theReturnList = getEnvironmentalFactorList("Hormone");
-        }        
-        else if (inDropdownKey.equals(Constants.Dropdowns.GROWTHFACTORDROP))
-        {
-            theReturnList = getEnvironmentalFactorList("Growth Factor");
-        }
-        else if (inDropdownKey.equals(Constants.Dropdowns.CHEMICALDRUGDROP))
-        {
-            theReturnList = getEnvironmentalFactorList("Chemical / Drug");
-        }        
-        else if (inDropdownKey.equals(Constants.Dropdowns.VIRUSDROP))
-        {
-            theReturnList = getEnvironmentalFactorList("Viral");
-        }
-        else if (inDropdownKey.equals(Constants.Dropdowns.RADIATIONDROP))
-        {
-            theReturnList = getEnvironmentalFactorList("Radiation");
-        }
-        else if (inDropdownKey.equals(Constants.Dropdowns.NUTRITIONFACTORDROP))
-        {
-            theReturnList = getEnvironmentalFactorList("Nutrition");
-        }        
-        else if (inDropdownKey.equals(Constants.Dropdowns.ENVIRONFACTORDROP))
-        {
-            theReturnList = getEnvironmentalFactorList("Environment");
-        }        
         else if (inDropdownKey.equals(Constants.Dropdowns.ANTIBODYDROP))
         {
             theReturnList = getEnvironmentalFactorList("Antibody");
-        }
+        }        
         else if (inDropdownKey.equals(Constants.Dropdowns.BACTERIADROP))
         {
             theReturnList = getEnvironmentalFactorList("Bacteria");
         }        
+        else if (inDropdownKey.equals(Constants.Dropdowns.CHEMICALDRUGDROP))
+        {
+            theReturnList = getEnvironmentalFactorList("Chemical / Drug");
+        }
+        else if (inDropdownKey.equals(Constants.Dropdowns.ENVIRONFACTORDROP))
+        {
+            theReturnList = getEnvironmentalFactorList("Environment");
+        }         
+        else if (inDropdownKey.equals(Constants.Dropdowns.SURGERYDROP))
+        {
+            theReturnList = getEnvironmentalFactorList("Other");
+        }
+        else if (inDropdownKey.equals(Constants.Dropdowns.GROWTHFACTORDROP))
+        {
+            theReturnList = getEnvironmentalFactorList("Growth Factor");
+        }        
+        else if (inDropdownKey.equals(Constants.Dropdowns.HORMONEDROP))
+        {
+            theReturnList = getEnvironmentalFactorList("Hormone");
+        }        
+        else if (inDropdownKey.equals(Constants.Dropdowns.NUTRITIONFACTORDROP))
+        {
+            theReturnList = getEnvironmentalFactorList("Nutrition");
+        }
         else if (inDropdownKey.equals(Constants.Dropdowns.PLASMIDDROP))
         {
             theReturnList = getEnvironmentalFactorList("Plasmid");
-        }
-        else if (inDropdownKey.equals(Constants.Dropdowns.TRANSPOSONDROP))
+        }        
+        else if (inDropdownKey.equals(Constants.Dropdowns.RADIATIONDROP))
         {
-            theReturnList = getEnvironmentalFactorList("Transposon");
+            theReturnList = getEnvironmentalFactorList("Radiation");
         }
         else if (inDropdownKey.equals(Constants.Dropdowns.SIGNALINGMOLECULEDROP))
         {
             theReturnList = getEnvironmentalFactorList("Signaling Molecule");
         }        
+        else if (inDropdownKey.equals(Constants.Dropdowns.TRANSPOSONDROP))
+        {
+            theReturnList = getEnvironmentalFactorList("Transposon");
+        }
+        else if (inDropdownKey.equals(Constants.Dropdowns.VIRUSDROP))
+        {
+            theReturnList = getEnvironmentalFactorList("Viral");
+        }
+        
         // Dropdown list for main advanced search CI section
         else if (inDropdownKey.equals(Constants.Dropdowns.CARCINOGENICAGENTSQUERYDROP))
         {
@@ -362,6 +363,10 @@ public class NewDropdownUtil
         else if (inDropdownKey.equals(Constants.Dropdowns.EXTERNALSOURCEQUERYDROP))
         {
             theReturnList = getExternalSourceList(inRequest);
+        } 
+        else if (inDropdownKey.equals(Constants.Dropdowns.USERNAMEINDATABASE))
+        {
+            theReturnList = getUsernameList(inRequest);
         }        
         else
         {
@@ -616,7 +621,7 @@ public class NewDropdownUtil
                         }
                     }
                     // Sort the list in 'abc' order
-                    Collections.sort(strainNames);
+                    Collections.sort(strainNames, String.CASE_INSENSITIVE_ORDER);
                     addOther(strainNames);
                     addBlank(strainNames);
                 }
@@ -688,6 +693,24 @@ public class NewDropdownUtil
         
         return externalSourceList;
     } 
+    
+    /**
+     * Returns a list of all usernames from party
+     * 
+     * @return usernameList
+     * @throws Exception
+     */
+    private static List getUsernameList(HttpServletRequest inRequest) throws Exception
+    {
+       	log.info("<NewDropdownUtil> In getUsernameList: ");
+       	
+       	List validUsernameList = QueryManagerSingleton.instance().getUsernames();       	
+        
+        Collections.sort(validUsernameList);
+        log.info("<NewDropdownUtil> validUsernameList.size(): " + validUsernameList.size());
+        
+        return validUsernameList;
+    }     
     
     /**
      * Returns a list of all carcinogenic agents (environmental factor types) from animalModel
@@ -768,7 +791,7 @@ public class NewDropdownUtil
        	
        	List therapeuticDrugList = QueryManagerSingleton.instance().getTherapeuticDrugNames();       	
         
-        Collections.sort(therapeuticDrugList);
+        Collections.sort(therapeuticDrugList, String.CASE_INSENSITIVE_ORDER);
         
         return therapeuticDrugList;
     } 
