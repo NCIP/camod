@@ -620,7 +620,10 @@ public class Constants {
         public static final String CLONEDESIGNATORQUERYDROP = "clonedesignatorquerydrop.db";
         
         // Compound / Drug field selected in adv search from agent (name) table
-        public static final String THERAPEUTICAPPROACHDRUGQUERYDROP = "therapeuticapproachdrugquerydrop.db";        
+        public static final String THERAPEUTICAPPROACHDRUGQUERYDROP = "therapeuticapproachdrugquerydrop.db";  
+        
+        // Used to validate if username is in the DB - security scan prevention
+        public static final String USERNAMEINDATABASE = "usernameInDatabase.db";
         
 
         // These two are used to display the species and strain currently in the
@@ -674,6 +677,9 @@ public class Constants {
         // Used for values selected for the advanced search for Genetic Description
         public static final String ENGINEEREDTRANSGENE = "engineeredTransgene";
         public static final String TARGETEDMODIFICATION = "targetedModification";
+        
+        // Used for validation of username in UserManagerImpl
+        public static final String SEARCHUSERNAMEDROP = "searchusername";
       
     }
 
@@ -897,6 +903,8 @@ public class Constants {
     
     public static final String PUBLICATIONS = "publications";
     
+    public static final String PUBLICATIONAUTHORS = "publicationAuthors";    
+    
     public static final String CARCINOGENIC_INTERVENTIONS_COLL = "carcinogenicInterventionColl";
     
     public static final String DRUG_SCREEN_OPTIONS = "drugScreenSearchOptions";
@@ -990,6 +998,7 @@ public class Constants {
         public static final String INVESTIGATOR_LIST = "investigator_list";
         public static final String JACKSONLAB_LIST = "jacksonlab_list";
         public static final String MMHCC_LIST = "mmhcc_list";
+        public static final String NCI_REPO_LIST = "nci_repo_list";
         public static final String ZFIN_LIST = "zfin_list";
         
         /**
