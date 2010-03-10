@@ -38,13 +38,14 @@ public class LoginTest extends BaseHttpTest {
     }
 
     public void testLogin() throws Exception {
-        loginToApplication("camodcurator2", "DataEntry1!");
+    	System.out.println("test/unit/web/LoginTest.testLogin");
+        loginToApplication("camodcurator2", "10and10=20");
         assertCurrentPageContains("Submit and Edit Models");
         logoutOfApplication();
     }
 
     public void testBadPassword() throws Exception {
-        loginToApplication("camodcurator2", "DataEntry1!");
+        loginToApplication("camodcurator2", "10and10=20");
         assertCurrentPageContains("Invalid username and/or password"); 
     }
 }

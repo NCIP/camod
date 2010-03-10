@@ -18,7 +18,7 @@ public class AllSearchTests extends TestCase {
     {
         TestSuite suite = new TestSuite();
 
-        // Search tests
+        // Search tests - two test still do not work (remove comment when fixed)
         //suite.addTest(SearchPopulateCellLinesTest.suite());
         suite.addTest(SearchPopulateCITest.suite());
         suite.addTest(SearchPopulateGeneticDescriptionTest.suite());

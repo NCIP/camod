@@ -19,7 +19,7 @@ public class AllSubmissionTests extends TestCase {
     {
         TestSuite suite = new TestSuite();
 
-        // Submission tests - two test still do not work (uncomment when fixed)
+        // Submission tests - two test still do not work (remove comment when fixed)
         suite.addTest(EditModelCharacteristicsTest.suite());
         suite.addTest(SubmitEditDeleteCITest.suite());
         suite.addTest(SubmitEditDeleteCellLinesTest.suite());

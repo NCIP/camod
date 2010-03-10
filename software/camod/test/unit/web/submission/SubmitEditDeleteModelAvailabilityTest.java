@@ -97,7 +97,7 @@ public class SubmitEditDeleteModelAvailabilityTest extends BaseModelNeededTest {
         assertCurrentPageContains("You have successfully deleted an Availability."); 
     } 
     
-    public void testMMHCCRepo() throws Exception {
+    public void testNCIMouseRepo() throws Exception {
     	navigateToModelForEditing(myModelName);
         
         /* Find Model Availablity link to Submit */
