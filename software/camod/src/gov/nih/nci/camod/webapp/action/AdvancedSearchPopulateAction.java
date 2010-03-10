@@ -58,6 +58,7 @@ import gov.nih.nci.camod.domain.SavedQueryAttribute;
 import gov.nih.nci.camod.domain.Species;
 import gov.nih.nci.camod.service.SavedQueryManager;
 import gov.nih.nci.camod.service.impl.SpeciesManagerSingleton;
+import gov.nih.nci.camod.util.NameValueList;
 import gov.nih.nci.camod.util.SafeHTMLUtil;
 import gov.nih.nci.camod.webapp.form.SearchForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
@@ -223,15 +224,30 @@ public class AdvancedSearchPopulateAction extends BaseAction {
         if (theSearchForm.getSpecies() !=null && theSearchForm.getSpecies().length() > 0){        
 	        log.debug("theSearchForm.getSpecies(): "+ theSearchForm.getSpecies());
 	        
-	        // Set selected species to a constant to determine which organ tree displays 
-	        // using common name because Rat has two species
-	        Species species = SpeciesManagerSingleton.instance().getByName(theSearchForm.getSpecies());
-	        theSearchSpecies = species.getCommonName();
-	        log.debug("<setSpeciesForOrganTree> theSearchSpecies: "+ theSearchSpecies);
-        } 
-        
-        request.getSession().setAttribute(Constants.SEARCHSPECIESCOMMONNAME, theSearchSpecies);
+        	// Verify that species is valid option from DB to prevent SQL injection
+        	try {
+                NameValueList.generateApprovedSpeciesList();
+                request.getSession().setAttribute(Constants.Dropdowns.SEARCHSPECIESDROP, NameValueList.getApprovedSpeciesList());
 
+                if (!SafeHTMLUtil.isValidValue(theSearchForm.getSpecies(),Constants.Dropdowns.SEARCHSPECIESDROP,request)) {
+                	log.warn("Species not found in database: " + theSearchForm.getSpecies());
+                } else {
+                    log.info("theSearchForm.getSpecies(): "+ theSearchForm.getSpecies());
+                    
+                    // Set selected species to a constant to determine which organ tree displays 
+                    // using common name because Rat has two species
+                    Species species = SpeciesManagerSingleton.instance().getByName(theSearchForm.getSpecies());
+                    theSearchSpecies = species.getCommonName();
+                    log.debug("<setSpeciesForOrganTree> theSearchSpecies: "+ theSearchSpecies); 
+                }
+                request.getSession().setAttribute(Constants.SEARCHSPECIESCOMMONNAME, theSearchSpecies);
+            }
+            catch (Exception e)
+            {
+                log.error("Species not valid - possible SQL injection detected: ", e);
+                throw e;
+            } 
+        }         	
         return mapping.findForward("searchAdvanced");    	
     }	
     
