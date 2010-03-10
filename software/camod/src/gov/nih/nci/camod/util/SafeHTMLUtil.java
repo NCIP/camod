@@ -78,6 +78,10 @@ public class SafeHTMLUtil {
         clean = StringUtils.replace(clean, "quot", "");         
         clean = StringUtils.replace(clean, "javascript", "");
         clean = StringUtils.replace(clean, "alert", "cleaned");
+        clean = StringUtils.replace(clean, "CR", "");
+        clean = StringUtils.replace(clean, "LF", "");
+        clean = StringUtils.replace(clean, "<", "");
+        clean = StringUtils.replace(clean, ">", "");        
         if(clean.length()==0){
                 clean = "empty";
         }
@@ -155,6 +159,26 @@ public class SafeHTMLUtil {
         return clean;       
     }
     
+    // clean method that allows <, >, (, ), /
+    public static String cleanLDAP(String s)    {
+        String clean = Translate.decode(s).replace("[", "").replace("]", "");
+        clean = StringUtils.replace(clean, "#", "");       
+        clean = StringUtils.replace(clean, ",", "");
+        clean = StringUtils.replace(clean, "+", "");
+        clean = StringUtils.replace(clean, "\"", "");
+        clean = StringUtils.replace(clean, "\\", "");
+        clean = StringUtils.replace(clean, "\"", "");
+        clean = StringUtils.replace(clean, "<", "");
+        clean = StringUtils.replace(clean, ">", "");
+        clean = StringUtils.replace(clean, ";", "");
+        clean = StringUtils.replace(clean, "(", "");
+        clean = StringUtils.replace(clean, ")", "");
+        if(clean.length()==0){
+                clean = "empty";
+        }
+        return clean;       
+    }    
+    
     // allows &, ", /, ?, and . that are used in redirects
     public static String cleanRedirect(String s)    {
         String clean = Translate.decode(s).replace("<", "").replace(">", "");
@@ -211,7 +235,7 @@ public class SafeHTMLUtil {
     }
     
     /**
-     * A utlity method to check the valid value againts a string values
+     * A utility method to check the valid value against a string values
      * Author for method: 
      * @param input - the data to be validated
      * @param source - the source against which the input to be validated
@@ -242,7 +266,7 @@ public class SafeHTMLUtil {
         return validValue ;
     }
     
-    // This method needs testing for sucessful searches
+    // This method needs testing for successful searches
     // This is a special case where one of the agent names contains a special character "/" or space
     //  i.e. Chemical / Drug, Growth Factor, and Signaling Molecule are valid selection options
     public static boolean isLetterOrDigitWithExceptions(String input)
@@ -282,7 +306,7 @@ public class SafeHTMLUtil {
         return true; 
     }    
     
-    // This method needs testing for sucessful searches
+    // This method needs testing for successful searches
     public static boolean isJavaIdentifierPart(String input)
     { 
         for (int i = 0; i < input.length(); i++)
@@ -293,7 +317,7 @@ public class SafeHTMLUtil {
         return true;
     }  
     
-    // This method needs testing for sucessful searches
+    // This method needs testing for successful searches
     public static String trimInput(String input)
     { 
         for (int i = 0; i < input.length(); i++)
@@ -304,7 +328,7 @@ public class SafeHTMLUtil {
     }     
     
     
-    // This method needs testing for sucessful searches
+    // This method needs testing for successful searches
     public static boolean isLetterOrDigit(String input)
     {  
         for (int i = 0; i < input.length(); i++)
@@ -313,5 +337,16 @@ public class SafeHTMLUtil {
                 return false;
         }
         return true;
-    }    
+    } 
+    
+    // This method needs testing for successful searches
+    public static boolean isLetter(String input)
+    {  
+        for (int i = 0; i < input.length(); i++)
+        {
+                if (!Character.isLetter(input.charAt(i)))
+                return false;
+        }
+        return true;
+    }     
 }
