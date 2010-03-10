@@ -116,8 +116,13 @@ public final class LoginAction extends BaseAction {
     	log.info("Enter LoginAction.execute");
         LoginForm loginForm = (LoginForm) form;
 
+
         String theUsername = loginForm.getUsername().toLowerCase(); 
-        
+        if(theUsername != null || SafeHTMLUtil.isLetter(theUsername)){
+        	// clean username to prevent SQL injection
+        	theUsername = SafeHTMLUtil.clean(theUsername);        	
+        } 
+        	
         // added for the security scan for some reason
         Cookie validUserCookie = new Cookie("validUserKey", "123456789");
         response.addCookie(validUserCookie);        
@@ -155,9 +160,9 @@ public final class LoginAction extends BaseAction {
             
             forward = "success";
             request.getSession().setAttribute(Constants.CURRENTUSER, theUsername);
-            log.info("set current user in LoginAction= " + request.getSession().getAttribute(Constants.CURRENTUSER));
-            log.info("Is current user loggedin= " + request.getSession().getAttribute(Constants.LOGGEDIN));
-            log.info("Session id= " + request.getSession().getId());
+            log.debug("set current user in LoginAction= " + request.getSession().getAttribute(Constants.CURRENTUSER));
+            log.debug("Is current user loggedin= " + request.getSession().getAttribute(Constants.LOGGEDIN));
+            log.debug("Session id= " + request.getSession().getId());
             
 		    //Used for sidebar, number of saved queries
             SavedQueryManager savedQueryManager = (SavedQueryManager) getBean("savedQueryManager");   
