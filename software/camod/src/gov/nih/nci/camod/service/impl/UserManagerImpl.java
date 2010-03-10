@@ -101,6 +101,8 @@ import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.UserManager;
 import gov.nih.nci.camod.util.LDAPUtil;
+import gov.nih.nci.camod.util.SafeHTMLUtil;
+import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 import gov.nih.nci.common.persistence.Search;
 import gov.nih.nci.security.AuthenticationManager;
 import gov.nih.nci.security.SecurityServiceProvider;
@@ -109,6 +111,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -375,16 +378,32 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 	public boolean login(String inUsername, String inPassword,
 			HttpServletRequest inRequest) {
 		boolean loginOk = false;
-		try {
-            log.debug("login method inside try");
-			// Work around bug in CSM. Empty passwords pass
-			if (inPassword.trim().length() != 0) {
-				loginOk = theAuthenticationMgr.login(inUsername, inPassword);
-				// Does the user exist? Must also be in our database to login
-				List theRoles = getRolesForUser(inUsername);
-				inRequest.getSession().setAttribute(Constants.CURRENTUSERROLES,
-						theRoles);
-			}
+		List usernameList = new ArrayList<String>();
+		log.debug("Enter login inUsername: " + inUsername);
+		
+		try {	
+			// generate list from DB
+			NewDropdownUtil.populateDropdown(inRequest, Constants.Dropdowns.USERNAMEINDATABASE, null);
+			// Assign list to usernameList
+			usernameList = (List)inRequest.getSession().getAttribute(Constants.Dropdowns.USERNAMEINDATABASE);
+	        log.info("login method usernameList.size()" + usernameList.size());
+	        
+			// If username is not in our DB, fail immediately (prevent SQL injection)
+	        if (!SafeHTMLUtil.isValidStringValue(inUsername,Constants.Dropdowns.USERNAMEINDATABASE,inRequest))
+	        {
+	        	log.info("Username is not in the DB - Invalid user");
+	        	loginOk = false;
+	        } else {
+	            log.info("login method inside authentication loop");
+				// Work around bug in CSM. Empty passwords pass
+				if (inPassword.trim().length() != 0) {
+					loginOk = theAuthenticationMgr.login(inUsername, inPassword);
+					// Does the user exist? Must also be in our database to login
+					List theRoles = getRolesForUser(inUsername);
+					inRequest.getSession().setAttribute(Constants.CURRENTUSERROLES,
+							theRoles);
+				}
+	        }
 		} catch (Exception e) {
 			log.error("Error logging in user: ", e);
 			loginOk = false;
