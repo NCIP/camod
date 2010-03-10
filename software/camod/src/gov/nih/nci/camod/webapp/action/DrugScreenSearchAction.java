@@ -103,7 +103,7 @@ public final class DrugScreenSearchAction extends BaseAction {
         		name = (String)e.nextElement();
         		log.debug("DrugScreenSearchAction headername: " + name);
         		String cleanHeaders = SafeHTMLUtil.clean(name);
-        		log.info("DrugScreenSearchAction cleaned headername: " + name);
+        		log.debug("DrugScreenSearchAction cleaned headername: " + name);
         	} 
         	
         	// get and clean header to prevent SQL injection
