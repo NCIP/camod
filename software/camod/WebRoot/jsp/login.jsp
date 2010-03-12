@@ -125,7 +125,7 @@
                                           <td valign="top">
                                               <table summary="" cellpadding="0" cellspacing="0" border="0" width="100%" class="sidebarSection">
                                                   <tr>
-                                                      <td class="sidebarTitle" height="20">NOT A USER (REGISTER)</td>
+                                                      <td class="sidebarTitle" height="20">NEW USERS</td>
                                                   </tr>
                                                   <tr>
                                                       <td>&nbsp;
@@ -164,12 +164,21 @@
                                           <td valign="top">
                                               <table summary="" cellpadding="0" cellspacing="0" border="0" width="100%" height="100%" class="sidebarSection">
                                                   <tr>
+                                                      <td class="sidebarTitle" height="20">LEGAL RULES OF THE ROAD</td>
+                                                  </tr>
+                                                  <tr>
+                                                      <td class="sidebarContent" valign="top">
+                                                      Please read this license agreement carefully before using this website.&nbsp;&nbsp;
+                                                      By accessing or using this website, you signify your agreement to the terms of use.<br/><br/>
+                                                      <html:link action="infoViewLicense.do">View License</html:link><br/><br/>
+                                                      </td>
+                                                  </tr>                                               
+                                                  <tr>
                                                       <td class="sidebarTitle" height="20">DID YOU KNOW?</td>
                                                   </tr>
                                                   <tr>
                                                       <td class="sidebarContent" valign="top">caMOD 2.6 was released to production in March 2010.<br/><br/>
                                                       <html:link action="infoReleaseNotes.do">Release Notes</html:link><br/><br/>
-                                                      <html:link action="infoViewLicense.do">View License</html:link><br/><br/>
                                                       </td>
                                                   </tr>
                                                   
