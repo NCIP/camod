@@ -649,7 +649,7 @@ public class QueryManagerImpl extends BaseManager
 				}
 			}
 
-			Collections.sort(theEnvFactors);
+			Collections.sort(theEnvFactors, String.CASE_INSENSITIVE_ORDER);
 
 			log.debug("Exiting QueryManagerImpl.getMatchingAgents");
 		} catch (Exception e) {
@@ -711,8 +711,8 @@ public class QueryManagerImpl extends BaseManager
 				}
 			}
 
-			Collections.sort(theEFAgentTypesList);
-
+			Collections.sort(theEFAgentTypesList, String.CASE_INSENSITIVE_ORDER);
+			
 			log.debug("Exiting QueryManagerImpl.getMatchingAgents");
 		} catch (Exception e) {
 			log.error("Exception in getMatchingAgents", e);
@@ -760,7 +760,7 @@ public class QueryManagerImpl extends BaseManager
 				theCellLineList.add(theCellLine);				
 			}
 
-			Collections.sort(theCellLineList);
+			Collections.sort(theCellLineList, String.CASE_INSENSITIVE_ORDER);
 
 			log.debug("Exiting QueryManagerImpl.getCellLineNames");
 		} catch (Exception e) {
@@ -810,7 +810,7 @@ public class QueryManagerImpl extends BaseManager
 				theTherapeuticDrugList.add(theDrugName);				
 			}
 
-			Collections.sort(theTherapeuticDrugList);
+			Collections.sort(theTherapeuticDrugList, String.CASE_INSENSITIVE_ORDER);
 
 			log.debug("Exiting QueryManagerImpl.getTherapeuticDrugNames");
 		} catch (Exception e) {
@@ -863,7 +863,7 @@ public class QueryManagerImpl extends BaseManager
 					theGenSegDesList.add(theGenSegDesignator);
 				}
 			}
-			Collections.sort(theGenSegDesList);
+			Collections.sort(theGenSegDesList, String.CASE_INSENSITIVE_ORDER);
 
 			log.debug("Exiting QueryManagerImpl.getGenomicSegmentDesignators");
 		} catch (Exception e) {
@@ -915,6 +915,7 @@ public class QueryManagerImpl extends BaseManager
 		log.debug("Found matching items: " + theList.size());
 
 		log.debug("Exiting QueryManagerImpl.getEnvironmentalFactors");
+		Collections.sort(theList, String.CASE_INSENSITIVE_ORDER);
 		return theList;
 	}
 
@@ -984,7 +985,7 @@ public class QueryManagerImpl extends BaseManager
 			}
 		}
 		log.debug( "Size = " + theEFNameList );
-		Collections.sort(theEFNameList);
+		Collections.sort(theEFNameList, String.CASE_INSENSITIVE_ORDER);
 		return theEFNameList;
 }
 	 
@@ -1366,7 +1367,7 @@ public class QueryManagerImpl extends BaseManager
                 String thePIEntry = theResultSet.getString(1) + ", " + theResultSet.getString(2);
                 thePIList.add(thePIEntry);
             }
-
+            Collections.sort(thePIList, String.CASE_INSENSITIVE_ORDER);
         }
         catch (Exception e)
         {
@@ -1384,8 +1385,7 @@ public class QueryManagerImpl extends BaseManager
                     stmt.close();
 
                 }
-                catch (Exception e)
-                {}
+                catch (Exception e){}
             }
         }
         return thePIList;
@@ -3766,6 +3766,30 @@ public class QueryManagerImpl extends BaseManager
 		log.debug("Exiting QueryManagerImpl.getExternalSources");
 		return theList;
 	}
+	
+	
+	/**
+	 * Return the list of username to validate login
+	 * 
+	 * @return a sorted list of unique usernames
+	 * @throws PersistenceException
+	 */
+	public List getUsernames() throws PersistenceException {
+		
+		log.info("Entering QueryManagerImpl.getUsernames");
+
+		// Format the query
+		HQLParameter[] theParams = new HQLParameter[0];
+
+		String theHQLQuery = "select distinct(p.username) FROM Party p";
+
+		List theList = Search.query(theHQLQuery, theParams);
+
+		log.info("Found matching items: " + theList.size());
+
+		log.info("Exiting QueryManagerImpl.getUsernames");
+		return theList;
+	}	
 	
 	/**
 	 * Get the model id's for any model that is from an external source
