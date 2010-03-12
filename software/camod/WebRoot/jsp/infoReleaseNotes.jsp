@@ -22,7 +22,7 @@
      
                              caMOD
                           Version 2.6
-                          February 2010
+                          March 2010
 
        National Cancer Institute's Center for Biomedical Informatics and Information Technology 
  
@@ -48,13 +48,14 @@
  
     caMOD 2.6, the Cancer Models Database, is a open source data management 
     system developed for the management and sharing of data of animal models. 
-    caMOD features controlled vocabularies from a shared, publicly accessible metadata repository (caDSR) and enterprise vocabulary services (EVS) from the National 
+    caMOD features controlled vocabularies from a shared, publicly accessible metadata repository (caDSR) and 
+    enterprise vocabulary services (EVS) from the National 
     Cancer Institute..   
  
     -- http://cancermodels.nci.nih.gov 
  
-    caMOD is a product of the NCI's Center for Biomedical Informatics and Information Technology and its partners. Visit  
-    the NCICB web site and the emice website for more information:  
+    caMOD is a product of the NCI's Center for Biomedical Informatics and Information Technology and its partners. 
+    Visit the NCICB web site and the emice website for more information:  
 	 
    -- http://ncicb.nci.nih.gov/ 
    -- http://emice.nci.nih.gov/  
@@ -64,7 +65,7 @@
     2.0 Release History 
 ================================================================ 
      caMOD Version 2.6 
-    --	February 2010
+    --	March 2010
     
     caMOD Version 2.5.1  
     --	June 2009
@@ -97,12 +98,16 @@
     3.0 New Features and Updates 
 ================================================================ 
 BDA
-The goal of the build and deployment automation (BDA) effort was to create a consistent and repeatable build and deployment process allowing each team to create production-ready software every day.  
-Development teams spend time communicating, verifying and fixing various deployment environments. The environment creation process is manual, non-repeatable and slow. Automation will make it fast and cheap, 
-therefore it will become part of their daily tasks. This will reduce time spent on non-development tasks and the DEV teams can better concentrate on creative development tasks.
+The goal of the build and deployment automation (BDA) effort was to create a consistent and repeatable build and deployment 
+process allowing each team to create production-ready software every day.  
+Development teams spend time communicating, verifying and fixing various deployment environments. The environment creation 
+process is manual, non-repeatable and slow. Automation will make it fast and cheap, 
+therefore it will become part of their daily tasks. This will reduce time spent on non-development tasks and the DEV teams 
+can better concentrate on creative development tasks.
 
 Carcinogenic Interventions part expanded
-New categories for Antibodies, Bacteria, Plasmid, Transposon, and Signaling Molecule were added to the carcinogenic interventions part. Users can now report exposure to bacteria and the utilization of the Sleeping Beauty system in caMOD. (GForge entry #23552)
+New categories for Antibodies, Bacteria, Plasmid, Transposon, and Signaling Molecule were added to the carcinogenic interventions part. 
+Users can now report exposure to bacteria and the utilization of the Sleeping Beauty system in caMOD. (GForge entry #23552)
 
 The caMOD 2.5 Common Data Elements (CDEs) are available via caDSR  
    
@@ -129,8 +134,8 @@ The caMOD 2.5 Common Data Elements (CDEs) are available via caDSR
         sections: Libraries and Tissues (from EST data) or Protein Similarities 
         (from UniGene). caBio discontinued support for the Protein Similarities and 
         the performance for the Libraries and Tissues query did not meet minimum standards.  
-        After meeting with the caBio team, it was concluded that the development team will need to eliminate lazy fetching for library and tissue attributes 
-        if we want to improve performance.
+        After meeting with the caBio team, it was concluded that the development team will need to eliminate lazy fetching for 
+        library and tissue attributes if we want to improve performance.
      
     Please report any defects found to application support.
  
