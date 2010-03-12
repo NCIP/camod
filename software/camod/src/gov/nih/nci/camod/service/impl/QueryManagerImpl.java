@@ -649,7 +649,7 @@ public class QueryManagerImpl extends BaseManager
 				}
 			}
 
-			Collections.sort(theEnvFactors, String.CASE_INSENSITIVE_ORDER);
+			Collections.sort(theEnvFactors);
 
 			log.debug("Exiting QueryManagerImpl.getMatchingAgents");
 		} catch (Exception e) {
@@ -711,8 +711,8 @@ public class QueryManagerImpl extends BaseManager
 				}
 			}
 
-			Collections.sort(theEFAgentTypesList, String.CASE_INSENSITIVE_ORDER);
-			
+			Collections.sort(theEFAgentTypesList);
+
 			log.debug("Exiting QueryManagerImpl.getMatchingAgents");
 		} catch (Exception e) {
 			log.error("Exception in getMatchingAgents", e);
@@ -760,7 +760,7 @@ public class QueryManagerImpl extends BaseManager
 				theCellLineList.add(theCellLine);				
 			}
 
-			Collections.sort(theCellLineList, String.CASE_INSENSITIVE_ORDER);
+			Collections.sort(theCellLineList);
 
 			log.debug("Exiting QueryManagerImpl.getCellLineNames");
 		} catch (Exception e) {
@@ -810,7 +810,7 @@ public class QueryManagerImpl extends BaseManager
 				theTherapeuticDrugList.add(theDrugName);				
 			}
 
-			Collections.sort(theTherapeuticDrugList, String.CASE_INSENSITIVE_ORDER);
+			Collections.sort(theTherapeuticDrugList);
 
 			log.debug("Exiting QueryManagerImpl.getTherapeuticDrugNames");
 		} catch (Exception e) {
@@ -863,7 +863,7 @@ public class QueryManagerImpl extends BaseManager
 					theGenSegDesList.add(theGenSegDesignator);
 				}
 			}
-			Collections.sort(theGenSegDesList, String.CASE_INSENSITIVE_ORDER);
+			Collections.sort(theGenSegDesList);
 
 			log.debug("Exiting QueryManagerImpl.getGenomicSegmentDesignators");
 		} catch (Exception e) {
@@ -915,7 +915,6 @@ public class QueryManagerImpl extends BaseManager
 		log.debug("Found matching items: " + theList.size());
 
 		log.debug("Exiting QueryManagerImpl.getEnvironmentalFactors");
-		Collections.sort(theList, String.CASE_INSENSITIVE_ORDER);
 		return theList;
 	}
 
@@ -985,7 +984,7 @@ public class QueryManagerImpl extends BaseManager
 			}
 		}
 		log.debug( "Size = " + theEFNameList );
-		Collections.sort(theEFNameList, String.CASE_INSENSITIVE_ORDER);
+		Collections.sort(theEFNameList);
 		return theEFNameList;
 }
 	 
@@ -1367,7 +1366,7 @@ public class QueryManagerImpl extends BaseManager
                 String thePIEntry = theResultSet.getString(1) + ", " + theResultSet.getString(2);
                 thePIList.add(thePIEntry);
             }
-            Collections.sort(thePIList, String.CASE_INSENSITIVE_ORDER);
+
         }
         catch (Exception e)
         {
@@ -1385,7 +1384,8 @@ public class QueryManagerImpl extends BaseManager
                     stmt.close();
 
                 }
-                catch (Exception e){}
+                catch (Exception e)
+                {}
             }
         }
         return thePIList;
