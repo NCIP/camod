@@ -611,7 +611,16 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<!-- Fix server.xml for session fixation security scan error -->
 		<replaceregexp file="${jboss.home}/server/${jboss.server.name}/deploy/jbossweb-tomcat55.sar/server.xml" 
 			byline="true" match="emptySessionPath=&quot;true&quot;" replace="emptySessionPath=&quot;false&quot;" />
-		<echo message="Modified server.xml emptySessionPath= property for session fixation"/>		
+		<echo message="Modified server.xml emptySessionPath= property for session fixation"/>
+		
+		<!-- Fix jboss-service.xml for session fixation security scan error (no cache)
+		<attribute name="DefaultCacheTimeout">1800</attribute> to <attribute name="DefaultCacheTimeout">1</attribute>	-->			
+		<xmltask preservetype="true" source="${jboss.home}/server/${jboss.server.name}/conf/jboss-service.xml"
+			dest="${jboss.home}/server/${jboss.server.name}/conf/jboss-service.xml">
+			<xmlcatalog refid="bda.xml.catalog"/>
+		<replace path="/server/mbean[@code='org.jboss.security.plugins.JaasSecurityManagerService']/attribute[@name='DefaultCacheTimeout']/text()" withtext="1"/>
+		</xmltask>
+		<echo message="Modified jboss-service.xml DefaultCacheTimeout= 1 to prevent JBoss cache for session fixation"/>		
 		
 		<!-- This code is for updating properties.service.xml, make sure to add ${line.separator} after each property def as the property delimiter, if this is not included you will not get the desired results. If you do not use properties service.xml you can delete this code. -->
 		<var name="property.block" 
