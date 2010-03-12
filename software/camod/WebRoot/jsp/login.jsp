@@ -23,7 +23,7 @@
 
               <!-- banner begins -->
               <tr>
-                  <td valign=top class="bannerHome"><img src="images/banner.gif"></td>
+                  <td valign=top class="bannerHome"><img src="/camod/images/banner.gif"></td>
               </tr>
               <!-- banner begins -->
 
@@ -111,13 +111,7 @@
                                                                   <td>
                                                                       <html:submit value="Login"/>
                                                                       </html:form>
-                                                                  </td>
-				      
-                                                                  <td>		      		
-                                                                      <FORM name="input" action="/camod/RegisterUserPopulateAction.do" method="get">
-                                                                          <input class="actionButton" type="submit" value="Register" />
-                                                                      </FORM>                                                                      			      		
-                                                                  </td>
+                                                                  </td>				      
                                                               </tr>                                                             
                                                           </table>
                                                           
@@ -125,9 +119,29 @@
                                                   </tr>
                                               </table>
                                           </td>
+									</tr>                                          
+                                      <!-- Register begins --> 
+                                      <tr>                                         
+                                          <td valign="top">
+                                              <table summary="" cellpadding="0" cellspacing="0" border="0" width="100%" class="sidebarSection">
+                                                  <tr>
+                                                      <td class="sidebarTitle" height="20">NOT A USER (REGISTER)</td>
+                                                  </tr>
+                                                  <tr>
+                                                      <td>&nbsp;
+                                                          <html:form action="RegisterUserPopulateAction.do" >		      		
+                                                          <html:submit value="Register" />
+                                                          </html:form>                                                                     			      		
+                                                      </td>
+                                                  </tr>
+                                              </table>
+                                          </td>                                          
                                       </tr>
+                                      <!-- Register ends -->                                      
                                        <% } else { } %>
                                       <!-- login ends -->
+                                      
+                                     
 
                                       <!-- what's new begins -->
                                       <tr>
@@ -138,7 +152,7 @@
                                                   </tr>
 
                                                   <tr>
-                                                      <td class="sidebarContent"><IMG src="images/bullet_point.gif" border=0>&nbsp;<html:link action="infoWhatsNew">View What's New</html:link></td>
+                                                      <td class="sidebarContent"><IMG src="/camod/images/bullet_point.gif" border=0>&nbsp;<html:link action="infoWhatsNew">View What's New</html:link></td>
                                                   </tr>
                                               </table>
                                           </td>
@@ -153,16 +167,19 @@
                                                       <td class="sidebarTitle" height="20">DID YOU KNOW?</td>
                                                   </tr>
                                                   <tr>
-                                                      <td class="sidebarContent" valign="top">caMOD 2.6 was released to production in February 2010.<br/><br/><html:link action="infoReleaseNotes.do">Release Notes</html:link></td>
+                                                      <td class="sidebarContent" valign="top">caMOD 2.6 was released to production in March 2010.<br/><br/>
+                                                      <html:link action="infoReleaseNotes.do">Release Notes</html:link><br/><br/>
+                                                      <html:link action="infoViewLicense.do">View License</html:link><br/><br/>
+                                                      </td>
                                                   </tr>
+                                                  
                                                   <tr>
 													<td> &nbsp; 
 														<input type="submit" value="User Guide" onClick="myRef = window.open('WebHelp/caMOD/UserGuide.pdf','mywin',
-															'left=20,top=20,width=900,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()">
-														</input>&nbsp;
+															'left=20,top=20,width=900,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"/>
+														&nbsp;
 														<input type="submit" value="Help" onClick="myRef = window.open('WebHelp/caMOD/index.html','mywin',
-															'left=20,top=20,width=700,height=500,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()">
-														</input>
+															'left=20,top=20,width=700,height=500,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"/>												
 													</td>                                                                  
                                               	</tr>
                                               </table>

@@ -9,7 +9,7 @@
 
 		<!-- link 1 begins -->
 		<TD height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="login"><center>HOME</center></html:link>&nbsp;&nbsp;
+		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="viewLicense"><center>HOME</center></html:link>&nbsp;&nbsp;
 		</TD>
 		<!-- link 1 ends -->
 
