@@ -10,18 +10,10 @@
 		
 		<!-- link 1 begins -->
 		<TD height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="login">HOME</html:link>&nbsp;&nbsp;
+		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="viewLicense">HOME</html:link>&nbsp;&nbsp;
 		</TD>
-		<!-- link 1 ends -->
-
-		<TD>
-			<IMG height=16 alt="" src="/camod/images/mainMenuSeparator.gif" width=1>
-		</TD>
-
-		<TD height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="RegisterUserPopulateAction">REGISTER</html:link>&nbsp;&nbsp;
-		</TD>
-		
+		<!-- link 1 ends -->		
+				
 		<TD>
 			<IMG height=16 alt="" src="/camod/images/mainMenuSeparator.gif" width=1>
 		</TD>
