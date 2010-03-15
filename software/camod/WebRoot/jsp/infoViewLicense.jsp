@@ -36,7 +36,7 @@ to review important
 <html:link action="infoPrivacyNotice">Use Guidelines</html:link>
 by clicking on the buttons below.</P>
 
-<B><P align="justify">I HAVE READ AND UNDERSTOOD THE ABOVE PROVISIONS, AND AGREE </P>
+<B><P align="justify">I HAVE READ, UNDERSTOOD, AND AGREE WITH THE ABOVE PROVISIONS.</P>
 
 </B>
 
