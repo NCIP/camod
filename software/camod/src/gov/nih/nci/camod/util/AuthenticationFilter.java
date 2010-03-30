@@ -57,7 +57,7 @@ public class AuthenticationFilter implements Filter {
         	if(isloginpage!=null && !isRequestedSessionIdFromURL &&( 
         			isloginpage.endsWith("/ReturnUserModels.do") 
         			))	{
-        		System.out.println("AuthenticationFilter.doFilter /ReturnUserModels.do loop ");
+        		//System.out.println("AuthenticationFilter.doFilter /ReturnUserModels.do loop ");
         		//just continue, so they can login
         		generateNewSession((HttpServletRequest) request);
         		chain.doFilter(request, response);
@@ -67,28 +67,28 @@ public class AuthenticationFilter implements Filter {
         	//check login for caMOD
             HttpSession session = ((HttpServletRequest) request).getSession(false);
             if (session != null && !isRequestedSessionIdFromURL){
-            	System.out.println("AuthenticationFilter session != null && !isRequestedSessionIdFromURL loop: " );
+            	//System.out.println("AuthenticationFilter session != null && !isRequestedSessionIdFromURL loop: " );
 	            String theUsername = (String) session.getAttribute(Constants.CURRENTUSER);         
 	            if(theUsername != null && theUsername.length() >0 ){
-	            	System.out.println("AuthenticationFilter set authorized = true: " );
+	            	//System.out.println("AuthenticationFilter set authorized = true: " );
 	                	authorized = true;
 	            }
             }
         }
         
         if (authorized) {
-        	System.out.println("AuthenticationFilter.doFilter authorized loop");
+        	//System.out.println("AuthenticationFilter.doFilter authorized loop");
             chain.doFilter(request, response);
             return;
         } else if (filterConfig != null) {
         	// redirect to login.jsp from any unauthorized pages (external bookmarks to secure pages, ect)
             String unauthorizedPage = filterConfig.getInitParameter("unauthorizedPage");
-            System.out.println("AuthenticationFilter.doFilter not authorized loop unauthorizedPage= " + unauthorizedPage);
+            //System.out.println("AuthenticationFilter.doFilter not authorized loop unauthorizedPage= " + unauthorizedPage);
             
             if (unauthorizedPage != null && !"".equals(unauthorizedPage)) {
             	//System.out.println("unauthorizedPage != null && !.equals(unauthorizedPage) loop: ");
             	generateNewSession((HttpServletRequest) request);
-            	System.out.println("Generated new session for request ");
+            	//System.out.println("Generated new session for request ");
             	//chain.doFilter(request, response); 
             	chain.doFilter(request, response);             
                 return; 
@@ -100,7 +100,7 @@ public class AuthenticationFilter implements Filter {
     private void generateNewSession(HttpServletRequest httpRequest){
     	System.out.println("AuthenticationFilter generateNewSession enter");
    	 HttpSession session = httpRequest.getSession();
-   	 	System.out.println("AuthenticationFilter generateNewSession session_id  " + session.getId());
+   	 	//System.out.println("AuthenticationFilter generateNewSession session_id  " + session.getId());
         HashMap<String, Object> old = new HashMap<String, Object>();
         Enumeration<String> keys = (Enumeration<String>) session.getAttributeNames();
         while (keys.hasMoreElements()) {
@@ -115,8 +115,8 @@ public class AuthenticationFilter implements Filter {
         for (Map.Entry<String, Object> entry : old.entrySet()) {
           session.setAttribute(entry.getKey(), entry.getValue());
         }
-        System.out.println("AuthenticationFilter generateNewSession new (reused) session_id  " + session.getId());
-        System.out.println("AuthenticationFilter generateNewSession exit");
+        //System.out.println("AuthenticationFilter generateNewSession new (reused) session_id  " + session.getId());
+        //System.out.println("AuthenticationFilter generateNewSession exit");
         
    } 
     
