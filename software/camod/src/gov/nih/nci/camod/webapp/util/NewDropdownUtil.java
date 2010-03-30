@@ -702,12 +702,12 @@ public class NewDropdownUtil
      */
     private static List getUsernameList(HttpServletRequest inRequest) throws Exception
     {
-       	log.info("<NewDropdownUtil> In getUsernameList: ");
+       	log.debug("<NewDropdownUtil> In getUsernameList: ");
        	
        	List validUsernameList = QueryManagerSingleton.instance().getUsernames();       	
         
         Collections.sort(validUsernameList);
-        log.info("<NewDropdownUtil> validUsernameList.size(): " + validUsernameList.size());
+        log.debug("<NewDropdownUtil> validUsernameList.size(): " + validUsernameList.size());
         
         return validUsernameList;
     }     
