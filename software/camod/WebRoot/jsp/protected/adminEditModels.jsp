@@ -58,14 +58,14 @@
     }    			
 </SCRIPT>
 
-<html:form action="SearchAdminAction.do" focus="modelId">
+
 
 <!-- adminEditModels.jsp -->
 <!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>	
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" width="100%">
-		
+		<html:form action="SearchAdminAction.do" focus="modelId">
 		<tr>
 			<td class="formMessage" colspan="3">
 				<logic:messagesPresent>
@@ -176,13 +176,13 @@
 						  	  <bean:message key="button.clear"/>
 						  </html:submit>						  
 						  
-				  		</html:form>			
+				  					
 				  		</td>
 			  		</tr>
 				</TABLE>
 			</td>
 		</tr>			
-
+	  </html:form>
 	 </TABLE>
 	<br>
 	
