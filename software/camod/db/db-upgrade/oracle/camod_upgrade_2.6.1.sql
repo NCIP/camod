@@ -56,10 +56,5 @@ Update Developmental_stage ds
 set ds.CONCEPT_CODE=replace (ds.CONCEPT_CODE,'_',':')  
 where ds.CONCEPT_CODE LIKE 'ZFS_%';		
 
--- #27701  	Add Editor rights to curatorcamod user in the DB
-Insert into PARTY_ROLE
-(PARTY_ID, ROLE_ID)
-VALUES (150063906, 3);
-
 commit;
 
