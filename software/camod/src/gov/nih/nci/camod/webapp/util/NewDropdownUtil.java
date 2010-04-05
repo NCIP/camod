@@ -808,7 +808,7 @@ public class NewDropdownUtil
        	
        	List genSegDesList = QueryManagerSingleton.instance().getGenomicSegmentDesignators();       	
         
-        Collections.sort(genSegDesList);
+        Collections.sort(genSegDesList, String.CASE_INSENSITIVE_ORDER);
         
         return genSegDesList;
     }
