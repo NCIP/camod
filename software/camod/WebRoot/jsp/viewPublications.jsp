@@ -95,6 +95,7 @@
 
 <bean:define id="mdl" name="animalmodel"/>
 <bean:define id="pubColl" name="publications"/>
+<!-- bean:define id="pubAuthors" name="publicationAuthors"/-->
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
@@ -114,27 +115,27 @@
 <!-- Summary table start -->
 
 			<tr>
-				<td class="greySubTitleLeft" width="30%">First Author</td>
-				<td class="greySubTitleLeft" width="55%">Journal</td>
-				<td class="greySubTitleLeftEnd" width="15%">Year</td>
+				<td class="greySubTitleLeft" width="45%">First Author</td>
+				<td class="greySubTitleLeft" width="45%">Journal</td>
+				<td class="greySubTitleLeftEnd" width="10%">Year</td>
 			</tr>
 			
 		<logic:iterate id="p" name="pubColl" indexId="idx">			
 			<tr>
 	
-				<td class="WhiteBox" width="30%">
+				<td class="WhiteBox" width="45%">
 				<camod:highlight>
-					<a href="<c:out value="#pub_${idx}" escapeXml="false"/>">
-						<bean:write name="p" property="authors" filter="false"/>
-					</a>
+					<c:forEach  items="${p.displayAuthors}" var="line">
+						<c:out value="${line}"/>
+					</c:forEach>&nbsp;
 				</camod:highlight>
 				</td>
 				
-				<td class="WhiteBoxRightEnd" width="55%">
+				<td class="WhiteBoxRightEnd" width="45%">
 					<camod:highlight><c:out value="${p.journal}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 				
-				<td class="WhiteBoxRightEnd" width="15%">
+				<td class="WhiteBoxRightEnd" width="10%">
 					<camod:highlight><c:out value="${p.year}"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
@@ -158,7 +159,11 @@
 			       
 		<tr>
 			<td class="WhiteBox" width="30%"><b>First Author:</b></td>
-			<td class="WhiteBoxRightEnd" width="70%"><c:out value="${p.authors}" escapeXml="false"/>&nbsp;</td>
+			<td class="WhiteBoxRightEnd" width="70%" escapeXml="false">
+				<c:forEach  items="${p.displayAuthors}" var="line">
+					<c:out value="${line}"/>
+				</c:forEach>&nbsp;	
+			</td>		
 		</tr>
 
 		<tr>
@@ -223,9 +228,7 @@
 		<tr>
 			<td class="GreyBox" width="30%"><b>Abstract in PubMed:</b></td>
 			<td class="GreyBoxRightEnd" width="70%">
-					<a target="_pubmed" href=" http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=retrieve&db=pubmed&dopt=abstract&list_uids=<c:out value="${p.pmid}"/>">
-					<IMG src="/camod/images/pubmed_70.gif" align="middle">
-					</a>
+					<a target="_pubmed" href=" http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=retrieve&db=pubmed&dopt=abstract&list_uids=<c:out value="${p.pmid}"/>">PMID</a>
 			</td>
 		</tr>
 				
