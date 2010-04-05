@@ -1,11 +1,11 @@
 Other
-Null Modification
 Amino Acid
 Deletion
 Insertion
+loxP Sites
 Misense
 Nonsense
+Null Modification
 Point Mutation
 Regulatory Sequence
-loxP Sites
 test
