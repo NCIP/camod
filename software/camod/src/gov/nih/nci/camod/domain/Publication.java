@@ -21,11 +21,12 @@
  * caMod 2.1 OM changes and added log/id header
  *
  */
+
 package gov.nih.nci.camod.domain;
 
 import java.io.Serializable;
-
 import gov.nih.nci.camod.util.Duplicatable;
+import gov.nih.nci.camod.util.WrapTextUtil;
 
 /**
  * @author rajputs
@@ -42,6 +43,7 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
     private String startPage;
     private String journal;
     private String authors;
+    private String[] displayAuthors;
     private Boolean firstTimeReported;
     private String jaxJNumber;
     private String zfinPubId; 
@@ -66,6 +68,22 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
     {
         this.authors = authors;
     }
+    
+    /**
+     * @return Returns the authors wrapped.
+     */
+    public String[] getDisplayAuthors()
+    {
+    	
+    	System.out.println("Publication.authors: " + authors.toString());
+        if (authors != null)
+        {
+        	displayAuthors = WrapTextUtil.wrapText(authors, 40);
+           System.out.println("Publication.displayAuthors: " + displayAuthors.toString());
+        }
+        return displayAuthors;    	
+
+    }     
 
     /**
      * @return Returns the endPage.
