@@ -205,6 +205,9 @@ TransplantationManager {
 			// Do not save other in the DB
 			inTransplantation.setAdminSiteAlternEntry(inTransplantationData
 					.getOtherAdministrativeSite());
+			
+			// Null out - when set to valude first then modified to other this needs cleared
+			inTransplantation.setAdministrativeSite(null);
 
 			// Send e-mail for other administrativeSite
 			sendEmail(inAnimalModel, inTransplantationData
