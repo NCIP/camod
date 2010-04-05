@@ -210,7 +210,7 @@
 				    <td class="formTitleBlue" height="20" colspan="3">Models Needing Screener Assignment</td>				
 			    </tr>			
 			    <tr>
-				    <td class="resultsBoxWhiteEnd" colspan="3" >You need to assign Sceeners for the following models</td> 
+				    <td class="resultsBoxWhiteEnd" colspan="3" >You need to assign Screeners for the following models</td> 
 			    </tr>			    
 			    <logic:iterate name="<%= Admin.MODELS_NEEDING_SCREENER_ASSIGNMENT %>" id="model" type="gov.nih.nci.camod.domain.AnimalModel">
 			        <tr>
