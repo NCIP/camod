@@ -803,7 +803,11 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 		} else {
 			theAvailability.setModifiedDate(new Date());
 		}
-		theAvailability.setEnteredDate(new Date());
+		
+		// Only set when the model is created, not on every edit
+		if (theAvailability.getEnteredDate().equals(null) ) {
+			theAvailability.setEnteredDate(new Date());
+		}			
 
         log.debug("Before Release Date");        
 		// Convert the date
