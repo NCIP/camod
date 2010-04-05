@@ -140,7 +140,7 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
     {
         log.debug("Entering AvailabilityManagerImpl.populateAvailability");
 
-        inAvailability.setName(inAvailabilityData.getName());
+        inAvailability.setName(inAvailabilityData.getName().trim());
         inAvailability.setStockNumber(inAvailabilityData.getStockNumber().trim());
 
         /* get distributor object */
@@ -161,7 +161,7 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
     {
         log.debug("Entering AvailabilityManagerImpl.editAvailability");
 
-        inAvailability.setName(inAvailabilityData.getName());
+        inAvailability.setName(inAvailabilityData.getName().trim());
         inAvailability.setStockNumber(inAvailabilityData.getStockNumber().trim());
 
         log.debug("Exiting AvailabilityManagerImpl.editAvailability");
@@ -175,7 +175,7 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
 
         // set Availability name
         log.debug("setName: " + inAvailabilityData.getName());        
-        inAvailability.setName(inAvailabilityData.getName());
+        inAvailability.setName(inAvailabilityData.getName().trim());
 
         if (inAvailabilityData.getPrincipalInvestigator() != null && inAvailabilityData.getPrincipalInvestigator().length() > 0)
         {
@@ -207,7 +207,7 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
 
         // set Availability name
         inAvailability.setName(inAvailabilityData.getName());
-        log.debug("setName: " + inAvailabilityData.getName());
+        log.debug("setName: " + inAvailabilityData.getName().trim());
 
         if (inAvailabilityData.getPrincipalInvestigator() != null && inAvailabilityData.getPrincipalInvestigator().length() >0)
         {
