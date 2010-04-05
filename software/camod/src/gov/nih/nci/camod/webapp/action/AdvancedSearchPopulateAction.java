@@ -97,14 +97,14 @@ public class AdvancedSearchPopulateAction extends BaseAction {
        	String sID = null;
         if (request.getHeader("X-Forwarded-For") != null){
         	sID = request.getHeader("X-Forwarded-For");
-            log.info("cleaned X-Forwarded-For: " + sID);
+            log.debug("cleaned X-Forwarded-For: " + sID);
             sID = SafeHTMLUtil.clean(sID);
         }
         
     	// get and clean header to prevent SQL injection
         if (request.getHeader("Referer") != null){
         	sID = request.getHeader("Referer");
-            log.info("cleaned Referer: " + sID);
+            log.debug("cleaned Referer: " + sID);
             sID = SafeHTMLUtil.clean(sID);
         }       	
 
@@ -232,7 +232,7 @@ public class AdvancedSearchPopulateAction extends BaseAction {
                 if (!SafeHTMLUtil.isValidValue(theSearchForm.getSpecies(),Constants.Dropdowns.SEARCHSPECIESDROP,request)) {
                 	log.warn("Species not found in database: " + theSearchForm.getSpecies());
                 } else {
-                    log.info("theSearchForm.getSpecies(): "+ theSearchForm.getSpecies());
+                    log.debug("theSearchForm.getSpecies(): "+ theSearchForm.getSpecies());
                     
                     // Set selected species to a constant to determine which organ tree displays 
                     // using common name because Rat has two species
