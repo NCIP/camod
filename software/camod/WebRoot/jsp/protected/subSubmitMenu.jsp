@@ -826,13 +826,13 @@
 		</logic:iterate> 
 		
 		<img src="images/right_arrow.gif" border="0"> 
-		<html:link styleClass="subMenuRed" action="MMHCCRepoPopulateAction.do?method=dropdown&lab=MMHCC Repository">Available from MMHCC Repo.</html:link><br>
-		<logic:iterate id="aAvailability" name="mmhcc_list"
+		<html:link styleClass="subMenuRed" action="NCIMouseRepoPopulateAction.do?method=dropdown&lab=NCI Mouse Repository">Available from NCI Mouse Repo.</html:link><br>
+		<logic:iterate id="aAvailability" name="nci_repo_list"
 			type="AnimalAvailability">&nbsp;&nbsp;&nbsp;&nbsp;
 			
 			<img src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
-				action="MMHCCRepoPopulateAction.do?method=populate"
+				action="NCIMouseRepoPopulateAction.do?method=populate"
 				paramId="aAvailabilityID" paramName="aAvailability"
 				paramProperty="id">
 				<camod:shorten><bean:write name="aAvailability" property="displayName" filter="false" /></camod:shorten>
