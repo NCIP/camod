@@ -127,7 +127,7 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 		log.debug("Entering UserManagerImpl");
 
 		try {
-            log.info("set lockout parameters for AuthenticationManager");
+            log.debug("set lockout parameters for AuthenticationManager");
 			theAuthenticationMgr = SecurityServiceProvider
 				.getAuthenticationManager(Constants.UPT_CONTEXT_NAME, "1800000", 
 					"60000", "75"); 
@@ -386,15 +386,15 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 			NewDropdownUtil.populateDropdown(inRequest, Constants.Dropdowns.USERNAMEINDATABASE, null);
 			// Assign list to usernameList
 			usernameList = (List)inRequest.getSession().getAttribute(Constants.Dropdowns.USERNAMEINDATABASE);
-	        log.info("login method usernameList.size()" + usernameList.size());
+	        log.debug("login method usernameList.size()" + usernameList.size());
 	        
 			// If username is not in our DB, fail immediately (prevent SQL injection)
 	        if (!SafeHTMLUtil.isValidStringValue(inUsername,Constants.Dropdowns.USERNAMEINDATABASE,inRequest))
 	        {
-	        	log.info("Username is not in the DB - Invalid user");
+	        	log.debug("Username is not in the DB - Invalid user");
 	        	loginOk = false;
 	        } else {
-	            log.info("login method inside authentication loop");
+	            log.debug("login method inside authentication loop");
 				// Work around bug in CSM. Empty passwords pass
 				if (inPassword.trim().length() != 0) {
 					loginOk = theAuthenticationMgr.login(inUsername, inPassword);
