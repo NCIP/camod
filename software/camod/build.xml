@@ -104,7 +104,9 @@
         TARGET: build_war
         This will build the war file
     -->
-    <target name="build_local_war" depends="copy_resource_directory">        
+    <target name="build_local_war" depends="copy_resource_directory">  
+    	<delete file="C:\devtools\jboss-4.0.2\server\default\work\jboss.web\localhost\camod" />
+    	<delete file="C:\devtools\jboss-4.0.2\server\default\deploy\camod.war" />
         <delete file="${build.local.dir}/${app.war.name}.war" />
     	<delete dir="${build.local.dir}"/>
         <mkdir dir="${build.local.dir}"/>
