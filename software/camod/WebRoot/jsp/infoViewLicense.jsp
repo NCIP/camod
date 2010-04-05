@@ -35,7 +35,7 @@ documents. Commercial use of the documents on this site may be protected under U
 the data may be the subject of patent applications or issued patents, and you may need to seek a license for its commercial use. You are encouraged 
 to review important <html:link action="infoPrivacyNotice">Use Guidelines</html:link> by clicking on the buttons below.</P>
 
-<B><P align="justify">I HAVE READ, UNDERSTOOD, AND AGREE WITH THE ABOVE PROVISIONS.</P>
+<B><P align="justify"></P>
 
 </B>
 
