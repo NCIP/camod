@@ -121,6 +121,111 @@
 		and d.DISEASE_ID NOT IN
 		(select disease_id from HISTOPATHOLOGY h)
     </sql>
+	</changeSet>
+	
+	<changeSet id="2.6.1_1_all_sql_for_caIMAGE_upgrade_and_enhancements" author="pandyas">                            
+		<comment>Modify schema for caIMAGE upgrade and additional features</comment>
+		<sqlFile path="@db-upgrade.run.dir@/camod_upgrade_2.6.1.sql"/>
+	</changeSet> 				
+    <!--sql>
+		Delete from IMAGE_TEST i
+		where i.ABS_CANCER_MODEL_ID is null
+		And i.IMAGE_ID NOT IN (Select eg.IMAGE_ID
+		from engineered_gene eg
+		where eg.IMAGE_ID IS NOT NULL)
+    </sql>
+	
+	
+	<changeSet id="2.7_2_update_abs_cancer_model_id_asssign_to_new_curator_account" author="pandyas">                            
+		<comment>Update submitter_id record to new curator account id (caMOD 2.6.1)</comment>
+    <sql>
+		update abs_cancer_model abs 
+		set abs.submitter_id=150063906 
+		where abs.submitter_id=50057228 or abs.submitter_id=50056983
+		or abs.submitter_id=237 or abs.submitter_id=56
+    </sql>
+	</changeSet>
+	
+	<changeSet id="2.7_3_update_JPG_IMAGE_url_value_for_caIMAGE_upgrade" author="pandyas">                            
+		<comment>Update IMAGE URL values for JPG files (caMOD 2.6.1)</comment>
+    <sql>
+		Update IMAGE_TEST i set i.URL=replace (i.URL,'http://caimage.nci.nih.gov/lizardtech','http://ncias-d330-v.nci.nih.gov:19080/adore-djatoka/images/caimage/Images/images')  
+		where i.url LIKE '%.JPG';
+    </sql>
+	</changeSet> 
+	
+	<changeSet id="2.7_4_update_jpg_IMAGE_url_value_for_caIMAGE_upgrade" author="pandyas">                            
+		<comment>Update IMAGE URL values for jpg files (caMOD 2.6.1)</comment>
+    <sql>
+		Update IMAGE_TEST i set i.URL=replace (i.URL,'http://caimage.nci.nih.gov/lizardtech','http://ncias-d330-v.nci.nih.gov:19080/adore-djatoka/images/caimage/Images/images')  
+		where i.url LIKE '%.jpg'; 
+    </sql>
+	</changeSet> 
+	
+	<changeSet id="2.7_5_update_png_IMAGE_url_value_for_caIMAGE_upgrade" author="pandyas">                            
+		<comment>Update IMAGE URL values for png files</comment>
+    <sql>
+		Update IMAGE_TEST i set i.URL=replace (i.URL,'http://caimage.nci.nih.gov/lizardtech','http://ncias-d330-v.nci.nih.gov:19080/adore-djatoka/images/caimage/Images/images')  
+		where i.url LIKE '%.png'; 
+    </sql>
+	</changeSet>
+	
+	<changeSet id="2.7_6_update_gif_IMAGE_url_value_for_caIMAGE_upgrade" author="pandyas">                            
+		<comment>Update IMAGE URL values for gif files (caMOD 2.6.1)</comment>
+    <sql>
+		Update IMAGE_TEST i set i.URL=replace (i.URL,'http://caimage.nci.nih.gov/lizardtech','http://ncias-d330-v.nci.nih.gov:19080/adore-djatoka/images/caimage/Images/images')  
+		where i.url LIKE '%.gif'; 
+    </sql>
 	</changeSet>	
+	
+	<changeSet id="2.7_7_increase_IMAGE_url_column_size_for_caIMAGE_upgrade" author="pandyas">                            
+		<comment>Increase IMAGE URL column size (caMOD 2.6.1)</comment>
+    <sql>
+		drop index IMAGEMAGE_URL
+    </sql>
+    <sql>
+		drop index IMAGEMAGE_URL_LWR
+    </sql>     
+    <sql>
+		commit
+    </sql>    
+    <sql>
+		ALTER TABLE IMAGE_TEST MODIFY (URL VARCHAR2(1000))
+    </sql>
+    <sql>
+		CREATE INDEX IMAGEMAGE_URL ON IMAGE(URL)
+    </sql>
+    <sql>
+		CREATE INDEX IMAGEMAGE_URL_LWR ON IMAGE(LOWER("URL"))
+    </sql>      
+	</changeSet>
+	
+	<changeSet id="2.7_8_delete_cpt_image_type_not_authorized_for_caIMAGE_upgrade" author="pandyas">                            
+		<comment>Delete unauthorized file type - cpt (caMOD 2.6.1)</comment>
+    <sql>
+		delete from image_test i 
+		where i.URL LIKE '%.cpt'
+    </sql> 
+    <sql>
+		Update engineered_gene eg
+		set eg.IMAGE_ID = null
+		where eg.ENGINEERED_GENE_ID = '63'
+    </sql> 
+	</changeSet>	
+	
+	<changeSet id="2.7_9_update_Animal_Distributor" author="pandyas">                            
+		<comment>Change MMHCC to NCI Mouse Repository in the Animal Distributor table (caMOD 2.6.1)</comment>
+    <sql>
+		Update Animal_Distributor ad
+		set ad.NAME = 'NCI Mouse Repository'
+		where ad.ANIMAL_DISTRIBUTOR_ID = '3'
+    </sql>
+	</changeSet-->
+	
+	<!--changeSet id="2.7_10_update_underline_to_colon_for_new_Zebrafish_vocabulary_loaded_in_EVS" author="pandyas">                            
+		<comment>Change the underline character to colon for organ Zebrafish entries (caMOD 2.6.1)</comment>
+        <sqlFile path="@db-upgrade.run.dir@/camod-upgrade-2.6.1_10.sql"/>
+	</changeSet-->	
+
 </databaseChangeLog>
 
