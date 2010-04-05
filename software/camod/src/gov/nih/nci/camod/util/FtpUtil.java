@@ -38,7 +38,12 @@ public class FtpUtil {
      * @throws MalformedURLException, IOException on error.
      */
     public void upload(String ftpServer, String user, String pwd, String fileName, File source) throws MalformedURLException, IOException {
+    	System.out.println("FtpUtil.upload method");
         if (ftpServer != null && fileName != null && source != null) {
+        	System.out.println("ftpServer= " + ftpServer);
+        	System.out.println("fileName= " + fileName);
+        	System.out.println("source= " + source);
+        	
             StringBuffer sb = new StringBuffer("ftp://");
             if (user != null && pwd != null) { //need authentication?
                 sb.append(user);
@@ -47,15 +52,23 @@ public class FtpUtil {
                 sb.append('@');
             }//else: anonymous access
             sb.append(ftpServer);
+            // caIMAGE upgrade - change to append /Images/djatoka after ftpServer
+            sb.append('/');
+            sb.append("Images");           
+            sb.append('/');
+            sb.append("djatoka");
             sb.append('/');
             sb.append(fileName);
             sb.append(";type=i"); //a=ASCII mode, i=image (binary) mode, d= file directory listing
+            System.out.println("sb= " + sb.toString());
 
             
             BufferedInputStream bis = null;
             BufferedOutputStream bos = null;
             try {
                 URL url = new URL(sb.toString());
+                System.out.println("FtpUtil url= " + url);
+                
                 URLConnection urlc = url.openConnection();
     
                 bos = new BufferedOutputStream(urlc.getOutputStream());
