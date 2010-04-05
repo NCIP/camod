@@ -187,13 +187,11 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
 
 			// Check the file type
 			if (fileType != null) {
-				// Supported file types. Sid is only supported for the normal
+				// Supported file types. sid is no longer supported for the normal
 				// image upload
 				if (fileType.toLowerCase().equals("jpg")
 						|| fileType.toLowerCase().equals("jpeg")
 						|| fileType.toLowerCase().equals("gif")
-						|| (fileType.toLowerCase().equals("sid") && !inStorageDirKey
-								.equals(Constants.CaImage.FTPGENCONSTORAGEDIRECTORY))
 						|| fileType.toLowerCase().equals("png")) {
 					InputStream in = null;
 					OutputStream out = null;
@@ -256,7 +254,7 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
 						e.printStackTrace();
 					}
 
-					// Iterate through all the reciepts in the config file
+					// Iterate through all the receipts in the config file
 					String ftpServer = camodProperties
 							.getProperty("caimage.ftp.server");
 					String ftpUsername = camodProperties
@@ -294,30 +292,10 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
 					inImage.setDescription(inImageData
 							.getDescriptionOfConstruct());
 
-					// Do something fancy for the sid images
-					if (fileType.equals("sid")) {
-						String theType = "";
-						if (inStorageDirKey
-								.equals(Constants.CaImage.FTPGENCONSTORAGEDIRECTORY)) {
-							theType = camodProperties
-									.getProperty("caimage.gencon");
-						} else {
-							theType = camodProperties
-									.getProperty("caimage.model");
-						}
-
-						String sidThumbView = camodProperties
-								.getProperty("caimage.sidthumbview.uri");
-						String theThumbUrl = sidThumbView + theType
-								+ uniqueFileName;
-						String theViewUrl = Constants.CaImage.LEGACYJSP
-								+ theType + uniqueFileName;
-						inImage.setUrl(theThumbUrl
-								+ Constants.CaImage.FILESEP + theViewUrl);
-					} else {
-						inImage.setUrl(serverViewUrl
-								+ uniqueFileName);
-					}
+					inImage.setUrl(serverViewUrl
+							+ uniqueFileName);
+					log.info("<ImageManagerImpl> inImage.setUrl: " + serverViewUrl + "+" + uniqueFileName);						
+					
 				} else {
 					log.error("Unsupported file type: " + fileType);
 					throw new IllegalArgumentException("Unknown file type: "
