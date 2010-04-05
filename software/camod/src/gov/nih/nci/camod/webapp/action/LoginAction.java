@@ -113,7 +113,7 @@ public final class LoginAction extends BaseAction {
      */
     public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws IOException, ServletException {
-    	log.info("Enter LoginAction.execute");
+    	log.debug("Enter LoginAction.execute");
         LoginForm loginForm = (LoginForm) form;
 
 
