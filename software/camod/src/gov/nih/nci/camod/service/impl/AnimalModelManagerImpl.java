@@ -793,21 +793,18 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 		thePhenotype.setBreedingNotes(inModelCharacteristicsData
 				.getBreedingNotes());
 
-        log.debug("Before Availability");        
+        log.info("Before Availability");        
 		// Get the availability
 		Availability theAvailability = inAnimalModel.getAvailability();
 
-		// When the model was created
+		// When the model was created, set entered date once only
 		if (theAvailability == null) {
 			theAvailability = new Availability();
+			theAvailability.setEnteredDate(new Date());			
 		} else {
-			theAvailability.setModifiedDate(new Date());
+			// Set the modified date after the model exists
+			theAvailability.setModifiedDate(new Date());			
 		}
-		
-		// Only set when the model is created, not on every edit
-		if (theAvailability.getEnteredDate().equals(null) ) {
-			theAvailability.setEnteredDate(new Date());
-		}			
 
         log.debug("Before Release Date");        
 		// Convert the date
@@ -826,12 +823,12 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 		}
 		theAvailability.setReleaseDate(theDate);
 
-        log.debug("Before setAvailability()");        
+        log.info("Before setAvailability()");        
 		// Associated the created objects
 		inAnimalModel.setAvailability(theAvailability);
 		inAnimalModel.setPhenotype(thePhenotype);
 
-		log.debug("Exiting populateAnimalModel");
+		log.info("Exiting populateAnimalModel");
 
 		return inAnimalModel;
 	}
