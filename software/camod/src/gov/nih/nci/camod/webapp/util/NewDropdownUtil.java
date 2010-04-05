@@ -774,7 +774,7 @@ public class NewDropdownUtil
        	
        	List cellLineList = QueryManagerSingleton.instance().getCellLineNames();       	
         
-        Collections.sort(cellLineList);
+        Collections.sort(cellLineList, String.CASE_INSENSITIVE_ORDER);
         
         return cellLineList;
     } 
