@@ -280,7 +280,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 			it = availabilitySet.iterator();
 			List<AnimalAvailability> investigatorList = new ArrayList<AnimalAvailability>();
 			List<AnimalAvailability> jacksonLabList = new ArrayList<AnimalAvailability>();
-			List<AnimalAvailability> mmhccList = new ArrayList<AnimalAvailability>();
+			List<AnimalAvailability> nciRepoList = new ArrayList<AnimalAvailability>();
 			List<AnimalAvailability> imsrList = new ArrayList<AnimalAvailability>();
 			List<AnimalAvailability> zfinList = new ArrayList<AnimalAvailability>();			
 
@@ -300,9 +300,9 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 					}
 
 					if (availability.getAnimalDistributor().getName().equals(
-							"MMHCC Repository")) {
+							"NCI Mouse Repository")) {
 
-						mmhccList.add(availability);
+						nciRepoList.add(availability);
 					}
 					if (availability.getAnimalDistributor().getName().equals(
 					"ZFIN")) {
@@ -553,8 +553,8 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 					Constants.Submit.INVESTIGATOR_LIST, investigatorList);
 			request.getSession().setAttribute(Constants.Submit.JACKSONLAB_LIST,
 					jacksonLabList);
-			request.getSession().setAttribute(Constants.Submit.MMHCC_LIST,
-					mmhccList);
+			request.getSession().setAttribute(Constants.Submit.NCI_REPO_LIST,
+					nciRepoList);
 			request.getSession().setAttribute(Constants.Submit.ZFIN_LIST,
 					zfinList);			
 
