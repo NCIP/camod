@@ -69,7 +69,7 @@
 
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
-			<td class="formRequiredLabel"><label for="field1">Upload Image<br>(Image of type .jpg, .jpeg, .gif, .sid or .png)<br>(Required if Alternate URL not used)</label></td>
+			<td class="formRequiredLabel"><label for="field1">Upload Image<br>(Image of type .jpg, .jpeg, .gif, or .png)<br>(Required if Alternate URL not used)</label></td>
 			<td class="formField">
 			
 			<c:if test="${not empty imageForm.url}">
