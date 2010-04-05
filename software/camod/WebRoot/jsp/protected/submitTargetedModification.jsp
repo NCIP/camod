@@ -33,9 +33,6 @@
 	}
 %>
 
-<html:form action="<%= actionName %>" focus="name" enctype="multipart/form-data">	
-
-
 <SCRIPT LANGUAGE="JavaScript">
 	
 	function chkTypeMod() {
@@ -59,10 +56,10 @@
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
-	<tr><td valign="top">
-<!-- -->
+	<tr><td valign="top">	
 
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
+	<html:form action="<%= actionName %>" focus="name" enctype="multipart/form-data">
 	<tr>
 		<html:errors/>
 		<td class="formMessage" colspan="3">* indicates a required field</td>
@@ -266,15 +263,16 @@
 			      
 				  <html:hidden property="modificationId"/>
 				  
-				</html:form>			
+							
 			</TABLE>
 		</td>
 	</tr>
+	</html:form>
 </TABLE>
 
 <!-- -->
 	</td></tr></TABLE>
-</tr></td></TABLE>
+</td></tr></TABLE>
 
 <SCRIPT>
 chkTypeMod();
