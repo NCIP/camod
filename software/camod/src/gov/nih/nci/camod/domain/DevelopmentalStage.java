@@ -91,8 +91,16 @@ public class DevelopmentalStage extends BaseObject implements Comparable, Serial
      */
     public String getEVSPreferredDescription()
     {
-    	String concept = getConceptCode();   	
-        return EvsTreeUtil.getConceptDetails(null, concept);  
+      String thePreferedDesc = null;
+
+      	if(EvsTreeUtil.getConceptDetails(null, conceptCode) != null & EvsTreeUtil.getConceptDetails(null, conceptCode).length() > 0){
+      		System.out.println("Developmental Stage retrieved from EVS: " + thePreferedDesc);
+       		thePreferedDesc = EvsTreeUtil.getConceptDetails(null, conceptCode);
+       	} else {
+       		System.out.println("Developmental Stage retrieved from caMOD: " + thePreferedDesc);
+       		thePreferedDesc = name;	
+       	}
+        return thePreferedDesc;        
     }    
 
     /**
