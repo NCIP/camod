@@ -187,9 +187,13 @@
                 Keyword Search:&nbsp;&nbsp;
                 <html:text styleClass="formFieldSized" property="keyword" size="45"/>
                 &nbsp;&nbsp;
-                <input class="actionButton" type="submit" value="Search" />
+                <input class="actionButton" type="submit" value="Search Keyword" />
             </td>
         </tr>
+        <tr><td></td></tr>
+        <tr><td></td></tr>
+        <tr><td></td></tr>
+        <tr><td></td></tr>        
         
         <tr>
         	<td colspan="3">        

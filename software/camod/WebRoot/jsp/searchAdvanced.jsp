@@ -269,9 +269,15 @@
 	
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0">
 	    <tr>
-	        <td class="formTitleBlue" height="20" colspan="3">Keyword Search:&nbsp;&nbsp;<html:text property="keyword" size="55"/>&nbsp;&nbsp;<input class="actionButton" type="submit" value="Search" /></td>
+	        <td class="formTitleBlue" height="20" colspan="3">Keyword Search:&nbsp;&nbsp;
+	        <html:text property="keyword" size="55"/>&nbsp;&nbsp;
+	        <input class="actionButton" type="submit" value="Search Keyword" /></td>
 	    </tr>
-        
+	    <tr><td></td></tr>
+        <tr><td></td></tr>
+        <tr><td></td></tr>
+        <tr><td></td></tr>
+                       
         <tr>
         	<td colspan="3">        
 		        <% if( aSavedQueryId != null ) { %>
@@ -288,8 +294,10 @@
         </tr>
         
         <tr>
-			<td class="formTitleBlue" height="20" colspan="3">Advanced Search
-				<camod:cshelp topic="advanced_search_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>		
+			<td class="formTitleBlue" height="20" align="left" colspan="2">Advanced Search
+				<camod:cshelp topic="advanced_search_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
+			<td class="formTitleBlue" height="20" align="right" colspan="1">
+				<input class="actionButton" type="submit" value="Search" /></td>		
 		</tr>
 		
 		<tr>
@@ -692,10 +700,9 @@
 				</TABLE>
 			</td>
 		</tr>
-		<!-- action buttons end -->
 	</TABLE>
 </html:form>	
-</tr></td></TABLE>	
+</td></tr></TABLE>		
 
 <SCRIPT LANGUAGE="JavaScript">
     checkFields();
