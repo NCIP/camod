@@ -131,7 +131,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<record name="${install-logs.dir}/install-${install.time}.log" action="start"/>
 
 	<target name="diag">
-		<echoproperties/>
+		<!--echoproperties/-->
 	</target>
 
 	<target name="common:common:init:pre">
@@ -637,7 +637,22 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<replaceregexp file="${camod.external.properties.dir}/camod.properties" byline="true"
 			match="^(superuser.usernames)=(.*)"
 			replace="\1=${superuser.usernames}"/>
-		<echo message="Updated superuser.usernames"/>	
+		<echo message="Updated superuser.usernames"/>
+		
+		<replaceregexp file="${camod.external.properties.dir}/camod.properties" byline="true"
+			match="^(caimage.host)=(.*)"
+			replace="\1=${caimage.host}"/>
+		<echo message="Updated caimage.host"/>
+		
+		<replaceregexp file="${camod.external.properties.dir}/camod.properties" byline="true"
+			match="^(caimage.modelview.uri)=(.*)"
+			replace="\1=${caimage.modelview.uri}"/>
+		<echo message="Updated caimage.modelview.uri"/>			
+		
+		<replaceregexp file="${camod.external.properties.dir}/camod.properties" byline="true"
+			match="^(caimage.genconview.uri)=(.*)"
+			replace="\1=${caimage.genconview.uri}"/>
+		<echo message="Updated caimage.genconview.uri"/>	
 		
 	</target>
 	
@@ -1255,17 +1270,6 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<jboss-copy-log4j
 			copied.jboss.log4j.dir="${copied.jboss.log4j.dir}"
 			/>
-		
-		<echo message="All properties after readers"/>
-	    <properties-print
-	            properties.list="${read.properties.list},jboss.server.hostname"
-	            />
-	    <properties-exist
-	            properties.list="${read.properties.list},jboss.server.hostname"
-	            />
-	    <properties-write
-	            properties.list="${read.properties.list},jboss.server.hostname"
-	            />
 		
 		<read-property-from-properties-service
 			jboss.home="${jboss.home}"
