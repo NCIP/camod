@@ -474,10 +474,6 @@
 			path="/jsp/protected/submitJacksonLab.jsp"></forward>
 		
 		<forward
-			name="submitMMHCCRepo"
-			path="/jsp/protected/submitMMHCCRepo.jsp"></forward>
-		
-		<forward
 			name="submitNCIMouseRepo"
 			path="/jsp/protected/submitNCIMouseRepo.jsp"></forward>
 			
@@ -825,12 +821,6 @@
 			path="/submitJacksonLab"
 			type="org.apache.struts.actions.ForwardAction"
 			parameter="/jsp/protected/submitJacksonLab.jsp">
-			<set-property property="secure" value="false"/>
-		</action>
-		<action
-			path="/submitMMHCCRepo"
-			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitMMHCCRepo.jsp">
 			<set-property property="secure" value="false"/>
 		</action>
 		<action
@@ -1442,32 +1432,6 @@
             path="/submitNCIMouseRepo.do">
         </forward>   	 	
      </action>
-     <action path="/MMHCCRepoAction"
-	        type="gov.nih.nci.camod.webapp.action.AvailabilityAction"
-	        name="availabilityForm"
-	        scope="request"
-	        parameter="method" 	     
-	        validate="true"
-	        input="input">
-	    <set-property property="secure" value="false" />
-	    <forward
-            name="input"
-            path="/submitMMHCCRepo.do">
-        </forward>   	 	
-     </action>
-
-    <action path="/MMHCCRepoPopulateAction"
-    		type="gov.nih.nci.camod.webapp.action.AvailabilityPopulateAction"
-    		name="availabilityForm"    		
-            scope="request"
-            parameter="method"            
-			validate="false">
-		 <set-property property="secure" value="false" />
-         <forward 
-    		name="next"
-    		path="/submitMMHCCRepo.do">
-    	 </forward>									
-    </action>
     
     <action path="/NCIMouseRepoPopulateAction"
     		type="gov.nih.nci.camod.webapp.action.AvailabilityPopulateAction"
