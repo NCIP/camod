@@ -160,7 +160,7 @@
                                                       <td class="sidebarTitle" height="20">DID YOU KNOW?</td>
                                                   </tr>
                                                   <tr>
-                                                      <td class="sidebarContent" valign="top">caMOD 2.6 was released to production in March 2010.<br/><br/>
+                                                      <td class="sidebarContent" valign="top">caMOD 2.6.1 was released to production in May 2010.<br/><br/>
                                                       <html:link action="infoReleaseNotes.do">Release Notes</html:link><br/><br/>
                                                       </td>
                                                   </tr>
