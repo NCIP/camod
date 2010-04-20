@@ -34,7 +34,7 @@
 												<TBODY>
 														<TR>
 															<TD class="formTitleBlue" colspan="2" height="20">
-																Release of caMOD 2.6 -March 2010
+																Release of caMOD 2.6.1 - May 2010
 															</TD>
 														</TR>
 														<TR>
@@ -45,39 +45,29 @@
 																<TD
 																	style="BORDER-LEFT: #5c5c5c 1px solid; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-BOTTOM: #5c5c5c 1px solid; BORDER-TOP: #5c5c5c 1px solid; PADDING-LEFT: 1em; FONT-SIZE: 0.7em; FONT-FAMILY: verdana, arial, helvetica, sans-serif; BACKGROUND-COLOR: #cccccc"
 																	width="80%">
-																	How to use the new feature?
+																	Description of the new feature?
 																</TD>
 															</TR>
 															<TR>
 																<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">
-																	BDA
+																	caIMAGE connection
 																</TD>
 																<TD
 																	style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
 																	width="80%">
-																	The goal of the build and deployment automation (BDA) effort was to create a consistent and repeatable build and deployment process allowing each team to create production-ready software every day.  
-																	Development teams spend time communicating, verifying and fixing various deployment environments. The environment creation process is manual, non-repeatable and slow. Automation will make it fast and cheap, 
-																	therefore it will become part of their daily tasks. This will reduce time spent on non-development tasks and the DEV teams can better concentrate on creative development tasks.
+																	The goal of this release is to update the connection to caIAMGE.  The caIMAGE application is being upgraded and the 
+																	servers and image viewing technology is being changed.  Therefore, both the submission of images and search of images in 
+																	caMOD needs to be modified.
 																</TD>
 															</TR>																		
 															<TR>
 																<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">
-																	Carcinogenic Interventions part expanded
+																	Various feature requests
 																</TD>
 																<TD
 																	style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
 																	width="80%">
-																	New categories for Antibodies, Bacteria, Plasmid, Transposon, and Signaling Molecule were added to the carcinogenic interventions part. Users can now report exposure to bacteria and the utilization of the Sleeping Beauty system in caMOD.
-																</TD>
-															</TR>
-															<TR>																		<TR>
-																<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">
-																	New species added
-																</TD>
-																<TD
-																	style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
-																	width="80%">
-																	caMOD supports information about rabbit models for cancer.
+																	New feature requests include: Wrap First Author field for MTB pages, Display PMID number on search results detail page, Separation between keyword search and simple/advanced search is not obvious to user, and Make sorting meaningful for humans and not for computers.
 																</TD>
 															</TR>
 														</TR>			
