@@ -21,8 +21,8 @@
  Release Notes 
      
                              caMOD
-                          Version 2.6
-                          March 2010
+                          Version 2.6.1
+                          May 2010
 
        National Cancer Institute's Center for Biomedical Informatics and Information Technology 
  
@@ -42,11 +42,11 @@
  
  
 ================================================================ 
-    1.0 caMOD Version 2.6 Introduction and History 
+    1.0 caMOD Version 2.6.1 Introduction and History 
 ================================================================ 
   
  
-    caMOD 2.6, the Cancer Models Database, is a open source data management 
+    caMOD 2.6.1, the Cancer Models Database, is a open source data management 
     system developed for the management and sharing of data of animal models. 
     caMOD features controlled vocabularies from a shared, publicly accessible metadata repository (caDSR) and 
     enterprise vocabulary services (EVS) from the National 
@@ -64,6 +64,9 @@
 ================================================================ 
     2.0 Release History 
 ================================================================ 
+     caMOD Version 2.6.1
+    --	May 2010
+    
      caMOD Version 2.6 
     --	March 2010
     
@@ -97,31 +100,32 @@
 ================================================================ 
     3.0 New Features and Updates 
 ================================================================ 
-BDA
-The goal of the build and deployment automation (BDA) effort was to create a consistent and repeatable build and deployment 
-process allowing each team to create production-ready software every day.  
-Development teams spend time communicating, verifying and fixing various deployment environments. The environment creation 
-process is manual, non-repeatable and slow. Automation will make it fast and cheap, 
-therefore it will become part of their daily tasks. This will reduce time spent on non-development tasks and the DEV teams 
-can better concentrate on creative development tasks.
+caIMAGE connection
+The goal of this release is to update the connection to caIAMGE.  The caIMAGE application is being upgraded and the 
+servers and image viewing technology is being changed.  Therefore, both the submission of images and search of images in 
+caMOD needs to be modified. 
 
-Carcinogenic Interventions part expanded
-New categories for Antibodies, Bacteria, Plasmid, Transposon, and Signaling Molecule were added to the carcinogenic interventions part. 
-Users can now report exposure to bacteria and the utilization of the Sleeping Beauty system in caMOD. (GForge entry #23552)
+Other feature requests
+- Retrieve developmental stage from DB when EVS does not return value (GForge entry #27836)
+- Change Zebrafish concept codes to accommodate new NCI Thesaurus release with improved Zebrafish vocabularies (GForge entry #27533)
+- BDA - automate changes to external properties for caIMAGE upgrade (GForge entry #25294)
+- Links to sid, gif, jpeg, jpg, tif images needs to be modified for caIMAGE upgrade (GForge entry #23750)
+- Wrap First Author field for MTB pages (GForge entry #23452)
+- Display PMID number on search results detail page (GForge entry #19879)
+- Assign various records to curator - data cleanup (GForge entry #18685)
+- Separation between keyword search and simple/advanced search is not obvious to user (GForge entry #14560)
+- Make sorting meaningful for humans and not for computers (GForge entry #14379)
 
-The caMOD 2.5 Common Data Elements (CDEs) are available via caDSR  
-   
+The caMOD 2.5 Common Data Elements (CDEs) are available via caDSR    
    
 ================================================================ 
     4.0 Defects Fixed Since Last Release 
 ================================================================ 
  
-- Display comments submitted to the transplantion page (GForge entry #24176)
-- Delete orphaned disease records (GForge entry #23904)
-- Display information stored in database when EVS does not return values (GForge entry #23751)
-- Clean up microarray data table GForge entry #23551)
-- Delete orphaned records in histopathology table (GForge entry #24379)
- 
+- Can't enter "Other" for site of administration on Transplant page (GForge entry #27700)
+- delete image record for image_id=1058 (GForge entry #27167)
+- Entered date changes every single time the model characteristics page is changed (GForge entry #20593)
+- Change label from MMHCC Repository to NCI Mouse Repository (GForge entry #18438) 
  
 ================================================================ 
     5.0 Known Issues/Defects 
@@ -137,8 +141,7 @@ The caMOD 2.5 Common Data Elements (CDEs) are available via caDSR
         After meeting with the caBio team, it was concluded that the development team will need to eliminate lazy fetching for 
         library and tissue attributes if we want to improve performance.
      
-    Please report any defects found to application support.
- 
+    Please report any defects found to application support. 
  
 ================================================================ 
     6.0 Bug Reports and Support 
