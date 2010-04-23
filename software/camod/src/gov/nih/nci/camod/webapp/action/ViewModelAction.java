@@ -400,7 +400,8 @@ public class ViewModelAction extends BaseAction
 	        setComments(request, Constants.Pages.MODEL_CHARACTERISTICS);
 	        
 	        // Call method so therapy link displays for models with caELMIR-only data
-	        populateCaelmirTherapyDetails(mapping, form, request, response);
+	        //caELMIR server went down and we experienced performance issues trying to connect
+	        //populateCaelmirTherapyDetails(mapping, form, request, response);
         } 
         catch (Exception e)
         {
@@ -703,7 +704,7 @@ public class ViewModelAction extends BaseAction
                                                        HttpServletRequest request,
                                                        HttpServletResponse response) throws Exception
     {
-        log.debug("<ViewModelAction>  populateTherapeuticApproaches");
+        log.info("<ViewModelAction>  populateTherapeuticApproaches");
         
         // Get and clean method to prevent Cross-Site Scripting 
         String methodName = request.getParameter("unprotected_method");
@@ -773,7 +774,8 @@ public class ViewModelAction extends BaseAction
 
         setComments(request, Constants.Pages.THERAPEUTIC_APPROACHES);
         
-        populateCaelmirTherapyDetails(mapping, form, request, response);
+        //caELMIR server went down and we experienced performance issues trying to connect
+        //populateCaelmirTherapyDetails(mapping, form, request, response);
 
         return mapping.findForward("viewTherapeuticApproaches");
     }
