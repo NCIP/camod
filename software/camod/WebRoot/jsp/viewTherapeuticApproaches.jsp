@@ -41,7 +41,7 @@
 
 <bean:define id="mdl" name="animalmodel"/>
 <bean:define id="ta" name="therapeuticApproachesColl"/>
-<bean:define id="csd" name="caelmirStudyData"/>
+<!--  bean:define id="csd" name="caelmirStudyData"/ -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 
@@ -89,7 +89,7 @@
 				</TABLE>
 			</c:forEach>
 				<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">			
-					<%@ include file="/jsp/includeCaelmirData.jsp" %>					
+					<!--%@ include file="/jsp/includeCaelmirData.jsp" %-->					
 				</TABLE>		
 			</BR>	
 			
