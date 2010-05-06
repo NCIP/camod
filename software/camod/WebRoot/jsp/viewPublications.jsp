@@ -251,6 +251,7 @@
     <% pageContext.setAttribute(Parameters.MODELSECTIONVALUE, Pages.PUBLICATIONS); %>
     <%@ include file="/jsp/includeComments.jsp" %>
     </TABLE>
+    </td></tr>    
 </TABLE>
 
 <%@ include file="/jsp/footer.jsp" %>
