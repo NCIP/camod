@@ -315,7 +315,7 @@ public class TargetedModificationManagerImpl extends BaseManager implements
 		}
 
 		// Upload Construct Map
-		// Check for exisiting Image for this TargetedModification
+		// Check for existing Image for this TargetedModification
 		if (inTargetedModification.getImage() != null) {
 			Image image = inTargetedModification.getImage();
 			image.setTitle(inTargetedModificationData.getTitle());
@@ -332,18 +332,19 @@ public class TargetedModificationManagerImpl extends BaseManager implements
 					&& !inTargetedModificationData.getFileLocation()
 							.getFileName().equals("")) {
 
-				ImageForm inImageData = new ImageForm();
+				ImageForm inImageForm = new ImageForm();
 
 				String inPath = request.getSession().getServletContext()
 						.getRealPath("/config/temp.jpg");
 
-				inImageData.setDescriptionOfConstruct(inTargetedModificationData.getDescriptionOfConstruct());
-				inImageData.setTitle(inTargetedModificationData.getTitle());
-				inImageData.setUrl(inTargetedModificationData.getUrl());
-				inImageData.setFileLocation(inTargetedModificationData.getFileLocation());
+				inImageForm.setDescriptionOfConstruct(inTargetedModificationData.getDescriptionOfConstruct());
+				inImageForm.setTitle(inTargetedModificationData.getTitle());
+				inImageForm.setUrl(inTargetedModificationData.getUrl());
+				inImageForm.setThumbUrl(inTargetedModificationData.getUrl());
+				inImageForm.setFileLocation(inTargetedModificationData.getFileLocation());
 
 				Image image = ImageManagerSingleton.instance().create(
-						new AnimalModel(), inImageData, inPath,
+						new AnimalModel(), inImageForm, inPath,
 						Constants.CaImage.FTPGENCONSTORAGEDIRECTORY);
 
 				log.debug("Image info: \ndescription:"
