@@ -271,7 +271,7 @@
 	    <tr>
 	        <td class="formTitleBlue" height="20" colspan="3">Keyword Search:&nbsp;&nbsp;
 	        <html:text property="keyword" size="55"/>&nbsp;&nbsp;
-	        <input class="actionButton" type="submit" value="Search Keyword" /></td>
+	        <input class="actionButton" type="submit" value="Search by Keyword" /></td>
 	    </tr>
 	    <tr><td></td></tr>
         <tr><td></td></tr>
@@ -701,8 +701,9 @@
 			</td>
 		</tr>
 	</TABLE>
+</td></tr>	
 </html:form>	
-</td></tr></TABLE>		
+</TABLE>		
 
 <SCRIPT LANGUAGE="JavaScript">
     checkFields();
