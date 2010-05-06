@@ -181,29 +181,32 @@ public class GenomicSegmentManagerImpl extends BaseManager implements
 			inGenomicSegment.setImage(image);
 		}
 
-		// Upload Construct File location, Title of Construct, Description of
-		// Construct
-		// Check for exisiting Image for this GenomicSegment
+		// Upload Construct File location, Title of Construct, 
+		// Description of Construct
+		// Check for existing Image for this GenomicSegment
 		if (inGenomicSegmentData.getFileLocation() != null)
 			if (inGenomicSegmentData.getFileLocation().getFileName() != null
 					&& !inGenomicSegmentData.getFileLocation().getFileName()
 							.equals("")) {
 
-				ImageForm inImageData = new ImageForm();
+				ImageForm inImageForm = new ImageForm();
 
 				String inPath = request.getSession().getServletContext()
 						.getRealPath("/config/temp.jpg");
 
-				inImageData.setDescriptionOfConstruct(inGenomicSegmentData
+				inImageForm.setDescriptionOfConstruct(inGenomicSegmentData
 						.getDescriptionOfConstruct());
-				inImageData.setTitle(inGenomicSegmentData.getTitle());
-				inImageData.setUrl(inGenomicSegmentData
+				inImageForm.setTitle(inGenomicSegmentData.getTitle());
+				inImageForm.setUrl(inGenomicSegmentData
 						.getUrl());
-				inImageData.setFileLocation(inGenomicSegmentData
+				inImageForm.setThumbUrl(inGenomicSegmentData
+						.getUrl());
+
+				inImageForm.setFileLocation(inGenomicSegmentData
 						.getFileLocation());
 
 				Image image = ImageManagerSingleton.instance().create(
-						new AnimalModel(), inImageData, inPath,
+						new AnimalModel(), inImageForm, inPath,
 						Constants.CaImage.FTPGENCONSTORAGEDIRECTORY);
 
 				log.debug("Image info: \ndescription:"
