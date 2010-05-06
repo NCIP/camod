@@ -68,7 +68,7 @@ public class ImagePopulateAction extends BaseAction {
 
 		Image theImage = ImageManagerSingleton.instance().get(aImageID);
   
-        log.debug("<ImageAction save> following Characteristics:" + "\n\t getUrl: "
+        log.debug("<ImagePopulateAction save> following Characteristics:" + "\n\t getUrl: "
                 + theImage.getUrl() + "\n\t getTitle: " + theImage.getTitle()
                 + "\n\t getDescription: " + theImage.getDescription() 
                 + "\n\t UrlAlternEntry: " + theImage.getUrlAlternEntry() 
