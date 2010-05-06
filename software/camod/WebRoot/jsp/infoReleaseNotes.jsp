@@ -101,7 +101,7 @@
     3.0 New Features and Updates 
 ================================================================ 
 caIMAGE connection
-The goal of this release is to update the connection to caIAMGE.  The caIMAGE application is being upgraded and the 
+The goal of this release is to update the connection to caIMAGE.  The caIMAGE application is being upgraded and the 
 servers and image viewing technology is being changed.  Therefore, both the submission of images and search of images in 
 caMOD needs to be modified. 
 
