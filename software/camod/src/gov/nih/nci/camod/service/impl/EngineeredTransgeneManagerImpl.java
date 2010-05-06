@@ -381,28 +381,28 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements
 			inEngineeredTransgene.setImage(image);
 		}
 
-		// Upload Construct File location, Title of Construct, Description of
-		// Construct
-		// Check for exisiting Image for this GenomicSegment
+		// Upload Construct File location, Title of Construct, 
+		// Description of Construct
+		// Check for existing Image for this GenomicSegment
 		if (inEngineeredTransgeneData.getFileLocation() != null)
 			if (inEngineeredTransgeneData.getFileLocation().getFileName() != null
 					&& !inEngineeredTransgeneData.getFileLocation()
 							.getFileName().equals("")) {
-				ImageForm inImageData = new ImageForm();
+				ImageForm inImageForm = new ImageForm();
 
 				String inPath = request.getSession().getServletContext()
 						.getRealPath("/config/temp.jpg");
 
-				inImageData.setDescriptionOfConstruct(inEngineeredTransgeneData
+				inImageForm.setDescriptionOfConstruct(inEngineeredTransgeneData
 						.getDescriptionOfConstruct());
-				inImageData.setTitle(inEngineeredTransgeneData.getTitle());
-				inImageData.setUrl(inEngineeredTransgeneData
+				inImageForm.setTitle(inEngineeredTransgeneData.getTitle());
+				inImageForm.setUrl(inEngineeredTransgeneData
 						.getUrl());
-				inImageData.setFileLocation(inEngineeredTransgeneData
+				inImageForm.setFileLocation(inEngineeredTransgeneData
 						.getFileLocation());
 
 				Image image = ImageManagerSingleton.instance().create(
-						new AnimalModel(), inImageData, inPath,
+						new AnimalModel(), inImageForm, inPath,
 						Constants.CaImage.FTPGENCONSTORAGEDIRECTORY);
 				inEngineeredTransgene.setImage(image);
 			}
