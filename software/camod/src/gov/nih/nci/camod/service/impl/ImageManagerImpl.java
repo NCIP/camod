@@ -294,7 +294,11 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
 
 					inImage.setUrl(serverViewUrl
 							+ uniqueFileName);
-					log.info("<ImageManagerImpl> inImage.setUrl: " + serverViewUrl + "+" + uniqueFileName);						
+					log.debug("<ImageManagerImpl> inImage.setUrl: " + serverViewUrl + "+" + uniqueFileName);
+					
+					inImage.setThumbUrl(serverViewUrl
+							+ uniqueFileName);
+					log.debug("<ImageManagerImpl> inImage.setThumbUrl: " + serverViewUrl + "+" + uniqueFileName);
 					
 				} else {
 					log.error("Unsupported file type: " + fileType);
