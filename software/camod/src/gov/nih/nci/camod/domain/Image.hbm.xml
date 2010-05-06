@@ -50,7 +50,12 @@
         <!-- altern_url -->
         <property name="urlAlternEntry" 
         	column="url_altern_entry" 
-        	type="string"/>        	       	
+        	type="string"/>   
+        	
+        <!-- thumbUrl -->
+        <property name="thumbUrl" 
+        	column="thumb_url" 
+        	type="string"/>
         	
         <!-- comments -->
         <property name="comments" 

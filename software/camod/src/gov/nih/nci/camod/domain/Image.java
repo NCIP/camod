@@ -63,7 +63,9 @@ public class Image extends BaseObject implements Comparable, Serializable, Dupli
 
     private String url;
     
-    private Long absCancerModelId;
+    private String thumbUrl;    
+    
+	private Long absCancerModelId;
     
     private String urlAlternEntry;
     
@@ -157,14 +159,24 @@ public class Image extends BaseObject implements Comparable, Serializable, Dupli
     {
         this.cancerModel = cancerModel;
     }
+    
+	/**
+	 * @param thumbUrl the thumbUrl to set
+	 */
+	public void setThumbUrl(String thumbUrl) {
+		this.thumbUrl = thumbUrl;
+	}    
 
+    /**
+     * @return Returns the Image Thumb nail Url.
+     */
     public String getThumbUrl()
     {
 
         String theThumbUrl = "";
-        if (url != null)
+        if (thumbUrl != null)
         {
-            StringTokenizer theTokenizer = new StringTokenizer(url);
+            StringTokenizer theTokenizer = new StringTokenizer(thumbUrl);
             theThumbUrl = theTokenizer.nextToken(";");
         }
         else
