@@ -115,9 +115,8 @@
 <!-- Summary table start -->
 
 			<tr>
-				<td class="greySubTitleLeft" width="45%">First Author</td>
-				<td class="greySubTitleLeft" width="45%">Journal</td>
-				<td class="greySubTitleLeftEnd" width="10%">Year</td>
+				<td class="greySubTitleLeft" width="50%">First Author</td>
+				<td class="greySubTitleLeft" width="50%">Journal / Year</td>
 			</tr>
 			
 		<logic:iterate id="p" name="pubColl" indexId="idx">			
@@ -132,12 +131,11 @@
 				</td>
 				
 				<td class="WhiteBoxRightEnd" width="45%">
-					<camod:highlight><c:out value="${p.journal}" escapeXml="false"/>&nbsp;</camod:highlight>
+				<a href="<c:out value="#pub_${idx}" escapeXml="false"/>">
+					<c:out value="${p.journal}" escapeXml="false"/>,&nbsp;<c:out value="${p.year}"/>&nbsp;
+				</a>
 				</td>
 				
-				<td class="WhiteBoxRightEnd" width="10%">
-					<camod:highlight><c:out value="${p.year}"/>&nbsp;</camod:highlight>
-				</td>
 			</tr>
 		</logic:iterate>
 
