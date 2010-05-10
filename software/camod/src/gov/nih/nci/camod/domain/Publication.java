@@ -74,12 +74,10 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
      */
     public String[] getDisplayAuthors()
     {
-    	
-    	System.out.println("Publication.authors: " + authors.toString());
         if (authors != null)
         {
         	displayAuthors = WrapTextUtil.wrapText(authors, 40);
-           System.out.println("Publication.displayAuthors: " + displayAuthors.toString());
+           //System.out.println("Publication.displayAuthors: " + displayAuthors.toString());
         }
         return displayAuthors;    	
 
