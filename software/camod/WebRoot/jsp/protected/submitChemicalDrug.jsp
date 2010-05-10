@@ -93,7 +93,7 @@
 				<html:text styleClass="formFieldUnSized" size="15" property="nscNumber"  />
 			</td>
 	</tr>
-	<!-- changed link to CAS# but NSC link can get both CAS and NSC - ask Ulli?? http://dtp.nci.nih.gov/dtpstandard/chemname/index.jsp?field1=   -->
+	
 	<tr>
 			<td class="formRequiredNotice" width="3">&nbsp;</td>
 			<td class="formLabel"><label for="field1">CAS number:</label>
