@@ -224,7 +224,7 @@
 			       
 					<tr>
 						<td class="WhiteBox" width="30%"><b>Title:</b></td>
-						<td class="WhiteBoxRightEnd" width="70%" colspan="3"><a name="authors"><c:out value="${p.title}" escapeXml="false"/></a>&nbsp;</td>
+						<td class="WhiteBoxRightEnd" width="70%" colspan="3"><c:out value="${p.title}" escapeXml="false"/>&nbsp;</td>
 					</tr>
 					
 					<tr>
@@ -250,9 +250,9 @@
 					<tr>
 						<td class="GreyBox" width="30%"><b>Abstract in PubMed:</b></td>
 						<td class="GreyBoxRightEnd" width="70%" colspan="3">
-								<a target="_pubmed" href=" http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=retrieve&db=pubmed&dopt=abstract&list_uids=<c:out value="${p.pmid}"/>">
-								<IMG src="/camod/images/pubmed_70.gif" align="middle">
-								</a>
+								<c:if test="${not empty p.pmid}">
+									<a target="_pubmed" href=" http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=retrieve&db=pubmed&dopt=abstract&list_uids=<c:out value="${p.pmid}"/>"><c:out value="${p.pmid}"/></a>
+								</c:if>									
 						</td>
 					</tr>
 							
@@ -263,7 +263,7 @@
 		</tr>
 		</c:forEach>
 		</table>
-		</tr></td>
+		</td></tr>
 	</c:otherwise>
 </c:choose >
 
