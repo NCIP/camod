@@ -12,16 +12,16 @@ where abs.submitter_id=50057228 or abs.submitter_id=50056983
 or abs.submitter_id=237 or abs.submitter_id=56;
 
 -- #23750  	Links to sid, gif, jpeg, jpg, tif images needs to be modified for caIMAGE upgrade		
-Update IMAGE i set i.URL=replace (i.URL,'http://caimage.nci.nih.gov/lizardtech','http://ncias-d330-v.nci.nih.gov:19080/adore-djatoka/images/caimage/Images/images')  
+Update IMAGE i set i.URL=replace (i.URL,'http://caimage.nci.nih.gov/lizardtech','http://imageserver-dev.nci.nih.gov/adore-djatoka/images/caimage/Images/images')  
 where i.url LIKE '%.JPG';		
 		
-Update IMAGE i set i.URL=replace (i.URL,'http://caimage.nci.nih.gov/lizardtech','http://ncias-d330-v.nci.nih.gov:19080/adore-djatoka/images/caimage/Images/images')  
+Update IMAGE i set i.URL=replace (i.URL,'http://caimage.nci.nih.gov/lizardtech','http://imageserver-dev.nci.nih.gov/adore-djatoka/images/caimage/Images/images')  
 where i.url LIKE '%.jpg';
 		
-Update IMAGE i set i.URL=replace (i.URL,'http://caimage.nci.nih.gov/lizardtech','http://ncias-d330-v.nci.nih.gov:19080/adore-djatoka/images/caimage/Images/images')  
+Update IMAGE i set i.URL=replace (i.URL,'http://caimage.nci.nih.gov/lizardtech','http://imageserver-dev.nci.nih.gov/adore-djatoka/images/caimage/Images/images')  
 where i.url LIKE '%.png'; 
 		
-Update IMAGE i set i.URL=replace (i.URL,'http://caimage.nci.nih.gov/lizardtech','http://ncias-d330-v.nci.nih.gov:19080/adore-djatoka/images/caimage/Images/images')  
+Update IMAGE i set i.URL=replace (i.URL,'http://caimage.nci.nih.gov/lizardtech','http://imageserver-dev.nci.nih.gov/adore-djatoka/images/caimage/Images/images')  
 where i.url LIKE '%.gif'; 
 		
 drop index IMAGEMAGE_URL;
