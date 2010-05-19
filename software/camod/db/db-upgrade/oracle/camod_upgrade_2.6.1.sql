@@ -11,7 +11,7 @@ set abs.submitter_id=150063906
 where abs.submitter_id=50057228 or abs.submitter_id=50056983
 or abs.submitter_id=237 or abs.submitter_id=56;
 
--- #23750  	Links to sid, gif, jpeg, jpg, tif images needs to be modified for caIMAGE upgrade		
+-- #23750  	Links to sid, gif, jpeg, jpg, tif images needs to be modified for caIMAGE upgrade
 Update IMAGE i set i.URL=replace (i.URL,'http://caimage.nci.nih.gov/lizardtech','http://imageserver-dev.nci.nih.gov/adore-djatoka/images/caimage/Images/images')  
 where i.url LIKE '%.JPG';		
 		
@@ -23,6 +23,9 @@ where i.url LIKE '%.png';
 		
 Update IMAGE i set i.URL=replace (i.URL,'http://caimage.nci.nih.gov/lizardtech','http://imageserver-dev.nci.nih.gov/adore-djatoka/images/caimage/Images/images')  
 where i.url LIKE '%.gif'; 
+
+Update IMAGE i set i.URL=replace (i.URL,'http://caimage.nci.nih.gov/lizardtech','http://imageserver-dev.nci.nih.gov/adore-djatoka/images/caimage/Images/images')  
+where i.url LIKE '%.jpeg';
 		
 drop index IMAGEMAGE_URL;
 drop index IMAGEMAGE_URL_LWR;
