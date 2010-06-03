@@ -203,63 +203,64 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
- 				<!-- Display disease tree based on animal model species or allow for text entry if no specific tree exists -->
-	 			<c:choose>			
-					<c:when test="${modelspeciescommonname == 'Mouse'}">
+ 			<!-- Display disease tree based on animal model species or allow for text entry if no specific tree exists -->
+	 		<c:choose>			
+				<c:when test="${modelspeciescommonname == 'Mouse'}">
 					<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
-					<camod:cshelp topic="data_tree_help" key="DIAGNOSIS.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />					
+							<camod:cshelp topic="data_tree_help" key="DIAGNOSIS.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />					
 						<a href="javascript:showMouseDiagnosisTree('associatedMetastasisForm', 'diagnosisCode', 'diagnosisName', 'tumorClassification', true)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>	
-				</td>
+					</td>
 						<html:hidden property="diagnosisCode"/>		
 						<html:hidden property="diagnosisName"/>
 						<td class="formField">
 							<html:text styleClass="formFieldSized" disabled="true" property="tumorClassification"   size="30" />
 						</td>									
-					</c:when>
-					<c:when test="${modelspeciescommonname == 'Rat'}">
+				</c:when>
+				<c:when test="${modelspeciescommonname == 'Rat'}">
 					<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
-					<camod:cshelp topic="data_tree_help" key="DIAGNOSIS.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />					
+						<camod:cshelp topic="data_tree_help" key="DIAGNOSIS.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />					
 						<a href="javascript:showRatDiagnosisTree('associatedMetastasisForm', 'diagnosisCode', 'diagnosisName', 'tumorClassification', true)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>	
-				</td>
+					</td>			
 						<html:hidden property="diagnosisCode"/>		
 						<html:hidden property="diagnosisName"/>
 						<td class="formField">
 							<html:text styleClass="formFieldSized" disabled="true" property="tumorClassification"   size="30" />
 						</td>												
-					</c:when>
+				</c:when>
 				<c:when test="${modelspeciescommonname == 'Zebrafish'}">
-					  <tr>
-							<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;</td>	
-							<td class="formField">
-								<html:hidden property="diagnosisCode"/>						
-								<html:select styleClass="formFieldSized" size="1" property="tumorClassification" onchange="chkOtherDiagnosis();" >
-									<html:optionsCollection name="<%= Constants.Dropdowns.ZEBRAFISHDIAGNOSISDROP %>" />										
-								</html:select>					
-								<br>
-								-if Diagnosis is not listed, then please<br>select "Other" from the list and specify it below:
-							</td>
-						</tr>			
+					<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
+					</td>	
+						<td class="formField">
+								<html:hidden property="diagnosisCode"/>	
+								<html:hidden property="diagnosisName"/>													
+							<html:select styleClass="formFieldSized" size="1" property="tumorClassification" onchange="chkOtherDiagnosis();" >
+								<html:optionsCollection name="<%= Constants.Dropdowns.ZEBRAFISHDIAGNOSISDROP %>" />										
+							</html:select>					
+							<br>
+							-if Diagnosis is not listed, then please<br>select "Other" from the list and specify it below:
+						</td>
+					</tr>			
 						<tr>
-								<td class="formRequiredNotice" width="5">&nbsp;</td>
-								<td class="formLabel"><label for="field1">Other Diagnosis:</label></td>
-								<td class="formField">
-									<html:text styleClass="formFieldSized" property="otherTumorClassification"  size="30" />
-								</td>
+							<td class="formRequiredNotice" width="5">&nbsp;</td>
+							<td class="formLabel"><label for="field1">Other Diagnosis:</label></td>
+							<td class="formField">
+								<html:text styleClass="formFieldSized" property="otherTumorClassification"  size="30" />
+							</td>
 						</tr>						
 				</c:when>							
 				<c:otherwise>
 					<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
 					</td>
-						<html:hidden property="diagnosisCode"/>			
+						<html:hidden property="diagnosisCode"/>								
 						<html:hidden property="diagnosisName"/>
 						<td class="formField">
 							<html:text styleClass="formFieldSized" disabled="false" property="tumorClassification"   size="25" />
 						</td>				
-					</c:otherwise>
-	    		</c:choose>
-	</tr>	
+				</c:otherwise>
+	    	</c:choose>
+	</tr>
 	
 
 	<tr>
