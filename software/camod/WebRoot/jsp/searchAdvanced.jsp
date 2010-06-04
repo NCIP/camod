@@ -297,7 +297,7 @@
 			<td class="formTitleBlue" height="20" align="left" colspan="2">Advanced Search
 				<camod:cshelp topic="advanced_search_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 			<td class="formTitleBlue" height="20" align="right" colspan="1">
-				<input class="actionButton" type="submit" value="Search" /></td>		
+				<input class="actionButton" type="submit" value="Search" onclick="blankKeyword()"/></td>		
 		</tr>
 		
 		<tr>
@@ -572,7 +572,8 @@
 			<td class="formField">			
 				<html:select styleClass="formFieldSized" size="1" property="cellLine" >
 					<html:options name="<%= Dropdowns.CELLLINENAMEQUERYDROP %>" />												
-				</html:select>			
+				</html:select>
+			</td>			
 		</tr>
 
 		<tr>
