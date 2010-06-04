@@ -90,7 +90,7 @@
 		<tr>		
 			<td class="GreyBox"><b>ATCC number of Cell Line:</b></td>
 			<td class="GreyBoxRightEnd">
-			<a target="atcc" href="http://www.atcc.org/common/catalog/numSearch/numResults.cfm?atccNum=<c:out value="${t.atccNumber}"/>">
+			<a target="atcc" href="http://www.atcc.org/SearchCatalogs/Linkin?id=<c:out value="${t.atccNumber}"/>&partner=NIH">
 			<c:out value="${t.atccNumber}" escapeXml="false"/>&nbsp;</a></td> 		
 		</tr>
 
