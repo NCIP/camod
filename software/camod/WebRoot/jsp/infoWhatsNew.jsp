@@ -23,7 +23,7 @@
 														   <TR>													
 																<TR>
 																	<TD class="formTitleBlue" colspan="2" height="20">
-																		Release of caMOD 2.6.1 - May 2010
+																		Release of caMOD 2.6.1 - June 2010
 																	</TD>
 																</TR>
 
