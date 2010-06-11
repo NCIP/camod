@@ -162,9 +162,9 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
 			inImage.setDescription(inImageData.getDescriptionOfConstruct());
 		}
 
-		// Upload Construct File location, Title of Construct, Description of
-		// Construct
-		// Check for exisiting Image for this Image
+		// Upload Construct File location, Title of Construct, 
+		// Description of Construct
+		// Check for existing Image for this Image
 		if (inImageData.getFileLocation() != null) {
 
 			log.debug("<ImageManagerImpl> Uploading a file");
