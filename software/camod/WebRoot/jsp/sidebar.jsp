@@ -84,7 +84,7 @@
 		onclick="document.location.href='#'"
 		onmouseout="changeMenuStyle(this,'subMenuSecondaryTitle'),hideCursor()"
 		height=20><A class=subMenuSecondary
-		 href="javascript:openHelpWindow('WebRoot/WebHelp/caMOD/index.html')" >HELP</A></TD></TR>
+		 href="javascript:openHelpWindow('camod/WebRoot/WebHelp/caMOD/index.html')" >HELP</A></TD></TR>
 		 
 
 	<%
