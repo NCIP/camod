@@ -11,11 +11,11 @@
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
-
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%" >
 	<tr><td valign="top" colspan="2">
 		<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%">
 		<tr><td>
+		
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">
 			<tr>
 				<td class="formTitle" height="20" colspan="2">
@@ -49,25 +49,25 @@
 						<td class="resultsBoxWhiteAllSidesNoLeft" width="85%">
 						<c:out value="${p.title}"/>&nbsp;
 						</td>
-					<tr>
+					</tr>
 					<tr>
 						<td class="resultsBoxGrey" width="15%"><b>Staining</b></td>
 						<td class="resultsBoxGreyEnd" width="85%">
 						<c:out value="${p.stainingMethod.name}"/>&nbsp;
 						</td>
-					<tr>				
+					</tr>				
 					<tr>
 						<td class="resultsBoxWhite" width="15%"><b>Description</b></td>
 						<td class="resultsBoxWhiteEnd" width="85%">
 						<c:out value="${p.description}"/>&nbsp;
 						</td>
-					<tr>
+					</tr>
 					<tr>
 						<td class="resultsBoxGrey" width="15%"><b>Alternate URL</b></td>
 						<td class="resultsBoxGreyEnd" width="85%">
 						<a href='<c:out value="${p.urlAlternEntry}"/>' target="_blank"><c:out value="${p.urlAlternEntry}"/></a>&nbsp;
 						</td>
-					<tr>					
+					</tr>					
 					<tr>
 						<td class="resultsBoxWhite" width="25%"><b>Comment</b></td>
 						<td class="resultsBoxWhiteEnd">
@@ -75,7 +75,7 @@
 						</td>
 					</tr>					
 					</TABLE>					
-					<br><br/>
+					<br></br>
 				</td>
 			</tr>
             <tr><td>&nbsp;</td></tr>			
@@ -87,9 +87,10 @@
   
 			
 			</TABLE>
-			<tr><td></td></tr>
+			<tr><td>&nbsp;</td></tr>
+			
 		</td></tr></TABLE>
 	</td></tr></TABLE>
-</tr></td></TABLE>
+</td></tr></TABLE>
 
 <%@ include file="/jsp/footer.jsp" %>
