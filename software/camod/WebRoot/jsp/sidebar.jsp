@@ -76,7 +76,7 @@
 		onclick="document.location.href='#'"
 		onmouseout="changeMenuStyle(this,'subMenuSecondaryTitle'),hideCursor()"
 		height=20><A class=subMenuSecondary
-		href="WebRoot/WebHelp/caMOD/UserGuide.pdf" target="_blank">CAMOD USER GUIDE</A></TD>
+		href="WebHelp/caMOD/UserGuide.pdf" target="_blank">CAMOD USER GUIDE</A></TD>
 	</TR>		
     <TR>
 	<TD class=subMenuSecondaryTitle
@@ -84,7 +84,7 @@
 		onclick="document.location.href='#'"
 		onmouseout="changeMenuStyle(this,'subMenuSecondaryTitle'),hideCursor()"
 		height=20><A class=subMenuSecondary
-		 href="javascript:openHelpWindow('camod/WebRoot/WebHelp/caMOD/index.html')" >HELP</A></TD></TR>
+		 href="javascript:openHelpWindow('WebHelp/caMOD/index.html')" >HELP</A></TD></TR>
 		 
 
 	<%
