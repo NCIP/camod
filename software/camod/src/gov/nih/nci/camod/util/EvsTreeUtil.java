@@ -73,24 +73,22 @@ package gov.nih.nci.camod.util;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.system.applicationservice.ApplicationService;
-import gov.nih.nci.system.applicationservice.EVSApplicationService;
 import gov.nih.nci.system.client.ApplicationServiceProvider;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.LexGrid.LexBIG.DataModel.Collections.CodingSchemeRenderingList;
 import org.LexGrid.LexBIG.DataModel.Collections.ResolvedConceptReferenceList;
-import org.LexGrid.LexBIG.DataModel.Core.CodingSchemeVersionOrTag;
 import org.LexGrid.LexBIG.DataModel.Core.ResolvedConceptReference;
 import org.LexGrid.LexBIG.LexBIGService.CodedNodeSet;
+import org.LexGrid.LexBIG.LexBIGService.LexBIGService;
+import org.LexGrid.LexBIG.Utility.ConvenienceMethods;
 import org.LexGrid.concepts.Concept;
 import org.LexGrid.LexBIG.DataModel.Collections.ConceptReferenceList;
-import org.LexGrid.LexBIG.DataModel.Core.ConceptReference;
-//import org.LexGrid.relations.Relations;
-import org.LexGrid.commonTypes.Property;
+import org.LexGrid.LexBIG.Exceptions.LBException;
 
 
 /**
@@ -101,223 +99,120 @@ public class EvsTreeUtil
 {
     static private final Log log = LogFactory.getLog(EvsTreeUtil.class);
     static private Map<String, String> ourDescriptions = new HashMap<String, String>();
+    static private LexBIGService appService = null;
+	static String serviceUrl = "http://lexevsapi51.nci.nih.gov/lexevsapi51";
 
-    private EvsTreeUtil()
-    {}
-
-
-    /**
-     * Get the application service based on the properties file
-     *
-     * @return the preferred name, or an empty string if something goes wrong.
-     */     
-    public static ApplicationService getCabioApplicationService()
-    {
-		ApplicationService appService = null;
-
-		try {
-			log.debug("CaBioApplicationService.getCabioApplicationService Enter : " );
-		
-			appService=ApplicationServiceProvider.getApplicationService("ServiceInfo");
-			
-			log.debug("ApplicationService : " + appService.toString());
-
-		}		
-		catch (FileNotFoundException e) {
-			log.error("Caught FileNotFoundException properties for caBIO: ", e);
+   
+    private EvsTreeUtil()  {
+    	try {
+    	//String serviceUrl = config.getServerURL();
+    	appService = (LexBIGService)ApplicationServiceProvider.getApplicationServiceFromUrl(serviceUrl, "EvsServiceInfo");
+		} catch (FileNotFoundException e) {
+			log.error("FileNotFound exception in EvsTreeUtil.",e);
 			e.printStackTrace();
 		} catch (IOException e) {
-			log.error("Caught IOException finding file for properties for caBIO: ", e);
-			e.printStackTrace();
-		} 
-		catch (Exception e) {
-			log.error("Caught Exception e for caBIO: ", e);
-			e.printStackTrace();
-		}		
-		return appService;
-    }
-    
-
-
-    /**
-     * Get the application service based on the properties file
-     *
-     * @return the application service.
-     */
-    public static EVSApplicationService getApplicationService()
-    {
-        // Get the app service uri
-		Properties camodProperties = new Properties();
-		String camodPropertiesFileName = null;
-		EVSApplicationService appService = null;
-
-		camodPropertiesFileName = System.getProperty("gov.nih.nci.camod.camodProperties");
-
-		try {
-			log.debug("EVSApplicationService.getApplicationService Enter : " );
-			// load properties from external file
-			FileInputStream in = new FileInputStream(camodPropertiesFileName);
-			camodProperties.load(in);
-			String serverURL = camodProperties.getProperty("evs.uri");
-			//String serverURL = "http://lexevsapi.nci.nih.gov/lexevsapi42";
-
-			log.debug("serverURL : " + serverURL);
-
-			ApplicationServiceProvider applicationServiceProvider = new ApplicationServiceProvider();
-			appService =
-				(EVSApplicationService)applicationServiceProvider.
-				getApplicationService(serverURL);
-
-			log.debug("EVSApplicationService : " + appService.toString());
-		}
-		catch (FileNotFoundException e) {
-			log.error("Caught exception finding file for properties for EVS: ", e);
-			e.printStackTrace();
-		} catch (IOException e) {
-			log.error("Caught exception finding file for properties for EVS: ", e);
+			log.error("IO exception EvsTreeUtil. ", e);
 			e.printStackTrace();
 		} catch (Exception e) {
-			log.error("Caught exception finding file for properties for EVS: ", e);
+			log.error("Caught general exception EvsTreeUtil. ", e);
 			e.printStackTrace();
 		}
-		return appService;
     }
 
-	public static ConceptReferenceList createConceptReferenceList(String[] codes, String codingSchemeName)
-	{
-		if (codes == null)
-		{
-			return null;
-		}
-		ConceptReferenceList list = new ConceptReferenceList();
-		for (int i = 0; i < codes.length; i++)
-		{
-			ConceptReference cr = new ConceptReference();
-			cr.setCodingScheme(codingSchemeName);
-			cr.setConceptCode(codes[i]);
-			list.addConceptReference(cr);
-		}
-		return list;
-	}
+    
+    public String getSupportedCodingSchemes(String codingSchemeName) throws Exception {
+    	
+        CodingSchemeRenderingList csrl = appService.getSupportedCodingSchemes();
+        for(int i = 0; i < csrl.getCodingSchemeRenderingCount(); i++)
+        {   
+            //get a version of the NCI Thesaurus on the server
+            if(csrl.getCodingSchemeRendering(i).getCodingSchemeSummary().getFormalName().equals(codingSchemeName) ){
+                if(csrl.getCodingSchemeRendering(i).getRenderingDetail().getVersionTags().getTagCount() > 0)
+                {return csrl.getCodingSchemeRendering(i).getCodingSchemeSummary().getRepresentsVersion();}
+            }
+        }
+        throw new IllegalStateException("No versions of coding scheme not found: "+codingSchemeName);
+    }	
 
-	public static Concept getConceptByCode(String codingSchemeName, String vers, String ltag, String code)
+	public static String getConceptByCode(String codingSchemeName, String vers, String ltag, String code)
 	{
+		log.info("Entered getConceptByCode.");
+		CodedNodeSet cns = null;
+		String myConcept = null;
+		String serviceUrl = "http://lexevsapi51.nci.nih.gov/lexevsapi51";
+		
         try {
-			RemoteServerUtil rsu = new RemoteServerUtil();
-			EVSApplicationService lbSvc = rsu.createLexBIGService();
-			if (lbSvc == null)
-			{
-				System.out.println("lbSvc == null???");
-				return null;
-			}
-
-			CodingSchemeVersionOrTag versionOrTag = new CodingSchemeVersionOrTag();
-			versionOrTag.setVersion(vers);
-
-			ConceptReferenceList crefs =
-				createConceptReferenceList(
-					new String[] {code}, codingSchemeName);
-
-			CodedNodeSet cns = null;
-
-			try {
-				cns = lbSvc.getCodingSchemeConcepts(codingSchemeName, versionOrTag);
-		    } catch (Exception e1) {
-				e1.printStackTrace();
-			}
-
-			cns = cns.restrictToCodes(crefs);
-			ResolvedConceptReferenceList matches = cns.resolveToList(null, null, null, 1);
-
-			if (matches == null)
-			{
-				System.out.println("Concept not found.");
-				return null;
-			}
-
-			// Analyze the result ...
-			if (matches.getResolvedConceptReferenceCount() > 0) {
-				ResolvedConceptReference ref =
-					(ResolvedConceptReference) matches.enumerateResolvedConceptReference().nextElement();
-
-				Concept entry = ref.getReferencedEntry();
-				return entry;
-			}
+        	log.info("getConceptByCode inside try.");
+        	
+        	if (appService != null) {
+	        	cns =  appService.getCodingSchemeConcepts(codingSchemeName, null);			
+	        	log.info("getConceptByCode got cns.");
+	        	
+			    // LexEVS 5.1
+			    ConceptReferenceList crefs = ConvenienceMethods.createConceptReferenceList(new String[] { code}, codingSchemeName); 
+	    		cns.restrictToCodes(crefs); 
+	    		ResolvedConceptReferenceList matches = cns.resolveToList(null, null, null, 1);	    
+	    		log.info("getConceptByCode matches: " );
+    		
+		       if (matches.getResolvedConceptReferenceCount() > 0) {
+	   			ResolvedConceptReference ref = (ResolvedConceptReference)matches.enumerateResolvedConceptReference().nextElement();
+	    		Concept entry = ref.getReferencedEntry();
+	   	    		for (int i = 0; i < entry.getPresentationCount(); i++) {
+	   	    			if (entry.getPresentation(i).getPropertyName().equals(Constants.Evs.DISPLAY_NAME_TAG) || entry.getPresentation(i).getPropertyName().equals(Constants.Evs.PREFERRED_NAME_TAG))
+	  	    				myConcept = entry.getPresentation(i).getValue().getContent();
+	    	    	} 
+	    	    			
+	    	    }
+        	} else {
+        		log.info("appservice is null. " );
+        	}
 		 } catch (Exception e) {
 			 e.printStackTrace();
 			 return null;
 		 }
-		 return null;
-	}
-
-	public static String outputPropertyDetails(Property[] properties)
-    {
-		log.debug("EvsTreeUtil.outputPropertyDetails Entered");
-
-		String prop_value = "";
-		String evsDisplayNameValue = "";
-		
-		for (int i=0; i<properties.length; i++)
-		{
-			Property property = (Property) properties[i];		
-			String prop_name = property.getPropertyName();
-			log.debug("prop_name: " + prop_name);			
-			prop_value = property.getText().getContent();
-			log.debug("prop_value: " + prop_value);
-			if(property.getPropertyName().equals(Constants.Evs.DISPLAY_NAME_TAG) || property.getPropertyName().equals(Constants.Evs.PREFERRED_NAME_TAG)) {
-				log.debug("property.getPropertyName(): "  + property.getPropertyName());
-				log.debug("prop_value: " + property.getText().getContent());
-				evsDisplayNameValue = property.getText().getContent();				
-				log.debug("evsDisplayNameValue: " + evsDisplayNameValue);
-				break;
-			} 
-		}
-		log.debug("EvsTreeUtil.outputPropertyDetails Exit ");
-		log.debug("Final evsDisplayNameValue: " + evsDisplayNameValue);
-		return evsDisplayNameValue;
+		 log.info("getConceptByCode myConcept: " + myConcept);
+		 return myConcept;
 	}
 
 	public static String getConceptDetails(String version, String code)
 	{
-		log.debug("EvsTreeUtil.getConceptDetails Entered: ");
+		log.info("EvsTreeUtil.getConceptDetails Entered: ");
         String scheme = "";
         String theDescription = ""; 
-		
+
+		try {
+    		log.info("get appService =null above.");
+    		appService = (LexBIGService)ApplicationServiceProvider.getApplicationServiceFromUrl(serviceUrl, "EvsServiceInfo");        			
+			
+		} catch (FileNotFoundException e) {
+			log.error("FileNotFound exception in getApplicationService.",e);
+			e.printStackTrace();
+		} catch (IOException e) {
+			log.error("IO exception getApplicationService. ", e);
+			e.printStackTrace();
+		} catch (Exception e) {
+			log.error("Caught general exception getApplicationService. ", e);
+			e.printStackTrace();
+		}        
+        
 		if( code != null ){
             if(code.contains("ZFA")){
-                log.debug("Zebrafish modelSpecies");
+                log.info("Zebrafish modelSpecies");
         		scheme = Constants.Evs.ZEBRAFISH_SCHEMA;
-        		//DisplayNameTag = Constants.Evs.DISPLAY_NAME_TAG_LOWER_CASE;
         	//Define parameters for all NCI_Thesaurus schema
         	} else {
-                log.debug("NOT Zebrafish modelSpecies");
+                log.info("NCI modelSpecies");
                 scheme = Constants.Evs.NCI_SCHEMA;
-        		//DisplayNameTag = Constants.Evs.DISPLAY_NAME_TAG;
         	}
 		}
 
-        Concept ce = getConceptByCode(scheme, null, null, code);
-        if (ce == null)
-        {
-        	log.info("Concept not found -- " + code);
-		}
-		else
-		{
-			log.debug("Concept found -- " + code);
-			log.debug("Concept ce.getEntityDescription().getContent()");
-
-			int num_properties = 0;
-
-			Property[] properties = ce.getPresentation();
-			num_properties = num_properties + properties.length;
-
-			theDescription = outputPropertyDetails(properties);
-			log.debug("\n theDescription: " + theDescription);
-
-			log.debug("\nTotal number of properties: " + num_properties + "\n\n");
-	    }
+		// returns Concept
+        theDescription = getConceptByCode(scheme, null, null, code);
+        log.info("EvsTreeUtil.getConceptDetails Entered theDescription: " +theDescription);
         return theDescription;
 	}
+	
+
 
     public static void main(String[] args)
  	{
