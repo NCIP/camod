@@ -26,6 +26,7 @@ import gov.nih.nci.camod.util.EvsTreeUtil;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
 import gov.nih.nci.system.applicationservice.ApplicationService;
 import gov.nih.nci.system.applicationservice.CaBioApplicationService;
+import gov.nih.nci.system.client.ApplicationServiceProvider;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -84,8 +85,14 @@ public class AgentManagerImpl extends BaseManager implements AgentManager
 
     public Collection getClinicalProtocols(Agent a)
     {
-    	ApplicationService appService = null;
-    	appService = (CaBioApplicationService)EvsTreeUtil.getCabioApplicationService();
+    	CaBioApplicationService appService = null;
+    	try {
+    	appService = (CaBioApplicationService)ApplicationServiceProvider.getApplicationService();
+        }
+        catch (Exception e)
+        {
+        	log.error("AgentManagerImpl Unable to get information from caBIO", e);
+        }   	
         Collection protocols = null;
         if (a != null)
         {
