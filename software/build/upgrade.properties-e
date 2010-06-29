@@ -213,6 +213,8 @@ caimage.host=ncias-d33.-v.nci.nih.gov:19080
 caimage.modelview.uri=http://ncias-d330-v.nci.nih.gov:19080/adore-djatoka/images/caimage/Images/images/Model_Images/Model/
 caimage.genconview.uri=http://ncias-d330-v.nci.nih.gov:19080/adore-djatoka/images/caimage/Images/images/Model_Images/GeneticConstruct/
 
+evs.uri=http://lexevsapi51.nci.nih.gov/lexevsapi51
+
 # clean up (delete) unused caImage properties?
 
 ####################
