@@ -502,7 +502,7 @@ public class ViewModelAction extends BaseAction
                     }
                     catch (Exception e)
                     {
-                        log.error("Unable to get information from caBIO", e);
+                        log.error("ViewModelAction Unable to get information from caBIO", e);
                     }
                
                 }
