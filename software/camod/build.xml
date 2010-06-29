@@ -5,7 +5,6 @@
     <property file="build.properties" />
 
     <!-- stage specific attributes -->
-    <!--filter filtersfile="${tier}_camod.properties" /-->
     <filter token="db.host" value="${db.host}"/>
     <filter token="db.port" value="${db.port}"/>
     <filter token="db.username" value="${db.username}"/>
