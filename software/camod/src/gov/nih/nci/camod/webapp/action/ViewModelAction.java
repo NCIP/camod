@@ -247,6 +247,7 @@ import gov.nih.nci.common.domain.DatabaseCrossReference;
 //import gov.nih.nci.common.domain.impl.DatabaseCrossReferenceImpl;
 import gov.nih.nci.system.applicationservice.ApplicationService;
 import gov.nih.nci.system.applicationservice.CaBioApplicationService;
+import gov.nih.nci.system.client.ApplicationServiceProvider;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -467,16 +468,16 @@ public class ViewModelAction extends BaseAction
                 // now go to caBIO and query the gene object....
                 TargetedModification tm = (TargetedModification) eg;
                 GeneIdentifier geneIdentifier = tm.getGeneIdentifier();
-                //log.debug("geneIdentifier.getEntrezGeneID() " + geneIdentifier.getEntrezGeneID());
+                log.debug("geneIdentifier.getEntrezGeneID() " + geneIdentifier.getEntrezGeneID());
                 if (geneIdentifier != null)
                 {
-                    //log.debug("Connecting to caBIO to look up gene " + geneIdentifier);
+                    log.debug("Connecting to caBIO to look up gene " + geneIdentifier);
                     // the geneId is available
                     try
                     {
-                      ApplicationService appService = (CaBioApplicationService)EvsTreeUtil.getCabioApplicationService();
+                    	CaBioApplicationService appService = (CaBioApplicationService)ApplicationServiceProvider.getApplicationService();
 
-                      log.debug("EvsTreeUtil.getApplicationService: " + appService.toString());
+                        log.info("appService: " + appService.toString());
                         DatabaseCrossReference dcr = new DatabaseCrossReference(); 
                         dcr.setCrossReferenceId(geneIdentifier.getEntrezGeneID());
 
@@ -503,6 +504,7 @@ public class ViewModelAction extends BaseAction
                     {
                         log.error("Unable to get information from caBIO", e);
                     }
+               
                 }
             }
             else if (eg instanceof InducedMutation)
