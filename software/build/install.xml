@@ -652,7 +652,12 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		<replaceregexp file="${camod.external.properties.dir}/camod.properties" byline="true"
 			match="^(caimage.genconview.uri)=(.*)"
 			replace="\1=${caimage.genconview.uri}"/>
-		<echo message="Updated caimage.genconview.uri"/>	
+		<echo message="Updated caimage.genconview.uri"/>
+		
+		<replaceregexp file="${camod.external.properties.dir}/camod.properties" byline="true"
+			match="^(evs.uri)=(.*)"
+			replace="\1=${evs.uri}"/>
+		<echo message="Updated evs.uri"/>		
 		
 	</target>
 	
