@@ -104,19 +104,6 @@ public class EvsTreeUtil
 
    
     private EvsTreeUtil()  {
-    	try {
-    	//String serviceUrl = config.getServerURL();
-    	appService = (LexBIGService)ApplicationServiceProvider.getApplicationServiceFromUrl(serviceUrl, "EvsServiceInfo");
-		} catch (FileNotFoundException e) {
-			log.error("FileNotFound exception in EvsTreeUtil.",e);
-			e.printStackTrace();
-		} catch (IOException e) {
-			log.error("IO exception EvsTreeUtil. ", e);
-			e.printStackTrace();
-		} catch (Exception e) {
-			log.error("Caught general exception EvsTreeUtil. ", e);
-			e.printStackTrace();
-		}
     }
 
     
@@ -139,7 +126,6 @@ public class EvsTreeUtil
 		log.info("Entered getConceptByCode.");
 		CodedNodeSet cns = null;
 		String myConcept = null;
-		String serviceUrl = "http://lexevsapi51.nci.nih.gov/lexevsapi51";
 		
         try {
         	log.info("getConceptByCode inside try.");
