@@ -175,16 +175,16 @@ function showWindow(imgscr){
                                                 <tr>
                                                    <td class="sidebarContent" > 
 													  													   
-														<input type="submit" value="User Guide" onClick="myRef = window.open('/helpDocs/caMOD/UserGuide.pdf','mywin',
+														<input type="submit" value="User Guide" onClick="myRef = window.open('/helpDocs/camod_Online_Help/UserGuide.pdf','mywin',
 															'left=20,top=20,width=900,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"/>
 														&nbsp;
-														<input type="submit" value="Help" onClick="myRef = window.open('/helpDocs/caMOD/Glossary caMOD.6.1.html','mywin',
+														<input type="submit" value="Help" onClick="myRef = window.open('/helpDocs/camod_Online_Help/Glossary caMOD.6.1.html','mywin',
 															'left=20,top=20,width=700,height=500,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"/><br/><br/>
 															
-														<input type="submit" value="User Guide" onClick="myRef = window.open('helpDocs/caMOD/UserGuide.pdf','mywin',
+														<input type="submit" value="User Guide" onClick="myRef = window.open('helpDocs/camod_Online_Help/UserGuide.pdf','mywin',
 															'left=20,top=20,width=900,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"/>
 														&nbsp;
-														<input type="submit" value="Help" onClick="myRef = window.open('helpDocs/caMOD/Glossary caMOD.6.1.html','mywin',
+														<input type="submit" value="Help" onClick="myRef = window.open('helpDocs/camod_Online_Help/Glossary caMOD.6.1.html','mywin',
 															'left=20,top=20,width=700,height=500,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"/>													
 														<br/><br/>
 															
