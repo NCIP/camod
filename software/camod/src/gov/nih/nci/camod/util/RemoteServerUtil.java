@@ -1,12 +1,9 @@
 package gov.nih.nci.camod.util;
 
 
-import gov.nih.nci.system.applicationservice.ApplicationService;
-import gov.nih.nci.system.applicationservice.EVSApplicationService;
 import gov.nih.nci.system.client.ApplicationServiceProvider;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Hashtable;
 import java.util.Properties;
 import org.LexGrid.LexBIG.LexBIGService.LexBIGService;
 
@@ -56,11 +53,11 @@ public class RemoteServerUtil {
 	 */
 	public static LexBIGService createLexBIGService()
     {
-		LexBIGService appService = null;
+		LexBIGService lbSvc = null;
 		String serviceUrl = "http://lexevsapi51.nci.nih.gov/lexevsapi51";
 
 		try {
-			appService = (LexBIGService)ApplicationServiceProvider.getApplicationServiceFromUrl(serviceUrl, "EvsServiceInfo");
+			lbSvc = (LexBIGService)ApplicationServiceProvider.getApplicationServiceFromUrl(serviceUrl, "EvsServiceInfo");
 			
 		} catch (FileNotFoundException e) {
 			System.out.println("FileNotFound exception in getApplicationService." + e);
@@ -72,8 +69,8 @@ public class RemoteServerUtil {
 			System.out.println("Caught general exception getApplicationService. " + e);
 			e.printStackTrace();
 		}
-		System.out.println("Exiting getApplicationService");
-		return appService;
+		System.out.println("Exiting createLexBIGService");
+		return lbSvc;
 	}
 
 	/**
@@ -93,36 +90,6 @@ public class RemoteServerUtil {
         }
 	}
 	
-    /**
-     * Get the application service based on the properties file
-     *
-     * @return the preferred name, or an empty string if something goes wrong.
-     */     
-    public static ApplicationService getCabioApplicationService()
-    {
-		ApplicationService appService = null;
-
-		try {
-			System.out.println("CaBioApplicationService.getCabioApplicationService Enter : " );
-		
-			appService=ApplicationServiceProvider.getApplicationService("ServiceInfo");
-			
-			System.out.println("ApplicationService : " + appService.toString());
-
-		}		
-		catch (FileNotFoundException e) {
-			System.out.println("Caught FileNotFoundException properties for caBIO: " +  e);
-			e.printStackTrace();
-		} catch (IOException e) {
-			System.out.println("Caught IOException finding file for properties for caBIO: " + e);
-			e.printStackTrace();
-		} 
-		catch (Exception e) {
-			System.out.println("Caught Exception e for caBIO: " + e);
-			e.printStackTrace();
-		}		
-		return appService;
-    }	
 
 }
 
