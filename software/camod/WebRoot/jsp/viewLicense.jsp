@@ -8,6 +8,13 @@
 
 <% pageContext.getSession().setAttribute("READDISCLAIMER", "true");  %>
 
+<script language="JavaScript">
+function showWindow(imgscr){
+		myWind = window.open(imgscr,"subWindow","HEIGHT=1000,WIDTH=1024,resizable");
+		myWind.focus();
+	}
+</script>
+
 <head>
 <meta HTTP-EQUIV="Pragma" CONTENT="no-cache">
 </head>
@@ -165,13 +172,22 @@
                                                       </td>
                                                   </tr>
                                                   
-                                                  <tr>
-													<td> &nbsp; 
-														<input type="submit" value="User Guide" onClick="myRef = window.open('WebHelp/caMOD/UserGuide.pdf','mywin',
+                                                <tr>
+                                                   <td class="sidebarContent" > 
+													  													   
+														<input type="submit" value="User Guide" onClick="myRef = window.open('/helpDocs/caMOD/UserGuide.pdf','mywin',
 															'left=20,top=20,width=900,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"/>
 														&nbsp;
-														<input type="submit" value="Help" onClick="myRef = window.open('WebHelp/caMOD/index.html','mywin',
-															'left=20,top=20,width=700,height=500,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"/>												
+														<input type="submit" value="Help" onClick="myRef = window.open('/helpDocs/caMOD/Glossary caMOD.6.1.html','mywin',
+															'left=20,top=20,width=700,height=500,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"/><br/><br/>
+															
+														<input type="submit" value="User Guide" onClick="myRef = window.open('helpDocs/caMOD/UserGuide.pdf','mywin',
+															'left=20,top=20,width=900,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"/>
+														&nbsp;
+														<input type="submit" value="Help" onClick="myRef = window.open('helpDocs/caMOD/Glossary caMOD.6.1.html','mywin',
+															'left=20,top=20,width=700,height=500,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"/>													
+														<br/><br/>
+															
 													</td>                                                                  
                                               	</tr>
                                               </table>
