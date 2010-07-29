@@ -14,7 +14,7 @@
 	<property name="globus.lib.dir" value="${grid.service.dir}/globus_lib_files" />
 	<property name="resource.file.jboss-globus-lib" value="jboss-globus-libs-cagrid1_2.zip" />
 	
-	<property name="any.filename" value="wsrf-camod.war" />
+	<property name="any.filename" value="camod.war" />
 		
 	<!-- Copy grid service to BDA folder (modify properties file in install.xml)  -->
 	<target name="copy-grid-service" depends="zip-globus-lib-files-to-bda">	
