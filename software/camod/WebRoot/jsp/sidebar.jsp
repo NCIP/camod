@@ -76,7 +76,7 @@
 		onclick="document.location.href='#'"
 		onmouseout="changeMenuStyle(this,'subMenuSecondaryTitle'),hideCursor()"
 		height=20><A class=subMenuSecondary
-		href="WebHelp/caMOD/UserGuide.pdf" target="_blank">CAMOD USER GUIDE</A></TD>
+		href="../WebHelp/caMOD_Online_Help/UserGuide.pdf" target="_blank">CAMOD USER GUIDE</A></TD>
 	</TR>		
     <TR>
 	<TD class=subMenuSecondaryTitle
