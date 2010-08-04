@@ -219,5 +219,9 @@
 	<!-- Add checks to see if in submission mode, if so add VIEW MY MODELS option -->
 	
 	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;<html:link styleClass="subMenuPrimary" action="searchResults"> BACK TO SEARCH RESULTS</html:link>	
+	<BR>
+	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;<html:link styleClass="subMenuPrimary" href="javascript:openHelpWindow('WebHelp/caMOD_Online_Help/index.html')"> HELP</html:link>	
+
+
 </DIV>
 </TD></TR>
