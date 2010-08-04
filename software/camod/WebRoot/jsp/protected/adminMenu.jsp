@@ -46,12 +46,13 @@
 		</TD>		
 		
 		<TD height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-		  &nbsp;&nbsp;<a class="footerMenuLink" href="javascript:openHelpWindow('../WebHelp/caMOD_Online_Help/index.html?single=true&amp;context=caMOD_Online_Help&amp;topic=login_page_help')" class="helpText">HELP</a>&nbsp;&nbsp;
+		  &nbsp;&nbsp;<a class="footerMenuLink" href="javascript:openHelpWindow('WebHelp/caMOD_Online_Help/index.html?single=true&amp;context=caMOD_Online_Help&amp;topic=login_page_help')" class="helpText">HELP</a>&nbsp;&nbsp;
 		</TD>
 		
 		<TD>
 			<IMG height=16 alt="" src="/camod/images/mainMenuSeparator.gif" width=1>
-		</TD>		
+		</TD>
+				
 		
 		</TR>
 	</TBODY>
