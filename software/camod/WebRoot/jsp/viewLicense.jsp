@@ -173,14 +173,27 @@ function showWindow(imgscr){
                                                   </tr>
                                                   
                                                 <tr>
-                                                   <td class="sidebarContent" > 
-													  													   
+                                                   <td class="sidebarContent" >
+													   <% 
+												        List theUser = (List) pageContext.getSession().getAttribute(Constants.CURRENTUSERROLES);
+												        if (theUser != null && theUser.size() > 0)
+												        {
+												       %>                                                     
+
+														<input type="submit" value="User Guide" onClick="myRef = window.open('./WebHelp/caMOD_Online_Help/UserGuide.pdf','mywin',
+															'left=20,top=20,width=900,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"/>
+														&nbsp;
+														<input type="submit" value="Help" onClick="myRef = window.open('./WebHelp/caMOD_Online_Help/index.html','mywin',
+															'left=20,top=20,width=700,height=500,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"/><br/><br/>
+
+														<% } else { %>
+
 														<input type="submit" value="User Guide" onClick="myRef = window.open('../WebHelp/caMOD_Online_Help/UserGuide.pdf','mywin',
 															'left=20,top=20,width=900,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"/>
 														&nbsp;
 														<input type="submit" value="Help" onClick="myRef = window.open('../WebHelp/caMOD_Online_Help/index.html','mywin',
 															'left=20,top=20,width=700,height=500,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"/><br/><br/>
-															
+				                                        <% }  %>
 													</td>                                                                  
                                               	</tr>
                                               </table>
