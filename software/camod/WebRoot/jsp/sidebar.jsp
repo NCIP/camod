@@ -70,13 +70,15 @@
 		onmouseout="changeMenuStyle(this,'subMenuSecondaryTitle'),hideCursor()"
 		height=20><A class=subMenuSecondary
 		href="http://ncicb.nci.nih.gov/NCICB/support" target="_blank">NCICB SUPPORT</A></TD></TR>
-    <TR>
+    <!--TR>
 	<TD class=subMenuSecondaryTitle
 		onmouseover="changeMenuStyle(this,'subMenuSecondaryTitleOver'),showCursor()"
 		onclick="document.location.href='#'"
 		onmouseout="changeMenuStyle(this,'subMenuSecondaryTitle'),hideCursor()"
-		height=20><A class=subMenuSecondary
-		href="../WebHelp/caMOD_Online_Help/UserGuide.pdf" target="_blank">CAMOD USER GUIDE</A></TD>
+		height=20>
+		<A class=subMenuSecondary
+		onClick="myRef = window.open('../WebHelp/caMOD_Online_Help/UserGuide.pdf','mywin',
+								'left=20,top=20,width=800,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()">CAMOD USER GUIDE</A></TD>
 	</TR>		
     <TR>
 	<TD class=subMenuSecondaryTitle
@@ -84,7 +86,10 @@
 		onclick="document.location.href='#'"
 		onmouseout="changeMenuStyle(this,'subMenuSecondaryTitle'),hideCursor()"
 		height=20><A class=subMenuSecondary
-		 href="javascript:openHelpWindow('../WebHelp/caMOD_Online_Help/index.html')" >HELP</A></TD></TR>
+		 onClick="myRef = window.open('../WebHelp/caMOD_Online_Help/index.html','mywin',
+								'left=20,top=20,width=800,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()" >HELP</A></TD></TR-->
+		 
+		 
 		 
 
 	<%
