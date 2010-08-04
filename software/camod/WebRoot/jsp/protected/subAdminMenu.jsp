@@ -71,7 +71,7 @@
 	   }
 	%>	
 	<IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5>
-	&nbsp;<html:link styleClass="subMenuPrimary" href="javascript:openHelpWindow('../WebHelp/caMOD_Online_Help/index.html')">HELP</html:link>	
+	&nbsp;<html:link styleClass="subMenuPrimary" href="javascript:openHelpWindow('WebHelp/caMOD_Online_Help/index.html')">HELP</html:link>	
 </DIV>
 
 <BR>
