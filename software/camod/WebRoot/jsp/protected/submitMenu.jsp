@@ -54,7 +54,7 @@
 			<IMG height=16 alt="" src="images/mainMenuSeparator.gif" width=1>
 		</TD>
 		
-		</TD></TR>
+		</TR>
 	</TBODY>
 	</TABLE>
 
