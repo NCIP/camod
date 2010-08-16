@@ -179,10 +179,12 @@
 
 <!-- submitTransplantation.jsp -->
 <!-- Main Content Begins -->
-<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<!-- Took this out of sidebar.jsp and has to go here to format correctly  -->
+<%@ include file="/jsp/submitMenu.jsp" %>
 <html:form action="<%= actionName %>" focus="name">
 <tr><td>
-	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
+	<TABLE summary="" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
 	<tr><td valign="top">
 
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">

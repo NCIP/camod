@@ -62,129 +62,132 @@
 
 <!-- adminEditModels.jsp -->
 <!-- Main Content Begins -->
-<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<!-- Took this out of sidebar.jsp and has to go here to format correctly  -->
+<%@ include file="/jsp/adminMenu.jsp" %>
+<tr><td>
+	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
 	<tr><td>	
-	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" width="100%">
-		<html:form action="SearchAdminAction.do" focus="modelId">
-		<tr>
-			<td class="formMessage" colspan="3">
-				<logic:messagesPresent>
-				  <ul>
-				    <font color="red">
-				      <html:messages id="error">
-				        <li><%=error %></li>
-				      </html:messages>
-				    </font>
-				  </ul>
-				</logic:messagesPresent>
-			</td>
-		</tr>
-		<tr>
-		    <td class="formTitle" height="20" colspan="8">Edit Models (SuperUser)&nbsp;
-		    	<camod:cshelp topic="screening_model_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>		
-		</tr>
-
-		
+		<TABLE summary="" cellpadding="3" cellspacing="0" border="0" width="100%">
+			<html:form action="SearchAdminAction.do" focus="modelId">
 			<tr>
-			    <td class="formRequiredNotice" >&nbsp;</td>
-				<td class="formLabel"><label for="field1">Model Id:</label>
-				</td>
-				<td class="formField" colspan="4">			
-					<html:text styleClass="formFieldSized" styleId="modelId" property="modelId" size="20"/>
-					 &nbsp;&nbsp;
-                	<input class="actionButton" type="submit" value="Search by Model Id" />	
+				<td class="formMessage" colspan="3">
+					<logic:messagesPresent>
+					  <ul>
+					    <font color="red">
+					      <html:messages id="error">
+					        <li><%=error %></li>
+					      </html:messages>
+					    </font>
+					  </ul>
+					</logic:messagesPresent>
 				</td>
 			</tr>
-			
 			<tr>
-			    <td class="formRequiredNotice" >&nbsp;</td>
-				<td class="formLabel"><label for="field1">Model Name / Model Descriptor: </label>
-				</td>
-				<td class="formField" >			
-					<html:text styleClass="formFieldSized" styleId="modelDescriptor" property="modelDescriptor" size="20"/>
-					<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="modelDescriptor" target="modelDescriptor"
-	  				parameters="modelDescriptor={modelDescriptor}" className="autocomplete" minimumCharacters="1" />	
-				</td>&nbsp;&nbsp;
-				
-				<td class="formRequiredNotice" width="15">&nbsp;</td>
-				<td class="formLabel"><label for="field3">State:</label></td>
-				<td class="formField">
-			        <html:select styleClass="formFieldSized" size="1" property="currentState">
-			            <html:options name="<%=Dropdowns.CURATIONSTATESWITHBLANKDROP%>"/>
-		            </html:select>
-				</td>				
-			</tr>	
-			
-			<tr>
-			    <td class="formRequiredNotice" >&nbsp;</td>
-			    <td class="formLabel"><label for="field1">Screener:</label></td>
-			    <td class="formField">			
-		            <html:select property="screener">
-			            <html:options name="<%=Dropdowns.USERSFORSCREENERROLEDROP%>"/>
-		            </html:select>
-			    </td>&nbsp;&nbsp;
-				
-			    <td class="formRequiredNotice" >&nbsp;</td>
-			    <td class="formLabel"><label for="field1">Editor:</label></td>
-			    <td class="formField">			
-		            <html:select property="editor">
-			            <html:options name="<%=Dropdowns.USERSFOREDITORROLEDROP%>"/>
-		            </html:select>
-			    </td>				
-			</tr>	
-			
-			<tr>
-			    <td class="formRequiredNotice" >&nbsp;</td>
-				<td class="formLabel"><label for="field3">External Data Source:</label></td>
-				<td class="formField">				
-				<html:select styleClass="formFieldSized" size="1" property="externalSource" >
-					<html:options name="<%=Dropdowns.EXTERNALSOURCEQUERYDROP %>" />										
-				</html:select>
-			    </td>&nbsp;&nbsp;
-				
-			    <td class="formRequiredNotice" >&nbsp;</td>
-				<td class="formLabel"><label for="field2">PI's Name:</label></td>
-				
-				<td class="formField">				
-					<html:select styleClass="formFieldSized" size="1" property="principalInvestigator" >
-						<html:options name="<%=Dropdowns.PRINCIPALINVESTIGATORQUERYALLDROP %>" />										
-					</html:select>			
-				</td>				
+			    <td class="formTitle" height="20" colspan="8">Edit Models (SuperUser)&nbsp;
+			    	<camod:cshelp topic="screening_model_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>		
 			</tr>
+	
 			
+				<tr>
+				    <td class="formRequiredNotice" >&nbsp;</td>
+					<td class="formLabel"><label for="field1">Model Id:</label>
+					</td>
+					<td class="formField" colspan="4">			
+						<html:text styleClass="formFieldSized" styleId="modelId" property="modelId" size="20"/>
+						 &nbsp;&nbsp;
+	                	<input class="actionButton" type="submit" value="Search by Model Id" />	
+					</td>
+				</tr>
+				
+				<tr>
+				    <td class="formRequiredNotice" >&nbsp;</td>
+					<td class="formLabel"><label for="field1">Model Name / Model Descriptor: </label>
+					</td>
+					<td class="formField" >			
+						<html:text styleClass="formFieldSized" styleId="modelDescriptor" property="modelDescriptor" size="20"/>
+						<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="modelDescriptor" target="modelDescriptor"
+		  				parameters="modelDescriptor={modelDescriptor}" className="autocomplete" minimumCharacters="1" />	
+					</td>&nbsp;&nbsp;
+					
+					<td class="formRequiredNotice" width="15">&nbsp;</td>
+					<td class="formLabel"><label for="field3">State:</label></td>
+					<td class="formField">
+				        <html:select styleClass="formFieldSized" size="1" property="currentState">
+				            <html:options name="<%=Dropdowns.CURATIONSTATESWITHBLANKDROP%>"/>
+			            </html:select>
+					</td>				
+				</tr>	
+				
+				<tr>
+				    <td class="formRequiredNotice" >&nbsp;</td>
+				    <td class="formLabel"><label for="field1">Screener:</label></td>
+				    <td class="formField">			
+			            <html:select property="screener">
+				            <html:options name="<%=Dropdowns.USERSFORSCREENERROLEDROP%>"/>
+			            </html:select>
+				    </td>&nbsp;&nbsp;
+					
+				    <td class="formRequiredNotice" >&nbsp;</td>
+				    <td class="formLabel"><label for="field1">Editor:</label></td>
+				    <td class="formField">			
+			            <html:select property="editor">
+				            <html:options name="<%=Dropdowns.USERSFOREDITORROLEDROP%>"/>
+			            </html:select>
+				    </td>				
+				</tr>	
+				
+				<tr>
+				    <td class="formRequiredNotice" >&nbsp;</td>
+					<td class="formLabel"><label for="field3">External Data Source:</label></td>
+					<td class="formField">				
+					<html:select styleClass="formFieldSized" size="1" property="externalSource" >
+						<html:options name="<%=Dropdowns.EXTERNALSOURCEQUERYDROP %>" />										
+					</html:select>
+				    </td>&nbsp;&nbsp;
+					
+				    <td class="formRequiredNotice" >&nbsp;</td>
+					<td class="formLabel"><label for="field2">PI's Name:</label></td>
+					
+					<td class="formField">				
+						<html:select styleClass="formFieldSized" size="1" property="principalInvestigator" >
+							<html:options name="<%=Dropdowns.PRINCIPALINVESTIGATORQUERYALLDROP %>" />										
+						</html:select>			
+					</td>				
+				</tr>
+				
+				<tr>
+				    <td class="formRequiredNotice" >&nbsp;</td>
+					<td class="formLabel"><label for="field3">Species:</label></td>
+					<td class="formField">				
+						<html:select property="species">
+							<html:optionsCollection name="<%= Dropdowns.NONHUMANSPECIESDROP %>" />										
+						</html:select>			
+					</td>&nbsp;&nbsp;				
+				</tr>						
+				
+				
 			<tr>
-			    <td class="formRequiredNotice" >&nbsp;</td>
-				<td class="formLabel"><label for="field3">Species:</label></td>
-				<td class="formField">				
-					<html:select property="species">
-						<html:optionsCollection name="<%= Dropdowns.NONHUMANSPECIESDROP %>" />										
-					</html:select>			
-				</td>&nbsp;&nbsp;				
-			</tr>						
-			
-			
-		<tr>
-			<td colspan="8" align="right">	
-				<TABLE cellpadding="0" cellspacing="0" border="0">
-					<tr>
-						<td align="right">
-						  <html:submit styleClass="actionButton" onclick="blankModelId()">
-							  Search
-						  </html:submit>
-					  
-						  <html:submit property="<%=Constants.Parameters.ACTION%>" styleClass="actionButton">
-						  	  <bean:message key="button.clear"/>
-						  </html:submit>						  
+				<td colspan="8" align="right">	
+					<TABLE cellpadding="0" cellspacing="0" border="0">
+						<tr>
+							<td align="right">
+							  <html:submit styleClass="actionButton" onclick="blankModelId()">
+								  Search
+							  </html:submit>
 						  
-				  					
-				  		</td>
-			  		</tr>
-				</TABLE>
-			</td>
-		</tr>			
-	  </html:form>
-	 </TABLE>
-	<br>
+							  <html:submit property="<%=Constants.Parameters.ACTION%>" styleClass="actionButton">
+							  	  <bean:message key="button.clear"/>
+							  </html:submit>						  
+							  
+					  					
+					  		</td>
+				  		</tr>
+					</TABLE>
+				</td>
+			</tr>			
+		  </html:form>
+		 </TABLE><br>
 	
     <c:if test="${not empty adminModelSearchResults}">
 	<display:table id="row" name="${sessionScope.adminModelSearchResults}"
@@ -221,8 +224,10 @@
 		</c:choose>            
 	</display:table>
 	</c:if>
-    </td></tr>
-   
+	
+  </td></tr>   
+  </TABLE>
+</td></tr>   
 </TABLE>
 
 <SCRIPT LANGUAGE="JavaScript">

@@ -9,45 +9,45 @@
 
 <!-- adminModelsAssignment.jsp -->
 <!-- Main Content Begins -->
-<html:form action="SearchAdminAssignmentAction.do" >
-<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+
+<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<!-- Took this out of sidebar.jsp and has to go here to format correctly  -->
+<%@ include file="/jsp/adminMenu.jsp" %>
+<tr><td>
+	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
 	<tr><td>	
-	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" width="100%">
-		
-		<tr>
-			<td class="formMessage" colspan="3">
-				<logic:messagesPresent>
-				  <ul>
-				    <font color="red">
-				      <html:messages id="error">
-				        <li><%=error %></li>
-				      </html:messages>
-				    </font>
-				  </ul>
-				</logic:messagesPresent>
-			</td>
-		</tr>
-		<tr>
-		    <td class="formTitle" height="20" colspan="4">Models Assignment &nbsp;<camod:cshelp topic="models_assignment_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>		
-		</tr>
-		    
-			    <td class=resultsBoxGreyNoEnd>			
-			        <html:select property="currentState">
-			            <html:options name="<%=Constants.Dropdowns.CURATIONSTATESDROP%>"/>
-		            </html:select>
-			    </td>
-		    
-		
-	        <td  class="resultsBoxGreyNoStart" align="right" colspan="3">
-				<TABLE cellpadding="4" cellspacing="0" border="0">	
-			        <html:submit styleClass="actionButton">
-					    <bean:message key="button.submit"/>
-				    </html:submit>	
-				</TABLE>
-			</td>
-		</html:form>
-	 </TABLE>
-	<br>	
+		<TABLE summary="" cellpadding="3" cellspacing="0" border="0" width="100%">	
+		<html:form action="SearchAdminAssignmentAction.do" >	
+			<tr>
+				<td class="formMessage" colspan="3">
+					<logic:messagesPresent>
+					  <ul>
+					    <font color="red">
+					      <html:messages id="error">
+					        <li><%=error %></li>
+					      </html:messages>
+					    </font>
+					  </ul>
+					</logic:messagesPresent>
+				</td>
+			</tr>
+			<tr>
+			    <td class="formTitle" height="20" colspan="4">Models Assignment &nbsp;<camod:cshelp topic="models_assignment_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>		
+			</tr>		    
+				<td class=resultsBoxGreyNoEnd>			
+				    <html:select property="currentState">
+				        <html:options name="<%=Constants.Dropdowns.CURATIONSTATESDROP%>"/>
+			        </html:select>
+				</td>
+		        <td  class="resultsBoxGreyNoStart" align="right" colspan="3">
+					<TABLE cellpadding="4" cellspacing="0" border="0">	
+				        <html:submit styleClass="actionButton">
+						    <bean:message key="button.submit"/>
+					    </html:submit>	
+					</TABLE>
+				</td>
+			</html:form>
+		 </TABLE><br>	
 
     <c:if test="${not empty adminModelAssignSearchResults}">
 	<display:table id="row" name="${sessionScope.adminModelAssignSearchResults}"
@@ -72,9 +72,10 @@
 	</display:table>
 	</c:if>
 
-    </td></tr>
-   
-</TABLE>	
+    </td></tr>   
+	</TABLE>	
+</td></tr>   
+</TABLE>
 
 <SCRIPT LANGUAGE="JavaScript">
 	blankCurrentState();
