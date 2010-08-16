@@ -1,5 +1,4 @@
 <%
-
 /**
  * 
  * $Id: searchSimple.jsp,v 1.54 2009-06-11 16:40:46 pandyas Exp $
@@ -104,7 +103,6 @@
  *
  *
  */
-
 %>
 
 <%@ include file="/jsp/header.jsp" %>
@@ -172,15 +170,19 @@
 
 <!-- searchSimple.jsp -->
 <!-- Main Content Begins -->
-<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+	<!-- Took this out of sidebar.jsp and has to go here to format correctly -->
+	<%@ include file="/jsp/searchMenu.jsp" %>
 		<tr>
 			<html:errors/>
 			<td class="formMessage" colspan="3"></td>
 	
 		</tr>
 	<tr><td>
-	
-	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
+	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+	<tr><td>
+			
+	<TABLE summary="" cellpadding="5" cellspacing="0" border="0" align="left">
 	<html:form action="SearchSimpleAction.do" focus="keyword">
         <tr>
             <td class="formTitleBlue" height="20" colspan="3">
@@ -333,7 +335,8 @@
 		</tr>
 		</html:form>				
 		</TABLE>		
-				
+</td></tr>
+</TABLE>				
 </td></tr>
 </TABLE>
 

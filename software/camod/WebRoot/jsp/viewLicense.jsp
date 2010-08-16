@@ -8,12 +8,6 @@
 
 <% pageContext.getSession().setAttribute("READDISCLAIMER", "true");  %>
 
-<script language="JavaScript">
-function showWindow(imgscr){
-		myWind = window.open(imgscr,"subWindow","HEIGHT=1000,WIDTH=1024,resizable");
-		myWind.focus();
-	}
-</script>
 
 <head>
 <meta HTTP-EQUIV="Pragma" CONTENT="no-cache">
@@ -26,8 +20,9 @@ function showWindow(imgscr){
 
 <!-- login.jsp -->
 <!-- Main Content Begins -->  
-	  <table summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
-
+	  <table summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="55%" height="90%">
+	  <!-- Took this out of sidebar.jsp and has to go here to format correctly - width must be < 75% above to display correctly -->
+	  <%@ include file="/jsp/homeMenu.jsp" %>
               <!-- banner begins -->
               <tr>
                   <td valign=top class="bannerHome"><img src="/camod/images/banner.gif"></td>
@@ -36,7 +31,7 @@ function showWindow(imgscr){
 
               <tr>
                   <td height="100%">
-                      <table summary="" cellpadding="0" cellspacing="0" border="0" height="100%">
+                      <table summary="" cellpadding="0" cellspacing="0" border="0" height="100%" >
                           <tr>
                               <td width="70%">
                               
@@ -180,10 +175,10 @@ function showWindow(imgscr){
 												        {
 												       %>                                                     
 
-														<input type="submit" value="User Guide" onClick="myRef = window.open('./WebHelp/caMOD_Online_Help/UserGuide.pdf','mywin',
+														<input type="submit" value="User Guide" onClick="myRef = window.open('../WebHelp/caMOD_Online_Help/UserGuide.pdf','mywin',
 															'left=20,top=20,width=900,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"/>
 														&nbsp;
-														<input type="submit" value="Help" onClick="myRef = window.open('./WebHelp/caMOD_Online_Help/index.html','mywin',
+														<input type="submit" value="Help" onClick="myRef = window.open('../WebHelp/caMOD_Online_Help/index.html','mywin',
 															'left=20,top=20,width=700,height=500,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"/><br/><br/>
 
 														<% } else { %>
@@ -193,7 +188,7 @@ function showWindow(imgscr){
 														&nbsp;
 														<input type="submit" value="Help" onClick="myRef = window.open('../WebHelp/caMOD_Online_Help/index.html','mywin',
 															'left=20,top=20,width=700,height=500,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"/><br/><br/>
-				                                        <% }  %>
+				                                        <% } %>
 													</td>                                                                  
                                               	</tr>
                                               </table>

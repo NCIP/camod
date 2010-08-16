@@ -48,9 +48,9 @@
 <!-- Application Footer  ends -->
 
 </TD></TR></TBODY></TABLE><!-- End of table started in beginning of Main content -->
-</TD></TR></TBODY></TABLE><!-- End of table started in beginning of Application header -->
+<!--/TD></TR--></TBODY></TABLE><!-- End of table started in beginning of Application header -->
 
-</TD</TR>
+<!--/TD></TR-->
 <TR><TD>
 
 <!-- Footer begins -->

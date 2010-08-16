@@ -19,7 +19,8 @@
 	&nbsp;<html:link styleClass="subMenuPrimary" action="searchResults">SEARCH RESULTS</html:link>
 	<BR>	
 	<IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5>
-	&nbsp;<html:link styleClass="subMenuPrimary" href="javascript:openHelpWindow('WebHelp/caMOD_Online_Help/index.html')">HELP</html:link>		
+	&nbsp;<html:link styleClass="subMenuPrimary" href="javascript:openHelpWindow('WebHelp/caMOD_Online_Help/index.html')">HELP</html:link>
+	<BR>			
 </DIV>
 </TD></TR>
 

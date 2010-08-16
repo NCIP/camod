@@ -17,9 +17,11 @@
 <bean:define id="agentList" name="<%=Constants.DRUG_SCREEN_SEARCH_RESULTS%>"/>
 <bean:define id="searchOption" name="drugScreenSearchOptions"/>
 
-<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
-<tr><td>
-	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
+<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+	<!-- Took this out of sidebar.jsp and has to go here to format correctly -->
+	<%@ include file="/jsp/searchMenu.jsp" %>
+	<tr><td>
+	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
 	<tr><td valign="top">
 		<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%">
 		<tr><td>
@@ -29,16 +31,13 @@
 						<td class="formTitle" height="20" colspan="4" align="center">Search Results</td>
 					</tr>
 					<tr>
-						<td class="resultsBoxWhiteEnd" height="20" colspan="9">
-							
+						<td class="resultsBoxWhiteEnd" height="20" colspan="9">							
 								<B><I>No compounds with the specified NSC number: 
 								<c:out value="${nscNumber}"/><br/>
-								</I></B>
-							
+								</I></B>							
 						</td>
 					</tr>
-				</TABLE>
-				<br>
+				</TABLE><br>				
 			</c:if>
 			<c:if test="${not empty agentList}">
 			<c:set var="foundYstData" value="0"/>

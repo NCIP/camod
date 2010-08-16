@@ -258,14 +258,17 @@
 
 <!-- searchAdvanced.jsp -->
 <!-- Main Content Begins -->
-<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
-<html:form action="SearchAdvancedAction.do" focus="keyword" onsubmit="enableFields()">
-		<tr>
-			<html:errors/>
-			<td class="formMessage" colspan="3"></td>
-	
-		</tr>
+<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+	<!-- Took this out of sidebar.jsp and has to go here to format correctly -->
+	<%@ include file="/jsp/searchMenu.jsp" %>
+	<html:form action="SearchAdvancedAction.do" focus="keyword" onsubmit="enableFields()">
+	<tr>
+		<html:errors/>
+		<td class="formMessage" colspan="3"></td>	
+	</tr>
 	<tr><td>
+    <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+    <tr><td>
 	
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0">
 	    <tr>
@@ -701,6 +704,8 @@
 				</TABLE>
 			</td>
 		</tr>
+	</TABLE>
+	</td></tr>
 	</TABLE>
 </td></tr>	
 </html:form>	

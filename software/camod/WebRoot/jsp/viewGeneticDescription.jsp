@@ -175,11 +175,14 @@
 <bean:define id="gsc" name="<%=Constants.GENOMIC_SEG_COLL%>"/>
 <bean:define id="smc" name="<%=Constants.SPONTANEOUS_MUT_COLL%>"/>
 
-<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+	<!-- Took this out of sidebar.jsp and has to go here to format correctly -->
+	<%@ include file="/jsp/searchMenu.jsp" %>
 	<tr><td>
-	
-	<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
-
+	<!-- Summary table start - added outer table to indent the summary table 10 units -->
+	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
+	<tr><td>
+	<TABLE  cellpadding="0" cellspacing="0" border="0" align="left" width="100%">
 		<tr>
 			<td class="formTitle" height="20" colspan="3">
 			Genetic Description - Model:
@@ -188,7 +191,6 @@
 			</camod:highlight>
 			</td>
 		</tr>
-
 		<tr>
 			<td class="GreyBox" width="20%"><b>Transgene</b></td>
 			<td class="GreyBoxRightEnd" width="80%">
@@ -202,7 +204,6 @@
 				</ul>&nbsp;
 			</td>			
 		</tr>
-
 		<tr>
 			<td class="WhiteBox" width="20%"><b>Genomic Segment</b></td>
 			<td class="WhiteBoxRightEnd" width="80%">
@@ -216,7 +217,6 @@
 				</ul>&nbsp;
 			</td>			
 		</tr>
-
 		<tr>
 			<td class="GreyBox" width="20%"><b>Targeted Modification</b></td>
 			<td class="GreyBoxRightEnd" width="80%">
@@ -229,8 +229,7 @@
 					</logic:iterate>
 				</ul>&nbsp;
 			</td>			
-		</tr>
-		
+		</tr>		
 		<tr>
 			<td class="WhiteBox" width="20%"><b>Induced Mutation</b></td>
 			<td class="WhiteBoxRightEnd" width="80%">
@@ -274,7 +273,9 @@
 			</td>			
 		</tr>
 	</TABLE>
-	
+	</td></tr>
+	</TABLE>	
+	<!-- Summary table ends -->
 </td></tr>
 </TABLE>
 
@@ -287,7 +288,7 @@
 	<tr><td>
 	<a name="<c:out value="eng_trans_${count}"/>"/>&nbsp;
 	<c:set var="count" value="${count + 1}"/>
-	<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
+	<TABLE cellpadding="7" cellspacing="0" border="0" align="left" width="60%">
 		<tr>
 			<td class="formTitle" height="20" colspan="2">
 				Engineered Transgene - Model:
@@ -527,7 +528,7 @@
 	<tr><td>
     <a name="<c:out value="gen_seg_${count}"/>"/>
 	<c:set var="count" value="${count + 1}"/>
-	<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
+	<TABLE  cellpadding="7" cellspacing="0" border="0" align="left" width="60%">
 		<tr>
 			<td class="formTitle" height="20" colspan="2">
 				Genomic Segment - Model:
@@ -731,7 +732,7 @@
 	<tr><td>
 	<a name="<c:out value="targ_mod_${count}"/>"/>
 	<c:set var="count" value="${count + 1}"/>
-	<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
+	<TABLE cellpadding="7" cellspacing="0" border="0" align="left" width="60%">
 		<tr>
 			<td class="formTitle" height="20" colspan="2">
 				Targeted Modification - Model:
@@ -993,7 +994,7 @@
 	<tr><td>
 	<a name="<c:out value="ind_mut_${count}"/>"/>
 	<c:set var="count" value="${count + 1}"/>
-	<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
+	<TABLE cellpadding="7" cellspacing="0" border="0" align="left" width="60%">
 		<tr>
 			<td class="formTitle" height="20" colspan="2">
 				Induced Mutation - Model:
@@ -1152,7 +1153,7 @@
 	<tr><td>
 	<a name="<c:out value="spon_mut_${count}"/>"/>
 	<c:set var="count" value="${count + 1}"/>
-	<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
+	<TABLE  cellpadding="7" cellspacing="0" border="0" align="left" width="60%">
 		<tr>
 			<td class="formTitle" height="20" colspan="2">
 				Spontaneous Mutation - Model:
@@ -1257,7 +1258,7 @@
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
-	<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
+	<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="60%">
     <% pageContext.setAttribute(Parameters.MODELSECTIONVALUE, Pages.GENETIC_DESCRIPTION); %>
     <%@ include file="/jsp/includeComments.jsp" %>
     </TABLE>

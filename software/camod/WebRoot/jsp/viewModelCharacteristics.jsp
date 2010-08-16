@@ -117,7 +117,11 @@
 
 <bean:define id="mdl" name="animalmodel"/>
 
-<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+	<!-- Took this out of sidebar.jsp and has to go here to format correctly -->
+	<%@ include file="/jsp/searchMenu.jsp" %>
+	<tr><td>
+	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
 	<tr><td>
 	<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
 
@@ -403,7 +407,8 @@
 		<% pageContext.setAttribute(Parameters.MODELSECTIONVALUE, Pages.MODEL_CHARACTERISTICS); %>
 		<%@ include file="/jsp/includeComments.jsp" %>
 	</TABLE>
-	
+</td></tr>
+</TABLE>	
 </td></tr>
 </TABLE>
 

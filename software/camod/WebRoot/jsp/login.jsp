@@ -2,11 +2,13 @@
 <%@ include file="/jsp/sidebar.jsp" %>
 <%@ include file="/common/taglibs.jsp"%>
 
+
 <%@ page import="gov.nih.nci.camod.Constants" %>
 
 <%@ page buffer="32kb"%>
 
 <% pageContext.getSession().setAttribute("READDISCLAIMER", "true");  %>
+
 
 <head>
 <meta HTTP-EQUIV="Pragma" CONTENT="no-cache">
@@ -19,8 +21,9 @@
 
 <!-- login.jsp -->
 <!-- Main Content Begins -->  
-	  <table summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
-
+	  <table summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="55%" height="90%">
+	  <!-- Took this out of sidebar.jsp and has to go here to format correctly - width must be < 75% above to display correctly -->
+	  <%@ include file="/jsp/loginMenu.jsp" %>
               <!-- banner begins -->
               <tr>
                   <td valign=top class="bannerHome"><img src="/camod/images/banner.gif"></td>
@@ -183,26 +186,14 @@
                                                   </tr>
                                                 <tr>                                                  
                                                    <td class="sidebarContent" >
-													   <% 
-												        List theUser = (List) pageContext.getSession().getAttribute(Constants.CURRENTUSERROLES);
-												        if (theUser != null && theUser.size() > 0)
-												        {
-												       %>                                                     
-
+													                                                      
+														<!-- works when first getting to page - before login -->
 														<input type="submit" value="User Guide" onClick="myRef = window.open('./WebHelp/caMOD_Online_Help/UserGuide.pdf','mywin',
 															'left=20,top=20,width=900,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"/>
 														&nbsp;
 														<input type="submit" value="Help" onClick="myRef = window.open('./WebHelp/caMOD_Online_Help/index.html','mywin',
 															'left=20,top=20,width=700,height=500,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"/><br/><br/>
 
-														<% } else { %>
-
-														<input type="submit" value="User Guide" onClick="myRef = window.open('../WebHelp/caMOD_Online_Help/UserGuide.pdf','mywin',
-															'left=20,top=20,width=900,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"/>
-														&nbsp;
-														<input type="submit" value="Help" onClick="myRef = window.open('../WebHelp/caMOD_Online_Help/index.html','mywin',
-															'left=20,top=20,width=700,height=500,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"/><br/><br/>
-				                                        <% }  %>
 													</td>                                                                  
                                               	</tr>
                                               </table>

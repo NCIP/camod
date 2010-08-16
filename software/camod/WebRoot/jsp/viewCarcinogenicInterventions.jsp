@@ -67,9 +67,12 @@
 
 <bean:define id="mdl" name="animalmodel"/>
 
-<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
-<tr><td>
-
+<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+	<!-- Took this out of sidebar.jsp and has to go here to format correctly -->
+	<%@ include file="/jsp/searchMenu.jsp" %>
+	<tr><td>
+	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
+	<tr><td>
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
 	<tr><td valign="top">
 		<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%">
@@ -1413,12 +1416,15 @@
 	</td></tr></TABLE>
 </td></tr></TABLE>
 
-<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
-		<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
+		<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="60%">
 	    <% pageContext.setAttribute(Parameters.MODELSECTIONVALUE, Pages.CARCINOGENIC_INTERVENTION); %>
 	    <%@ include file="/jsp/includeComments.jsp" %>
 	    </TABLE>
+	    
+    </td></tr>
+	</TABLE>	    
     </td></tr>
 </TABLE>
 

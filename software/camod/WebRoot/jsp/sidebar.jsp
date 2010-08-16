@@ -116,9 +116,11 @@
 	%>
 
       <TR>
-	<TD class=subMenuFill height="100%">&nbsp;</TD></TR>
+		<TD class=subMenuFill height="100%">&nbsp;</TD>
+	  </TR>
       <TR>
-	<TD class=subMenuFooter height=23>&nbsp;</TD></TR>
+		<TD class=subMenuFooter height=23>&nbsp;</TD>
+	  </TR>
 	</TBODY>
    </TABLE>				
 <!-- standard submenu ends -->
@@ -133,12 +135,12 @@
 	<TBODY>	
 
 <!-- Can place code here to determine what Main Menu is needed (this is placed on top of the main content in center of page)-->	
-<%@ include file="loginMenu.jsp" %>
+<!--%@ include file="loginMenu.jsp" %-->
 
 <TR><TD valign=top width="100%">
 
 <!-- Main Content Begins -->
-<TABLE class=contentPage cellSpacing=0 cellPadding=0 width=700 summary="" border=0>
+<TABLE class=contentPage cellSpacing=0 cellPadding=0 width="100%" summary="" border=0>
 <TBODY>
 <TR>
 <TD valign="top">

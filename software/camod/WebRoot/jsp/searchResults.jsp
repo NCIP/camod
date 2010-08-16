@@ -111,41 +111,36 @@
 %>
 
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
-<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
-<tr><td>
 
+<!-- searchResults.jsp -->
+<!-- Main Content Begins -->
+<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<tr><td>
 	<logic:present name="<%=Constants.NOSAVEOPTION%>">
 		<bean:define id="noSaveOption" name="<%=Constants.NOSAVEOPTION%>" />	
 	</logic:present>
-
 	<logic:present name="<%=Constants.CRITERIATABLE%>">
 		<bean:define id="criteriaTable" name="<%=Constants.CRITERIATABLE%>" />	
-	</logic:present>
-	
+	</logic:present>	
 	<logic:present name="<%=Constants.DUP_NAME%>">
 		<bean:define id="dupName" name="<%=Constants.DUP_NAME%>" />
-	</logic:present>	
-
+	</logic:present>
 	<logic:present name="<%=Constants.DUP_NAME_VALUE%>">
 		<bean:define id="dupNameValue" name="<%=Constants.DUP_NAME_VALUE%>" />
-	</logic:present>	
-			
+	</logic:present>			
 	<logic:present name="<%=Constants.QUERY_NAME%>">
 		<bean:define id="aQueryName" name="<%=Constants.QUERY_NAME%>" />
-	</logic:present>
-	
+	</logic:present>	
 	<logic:present name="<%=Constants.RERUN_QUERY%>">
 		<bean:define id="reRunQuery" name="<%=Constants.RERUN_QUERY%>" />	
 	</logic:present>
-
 	<logic:present name="<%=Constants.ASAVEDQUERYID%>">
 		<bean:define id="aSavedQueryId" name="<%=Constants.ASAVEDQUERYID%>" />	
-	</logic:present>
-	
+	</logic:present>	
 	<logic:present name="<%=Constants.CURRENTUSER%>">
 		<bean:define id="currentUser" name="<%=Constants.CURRENTUSER%>" />	
 	</logic:present>
-	
+		
 	<%							
 		request.getSession().setAttribute( Constants.DUP_NAME, "false" );
 			
@@ -158,11 +153,12 @@
 	%>
 
 
-<!-- searchResults.jsp -->
-<!-- Main Content Begins -->
-	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
-	<tr><td valign="top">
-		<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%">
+
+    <TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+	<!-- Took this out of sidebar.jsp and has to go here to format correctly -->
+	<%@ include file="/jsp/searchMenu.jsp" %>	
+	<tr><td>
+		<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%">
 		<tr>
 			<td>
 				<TABLE cellpadding="5" cellspacing="0" border="0" width="100%">
@@ -252,7 +248,7 @@
 		</tr>
 		
 		<tr><td>
-			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" width="100%">	
+			<TABLE  cellpadding="10" cellspacing="0" border="0" width="100%">	
 				<tr>
 					<td class="formTitle" height="20" colspan="4">Search Results&nbsp;
 					<camod:cshelp topic="search_results_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/>

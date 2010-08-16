@@ -97,55 +97,54 @@
 <bean:define id="pubColl" name="publications"/>
 <!-- bean:define id="pubAuthors" name="publicationAuthors"/-->
 
-<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+	<!-- Took this out of sidebar.jsp and has to go here to format correctly -->
+	<%@ include file="/jsp/searchMenu.jsp" %>	
 	<tr><td>
-
-	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left" width="100%">
-
-	<tr>
-		<td class="formTitle" height="20" colspan="3">Publications - Model:
-			<camod:highlight><c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
-					<c:if test="${mdl.externalSource == 'Jax MTB'}">
-							<IMG src="/camod/images/mtb_logo.jpg" >
-						</c:if>							
-					</camod:highlight>
-		</td>
-	</tr>			
-
-<!-- Summary table start -->
-
-			<tr>
-				<td class="greySubTitleLeft" width="50%">First Author</td>
-				<td class="greySubTitleLeft" width="50%">Journal / Year</td>
-			</tr>
+	<!-- Summary table start - added outer table to indent the summary table 10 units -->
+	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
+	<tr><td>	
+	<TABLE cellpadding="0" cellspacing="0" border="0" align="left" width="100%">
+		<tr>
+			<td class="formTitle" height="20" colspan="3">Publications - Model:
+				<camod:highlight><c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
+						<c:if test="${mdl.externalSource == 'Jax MTB'}">
+								<IMG src="/camod/images/mtb_logo.jpg" >
+							</c:if>							
+						</camod:highlight>
+			</td>
+		</tr>		
+		<tr>
+			<td class="greySubTitleLeft" width="50%">First Author</td>
+			<td class="greySubTitleLeft" width="50%">Journal / Year</td>
+		</tr>
 			
-		<logic:iterate id="p" name="pubColl" indexId="idx">			
-			<tr>
-	
-				<td class="WhiteBox" width="45%">
-				<camod:highlight>
-					<c:forEach  items="${p.displayAuthors}" var="line">
-						<c:out value="${line}"/>
-					</c:forEach>&nbsp;
-				</camod:highlight>
-				</td>
+	<logic:iterate id="p" name="pubColl" indexId="idx">			
+		<tr>	
+			<td class="WhiteBox" width="45%">
+			<camod:highlight>
+				<c:forEach  items="${p.displayAuthors}" var="line">
+					<c:out value="${line}"/>
+				</c:forEach>&nbsp;
+			</camod:highlight>
+			</td>
 				
-				<td class="WhiteBoxRightEnd" width="45%">
-				<a href="<c:out value="#pub_${idx}" escapeXml="false"/>">
-					<c:out value="${p.journal}" escapeXml="false"/>,&nbsp;<c:out value="${p.year}"/>&nbsp;
-				</a>
-				</td>
-				
-			</tr>
-		</logic:iterate>
-
+			<td class="WhiteBoxRightEnd" width="45%">
+			<a href="<c:out value="#pub_${idx}" escapeXml="false"/>">
+				<c:out value="${p.journal}" escapeXml="false"/>,&nbsp;<c:out value="${p.year}"/>&nbsp;
+			</a>
+			</td>				
+		</tr>
+	</logic:iterate>
+	</TABLE>
+	</td></tr>
 	</TABLE>				
-</td></tr>
+	</td></tr>
 </TABLE>														
 <!-- Summary table end -->
 
 <c:forEach var="p" items="${pubColl}" varStatus="stat">
-<TABLE cellpadding="5" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
 	<tr><td>
 	<a name="<c:out value="pub_${count}"/>"/>&nbsp;
 	<c:set var="count" value="${count + 1}"/>	
@@ -245,7 +244,7 @@
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
-	<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
+	<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="60%">
     <% pageContext.setAttribute(Parameters.MODELSECTIONVALUE, Pages.PUBLICATIONS); %>
     <%@ include file="/jsp/includeComments.jsp" %>
     </TABLE>
