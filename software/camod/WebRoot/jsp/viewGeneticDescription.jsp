@@ -728,7 +728,9 @@
 <c:set var="count" value="0"/>
 <c:if test="${not empty targetedModColl}">
 <c:forEach var="tm" items="${targetedModColl}">
-<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+	<tr><td>
+	<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">	
 	<tr><td>
 	<a name="<c:out value="targ_mod_${count}"/>"/>
 	<c:set var="count" value="${count + 1}"/>
@@ -977,6 +979,7 @@
 	        </tr>
 		</c:if>
 	</TABLE>
+</td></tr></TABLE>	
 </td></tr>
 <tr>
     <td colspan="2" align="right"><a href="#">Top</a></td>
@@ -1262,6 +1265,7 @@
     <% pageContext.setAttribute(Parameters.MODELSECTIONVALUE, Pages.GENETIC_DESCRIPTION); %>
     <%@ include file="/jsp/includeComments.jsp" %>
     </TABLE>
+    </td></tr>
 </TABLE>
 <!-- End Induced Mutation-->
 

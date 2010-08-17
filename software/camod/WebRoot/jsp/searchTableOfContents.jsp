@@ -18,9 +18,12 @@
 <%@ page import='gov.nih.nci.camod.Constants.*' %>
 <%@ page import='gov.nih.nci.camod.Constants' %>
 
-<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<tr><td>
+<!-- Took this out of sidebar.jsp and has to go here to format correctly -->
+<%@ include file="/jsp/searchMenu.jsp" %>
+	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
 	<tr><td>
-	
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
 
 		<tr>
@@ -65,7 +68,8 @@
 			    </c:forEach>
 		    </c:if>
 	</TABLE>
-	
+	</td></tr>
+	</TABLE>	
 </td></tr>
 </TABLE>	
 

@@ -302,14 +302,14 @@
 		<c:if test="${not empty mdl.animalAvailabilityCollection}">
 		<tr><td>&nbsp;</td></tr>
         <tr>
-			<td class="formTitle" height="20" colspan="2">Model Availability: This model is available from</td>
+			<td class="formTitle" height="20" colspan="3">Model Availability: This model is available from</td>
 		</tr>
 		<tr><td colspan="2">
-			<table cellpadding="5" cellspacing="0" border="0" width="100%">
+			<table cellpadding="0" cellspacing="0" border="0" width="100%">
 		<tr>
-			<td class="formTitleBlue" width="30%">Strain</td>				
+			<td class="formTitleBlue" width="35%">Strain</td>				
 			<td class="formTitleBlue" width="45%">Distributor</td>
-			<td class="formTitleBlue" width="25%">Stock number</td>
+			<td class="formTitleBlue" width="20%">Stock number</td>
 		</tr>
 		<c:forEach var="av" items="${mdl.animalAvailabilityCollection}" varStatus="stat2">
 			<c:choose>
