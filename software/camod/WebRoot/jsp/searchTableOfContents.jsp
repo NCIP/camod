@@ -22,9 +22,9 @@
 <!-- Took this out of sidebar.jsp and has to go here to format correctly -->
 <%@ include file="/jsp/searchMenu.jsp" %>
 <tr><td>
-
-
-	<TABLE summary="" cellpadding="10" cellspacing="0" border="0" align="left" width="60%">
+<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
+<tr><td>
+	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left" width="100%">
 
 		<tr>
             <logic:messagesPresent>
@@ -68,6 +68,8 @@
 			    </c:forEach>
 		    </c:if>
 	</TABLE>
+</td></tr>
+</TABLE>	
 </td></tr>
 </TABLE>	
 
