@@ -14,7 +14,7 @@
 <!-- Took this out of sidebar.jsp and has to go here to format correctly  -->
 <%@ include file="/jsp/adminMenu.jsp" %>
 <tr><td>
-	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
+	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="50%" height="100%">
 	<tr><td>	
 		<TABLE summary="" cellpadding="3" cellspacing="0" border="0" width="100%">	
 		<html:form action="SearchAdminAssignmentAction.do" >	
