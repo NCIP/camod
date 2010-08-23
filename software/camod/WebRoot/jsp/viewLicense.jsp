@@ -168,26 +168,30 @@
                                                   </tr>
                                                   
                                                 <tr>
-                                                   <td class="sidebarContent" >
+                                                   <td class="sidebarContent" >                                                   
 													   <% 
-												        List theUser = (List) pageContext.getSession().getAttribute(Constants.CURRENTUSERROLES);
-												        if (theUser != null && theUser.size() > 0)
-												        {
-												       %>                                                     
-
-														<input type="submit" value="User Guide" onClick="myRef = window.open('../WebHelp/caMOD_Online_Help/UserGuide.pdf','mywin',
+												    	// get and clean header to prevent SQL injection
+												    	String isloginpage = ((HttpServletRequest) request).getRequestURI();
+												        boolean isRequestedSessionIdFromURL = ((HttpServletRequest) request).isRequestedSessionIdFromURL();
+													    if(isloginpage!=null && !isRequestedSessionIdFromURL &&(
+													    		isloginpage.endsWith("/camod/")   ))	{
+												       %>
+														<!-- works when opening URL -->
+														<input type="submit" value="User Guide" onClick="myRef = window.open('./WebHelp/caMOD_Online_Help/UserGuide.pdf','mywin',
 															'left=20,top=20,width=900,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"/>
 														&nbsp;
-														<input type="submit" value="Help" onClick="myRef = window.open('../WebHelp/caMOD_Online_Help/index.html','mywin',
-															'left=20,top=20,width=700,height=500,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"/><br/><br/>
+														<input type="submit" value="Help" onClick="myRef = window.open('./WebHelp/caMOD_Online_Help/index.html','mywin',
+															'left=20,top=20,width=700,height=500,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"/><br/><br/>												                                                            
+
 
 														<% } else { %>
-
+                                                        <!--  works from search link for Home and submit link for HOME -->
 														<input type="submit" value="User Guide" onClick="myRef = window.open('../WebHelp/caMOD_Online_Help/UserGuide.pdf','mywin',
 															'left=20,top=20,width=900,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"/>
 														&nbsp;
 														<input type="submit" value="Help" onClick="myRef = window.open('../WebHelp/caMOD_Online_Help/index.html','mywin',
-															'left=20,top=20,width=700,height=500,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"/><br/><br/>
+															'left=20,top=20,width=700,height=500,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"/><br/><br/>														
+
 				                                        <% } %>
 													</td>                                                                  
                                               	</tr>
