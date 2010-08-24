@@ -1,9 +1,11 @@
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp"%>
 <!-- Main Content Begins -->
-<TABLE class="contentPage" cellspacing="0" cellpadding="0" width="700" summary="" border="0">
+<TABLE class="contentPage" cellspacing="0" cellpadding="0" width="100%" summary="" border="0">
+	<!-- Took this out of sidebar.jsp and has to go here to format correctly -->
+	<%@ include file="/jsp/searchMenu.jsp" %>
 	<TBODY><TR><TD valign="top">
-		<TABLE class="contentBegins" height="100%" cellspacing="0" cellpadding="10" width="100%" border="0">
+		<TABLE class="contentBegins" height="100%" cellspacing="0" cellpadding="10" width="60%" border="0">
 			<TBODY><TR><TD>
 				<TABLE class="contentPage" height="100%" cellspacing="0" cellpadding="0" width="100%" summary="" border="0">
 						<TBODY><TR><TD valign="top">
