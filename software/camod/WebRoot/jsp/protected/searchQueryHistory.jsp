@@ -3,7 +3,8 @@
 
 <%@ page import="gov.nih.nci.camod.service.SavedQueryManager" %>
 <%@ page import="gov.nih.nci.camod.domain.SavedQuery" %>	
-<%@ page import="gov.nih.nci.camod.domain.SavedQueryAttribute" %>	
+<%@ page import="gov.nih.nci.camod.domain.SavedQueryAttribute" %>
+<%@ page import="java.util.List" %>	
 
 <%  
 	List userQueryList = (List) request.getSession().getAttribute( Constants.USERSQUERYLIST );
@@ -95,7 +96,7 @@
 		<%}%>		
 				
 	</TABLE>					
-</tr></td></TABLE>
+</td></tr></TABLE>
 </DIV>
 
 <%@ include file="/jsp/footer.jsp" %>
