@@ -26,9 +26,12 @@
 <!-- searchQueryHistory.jsp -->
 <!-- Main Content Begins -->
 <DIV id="masterdiv">
-<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<!-- Took this out of sidebar.jsp and has to go here to format correctly -->
+<%@ include file="/jsp/searchMenu.jsp" %>
 <tr><td>
-	
+<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">	
+<tr><td>
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" width="100%">	
 		<tr>
 			<td class="formTitleBlue" height="20" colspan="4">Query History ( Last 20 searches ) &nbsp;
@@ -95,7 +98,8 @@
 		     </TR>
 		<%}%>		
 				
-	</TABLE>					
+	</TABLE>
+	</td></tr></TABLE>					
 </td></tr></TABLE>
 </DIV>
 

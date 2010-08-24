@@ -204,17 +204,19 @@
 
 <!-- custimizeSearchResults.jsp -->
 <!-- Main Content Begins -->										
-<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
-	
+<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+	<!-- Took this out of sidebar.jsp and has to go here to format correctly -->
+	<%@ include file="/jsp/searchMenu.jsp" %>	
 	<% if ( errorMessage != null ) { %>
 		<tr><td>
 			<font color="red"><%= errorMessage %></font>							
 		</td></tr>
 	<%} %>
 	
-	<tr>
-		<td>
-	
+	<tr><td>
+	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
+	<tr><td>
+		
 			<TABLE summary="" cellpadding="5" cellspacing="0" border="0" align="left">
 				<tr>
 					<td class="formTitleBlue" height="20" colspan="4">
@@ -285,8 +287,9 @@
 				</tr>
 																																			
 			</TABLE>
-		</td>
-	</tr>
+		</td></tr>
+	</TABLE>
+</td></tr>
 </TABLE>
 </html:form>	
 

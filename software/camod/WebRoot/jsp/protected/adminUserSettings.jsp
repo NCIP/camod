@@ -2,6 +2,7 @@
 <%@ include file="/jsp/sidebar.jsp" %>
 <%@ include file="/common/taglibs.jsp"%>
 
+
 <SCRIPT LANGUAGE="JavaScript">
 	function enableUsername() {
 		ideControl = document.forms[0].username.disabled = false;
@@ -9,11 +10,13 @@
 </SCRIPT>
 
 <!-- Main Content Begins -->  
-<TABLE summary="" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
-	<tr><td width="100%">		
-
-	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
-
+<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+	<!-- Took this out of sidebar.jsp and has to go here to format correctly -->
+	<%@ include file="/jsp/adminMenu.jsp" %>
+	<tr><td>		
+	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
+	<tr><td>
+	<TABLE cellpadding="3" cellspacing="0" border="0" align="left">
 		<tr>
 		    <logic:messagesPresent>
 				<ul>
@@ -40,6 +43,7 @@
 			<td class="formField">
 				<html:text disabled="true" styleClass="formFieldSized" property="username" size="30"/>
 			</td>
+			</html:form>
 		</tr>		
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
@@ -92,14 +96,16 @@
 					  <html:cancel styleClass="actionButton">
 					  	  <bean:message key="button.cancel"/>
 	  				  </html:cancel>
-				  </html:form>			
+				  			
 				</TABLE>
 			</td>
-		</tr>		
+		</tr>
+				
 	</TABLE>
-	</td></tr>
-	    
-</TABLE>
+	</td></tr>	    
+	</TABLE>
+</td></tr>	    
+</TABLE>	
 
 <!-- Main Content Ends  -->
 
