@@ -2,7 +2,6 @@
 <%@ include file="/jsp/sidebar.jsp" %>
 <%@ include file="/common/taglibs.jsp"%>
 
-
 <SCRIPT LANGUAGE="JavaScript">
 	function enableUsername() {
 		ideControl = document.forms[0].username.disabled = false;
@@ -11,12 +10,13 @@
 
 <!-- Main Content Begins -->  
 <TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
-	<!-- Took this out of sidebar.jsp and has to go here to format correctly -->
-	<%@ include file="/jsp/adminMenu.jsp" %>
-	<tr><td>		
+<!-- Took this out of sidebar.jsp and has to go here to format correctly -->
+<%@ include file="/jsp/adminMenu.jsp" %>
+<tr><td>		
 	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
+	<html:form action="AdminUserSettingsAction.do" onsubmit="enableUsername()">
 	<tr><td>
-	<TABLE cellpadding="3" cellspacing="0" border="0" align="left">
+		<TABLE cellpadding="3" cellspacing="0" border="0" align="left">
 		<tr>
 		    <logic:messagesPresent>
 				<ul>
@@ -31,7 +31,6 @@
 				* indicates a required field
 			</td>
 		</tr>
-
 		<tr>
 			<td class="formTitle" height="20" colspan="3">User Settings for <c:out value="${userSettingsForm.firstName}"/> <c:out value="${userSettingsForm.lastName}"/>
 				&nbsp;<camod:cshelp topic="user_settings_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
@@ -39,12 +38,12 @@
         <tr>
 			<td class="formRequiredNotice" width="5">&nbsp</td>
 			<td class="formLabel"><label for="field2">Username</label></td>
-			<html:form action="AdminUserSettingsAction.do" onsubmit="enableUsername()">
+
 			<td class="formField">
 				<html:text disabled="true" styleClass="formFieldSized" property="username" size="30"/>
 			</td>
-			</html:form>
-		</tr>		
+			
+		</tr>
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
 			<td class="formRequiredLabel"><label for="field2">Institute / Organization</label></td>
@@ -101,8 +100,9 @@
 			</td>
 		</tr>
 				
-	</TABLE>
-	</td></tr>	    
+		</TABLE>
+	</td></tr>
+	</html:form>	    
 	</TABLE>
 </td></tr>	    
 </TABLE>	
