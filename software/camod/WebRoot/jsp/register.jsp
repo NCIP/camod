@@ -57,11 +57,14 @@
 
 <!-- register.jsp -->
 <!-- Main Content Begins --> 
-<TABLE summary="" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
-	<tr><td width="100%">		
-
+<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<!-- Took this out of sidebar.jsp and has to go here to format correctly  -->
+<%@ include file="/jsp/searchMenu.jsp" %>
+<tr><td>		
+	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
+	<tr><td>
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
-
+	<html:form action="RegisterUserAction.do">
 		<tr>
 		    <logic:messagesPresent>
 				<ul>
@@ -75,17 +78,14 @@
 			<td class="formMessage" colspan="3">
 				* indicates a required field
 			</td>
-		</tr>
-		
+		</tr>		
 		<tr>
 			<td class="formTitle" height="20" colspan="3">Register for an account &nbsp 
 			<camod:cshelp topic="register_user_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 		</tr>
-
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
-			<td class="formRequiredLabel"><label for="field2">Institute / Organization</label></td>
-			<html:form action="RegisterUserAction.do">
+			<td class="formRequiredLabel"><label for="field2">Institute / Organization</label></td>			
 			<td class="formField">
 				<html:text styleClass="formFieldSized" property="affiliation" size="30"/>
 			</td>
@@ -96,34 +96,30 @@
 			<td class="formField">
 				<html:text styleClass="formFieldSized" property="firstName" size="30"/>
 			</td>
-		</tr>
-		
+		</tr>		
 		<tr>
 			<td class="formRequiredNotice" width="0">*</td>
 			<td class="formRequiredLabel"><label for="field1">Last Name</label></td>
 			<td class="formField">
 				<html:text styleClass="formFieldSized" property="lastName" size="30"/>
 			</td>
-		</tr>
-		
+		</tr>		
 		<tr>
 			<td class="formRequiredNotice" width="0">*</td>
 			<td class="formRequiredLabel"><label for="field1">Phone</label></td>
 			<td class="formField">
 				<html:text styleClass="formFieldSized" property="phone" size="30"/>
 			</td>
-		</tr>		
-
+		</tr>
 		<tr>
 			<td class="formRequiredNotice" width="0">*</td>
 			<td class="formRequiredLabel"><label for="field1">Email</label></td>
 			<td class="formField">
 				<html:text styleClass="formFieldSized" property="email" size="30"/>
 			</td>
-		</tr>
-						
+		</tr>						
 		<tr>
-			<td class="formRequiredNotice" width="5">&nbsp</td>
+			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">Check if you are a principal investigator / lab chief</label></td>
 			<td class="formField" align="left" >
 			    <html:checkbox styleClass="formFieldSized" property="principalInvestigator" onclick="checkFields()" > </html:checkbox>
@@ -144,8 +140,7 @@
 			<td class="formField">
 				<html:text styleClass="formFieldSizedEnabled" property="piFirstName" size="30"/>
 			</td>
-		</tr>
-		
+		</tr>		
 		<tr>
 			<td class="formRequiredNotice" width="0">*</td>
 			<td class="formRequiredLabel"><label for="field1">Principal Investigator Last Name</label></td>
@@ -162,22 +157,21 @@
 		</tr>		
 		<tr>
 			<td align="right" colspan="3">
-				<TABLE cellpadding="4" cellspacing="0" border="0">
-				
+				<TABLE cellpadding="4" cellspacing="0" border="0">				
 					  <html:submit styleClass="actionButton">
 						  <bean:message key="button.submit"/>
-					  </html:submit>
-					  
+					  </html:submit>					  
 					  <html:cancel styleClass="actionButton">
 					  	  <bean:message key="button.cancel"/>
-	  				  </html:cancel>
-				  </html:form>			
+	  				  </html:cancel>				  			
 				</TABLE>
 			</td>
-		</tr>		
-	</TABLE>
+		</tr>
+	</html:form>		
+	</TABLE>	
 	</td></tr>
-	    
+	</TABLE>
+</td></tr>	    
 </TABLE>
 
 <SCRIPT LANGUAGE="JavaScript">
