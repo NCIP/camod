@@ -81,12 +81,13 @@ public class Disease extends BaseObject implements Comparable, Serializable, Dup
         }
         else
         {
-        	if(EvsTreeUtil.getConceptDetails(null, conceptCode) != null & EvsTreeUtil.getConceptDetails(null, conceptCode).length() > 0){
+        	String conceptDetails = EvsTreeUtil.getConceptDetails(null, conceptCode);
+        	if(conceptDetails != null & conceptDetails.length() > 0){        		
+        		thePreferedDesc = conceptDetails;
         		System.out.println("Organ retrieved from EVS: " + thePreferedDesc);
-        		thePreferedDesc = EvsTreeUtil.getConceptDetails(null, conceptCode);
-        	} else {
-        		System.out.println("Organ retrieved from caMOD: " + thePreferedDesc);
+        	} else {        		
         		thePreferedDesc = name;	
+        		System.out.println("Organ retrieved from caMOD: " + thePreferedDesc);
         	}
         }
         System.out.println("Disease thePreferedDesc: " + thePreferedDesc);
