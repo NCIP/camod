@@ -40,7 +40,7 @@
 					information on an NCI Web page, or to receive a personalized response 
 					to your specific questions about cancer, we encourage U.S. residents 
 					to call NCI's <a 
-					href="http://cis.nci.nih.gov/contact/contact.html">Cancer Information 
+					href="http://www.cancer.gov/aboutnci/cis">Cancer Information 
 					Service (CIS)</a> at <strong>1-800-4-CANCER (1-800-422-6237)</strong> 
 					Monday through Friday from 9:00 a.m. to 4:30 p.m. local time to speak 
 					with a Cancer Information Specialist. Deaf and hard of hearing 
@@ -56,7 +56,7 @@
 					</p><p><strong><em>** Please note: this form is for visitors with 
 					disabilities who have comments about the accessibility of NCI's Web 
 					pages. If you have questions about cancer, please contact the <a 
-					href="http://cis.nci.nih.gov/contact/contact.html">Cancer Information 
+					href="http://www.cancer.gov/aboutnci/cis">Cancer Information 
 					Service</a>. **</em></strong> </p>
 
 
