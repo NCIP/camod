@@ -158,7 +158,7 @@
 
     <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
 	<tr><td>
-		<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%">
+		<TABLE cellpadding="7" cellspacing="0" border="0" class="contentBegins" width="100%">
 		<tr>
 			<td>
 				<TABLE cellpadding="5" cellspacing="0" border="0" width="100%">
