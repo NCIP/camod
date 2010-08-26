@@ -72,9 +72,7 @@
 package gov.nih.nci.camod.util;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.system.applicationservice.ApplicationService;
 import gov.nih.nci.system.client.ApplicationServiceProvider;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
@@ -88,7 +86,6 @@ import org.LexGrid.LexBIG.LexBIGService.LexBIGService;
 import org.LexGrid.LexBIG.Utility.ConvenienceMethods;
 import org.LexGrid.concepts.Concept;
 import org.LexGrid.LexBIG.DataModel.Collections.ConceptReferenceList;
-import org.LexGrid.LexBIG.Exceptions.LBException;
 
 
 /**
@@ -123,22 +120,22 @@ public class EvsTreeUtil
 
 	public static String getConceptByCode(String codingSchemeName, String vers, String ltag, String code)
 	{
-		log.info("Entered getConceptByCode.");
+		log.debug("Entered getConceptByCode.");
 		CodedNodeSet cns = null;
 		String myConcept = null;
 		
         try {
-        	log.info("getConceptByCode inside try.");
+        	log.debug("getConceptByCode inside try.");
         	
         	if (appService != null) {
 	        	cns =  appService.getCodingSchemeConcepts(codingSchemeName, null);			
-	        	log.info("getConceptByCode got cns.");
+	        	log.debug("getConceptByCode got cns.");
 	        	
 			    // LexEVS 5.1
 			    ConceptReferenceList crefs = ConvenienceMethods.createConceptReferenceList(new String[] { code}, codingSchemeName); 
 	    		cns.restrictToCodes(crefs); 
 	    		ResolvedConceptReferenceList matches = cns.resolveToList(null, null, null, 1);	    
-	    		log.info("getConceptByCode matches: " );
+	    		log.debug("getConceptByCode matches: " );
     		
 		       if (matches.getResolvedConceptReferenceCount() > 0) {
 	   			ResolvedConceptReference ref = (ResolvedConceptReference)matches.enumerateResolvedConceptReference().nextElement();
@@ -150,24 +147,24 @@ public class EvsTreeUtil
 	    	    			
 	    	    }
         	} else {
-        		log.info("appservice is null. " );
+        		log.debug("appservice is null. " );
         	}
 		 } catch (Exception e) {
 			 e.printStackTrace();
 			 return null;
 		 }
-		 log.info("getConceptByCode myConcept: " + myConcept);
+		 log.debug("getConceptByCode myConcept: " + myConcept);
 		 return myConcept;
 	}
 
 	public static String getConceptDetails(String version, String code)
 	{
-		log.info("EvsTreeUtil.getConceptDetails Entered: ");
+		log.debug("EvsTreeUtil.getConceptDetails Entered: ");
         String scheme = "";
         String theDescription = ""; 
 
 		try {
-    		log.info("get appService =null above.");
+    		log.debug("get appService =null above.");
     		appService = (LexBIGService)ApplicationServiceProvider.getApplicationServiceFromUrl(serviceUrl, "EvsServiceInfo");        			
 			
 		} catch (FileNotFoundException e) {
@@ -183,18 +180,18 @@ public class EvsTreeUtil
         
 		if( code != null ){
             if(code.contains("ZFA")){
-                log.info("Zebrafish modelSpecies");
+                log.debug("Zebrafish modelSpecies");
         		scheme = Constants.Evs.ZEBRAFISH_SCHEMA;
         	//Define parameters for all NCI_Thesaurus schema
         	} else {
-                log.info("NCI modelSpecies");
+                log.debug("NCI modelSpecies");
                 scheme = Constants.Evs.NCI_SCHEMA;
         	}
 		}
 
 		// returns Concept
         theDescription = getConceptByCode(scheme, null, null, code);
-        log.info("EvsTreeUtil.getConceptDetails Entered theDescription: " +theDescription);
+        log.debug("EvsTreeUtil.getConceptDetails Entered theDescription: " +theDescription);
         return theDescription;
 	}
 	
