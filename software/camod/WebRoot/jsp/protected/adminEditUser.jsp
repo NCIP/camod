@@ -10,11 +10,14 @@
 
 <!-- adminEditUser.jsp -->
 <!-- Main Content Begins -->
-<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<!-- Took this out of sidebar.jsp and has to go here to format correctly -->
+<%@ include file="/jsp/adminMenu.jsp" %>
+<tr><td>
+	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
 	<tr><td>
-	
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0">
-
+	<html:form method="get" action="AdminEditUserAction.do">
 		<tr>
 		    <logic:messagesPresent>
 				<ul>
@@ -42,8 +45,7 @@
 		</tr>
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
-			<td class="formRequiredLabel"><label for="field2">Institute / Organization</label></td>
-			<html:form method="get" action="AdminEditUserAction.do">
+			<td class="formRequiredLabel"><label for="field2">Institute / Organization</label></td>			
 			<td class="formField">
 				<html:text styleClass="formFieldSized" property="affiliation" size="30"/>
 			</td>
@@ -90,20 +92,19 @@
 	    
 		<tr>
 			<td align="right" colspan="3">
-				<TABLE cellpadding="4" cellspacing="0" border="0">
-				
+				<TABLE cellpadding="4" cellspacing="0" border="0">				
 					  <html:submit styleClass="actionButton">
 						  <bean:message key="button.submit"/>
-					  </html:submit>
-					  
+					  </html:submit>					  
 					  <html:cancel styleClass="actionButton">
 					  	  <bean:message key="button.cancel"/>
-	  				  </html:cancel>
-				  </html:form>			
+	  				  </html:cancel>				  			
 				</TABLE>
 			</td>
-		</tr>		
-	</TABLE>	
+		</tr>
+	</html:form>		
+	</TABLE>
+	</td></tr></TABLE>
 </td></tr></TABLE>
 
 <%@ include file="/jsp/footer.jsp" %>
