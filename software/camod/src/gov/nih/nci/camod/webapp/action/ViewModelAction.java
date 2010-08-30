@@ -467,8 +467,7 @@ public class ViewModelAction extends BaseAction
                 tmCnt++;
                 // now go to caBIO and query the gene object....
                 TargetedModification tm = (TargetedModification) eg;
-                GeneIdentifier geneIdentifier = tm.getGeneIdentifier();
-                log.debug("geneIdentifier.getEntrezGeneID() " + geneIdentifier.getEntrezGeneID());
+                GeneIdentifier geneIdentifier = tm.getGeneIdentifier();                
                 if (geneIdentifier != null)
                 {
                     log.debug("Connecting to caBIO to look up gene " + geneIdentifier);
