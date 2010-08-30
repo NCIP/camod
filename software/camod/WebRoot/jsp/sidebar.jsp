@@ -68,8 +68,9 @@
 		onmouseover="changeMenuStyle(this,'subMenuSecondaryTitleOver'),showCursor()"
 		onclick="document.location.href='#'"
 		onmouseout="changeMenuStyle(this,'subMenuSecondaryTitle'),hideCursor()"
-		height=20><A class=subMenuSecondary
-		href="http://ncicb.nci.nih.gov/NCICB/support" target="_blank">NCICB SUPPORT</A></TD></TR>
+		height=20><html:link styleClass="footerMenuLink" action="infoApplicationSupport">NCICB SUPPORT</html:link></TD></TR>
+		
+		
     <!--TR>
 	<TD class=subMenuSecondaryTitle
 		onmouseover="changeMenuStyle(this,'subMenuSecondaryTitleOver'),showCursor()"
