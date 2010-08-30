@@ -176,9 +176,9 @@
 <bean:define id="smc" name="<%=Constants.SPONTANEOUS_MUT_COLL%>"/>
 
 <TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
-	<!-- Took this out of sidebar.jsp and has to go here to format correctly -->
-	<%@ include file="/jsp/searchMenu.jsp" %>
-	<tr><td>
+<!-- Took this out of sidebar.jsp and has to go here to format correctly -->
+<%@ include file="/jsp/searchMenu.jsp" %>
+<tr><td>
 	<!-- Summary table start - added outer table to indent the summary table 10 units -->
 	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
 	<tr><td>
@@ -728,7 +728,7 @@
 <c:set var="count" value="0"/>
 <c:if test="${not empty targetedModColl}">
 <c:forEach var="tm" items="${targetedModColl}">
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
 	<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">	
 	<tr><td>
