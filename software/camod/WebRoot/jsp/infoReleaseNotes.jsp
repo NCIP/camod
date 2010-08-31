@@ -23,8 +23,8 @@
  Release Notes 
      
                              caMOD
-                          Version 2.6.1
-                          June 2010
+                          Version 2.6.2
+                          Sept 2010
 
        National Cancer Institute's Center for Biomedical Informatics and Information Technology 
  
@@ -44,11 +44,11 @@
  
  
 ================================================================ 
-    1.0 caMOD Version 2.6.1 Introduction and History 
+    1.0 caMOD Version 2.6.2 Introduction and History 
 ================================================================ 
   
  
-    caMOD 2.6.1, the Cancer Models Database, is a open source data management 
+    caMOD 2.6.2, the Cancer Models Database, is a open source data management 
     system developed for the management and sharing of data of animal models. 
     caMOD features controlled vocabularies from a shared, publicly accessible metadata repository (caDSR) and 
     enterprise vocabulary services (EVS) from the National 
@@ -66,6 +66,9 @@
 ================================================================ 
     2.0 Release History 
 ================================================================ 
+     caMOD Version 2.6.2
+    --	Sept 2010
+    
      caMOD Version 2.6.1
     --	June 2010
     
@@ -102,21 +105,11 @@
 ================================================================ 
     3.0 New Features and Updates 
 ================================================================ 
-caIMAGE connection
-The goal of this release is to update the connection to caIMAGE.  The caIMAGE application is being upgraded and the 
-servers and image viewing technology is being changed.  Therefore, both the submission of images and search of images in 
-caMOD needs to be modified. 
+LexEVS connection upgraded
+The connection to the LexEVS API was upgraded to use version 5.1.  The data displayed to the user remains the same. 
 
-Other feature requests
-- Retrieve developmental stage from DB when EVS does not return value (GForge entry #27836)
-- Change Zebrafish concept codes to accommodate new NCI Thesaurus release with improved Zebrafish vocabularies (GForge entry #27533)
-- BDA - automate changes to external properties for caIMAGE upgrade (GForge entry #25294)
-- Links to sid, gif, jpeg, jpg, tif images needs to be modified for caIMAGE upgrade (GForge entry #23750)
-- Wrap First Author field for MTB pages (GForge entry #23452)
-- Display PMID number on search results detail page (GForge entry #19879)
-- Assign various records to curator - data cleanup (GForge entry #18685)
-- Separation between keyword search and simple/advanced search is not obvious to user (GForge entry #14560)
-- Make sorting meaningful for humans and not for computers (GForge entry #14379)
+caBIO connection upgraded
+The connection to the BIO API was upgraded to use version 4.3.1.  The data displayed to the user remains the same.
 
 The caMOD 2.5 Common Data Elements (CDEs) are available via caDSR    
    
@@ -124,10 +117,8 @@ The caMOD 2.5 Common Data Elements (CDEs) are available via caDSR
     4.0 Defects Fixed Since Last Release 
 ================================================================ 
  
-- Can't enter "Other" for site of administration on Transplant page (GForge entry #27700)
-- delete image record for image_id=1058 (GForge entry #27167)
-- Entered date changes every single time the model characteristics page is changed (GForge entry #20593)
-- Change label from MMHCC Repository to NCI Mouse Repository (GForge entry #18438) 
+User Guide and Help links upgraded
+The connection to the User Guide and all the help links throughout caMOD was upgraded to work with the new Apache Tomcat functionality.
  
 ================================================================ 
     5.0 Known Issues/Defects 
