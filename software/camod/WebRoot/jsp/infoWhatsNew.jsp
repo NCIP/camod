@@ -25,7 +25,7 @@
 														   <TR>													
 																<TR>
 																	<TD class="formTitleBlue" colspan="2" height="20">
-																		Release of caMOD 2.6.1 - June 2010
+																		Release of caMOD 2.6.2 - Sept 2010
 																	</TD>
 																</TR>
 
@@ -41,30 +41,35 @@
 																</TR>
 																<TR>
 																	<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">
-																		caIMAGE connection
+																		LexEVS connection upgraded
 																	</TD>
 																	<TD
 																		style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
 																		width="80%">
-																		The goal of this release is to update the connection to caIMAGE.  The caIMAGE application is being upgraded and the 
-																		servers and image viewing technology is being changed.  Therefore, both the submission of images and search of images in 
-																		caMOD needs to be modified.
-																	</TD>
-																</TR>																		
-																<TR>
-																	<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">
-																		Various feature requests
-																	</TD>
-																	<TD
-																		style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
-																		width="80%">
-								                                           <ul><li>	Wrap First Author field for MTB pages </li>
-								                                           <li>	Display PMID number on search results detail page </li>
-								                                           <li>	Separation between keyword search and simple/advanced search </li>
-								                                           <li>	Make sorting meaningful for humans</li></ul>
+																		The connection to the LexEVS API was upgraded to use version 5.1.  The data displayed to the user remains the same.  
 																	</TD>
 																</TR>
-														    </TR>			
+																<TR>
+																	<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">
+																		caBIO connection upgraded
+																	</TD>
+																	<TD
+																		style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
+																		width="80%">
+																		The connection to the BIO API was upgraded to use version 4.3.1.  The data displayed to the user remains the same.  
+																	</TD>
+																</TR>
+																<TR>
+																	<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">
+																		User Guide and Help links upgraded
+																	</TD>
+																	<TD
+																		style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
+																		width="80%">
+																		The connection to the User Guide and all the help links throughout caMOD was upgraded to work with the new Apache Tomcat functionality.  
+																	</TD>
+																</TR>																																
+														</TR>			
 												    </TBODY>
 											    </TABLE><br>																
 						                </TD></TR></TBODY>
