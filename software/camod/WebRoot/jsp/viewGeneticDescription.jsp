@@ -734,7 +734,7 @@
 	<tr><td>
 	<a name="<c:out value="targ_mod_${count}"/>"/>
 	<c:set var="count" value="${count + 1}"/>
-	<TABLE cellpadding="7" cellspacing="0" border="0" align="left" width="60%">
+	<TABLE cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
 		<tr>
 			<td class="formTitle" height="20" colspan="2">
 				Targeted Modification - Model:
