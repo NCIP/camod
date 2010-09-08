@@ -161,19 +161,19 @@
 							<c:otherwise>
 								<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
 							</c:otherwise>
-						</c:choose>
+						</c:choose></BR>
 						<c:if test="${not empty cd.environmentalFactor.nscNumber}">
-							<br>NSC: 
+							<br>NSC:&nbsp;
 							<a target="_blank" href="http://dtp.nci.nih.gov/dtpstandard/servlet/ChemData?queryHOLD=&searchtype=NSC&chemnameboolean=and&outputformat=html&Submit=Submit&searchlist=<c:out value="${cd.environmentalFactor.nscNumber}"/>">
 							    <c:out value="${cd.environmentalFactor.nscNumber}"/>
 							</a>
-						</c:if>
+						</c:if></BR>
 						<c:if test="${not empty cd.environmentalFactor.casNumber}">
-							<br>CAS: 
+							<br>CAS:&nbsp;
 							<a target="_blank" href="http://dtp.nci.nih.gov/dtpstandard/servlet/ChemData?queryHOLD=&searchtype=CAS&chemnameboolean=and&outputformat=html&Submit=Submit&searchlist=<c:out value="${cd.environmentalFactor.casNumber}"/>">
 							    <c:out value="${cd.environmentalFactor.casNumber}"/>
 							</a>    
-						</c:if>
+						</c:if></BR>
 					</td>
 					<td class="<c:out value="${tdClass}"/>" width="17%">
 						<camod:highlight><c:out value="${cd.treatment.dosage}"  escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}" escapeXml="false"/></camod:highlight>
