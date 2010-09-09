@@ -71,37 +71,257 @@
 <!-- Took this out of sidebar.jsp and has to go here to format correctly -->
 <%@ include file="/jsp/searchMenu.jsp" %>
 <tr><td>
-	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="70%" height="100%">
+	<TABLE cellpadding="10" cellspacing="0" border="00" class="contentBegins" width="70%" height="100%">
 	<tr><td>
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
 	<tr><td valign="top">
+	
 		<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%">
 		<tr><td>
-			<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">
-			<tr>
-				<td class="formTitle" height="20" colspan="7">
-					Carcinogenic Agents - Model:
-					<camod:highlight>
-						<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
-					<c:if test="${mdl.externalSource == 'Jax MTB'}">
-						<IMG src="/camod/images/mtb_logo.jpg">
-					</c:if>							
-					</camod:highlight>
-				</td>				
-			</tr>			
-			</TABLE>			
-			<br>
-
-					
-			<!--   Start Chemical / Drug Section (caMOD and Jackson Lab data) ------------------------------------------------>
-			<c:set var="environmentalFactorType" value="Chemical / Drug"/>
-			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
-			<c:if test="${not empty cdList}">
-				<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">
-	
+				<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">
 				<tr>
-					<td class="formTitleBlue" height="20" colspan="7">Chemical / Drug</td>				
+					<td class="formTitle" height="20" colspan="7">
+						Carcinogenic Agents - Model:
+						<camod:highlight>
+							<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
+						<c:if test="${mdl.externalSource == 'Jax MTB'}">
+							<IMG src="/camod/images/mtb_logo.jpg">
+						</c:if>							
+						</camod:highlight>
+					</td>				
+				</tr>			
+				</TABLE><br>
+					
+				<!--   Start Chemical / Drug Section (caMOD and Jackson Lab data) ------------------------------------------------>
+				<c:set var="environmentalFactorType" value="Chemical / Drug"/>
+				<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
+				<c:if test="${not empty cdList}">
+					<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">
+		
+					<tr>
+						<td class="formTitleBlue" height="20" colspan="7">Chemical / Drug</td>				
+					</tr>
+					<!--   Start of if externalSource is Jax MTB -->
+					<c:if test="${mdl.externalSource == 'Jax MTB'}">
+					<tr>
+						<td class="greySubTitleLeft" width="17%">Agent Type</td>
+						<td class="greySubTitleLeft" width="17%">Agent Name</td>				
+					</tr>
+					
+					<c:forEach var="cd" items="${cdList}" varStatus="stat">
+						<c:choose>
+							<c:when test = "${stat.count % 2 == 0}">
+								<c:set var="tdClass" value="resultsBoxWhite"/>
+							</c:when>
+							<c:otherwise>
+								<c:set var="tdClass" value="resultsBoxGrey"/>
+							</c:otherwise>
+						</c:choose>
+					<tr>
+						<td class="<c:out value="${tdClass}"/>" width="17%">
+							<camod:highlight><c:out value="${cd.environmentalFactor.type}" escapeXml="false"/></camod:highlight>
+						</td>
+		
+						<td class="<c:out value="${tdClass}"/>" width="20%">
+							<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
+						</td>
+					</tr>
+					</c:forEach>			
+					</c:if>		
+					<!--   End of if externalSource is Jax MTB -->
+				
+					<!--   Start of if externalSource is empty (caMOD data) -->	
+					<c:if test="${empty mdl.externalSource}">
+					<tr>
+						<td class="greySubTitleLeft" width="17%">Chemical / Drug</td>
+						<td class="greySubTitleLeft" width="17%">Dose</td>
+						<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
+						<td class="greySubTitleLeft" width="17%">Administrative Route</td>
+						<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
+						<td class="greySubTitle" width="17%">Gender</td>
+						<td class="greySubTitle" width="17%">Comment</td>									
+					</tr>
+					
+					<c:forEach var="cd" items="${cdList}" varStatus="stat">
+						<c:choose>
+							<c:when test = "${stat.count % 2 == 0}">
+								<c:set var="tdClass" value="resultsBoxWhite"/>
+							</c:when>
+							<c:otherwise>
+								<c:set var="tdClass" value="resultsBoxGrey"/>
+							</c:otherwise>
+						</c:choose>
+					<tr>
+						<td class="<c:out value="${tdClass}"/>" width="17%">
+							<c:choose>
+								<c:when test="${empty cd.environmentalFactor.name}">
+									<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
+								</c:when>
+								<c:otherwise>
+									<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
+								</c:otherwise>
+							</c:choose></BR>
+							<c:if test="${not empty cd.environmentalFactor.nscNumber}">
+								<br>NSC:&nbsp;
+								<a target="_blank" href="http://dtp.nci.nih.gov/dtpstandard/servlet/ChemData?queryHOLD=&searchtype=NSC&chemnameboolean=and&outputformat=html&Submit=Submit&searchlist=<c:out value="${cd.environmentalFactor.nscNumber}"/>">
+								    <c:out value="${cd.environmentalFactor.nscNumber}"/>
+								</a>
+							</c:if></BR>
+							<c:if test="${not empty cd.environmentalFactor.casNumber}">
+								<br>CAS:&nbsp;
+								<a target="_blank" href="http://dtp.nci.nih.gov/dtpstandard/servlet/ChemData?queryHOLD=&searchtype=CAS&chemnameboolean=and&outputformat=html&Submit=Submit&searchlist=<c:out value="${cd.environmentalFactor.casNumber}"/>">
+								    <c:out value="${cd.environmentalFactor.casNumber}"/>
+								</a>    
+							</c:if></BR>
+						</td>
+						<td class="<c:out value="${tdClass}"/>" width="17%">
+							<camod:highlight><c:out value="${cd.treatment.dosage}"  escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}" escapeXml="false"/></camod:highlight>
+						</td>
+						<td class="<c:out value="${tdClass}"/>" width="17%">
+							<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
+						</td>
+						<td class="<c:out value="${tdClass}"/>" width="17%">
+							<c:choose>
+								<c:when test="${empty cd.treatment.administrativeRoute}">
+									<camod:highlight><c:out value="${cd.treatment.adminRouteAlternEntry}" escapeXml="false"/></camod:highlight>
+								</c:when>
+								<c:otherwise>
+									<camod:highlight><c:out value="${cd.treatment.administrativeRoute}" escapeXml="false"/></camod:highlight>
+								</c:otherwise>
+							</c:choose>&nbsp;
+						</td>
+						<td class="<c:out value="${tdClass}"/>" width="17%">
+							<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}"/></camod:highlight>
+						</td>
+						<td class="<c:out value="${tdClass}"/>" width="17%">
+							<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}" escapeXml="false"/>&nbsp;</camod:highlight>
+						</td>
+	
+						<td class="<c:out value="${tdClass}"/>End" width="17%">
+							<camod:highlight><c:out value="${cd.environmentalFactor.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
+						</td>
+						
+					</tr>
+					</c:forEach>
+					<!--   End of if externalSource is empty (caMOD data) -->
+					</c:if>
+					</TABLE>
+					<br>								
+					</c:if>
+				
+				
+				<!--   Start Growth Factor Section (caMOD and Jackson Lab data) ------------------------------------------------>
+				<c:set var="environmentalFactorType" value="Growth Factor"/>
+				<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
+				<c:if test="${not empty cdList}">
+				<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
+				<tr>
+					<td class="formTitleBlue" height="20" colspan="7">Growth Factor</td>				
 				</tr>
+				
+				<!--   Start of if externalSource is Jax MTB -->
+				<c:if test="${mdl.externalSource == 'Jax MTB'}">
+				<tr>
+					<td class="greySubTitleLeft" width="17%">Agent Type</td>
+					<td class="greySubTitleLeft" width="17%">Agent Name</td>				jj
+				</tr>
+				
+				<c:forEach var="cd" items="${cdList}" varStatus="stat">
+					<c:choose>
+						<c:when test = "${stat.count % 2 == 0}">
+							<c:set var="tdClass" value="resultsBoxWhite"/>
+						</c:when>
+						<c:otherwise>
+							<c:set var="tdClass" value="resultsBoxGrey"/>
+						</c:otherwise>
+					</c:choose>
+				<tr>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.environmentalFactor.type}" escapeXml="false"/></camod:highlight>
+					</td>
+	
+					<td class="<c:out value="${tdClass}"/>" width="20%">
+						<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
+					</td>
+				</tr>
+				</c:forEach>			
+				</c:if>		
+				<!--   End of if externalSource is Jax MTB -->
+	
+				<!--   Start of if externalSource is empty (caMOD data) -->	
+				<c:if test="${empty mdl.externalSource}">												
+				<tr>
+					<td class="greySubTitleLeft" width="17%">Growth Factor</td>
+					<td class="greySubTitleLeft" width="17%">Dose</td>
+					<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>	
+					<td class="greySubTitleLeft" width="17%">Administrative Route</td>
+					<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
+					<td class="greySubTitle" width="17%">Gender</td>
+					<td class="greySubTitle" width="17%">Comment</td>					
+				</tr>
+				<c:forEach var="cd" items="${cdList}" varStatus="stat">
+					<c:choose>
+						<c:when test = "${stat.count % 2 == 0}">
+							<c:set var="tdClass" value="resultsBoxWhite"/>
+						</c:when>
+						<c:otherwise>
+							<c:set var="tdClass" value="resultsBoxGrey"/>
+						</c:otherwise>
+					</c:choose>
+				<tr>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<c:choose>
+							<c:when test="${empty cd.environmentalFactor.name}">
+								<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
+							</c:when>
+							<c:otherwise>
+								<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
+							</c:otherwise>
+						</c:choose>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.dosage}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}" escapeXml="false"/></camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<c:choose>
+							<c:when test="${empty cd.treatment.administrativeRoute}">
+								<camod:highlight><c:out value="${cd.treatment.adminRouteAlternEntry}" escapeXml="false"/></camod:highlight>
+							</c:when>
+							<c:otherwise>
+								<camod:highlight><c:out value="${cd.treatment.administrativeRoute}" escapeXml="false"/></camod:highlight>
+							</c:otherwise>
+						</c:choose>&nbsp;
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}" escapeXml="false"/></camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}"/>&nbsp;</camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>End" width="17%">
+							<camod:highlight><c:out value="${cd.environmentalFactor.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>				
+				</tr>
+				</c:forEach>
+				<!--   End of if externalSource is empty (caMOD data) -->
+				</c:if>			
+				</TABLE>		
+				<br>								
+				</c:if>
+	
+	
+				<!--   Start Hormone Section  (caMOD and Jackson Lab data) ------------------------------------------------>
+				<c:set var="environmentalFactorType" value="Hormone"/>
+				<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
+				<c:if test="${not empty cdList}">
+				<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
+				<tr>
+					<td class="formTitleBlue" height="20" colspan="7">Hormone</td>				
+				</tr>
+				
 				<!--   Start of if externalSource is Jax MTB -->
 				<c:if test="${mdl.externalSource == 'Jax MTB'}">
 				<tr>
@@ -130,19 +350,18 @@
 				</c:forEach>			
 				</c:if>		
 				<!--   End of if externalSource is Jax MTB -->
-			
+	
 				<!--   Start of if externalSource is empty (caMOD data) -->	
-				<c:if test="${empty mdl.externalSource}">
+				<c:if test="${empty mdl.externalSource}">									
 				<tr>
-					<td class="greySubTitleLeft" width="17%">Chemical / Drug</td>
+					<td class="greySubTitleLeft" width="17%">Hormone</td>
 					<td class="greySubTitleLeft" width="17%">Dose</td>
 					<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
 					<td class="greySubTitleLeft" width="17%">Administrative Route</td>
 					<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
 					<td class="greySubTitle" width="17%">Gender</td>
-					<td class="greySubTitle" width="17%">Comment</td>									
+					<td class="greySubTitle" width="17%">Comment</td>
 				</tr>
-				
 				<c:forEach var="cd" items="${cdList}" varStatus="stat">
 					<c:choose>
 						<c:when test = "${stat.count % 2 == 0}">
@@ -161,22 +380,10 @@
 							<c:otherwise>
 								<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
 							</c:otherwise>
-						</c:choose></BR>
-						<c:if test="${not empty cd.environmentalFactor.nscNumber}">
-							<br>NSC:&nbsp;
-							<a target="_blank" href="http://dtp.nci.nih.gov/dtpstandard/servlet/ChemData?queryHOLD=&searchtype=NSC&chemnameboolean=and&outputformat=html&Submit=Submit&searchlist=<c:out value="${cd.environmentalFactor.nscNumber}"/>">
-							    <c:out value="${cd.environmentalFactor.nscNumber}"/>
-							</a>
-						</c:if></BR>
-						<c:if test="${not empty cd.environmentalFactor.casNumber}">
-							<br>CAS:&nbsp;
-							<a target="_blank" href="http://dtp.nci.nih.gov/dtpstandard/servlet/ChemData?queryHOLD=&searchtype=CAS&chemnameboolean=and&outputformat=html&Submit=Submit&searchlist=<c:out value="${cd.environmentalFactor.casNumber}"/>">
-							    <c:out value="${cd.environmentalFactor.casNumber}"/>
-							</a>    
-						</c:if></BR>
+						</c:choose>
 					</td>
 					<td class="<c:out value="${tdClass}"/>" width="17%">
-						<camod:highlight><c:out value="${cd.treatment.dosage}"  escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}" escapeXml="false"/></camod:highlight>
+						<camod:highlight><c:out value="${cd.treatment.dosage}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}" escapeXml="false"/></camod:highlight>
 					</td>
 					<td class="<c:out value="${tdClass}"/>" width="17%">
 						<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
@@ -192,1241 +399,1028 @@
 						</c:choose>&nbsp;
 					</td>
 					<td class="<c:out value="${tdClass}"/>" width="17%">
-						<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}"/></camod:highlight>
+						<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}" escapeXml="false"/></camod:highlight>
 					</td>
 					<td class="<c:out value="${tdClass}"/>" width="17%">
 						<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}" escapeXml="false"/>&nbsp;</camod:highlight>
 					</td>
-
 					<td class="<c:out value="${tdClass}"/>End" width="17%">
-						<camod:highlight><c:out value="${cd.environmentalFactor.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
-					</td>
-					
+							<camod:highlight><c:out value="${cd.environmentalFactor.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>				
 				</tr>
 				</c:forEach>
 				<!--   End of if externalSource is empty (caMOD data) -->
-				</c:if>
+				</c:if>			
+				</TABLE>
+				<br>								
+				</c:if>			
+				
+				
+				<!--   Start Radiation Section (caMOD and Jackson Lab data) ------------------------------------------------>
+				<c:set var="environmentalFactorType" value="Radiation"/>
+				<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
+				<c:if test="${not empty cdList}">
+				<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
+				<tr>
+					<td class="formTitleBlue" height="20" colspan="7">Radiation</td>				
+				</tr>
+				
+				<!--   Start of if externalSource is Jax MTB -->
+				<c:if test="${mdl.externalSource == 'Jax MTB'}">
+				<tr>
+					<td class="greySubTitleLeft" width="17%">Agent Type</td>
+					<td class="greySubTitleLeft" width="17%">Agent Name</td>				
+				</tr>
+				
+				<c:forEach var="cd" items="${cdList}" varStatus="stat">
+					<c:choose>
+						<c:when test = "${stat.count % 2 == 0}">
+							<c:set var="tdClass" value="resultsBoxWhite"/>
+						</c:when>
+						<c:otherwise>
+							<c:set var="tdClass" value="resultsBoxGrey"/>
+						</c:otherwise>
+					</c:choose>
+				<tr>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.environmentalFactor.type}" escapeXml="false"/></camod:highlight>
+					</td>
+	
+					<td class="<c:out value="${tdClass}"/>" width="20%">
+						<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
+					</td>
+				</tr>
+				</c:forEach>			
+				</c:if>		
+				<!--   End of if externalSource is Jax MTB -->
+	
+				<!--   Start of if externalSource is empty (caMOD data) -->	
+				<c:if test="${empty mdl.externalSource}">									
+				<tr>
+					<td class="greySubTitleLeft" width="17%">Radiation</td>
+					<td class="greySubTitleLeft" width="17%">Dose</td>
+					<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>	
+					<td class="greySubTitleLeft" width="17%">Administrative Route</td>
+					<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
+					<td class="greySubTitle" width="17%">Gender</td>
+					<td class="greySubTitle" width="17%">Comment</td>	
+				</tr>
+				<c:forEach var="cd" items="${cdList}" varStatus="stat">
+					<c:choose>
+						<c:when test = "${stat.count % 2 == 0}">
+							<c:set var="tdClass" value="resultsBoxWhite"/>
+						</c:when>
+						<c:otherwise>
+							<c:set var="tdClass" value="resultsBoxGrey"/>
+						</c:otherwise>
+					</c:choose>
+				<tr>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<c:choose>
+							<c:when test="${empty cd.environmentalFactor.name}">
+								<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
+							</c:when>
+							<c:otherwise>
+								<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
+							</c:otherwise>
+						</c:choose>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.dosage}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}" escapeXml="false"/></camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<c:choose>
+							<c:when test="${empty cd.treatment.administrativeRoute}">
+								<camod:highlight><c:out value="${cd.treatment.adminRouteAlternEntry}" escapeXml="false"/></camod:highlight>
+							</c:when>
+							<c:otherwise>
+								<camod:highlight><c:out value="${cd.treatment.administrativeRoute}" escapeXml="false"/></camod:highlight>
+							</c:otherwise>
+						</c:choose>&nbsp;
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}" escapeXml="false"/></camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}" escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>End" width="17%">
+							<camod:highlight><c:out value="${cd.environmentalFactor.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>				
+				</tr>
+				</c:forEach>
+				<!--   End of if externalSource is empty (caMOD data) -->
+				</c:if>			
 				</TABLE>
 				<br>								
 				</c:if>
-
-			
-			
-			<!--   Start Growth Factor Section (caMOD and Jackson Lab data) ------------------------------------------------>
-			<c:set var="environmentalFactorType" value="Growth Factor"/>
-			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
-			<c:if test="${not empty cdList}">
-			<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
-			<tr>
-				<td class="formTitleBlue" height="20" colspan="7">Growth Factor</td>				
-			</tr>
-			
-			<!--   Start of if externalSource is Jax MTB -->
-			<c:if test="${mdl.externalSource == 'Jax MTB'}">
-			<tr>
-				<td class="greySubTitleLeft" width="17%">Agent Type</td>
-				<td class="greySubTitleLeft" width="17%">Agent Name</td>				
-			</tr>
-			
-			<c:forEach var="cd" items="${cdList}" varStatus="stat">
-				<c:choose>
-					<c:when test = "${stat.count % 2 == 0}">
-						<c:set var="tdClass" value="resultsBoxWhite"/>
-					</c:when>
-					<c:otherwise>
-						<c:set var="tdClass" value="resultsBoxGrey"/>
-					</c:otherwise>
-				</c:choose>
-			<tr>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.type}" escapeXml="false"/></camod:highlight>
-				</td>
-
-				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
-				</td>
-			</tr>
-			</c:forEach>			
-			</c:if>		
-			<!--   End of if externalSource is Jax MTB -->
-
-			<!--   Start of if externalSource is empty (caMOD data) -->	
-			<c:if test="${empty mdl.externalSource}">												
-			<tr>
-				<td class="greySubTitleLeft" width="17%">Growth Factor</td>
-				<td class="greySubTitleLeft" width="17%">Dose</td>
-				<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>	
-				<td class="greySubTitleLeft" width="17%">Administrative Route</td>
-				<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
-				<td class="greySubTitle" width="17%">Gender</td>
-				<td class="greySubTitle" width="17%">Comment</td>					
-			</tr>
-			<c:forEach var="cd" items="${cdList}" varStatus="stat">
-				<c:choose>
-					<c:when test = "${stat.count % 2 == 0}">
-						<c:set var="tdClass" value="resultsBoxWhite"/>
-					</c:when>
-					<c:otherwise>
-						<c:set var="tdClass" value="resultsBoxGrey"/>
-					</c:otherwise>
-				</c:choose>
-			<tr>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:choose>
-						<c:when test="${empty cd.environmentalFactor.name}">
-							<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
-						</c:when>
-						<c:otherwise>
-							<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
-						</c:otherwise>
-					</c:choose>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.dosage}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}" escapeXml="false"/></camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:choose>
-						<c:when test="${empty cd.treatment.administrativeRoute}">
-							<camod:highlight><c:out value="${cd.treatment.adminRouteAlternEntry}" escapeXml="false"/></camod:highlight>
-						</c:when>
-						<c:otherwise>
-							<camod:highlight><c:out value="${cd.treatment.administrativeRoute}" escapeXml="false"/></camod:highlight>
-						</c:otherwise>
-					</c:choose>&nbsp;
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}" escapeXml="false"/></camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}"/>&nbsp;</camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>End" width="17%">
-						<camod:highlight><c:out value="${cd.environmentalFactor.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>				
-			</tr>
-			</c:forEach>
-			<!--   End of if externalSource is empty (caMOD data) -->
-			</c:if>			
-			</TABLE>		
-			<br>								
-			</c:if>
-
-
-			<!--   Start Hormone Section  (caMOD and Jackson Lab data) ------------------------------------------------>
-			<c:set var="environmentalFactorType" value="Hormone"/>
-			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
-			<c:if test="${not empty cdList}">
-			<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
-			<tr>
-				<td class="formTitleBlue" height="20" colspan="7">Hormone</td>				
-			</tr>
-			
-			<!--   Start of if externalSource is Jax MTB -->
-			<c:if test="${mdl.externalSource == 'Jax MTB'}">
-			<tr>
-				<td class="greySubTitleLeft" width="17%">Agent Type</td>
-				<td class="greySubTitleLeft" width="17%">Agent Name</td>				
-			</tr>
-			
-			<c:forEach var="cd" items="${cdList}" varStatus="stat">
-				<c:choose>
-					<c:when test = "${stat.count % 2 == 0}">
-						<c:set var="tdClass" value="resultsBoxWhite"/>
-					</c:when>
-					<c:otherwise>
-						<c:set var="tdClass" value="resultsBoxGrey"/>
-					</c:otherwise>
-				</c:choose>
-			<tr>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.type}" escapeXml="false"/></camod:highlight>
-				</td>
-
-				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
-				</td>
-			</tr>
-			</c:forEach>			
-			</c:if>		
-			<!--   End of if externalSource is Jax MTB -->
-
-			<!--   Start of if externalSource is empty (caMOD data) -->	
-			<c:if test="${empty mdl.externalSource}">									
-			<tr>
-				<td class="greySubTitleLeft" width="17%">Hormone</td>
-				<td class="greySubTitleLeft" width="17%">Dose</td>
-				<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
-				<td class="greySubTitleLeft" width="17%">Administrative Route</td>
-				<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
-				<td class="greySubTitle" width="17%">Gender</td>
-				<td class="greySubTitle" width="17%">Comment</td>
-			</tr>
-			<c:forEach var="cd" items="${cdList}" varStatus="stat">
-				<c:choose>
-					<c:when test = "${stat.count % 2 == 0}">
-						<c:set var="tdClass" value="resultsBoxWhite"/>
-					</c:when>
-					<c:otherwise>
-						<c:set var="tdClass" value="resultsBoxGrey"/>
-					</c:otherwise>
-				</c:choose>
-			<tr>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:choose>
-						<c:when test="${empty cd.environmentalFactor.name}">
-							<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
-						</c:when>
-						<c:otherwise>
-							<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
-						</c:otherwise>
-					</c:choose>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.dosage}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}" escapeXml="false"/></camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:choose>
-						<c:when test="${empty cd.treatment.administrativeRoute}">
-							<camod:highlight><c:out value="${cd.treatment.adminRouteAlternEntry}" escapeXml="false"/></camod:highlight>
-						</c:when>
-						<c:otherwise>
-							<camod:highlight><c:out value="${cd.treatment.administrativeRoute}" escapeXml="false"/></camod:highlight>
-						</c:otherwise>
-					</c:choose>&nbsp;
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}" escapeXml="false"/></camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}" escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>End" width="17%">
-						<camod:highlight><c:out value="${cd.environmentalFactor.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>				
-			</tr>
-			</c:forEach>
-			<!--   End of if externalSource is empty (caMOD data) -->
-			</c:if>			
-			</TABLE>
-			<br>								
-			</c:if>			
-			
-			
-			<!--   Start Radiation Section (caMOD and Jackson Lab data) ------------------------------------------------>
-			<c:set var="environmentalFactorType" value="Radiation"/>
-			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
-			<c:if test="${not empty cdList}">
-			<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
-			<tr>
-				<td class="formTitleBlue" height="20" colspan="7">Radiation</td>				
-			</tr>
-			
-			<!--   Start of if externalSource is Jax MTB -->
-			<c:if test="${mdl.externalSource == 'Jax MTB'}">
-			<tr>
-				<td class="greySubTitleLeft" width="17%">Agent Type</td>
-				<td class="greySubTitleLeft" width="17%">Agent Name</td>				
-			</tr>
-			
-			<c:forEach var="cd" items="${cdList}" varStatus="stat">
-				<c:choose>
-					<c:when test = "${stat.count % 2 == 0}">
-						<c:set var="tdClass" value="resultsBoxWhite"/>
-					</c:when>
-					<c:otherwise>
-						<c:set var="tdClass" value="resultsBoxGrey"/>
-					</c:otherwise>
-				</c:choose>
-			<tr>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.type}" escapeXml="false"/></camod:highlight>
-				</td>
-
-				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
-				</td>
-			</tr>
-			</c:forEach>			
-			</c:if>		
-			<!--   End of if externalSource is Jax MTB -->
-
-			<!--   Start of if externalSource is empty (caMOD data) -->	
-			<c:if test="${empty mdl.externalSource}">									
-			<tr>
-				<td class="greySubTitleLeft" width="17%">Radiation</td>
-				<td class="greySubTitleLeft" width="17%">Dose</td>
-				<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>	
-				<td class="greySubTitleLeft" width="17%">Administrative Route</td>
-				<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
-				<td class="greySubTitle" width="17%">Gender</td>
-				<td class="greySubTitle" width="17%">Comment</td>	
-			</tr>
-			<c:forEach var="cd" items="${cdList}" varStatus="stat">
-				<c:choose>
-					<c:when test = "${stat.count % 2 == 0}">
-						<c:set var="tdClass" value="resultsBoxWhite"/>
-					</c:when>
-					<c:otherwise>
-						<c:set var="tdClass" value="resultsBoxGrey"/>
-					</c:otherwise>
-				</c:choose>
-			<tr>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:choose>
-						<c:when test="${empty cd.environmentalFactor.name}">
-							<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
-						</c:when>
-						<c:otherwise>
-							<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
-						</c:otherwise>
-					</c:choose>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.dosage}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}" escapeXml="false"/></camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:choose>
-						<c:when test="${empty cd.treatment.administrativeRoute}">
-							<camod:highlight><c:out value="${cd.treatment.adminRouteAlternEntry}" escapeXml="false"/></camod:highlight>
-						</c:when>
-						<c:otherwise>
-							<camod:highlight><c:out value="${cd.treatment.administrativeRoute}" escapeXml="false"/></camod:highlight>
-						</c:otherwise>
-					</c:choose>&nbsp;
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}" escapeXml="false"/></camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}" escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>End" width="17%">
-						<camod:highlight><c:out value="${cd.environmentalFactor.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>				
-			</tr>
-			</c:forEach>
-			<!--   End of if externalSource is empty (caMOD data) -->
-			</c:if>			
-			</TABLE>
-			<br>								
-			</c:if>
-			
-			<!--   Start Surgery / Other Section ------------------------------------------------>
-			<c:set var="environmentalFactorType" value="Other"/>
-			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
-			<c:if test="${not empty cdList}">
-			<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
-			<tr>
-				<td class="formTitleBlue" height="20" colspan="7">Other / Surgery</td>
-			</tr>
-			<!--   Start of if externalSource is Jax MTB -->
-			<c:if test="${mdl.externalSource == 'Jax MTB'}">
-			<tr>
-				<td class="greySubTitleLeft" width="17%">Agent Type</td>
-				<td class="greySubTitleLeft" width="17%">Agent Name</td>				
-			</tr>
-			
-			<c:forEach var="cd" items="${cdList}" varStatus="stat">
-				<c:choose>
-					<c:when test = "${stat.count % 2 == 0}">
-						<c:set var="tdClass" value="resultsBoxWhite"/>
-					</c:when>
-					<c:otherwise>
-						<c:set var="tdClass" value="resultsBoxGrey"/>
-					</c:otherwise>
-				</c:choose>
-			<tr>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.type}" escapeXml="false"/></camod:highlight>
-				</td>
-
-				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
-				</td>
-			</tr>			
-			</c:forEach>
-			</c:if>		
-			<!--   End of if externalSource is Jax MTB -->
-
-			<!--   Start of if externalSource is empty (caMOD data) -->	
-			<c:if test="${empty mdl.externalSource}">									
-			<tr>
-				<td class="greySubTitleLeft" width="30%">Surgery</td>
-				<td class="greySubTitleLeft" width="30%">Treatment Regimen</td>
-				<td class="greySubTitleLeft" width="20%">Age at Treatment</td>
-				<td class="greySubTitle" width="20%">Gender</td>
-				<td class="greySubTitle" width="17%">Comment</td>				
-			</tr>
-			<c:forEach var="cd" items="${cdList}" varStatus="stat">
-				<c:choose>
-					<c:when test = "${stat.count % 2 == 0}">
-						<c:set var="tdClass" value="resultsBoxWhite"/>
-					</c:when>
-					<c:otherwise>
-						<c:set var="tdClass" value="resultsBoxGrey"/>
-					</c:otherwise>
-				</c:choose>
-			<tr>
-				<td class="<c:out value="${tdClass}"/>" width="30%">
-					<c:choose>
-						<c:when test="${empty cd.environmentalFactor.name}">
-							<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
-						</c:when>
-						<c:otherwise>
-							<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
-						</c:otherwise>
-					</c:choose>&nbsp;
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="30%">
-					<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}" escapeXml="false"/></camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}" escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>End" width="17%">
-						<camod:highlight><c:out value="${cd.environmentalFactor.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>				
-			</tr>
-			</c:forEach>
-			<!--   End of if externalSource is empty (caMOD data) -->
-			</c:if>			
-			</TABLE>
-			<br>								
-			</c:if>			
-			
-
-
-     		<!--   Start Viral Treatment Section (caMOD and Jackson Lab data) ------------------------------------------------>
-			<c:set var="environmentalFactorType" value="Viral"/>
-			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
-			<c:if test="${not empty cdList}">
-			<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
-			<tr>
-				<td class="formTitleBlue" height="20" colspan="7">Viral Treatment</td>
-			</tr>
-			
-			<!--   Start of if externalSource is Jax MTB -->
-			<c:if test="${mdl.externalSource == 'Jax MTB'}">			
-			<tr>
-				<td class="greySubTitleLeft" width="17%">Agent Type</td>
-				<td class="greySubTitleLeft" width="17%">Agent Name</td>				
-			</tr>
-			
-			<c:forEach var="cd" items="${cdList}" varStatus="stat">
-				<c:choose>
-					<c:when test = "${stat.count % 2 == 0}">
-						<c:set var="tdClass" value="resultsBoxWhite"/>
-					</c:when>
-					<c:otherwise>
-						<c:set var="tdClass" value="resultsBoxGrey"/>
-					</c:otherwise>
-				</c:choose>
-			<tr>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.type}" escapeXml="false"/></camod:highlight>
-				</td>
-
-				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
-				</td>
-			</tr>
-			</c:forEach>			
-			
-			</c:if>		
-			<!--   End of if externalSource is Jax MTB -->
-
-			<!--   Start of if externalSource is empty (caMOD data) -->	
-			<c:if test="${empty mdl.externalSource}">						
-			<tr>
-				<td class="greySubTitleLeft" width="17%">Virus</td>
-				<td class="greySubTitleLeft" width="17%">Dose</td>
-				<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
-				<td class="greySubTitleLeft" width="17%">Administrative Route</td>
-				<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
-				<td class="greySubTitle" width="17%">Gender</td>
-				<td class="greySubTitle" width="17%">Comment</td>				
-			</tr>
-			
-			<c:forEach var="cd" items="${cdList}" varStatus="stat">
-				<c:choose>
-					<c:when test = "${stat.count % 2 == 0}">
-						<c:set var="tdClass" value="resultsBoxWhite"/>
-					</c:when>
-					<c:otherwise>
-						<c:set var="tdClass" value="resultsBoxGrey"/>
-					</c:otherwise>
-				</c:choose>
-			<tr>
-				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<c:choose>
-						<c:when test="${empty cd.environmentalFactor.name}">
-							<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
-						</c:when>
-						<c:otherwise>
-							<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
-						</c:otherwise>
-					</c:choose>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.dosage}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}" escapeXml="false"/></camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:choose>
-						<c:when test="${empty cd.treatment.administrativeRoute}">
-							<camod:highlight><c:out value="${cd.treatment.adminRouteAlternEntry}" escapeXml="false"/></camod:highlight>
-						</c:when>
-						<c:otherwise>
-							<camod:highlight><c:out value="${cd.treatment.administrativeRoute}" escapeXml="false"/></camod:highlight>
-						</c:otherwise>
-					</c:choose>&nbsp;
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}" escapeXml="false"/></camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}" escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>End" width="17%">
-						<camod:highlight><c:out value="${cd.environmentalFactor.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>				
-			</tr>
-			</c:forEach>
-			<!--   End of if externalSource is empty (caMOD data) -->
-			</c:if>			
-			</TABLE>
-			<br>								
-			</c:if>	
-					
-
-			<!--   Start Environmental Factor Section (caMOD data) ------------------------------------------------>
-			<c:set var="environmentalFactorType" value="Environment"/>
-			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
-			<c:if test="${not empty cdList}">
-			<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
-			<tr>
-				<td class="formTitleBlue" height="20" colspan="7">Environment</td>				
-			</tr>
-			
-			<tr>
-				<td class="greySubTitleLeft" width="17%">Environmental Factor</td>
-				<td class="greySubTitleLeft" width="17%">Dose</td>
-				<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
-				<td class="greySubTitleLeft" width="17%">Administrative Route</td>
-				<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
-				<td class="greySubTitle" width="17%">Gender</td>
-				<td class="greySubTitle" width="17%">Comment</td>				
-			</tr>
-			
-			<c:forEach var="cd" items="${cdList}" varStatus="stat">
-				<c:choose>
-					<c:when test = "${stat.count % 2 == 0}">
-						<c:set var="tdClass" value="resultsBoxWhite"/>
-					</c:when>
-					<c:otherwise>
-						<c:set var="tdClass" value="resultsBoxGrey"/>
-					</c:otherwise>
-				</c:choose>
-			<tr>
-				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<c:choose>
-						<c:when test="${empty cd.environmentalFactor.name}">
-							<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}"  escapeXml="false"/></camod:highlight>
-						</c:when>
-						<c:otherwise>
-							<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
-						</c:otherwise>
-					</c:choose>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.dosage}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}" escapeXml="false"/></camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:choose>
-						<c:when test="${empty cd.treatment.administrativeRoute}">
-							<camod:highlight><c:out value="${cd.treatment.adminRouteAlternEntry}" escapeXml="false"/></camod:highlight>
-						</c:when>
-						<c:otherwise>
-							<camod:highlight><c:out value="${cd.treatment.administrativeRoute}" escapeXml="false"/></camod:highlight>
-						</c:otherwise>
-					</c:choose>&nbsp;
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}" escapeXml="false"/></camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}" escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>End" width="17%">
-						<camod:highlight><c:out value="${cd.environmentalFactor.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>				
-			</tr>
-			</c:forEach>
-			</TABLE>		
-			<br>								
-			</c:if>
-
-			<!--   Start Gene Delivery Section (caMOD data) ------------------------------------------------>
-			<c:set var="environmentalFactorType" value="GeneDelivery"/>
-			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
-			<c:if test="${not empty cdList}">
-			<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
-			<tr>
-				<td class="formTitleBlue" height="20" colspan="7">Gene Delivery</td>				
-			</tr>
-			<tr>
-				<td class="greySubTitleLeft" width="17%">Viral Vector</td>
-				<td class="greySubTitleLeft" width="17%">Gene</td>
-				<td class="greySubTitleLeft" width="17%">Organ</td>
-				<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>	
-				<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
-				<td class="greySubTitle" width="17%">Gender</td>
-				<td class="greySubTitle" width="17%">Comment</td>
-			</tr>
-			<c:forEach var="cd" items="${cdList}" varStatus="stat">
-				<c:choose>
-					<c:when test = "${stat.count % 2 == 0}">
-						<c:set var="tdClass" value="resultsBoxWhite"/>
-					</c:when>
-					<c:otherwise>
-						<c:set var="tdClass" value="resultsBoxGrey"/>
-					</c:otherwise>
-				</c:choose>
-			<tr>
-				<td class="<c:out value="${tdClass}"/>" width="30%">
-					<c:choose>
-						<c:when test="${empty cd.viralVector}">
-							<camod:highlight><c:out value="${cd.viralVectorAlternEntry}" escapeXml="false"/></camod:highlight>
-						</c:when>
-						<c:otherwise>
-							<camod:highlight><c:out value="${cd.viralVector}" escapeXml="false"/></camod:highlight>
-						</c:otherwise>
-					</c:choose>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<camod:highlight><c:out value="${cd.geneInVirus}" escapeXml="false"/></camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="30%">
-					<camod:highlight><c:out value="${cd.organ.EVSPreferredDescription}" escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}" escapeXml="false"/></camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}" escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>End" width="17%">
-						<camod:highlight><c:out value="${cd.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>				
-			</tr>
-			</c:forEach>
-			</TABLE>
-			<br>								
-			</c:if>
 				
-			
-			
-			<!--   Start Nutritional Factor Section  (caMOD data) ------------------------------------------------>
-			<c:set var="environmentalFactorType" value="Nutrition"/>
-			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
-			<c:if test="${not empty cdList}">
-			<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
-			<tr>
-				<td class="formTitleBlue" height="20" colspan="6">Nutrition</td>				
-			</tr>
-			<tr>
-				<td class="greySubTitleLeft" width="20%">Nutritional Component / Diet</td>
-				<td class="greySubTitleLeft" width="20%">Dose</td>
-				<td class="greySubTitleLeft" width="20%">Treatment Regimen</td>
-				<td class="greySubTitleLeft" width="20%">Age at Treatment</td>
-				<td class="greySubTitle" width="20%">Gender</td>
-				<td class="greySubTitle" width="17%">Comment</td>				
-			</tr>
-			
-			<c:forEach var="cd" items="${cdList}" varStatus="stat">
-				<c:choose>
-					<c:when test = "${stat.count % 2 == 0}">
-						<c:set var="tdClass" value="resultsBoxWhite"/>
-					</c:when>
-					<c:otherwise>
-						<c:set var="tdClass" value="resultsBoxGrey"/>
-					</c:otherwise>
-				</c:choose>&nbsp;
-			<tr>
-				<td class="<c:out value="${tdClass}"/>" width="20%">
+				
+				<!--   Start Surgery / Other Section ------------------------------------------------>
+				<c:set var="environmentalFactorType" value="Other"/>
+				<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
+				<c:if test="${not empty cdList}">
+				<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
+				<tr>
+					<td class="formTitleBlue" height="20" colspan="7">Other / Surgery</td>
+				</tr>
+				<!--   Start of if externalSource is Jax MTB -->
+				<c:if test="${mdl.externalSource == 'Jax MTB'}">
+				<tr>
+					<td class="greySubTitleLeft" width="17%">Agent Type</td>
+					<td class="greySubTitleLeft" width="17%">Agent Name</td>				
+				</tr>
+				
+				<c:forEach var="cd" items="${cdList}" varStatus="stat">
 					<c:choose>
-						<c:when test="${empty cd.environmentalFactor.name}">
-							<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
+						<c:when test = "${stat.count % 2 == 0}">
+							<c:set var="tdClass" value="resultsBoxWhite"/>
 						</c:when>
 						<c:otherwise>
-							<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
-						</c:otherwise>
-					</c:choose>&nbsp;
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<camod:highlight><c:out value="${cd.treatment.dosage}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}" escapeXml="false"/></camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}" escapeXml="false"/></camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}" escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>End" width="17%">
-						<camod:highlight><c:out value="${cd.environmentalFactor.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>				
-			</tr>
-			</c:forEach>
-			</TABLE>
-			<br>								
-			</c:if>
-
-			
-     		<!--   Start Antibody Section (caMOD and Jackson Lab data) ------------------------------------------------>
-			<c:set var="environmentalFactorType" value="Antibody"/>
-			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
-			<c:if test="${not empty cdList}">
-			<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
-			<tr>
-				<td class="formTitleBlue" height="20" colspan="7">Antibody</td>
-			</tr>
-			<!--   Start of if externalSource is Jax MTB -->
-			<c:if test="${mdl.externalSource == 'Jax MTB'}">
-			<tr>
-				<td class="greySubTitleLeft" width="17%">Agent Type</td>
-				<td class="greySubTitleLeft" width="17%">Agent Name</td>				
-			</tr>
-			
-			<c:forEach var="cd" items="${cdList}" varStatus="stat">
-				<c:choose>
-					<c:when test = "${stat.count % 2 == 0}">
-						<c:set var="tdClass" value="resultsBoxWhite"/>
-					</c:when>
-					<c:otherwise>
-						<c:set var="tdClass" value="resultsBoxGrey"/>
-					</c:otherwise>
-				</c:choose>
-			<tr>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.type}" escapeXml="false"/></camod:highlight>
-				</td>
-
-				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
-				</td>
-			</tr>			
-			</c:forEach>
-			</c:if>		
-			<!--   End of if externalSource is Jax MTB -->
-
-			<!--   Start of if externalSource is empty (caMOD data) -->	
-			<c:if test="${empty mdl.externalSource}">									
-			<tr>
-				<td class="greySubTitleLeft" width="17%">Antibody</td>
-				<td class="greySubTitleLeft" width="17%">Dose</td>
-				<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
-				<td class="greySubTitleLeft" width="17%">Administrative Route</td>
-				<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
-				<td class="greySubTitle" width="17%">Gender</td>
-				<td class="greySubTitle" width="17%">Comment</td>
-			</tr>
-			<c:forEach var="cd" items="${cdList}" varStatus="stat">
-				<c:choose>
-					<c:when test = "${stat.count % 2 == 0}">
-						<c:set var="tdClass" value="resultsBoxWhite"/>
-					</c:when>
-					<c:otherwise>
-						<c:set var="tdClass" value="resultsBoxGrey"/>
-					</c:otherwise>
-				</c:choose>
-			<tr>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:choose>
-						<c:when test="${empty cd.environmentalFactor.name}">
-							<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
-						</c:when>
-						<c:otherwise>
-							<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
+							<c:set var="tdClass" value="resultsBoxGrey"/>
 						</c:otherwise>
 					</c:choose>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.dosage}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}" escapeXml="false"/></camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
+				<tr>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.environmentalFactor.type}" escapeXml="false"/></camod:highlight>
+					</td>
+	
+					<td class="<c:out value="${tdClass}"/>" width="20%">
+						<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
+					</td>
+				</tr>			
+				</c:forEach>
+				</c:if>		
+				<!--   End of if externalSource is Jax MTB -->
+	
+				<!--   Start of if externalSource is empty (caMOD data) -->	
+				<c:if test="${empty mdl.externalSource}">									
+				<tr>
+					<td class="greySubTitleLeft" width="30%">Surgery</td>
+					<td class="greySubTitleLeft" width="30%">Treatment Regimen</td>
+					<td class="greySubTitleLeft" width="20%">Age at Treatment</td>
+					<td class="greySubTitle" width="20%">Gender</td>
+					<td class="greySubTitle" width="17%">Comment</td>				
+				</tr>
+				<c:forEach var="cd" items="${cdList}" varStatus="stat">
 					<c:choose>
-						<c:when test="${empty cd.treatment.administrativeRoute}">
-							<camod:highlight><c:out value="${cd.treatment.adminRouteAlternEntry}" escapeXml="false"/></camod:highlight>
+						<c:when test = "${stat.count % 2 == 0}">
+							<c:set var="tdClass" value="resultsBoxWhite"/>
 						</c:when>
 						<c:otherwise>
-							<camod:highlight><c:out value="${cd.treatment.administrativeRoute}" escapeXml="false"/></camod:highlight>
-						</c:otherwise>
-					</c:choose>&nbsp;
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}" escapeXml="false"/></camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}" escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>End" width="17%">
-						<camod:highlight><c:out value="${cd.environmentalFactor.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>				
-			</tr>
-			</c:forEach>
-			<!--   End of if externalSource is empty (caMOD data) -->
-			</c:if>			
-			</TABLE>
-			<br>								
-			</c:if>
-			
-     		<!--   Start Bacteria Section (caMOD and Jackson Lab data) ------------------------------------------------>
-			<c:set var="environmentalFactorType" value="Bacteria"/>
-			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
-			<c:if test="${not empty cdList}">
-			<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
-			<tr>
-				<td class="formTitleBlue" height="20" colspan="7">Bacteria</td>
-			</tr>
-			<!--   Start of if externalSource is Jax MTB -->
-			<c:if test="${mdl.externalSource == 'Jax MTB'}">			
-			<tr>
-				<td class="greySubTitleLeft" width="17%">Agent Type</td>
-				<td class="greySubTitleLeft" width="17%">Agent Name</td>				
-			</tr>
-			
-			<c:forEach var="cd" items="${cdList}" varStatus="stat">
-				<c:choose>
-					<c:when test = "${stat.count % 2 == 0}">
-						<c:set var="tdClass" value="resultsBoxWhite"/>
-					</c:when>
-					<c:otherwise>
-						<c:set var="tdClass" value="resultsBoxGrey"/>
-					</c:otherwise>
-				</c:choose>
-			<tr>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.type}" escapeXml="false"/></camod:highlight>
-				</td>
-
-				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
-				</td>
-			</tr>
-			</c:forEach>
-			</c:if>		
-			<!--   End of if externalSource is Jax MTB -->
-
-			<!--   Start of if externalSource is empty (caMOD data) -->	
-			<c:if test="${empty mdl.externalSource}">									
-			<tr>
-				<td class="greySubTitleLeft" width="17%">Bacteria</td>
-				<td class="greySubTitleLeft" width="17%">Dose</td>
-				<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
-				<td class="greySubTitleLeft" width="17%">Administrative Route</td>
-				<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
-				<td class="greySubTitle" width="17%">Gender</td>
-				<td class="greySubTitle" width="17%">Comment</td>
-			</tr>
-			<c:forEach var="cd" items="${cdList}" varStatus="stat">
-				<c:choose>
-					<c:when test = "${stat.count % 2 == 0}">
-						<c:set var="tdClass" value="resultsBoxWhite"/>
-					</c:when>
-					<c:otherwise>
-						<c:set var="tdClass" value="resultsBoxGrey"/>
-					</c:otherwise>
-				</c:choose>
-			<tr>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:choose>
-						<c:when test="${empty cd.environmentalFactor.name}">
-							<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
-						</c:when>
-						<c:otherwise>
-							<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
+							<c:set var="tdClass" value="resultsBoxGrey"/>
 						</c:otherwise>
 					</c:choose>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.dosage}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}" escapeXml="false"/></camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
+				<tr>
+					<td class="<c:out value="${tdClass}"/>" width="30%">
+						<c:choose>
+							<c:when test="${empty cd.environmentalFactor.name}">
+								<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
+							</c:when>
+							<c:otherwise>
+								<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
+							</c:otherwise>
+						</c:choose>&nbsp;
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="30%">
+						<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="20%">
+						<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}" escapeXml="false"/></camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="20%">
+						<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}" escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>End" width="17%">
+							<camod:highlight><c:out value="${cd.environmentalFactor.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>				
+				</tr>
+				</c:forEach>
+				<!--   End of if externalSource is empty (caMOD data) -->
+				</c:if>			
+				</TABLE>
+				<br>								
+				</c:if>	
+					
+	
+	     		<!--   Start Viral Treatment Section (caMOD and Jackson Lab data) ------------------------------------------------>
+				<c:set var="environmentalFactorType" value="Viral"/>
+				<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
+				<c:if test="${not empty cdList}">
+				<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
+				<tr>
+					<td class="formTitleBlue" height="20" colspan="7">Viral Treatment</td>
+				</tr>
+				
+				<!--   Start of if externalSource is Jax MTB -->
+				<c:if test="${mdl.externalSource == 'Jax MTB'}">			
+				<tr>
+					<td class="greySubTitleLeft" width="17%">Agent Type</td>
+					<td class="greySubTitleLeft" width="17%">Agent Name</td>				
+				</tr>
+				
+				<c:forEach var="cd" items="${cdList}" varStatus="stat">
 					<c:choose>
-						<c:when test="${empty cd.treatment.administrativeRoute}">
-							<camod:highlight><c:out value="${cd.treatment.adminRouteAlternEntry}" escapeXml="false"/></camod:highlight>
+						<c:when test = "${stat.count % 2 == 0}">
+							<c:set var="tdClass" value="resultsBoxWhite"/>
 						</c:when>
 						<c:otherwise>
-							<camod:highlight><c:out value="${cd.treatment.administrativeRoute}" escapeXml="false"/></camod:highlight>
-						</c:otherwise>
-					</c:choose>&nbsp;
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}" escapeXml="false"/></camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}" escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>End" width="17%">
-						<camod:highlight><c:out value="${cd.environmentalFactor.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>				
-			</tr>
-			</c:forEach>
-			<!--   End of if externalSource is empty (caMOD data) -->
-			</c:if>			
-			</TABLE>
-			<br>								
-			</c:if>
-
-
-     		<!--   Start Plasmid Section (caMOD and Jackson Lab data) ------------------------------------------------>
-			<c:set var="environmentalFactorType" value="Plasmid"/>
-			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
-			<c:if test="${not empty cdList}">
-			<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
-			<tr>
-				<td class="formTitleBlue" height="20" colspan="7">Plasmid</td>
-			</tr>
-			<!--   Start of if externalSource is Jax MTB -->
-			<c:if test="${mdl.externalSource == 'Jax MTB'}">			
-			<tr>
-				<td class="greySubTitleLeft" width="17%">Agent Type</td>
-				<td class="greySubTitleLeft" width="17%">Agent Name</td>				
-			</tr>
-			
-			<c:forEach var="cd" items="${cdList}" varStatus="stat">
-				<c:choose>
-					<c:when test = "${stat.count % 2 == 0}">
-						<c:set var="tdClass" value="resultsBoxWhite"/>
-					</c:when>
-					<c:otherwise>
-						<c:set var="tdClass" value="resultsBoxGrey"/>
-					</c:otherwise>
-				</c:choose>
-			<tr>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.type}" escapeXml="false"/></camod:highlight>
-				</td>
-
-				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
-				</td>
-			</tr>
-			</c:forEach>
-			</c:if>		
-			<!--   End of if externalSource is Jax MTB -->
-
-			<!--   Start of if externalSource is empty (caMOD data) -->	
-			<c:if test="${empty mdl.externalSource}">									
-			<tr>
-				<td class="greySubTitleLeft" width="17%">Plasmid</td>
-				<td class="greySubTitleLeft" width="17%">Dose</td>
-				<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
-				<td class="greySubTitleLeft" width="17%">Administrative Route</td>
-				<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
-				<td class="greySubTitle" width="17%">Gender</td>
-				<td class="greySubTitle" width="17%">Comment</td>
-			</tr>
-			<c:forEach var="cd" items="${cdList}" varStatus="stat">
-				<c:choose>
-					<c:when test = "${stat.count % 2 == 0}">
-						<c:set var="tdClass" value="resultsBoxWhite"/>
-					</c:when>
-					<c:otherwise>
-						<c:set var="tdClass" value="resultsBoxGrey"/>
-					</c:otherwise>
-				</c:choose>
-			<tr>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:choose>
-						<c:when test="${empty cd.environmentalFactor.name}">
-							<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
-						</c:when>
-						<c:otherwise>
-							<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
+							<c:set var="tdClass" value="resultsBoxGrey"/>
 						</c:otherwise>
 					</c:choose>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.dosage}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}" escapeXml="false"/></camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
+				<tr>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.environmentalFactor.type}" escapeXml="false"/></camod:highlight>
+					</td>
+	
+					<td class="<c:out value="${tdClass}"/>" width="20%">
+						<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
+					</td>
+				</tr>
+				</c:forEach>			
+				
+				</c:if>		
+				<!--   End of if externalSource is Jax MTB -->
+	
+				<!--   Start of if externalSource is empty (caMOD data) -->	
+				<c:if test="${empty mdl.externalSource}">						
+				<tr>
+					<td class="greySubTitleLeft" width="17%">Virus</td>
+					<td class="greySubTitleLeft" width="17%">Dose</td>
+					<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
+					<td class="greySubTitleLeft" width="17%">Administrative Route</td>
+					<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
+					<td class="greySubTitle" width="17%">Gender</td>
+					<td class="greySubTitle" width="17%">Comment</td>				
+				</tr>
+				
+				<c:forEach var="cd" items="${cdList}" varStatus="stat">
 					<c:choose>
-						<c:when test="${empty cd.treatment.administrativeRoute}">
-							<camod:highlight><c:out value="${cd.treatment.adminRouteAlternEntry}" escapeXml="false"/></camod:highlight>
+						<c:when test = "${stat.count % 2 == 0}">
+							<c:set var="tdClass" value="resultsBoxWhite"/>
 						</c:when>
 						<c:otherwise>
-							<camod:highlight><c:out value="${cd.treatment.administrativeRoute}" escapeXml="false"/></camod:highlight>
-						</c:otherwise>
-					</c:choose>&nbsp;
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}" escapeXml="false"/></camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}" escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>End" width="17%">
-						<camod:highlight><c:out value="${cd.environmentalFactor.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>				
-			</tr>
-			</c:forEach>
-			<!--   End of if externalSource is empty (caMOD data) -->
-			</c:if>			
-			</TABLE>
-			<br>								
-			</c:if>	
-			
-     		<!--   Start Transposon Section (caMOD and Jackson Lab data) ------------------------------------------------>
-			<c:set var="environmentalFactorType" value="Transposon"/>
-			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
-			<c:if test="${not empty cdList}">
-			<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
-			<tr>
-				<td class="formTitleBlue" height="20" colspan="7">Transposon</td>
-			</tr>
-			<!--   Start of if externalSource is Jax MTB -->
-			<c:if test="${mdl.externalSource == 'Jax MTB'}">			
-			<tr>
-				<td class="greySubTitleLeft" width="17%">Agent Type</td>
-				<td class="greySubTitleLeft" width="17%">Agent Name</td>				
-			</tr>
-			
-			<c:forEach var="cd" items="${cdList}" varStatus="stat">
-				<c:choose>
-					<c:when test = "${stat.count % 2 == 0}">
-						<c:set var="tdClass" value="resultsBoxWhite"/>
-					</c:when>
-					<c:otherwise>
-						<c:set var="tdClass" value="resultsBoxGrey"/>
-					</c:otherwise>
-				</c:choose>
-			<tr>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.type}" escapeXml="false"/></camod:highlight>
-				</td>
-
-				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
-				</td>
-			</tr>
-			</c:forEach>
-			</c:if>		
-			<!--   End of if externalSource is Jax MTB -->
-
-			<!--   Start of if externalSource is empty (caMOD data) -->	
-			<c:if test="${empty mdl.externalSource}">									
-			<tr>
-				<td class="greySubTitleLeft" width="17%">Transposon</td>
-				<td class="greySubTitleLeft" width="17%">Dose</td>
-				<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
-				<td class="greySubTitleLeft" width="17%">Administrative Route</td>
-				<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
-				<td class="greySubTitle" width="17%">Gender</td>
-				<td class="greySubTitle" width="17%">Comment</td>
-			</tr>
-			<c:forEach var="cd" items="${cdList}" varStatus="stat">
-				<c:choose>
-					<c:when test = "${stat.count % 2 == 0}">
-						<c:set var="tdClass" value="resultsBoxWhite"/>
-					</c:when>
-					<c:otherwise>
-						<c:set var="tdClass" value="resultsBoxGrey"/>
-					</c:otherwise>
-				</c:choose>
-			<tr>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:choose>
-						<c:when test="${empty cd.environmentalFactor.name}">
-							<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
-						</c:when>
-						<c:otherwise>
-							<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
+							<c:set var="tdClass" value="resultsBoxGrey"/>
 						</c:otherwise>
 					</c:choose>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.dosage}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}" escapeXml="false"/></camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
+				<tr>
+					<td class="<c:out value="${tdClass}"/>" width="20%">
+						<c:choose>
+							<c:when test="${empty cd.environmentalFactor.name}">
+								<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
+							</c:when>
+							<c:otherwise>
+								<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
+							</c:otherwise>
+						</c:choose>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.dosage}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}" escapeXml="false"/></camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<c:choose>
+							<c:when test="${empty cd.treatment.administrativeRoute}">
+								<camod:highlight><c:out value="${cd.treatment.adminRouteAlternEntry}" escapeXml="false"/></camod:highlight>
+							</c:when>
+							<c:otherwise>
+								<camod:highlight><c:out value="${cd.treatment.administrativeRoute}" escapeXml="false"/></camod:highlight>
+							</c:otherwise>
+						</c:choose>&nbsp;
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}" escapeXml="false"/></camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}" escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>End" width="17%">
+							<camod:highlight><c:out value="${cd.environmentalFactor.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>				
+				</tr>
+				</c:forEach>
+				<!--   End of if externalSource is empty (caMOD data) -->
+				</c:if>			
+				</TABLE>
+				<br>								
+				</c:if>	
+						
+	
+				<!--   Start Environmental Factor Section (caMOD data) ------------------------------------------------>
+				<c:set var="environmentalFactorType" value="Environment"/>
+				<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
+				<c:if test="${not empty cdList}">
+				<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
+				<tr>
+					<td class="formTitleBlue" height="20" colspan="7">Environment</td>				
+				</tr>
+				
+				<tr>
+					<td class="greySubTitleLeft" width="17%">Environmental Factor</td>
+					<td class="greySubTitleLeft" width="17%">Dose</td>
+					<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
+					<td class="greySubTitleLeft" width="17%">Administrative Route</td>
+					<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
+					<td class="greySubTitle" width="17%">Gender</td>
+					<td class="greySubTitle" width="17%">Comment</td>				
+				</tr>
+				
+				<c:forEach var="cd" items="${cdList}" varStatus="stat">
 					<c:choose>
-						<c:when test="${empty cd.treatment.administrativeRoute}">
-							<camod:highlight><c:out value="${cd.treatment.adminRouteAlternEntry}" escapeXml="false"/></camod:highlight>
+						<c:when test = "${stat.count % 2 == 0}">
+							<c:set var="tdClass" value="resultsBoxWhite"/>
 						</c:when>
 						<c:otherwise>
-							<camod:highlight><c:out value="${cd.treatment.administrativeRoute}" escapeXml="false"/></camod:highlight>
-						</c:otherwise>
-					</c:choose>&nbsp;
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}" escapeXml="false"/></camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}" escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>End" width="17%">
-						<camod:highlight><c:out value="${cd.environmentalFactor.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>				
-			</tr>
-			</c:forEach>
-			<!--   End of if externalSource is empty (caMOD data) -->
-			</c:if>			
-			</TABLE>
-			<br>								
-			</c:if>		
-
-     		<!--   Start Signaling Molecule Section (caMOD and Jackson Lab data) ------------------------------------------------>
-			<c:set var="environmentalFactorType" value="Signaling Molecule"/>
-			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
-			<c:if test="${not empty cdList}">
-			<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
-			<tr>
-				<td class="formTitleBlue" height="20" colspan="7">Signaling Molecule</td>
-			</tr>
-			<!--   Start of if externalSource is Jax MTB -->
-			<c:if test="${mdl.externalSource == 'Jax MTB'}">			
-			<tr>
-				<td class="greySubTitleLeft" width="17%">Agent Type</td>
-				<td class="greySubTitleLeft" width="17%">Agent Name</td>				
-			</tr>
-			
-			<c:forEach var="cd" items="${cdList}" varStatus="stat">
-				<c:choose>
-					<c:when test = "${stat.count % 2 == 0}">
-						<c:set var="tdClass" value="resultsBoxWhite"/>
-					</c:when>
-					<c:otherwise>
-						<c:set var="tdClass" value="resultsBoxGrey"/>
-					</c:otherwise>
-				</c:choose>
-			<tr>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.type}" escapeXml="false"/></camod:highlight>
-				</td>
-
-				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
-				</td>
-			</tr>
-			</c:forEach>
-			</c:if>		
-			<!--   End of if externalSource is Jax MTB -->
-
-			<!--   Start of if externalSource is empty (caMOD data) -->	
-			<c:if test="${empty mdl.externalSource}">									
-			<tr>
-				<td class="greySubTitleLeft" width="17%">Signaling Molecule</td>
-				<td class="greySubTitleLeft" width="17%">Dose</td>
-				<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
-				<td class="greySubTitleLeft" width="17%">Administrative Route</td>
-				<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
-				<td class="greySubTitle" width="17%">Gender</td>
-				<td class="greySubTitle" width="17%">Comment</td>
-			</tr>
-			<c:forEach var="cd" items="${cdList}" varStatus="stat">
-				<c:choose>
-					<c:when test = "${stat.count % 2 == 0}">
-						<c:set var="tdClass" value="resultsBoxWhite"/>
-					</c:when>
-					<c:otherwise>
-						<c:set var="tdClass" value="resultsBoxGrey"/>
-					</c:otherwise>
-				</c:choose>
-			<tr>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:choose>
-						<c:when test="${empty cd.environmentalFactor.name}">
-							<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
-						</c:when>
-						<c:otherwise>
-							<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
+							<c:set var="tdClass" value="resultsBoxGrey"/>
 						</c:otherwise>
 					</c:choose>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.dosage}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}" escapeXml="false"/></camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
+				<tr>
+					<td class="<c:out value="${tdClass}"/>" width="20%">
+						<c:choose>
+							<c:when test="${empty cd.environmentalFactor.name}">
+								<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}"  escapeXml="false"/></camod:highlight>
+							</c:when>
+							<c:otherwise>
+								<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
+							</c:otherwise>
+						</c:choose>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.dosage}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}" escapeXml="false"/></camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<c:choose>
+							<c:when test="${empty cd.treatment.administrativeRoute}">
+								<camod:highlight><c:out value="${cd.treatment.adminRouteAlternEntry}" escapeXml="false"/></camod:highlight>
+							</c:when>
+							<c:otherwise>
+								<camod:highlight><c:out value="${cd.treatment.administrativeRoute}" escapeXml="false"/></camod:highlight>
+							</c:otherwise>
+						</c:choose>&nbsp;
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}" escapeXml="false"/></camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}" escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>End" width="17%">
+							<camod:highlight><c:out value="${cd.environmentalFactor.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>				
+				</tr>
+				</c:forEach>
+				</TABLE>		
+				<br>								
+				</c:if>
+				
+	
+				<!--   Start Gene Delivery Section (caMOD data) ------------------------------------------------>
+				<c:set var="environmentalFactorType" value="GeneDelivery"/>
+				<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
+				<c:if test="${not empty cdList}">
+				<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
+				<tr>
+					<td class="formTitleBlue" height="20" colspan="7">Gene Delivery</td>				
+				</tr>
+				<tr>
+					<td class="greySubTitleLeft" width="17%">Viral Vector</td>
+					<td class="greySubTitleLeft" width="17%">Gene</td>
+					<td class="greySubTitleLeft" width="17%">Organ</td>
+					<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>	
+					<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
+					<td class="greySubTitle" width="17%">Gender</td>
+					<td class="greySubTitle" width="17%">Comment</td>
+				</tr>
+				<c:forEach var="cd" items="${cdList}" varStatus="stat">
 					<c:choose>
-						<c:when test="${empty cd.treatment.administrativeRoute}">
-							<camod:highlight><c:out value="${cd.treatment.adminRouteAlternEntry}" escapeXml="false"/></camod:highlight>
+						<c:when test = "${stat.count % 2 == 0}">
+							<c:set var="tdClass" value="resultsBoxWhite"/>
 						</c:when>
 						<c:otherwise>
-							<camod:highlight><c:out value="${cd.treatment.administrativeRoute}" escapeXml="false"/></camod:highlight>
+							<c:set var="tdClass" value="resultsBoxGrey"/>
+						</c:otherwise>
+					</c:choose>
+				<tr>
+					<td class="<c:out value="${tdClass}"/>" width="30%">
+						<c:choose>
+							<c:when test="${empty cd.viralVector}">
+								<camod:highlight><c:out value="${cd.viralVectorAlternEntry}" escapeXml="false"/></camod:highlight>
+							</c:when>
+							<c:otherwise>
+								<camod:highlight><c:out value="${cd.viralVector}" escapeXml="false"/></camod:highlight>
+							</c:otherwise>
+						</c:choose>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="20%">
+						<camod:highlight><c:out value="${cd.geneInVirus}" escapeXml="false"/></camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="30%">
+						<camod:highlight><c:out value="${cd.organ.EVSPreferredDescription}" escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="20%">
+						<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}" escapeXml="false"/></camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}" escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>End" width="17%">
+							<camod:highlight><c:out value="${cd.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>				
+				</tr>
+				</c:forEach>
+				</TABLE>
+				<br>								
+				</c:if>				
+				
+				
+				<!--   Start Nutritional Factor Section  (caMOD data) ------------------------------------------------>
+				<c:set var="environmentalFactorType" value="Nutrition"/>
+				<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
+				<c:if test="${not empty cdList}">
+				<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
+				<tr>
+					<td class="formTitleBlue" height="20" colspan="6">Nutrition</td>				
+				</tr>
+				<tr>
+					<td class="greySubTitleLeft" width="20%">Nutritional Component / Diet</td>
+					<td class="greySubTitleLeft" width="20%">Dose</td>
+					<td class="greySubTitleLeft" width="20%">Treatment Regimen</td>
+					<td class="greySubTitleLeft" width="20%">Age at Treatment</td>
+					<td class="greySubTitle" width="20%">Gender</td>
+					<td class="greySubTitle" width="17%">Comment</td>				
+				</tr>
+				
+				<c:forEach var="cd" items="${cdList}" varStatus="stat">
+					<c:choose>
+						<c:when test = "${stat.count % 2 == 0}">
+							<c:set var="tdClass" value="resultsBoxWhite"/>
+						</c:when>
+						<c:otherwise>
+							<c:set var="tdClass" value="resultsBoxGrey"/>
 						</c:otherwise>
 					</c:choose>&nbsp;
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}" escapeXml="false"/></camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}" escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>
-				<td class="<c:out value="${tdClass}"/>End" width="17%">
-						<camod:highlight><c:out value="${cd.environmentalFactor.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
-				</td>				
-			</tr>
-			</c:forEach>
-			<!--   End of if externalSource is empty (caMOD data) -->
-			</c:if>			
-			</TABLE>
-			<br>								
-			</c:if>	
+				<tr>
+					<td class="<c:out value="${tdClass}"/>" width="20%">
+						<c:choose>
+							<c:when test="${empty cd.environmentalFactor.name}">
+								<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
+							</c:when>
+							<c:otherwise>
+								<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
+							</c:otherwise>
+						</c:choose>&nbsp;
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="20%">
+						<camod:highlight><c:out value="${cd.treatment.dosage}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}" escapeXml="false"/></camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="20%">
+						<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="20%">
+						<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}" escapeXml="false"/></camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="20%">
+						<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}" escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>End" width="17%">
+							<camod:highlight><c:out value="${cd.environmentalFactor.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>				
+				</tr>
+				</c:forEach>
+				</TABLE>
+				<br>								
+				</c:if>
+	
+				
+	     		<!--   Start Antibody Section (caMOD and Jackson Lab data) ------------------------------------------------>
+				<c:set var="environmentalFactorType" value="Antibody"/>
+				<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
+				<c:if test="${not empty cdList}">
+				<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
+				<tr>
+					<td class="formTitleBlue" height="20" colspan="7">Antibody</td>
+				</tr>
+				<!--   Start of if externalSource is Jax MTB -->
+				<c:if test="${mdl.externalSource == 'Jax MTB'}">
+				<tr>
+					<td class="greySubTitleLeft" width="17%">Agent Type</td>
+					<td class="greySubTitleLeft" width="17%">Agent Name</td>				
+				</tr>
+				
+				<c:forEach var="cd" items="${cdList}" varStatus="stat">
+					<c:choose>
+						<c:when test = "${stat.count % 2 == 0}">
+							<c:set var="tdClass" value="resultsBoxWhite"/>
+						</c:when>
+						<c:otherwise>
+							<c:set var="tdClass" value="resultsBoxGrey"/>
+						</c:otherwise>
+					</c:choose>
+				<tr>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.environmentalFactor.type}" escapeXml="false"/></camod:highlight>
+					</td>
+	
+					<td class="<c:out value="${tdClass}"/>" width="20%">
+						<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
+					</td>
+				</tr>			
+				</c:forEach>
+				</c:if>		
+				<!--   End of if externalSource is Jax MTB -->
+	
+				<!--   Start of if externalSource is empty (caMOD data) -->	
+				<c:if test="${empty mdl.externalSource}">									
+				<tr>
+					<td class="greySubTitleLeft" width="17%">Antibody</td>
+					<td class="greySubTitleLeft" width="17%">Dose</td>
+					<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
+					<td class="greySubTitleLeft" width="17%">Administrative Route</td>
+					<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
+					<td class="greySubTitle" width="17%">Gender</td>
+					<td class="greySubTitle" width="17%">Comment</td>
+				</tr>
+				<c:forEach var="cd" items="${cdList}" varStatus="stat">
+					<c:choose>
+						<c:when test = "${stat.count % 2 == 0}">
+							<c:set var="tdClass" value="resultsBoxWhite"/>
+						</c:when>
+						<c:otherwise>
+							<c:set var="tdClass" value="resultsBoxGrey"/>
+						</c:otherwise>
+					</c:choose>
+				<tr>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<c:choose>
+							<c:when test="${empty cd.environmentalFactor.name}">
+								<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
+							</c:when>
+							<c:otherwise>
+								<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
+							</c:otherwise>
+						</c:choose>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.dosage}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}" escapeXml="false"/></camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<c:choose>
+							<c:when test="${empty cd.treatment.administrativeRoute}">
+								<camod:highlight><c:out value="${cd.treatment.adminRouteAlternEntry}" escapeXml="false"/></camod:highlight>
+							</c:when>
+							<c:otherwise>
+								<camod:highlight><c:out value="${cd.treatment.administrativeRoute}" escapeXml="false"/></camod:highlight>
+							</c:otherwise>
+						</c:choose>&nbsp;
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}" escapeXml="false"/></camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}" escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>End" width="17%">
+							<camod:highlight><c:out value="${cd.environmentalFactor.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>				
+				</tr>
+				</c:forEach>
+				<!--   End of if externalSource is empty (caMOD data) -->
+				</c:if>			
+				</TABLE>
+				<br>								
+				</c:if>
+				
+	     		<!--   Start Bacteria Section (caMOD and Jackson Lab data) ------------------------------------------------>
+				<c:set var="environmentalFactorType" value="Bacteria"/>
+				<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
+				<c:if test="${not empty cdList}">
+				<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
+				<tr>
+					<td class="formTitleBlue" height="20" colspan="7">Bacteria</td>
+				</tr>
+				<!--   Start of if externalSource is Jax MTB -->
+				<c:if test="${mdl.externalSource == 'Jax MTB'}">			
+				<tr>
+					<td class="greySubTitleLeft" width="17%">Agent Type</td>
+					<td class="greySubTitleLeft" width="17%">Agent Name</td>				
+				</tr>
+				
+				<c:forEach var="cd" items="${cdList}" varStatus="stat">
+					<c:choose>
+						<c:when test = "${stat.count % 2 == 0}">
+							<c:set var="tdClass" value="resultsBoxWhite"/>
+						</c:when>
+						<c:otherwise>
+							<c:set var="tdClass" value="resultsBoxGrey"/>
+						</c:otherwise>
+					</c:choose>
+				<tr>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.environmentalFactor.type}" escapeXml="false"/></camod:highlight>
+					</td>
+	
+					<td class="<c:out value="${tdClass}"/>" width="20%">
+						<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
+					</td>
+				</tr>
+				</c:forEach>
+				</c:if>		
+				<!--   End of if externalSource is Jax MTB -->
+	
+				<!--   Start of if externalSource is empty (caMOD data) -->	
+				<c:if test="${empty mdl.externalSource}">									
+				<tr>
+					<td class="greySubTitleLeft" width="17%">Bacteria</td>
+					<td class="greySubTitleLeft" width="17%">Dose</td>
+					<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
+					<td class="greySubTitleLeft" width="17%">Administrative Route</td>
+					<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
+					<td class="greySubTitle" width="17%">Gender</td>
+					<td class="greySubTitle" width="17%">Comment</td>
+				</tr>
+				<c:forEach var="cd" items="${cdList}" varStatus="stat">
+					<c:choose>
+						<c:when test = "${stat.count % 2 == 0}">
+							<c:set var="tdClass" value="resultsBoxWhite"/>
+						</c:when>
+						<c:otherwise>
+							<c:set var="tdClass" value="resultsBoxGrey"/>
+						</c:otherwise>
+					</c:choose>
+				<tr>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<c:choose>
+							<c:when test="${empty cd.environmentalFactor.name}">
+								<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
+							</c:when>
+							<c:otherwise>
+								<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
+							</c:otherwise>
+						</c:choose>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.dosage}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}" escapeXml="false"/></camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<c:choose>
+							<c:when test="${empty cd.treatment.administrativeRoute}">
+								<camod:highlight><c:out value="${cd.treatment.adminRouteAlternEntry}" escapeXml="false"/></camod:highlight>
+							</c:when>
+							<c:otherwise>
+								<camod:highlight><c:out value="${cd.treatment.administrativeRoute}" escapeXml="false"/></camod:highlight>
+							</c:otherwise>
+						</c:choose>&nbsp;
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}" escapeXml="false"/></camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}" escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>End" width="17%">
+							<camod:highlight><c:out value="${cd.environmentalFactor.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>				
+				</tr>
+				</c:forEach>
+				<!--   End of if externalSource is empty (caMOD data) -->
+				</c:if>			
+				</TABLE>
+				<br>								
+				</c:if>
+	
+	
+	     		<!--   Start Plasmid Section (caMOD and Jackson Lab data) ------------------------------------------------>
+				<c:set var="environmentalFactorType" value="Plasmid"/>
+				<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
+				<c:if test="${not empty cdList}">
+				<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
+				<tr>
+					<td class="formTitleBlue" height="20" colspan="7">Plasmid</td>
+				</tr>
+				<!--   Start of if externalSource is Jax MTB -->
+				<c:if test="${mdl.externalSource == 'Jax MTB'}">			
+				<tr>
+					<td class="greySubTitleLeft" width="17%">Agent Type</td>
+					<td class="greySubTitleLeft" width="17%">Agent Name</td>				
+				</tr>
+				
+				<c:forEach var="cd" items="${cdList}" varStatus="stat">
+					<c:choose>
+						<c:when test = "${stat.count % 2 == 0}">
+							<c:set var="tdClass" value="resultsBoxWhite"/>
+						</c:when>
+						<c:otherwise>
+							<c:set var="tdClass" value="resultsBoxGrey"/>
+						</c:otherwise>
+					</c:choose>
+				<tr>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.environmentalFactor.type}" escapeXml="false"/></camod:highlight>
+					</td>
+	
+					<td class="<c:out value="${tdClass}"/>" width="20%">
+						<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
+					</td>
+				</tr>
+				</c:forEach>
+				</c:if>		
+				<!--   End of if externalSource is Jax MTB -->
+	
+				<!--   Start of if externalSource is empty (caMOD data) -->	
+				<c:if test="${empty mdl.externalSource}">									
+				<tr>
+					<td class="greySubTitleLeft" width="17%">Plasmid</td>
+					<td class="greySubTitleLeft" width="17%">Dose</td>
+					<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
+					<td class="greySubTitleLeft" width="17%">Administrative Route</td>
+					<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
+					<td class="greySubTitle" width="17%">Gender</td>
+					<td class="greySubTitle" width="17%">Comment</td>
+				</tr>
+				<c:forEach var="cd" items="${cdList}" varStatus="stat">
+					<c:choose>
+						<c:when test = "${stat.count % 2 == 0}">
+							<c:set var="tdClass" value="resultsBoxWhite"/>
+						</c:when>
+						<c:otherwise>
+							<c:set var="tdClass" value="resultsBoxGrey"/>
+						</c:otherwise>
+					</c:choose>
+				<tr>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<c:choose>
+							<c:when test="${empty cd.environmentalFactor.name}">
+								<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
+							</c:when>
+							<c:otherwise>
+								<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
+							</c:otherwise>
+						</c:choose>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.dosage}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}" escapeXml="false"/></camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<c:choose>
+							<c:when test="${empty cd.treatment.administrativeRoute}">
+								<camod:highlight><c:out value="${cd.treatment.adminRouteAlternEntry}" escapeXml="false"/></camod:highlight>
+							</c:when>
+							<c:otherwise>
+								<camod:highlight><c:out value="${cd.treatment.administrativeRoute}" escapeXml="false"/></camod:highlight>
+							</c:otherwise>
+						</c:choose>&nbsp;
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}" escapeXml="false"/></camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}" escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>End" width="17%">
+							<camod:highlight><c:out value="${cd.environmentalFactor.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>				
+				</tr>
+				</c:forEach>
+				<!--   End of if externalSource is empty (caMOD data) -->
+				</c:if>			
+				</TABLE>
+				<br>								
+				</c:if>	
+				
+	     		<!--   Start Transposon Section (caMOD and Jackson Lab data) ------------------------------------------------>
+				<c:set var="environmentalFactorType" value="Transposon"/>
+				<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
+				<c:if test="${not empty cdList}">
+				<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
+				<tr>
+					<td class="formTitleBlue" height="20" colspan="7">Transposon</td>
+				</tr>
+				<!--   Start of if externalSource is Jax MTB -->
+				<c:if test="${mdl.externalSource == 'Jax MTB'}">			
+				<tr>
+					<td class="greySubTitleLeft" width="17%">Agent Type</td>
+					<td class="greySubTitleLeft" width="17%">Agent Name</td>				
+				</tr>
+				
+				<c:forEach var="cd" items="${cdList}" varStatus="stat">
+					<c:choose>
+						<c:when test = "${stat.count % 2 == 0}">
+							<c:set var="tdClass" value="resultsBoxWhite"/>
+						</c:when>
+						<c:otherwise>
+							<c:set var="tdClass" value="resultsBoxGrey"/>
+						</c:otherwise>
+					</c:choose>
+				<tr>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.environmentalFactor.type}" escapeXml="false"/></camod:highlight>
+					</td>
+	
+					<td class="<c:out value="${tdClass}"/>" width="20%">
+						<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
+					</td>
+				</tr>
+				</c:forEach>
+				</c:if>		
+				<!--   End of if externalSource is Jax MTB -->
+	
+				<!--   Start of if externalSource is empty (caMOD data) -->	
+				<c:if test="${empty mdl.externalSource}">									
+				<tr>
+					<td class="greySubTitleLeft" width="17%">Transposon</td>
+					<td class="greySubTitleLeft" width="17%">Dose</td>
+					<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
+					<td class="greySubTitleLeft" width="17%">Administrative Route</td>
+					<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
+					<td class="greySubTitle" width="17%">Gender</td>
+					<td class="greySubTitle" width="17%">Comment</td>
+				</tr>
+				<c:forEach var="cd" items="${cdList}" varStatus="stat">
+					<c:choose>
+						<c:when test = "${stat.count % 2 == 0}">
+							<c:set var="tdClass" value="resultsBoxWhite"/>
+						</c:when>
+						<c:otherwise>
+							<c:set var="tdClass" value="resultsBoxGrey"/>
+						</c:otherwise>
+					</c:choose>
+				<tr>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<c:choose>
+							<c:when test="${empty cd.environmentalFactor.name}">
+								<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
+							</c:when>
+							<c:otherwise>
+								<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
+							</c:otherwise>
+						</c:choose>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.dosage}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}" escapeXml="false"/></camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<c:choose>
+							<c:when test="${empty cd.treatment.administrativeRoute}">
+								<camod:highlight><c:out value="${cd.treatment.adminRouteAlternEntry}" escapeXml="false"/></camod:highlight>
+							</c:when>
+							<c:otherwise>
+								<camod:highlight><c:out value="${cd.treatment.administrativeRoute}" escapeXml="false"/></camod:highlight>
+							</c:otherwise>
+						</c:choose>&nbsp;
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}" escapeXml="false"/></camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}" escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>End" width="17%">
+							<camod:highlight><c:out value="${cd.environmentalFactor.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>				
+				</tr>
+				</c:forEach>
+				<!--   End of if externalSource is empty (caMOD data) -->
+				</c:if>			
+				</TABLE>
+				<br>								
+				</c:if>		
+	
+	     		<!--   Start Signaling Molecule Section (caMOD and Jackson Lab data) ------------------------------------------------>
+				<c:set var="environmentalFactorType" value="Signaling Molecule"/>
+				<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
+				<c:if test="${not empty cdList}">
+				<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
+				<tr>
+					<td class="formTitleBlue" height="20" colspan="7">Signaling Molecule</td>
+				</tr>
+				<!--   Start of if externalSource is Jax MTB -->
+				<c:if test="${mdl.externalSource == 'Jax MTB'}">			
+				<tr>
+					<td class="greySubTitleLeft" width="17%">Agent Type</td>
+					<td class="greySubTitleLeft" width="17%">Agent Name</td>				
+				</tr>
+				
+				<c:forEach var="cd" items="${cdList}" varStatus="stat">
+					<c:choose>
+						<c:when test = "${stat.count % 2 == 0}">
+							<c:set var="tdClass" value="resultsBoxWhite"/>
+						</c:when>
+						<c:otherwise>
+							<c:set var="tdClass" value="resultsBoxGrey"/>
+						</c:otherwise>
+					</c:choose>
+				<tr>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.environmentalFactor.type}" escapeXml="false"/></camod:highlight>
+					</td>
+	
+					<td class="<c:out value="${tdClass}"/>" width="20%">
+						<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
+					</td>
+				</tr>
+				</c:forEach>
+				</c:if>		
+				<!--   End of if externalSource is Jax MTB -->
+	
+				<!--   Start of if externalSource is empty (caMOD data) -->	
+				<c:if test="${empty mdl.externalSource}">									
+				<tr>
+					<td class="greySubTitleLeft" width="17%">Signaling Molecule</td>
+					<td class="greySubTitleLeft" width="17%">Dose</td>
+					<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
+					<td class="greySubTitleLeft" width="17%">Administrative Route</td>
+					<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
+					<td class="greySubTitle" width="17%">Gender</td>
+					<td class="greySubTitle" width="17%">Comment</td>
+				</tr>
+				<c:forEach var="cd" items="${cdList}" varStatus="stat">
+					<c:choose>
+						<c:when test = "${stat.count % 2 == 0}">
+							<c:set var="tdClass" value="resultsBoxWhite"/>
+						</c:when>
+						<c:otherwise>
+							<c:set var="tdClass" value="resultsBoxGrey"/>
+						</c:otherwise>
+					</c:choose>
+				<tr>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<c:choose>
+							<c:when test="${empty cd.environmentalFactor.name}">
+								<camod:highlight><c:out value="${cd.environmentalFactor.nameAlternEntry}" escapeXml="false"/></camod:highlight>
+							</c:when>
+							<c:otherwise>
+								<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
+							</c:otherwise>
+						</c:choose>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.dosage}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}" escapeXml="false"/></camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<c:choose>
+							<c:when test="${empty cd.treatment.administrativeRoute}">
+								<camod:highlight><c:out value="${cd.treatment.adminRouteAlternEntry}" escapeXml="false"/></camod:highlight>
+							</c:when>
+							<c:otherwise>
+								<camod:highlight><c:out value="${cd.treatment.administrativeRoute}" escapeXml="false"/></camod:highlight>
+							</c:otherwise>
+						</c:choose>&nbsp;
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}" escapeXml="false"/></camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>" width="17%">
+						<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}" escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>
+					<td class="<c:out value="${tdClass}"/>End" width="17%">
+							<camod:highlight><c:out value="${cd.environmentalFactor.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
+					</td>				
+				</tr>
+				</c:forEach>
+				<!--   End of if externalSource is empty (caMOD data) -->
+				</c:if>			
+				</TABLE>
+				<br>								
+				</c:if>	
+				
+		</td></tr></TABLE>	
+    </td></tr></TABLE>
+	</td></tr></TABLE>	    
+ </td></tr></TABLE>
 
-
-		</td></tr></TABLE>
-	</td></tr></TABLE>
-</td></tr></TABLE>
-
-	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
-	<tr><td>
-		<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="60%">
-	    <% pageContext.setAttribute(Parameters.MODELSECTIONVALUE, Pages.CARCINOGENIC_INTERVENTION); %>
-	    <%@ include file="/jsp/includeComments.jsp" %>
-	    </TABLE>
-	    
-    </td></tr>
-	</TABLE>	    
-    </td></tr>
-</TABLE>
-
+		<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+		<tr><td>
+			<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="70%">
+			    <% pageContext.setAttribute(Parameters.MODELSECTIONVALUE, Pages.CARCINOGENIC_INTERVENTION); %>
+			    <%@ include file="/jsp/includeComments.jsp" %>
+			 </TABLE>
+		 </td></tr>
+		 </TABLE> 
 
 <%@ include file="/jsp/footer.jsp" %>
