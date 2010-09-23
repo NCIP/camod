@@ -71,7 +71,7 @@ public class AuthenticationFilter implements Filter {
             	//System.out.println("AuthenticationFilter session != null && !isRequestedSessionIdFromURL loop: " );
 	            String theUsername = (String) session.getAttribute(Constants.CURRENTUSER);         
 	            if(theUsername != null && theUsername.length() >0 ){
-	            	System.out.println("AuthenticationFilter set authorized = true: " );
+	            	//System.out.println("AuthenticationFilter set authorized = true: " );
 	                	authorized = true;
 	            }
             }
@@ -96,7 +96,7 @@ public class AuthenticationFilter implements Filter {
     private void generateNewSession(HttpServletRequest httpRequest){
     	//System.out.println("AuthenticationFilter generateNewSession enter");
    	 HttpSession session = httpRequest.getSession();
-   	 	System.out.println("AuthenticationFilter generateNewSession session_id  " + session.getId());
+   	 	//System.out.println("AuthenticationFilter generateNewSession session_id  " + session.getId());
         HashMap<String, Object> old = new HashMap<String, Object>();
         Enumeration<String> keys = (Enumeration<String>) session.getAttributeNames();
         while (keys.hasMoreElements()) {
