@@ -52,7 +52,7 @@ public class LogoutAction extends BaseAction {
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws IOException, ServletException
 	{
-		log.info("Entered LogoutAction: " );
+		log.debug("Entered LogoutAction: " );
 		// Remove the logged in credential attributes
 		request.getSession().removeAttribute("camod.loggedon.username");
 		request.getSession().removeAttribute("camod.loggedon.userroles");		
