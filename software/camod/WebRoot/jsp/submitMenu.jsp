@@ -54,13 +54,6 @@
 		</TD>
 		<% } %>
 
-		<!--TD height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-		  &nbsp;&nbsp;<a class="footerMenuLink" href="/camod/RegisterUserPopulateAction.do">HELP</a>&nbsp;&nbsp;
-		</TD>
-		
-		<TD>
-			<IMG height=16 alt="" src="images/mainMenuSeparator.gif" width=1>
-		</TD-->
 		
 		</TR>
 	</TBODY>
