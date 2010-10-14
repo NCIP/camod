@@ -113,13 +113,14 @@ public final class LoginAction extends BaseAction {
      */
     public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws IOException, ServletException {
-    	log.debug("Enter LoginAction.execute");
+    	log.info("Enter LoginAction.execute");
         LoginForm loginForm = (LoginForm) form;
 
 
         String theUsername = loginForm.getUsername().toLowerCase(); 
-        if(theUsername != null || SafeHTMLUtil.isLetter(theUsername)){
+        if(theUsername != null && theUsername.length() > 0) {
         	// clean username to prevent SQL injection
+        	log.info("Cleaned username");
         	theUsername = SafeHTMLUtil.clean(theUsername);        	
         } 
         	
@@ -151,6 +152,11 @@ public final class LoginAction extends BaseAction {
         } 
 
         // check login credentials using Authentication Mangager
+        if(theUsername != null) {
+        	// clean username to prevent SQL injection
+        	log.info("Cleaned username");
+        	theUsername = SafeHTMLUtil.clean(theUsername);        	
+        }        
         boolean loginOK = UserManagerSingleton.instance().login(theUsername, loginForm.getPassword(), request);
 
         String forward = "failure";
