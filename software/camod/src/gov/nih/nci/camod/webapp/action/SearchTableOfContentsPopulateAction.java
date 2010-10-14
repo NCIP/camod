@@ -36,29 +36,30 @@ public class SearchTableOfContentsPopulateAction extends BaseAction {
             HttpServletResponse response) throws Exception {
 
         log.info("In SearchTableOfContentsPopulateAction.populate");
-        
-        // Clean all headers for security scan (careful about what chars you allow)
-    	String headername = "";
-    	for(Enumeration e = request.getHeaderNames(); e.hasMoreElements();){
-    		headername = (String)e.nextElement();
-    		log.debug("SearchTableOfContentsPopulateAction headername: " + headername);
-    		String cleanHeaders = SafeHTMLUtil.clean(headername);
-    		log.debug("SearchTableOfContentsPopulateAction cleaned headername: " + headername);
-    	}    
-    	
+
     	// get and clean header to prevent SQL injection
-       	String sID = null;
+        String sID = null;
         if (request.getHeader("X-Forwarded-For") != null){
         	sID = request.getHeader("X-Forwarded-For");
             log.info("cleaned X-Forwarded-For: " + sID);
             sID = SafeHTMLUtil.clean(sID);
         }
         
+        // Clean all headers for security scan (careful about what chars you allow)
+    	String headername = "";
+    	for(Enumeration e = request.getHeaderNames(); e.hasMoreElements();){
+    		headername = (String)e.nextElement();
+    		log.info("SearchTableOfContentsPopulateAction headername: " + headername);
+    		String cleanHeaders = SafeHTMLUtil.clean(headername);
+    		log.info("SearchTableOfContentsPopulateAction cleaned headername: " + headername);
+    	}     	
+
+    	String sID2 = null;
     	// get and clean header to prevent SQL injection
         if (request.getHeader("Referer") != null){
-        	sID = request.getHeader("Referer");
-            log.info("cleaned Referer: " + sID);
-            sID = SafeHTMLUtil.clean(sID);
+        	sID2 = request.getHeader("Referer");
+            log.info("cleaned Referer: " + sID2);
+            sID2 = SafeHTMLUtil.clean(sID2);
         }     	
 
         // Get the curation manager workflow XML
