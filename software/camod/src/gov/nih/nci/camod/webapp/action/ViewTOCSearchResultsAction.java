@@ -59,40 +59,40 @@ public class ViewTOCSearchResultsAction extends BaseAction {
             HttpServletResponse response) throws Exception {
     	
     	log.info("In ViewTOCSearchResultsAction.execute");
+    	// get and clean header to prevent SQL injection
+       	String sID = null;
+        if (request.getHeader("X-Forwarded-For") != null){
+        	sID = request.getHeader("X-Forwarded-For");
+        	log.info("cleaned X-Forwarded-For: " + sID);
+            sID = SafeHTMLUtil.clean(sID);
+        }  
+        
+        String sID2 = null;
+    	// get and clean header to prevent SQL injection
+        if (request.getHeader("Referer") != null){
+        	sID2 = request.getHeader("Referer");
+        	log.info("cleaned Referer: " + sID2);
+            sID2 = SafeHTMLUtil.clean(sID2);
+        } 
+        
+        // Clean all headers for security scan (careful about what chars you allow)
+    	String headername = "";
+    	for(Enumeration e = request.getHeaderNames(); e.hasMoreElements();){
+    		headername = (String)e.nextElement();
+    		log.info("ViewTOCSearchResultsAction headername: " + headername);
+    		String cleanHeaders = SafeHTMLUtil.clean(headername);
+    		log.debug("ViewTOCSearchResultsAction cleaned headername: " + headername);
+    	}         
   
         String theForward = "next";
         
         try {
-        	
-            // Clean all headers for security scan (careful about what chars you allow)
-        	String headername = "";
-        	for(Enumeration e = request.getHeaderNames(); e.hasMoreElements();){
-        		headername = (String)e.nextElement();
-        		log.debug("ViewTOCSearchResultsAction headername: " + headername);
-        		String cleanHeaders = SafeHTMLUtil.clean(headername);
-        		log.debug("ViewTOCSearchResultsAction cleaned headername: " + headername);
-        	}    
-            
-        	// get and clean header to prevent SQL injection
-           	String sID = null;
-            if (request.getHeader("X-Forwarded-For") != null){
-            	sID = request.getHeader("X-Forwarded-For");
-            	log.info("cleaned X-Forwarded-For: " + sID);
-                sID = SafeHTMLUtil.clean(sID);
-            }  
-            
-        	// get and clean header to prevent SQL injection
-            if (request.getHeader("Referer") != null){
-            	sID = request.getHeader("Referer");
-            	log.info("cleaned Referer: " + sID);
-                sID = SafeHTMLUtil.clean(sID);
-            }             
       
             // clean TOCQUERYKEY ahead of try loop - then loop checks if it is a valid choice - security scan code
             String theKey = (String) request.getParameter(Constants.Parameters.TOCQUERYKEY);
             if (theKey != null && theKey.length() > 0) {
             	theKey = SafeHTMLUtil.clean(theKey);
-            log.debug("ViewTOCSearchResultsAction theKey: " + theKey);
+            log.info("ViewTOCSearchResultsAction cleaned theKey: " + theKey);
             }        	
             
         	//Remove any retained criteriatable values
@@ -108,7 +108,7 @@ public class ViewTOCSearchResultsAction extends BaseAction {
 	            if (!SafeHTMLUtil.isValidValue(theKey,Constants.Dropdowns.SEARCHTOCDROP,request))
 	            {
 	                // set theForward to failure - fail gracefully but do not let query continue
-	            	log.info("TOC: The key is not an accepted value - end query " + theKey);  
+	            	System.out.println("TOC: The key is not an accepted value - end query " + theKey);  
 	                theForward = "failure";
 	            } else {	            
 		            log.debug("theKey is a valid value - continue with querry: " + theKey); 
