@@ -117,7 +117,7 @@ public final class LoginAction extends BaseAction {
         LoginForm loginForm = (LoginForm) form;
 
 
-        String theUsername = loginForm.getUsername().toLowerCase(); 
+        String theUsername = loginForm.getUsername(); 
         if(theUsername != null && theUsername.length() > 0) {
         	// clean username to prevent SQL injection
         	log.info("Cleaned username");
