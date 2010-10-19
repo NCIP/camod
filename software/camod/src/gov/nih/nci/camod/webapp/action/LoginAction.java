@@ -125,12 +125,6 @@ public final class LoginAction extends BaseAction {
         	loginForm.setUsername(theUsername);
         } 
         
-        String thePassword = loginForm.getPassword(); 
-        if(thePassword != null) {
-        	// clean password to prevent SQL injection
-        	log.info("Cleaned thePassword");
-        	thePassword = SafeHTMLUtil.cleanKeyword(thePassword);        	
-        }        
         	
         // added for the security scan for some reason
         Cookie validUserCookie = new Cookie("validUserKey", "123456789");
@@ -160,7 +154,7 @@ public final class LoginAction extends BaseAction {
         } 
 
         // check login credentials using Authentication Manager 
-        boolean loginOK = UserManagerSingleton.instance().login(theUsername, thePassword, request);
+        boolean loginOK = UserManagerSingleton.instance().login(theUsername, loginForm.getPassword(), request);
 
         String forward = "failure";
 
