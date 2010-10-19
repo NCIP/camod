@@ -121,8 +121,16 @@ public final class LoginAction extends BaseAction {
         if(theUsername != null && theUsername.length() > 0) {
         	// clean username to prevent SQL injection
         	log.info("Cleaned username");
-        	theUsername = SafeHTMLUtil.clean(theUsername);        	
+        	theUsername = SafeHTMLUtil.clean(theUsername); 
+        	loginForm.setUsername(theUsername);
         } 
+        
+        String thePassword = loginForm.getPassword(); 
+        if(thePassword != null) {
+        	// clean password to prevent SQL injection
+        	log.info("Cleaned thePassword");
+        	thePassword = SafeHTMLUtil.clean(thePassword);        	
+        }        
         	
         // added for the security scan for some reason
         Cookie validUserCookie = new Cookie("validUserKey", "123456789");
@@ -151,13 +159,8 @@ public final class LoginAction extends BaseAction {
         	}       	
         } 
 
-        // check login credentials using Authentication Mangager
-        if(theUsername != null) {
-        	// clean username to prevent SQL injection
-        	log.info("Cleaned username");
-        	theUsername = SafeHTMLUtil.clean(theUsername);        	
-        }        
-        boolean loginOK = UserManagerSingleton.instance().login(theUsername, loginForm.getPassword(), request);
+        // check login credentials using Authentication Manager 
+        boolean loginOK = UserManagerSingleton.instance().login(theUsername, thePassword, request);
 
         String forward = "failure";
 
