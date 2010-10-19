@@ -129,7 +129,7 @@ public final class LoginAction extends BaseAction {
         if(thePassword != null) {
         	// clean password to prevent SQL injection
         	log.info("Cleaned thePassword");
-        	thePassword = SafeHTMLUtil.clean(thePassword);        	
+        	thePassword = SafeHTMLUtil.cleanKeyword(thePassword);        	
         }        
         	
         // added for the security scan for some reason
