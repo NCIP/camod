@@ -377,10 +377,8 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 	 */
 	public boolean login(String inUsername, String inPassword,
 			HttpServletRequest inRequest) {
-		boolean loginOk = true;
-		List usernameList = new ArrayList<String>();
-		log.debug("Enter login inUsername: " + inUsername);
-		
+		boolean loginOk = false;
+		List usernameList = new ArrayList<String>();		
 		try {	
 			// generate list from DB
 			NewDropdownUtil.populateDropdown(inRequest, Constants.Dropdowns.USERNAMEINDATABASE, null);
@@ -397,7 +395,7 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 	            log.info("login method inside authentication loop");
 				// Work around bug in CSM. Empty passwords pass
 				if (inPassword.trim().length() != 0) {
-					//loginOk = theAuthenticationMgr.login(inUsername, inPassword);
+					loginOk = theAuthenticationMgr.login(inUsername, inPassword);
 					// Does the user exist? Must also be in our database to login
 					List theRoles = getRolesForUser(inUsername);
 					inRequest.getSession().setAttribute(Constants.CURRENTUSERROLES,
