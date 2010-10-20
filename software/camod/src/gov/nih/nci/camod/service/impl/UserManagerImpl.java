@@ -203,6 +203,7 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 
 					while (theTokenizer.hasMoreTokens()) {
 						if (theTokenizer.nextToken().equals(inUsername)) {
+							log.info("theSuperusers: " + theTokenizer.nextToken().toString());
 							theRoles.add(Constants.Admin.Roles.SUPER_USER);
 							break;
 						}
