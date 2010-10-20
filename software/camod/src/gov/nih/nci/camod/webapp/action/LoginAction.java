@@ -115,17 +115,8 @@ public final class LoginAction extends BaseAction {
             HttpServletResponse response) throws IOException, ServletException {
     	log.info("Enter LoginAction.execute");
         LoginForm loginForm = (LoginForm) form;
-
-
-        String theUsername = loginForm.getUsername().toLowerCase(); 
-        if(theUsername != null && theUsername.length() > 0) {
-        	// clean username to prevent SQL injection
-        	log.info("Cleaned username");
-        	theUsername = SafeHTMLUtil.clean(theUsername); 
-        	loginForm.setUsername(theUsername);
-        } 
-        
-        	
+		String forward = "failure";
+		
         // added for the security scan for some reason
         Cookie validUserCookie = new Cookie("validUserKey", "123456789");
         response.addCookie(validUserCookie);        
@@ -151,69 +142,74 @@ public final class LoginAction extends BaseAction {
         	cookieArray[i].setSecure(true); 
         	log.debug("Secured JSESSIONID");
         	}       	
-        } 
-
-        // check login credentials using Authentication Manager 
-        boolean loginOK = UserManagerSingleton.instance().login(theUsername, loginForm.getPassword(), request);
-
-        String forward = "failure";
-
-        if (loginOK) {
-            log.info("Successful login");            
-            
-            forward = "success";
-            request.getSession().setAttribute(Constants.CURRENTUSER, theUsername);
-            log.debug("set current user in LoginAction= " + request.getSession().getAttribute(Constants.CURRENTUSER));
-            log.debug("Is current user loggedin= " + request.getSession().getAttribute(Constants.LOGGEDIN));
-            log.debug("Session id= " + request.getSession().getId());
-            
-		    //Used for sidebar, number of saved queries
-            SavedQueryManager savedQueryManager = (SavedQueryManager) getBean("savedQueryManager");   
-            
-            //Used to pre-load settings for search result columns
-            ResultSettingsManager resultSettingsManager = (ResultSettingsManager) getBean("resultSettingsManager");
-            
-            try {
-                List savedQueriesList = savedQueryManager.getSavedQueriesByUsername( (String) request.getSession().getAttribute(Constants.CURRENTUSER) );
-                request.getSession().setAttribute(Constants.NUMBEROFSAVEDQUERIES, String.valueOf(savedQueriesList.size()) );
-                
-                //Pre-load columns for search results
-                String[] columns = Constants.SEARCHRESULTCOLUMNSDEFAULT;
-                String itemsPerPage = "" + Constants.ITEMSPERPAGEDEFAULT;
-                
-                ResultSettings inResultSettings = resultSettingsManager.getByUsername( (String) request.getSession().getAttribute(Constants.CURRENTUSER) );
-        
-                if ( inResultSettings != null ) 
-                {
-                    log.debug("Customized queryString: " + request.getQueryString());                	
-                    Set<ResultSettingsColumns> resultSettingsColumnsList = inResultSettings.getResultSettingsColumns();
-                    Iterator <ResultSettingsColumns> setIter = resultSettingsColumnsList.iterator();                  
-                    itemsPerPage = "" + inResultSettings.getItemsPerPage();
-                    String[] theColumns = new String[resultSettingsColumnsList.size()];
-                    
-                    while ( setIter.hasNext() )
-                    {                       
-                        ResultSettingsColumns theResultSettingsColumns = (ResultSettingsColumns) setIter.next();
-                        theColumns[theResultSettingsColumns.getColumnOrder()] = theResultSettingsColumns.getColumnName();
-                    }  
-                    
-                    request.getSession().setAttribute( Constants.ITEMSPERPAGE, itemsPerPage );        
-                    request.getSession().setAttribute( Constants.SEARCHRESULTCOLUMNS, theColumns );
-
-                } else {                
-                    request.getSession().setAttribute( Constants.ITEMSPERPAGE, itemsPerPage );        
-                    request.getSession().setAttribute( Constants.SEARCHRESULTCOLUMNS, columns );
-                }
-                
-            } catch (Exception e) {
-                log.debug( "User search result settings load failed" );
-            }
-            
-        } else {
-            log.debug("Login failed");
-            request.getSession().setAttribute(Constants.LOGINFAILED, "true");
         }
-
+        
+        String theUsername = loginForm.getUsername().toLowerCase();
+        
+		// If user name is in our DB proceed.  Or fail immediately (prevent SQL injection)
+        if (SafeHTMLUtil.isValidStringValue(theUsername,Constants.Dropdowns.USERNAMEINDATABASE,request))
+        { 	
+	        // check login credentials using Authentication Manager 
+	        boolean loginOK = UserManagerSingleton.instance().login(theUsername, loginForm.getPassword(), request);	        
+	
+	        if (loginOK) {
+	            log.info("Successful login");            
+	            
+	            forward = "success";
+	            request.getSession().setAttribute(Constants.CURRENTUSER, theUsername);
+	            log.debug("set current user in LoginAction= " + request.getSession().getAttribute(Constants.CURRENTUSER));
+	            log.debug("Is current user loggedin= " + request.getSession().getAttribute(Constants.LOGGEDIN));
+	            log.debug("Session id= " + request.getSession().getId());
+	            
+			    //Used for sidebar, number of saved queries
+	            SavedQueryManager savedQueryManager = (SavedQueryManager) getBean("savedQueryManager");   
+	            
+	            //Used to pre-load settings for search result columns
+	            ResultSettingsManager resultSettingsManager = (ResultSettingsManager) getBean("resultSettingsManager");
+	            
+		            try {
+		                List savedQueriesList = savedQueryManager.getSavedQueriesByUsername( (String) request.getSession().getAttribute(Constants.CURRENTUSER) );
+		                request.getSession().setAttribute(Constants.NUMBEROFSAVEDQUERIES, String.valueOf(savedQueriesList.size()) );
+		                
+		                //Pre-load columns for search results
+		                String[] columns = Constants.SEARCHRESULTCOLUMNSDEFAULT;
+		                String itemsPerPage = "" + Constants.ITEMSPERPAGEDEFAULT;
+		                
+		                ResultSettings inResultSettings = resultSettingsManager.getByUsername( (String) request.getSession().getAttribute(Constants.CURRENTUSER) );
+		        
+		                if ( inResultSettings != null ) 
+		                {
+		                    log.debug("Customized queryString: " + request.getQueryString());                	
+		                    Set<ResultSettingsColumns> resultSettingsColumnsList = inResultSettings.getResultSettingsColumns();
+		                    Iterator <ResultSettingsColumns> setIter = resultSettingsColumnsList.iterator();                  
+		                    itemsPerPage = "" + inResultSettings.getItemsPerPage();
+		                    String[] theColumns = new String[resultSettingsColumnsList.size()];
+		                    
+		                    while ( setIter.hasNext() )
+		                    {                       
+		                        ResultSettingsColumns theResultSettingsColumns = (ResultSettingsColumns) setIter.next();
+		                        theColumns[theResultSettingsColumns.getColumnOrder()] = theResultSettingsColumns.getColumnName();
+		                    }  
+		                    
+		                    request.getSession().setAttribute( Constants.ITEMSPERPAGE, itemsPerPage );        
+		                    request.getSession().setAttribute( Constants.SEARCHRESULTCOLUMNS, theColumns );
+		
+		                } else {                
+		                    request.getSession().setAttribute( Constants.ITEMSPERPAGE, itemsPerPage );        
+		                    request.getSession().setAttribute( Constants.SEARCHRESULTCOLUMNS, columns );
+		                }                
+	            } catch (Exception e) {
+	                log.debug( "User search result settings load failed" );
+	            }
+	        } else {
+		         log.debug("Login failed");
+		         request.getSession().setAttribute(Constants.LOGINFAILED, "true");
+	        } // end if (loginOK)
+	   } else {
+	         log.debug("Login failed");
+	         request.getSession().setAttribute(Constants.LOGINFAILED, "true");
+	   } // end if (SafeHTMLUtil.isValidStringValue
+       
         // Forward control to the specified success URI
         return mapping.findForward(forward);
     }
