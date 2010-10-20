@@ -44,15 +44,7 @@ database.name=NCID1DEV
 database.user=xxxxxxxxx
 database.password=fsb#4625
 database.url=jdbc:oracle:thin:@${database.server}:${database.port}:${database.name}
-# <connection-url>jdbc:oracle:thin:@cbdb-d1001.nci.nih.gov:1521:NCID1DEV</connection-url>
-
-########################
-###  APPLICATION JBOSS SETTINGS  ###
-########################
-# jboss.home will be generated as ${application.base.path}/${jboss.relateive.path}
-jboss.relative.path=${jboss.binaries.relative.dir}
 jboss.server.hostname=localhost
-jboss.server.name=default
 jboss.web.user=admin
 jboss.web.password=blueprint123!
 
@@ -204,7 +196,7 @@ camod.grid.validation.post.socket.list=${camod.grid.jboss.server.jndi.port}
 ################################
 
 # Superuser usernames.  Can edit all models
-superuser.usernames=pandyas,ulrike,thulasiramank,colbertma,curatorcamod
+superuser.usernames=pandyas,ulrike,colbertma,curatorcamod,camodcurator2
 
 #caImage properties 
 #caimage.host=cancerimages-dev.nci.nih.gov
