@@ -111,7 +111,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
-
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -203,13 +202,13 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 
 					while (theTokenizer.hasMoreTokens()) {
 						if (theTokenizer.nextToken().equals(inUsername)) {
-							log.info("theSuperusers: " + theTokenizer.nextToken().toString());
+							log.info("inUsername matches theSuperusers list.");
 							theRoles.add(Constants.Admin.Roles.SUPER_USER);
 							break;
 						}
 					}
 				} catch (Exception e) {
-					log.error("Cannot get superuser information from bundle", e);
+					log.info("Cannot get superuser information from bundle", e);
 				}
 			} else {
 				throw new IllegalArgumentException("User: " + inUsername
