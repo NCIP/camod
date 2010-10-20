@@ -35,13 +35,13 @@ public class LoginForm extends BaseForm implements Serializable {
 	}
 	/**
 	 * @param username The username to set.
+	 * Do not clean variable for SQL injection here
+	 * camodcurator%27 cleans to camodcurator and 
+	 * then incorrectly continues through the code
+	 * so a hacker can get lucky
 	 */
 	public void setUsername(String username) {
 		this.username = username;
-        // Clean the parameter
-        if (this.username != null && !this.username.equals(""))  {
-                this.username = SafeHTMLUtil.clean(this.username);
-        }		
 	}
 	/**
 	 * @param password The password to set.
