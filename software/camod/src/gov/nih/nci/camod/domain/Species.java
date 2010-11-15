@@ -189,32 +189,8 @@ public class Species extends BaseObject implements Serializable
         result = HashCodeUtil.hash(result, this.getScientificName());
         return result + super.hashCode();
     }
-    /*    
-     public int compareTo(Object o)
-     {
-     // compare by evs description name if possible, otherwise organ name
-     if ((o instanceof Species) && (this.getEVSPreferredDescription() != null) && (((Species) o).getEVSPreferredDescription() != null))
-     {
-     int result = this.getEVSPreferredDescription().compareTo(((Species) o).getEVSPreferredDescription());
-     if (result != 0)
-     {
-     return result;
-     }
-     }
-     else if ((o instanceof Species) && (this.getScientificName() != null) && (((Species) o).getScientificName() != null))
-     {
-     int result = this.getScientificName().compareTo(((Species) o).getScientificName());
-     if (result != 0)
-     {
-     return result;
-     }
-     }
 
-     return super.compareTo(o);
-     }
-     */
-
-	/**
+    /**
 	 * @return the scientificNameAlternEntry
 	 */
 	public String getScientificNameAlternEntry() {
