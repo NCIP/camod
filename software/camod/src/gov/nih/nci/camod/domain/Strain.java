@@ -164,30 +164,7 @@ public class Strain extends BaseObject implements Serializable
         result = HashCodeUtil.hash(result, this.getName());
         return result + super.hashCode();
     }
-    /*    
-     public int compareTo(Object o)
-     {
-     // compare by evs description name if possible, otherwise organ name
-     if ((o instanceof Strain) && (this.getEVSPreferredDescription() != null) && (((Strain) o).getEVSPreferredDescription() != null))
-     {
-     int result = this.getEVSPreferredDescription().compareTo(((Organ) o).getEVSPreferredDescription());
-     if (result != 0)
-     {
-     return result;
-     }
-     }
-     else if ((o instanceof Strain) && (this.getName() != null) && (((Strain) o).getName() != null))
-     {
-     int result = this.getName().compareTo(((Strain) o).getName());
-     if (result != 0)
-     {
-     return result;
-     }
-     }
 
-     return super.compareTo(o);
-     }    
-     */
 
 	/**
 	 * @return the nameAlternEntry
