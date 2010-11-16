@@ -244,14 +244,14 @@ public class TransplantationPopulateAction extends BaseAction
                 // since we are always querying from concept code (save and edit),
                 // simply display EVSPreferredDescription, unless concept code is '00000'
                 if (transplantation.getOrgan().getConceptCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)) {
-                	transplantationForm.setOrgan(transplantation.getOrgan().getEVSPreferredDescription());
-                    log.debug("<TransplantationPopulateAction> setOrgan= " + transplantation.getOrgan().getName());
+                	transplantationForm.setOrgan(transplantation.getOrgan().getName());
+                    log.info("<TransplantationPopulateAction> setOrgan= " + transplantation.getOrgan().getName());
                     transplantationForm.setOrganTissueCode(transplantation.getOrgan().getConceptCode());
                     log.debug("<TransplantationPopulateAction> OrganTissueCode= " + transplantation.getOrgan().getConceptCode());           
                     
                 } else {
-                	transplantationForm.setOrgan(transplantation.getOrgan().getEVSPreferredDescription());
-                    log.debug("<TransplantationPopulateAction> setOrgan= " + transplantation.getOrgan().getEVSPreferredDescription());
+                	transplantationForm.setOrgan(transplantation.getOrgan().getName());
+                    log.info("<TransplantationPopulateAction> setOrgan= " + transplantation.getOrgan().getName());
                     transplantationForm.setOrganTissueCode(transplantation.getOrgan().getConceptCode());
                     log.debug("<TransplantationPopulateAction> OrganTissueCode= " + transplantation.getOrgan().getConceptCode());
                 }

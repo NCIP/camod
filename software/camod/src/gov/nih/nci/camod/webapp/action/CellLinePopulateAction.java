@@ -95,17 +95,17 @@ public class CellLinePopulateAction extends BaseAction {
             // simply display EVSPreferredDescription, unless concept code is '00000'
             if (cellLine.getOrgan().getConceptCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)) {
                 cellLineForm.setOrgan(cellLine.getOrgan().getName());
-                log.debug("cellLine.getOrgan().getName(): " + cellLine.getOrgan().getName());
+                log.info("cellLine.getOrgan().getName(): " + cellLine.getOrgan().getName());
     
                 cellLineForm.setOrganTissueCode(cellLine.getOrgan().getConceptCode());
-                log.debug("OrganTissueCode: " + cellLine.getOrgan().getConceptCode());             
+                log.info("OrganTissueCode: " + cellLine.getOrgan().getConceptCode());             
                 
             } else {
-                cellLineForm.setOrgan(cellLine.getOrgan().getEVSPreferredDescription());
-                log.debug("cellLine.getOrgan().getEVSPreferredDescription(): " + cellLine.getOrgan().getEVSPreferredDescription());
+                cellLineForm.setOrgan(cellLine.getOrgan().getName());
+                log.info("cellLine.getOrgan().getName(): " + cellLine.getOrgan().getName());
     
                 cellLineForm.setOrganTissueCode(cellLine.getOrgan().getConceptCode());
-                log.debug("OrganTissueCode: " + cellLine.getOrgan().getConceptCode());
+                log.info("OrganTissueCode: " + cellLine.getOrgan().getConceptCode());
             }
 
 		}

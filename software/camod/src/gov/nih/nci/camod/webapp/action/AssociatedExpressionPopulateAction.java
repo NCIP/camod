@@ -94,8 +94,8 @@ public class AssociatedExpressionPopulateAction extends BaseAction {
 
             associatedExpressionForm.setEngineeredGeneID(aAssociatedExpressionID);
             associatedExpressionForm.setOrganTissueCode(organ.getConceptCode());
-            // Does not work for Zebrafish EVS tree
-            //associatedExpressionForm.setOrganTissueName(organ.getEVSPreferredDescription());
+
+            // simply display organ.name since EVSPreferredDescription is too slow in LexEVS 5.x API
             associatedExpressionForm.setOrganTissueName(organ.getName());
             }
             

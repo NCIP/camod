@@ -127,11 +127,12 @@ public class GeneDeliveryPopulateAction extends BaseAction {
 			log.debug("<GeneDeliveryPopulateAction> get the Organ attributes");
 
 			// since we are always querying from concept code (save and edit),
-			// simply display EVSPreferredDescription
+			// simply display organ.name since EVSPreferredDescription is too slow in LexEVS 5.x API
 			if (gene.getOrgan() != null) {
-				log.debug("gene.getOrgan(): " + gene.getOrgan().toString());
+				log.info("gene.getOrgan(): " + gene.getOrgan().toString());
 				geneDeliveryForm.setOrganTissueCode(gene.getOrgan().getConceptCode());
-				geneDeliveryForm.setOrgan(gene.getOrgan().getEVSPreferredDescription());
+				geneDeliveryForm.setOrgan(gene.getOrgan().getName());
+				log.info("GD popAction gene.getOrgan().getName(): " + gene.getOrgan().getName());
 			}
 			
             if (gene.getComments() != null)

@@ -110,30 +110,31 @@ public class AssociatedMetastasisPopulateAction extends BaseAction {
             // simply display EVSPreferredDescription, unless concept code is '00000'
             if (associatedMetastasis.getOrgan().equals(Constants.Dropdowns.CONCEPTCODEZEROS)) {
             	assocMetastasisForm.setOrgan(associatedMetastasis.getOrgan().getName());
-	            log.debug("associatedMetastasis.getOrgan().getName(): " + associatedMetastasis.getOrgan().getName());
+	            log.info("associatedMetastasis.getOrgan().getName(): " + associatedMetastasis.getOrgan().getName());
 	
 	            assocMetastasisForm.setOrganTissueCode(associatedMetastasis.getOrgan().getConceptCode());
-	            log.debug("OrganTissueCode: " + associatedMetastasis.getOrgan().getConceptCode());            	
+	            log.info("OrganTissueCode: " + associatedMetastasis.getOrgan().getConceptCode());            	
             	
             } else {
-            	assocMetastasisForm.setOrgan(associatedMetastasis.getOrgan().getEVSPreferredDescription());
-	            log.debug("associatedMetastasis.getOrgan().getEVSPreferredDescription(): " + associatedMetastasis.getOrgan().getEVSPreferredDescription());
+            	assocMetastasisForm.setOrgan(associatedMetastasis.getOrgan().getName());
+	            log.info("associatedMetastasis.getOrgan().getName(): " + associatedMetastasis.getOrgan().getName());
 	
 	            assocMetastasisForm.setOrganTissueCode(associatedMetastasis.getOrgan().getConceptCode());
-	            log.debug("OrganTissueCode: " + associatedMetastasis.getOrgan().getConceptCode());
+	            log.info("OrganTissueCode: " + associatedMetastasis.getOrgan().getConceptCode());
             }
             
              /* Set Disease object attributes - check for other Zebrafish entry*/
             Disease disease = associatedMetastasis.getDisease();
             if(disease.getNameAlternEntry() != null) {
-                log.debug("disease is other in DB");
+                log.info("disease is other in DB");
                 assocMetastasisForm.setTumorClassification(Constants.Dropdowns.OTHER_OPTION);
                 assocMetastasisForm.setOtherTumorClassification(disease.getNameAlternEntry());
                 
             } else {
                 assocMetastasisForm.setDiagnosisName(disease.getName());
                 assocMetastasisForm.setDiagnosisCode(disease.getConceptCode());
-                assocMetastasisForm.setTumorClassification(disease.getEVSPreferredDescription());
+                //simply display disease.name since EVSPreferredDescription is too slow in LexEVS 5.x API
+                assocMetastasisForm.setTumorClassification(disease.getName());
             }
 
             /* Set GeneticAlteration attributes */

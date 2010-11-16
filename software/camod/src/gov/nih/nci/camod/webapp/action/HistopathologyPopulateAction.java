@@ -134,13 +134,13 @@ public class HistopathologyPopulateAction extends BaseAction {
             // simply display EVSPreferredDescription, unless concept code is '00000'
             if (theHistopathology.getOrgan().getConceptCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)) {
 	            histopathologyForm.setOrgan(theHistopathology.getOrgan().getName());
-	            log.debug("theHistopathology.getOrgan().getName(): " + theHistopathology.getOrgan().getName());	
+	            log.info("theHistopathology.getOrgan().getName(): " + theHistopathology.getOrgan().getName());	
 	            histopathologyForm.setOrganTissueCode(theHistopathology.getOrgan().getConceptCode());
-	            log.debug("OrganTissueCode: " + theHistopathology.getOrgan().getConceptCode()); 	            
+	            log.info("OrganTissueCode: " + theHistopathology.getOrgan().getConceptCode()); 	            
             	
             } else {
-	            histopathologyForm.setOrgan(theHistopathology.getOrgan().getEVSPreferredDescription());
-	            log.debug("theHistopathology.getOrgan().getEVSPreferredDescription(): " + theHistopathology.getOrgan().getEVSPreferredDescription());	
+	            histopathologyForm.setOrgan(theHistopathology.getOrgan().getName());
+	            log.info("theHistopathology.getOrgan().getName: " + theHistopathology.getOrgan().getName());	
 	            histopathologyForm.setOrganTissueCode(theHistopathology.getOrgan().getConceptCode());
             }
             
@@ -148,7 +148,7 @@ public class HistopathologyPopulateAction extends BaseAction {
             Disease disease = theHistopathology.getDisease();
             // get disease for Zebrafish models when 'Other' is selected from list
             if(disease.getNameAlternEntry() != null  && disease.getNameAlternEntry().length() >0) {
-            	log.debug("disease is other in DB for Zebrafish");
+            	log.info("disease is other in DB for Zebrafish");
             	histopathologyForm.setTumorClassification(Constants.Dropdowns.OTHER_OPTION);
             	histopathologyForm.setDiagnosisCode(disease.getConceptCode());            	
             	histopathologyForm.setOtherTumorClassification(disease.getNameAlternEntry());
@@ -156,22 +156,23 @@ public class HistopathologyPopulateAction extends BaseAction {
             } else {
             	// get disease for models (i.e. Zebrafish diagnosis selected from list) and Mouse entered manually
             	if (disease.getConceptCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS) ){
-                	log.debug("disease getConceptCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS");
+                	log.info("disease getConceptCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS");
             		// Concept code is 00000, so just use name
 	            	histopathologyForm.setDiagnosisName(disease.getName());
-	            	log.debug("disease.getName(): " + disease.getName());
+	            	log.info("disease.getName(): " + disease.getName());
 	            	histopathologyForm.setDiagnosisCode(disease.getConceptCode());
-	            	log.debug("disease.getConceptCode(): " + disease.getConceptCode());
+	            	log.info("disease.getConceptCode(): " + disease.getConceptCode());
 	            	histopathologyForm.setTumorClassification(disease.getName());
-	            	log.debug("disease.getName(): " + disease.getName());
+	            	log.info("disease.getName(): " + disease.getName());
             		
             	} else {
             		// get disease for models selected from the EVS tree (i.e. Mouse, Rat)
             		log.debug("disease getConceptCode() not equal to Constants.Dropdowns.CONCEPTCODEZEROS");
             		// Concept code is not 000000, so get preferred name from EVS 
-	            	histopathologyForm.setDiagnosisName(disease.getEVSPreferredDescription());
+            		// simply display organ.name since EVSPreferredDescription is too slow in LexEVS 5.x API
+	            	histopathologyForm.setDiagnosisName(disease.getName());
 	            	histopathologyForm.setDiagnosisCode(disease.getConceptCode());
-	            	histopathologyForm.setTumorClassification(disease.getEVSPreferredDescription());
+	            	histopathologyForm.setTumorClassification(disease.getName());
             	}
             }
             
