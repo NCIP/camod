@@ -218,7 +218,6 @@ package gov.nih.nci.camod.webapp.action;
 
 import edu.wustl.common.util.CaElmirInterfaceManager;
 import gov.nih.nci.cabio.domain.Gene;
-//import gov.nih.nci.cabio.domain.impl.GeneImpl;
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.Agent;
 import gov.nih.nci.camod.domain.AnimalModel;
@@ -241,14 +240,10 @@ import gov.nih.nci.camod.service.CommentsManager;
 import gov.nih.nci.camod.service.PersonManager;
 import gov.nih.nci.camod.service.TransplantationManager;
 import gov.nih.nci.camod.service.impl.QueryManagerSingleton;
-import gov.nih.nci.camod.util.EvsTreeUtil;
 import gov.nih.nci.camod.util.SafeHTMLUtil;
 import gov.nih.nci.common.domain.DatabaseCrossReference;
-//import gov.nih.nci.common.domain.impl.DatabaseCrossReferenceImpl;
-import gov.nih.nci.system.applicationservice.ApplicationService;
 import gov.nih.nci.system.applicationservice.CaBioApplicationService;
 import gov.nih.nci.system.client.ApplicationServiceProvider;
-
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -470,7 +465,7 @@ public class ViewModelAction extends BaseAction
                 GeneIdentifier geneIdentifier = tm.getGeneIdentifier();                
                 if (geneIdentifier != null)
                 {
-                    log.debug("Connecting to caBIO to look up gene " + geneIdentifier);
+                    log.info("Connecting to caBIO to look up gene " + geneIdentifier);
                     // the geneId is available
                     try
                     {
@@ -484,18 +479,18 @@ public class ViewModelAction extends BaseAction
                         dcr.setDataSourceName("LOCUS_LINK_ID");
                         List<DatabaseCrossReference> cfcoll = new ArrayList<DatabaseCrossReference>();
                         cfcoll.add(dcr);
-
+                        log.info("cfcoll.size(): " + cfcoll.size());
                         Gene myGene = new Gene();
                         myGene.setDatabaseCrossReferenceCollection(cfcoll);
                         List resultList = appService.search(Gene.class, myGene);
-
+                        log.info("resultList.size(): " + resultList.size());
                         
                         final int geneCount = (resultList != null) ? resultList.size() : 0;
-                        //log.debug("Got " + geneCount + " Gene Objects");
+                        log.info("Got " + geneCount + " Gene Objects");
                         if (geneCount > 0)
                         {
                             myGene = (Gene) resultList.get(0);
-                            log.debug("Gene:" + geneIdentifier + " ==>" + myGene);
+                            log.info("Gene:" + geneIdentifier + " ==>" + myGene);
                             tmGeneMap.put(tm.getId(), myGene);
                         }
                     }
@@ -513,7 +508,7 @@ public class ViewModelAction extends BaseAction
             }
         }
 
-        log.debug("<populateEngineeredGene> " + "egcCnt=" + egcCnt + "tgc=" + tgCnt + "gsc=" + gsCnt + "tmc=" + tmCnt + "imc=" + imCnt);
+        log.info("<populateEngineeredGene> " + "egcCnt=" + egcCnt + "tgc=" + tgCnt + "gsc=" + gsCnt + "tmc=" + tmCnt + "imc=" + imCnt);
         request.getSession().setAttribute(Constants.ANIMALMODEL, am);
         request.getSession().setAttribute(Constants.TRANSGENE_COLL, tgc);
         request.getSession().setAttribute(Constants.GENOMIC_SEG_COLL, gsc);
@@ -732,7 +727,7 @@ public class ViewModelAction extends BaseAction
         Iterator it = therapyColl.iterator();
 
         final int cc = (therapyColl != null) ? therapyColl.size() : 0;
-        log.debug("Looking up clinical protocols for " + cc + " agents...");
+        log.info("Looking up clinical protocols for " + cc + " agents...");
 
         while (it.hasNext())
         {
@@ -743,7 +738,7 @@ public class ViewModelAction extends BaseAction
             }
             // Sort therapy in order entered as requested by user
             Collections.sort(therapeuticApprochesColl);
-            log.debug("therapeuticApprochesColl: " + therapeuticApprochesColl.toString());
+            log.info("therapeuticApprochesColl: " + therapeuticApprochesColl.toString());
             
             Agent a = t.getAgent();
             AgentManager myAgentManager = (AgentManager) getBean("agentManager");
@@ -751,10 +746,11 @@ public class ViewModelAction extends BaseAction
             {
                 Long nscNumber = a.getNscNumber();
                 if (nscNumber != null)
+                	log.info("nscNumber: " + nscNumber);
                 {
                     Collection protocols = myAgentManager.getClinicalProtocols(a);
                     clinProtocols.put(nscNumber, protocols);
-                    
+                    log.info("clinProtocols.size(): " + clinProtocols.size());
                     // get the yeast data
                     List yeastStages = myAgentManager.getYeastResults(a, true);
                     if (yeastStages.size() > 0)
