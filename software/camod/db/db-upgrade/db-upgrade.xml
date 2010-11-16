@@ -133,10 +133,16 @@
 		<sqlFile path="@db-upgrade.run.dir@/camod_upgrade_2.6.1_2.sql"/>
 	</changeSet> 				
 	
-	<changeSet id="2.6.2_1_update_roles_for_test_user" author="pandyas">                            
+	<!-- changed through GUI in admin
+	changeSet id="2.6.2_1_update_roles_for_test_user" author="pandyas">                            
 		<comment>Update the roles for a test user</comment>
         <sqlFile path="@db-upgrade.run.dir@/camod_upgrade_2.6.2_1.sql"/>
-	</changeSet>	
+	</changeSet-->
+	
+	<changeSet id="2.7_1_update_organ_name" author="pandyas">                            
+		<comment>Update the organ name field</comment>
+        <sqlFile path="@db-upgrade.run.dir@/camod_upgrade_2.7_1.sql"/>
+	</changeSet>
 
 </databaseChangeLog>
 
