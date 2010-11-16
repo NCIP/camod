@@ -38,12 +38,16 @@ database.system.url=jdbc:oracle:thin:@${database.server}:${database.port}:${data
 
 # Require for all installs
 database.type=oracle
-database.server=cbdb-d1001.nci.nih.gov
-database.port=1521
-database.name=NCID1DEV
+database.server=ncidb-nci-d.NCI.NIH.GOV
+database.port=1564
+database.name=NCIDEV
 database.user=xxxxxxxxx
 database.password=fsb#4625
 database.url=jdbc:oracle:thin:@${database.server}:${database.port}:${database.name}
+# <connection-url>jdbc:oracle:thin:@cbdb-d1001.nci.nih.gov:1521:NCID1DEV</connection-url>
+
+
+
 jboss.server.hostname=localhost
 jboss.web.user=admin
 jboss.web.password=blueprint123!
