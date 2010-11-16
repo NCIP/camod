@@ -104,7 +104,7 @@
       paramsHT.conceptCode = inConceptCode;
       paramsHT.conceptName = inConceptName;
       paramsHT.displayName = inDisplayName;        	
-      paramsHT.postMsg = false;
+      paramsHT.postMsg = true;
       paramsHT.onlyLeaf = onlyLeaf;       
       if (fieldsToBlank != undefined) paramsHT.fieldsToBlank = fieldsToBlank;
 
@@ -123,7 +123,7 @@
       paramsHT.conceptCode = inConceptCode;
       paramsHT.conceptName = inConceptName;
       paramsHT.displayName = inDisplayName;        	
-      paramsHT.postMsg = false;
+      paramsHT.postMsg = true;
       paramsHT.onlyLeaf = onlyLeaf;       
       if (fieldsToBlank != undefined) paramsHT.fieldsToBlank = fieldsToBlank;
 
