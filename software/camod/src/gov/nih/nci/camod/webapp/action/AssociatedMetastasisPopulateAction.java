@@ -133,8 +133,7 @@ public class AssociatedMetastasisPopulateAction extends BaseAction {
             } else {
                 assocMetastasisForm.setDiagnosisName(disease.getName());
                 assocMetastasisForm.setDiagnosisCode(disease.getConceptCode());
-                //simply display disease.name since EVSPreferredDescription is too slow in LexEVS 5.x API
-                assocMetastasisForm.setTumorClassification(disease.getName());
+                assocMetastasisForm.setTumorClassification(disease.getEVSPreferredDescription());
             }
 
             /* Set GeneticAlteration attributes */
