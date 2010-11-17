@@ -123,7 +123,7 @@
       paramsHT.conceptCode = inConceptCode;
       paramsHT.conceptName = inConceptName;
       paramsHT.displayName = inDisplayName;        	
-      paramsHT.postMsg = true;
+      paramsHT.postMsg = false;
       paramsHT.onlyLeaf = onlyLeaf;       
       if (fieldsToBlank != undefined) paramsHT.fieldsToBlank = fieldsToBlank;
 
