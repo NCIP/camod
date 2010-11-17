@@ -169,10 +169,9 @@ public class HistopathologyPopulateAction extends BaseAction {
             		// get disease for models selected from the EVS tree (i.e. Mouse, Rat)
             		log.debug("disease getConceptCode() not equal to Constants.Dropdowns.CONCEPTCODEZEROS");
             		// Concept code is not 000000, so get preferred name from EVS 
-            		// simply display organ.name since EVSPreferredDescription is too slow in LexEVS 5.x API
-	            	histopathologyForm.setDiagnosisName(disease.getName());
+	            	histopathologyForm.setDiagnosisName(disease.getEVSPreferredDescription());
 	            	histopathologyForm.setDiagnosisCode(disease.getConceptCode());
-	            	histopathologyForm.setTumorClassification(disease.getName());
+	            	histopathologyForm.setTumorClassification(disease.getEVSPreferredDescription());
             	}
             }
             
