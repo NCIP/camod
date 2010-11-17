@@ -48,6 +48,7 @@ public class Disease extends BaseObject implements Comparable, Serializable, Dup
      */
     public String getName()
     {
+    	System.out.println("Entered Disease.getName. ");
         return name;
     }
 
