@@ -799,8 +799,6 @@ public class AnimalModelSearchResult implements Comparable
             while (hisSetIter.hasNext())
             {
                 Histopathology his = (Histopathology) hisSetIter.next();
-                //simply display organ.name since EVSPreferredDescription is too slow in LexEVS 5.x API
-                System.out.println("getSiteOfLesionTumor his.getOrgan().getName(): " + his.getOrgan().getName());
                 mySiteOfLesionTumor += his.getOrgan().getName() + "<br>";
             }
         }
@@ -1312,8 +1310,8 @@ public class AnimalModelSearchResult implements Comparable
 
             for (Histopathology theHistopathology : theHistopathologySet)
             {
+            	// simply display organ.name since EVSPreferredDescription is too slow in LexEVS 5.x API
             	String theOrgan = theHistopathology.getOrgan().getName();
-            	System.out.println("AnimalModelSearchResult theHistopathology.getOrgan().getName(): " + theHistopathology.getOrgan().getName());
 
                 if (!theOrgans.contains(theOrgan))
                 {
