@@ -1297,7 +1297,7 @@ public class AnimalModelSearchResult implements Comparable
      */
     public String getTumorSites() throws Exception
     {
-
+    	System.out.println("Entered AnimalModelSearchResult.getTumorSites. ");
         Set<String> theOrgans = new TreeSet<String>();
         Hashtable<String, TreeSet<String>> theMetas = new Hashtable<String, TreeSet<String>>();
 
@@ -1307,12 +1307,14 @@ public class AnimalModelSearchResult implements Comparable
 
             myTumorSites = "";
             Set<Histopathology> theHistopathologySet = myAnimalModel.getHistopathologyCollection();
+            System.out.println("AnimalModelSearchResult theHistopathologySet.size(): " + theHistopathologySet.size());
 
             for (Histopathology theHistopathology : theHistopathologySet)
             {
             	// simply display organ.name since EVSPreferredDescription is too slow in LexEVS 5.x API
             	String theOrgan = theHistopathology.getOrgan().getName();
-
+            	System.out.println("AnimalModelSearchResult getOrgan().getName(): " + theOrgan);
+            	
                 if (!theOrgans.contains(theOrgan))
                 {
                     theOrgans.add(theOrgan);
@@ -1321,11 +1323,13 @@ public class AnimalModelSearchResult implements Comparable
 
                 TreeSet<String> theMetaSet = theMetas.get(theOrgan);
                 Set<Histopathology> theMetastasisSet = theHistopathology.getMetastasisCollection();
-
+                System.out.println("AnimalModelSearchResult theMetastasisSet.size(): " + theMetastasisSet.size());
+                
                 for (Histopathology theMetastasis : theMetastasisSet)
                 {
                 	// simply display organ.name since EVSPreferredDescription is too slow in LexEVS 5.x API
                     String theMetaOrgan = theMetastasis.getOrgan().getName();
+                    System.out.println("AnimalModelSearchResult theMetaOrgan.getName(): " + theMetaOrgan);
                     if (!theMetaSet.contains(theMetaOrgan))
                     {
                         theMetaSet.add(theMetaOrgan);
@@ -1345,7 +1349,7 @@ public class AnimalModelSearchResult implements Comparable
                 myTumorSites += theMetaOrgan + " (Metastasis)<br>";
             }
         }
-
+        System.out.println("AnimalModelSearchResult myTumorSites.length(): " + myTumorSites.length());
         return myTumorSites;
     }
 
