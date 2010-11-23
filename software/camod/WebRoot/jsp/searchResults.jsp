@@ -1,5 +1,4 @@
 <%
-
 /**
  * 
  * $Id: searchResults.jsp,v 1.34 2009-06-17 16:06:06 pandyas Exp $
@@ -67,7 +66,6 @@
  *
  *
  */
-
 %>
 
 <%@ include file="/jsp/header.jsp" %>
@@ -104,7 +102,7 @@
 	String[] resultColumns = ( String[] ) request.getSession().getAttribute( Constants.SEARCHRESULTCOLUMNS );
    	if ( resultColumns == null ) 
    	{
-   		resultColumns = new String[] { "Unique Model Identifier", "Model Descriptor", "Tumor Sites", "Species" };   //default                
+   		resultColumns = new String[] { "Model Identifier", "Model Descriptor",  "Species" };   //default                
   	}  
   	
 	//String noSaveOption = request.getParameter( "noSaveOption" );  	  	 
@@ -271,7 +269,7 @@
 					<%
 					    for (int i = 0; i < resultColumns.length; i++) {
 					    	
-							if( resultColumns[i].equals("Unique Model Identifier") ) { %>
+							if( resultColumns[i].equals("Model Identifier") ) { %>
 							     <display:column title="Unique Model Identifier" sortable="true" headerClass="sortable" >
 							         <camod:highlight><c:out escapeXml="false" value="${row.modelId}"/></camod:highlight>
 							     </display:column>	 							
