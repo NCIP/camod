@@ -151,7 +151,7 @@
 				  	        <tr>
 					  	        <td width="50%">
 									<a href="<c:out value="#histo_${histstat.count}"/>">
-										<camod:highlight><c:out value="${h.organ.EVSPreferredDescription}"/></camod:highlight>
+										<camod:highlight><c:out value="${h.organ.name}"/></camod:highlight>
 									</a>
 								</td>
 								<td width="50%">
@@ -173,7 +173,7 @@
 								    <td width="50%">
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-
 										<a href="<c:out value="#metas_${histstat.count}_${metastat.count}"/>">
-											<c:out value="${m.organ.EVSPreferredDescription}"/>
+											<c:out value="${m.organ.name}"/>
 										</a>(Metastasis)
 									</td>
 									<td width="50%">
@@ -206,14 +206,14 @@
 			<tr>
 			    <a name="<c:out value="histo_${histstat.count}"/>"/>&nbsp;
 				<td class="formTitleBlue" height="20" colspan="2">
-					Lesion / Tumor in <camod:highlight><c:out value="${h.organ.EVSPreferredDescription}"/>&nbsp;</camod:highlight>
+					Lesion / Tumor in <camod:highlight><c:out value="${h.organ.name}"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>				
 			
 			<tr>
 				<td class="resultsBoxGrey" width="25%"><b>Organ / Tissue</b></td>
 				<td class="resultsBoxGreyEnd" width="75%">
-					<camod:highlight><c:out value="${h.organ.EVSPreferredDescription}"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${h.organ.name}"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 
@@ -365,14 +365,14 @@
 				<tr>
 				    <a name="<c:out value="metas_${histstat.count}_${metastat.count}"/>"/>&nbsp;
 					<td class="greySubTitleLeftEnd" height="20" colspan="2">
-						Metastasis in <c:out value="${m.organ.EVSPreferredDescription}"/>&nbsp;
+						Metastasis in <c:out value="${m.organ.name}"/>&nbsp;
 					</td>
 				</tr>
 	
 				<tr>
 					<td class="resultsBoxGrey" width="25%"><b>Organ / Tissue</b></td>
 					<td class="resultsBoxGreyEnd" width="75%">
-						<camod:highlight><c:out value="${m.organ.EVSPreferredDescription}"/>&nbsp;</camod:highlight>
+						<camod:highlight><c:out value="${m.organ.name}"/>&nbsp;</camod:highlight>
 					</td>
 				</tr>
 				<tr>
