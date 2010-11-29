@@ -143,6 +143,11 @@
 		<comment>Update the organ name field</comment>
         <sqlFile path="@db-upgrade.run.dir@/camod_upgrade_2.7_1.sql"/>
 	</changeSet>
+	
+	<changeSet id="2.7_2_update_PARENT_HISTOPATHOLOGY_ID_for_missing_metastasis_data" author="pandyas">                            
+		<comment>Update the PARENT_HISTOPATHOLOGY_ID field</comment>
+        <sqlFile path="@db-upgrade.run.dir@/camod_upgrade_2.7_2.sql"/>
+	</changeSet>	
 
 </databaseChangeLog>
 
