@@ -445,7 +445,7 @@
 							<tr>
 								<td class="WhiteBox">
 									<camod:highlight>
-										<c:out value="${el.organ.EVSPreferredDescription}" escapeXml="false"/>&nbsp;
+										<c:out value="${el.organ.name}" escapeXml="false"/>&nbsp;
 										(<c:out value="${el.expressionLevelDesc.expressionLevel}" escapeXml="false"/>)&nbsp;
 									</camod:highlight>		
 								</td>
@@ -621,7 +621,7 @@
 							<tr>
 								<td class="WhiteBox">
 									<camod:highlight>
-										<c:out value="${el.organ.EVSPreferredDescription}" escapeXml="false"/>&nbsp;
+										<c:out value="${el.organ.name}" escapeXml="false"/>&nbsp;
 										(<c:out value="${el.expressionLevelDesc.expressionLevel}" escapeXml="false"/>)&nbsp;
 									</camod:highlight>		
 								</td>
@@ -830,7 +830,7 @@
 							<tr>
 								<td class="WhiteBox">
 									<camod:highlight>
-										<c:out value="${el.organ.EVSPreferredDescription}" escapeXml="false"/>&nbsp;
+										<c:out value="${el.organ.name}" escapeXml="false"/>&nbsp;
 										(<c:out value="${el.expressionLevelDesc.expressionLevel}" escapeXml="false"/>)&nbsp;
 									</camod:highlight>		
 								</td>
