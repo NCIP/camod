@@ -39,83 +39,83 @@
 			<table summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 			<TR>
 				<TD class="resultsBoxWhite" width="17%"><FONT FACE="Arial"><P>none (wt1)</FONT></TD>
-				<TD class="resultsBoxWhiteEnd"  width="83%"><I><FONT FACE="Arial"><P>MATa  erg6</FONT><FONT FACE="Symbol">D</FONT>
-				<FONT FACE="Arial">LEU2 pdr1</FONT><FONT FACE="Symbol">D</FONT><FONT FACE="Arial">LEU2 pdr3</FONT><FONT FACE="Symbol">D</FONT>
+				<TD class="resultsBoxWhiteEnd"  width="83%"><I><FONT FACE="Arial"><P>MATa  erg6</FONT>&Delta;
+				<FONT FACE="Arial">LEU2 pdr1</FONT>&Delta;<FONT FACE="Arial">LEU2 pdr3</FONT>&Delta;
 				<FONT FACE="Arial">hisG::URA3::hisG ade2 ade3 leu2 ura3  </I></FONT></TD>
 			</TR>
 			<TR>
 				<TD class="resultsBoxGrey" width="17%"><I><FONT FACE="Arial"><P>rad18</I></FONT></TD>
-				<TD class="resultsBoxGreyEnd"  width="83%"><I><FONT FACE="Arial"><P>MATa rad18</FONT><FONT FACE="Symbol">D</FONT>
-				<FONT FACE="Arial">URA3 erg6</FONT><FONT FACE="Symbol">D</FONT>
-				<FONT FACE="Arial">TRP1 pdr1</FONT><FONT FACE="Symbol">D</FONT><FONT FACE="Arial">LEU2 pdr3</FONT><FONT FACE="Symbol">D</FONT>
+				<TD class="resultsBoxGreyEnd"  width="83%"><I><FONT FACE="Arial"><P>MATa rad18</FONT>&Delta;
+				<FONT FACE="Arial">URA3 erg6</FONT>&Delta;
+				<FONT FACE="Arial">TRP1 pdr1</FONT>&Delta;<FONT FACE="Arial">LEU2 pdr3</FONT>&Delta;
 				<FONT FACE="Arial">hisG ade2 ade3 leu2  trp1 ura3  </I></FONT></TD>
 			</TR>
 			<TR>
 				<TD class="resultsBoxWhite" width="17%"><I><FONT FACE="Arial"><P>rad14</I></FONT></TD>
-				<TD class="resultsBoxWhiteEnd"  width="83%"><I><FONT FACE="Arial"><P>MATa rad14</FONT><FONT FACE="Symbol">D</FONT>
-				<FONT FACE="Arial">kan<SUP>r</SUP> erg6</FONT><FONT FACE="Symbol">D</FONT>
-				<FONT FACE="Arial">LEU2 pdr1</FONT><FONT FACE="Symbol">D</FONT><FONT FACE="Arial">LEU2 pdr3</FONT><FONT FACE="Symbol">D</FONT>
+				<TD class="resultsBoxWhiteEnd"  width="83%"><I><FONT FACE="Arial"><P>MATa rad14</FONT>&Delta;
+				<FONT FACE="Arial">kan<SUP>r</SUP> erg6</FONT>&Delta;
+				<FONT FACE="Arial">LEU2 pdr1</FONT>&Delta;<FONT FACE="Arial">LEU2 pdr3</FONT>&Delta;
 				<FONT FACE="Arial">hisG::URA3::hisG ade2 ade3 leu2 ura3  </I></FONT></TD>
 			</TR>
 			<TR>
 				<TD class="resultsBoxGrey" width="17%"><I><FONT FACE="Arial"><P>rad50</I></FONT></TD>
-				<TD class="resultsBoxGreyEnd"  width="83%"><I><FONT FACE="Arial"><P>MATa rad50</FONT><FONT FACE="Symbol">D</FONT>
-				<FONT FACE="Arial">kan<SUP>r</SUP> erg6</FONT><FONT FACE="Symbol">D</FONT>
-				<FONT FACE="Arial">LEU2 pdr1</FONT><FONT FACE="Symbol">D</FONT><FONT FACE="Arial">LEU2 pdr3</FONT><FONT FACE="Symbol">D</FONT>
+				<TD class="resultsBoxGreyEnd"  width="83%"><I><FONT FACE="Arial"><P>MATa rad50</FONT>&Delta;
+				<FONT FACE="Arial">kan<SUP>r</SUP> erg6</FONT>&Delta;
+				<FONT FACE="Arial">LEU2 pdr1</FONT>&Delta;<FONT FACE="Arial">LEU2 pdr3</FONT>&Delta;
 				<FONT FACE="Arial">hisG::URA3::hisG ade2 ade3 leu2 ura3 </I></FONT></TD>
 			</TR>
 			<TR>
 				<TD class="resultsBoxWhite" width="17%"><I><FONT FACE="Arial"><P>rad52</I></FONT></TD>
-				<TD class="resultsBoxWhiteEnd"  width="83%"><I><FONT FACE="Arial"><P>MATa rad52</FONT><FONT FACE="Symbol">D</FONT>
-				<FONT FACE="Arial">URA3 erg6</FONT><FONT FACE="Symbol">D</FONT><FONT FACE="Arial">LEU2 pdr1</FONT>
-				<FONT FACE="Symbol">D</FONT><FONT FACE="Arial">LEU2 pdr3</FONT><FONT FACE="Symbol">D</FONT><FONT FACE="Arial">hisG::URA3::hisG ade2 ade3 leu2  ura3 </I></FONT></TD>
+				<TD class="resultsBoxWhiteEnd"  width="83%"><I><FONT FACE="Arial"><P>MATa rad52</FONT>&Delta;
+				<FONT FACE="Arial">URA3 erg6</FONT>&Delta;<FONT FACE="Arial">LEU2 pdr1</FONT>
+				&Delta;<FONT FACE="Arial">LEU2 pdr3</FONT>&Delta;<FONT FACE="Arial">hisG::URA3::hisG ade2 ade3 leu2  ura3 </I></FONT></TD>
 			</TR>
 			<TR>
 				<TD class="resultsBoxGrey" width="17%"><I><FONT FACE="Arial"><P>bub3</I></FONT></TD>
-				<TD class="resultsBoxGreyEnd"  width="83%"><I><FONT FACE="Arial"><P>MATa  bub3</FONT><FONT FACE="Symbol">D</FONT>
-				<FONT FACE="Arial">URA3 erg6</FONT><FONT FACE="Symbol">D</FONT><FONT FACE="Arial">TRP1 pdr1</FONT>
-				<FONT FACE="Symbol">D</FONT><FONT FACE="Arial">LEU2 pdr3</FONT><FONT FACE="Symbol">D</FONT><FONT FACE="Arial">hisG ade2 ade3 leu2 trp1 ura3  </I></FONT></TD>
+				<TD class="resultsBoxGreyEnd"  width="83%"><I><FONT FACE="Arial"><P>MATa  bub3</FONT>&Delta;
+				<FONT FACE="Arial">URA3 erg6</FONT>&Delta;<FONT FACE="Arial">TRP1 pdr1</FONT>
+				&Delta;<FONT FACE="Arial">LEU2 pdr3</FONT>&Delta;<FONT FACE="Arial">hisG ade2 ade3 leu2 trp1 ura3  </I></FONT></TD>
 			</TR>
 			<TR>
 				<TD class="resultsBoxWhite" width="17%"><I><FONT FACE="Arial"><P>CLN2oe</I></FONT></TD>
-				<TD class="resultsBoxWhiteEnd"  width="83%"><I><FONT FACE="Arial"><P>MATa URA3-pGPD-CLN2 erg6</FONT><FONT FACE="Symbol">D</FONT>
-				<FONT FACE="Arial">TRP1 pdr1</FONT><FONT FACE="Symbol">D</FONT>
-				<FONT FACE="Arial">LEU2 pdr3</FONT><FONT FACE="Symbol">D</FONT><FONT FACE="Arial">hisG ade2 ade3 leu2  trp1 ura3  </I></FONT></TD>
+				<TD class="resultsBoxWhiteEnd"  width="83%"><I><FONT FACE="Arial"><P>MATa URA3-pGPD-CLN2 erg6</FONT>&Delta;
+				<FONT FACE="Arial">TRP1 pdr1</FONT>&Delta;
+				<FONT FACE="Arial">LEU2 pdr3</FONT>&Delta;<FONT FACE="Arial">hisG ade2 ade3 leu2  trp1 ura3  </I></FONT></TD>
 			</TR>
 			<TR>
 				<TD class="resultsBoxGrey" width="17%"><I><FONT FACE="Arial"><P>mec2-1</I></FONT></TD>
-				<TD class="resultsBoxGreyEnd"  width="83%"><I><FONT FACE="Arial"><P>MATa  mec2-1 erg6</FONT><FONT FACE="Symbol">D</FONT><FONT FACE="Arial">LEU2 pdr1</FONT>
-				<FONT FACE="Symbol">D</FONT>
-				<FONT FACE="Arial">LEU2 pdr3</FONT><FONT FACE="Symbol">D</FONT><FONT FACE="Arial">hisG::URA3::hisG ade2 ade3 leu2 ura3  </I></FONT></TD>
+				<TD class="resultsBoxGreyEnd"  width="83%"><I><FONT FACE="Arial"><P>MATa  mec2-1 erg6</FONT>&Delta;<FONT FACE="Arial">LEU2 pdr1</FONT>
+				&Delta;
+				<FONT FACE="Arial">LEU2 pdr3</FONT>&Delta;<FONT FACE="Arial">hisG::URA3::hisG ade2 ade3 leu2 ura3  </I></FONT></TD>
 			</TR>
 			<TR>
 				<TD class="resultsBoxWhite" width="17%"><FONT FACE="Arial"><P>none (wt2)</FONT></TD>
 				<TD class="resultsBoxWhiteEnd"  width="83%"><I><FONT FACE="Arial"><P>MAT</FONT><FONT FACE="Symbol">a</FONT><FONT FACE="Arial">  erg6</FONT>
-				<FONT FACE="Symbol">D</FONT><FONT FACE="Arial">TRP1 pdr1</FONT>
-				<FONT FACE="Symbol">D</FONT><FONT FACE="Arial">LEU2 pdr3</FONT><FONT FACE="Symbol">D</FONT><FONT FACE="Arial">hisG ade2 ade3 leu2 trp1 ura3   </I></FONT></TD>
+				&Delta;<FONT FACE="Arial">TRP1 pdr1</FONT>
+				&Delta;<FONT FACE="Arial">LEU2 pdr3</FONT>&Delta;<FONT FACE="Arial">hisG ade2 ade3 leu2 trp1 ura3   </I></FONT></TD>
 			</TR>
 			<TR>
 				<TD class="resultsBoxGrey" width="17%"><I><FONT FACE="Arial"><P>mgt1</I></FONT></TD>
 				<TD class="resultsBoxGreyEnd"  width="83%"><I><FONT FACE="Arial"><P>MAT</FONT><FONT FACE="Symbol">a</FONT><FONT FACE="Arial"> mgt1</FONT>
-				<FONT FACE="Symbol">D</FONT><FONT FACE="Arial">kan<SUP>r</SUP> erg6</FONT>
-				<FONT FACE="Symbol">D</FONT><FONT FACE="Arial">LEU2 pdr1</FONT><FONT FACE="Symbol">D</FONT><FONT FACE="Arial">LEU2 pdr3</FONT><FONT FACE="Symbol">D</FONT>
+				&Delta;<FONT FACE="Arial">kan<SUP>r</SUP> erg6</FONT>
+				&Delta;<FONT FACE="Arial">LEU2 pdr1</FONT>&Delta;<FONT FACE="Arial">LEU2 pdr3</FONT>&Delta;
 				<FONT FACE="Arial">hisG ade2 ade3 leu2 ura3  </I></FONT></TD>
 			</TR>
 			<TR>
 				<TD class="resultsBoxWhite" width="17%"><I><FONT FACE="Arial"><P>mlh1</I></FONT></TD>
-				<TD class="resultsBoxWhiteEnd"  width="83%"><I><FONT FACE="Arial"><P>MAT</FONT><FONT FACE="Symbol">a</FONT><FONT FACE="Arial"> mlh1</FONT><FONT FACE="Symbol">D</FONT>
-				<FONT FACE="Arial">TRP1 erg6</FONT><FONT FACE="Symbol">D</FONT><FONT FACE="Arial">TRP1 pdr1</FONT><FONT FACE="Symbol">D</FONT><FONT FACE="Arial">LEU2 pdr3</FONT>
-				<FONT FACE="Symbol">D</FONT><FONT FACE="Arial">hisG ade2 ade3 leu2  ura3  </I></FONT></TD>
+				<TD class="resultsBoxWhiteEnd"  width="83%"><I><FONT FACE="Arial"><P>MAT</FONT><FONT FACE="Symbol">a</FONT><FONT FACE="Arial"> mlh1</FONT>&Delta;
+				<FONT FACE="Arial">TRP1 erg6</FONT>&Delta;<FONT FACE="Arial">TRP1 pdr1</FONT>&Delta;<FONT FACE="Arial">LEU2 pdr3</FONT>
+				&Delta;<FONT FACE="Arial">hisG ade2 ade3 leu2  ura3  </I></FONT></TD>
 			</TR>
 			<TR>
 				<TD class="resultsBoxGrey" width="17%"><I><FONT FACE="Arial"><P>sgs1</I></FONT></TD>
-				<TD class="resultsBoxGreyEnd"  width="83%"><I><FONT FACE="Arial"><P>MATa sgs1</FONT><FONT FACE="Symbol">D</FONT><FONT FACE="Arial">LEU2 erg6</FONT><FONT FACE="Symbol">D</FONT>
-				<FONT FACE="Arial">TRP1 pdr1</FONT><FONT FACE="Symbol">D</FONT>	<FONT FACE="Arial">LEU2 pdr3</FONT><FONT FACE="Symbol">D</FONT>
+				<TD class="resultsBoxGreyEnd"  width="83%"><I><FONT FACE="Arial"><P>MATa sgs1</FONT>&Delta;<FONT FACE="Arial">LEU2 erg6</FONT>&Delta;
+				<FONT FACE="Arial">TRP1 pdr1</FONT>&Delta;	<FONT FACE="Arial">LEU2 pdr3</FONT>&Delta;
 				<FONT FACE="Arial">hisG ade2 ade3 leu2 ura3  </I></FONT></TD>
 			</TR>
 			<TR>
 				<TD class="resultsBoxWhite" width="17%"><I><FONT FACE="Arial"><P>rad50 </I>EPP<I>+</I></FONT></TD>
-				<TD class="resultsBoxWhiteEnd"  width="83%"><I><FONT FACE="Arial"><P>MAT</FONT><FONT FACE="Symbol">a</FONT><FONT FACE="Arial"> rad50</FONT><FONT FACE="Symbol">D</FONT>
+				<TD class="resultsBoxWhiteEnd"  width="83%"><I><FONT FACE="Arial"><P>MAT</FONT><FONT FACE="Symbol">a</FONT><FONT FACE="Arial"> rad50</FONT>&Delta;
 				<FONT FACE="Arial">kan<SUP>r</SUP> ade2 ade3 leu2  trp1ura3</I></FONT></TD>
 			</TR>
 			</table></td>
