@@ -823,7 +823,7 @@
 						<camod:highlight><c:out value="${cd.geneInVirus}" escapeXml="false"/></camod:highlight>
 					</td>
 					<td class="<c:out value="${tdClass}"/>" width="30%">
-						<camod:highlight><c:out value="${cd.organ.EVSPreferredDescription}" escapeXml="false"/>&nbsp;</camod:highlight>
+						<camod:highlight><c:out value="${cd.organ.name}" escapeXml="false"/>&nbsp;</camod:highlight>
 					</td>
 					<td class="<c:out value="${tdClass}"/>" width="20%">
 						<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
