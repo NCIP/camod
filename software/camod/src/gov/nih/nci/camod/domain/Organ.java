@@ -128,6 +128,22 @@ public class Organ extends BaseObject implements Comparable, Serializable, Dupli
 
     public int compareTo(Object o)
     {
+        // compare organ name
+    	if ((o instanceof Organ) && (this.getName() != null) && (((Organ) o).getName() != null))
+        {
+            int result = this.getName().compareTo(((Organ) o).getName());
+            if (result != 0)
+            {
+                return result;
+            }
+        }
+
+        return super.compareTo(o);
+    }    
+  
+    /*  Took out all calls to getEVSPreferredDescription() during LexEVS5.1 upgrade (too slow)
+    public int compareTo(Object o)
+    {
         // compare by evs description name if possible, otherwise organ name
         if ((o instanceof Organ) && (this.getEVSPreferredDescription() != null) && (((Organ) o).getEVSPreferredDescription() != null))
         {
@@ -148,4 +164,5 @@ public class Organ extends BaseObject implements Comparable, Serializable, Dupli
 
         return super.compareTo(o);
     }
+    */
 }
