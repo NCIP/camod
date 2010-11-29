@@ -102,7 +102,7 @@
 	String[] resultColumns = ( String[] ) request.getSession().getAttribute( Constants.SEARCHRESULTCOLUMNS );
    	if ( resultColumns == null ) 
    	{
-   		resultColumns = new String[] { "Model Identifier", "Model Descriptor",  "Species" };   //default                
+   		resultColumns = new String[] { "Model Identifier", "Model Descriptor", "Tumor Sites", "Species" };   //default                
   	}  
   	
 	//String noSaveOption = request.getParameter( "noSaveOption" );  	  	 
