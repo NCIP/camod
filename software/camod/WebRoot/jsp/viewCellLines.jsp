@@ -93,7 +93,7 @@
 			<tr>
 				<td class="resultsBoxGrey" width="25%"><b>Organ / Tissue</b></td>
 				<td class="resultsBoxGreyEnd">
-					<camod:highlight><c:out value="${cl.organ.EVSPreferredDescription}"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${cl.organ.name}"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			<tr>
