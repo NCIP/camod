@@ -144,10 +144,15 @@
         <sqlFile path="@db-upgrade.run.dir@/camod_upgrade_2.7_1.sql"/>
 	</changeSet>
 	
-	<changeSet id="2.7_2_update_PARENT_HISTOPATHOLOGY_ID_for_missing_metastasis_data" author="pandyas">                            
+	<changeSet id="2.7_2_update_for_missing_metastasis_data" author="pandyas">                            
 		<comment>Update the PARENT_HISTOPATHOLOGY_ID field</comment>
         <sqlFile path="@db-upgrade.run.dir@/camod_upgrade_2.7_2.sql"/>
-	</changeSet>	
+	</changeSet>
+	
+	<changeSet id="2.7_3_update_for_missing_metastasis_data" author="pandyas">                            
+		<comment>Update the PARENT_HISTOPATHOLOGY_ID field</comment>
+        <sqlFile path="@db-upgrade.run.dir@/camod_upgrade_2.7_3.sql"/>
+	</changeSet>			
 
 </databaseChangeLog>
 
