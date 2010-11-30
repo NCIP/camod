@@ -745,20 +745,24 @@ public class ViewModelAction extends BaseAction
             if (a != null)
             {
                 Long nscNumber = a.getNscNumber();
-                if (nscNumber != null)
-                	log.info("nscNumber: " + nscNumber);
+                if (nscNumber != null)                		                	
                 {
+                	log.info("nscNumber: " + nscNumber);
                     Collection protocols = myAgentManager.getClinicalProtocols(a);
                     clinProtocols.put(nscNumber, protocols);
                     log.info("clinProtocols.size(): " + clinProtocols.size());
                     // get the yeast data
+                    log.info("ViewModelAction.populateThearapeuticApproaches() calls AgentManager to get yeast data with useNscNumber=true.");
                     List yeastStages = myAgentManager.getYeastResults(a, true);
+                    log.info("yeastStages.size(): " + yeastStages.size());
                     if (yeastStages.size() > 0)
                     {
                         yeastResults.put(a.getId(), yeastStages);
                     }
                     // now get invivo/Transplantation data
+                    log.info("ViewModelAction.populateThearapeuticApproaches() calls QueryManager....getInvivoResults() with useNscNumber=true.");
                     List transplantationResults = QueryManagerSingleton.instance().getInvivoResults(a, true);
+                    log.info("transplantationResults.size(): " + transplantationResults.size());
                     invivoResults.put(a.getId(), transplantationResults);
                 }
             }
