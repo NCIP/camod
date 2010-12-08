@@ -40,8 +40,7 @@ public class Organ extends BaseObject implements Comparable, Serializable, Dupli
      */
     public String getName()
     {
-    	System.out.println("Organ.name retrieved from caMOD: " + name);
-        return name;
+    	return name;
     }
 
     /**
