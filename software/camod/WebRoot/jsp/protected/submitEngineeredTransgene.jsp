@@ -236,7 +236,7 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Gene Functions:<br>(seperate each entry by a comma)</label>
+		<td class="formLabel"><label for="field2">Gene Functions:<br>(separate each entry by a comma)</label>
 		</td>
 		<td class="formField">
 			<html:textarea styleClass="formFieldSized" property="geneFunctions"  rows="4" cols="32"  />		
