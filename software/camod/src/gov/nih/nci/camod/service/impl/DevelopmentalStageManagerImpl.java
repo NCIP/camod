@@ -128,8 +128,7 @@ public class DevelopmentalStageManagerImpl extends BaseManager implements Develo
         DevelopmentalStage theQBEStage = new DevelopmentalStage();
         DevelopmentalStage theStage = null;
         
-        theQBEStage.setConceptCode(inConceptCode);
-        
+        theQBEStage.setConceptCode(inConceptCode);        
         
         try {
         	List theList = Search.query(theQBEStage);
@@ -144,14 +143,12 @@ public class DevelopmentalStageManagerImpl extends BaseManager implements Develo
             {
             	theStage = theQBEStage;
                 theQBEStage.setName(inName);
-            }
-        	
+            }        	
         }
         catch (Exception e)
         {
             log.error("Error querying for matching dev stage object.  Creating new one.", e);
-        }
-        
+        }        
         log.debug("DevelopmentalStageManagerImpl getOrCreate theDevStage: " + theStage.toString()); 
         return theStage;
     }    
