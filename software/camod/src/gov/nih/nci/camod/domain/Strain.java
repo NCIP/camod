@@ -18,7 +18,6 @@
 package gov.nih.nci.camod.domain;
 
 import gov.nih.nci.camod.util.HashCodeUtil;
-
 import java.io.Serializable;
 
 
@@ -164,7 +163,29 @@ public class Strain extends BaseObject implements Serializable
         result = HashCodeUtil.hash(result, this.getName());
         return result + super.hashCode();
     }
+    
+    public int compareTo(Object o)
+    {
+        // compare by evs concept code
+        if ((o instanceof Strain) && (this.conceptCode != null) && (((Strain) o).conceptCode != null))
+        {
+            int result = this.conceptCode.compareTo(((Strain) o).conceptCode);
+            if (result != 0)
+            {
+                return result;
+            }
+        }
+        else if ((o instanceof Strain) && (this.getName() != null) && (((Strain) o).getName() != null))
+        {
+            int result = this.getName().compareTo(((Strain) o).getName());
+            if (result != 0)
+            {
+                return result;
+            }
+        }
 
+        return super.compareTo(o);
+    }	
 
 	/**
 	 * @return the nameAlternEntry
