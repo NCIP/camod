@@ -156,8 +156,8 @@ public class TherapyPopulateAction extends BaseAction
 
             if(therapy.getDevelopmentalStage() !=null){
                 // since we are always querying from concept code (save and edit),
-                // simply display EVSPreferredDescription -  does not work for Zebrafish vocab
-            	therapyForm.setDevelopmentalStage(therapy.getDevelopmentalStage().getEVSPreferredDescription());
+                // simply display EVSPreferredDescription -  does not work for Zebrafish vocab (commented out in LexEVS 5.1 upgrade)
+            	//therapyForm.setDevelopmentalStage(therapy.getDevelopmentalStage().getEVSPreferredDescription());
                 therapyForm.setDevelopmentalStage(therapy.getDevelopmentalStage().getName());                
                 log.debug("setDevelopmentalStage= " + therapy.getDevelopmentalStage().getName());
 
