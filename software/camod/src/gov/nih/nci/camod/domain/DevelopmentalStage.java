@@ -88,7 +88,7 @@ public class DevelopmentalStage extends BaseObject implements Comparable, Serial
     
     /**
      * @return Returns the EVS Preferred displayName
-     */
+    
     public String getEVSPreferredDescription()
     {
       String thePreferedDesc = null;
@@ -104,7 +104,7 @@ public class DevelopmentalStage extends BaseObject implements Comparable, Serial
        	}
         return thePreferedDesc;        
     }    
-
+     */
     /**
      * @see java.lang.Object#toString()
      */
@@ -136,10 +136,10 @@ public class DevelopmentalStage extends BaseObject implements Comparable, Serial
 
     public int compareTo(Object o)
     {
-        // compare by evs description name if possible, otherwise DevelopmentalStage name
-        if ((o instanceof DevelopmentalStage) && (this.getEVSPreferredDescription() != null) && (((DevelopmentalStage) o).getEVSPreferredDescription() != null))
+        // compare by evs concept code
+        if ((o instanceof DevelopmentalStage) && (this.conceptCode != null) && (((DevelopmentalStage) o).conceptCode != null))
         {
-            int result = this.getEVSPreferredDescription().compareTo(((DevelopmentalStage) o).getEVSPreferredDescription());
+            int result = this.conceptCode.compareTo(((DevelopmentalStage) o).conceptCode);
             if (result != 0)
             {
                 return result;
