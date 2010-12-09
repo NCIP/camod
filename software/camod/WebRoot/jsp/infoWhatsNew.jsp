@@ -25,7 +25,7 @@
 														   <TR>													
 																<TR>
 																	<TD class="formTitleBlue" colspan="2" height="20">
-																		Release of caMOD 2.6.2 - Oct 2010
+																		Release of caMOD 2.7 - Feb 2011
 																	</TD>
 																</TR>
 
@@ -41,34 +41,26 @@
 																</TR>
 																<TR>
 																	<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">
-																		LexEVS connection upgraded
+																		LexEVS connection upgraded in EVSTree
 																	</TD>
 																	<TD
 																		style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
 																		width="80%">
-																		The connection to the LexEVS API was upgraded to use version 5.1.  The data displayed to the user remains the same.  
+																		The connection to the LexEVS API was upgraded to use version 5.1 in the EVSTree application.  The data displayed to the user remains the same. 
+																		The search functionality was upgraded. 
 																	</TD>
 																</TR>
 																<TR>
 																	<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">
-																		caBIO connection upgraded
+																		Various bug fixes related to the LexEVS 5.1 upgrade.
 																	</TD>
 																	<TD
 																		style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
 																		width="80%">
-																		The connection to the BIO API was upgraded to use version 4.3.1.  The data displayed to the user remains the same.  
+																		There were various fixes made that directly related to the changes in the LexEVS API.  The organs are being retrieved from the database for performance and the Therapy sections were upgraded.  In addition, metastatis data was loaded from a previous source.  
 																	</TD>
 																</TR>
-																<TR>
-																	<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">
-																		User Guide and Help links upgraded
-																	</TD>
-																	<TD
-																		style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
-																		width="80%">
-																		The connection to the User Guide and all the help links throughout caMOD was upgraded to work with the new Apache Tomcat functionality.  
-																	</TD>
-																</TR>																																
+																															
 														</TR>			
 												    </TBODY>
 											    </TABLE><br>																
