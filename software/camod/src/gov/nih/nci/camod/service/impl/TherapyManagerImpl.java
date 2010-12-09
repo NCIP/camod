@@ -176,17 +176,15 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
 	
 	private void populateDevelopmentalStage(TherapyData inTherapyData, Therapy theTherapy) 
 							throws Exception {
-		log.debug("Entering populateDevelopmentalStage");
+		log.debug("Entering populateDevelopmentalStage.");
 
 		if (inTherapyData.getDevelopmentalStageCode() != null && inTherapyData.getDevelopmentalStageCode().length() > 0) {
-			log.debug("inTherapyData.getDevelopmentalStageCode(): "
-					+ inTherapyData.getDevelopmentalStageCode());
 			// Get or create DevelopmentalStage object each time
-			log.debug("getOrCreate method used");
 			DevelopmentalStage theDevelopmentalStage = DevelopmentalStageManagerSingleton.instance().getOrCreate(
 					inTherapyData.getDevelopmentalStageCode(),
 					inTherapyData.getDevelopmentalStageName());
 			theTherapy.setDevelopmentalStage(theDevelopmentalStage);
+					
 		} else {
 			// Null out - not required field
 			theTherapy.setDevelopmentalStage(null);
@@ -218,7 +216,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
 					inTherapyData.getOtherAdministrativeRoute());
 
 			log
-					.trace("Sending Notification eMail - new Administrative Route added");
+					.debug("Sending Notification eMail - new Administrative Route added");
 			sendEmail(inAnimalModel, inTherapyData
 					.getOtherAdministrativeRoute(), " AdministrativeRoute");
 
