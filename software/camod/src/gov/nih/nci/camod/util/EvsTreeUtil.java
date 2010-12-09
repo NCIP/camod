@@ -72,9 +72,6 @@
 package gov.nih.nci.camod.util;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.system.client.ApplicationServiceProvider;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -120,42 +117,42 @@ public class EvsTreeUtil
 
 	public static String getConceptByCode(String codingSchemeName, String vers, String ltag, String code)
 	{
-		log.debug("Entered getConceptByCode.");
+		log.info("Entered getConceptByCode code (DOES NOT WORK FOR 5.1 API): " + code);
 		CodedNodeSet cns = null;
 		String myConcept = null;
 		
         try {
-        	log.debug("getConceptByCode inside try.");
+        	log.info("getConceptByCode inside try.");
         	
         	if (appService != null) {
 	        	cns =  appService.getCodingSchemeConcepts(codingSchemeName, null);			
-	        	log.debug("getConceptByCode got cns.");
+	        	log.info("getConceptByCode got cns.");
 	        	
 			    // LexEVS 5.1
 			    ConceptReferenceList crefs = ConvenienceMethods.createConceptReferenceList(new String[] { code}, codingSchemeName); 
+			    log.info("getConceptByCode crefs. " + crefs.toString());
 	    		cns.restrictToCodes(crefs); 
 	    		ResolvedConceptReferenceList matches = cns.resolveToList(null, null, null, 1);	    
 	    		log.debug("getConceptByCode matches: " );
     		
 		       if (matches.getResolvedConceptReferenceCount() > 0) {
-	   			ResolvedConceptReference ref = (ResolvedConceptReference)matches.enumerateResolvedConceptReference().nextElement();
-	    		Concept entry = ref.getReferencedEntry();
-	   	    		for (int i = 0; i < entry.getPresentationCount(); i++) {
-	   	    			if (entry.getPresentation(i).getPropertyName().equals(Constants.Evs.DISPLAY_NAME_TAG) || entry.getPresentation(i).getPropertyName().equals(Constants.Evs.PREFERRED_NAME_TAG))
-	  	    				myConcept = entry.getPresentation(i).getValue().getContent();
-	    	    	} 
-	    	    			
-	    	    }
-        	} else {
-        		log.debug("appservice is null. " );
-        	}
-		 } catch (Exception e) {
-			 e.printStackTrace();
-			 return null;
-		 }
-		 log.debug("getConceptByCode myConcept: " + myConcept);
-		 return myConcept;
-	}
+		    	   log.info("getConceptByCode matches.getResolvedConceptReferenceCount() > 0." );
+		 			ResolvedConceptReference ref = (ResolvedConceptReference)matches.enumerateResolvedConceptReference().nextElement();
+    	    		Concept entry = ref.getReferencedEntry();
+    	    		myConcept = entry.getEntityDescription().getContent();
+    	    		log.info("getConceptByCode myConcept: " + myConcept);
+   	    	} else {
+	    		System.out.println("No match found!");
+	    	}
+    	}
+    
+    } catch (Exception e) {
+        System.err.println("Error displaying the name.");
+        e.printStackTrace();
+    }
+    
+        return myConcept;
+    }
 
 	public static String getConceptDetails(String version, String code)
 	{
@@ -164,17 +161,11 @@ public class EvsTreeUtil
         String theDescription = ""; 
 
 		try {
-    		log.debug("get appService =null above.");
-    		appService = (LexBIGService)ApplicationServiceProvider.getApplicationServiceFromUrl(serviceUrl, "EvsServiceInfo");        			
+    		log.info("get appService.");
+	    	appService = RemoteServerUtil.createLexBIGService();        			
 			
-		} catch (FileNotFoundException e) {
-			log.error("FileNotFound exception in getApplicationService.",e);
-			e.printStackTrace();
-		} catch (IOException e) {
-			log.error("IO exception getApplicationService. ", e);
-			e.printStackTrace();
 		} catch (Exception e) {
-			log.error("Caught general exception getApplicationService. ", e);
+			log.error("FileNotFound exception in getApplicationService.",e);
 			e.printStackTrace();
 		}        
         
