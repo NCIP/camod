@@ -16,7 +16,6 @@ package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.domain.DevelopmentalStage;
 import gov.nih.nci.camod.service.DevelopmentalStageManager;
-import gov.nih.nci.camod.util.EvsTreeUtil;
 import gov.nih.nci.common.persistence.Search;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
 import gov.nih.nci.common.persistence.hibernate.eqbe.Evaluation;
@@ -39,7 +38,7 @@ public class DevelopmentalStageManagerImpl extends BaseManager implements Develo
      */
     public List getAll() throws Exception
     {
-        log.trace("In DevelopmentalStageManagerImpl.getAll");
+        log.debug("In DevelopmentalStageManagerImpl.getAll");
         return super.getAll(DevelopmentalStage.class);
     }	
 
@@ -56,7 +55,7 @@ public class DevelopmentalStageManagerImpl extends BaseManager implements Develo
      */
     public DevelopmentalStage get(String id) throws Exception
     {
-        log.trace("In DevelopmentalStageManagerImpl.get");
+        log.debug("In DevelopmentalStageManagerImpl.get");
         return (DevelopmentalStage) super.get(id, DevelopmentalStage.class);
     }
     
@@ -114,7 +113,7 @@ public class DevelopmentalStageManagerImpl extends BaseManager implements Develo
      * @param inConceptCode
      *            the concept code for an DevelopmentalStage
      * @param inName
-     *            the name of the DevelopmentalStage; used if we can't get the preferred desc. from EVS
+     *            the name of the DevelopmentalStage and not the preferred desc. from EVS (removed in LexEVS 5.1 upgrade)
      * 
      * @return the matching DevelopmentalStage, or create a new one if nothing matched
      * 
@@ -124,36 +123,36 @@ public class DevelopmentalStageManagerImpl extends BaseManager implements Develo
     public DevelopmentalStage getOrCreate(String inConceptCode,
                              String inName) throws Exception
     {
-        log.debug("<DevelopmentalStageManagerImpl> Entering getOrCreate");
+        log.debug("Entered DevelopmentalStageManagerImpl.getOrCreate");   
 
         DevelopmentalStage theQBEStage = new DevelopmentalStage();
+        DevelopmentalStage theStage = null;
+        
         theQBEStage.setConceptCode(inConceptCode);
-
-        DevelopmentalStage theDevStage = null;
-
-        List theList = Search.query(theQBEStage);
-
-        // Doesn't exist. Use the QBE organ since it has the same data
-        if (theList != null && theList.size() > 0)
-        {
-        	theDevStage = (DevelopmentalStage) theList.get(0);
-        }
-        else
-        {
-        	theDevStage = theQBEStage;
-            String thePreferredDiscription = EvsTreeUtil.getConceptDetails(null, inConceptCode);
-
-            if (thePreferredDiscription != null && thePreferredDiscription.length() > 0)
+        
+        
+        try {
+        	List theList = Search.query(theQBEStage);
+        	
+            // Does exist, return object. 
+            if (theList != null && theList.size() > 0)
             {
-            	theDevStage.setName(thePreferredDiscription);
-            }
+            	theStage = (DevelopmentalStage) theList.get(0);
+            } 
+            //  Doesn't exist. Create object with either name 
             else
             {
-            	theDevStage.setName(inName);
+            	theStage = theQBEStage;
+                theQBEStage.setName(inName);
             }
-            theDevStage.setConceptCode(inConceptCode);
+        	
         }
-
-        return theDevStage;
+        catch (Exception e)
+        {
+            log.error("Error querying for matching dev stage object.  Creating new one.", e);
+        }
+        
+        log.debug("DevelopmentalStageManagerImpl getOrCreate theDevStage: " + theStage.toString()); 
+        return theStage;
     }    
 }
