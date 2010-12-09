@@ -23,8 +23,8 @@
  Release Notes 
      
                              caMOD
-                          Version 2.6.2
-                          Oct 2010
+                          Version 2.7
+                          Feb 2011
 
        National Cancer Institute's Center for Biomedical Informatics and Information Technology 
  
@@ -44,11 +44,11 @@
  
  
 ================================================================ 
-    1.0 caMOD Version 2.6.2 Introduction and History 
+    1.0 caMOD Version 2.7 Introduction and History 
 ================================================================ 
   
  
-    caMOD 2.6.2, the Cancer Models Database, is a open source data management 
+    caMOD 2.7, the Cancer Models Database, is a open source data management 
     system developed for the management and sharing of data of animal models. 
     caMOD features controlled vocabularies from a shared, publicly accessible metadata repository (caDSR) and 
     enterprise vocabulary services (EVS) from the National 
@@ -66,6 +66,9 @@
 ================================================================ 
     2.0 Release History 
 ================================================================ 
+     caMOD Version 2.7
+    --	Feb 2011
+
      caMOD Version 2.6.2
     --	Oct 2010
     
@@ -106,19 +109,19 @@
     3.0 New Features and Updates 
 ================================================================ 
 LexEVS connection upgraded
-The connection to the LexEVS API was upgraded to use version 5.1.  The data displayed to the user remains the same. 
+The connection to the LexEVS API was upgraded to use version 5.1 for the EVSTree application.  The data displayed to the user remains the same. 
+The search functionality for the vocabulary trees has been upgraded.
 
-caBIO connection upgraded
-The connection to the BIO API was upgraded to use version 4.3.1.  The data displayed to the user remains the same.
-
-The caMOD 2.5 Common Data Elements (CDEs) are available via caDSR    
    
 ================================================================ 
     4.0 Defects Fixed Since Last Release 
 ================================================================ 
  
-User Guide and Help links upgraded
-The connection to the User Guide and all the help links throughout caMOD was upgraded to work with the new Apache Tomcat functionality.
+Misspelling on transgene submission page (JIRA# CAMOD-954)
+Retrieve organ information for search results pages from DB not directly from LexEVS (JIRA # CAMOD-969)
+Metastases are gone from earlier models (JIRA# CAMOD-974)
+Therapeutic approaches search page not shown - user gets blank page (JIRA# CAMOD-975)
+Submission of Zebrafish with Thearpy and developmental stages throws error (JIRA# CAMOD-976)
  
 ================================================================ 
     5.0 Known Issues/Defects 
