@@ -162,7 +162,7 @@
                                                       <td class="sidebarTitle" height="20">DID YOU KNOW?</td>
                                                   </tr>
                                                   <tr>
-                                                      <td class="sidebarContent" valign="top">caMOD 2.6.2 was released to production in Oct 2010.<br/><br/>
+                                                      <td class="sidebarContent" valign="top">caMOD 2.6.2 was released in Feb 2011.<br/><br/>
                                                       <html:link action="infoReleaseNotes.do">Release Notes</html:link><br/><br/>
                                                       </td>
                                                   </tr>
