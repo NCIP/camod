@@ -96,7 +96,7 @@ public class StainingMethod extends BaseObject implements Comparable, Serializab
 
     public int compareTo(Object o)
     {
-        // compare by evs comcept code
+        // compare by evs concept code
         if ((o instanceof StainingMethod) && (this.conceptCode != null) && (((StainingMethod) o).conceptCode != null))
         {
             int result = this.conceptCode.compareTo(((StainingMethod) o).conceptCode);
