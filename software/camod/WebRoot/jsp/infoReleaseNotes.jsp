@@ -47,12 +47,11 @@
     1.0 caMOD Version 2.7 Introduction and History 
 ================================================================ 
   
- 
     caMOD 2.7, the Cancer Models Database, is a open source data management 
     system developed for the management and sharing of data of animal models. 
     caMOD features controlled vocabularies from a shared, publicly accessible metadata repository (caDSR) and 
     enterprise vocabulary services (EVS) from the National 
-    Cancer Institute..   
+    Cancer Institute.   
  
     -- http://cancermodels.nci.nih.gov 
  
@@ -108,20 +107,21 @@
 ================================================================ 
     3.0 New Features and Updates 
 ================================================================ 
+
 LexEVS connection upgraded
 The connection to the LexEVS API was upgraded to use version 5.1 for the EVSTree application.  The data displayed to the user remains the same. 
 The search functionality for the vocabulary trees has been upgraded.
-
+   
    
 ================================================================ 
     4.0 Defects Fixed Since Last Release 
 ================================================================ 
  
 Misspelling on transgene submission page (JIRA# CAMOD-954)
-Retrieve organ information for search results pages from DB not directly from LexEVS (JIRA # CAMOD-969)
+Retrieve organ information for search results pages from DB not directly from LexEVS (JIRA# CAMOD-969)
 Metastases are gone from earlier models (JIRA# CAMOD-974)
 Therapeutic approaches search page not shown - user gets blank page (JIRA# CAMOD-975)
-Submission of Zebrafish with Thearpy and developmental stages throws error (JIRA# CAMOD-976)
+Submission of Zebrafish with Therapy and developmental stages throws error (JIRA# CAMOD-976)
  
 ================================================================ 
     5.0 Known Issues/Defects 
@@ -130,13 +130,6 @@ Submission of Zebrafish with Thearpy and developmental stages throws error (JIRA
     1. Organ-specific pre-selection of diagnoses in the vocabulary trees is 
        not available
     
-    2. Genetic Description view screen does not include data for the following 
-        sections: Libraries and Tissues (from EST data) or Protein Similarities 
-        (from UniGene). caBio discontinued support for the Protein Similarities and 
-        the performance for the Libraries and Tissues query did not meet minimum standards.  
-        After meeting with the caBio team, it was concluded that the development team will need to eliminate lazy fetching for 
-        library and tissue attributes if we want to improve performance.
-     
     Please report any defects found to application support. 
  
 ================================================================ 
@@ -157,7 +150,7 @@ Submission of Zebrafish with Thearpy and developmental stages throws error (JIRA
        CAMOD_DEVELOPERS-L  
  
 ================================================================ 
-    7.0 NCICB Web Pages 
+    7.0 CBIIT Web Pages 
 ================================================================ 
      
     The NCI Center for Bioinformatics 
