@@ -117,7 +117,7 @@ public class EvsTreeUtil
 
 	public static String getConceptByCode(String codingSchemeName, String vers, String ltag, String code)
 	{
-		log.info("Entered getConceptByCode code (DOES NOT WORK FOR 5.1 API): " + code);
+		log.info("Entered getConceptByCode code (updated for 5.1 API): " + code);
 		CodedNodeSet cns = null;
 		String myConcept = null;
 		
