@@ -18,11 +18,8 @@
 			
 			<tr>
 				<td class="resultsBoxWhiteEnd">
-
 					<a name="top"></a>
 					<h2>Web Accessibility Feedback Form</h2>
-
-
 
 					<h3 class="alt">About Web Site Accessibility at <abbr title="National 
 					Cancer Institute">NCI</abbr></h3>
@@ -48,73 +45,12 @@
 					<h3 class="alt">To Ask Questions About Web Accessibility for People 
 					With Disabilities</h3>
 
-					<p>For questions about NCI's continuing efforts to make its Web-based 
-					information accessible to all users, or to report an accessibility 
-					problem on any of our pages, please complete this form. 
-					Alternatively, you may e-mail <a 
-					href="mailto:nci508@mail.nih.gov">nci508@mail.nih.gov</a>. 
-					</p><p><strong><em>** Please note: this form is for visitors with 
-					disabilities who have comments about the accessibility of NCI's Web 
-					pages. If you have questions about cancer, please contact the <a 
-					href="http://www.cancer.gov/aboutnci/cis">Cancer Information 
-					Service</a>. **</em></strong> </p>
-
-
-					  <form action="http://fmp.cit.nih.gov/508comments/FMPro" 
-					method="post" name="CommentForm" onsubmit="return isReady(this)">
-					<input type=hidden name=-DB value="508Comments.fp5">
-					<input type=hidden name=-Lay value="web">
-					<input type=hidden name="-format" value="ncithankyou.htm">
-					<input type=hidden name="-error" value="new_error.htm">
-					<input type="hidden" name="-Script" value="sendMail">
-
-						<table border="0" cellspacing="10">
-									<tr>
-										<td valign="top" nowrap 
-					align="right"><label for="fullname">Name:</label></td><td 
-					valign="top"><input type=text name="name" size=40 id="fullname"></td>
-												</tr>
-												<tr>
-													<td 
-					valign="top" nowrap align="right"><label for="email">E-mail 
-					(required):</label></td><td valign="top"><input type=text 
-					name="email" size=30 id="email">
-					<input type ="hidden" name="IC" value="NCI"></td>
-
-												</tr>
-					<tr>
-										<td valign="top" 
-					align="right" nowrap><label for="url">Address of the page<br>
-					on which you are<br>
-					commenting (you can<br>
-					select and type over to change:)</label></td><td valign="top"><input 
-					type="text" name="Ref_URL" value="" size="50" id="url"></td>
-												</tr>
-
-
-												<tr>
-
-													<td 
-					valign="top" nowrap  align="right"><label 
-					for="comment">Comment:</label></td><td valign="top"><textarea 
-					name="comment" rows=7 cols=50 WRAP="VIRTUAL" 
-					id="comment"></textarea></td>
-												</tr>
-
-													<tr><td>
-													</td>
-												<td 
-					valign="top"><input type=submit name="-New" value="Submit Comment"></td>
-												</tr>
-												</table>
-
-										</form>
-			
-				
-		
+					<p>For questions about NCI's continuing efforts to make its Web-based information accessible to all users, 
+					or to report an accessibility problem on any of our pages, please e-mail: &nbsp;
+					<a href="mailto:nci508@mail.nih.gov">nci508@mail.nih.gov</a>. </p><BR/>							
 				</td>
+
 			</tr>
-			
 			</TABLE>
 		</td></tr></TABLE>
 	</td></tr></TABLE>
