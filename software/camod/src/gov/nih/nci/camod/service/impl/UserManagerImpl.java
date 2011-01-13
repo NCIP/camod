@@ -382,7 +382,7 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 		try {
 			//clean the username 
 			String cleanUN = SafeHTMLUtil.clean(inUsername);
-			log.debug("login method cleaned username.");
+			log.info("login method cleaned username.");
 			
 			// generate list from DB
 			NewDropdownUtil.populateDropdown(inRequest, Constants.Dropdowns.USERNAMEINDATABASE, null);
