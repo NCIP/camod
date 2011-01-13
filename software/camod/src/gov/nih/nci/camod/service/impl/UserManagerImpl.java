@@ -379,7 +379,11 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 			HttpServletRequest inRequest) {
 		boolean loginOk = false;
 		List usernameList = new ArrayList<String>();		
-		try {	
+		try {
+			//clean the username 
+			String cleanUN = SafeHTMLUtil.clean(inUsername);
+			log.debug("login method cleaned username.");
+			
 			// generate list from DB
 			NewDropdownUtil.populateDropdown(inRequest, Constants.Dropdowns.USERNAMEINDATABASE, null);
 			// Assign list to usernameList
@@ -387,7 +391,7 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 	        log.debug("login method usernameList.size()" + usernameList.size());
 	        
 			// If username is not in our DB, fail immediately (prevent SQL injection)
-	        if (!SafeHTMLUtil.isValidStringValue(inUsername,Constants.Dropdowns.USERNAMEINDATABASE,inRequest))
+	        if (!SafeHTMLUtil.isValidStringValue(cleanUN,Constants.Dropdowns.USERNAMEINDATABASE,inRequest))
 	        {
 	        	log.info("Username is not in the DB - Invalid user");
 	        	loginOk = false;
@@ -395,9 +399,9 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 	            log.info("login method inside authentication loop");
 				// Work around bug in CSM. Empty passwords pass
 				if (inPassword.trim().length() != 0) {
-					loginOk = theAuthenticationMgr.login(inUsername, inPassword);
+					loginOk = theAuthenticationMgr.login(cleanUN, inPassword);
 					// Does the user exist? Must also be in our database to login
-					List theRoles = getRolesForUser(inUsername);
+					List theRoles = getRolesForUser(cleanUN);
 					inRequest.getSession().setAttribute(Constants.CURRENTUSERROLES,
 							theRoles);
 				}
