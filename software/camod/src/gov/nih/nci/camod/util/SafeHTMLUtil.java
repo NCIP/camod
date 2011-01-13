@@ -60,8 +60,7 @@ public class SafeHTMLUtil {
 	
     public static String clean(String s)    {
         String clean = Translate.decode(s).replace("<", "").replace(">", "");
-        clean = StringUtils.replace(clean, "script", "");
-        clean = StringUtils.replace(clean, "%27", "");        
+        clean = StringUtils.replace(clean, "script", "");    
         clean = StringUtils.replace(clean, "%", "");
         clean = StringUtils.replace(clean, "#", "");
         clean = StringUtils.replace(clean, ";", "");
