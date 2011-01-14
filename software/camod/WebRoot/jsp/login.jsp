@@ -104,11 +104,11 @@
                                                               <tr>                                      
                                                                   <html:form action="LoginAction.do" focus="username">                                      
                                                                   <td class="sidebarLogin" align="right"><label for="loginID">Login ID</label></td>
-                                                                  <td class="formFieldLogin"><html:text property="username" size="15" maxlength="15" /></td>
+                                                                  <td class="formFieldLogin"><html:text property="username" size="20" maxlength="25" /></td>
                                                               </tr>
                                                               <tr>
                                                                   <td class="sidebarLogin" align="right"><label for="password">Password</label></td>
-                                                                  <td class="formFieldLogin"><html:password property="password" size="15" maxlength="15" /></td>
+                                                                  <td class="formFieldLogin"><html:password property="password" size="20" maxlength="25" /></td>
                                                               </tr>
                                                               <tr>
                                                                   <td>
