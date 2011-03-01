@@ -21,8 +21,6 @@
  */
 package gov.nih.nci.camod.domain;
 
-import gov.nih.nci.camod.util.EvsTreeUtil;
-
 import java.io.Serializable;
 import gov.nih.nci.camod.util.Duplicatable;
 import gov.nih.nci.camod.util.HashCodeUtil;
@@ -74,7 +72,7 @@ public class Organ extends BaseObject implements Comparable, Serializable, Dupli
      * @return Returns the EVS Preferred displayName
      *      if the conceptCode = 000000, then return the name
      *   	Added code to get the name when EVS is down     *      
-     */
+     
     public String getEVSPreferredDescription()
     {
         String thePreferedDesc = null;
@@ -95,7 +93,7 @@ public class Organ extends BaseObject implements Comparable, Serializable, Dupli
         }
         return thePreferedDesc;
     }    
-
+	*/
     /**
      * @see java.lang.Object#toString()
      */
