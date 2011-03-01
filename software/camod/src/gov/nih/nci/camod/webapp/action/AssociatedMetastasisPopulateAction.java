@@ -107,7 +107,7 @@ public class AssociatedMetastasisPopulateAction extends BaseAction {
             log.debug("<HistopathologyPopulateAction populate> get the Organ attributes");
 
             // since we are always querying from concept code (save and edit),
-            // simply display EVSPreferredDescription, unless concept code is '00000'
+            // simply display organ.name since EVSPreferredDescription is too slow in LexEVS 5.x API, unless concept code is '00000'
             if (associatedMetastasis.getOrgan().equals(Constants.Dropdowns.CONCEPTCODEZEROS)) {
             	assocMetastasisForm.setOrgan(associatedMetastasis.getOrgan().getName());
 	            log.info("associatedMetastasis.getOrgan().getName(): " + associatedMetastasis.getOrgan().getName());
