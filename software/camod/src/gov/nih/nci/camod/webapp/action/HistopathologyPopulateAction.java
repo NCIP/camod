@@ -131,7 +131,7 @@ public class HistopathologyPopulateAction extends BaseAction {
             log.debug("<HistopathologyPopulateAction populate> get the Organ attributes");
 
             // since we are always querying from concept code (save and edit),
-            // simply display EVSPreferredDescription, unless concept code is '00000'
+            // simply display organ.name since EVSPreferredDescription is too slow in LexEVS 5.x API, unless concept code is '00000'
             if (theHistopathology.getOrgan().getConceptCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)) {
 	            histopathologyForm.setOrgan(theHistopathology.getOrgan().getName());
 	            log.info("theHistopathology.getOrgan().getName(): " + theHistopathology.getOrgan().getName());	
