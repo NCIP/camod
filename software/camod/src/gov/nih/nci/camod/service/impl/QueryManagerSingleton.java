@@ -20,7 +20,7 @@ public class QueryManagerSingleton {
     private static QueryManagerImpl ourManager = new QueryManagerImpl();
 
     /**
-     * @return the global instance of the SexDistributionManager
+     * @return the global instance of the QueryManagerImpl
      */
     public static synchronized QueryManagerImpl instance() {
         return ourManager;
