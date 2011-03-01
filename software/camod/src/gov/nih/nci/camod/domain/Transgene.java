@@ -24,8 +24,6 @@ public class Transgene extends EngineeredGene {
 
 	private Set<RegulatoryElement> regulatoryElementCollection = new TreeSet<RegulatoryElement>();
 
-
-
 	/**
 	 * @return Returns the locationOfIntegration.
 	 */
