@@ -108,7 +108,7 @@ public class EnvironmentalFactor extends BaseObject implements Comparable, Seria
     /**
      * @return Returns the display name for Induced Mutation.
      * name is saved in nameAlternEntry since it is free-text.
-     * old models store IM name is the name field 
+     * old models store IM name in the name field 
      * This will be cleaned up now that we have a flag 
      */
     public String getDisplayNameIM()
