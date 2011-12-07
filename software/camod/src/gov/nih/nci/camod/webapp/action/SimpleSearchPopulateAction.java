@@ -162,7 +162,7 @@ public class SimpleSearchPopulateAction extends BaseAction {
     	String theSearchSpecies = null;    	
         SearchForm theSearchForm = (SearchForm) form;
         
-        // Check if null - if user goes from species to empty this correctly redirects to screen        
+        /// Check if null - if user goes from species to empty this correctly redirects to screen        
         if (theSearchForm.getSpecies() !=null && theSearchForm.getSpecies().length() > 0){
         	// Verify that species is valid option from DB to prevent SQL injection
         	try {
