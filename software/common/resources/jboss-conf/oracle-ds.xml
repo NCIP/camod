@@ -14,12 +14,12 @@
 
 <datasources>
 	<local-tx-datasource>
-		<jndi-name>@application.context.name@</jndi-name>
+		<jndi-name>camod</jndi-name>
 		<connection-url>@database.url@</connection-url>
 		<user-name>@database.user@</user-name>
 		<password>@database.password@</password>
 		<driver-class>@database.driver@</driver-class>
-		<exception-sorter-class-name>@database.exception-sorter-class-name@</exception-sorter-class-name>
-		<valid-connection-checker-class-name>@database.valid-connection-checker-class-name@</valid-connection-checker-class-name>
+		<exception-sorter-class-name>org.jboss.resource.adapter.jdbc.vendor.OracleExceptionSorter</exception-sorter-class-name>
+		<valid-connection-checker-class-name>org.jboss.resource.adapter.jdbc.vendor.OracleValidConnectionChecker</valid-connection-checker-class-name>
 	</local-tx-datasource>
 </datasources>

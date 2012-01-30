@@ -10,16 +10,67 @@
     <filter token="db.username" value="${db.username}"/>
     <filter token="db.password" value="${db.password}"/>
     <filter token="db.dbname" value="${db.dbname}"/>
+    <filter token="db.url" value="${db.url}"/>
+    <filter token="db.driver" value="${db.driver}"/>
+    <filter token="common.resources.dir" value="${common.resources.dir}"/>
+    <filter token="caimage.host" value="${caimage.host}"/>
+    <filter token="caimage.modelview.uri" value="${caimage.modelview.uri}"/>
+    <filter token="caimage.genconview.uri" value="${caimage.genconview.uri}"/>
+    <filter token="ldap.url" value="${ldap.url}"/>
+    <filter token="ldap.basedn" value="${ldap.basedn}"/>
 
 	<echo>Building for stage: ${tier}</echo>
+	
+    <path id="liquibase.dependencies.path">
+	<fileset dir="${basedir}/db/lib">
+		<include name="liquibase-*.jar" />
+		<include name="ojdbc14*.jar" />
+		<include name="ant-contrib-1.0b3.jar" />
+	</fileset>
+	<pathelement path="${basedir}" />
+    </path>
+
+    <taskdef resource="liquibasetasks.properties">
+	<classpath refid="liquibase.dependencies.path" />
+    </taskdef>
+
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+	<classpath refid="liquibase.dependencies.path" />
+    </taskdef>
+	
 	
     <!--
         TARGET: build_resources
         This will build the war file and copy the server.xml cleaned for session fixation
     -->	
     <target name="build_resources" depends="build_war">
+    	<echo>************  ${common.resources.dir}</echo>
+    	
     	<copy file="${log4j.file}" todir="${build.dir}"/>
     	<copy file="${ojdbc14.file}" todir="${build.dir}"/>
+    	<copy file="${common.resources.dir}/mail.properties" todir="${build.dir}">
+    	  <filterset>
+	    <filter token="MAIL_SMTP_SERVER" value="${mail.smtp.server}"/>
+	  </filterset>
+	</copy>
+    	<copy file="${common.resources.dir}/camod.properties" todir="${build.dir}">
+    	  <filterset>
+		    <filter token="CAIMAGE_HOST" value="${caimage.host}"/>
+		    <filter token="CAIMAGE_MODELVIEW" value="${caimage.modelview.uri}"/>
+		    <filter token="CAIMAGE_GENCONVIEW" value="${caimage.genconview.uri}"/>
+    	  	<filter token="EVS_URI" value="${evs.uri}"/>
+		  </filterset>
+	</copy>
+	
+	<copy file="${common.resources.dir}/jboss-conf/login-config.xml" todir="${build.dir}">
+	  <filterset>
+	    <filter token="ldap.url" value="${ldap.url}"/>
+	    <filter token="ldap.basedn" value="${ldap.basedn}"/>
+	  </filterset>
+	</copy>		
+			
+	<copy file="${common.resources.dir}/jboss-conf/properties-service.xml" todir="${build.dir}" />
+
     </target>	
     <!--
         TARGET: build_war
@@ -221,6 +272,16 @@
                      includes="**/*.hbm.xml"/>            
         </schemaexport>
     </target>
+    
+    <target name="upgrade-db">
+    	<echo>************  ${db.upgrade.file}</echo>
+    	<echo>************  ${db.driver}</echo>
+    	<echo>************  ${db.url}</echo>
+    	<echo>************  ${db.username}</echo>
+    	<echo>************  ${db.password}</echo>
+	<updateDatabase changeLogFile="${db.upgrade.file}" driver="${db.driver}" url="${db.url}" username="${db.username}" password="${db.password}" dropFirst="false" classpathref="liquibase.dependencies.path" />
+    </target>
+
 
     <!-- =================================================================== -->
     <!-- The Junit Ant   --> 
