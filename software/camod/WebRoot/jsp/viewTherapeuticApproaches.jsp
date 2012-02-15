@@ -42,23 +42,23 @@
 <bean:define id="mdl" name="animalmodel"/>
 <bean:define id="ta" name="therapeuticApproachesColl"/>
 <!--  bean:define id="csd" name="caelmirStudyData"/ -->
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<!-- Took this out of sidebar.jsp and has to go here to format correctly -->
 	<%@ include file="/jsp/searchMenu.jsp" %>
 	<tr><td>
 
-	<TABLE summary="" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
+	<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
 	<tr><td valign="top">
 		<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%">
 		<tr><td>
-			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
+			<TABLE cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 			<tr>
-				<td class="formTitle" height="20" colspan="9">
+				<th scope="col" class="formTitle" height="20" colspan="9">
 					Therapeutic Approaches - Model:
 					<camod:highlight>
 						<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
 					</camod:highlight>
-				</td>				
+				</th>				
 			</tr>
 			<tr>
 				<td class="resultsBoxWhiteEnd" height="20" colspan="9">
@@ -78,7 +78,7 @@
 			    <c:set var="foundPreClinicalData" value="0"/>
 			    <c:set var="foundClinicalData" value="0"/>
 			    
-				<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">
+				<TABLE summary="This table is used to format page content" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">
 				    <tr><td><a name="<c:out value="therap_${stat.count}"/>"/>&nbsp;</td></tr>
 					<c:set var="agt" value="${t.agent}"/>
 					<c:set var="agentId" value="${agt.id}"/>
@@ -90,7 +90,7 @@
 					<%@ include file="/jsp/includeInvivoData.jsp" %>
 				</TABLE>
 			</c:forEach>
-				<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">			
+				<TABLE summary="This table is used to format page content" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">			
 					<!--%@ include file="/jsp/includeCaelmirData.jsp" %-->					
 				</TABLE>		
 			</BR>	
@@ -100,9 +100,9 @@
 	</td></tr></TABLE>
 </td></tr></TABLE>
 
-<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
-	<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="60%">
+	<TABLE summary="This table is used to format page content" cellpadding="7" cellspacing="0" border="0" align="left" width="60%">
     <% pageContext.setAttribute(Parameters.MODELSECTIONVALUE, Pages.THERAPEUTIC_APPROACHES); %>
     <%@ include file="/jsp/includeComments.jsp" %>
     </TABLE>
