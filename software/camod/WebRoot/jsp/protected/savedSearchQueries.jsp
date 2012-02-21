@@ -51,11 +51,11 @@
 <!-- savedSearchQueries.jsp -->
 <!-- Main Content Begins -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <!-- Took this out of sidebar.jsp and has to go here to format correctly -->
 <%@ include file="/jsp/searchMenu.jsp" %>
 <tr><td>
-<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
 <tr><td>	
 	<logic:messagesPresent>
 	  <b>
@@ -67,20 +67,20 @@
 	  </b>  
 	</logic:messagesPresent>
 		
-	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" width="100%">	
+	<TABLE cellpadding="3" cellspacing="0" border="0" width="100%">	
 
 		<tr>
-			<td class="formTitleBlue" height="20" colspan="6">Saved Queries&nbsp;
-				<camod:cshelp topic="saving_search_query_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>				
+			<th scope="col" class="formTitleBlue" height="20" colspan="6">Saved Queries&nbsp;
+				<camod:cshelp topic="saving_search_query_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></th>				
 		</tr>
 
 		<tr>
-			<td class="greySubTitleLeft" width="40%">Query Name</td>
-			<td class="greySubTitleLeft" width="15%">Last Executed</td>
-			<td class="greySubTitleLeft" width="5%">Results</td>
-			<td class="greySubTitleLeft" width="20%">Resubmit Query</td>
-			<td class="greySubTitleLeft" width="15%">Edit Query</td>
-			<td class="greySubTitle" width="5%">Delete</td>
+			<th scope="col" class="greySubTitleLeft" width="40%">Query Name</th>
+			<th scope="col" class="greySubTitleLeft" width="15%">Last Executed</th>
+			<th scope="col" class="greySubTitleLeft" width="5%">Results</th>
+			<th scope="col" class="greySubTitleLeft" width="20%">Resubmit Query</th>
+			<th scope="col" class="greySubTitleLeft" width="15%">Edit Query</th>
+			<th scope="col" class="greySubTitle" width="5%">Delete</th>
 		</tr>
 						
 		<% if ( size > 0 ) { %>
@@ -94,9 +94,9 @@
 					<span class="submasterdiv" id='subMenu<%=menuNumber%>'>
 						<table width="100%" cellpadding="0" cellspacing="0">
 							<tr>	
-								<td colspan="2">							    
+								<th scope="col" colspan="2">							    
 								    <b>Search Criteria</b><br>
-							    </td>
+							    </th>
 								<bean:define id="criteriaList" name="aQuery" property="savedQueryAttributes" />
 								<logic:iterate id="aCriteria" name="criteriaList" type="SavedQueryAttribute">							
 									<tr>

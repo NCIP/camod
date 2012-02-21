@@ -3,8 +3,9 @@
 <script language="JavaScript" src="scripts/global.js"></script>
   
 <!-- standard submenu begins -->
-<!-- sidebar.jsp -->	  
-    <TABLE height="100%" cellSpacing=0 cellPadding=0 width="210" summary="" border=0>
+<!-- sidebar.jsp -->	
+	<a href="#main_content"><img src="../../images/skipnav.gif" alt="Skip Navigation Link" name="skipnav" width="1" height="1" border="0" id="skipnav"></a>  
+    <TABLE height="100%" cellSpacing=0 cellPadding=0 width="210" summary="This table is used to format page content" border=0>
       <TBODY>   
       
 <!-- Place Code here to determine the sub-Menu Links -->
@@ -77,18 +78,18 @@
 	if( session.getAttribute("camod.loggedon.username") != null ) {
 		%>
 		<TR><TD class="loggedInBox" width="100%">Currently logged in as:<br>
-		<TABLE><TR><TD class="loggedInBoxBorderless">
+		<TABLE summary="This table is used to format page content"><TR><TD class="loggedInBoxBorderless">
 		     <b><%= session.getAttribute("camod.loggedon.username") %></b><br>
 		     <logic:present name="<%= Constants.CURRENTUSERROLES %>">
 			    <logic:iterate name="<%= Constants.CURRENTUSERROLES %>" id="role" type="String">
 			        &nbsp;&nbsp;&nbsp;&nbsp;<font color="#475b82"> - <c:out value="${role}" /><br>
 			    </logic:iterate>
 			 </logic:present>
-		     <img src="/camod/images/subMenuCircleFilled.gif" border="0">&nbsp;<a href="/camod/AdminUserSettingsPopulateAction.do">User Settings</a><br>
-		     <img src="/camod/images/subMenuCircleFilled.gif" border="0">&nbsp;<a href="/camod/CustomizeSearchResultsPopulateAction.do">Customize Results</a><br>
-			 <img src="/camod/images/subMenuCircleFilled.gif" border="0">&nbsp;<a href="/camod/ReturnUserSavedQueries.do?method=returnSavedUserQueries">View Saved Queries</a>&nbsp;( <b><%=numSavedQueries%></b> saved )<br>
-		     <img src="/camod/images/subMenuCircleFilled.gif" border="0">&nbsp;<a href="/camod/ReturnUserQueries.do?method=returnUserQueries">View Query History</a><br>
-		     <img src="/camod/images/subMenuArrow.gif" border="0">&nbsp;<a href="/camod/LogoutAction.do">Log out</a>
+		     <img alt="User Settings" src="/camod/images/subMenuCircleFilled.gif" border="0">&nbsp;<a href="/camod/AdminUserSettingsPopulateAction.do">User Settings</a><br>
+		     <img alt="Customize Results" src="/camod/images/subMenuCircleFilled.gif" border="0">&nbsp;<a href="/camod/CustomizeSearchResultsPopulateAction.do">Customize Results</a><br>
+			 <img alt="View Saved Queries" src="/camod/images/subMenuCircleFilled.gif" border="0">&nbsp;<a href="/camod/ReturnUserSavedQueries.do?method=returnSavedUserQueries">View Saved Queries</a>&nbsp;( <b><%=numSavedQueries%></b> saved )<br>
+		     <img alt="View Query History" src="/camod/images/subMenuCircleFilled.gif" border="0">&nbsp;<a href="/camod/ReturnUserQueries.do?method=returnUserQueries">View Query History</a><br>
+		     <img alt="Log out" src="/camod/images/subMenuArrow.gif" border="0">&nbsp;<a href="/camod/LogoutAction.do">Log out</a>
 		     <br>
 		</TD></TR></TABLE>
 		</TD></TR>
@@ -110,9 +111,9 @@
 
 <!-- Following cell is for main content -->
 <TD valign=top width="100%"> 
-
+<a name="main_content"></a>
 <!-- Following table is ended at the end of the Application footer -->
-<TABLE height="100%" cellSpacing=0 cellPadding=0 width="100%" summary="" border=0>
+<TABLE height="100%" cellSpacing=0 cellPadding=0 width="100%" summary="This table is used to format page content" border=0>
 	<TBODY>	
 
 <!-- Can place code here to determine what Main Menu is needed (this is placed on top of the main content in center of page)-->	
@@ -121,7 +122,7 @@
 <TR><TD valign=top width="100%">
 
 <!-- Main Content Begins -->
-<TABLE class=contentPage cellSpacing=0 cellPadding=0 width="100%" summary="" border=0>
+<TABLE class=contentPage cellSpacing=0 cellPadding=0 width="100%" summary="This table is used to format page content" border=0>
 <TBODY>
 <TR>
 <TD valign="top">

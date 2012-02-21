@@ -97,22 +97,22 @@
 <bean:define id="pubColl" name="publications"/>
 <!-- bean:define id="pubAuthors" name="publicationAuthors"/-->
 
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<!-- Took this out of sidebar.jsp and has to go here to format correctly -->
 	<%@ include file="/jsp/searchMenu.jsp" %>	
 	<tr><td>
 	<!-- Summary table start - added outer table to indent the summary table 10 units -->
-	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
+	<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
 	<tr><td>	
 	<TABLE cellpadding="0" cellspacing="0" border="0" align="left" width="100%">
 		<tr>
-			<td class="formTitle" height="20" colspan="3">Publications - Model:
+			<th scope="col" class="formTitle" height="20" colspan="3">Publications - Model:
 				<camod:highlight><c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
 						<c:if test="${mdl.externalSource == 'Jax MTB'}">
 								<IMG src="/camod/images/mtb_logo.jpg" >
 							</c:if>							
 						</camod:highlight>
-			</td>
+			</th>
 		</tr>		
 		<tr>
 			<td class="greySubTitleLeft" width="50%">First Author</td>
@@ -144,11 +144,11 @@
 <!-- Summary table end -->
 
 <c:forEach var="p" items="${pubColl}" varStatus="stat">
-<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
 	<tr><td>
 	<a name="<c:out value="pub_${count}"/>"/>&nbsp;
 	<c:set var="count" value="${count + 1}"/>	
-	<TABLE summary="" cellpadding="5" cellspacing="0" border="0" align="left" width="100%">
+	<TABLE summary="This table is used to format page content" cellpadding="5" cellspacing="0" border="0" align="left" width="100%">
 		<tr>
 			<td class="GreyBoxTop" width="30%"><b>Publication Status:</b></td>
 			<td class="GreyBoxTopRightEnd" width="65%"><c:out value="${p.publicationStatus.name}" escapeXml="false"/>&nbsp;</td>
@@ -242,9 +242,9 @@
 </TABLE>
 	</c:forEach>
 
-<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
-	<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="60%">
+	<TABLE summary="This table is used to format page content" cellpadding="7" cellspacing="0" border="0" align="left" width="60%">
     <% pageContext.setAttribute(Parameters.MODELSECTIONVALUE, Pages.PUBLICATIONS); %>
     <%@ include file="/jsp/includeComments.jsp" %>
     </TABLE>

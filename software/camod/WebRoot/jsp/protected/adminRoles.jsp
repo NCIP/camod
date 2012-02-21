@@ -9,31 +9,31 @@
 
 <!-- adminRoles.jsp -->
 <!-- Main Content Begins -->
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	  <!-- Took this out of sidebar.jsp and has to go here to format correctly  -->
 	  <%@ include file="/jsp/adminMenu.jsp" %>
 <tr><td>
-	<TABLE  cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
+	<TABLE  summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
 	<tr><td valign="top">
 	
-		<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left" width="100%">	
+		<TABLE summary="This table is used to format page content" cellpadding="3" cellspacing="0" border="0" align="left" width="100%">	
 			<tr>
 				<td class="formTitle" height="20">Administration Roles &nbsp;
 				<camod:cshelp topic="administration_roles_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>				
 			</tr>			
 			<tr>
 				<td class="resultsBoxGreyEnd">
-				<TABLE width="100%">
+				<TABLE summary="This table is used to format page content" width="100%">
 					<tr>
 						<td>News and notes...</td>
-						<td align="right"><img src="/camod/images/admin.gif"></td>
+						<td align="right"><img alt="Admin" src="/camod/images/admin.gif"></td>
 					</tr>
 				</TABLE>
 				</tr>
 				<tr>
 	                <logic:messagesPresent>
 	                    <td>
-	                        <TABLE width="100%">
+	                        <TABLE summary="This table is used to format page content" width="100%">
 	                            <tr>
 						        <br>
 								<b><font color=red>
@@ -64,14 +64,14 @@
 			    		
 		<!-- Start the various sections per role -->
 		 		
-		<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%">
+		<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%">
 		<tr><td>
 		
 		<!-- Models assigned to this user that need to be edited -->
 		<logic:present name="<%= Admin.MODELS_NEEDING_EDITING %>">
-			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left" width="100%">	
+			<TABLE cellpadding="3" cellspacing="0" border="0" align="left" width="100%">	
 			    <tr>
-				    <td class="formTitleBlue" height="20" colspan="3">Models to Edit</td>				
+				    <th scope="col" class="formTitleBlue" height="20" colspan="3">Models to Edit</th>				
 			    </tr>			
 			    <tr>
 				    <td class="resultsBoxWhiteEnd" colspan="3" >You have been assigned the following models to Edit</td> 
@@ -99,13 +99,13 @@
 			</TABLE>	
 		</logic:present>			
 		</td></tr>
-				<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%">
+				<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%">
 		<tr><td>
 		
 		<!-- Models assigned to this user that need more information -->
 		
 		<logic:present name="<%= Admin.MODELS_NEEDING_MORE_INFO %>">
-			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left" width="100%">	
+			<TABLE summary="This table is used to format page content" cellpadding="3" cellspacing="0" border="0" align="left" width="100%">	
 			    <tr>
 				    <td class="formTitleBlue" height="20" colspan="3">Models Needing more information</td>				
 			    </tr>			
@@ -140,7 +140,7 @@
 		<!-- Models assigned to this user that need to have an editor assigned -->
 		
 		<logic:present name="<%= Admin.MODELS_NEEDING_EDITOR_ASSIGNMENT %>">
-			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left" width="100%">	
+			<TABLE summary="This table is used to format page content" cellpadding="3" cellspacing="0" border="0" align="left" width="100%">	
 			    <tr>
 				    <td class="formTitleBlue" height="20" colspan="3">Models Needing Editor Assignment</td>				
 			    </tr>			
@@ -170,9 +170,9 @@
 		<!-- Models assigned to this user that need to be screened -->
 		
 		<logic:present name="<%= Admin.MODELS_NEEDING_SCREENING %>">
-			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left" width="100%">	
+			<TABLE cellpadding="3" cellspacing="0" border="0" align="left" width="100%">	
 			    <tr>
-				    <td class="formTitleBlue" height="20" colspan="3">Models to Screen</td>				
+				    <th scope="col" class="formTitleBlue" height="20" colspan="3">Models to Screen</th>				
 			    </tr>			
 			    <tr>
 				    <td class="resultsBoxWhiteEnd" colspan="3">You have been assigned the following models to Screen</td> 
@@ -207,9 +207,9 @@
 		<!-- Models assigned to this user that need a screener assigned -->
 		
 		<logic:present name="<%= Admin.MODELS_NEEDING_SCREENER_ASSIGNMENT %>">
-			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left" width="100%">	
+			<TABLE cellpadding="3" cellspacing="0" border="0" align="left" width="100%">	
 			    <tr>
-				    <td class="formTitleBlue" height="20" colspan="3">Models Needing Screener Assignment</td>				
+				    <th scope="col" class="formTitleBlue" height="20" colspan="3">Models Needing Screener Assignment</th>				
 			    </tr>			
 			    <tr>
 				    <td class="resultsBoxWhiteEnd" colspan="3" >You need to assign Screeners for the following models</td> 
@@ -238,9 +238,9 @@
 		<!-- Comments assigned to this user that need review -->
 		
 		<logic:present name="<%= Admin.COMMENTS_NEEDING_REVIEW %>">
-			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left" width="100%">	
+			<TABLE cellpadding="3" cellspacing="0" border="0" align="left" width="100%">	
 			    <tr>
-				    <td class="formTitleBlue" height="20" colspan="3">Comments to Review</td>				
+				    <th scope="col" class="formTitleBlue" height="20" colspan="3">Comments to Review</th>				
 			    </tr>			
 		        <tr>
 				    <td class="resultsBoxWhiteEnd" colspan="3">You have been assigned the following Comments to Review
@@ -277,9 +277,9 @@
 		<tr><td>
 		
 		<logic:present name="<%= Admin.COMMENTS_NEEDING_ASSIGNMENT %>">
-			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left" width="100%">	
+			<TABLE cellpadding="3" cellspacing="0" border="0" align="left" width="100%">	
 			    <tr>
-				    <td class="formTitleBlue" height="20" colspan="3">Comments Needing Assignment</td>				
+				    <th scope="col" class="formTitleBlue" height="20" colspan="3">Comments Needing Assignment</th>				
 			    </tr>			
 		        <tr>
 				    <td class="resultsBoxWhiteEnd" colspan="3">You need to assign reviewers for the following comments

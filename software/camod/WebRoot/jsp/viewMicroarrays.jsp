@@ -7,21 +7,21 @@
 
 <bean:define id="mdl" name="animalmodel"/>
 
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<!-- Took this out of sidebar.jsp and has to go here to format correctly -->
 	<%@ include file="/jsp/searchMenu.jsp" %>
 	<tr><td>
 
-	<TABLE summary="" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
+	<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
 	<tr><td valign="top">
-		<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%">
+		<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%">
 		<tr><td>
-			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
+			<TABLE cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 
 			<tr>
-				<td class="formTitle" height="20">
+				<th scope="col" class="formTitle" height="20">
 				Microarrays - Model:
-				<c:out value="${mdl.modelDescriptor}" escapeXml="false"/></td>
+				<c:out value="${mdl.modelDescriptor}" escapeXml="false"/></th>
 			</tr>			
 			
 			<bean:define id="maColl" name="mdl" property="microArrayDataCollection"/>

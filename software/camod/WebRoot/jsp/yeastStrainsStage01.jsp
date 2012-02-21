@@ -14,13 +14,13 @@
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
 
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <!-- Took this out of sidebar.jsp and has to go here to format correctly -->
 <%@ include file="/jsp/searchMenu.jsp" %>
 <tr><td>
-	<TABLE summary="" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
+	<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
 	<tr><td valign="top">
-		<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%">
+		<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%">
 		<tr><td>
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 			<tr>
@@ -29,14 +29,14 @@
 
 			</TABLE>
 			<br>
-			<TABLE summary="" cellpadding="0" cellspacing="0" border="0" align="center" width="100%">
+			<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" align="center" width="100%">
 				<TR>
 					<TD class="formTitleBlue" align="center" width="17%" height="20"><B>Strain</B></TD>
 					<TD class="formTitleBlue" align="center" width="83%" height="20"><B>Genotype</B></TD> 
 				</TR>
 
 				<td colspan="2">
-			<table summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
+			<table summary="This table is used to format page content" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 				<TR>
 					<TD class="resultsBoxWhite" width="17%"><I><FONT FACE="Arial"><P>rad50</I></FONT></TD>
 					<TD class="resultsBoxWhiteEnd"  width="83%"><I><FONT FACE="Arial"><P>MATa rad50</FONT>&Delta;<FONT FACE="Arial">kan<SUP>r</SUP> erg6</FONT>

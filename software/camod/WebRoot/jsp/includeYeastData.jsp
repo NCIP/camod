@@ -4,7 +4,7 @@
 <c:if test="${not empty yst}">
 	<c:forEach var="stg" items="${yst}" varStatus="stat2">
 		<c:if test="${stg.strainCount <= 0}">
-		    <table summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
+		    <table summary="This table is used to format page content" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 			<tr>
 				<td class="greySubTitleLeftEnd" colspan=4>
 				<b>Data unavailable for NCI Yeast Anticancer Drug Screen </b>
@@ -15,7 +15,7 @@
 	    <c:if test="${stg.strainCount > 0}">
 		    <c:set var="foundYstData" value="1"/>
 		  	<tr><td colspan="2">
-			<table summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
+			<table summary="This table is used to format page content" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 				<tr>
 					<td class="formTitleBlue" colspan="11" align="center">
 						Publicly available data from the NCI Yeast Anticancer Drug Screen

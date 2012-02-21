@@ -17,21 +17,21 @@
 
 <!-- submitModels.jsp -->
 <!-- Main Content Begins -->
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <!-- Took this out of sidebar.jsp and has to go here to format correctly  -->
 <%@ include file="/jsp/submitMenu.jsp" %>
 <tr><td>
 
-	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
+	<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
 	<tr><td>
 	
-		<TABLE summary="" cellpadding="3" cellspacing="0" border="0" width="100%">
+		<TABLE summary="This table is used to format page content" cellpadding="3" cellspacing="0" border="0" width="100%">
 			<tr>
 				<td class="formTitle" height="20" colspan="4">Submit and Edit Models &nbsp;
 	                <camod:cshelp topic="submit_edit_models_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>		
 			</tr>
 			<tr><td class="resultsBoxGreyEnd">			
-					<TABLE width="100%">
+					<TABLE summary="This table is used to format page content" width="100%">
 						<tr>
 						<td>
 								  Welcome back <b><%= session.getAttribute("camod.loggedon.username") %></b>.<br>
@@ -52,13 +52,13 @@
 									  
 									</logic:messagesPresent>						     			
 						    </td>				      
-						    <td><img src="images/submit.gif"> </td>
+						    <td><img alt="Submit" src="images/submit.gif"> </td>
 					    </tr>
 				    </TABLE>
 			</td></tr>
 		</TABLE><br>	
 
-		<TABLE summary="" cellpadding="10" cellspacing="0" border="0" width="100%">	
+		<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" width="100%">	
 			<tr>
 				<td class="formTitleBlue" height="20" colspan="5">Your Models</td>				
 			</tr>
@@ -91,7 +91,7 @@
 		             	<center>
 		             	    <c:set var="dupLink" value="return confirm('Are you sure you want to duplicate this record (${aModel.modelDescriptor})?');"/>   
 		                    <c:set var="uri" value="/camod/DuplicateAnimalModelAction.do?method=duplicate&aModelID=${aModel.id}"/>
-		                    <a href='<c:out value="${uri}"/>' onclick='<c:out value="${dupLink}"/>' ><IMG src="images/dupRecord.gif" border=0></a>  
+		                    <a href='<c:out value="${uri}"/>' onclick='<c:out value="${dupLink}"/>' ><IMG alt="Duplicate" src="images/dupRecord.gif" border=0></a>  
 		       	        </center>
 		             </td>
 		             <td class="resultsBoxGrey" width="40%">
@@ -107,7 +107,7 @@
 			             <center>
 		                    <c:set var="deleteLink" value="return confirm('Are you sure you want to delete this record (${aModel.modelDescriptor})?');"/>   
 		                    <c:set var="uri" value="/camod/DeleteAnimalModelAction.do?method=delete&aModelID=${aModel.id}"/>
-		                    <a href='<c:out value="${uri}"/>' onclick='<c:out value="${deleteLink}"/>' ><IMG src="images/remove.gif" border=0/></a>               	
+		                    <a href='<c:out value="${uri}"/>' onclick='<c:out value="${deleteLink}"/>' ><IMG alt="Remove" src="images/remove.gif" border=0/></a>               	
 		                </center>
 		             </td>                     
 		         </TR>

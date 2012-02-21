@@ -175,21 +175,21 @@
 <bean:define id="gsc" name="<%=Constants.GENOMIC_SEG_COLL%>"/>
 <bean:define id="smc" name="<%=Constants.SPONTANEOUS_MUT_COLL%>"/>
 
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <!-- Took this out of sidebar.jsp and has to go here to format correctly -->
 <%@ include file="/jsp/searchMenu.jsp" %>
 <tr><td>
 	<!-- Summary table start - added outer table to indent the summary table 10 units -->
-	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
+	<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
 	<tr><td>
 	<TABLE  cellpadding="0" cellspacing="0" border="0" align="left" width="100%">
 		<tr>
-			<td class="formTitle" height="20" colspan="3">
+			<th scope="col" class="formTitle" height="20" colspan="3">
 			Genetic Description - Model:
 			<camod:highlight>
 				<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>&nbsp;		
 			</camod:highlight>
-			</td>
+			</th>
 		</tr>
 		<tr>
 			<td class="GreyBox" width="20%"><b>Transgene</b></td>
@@ -284,18 +284,18 @@
 <% if ( cc > 0 ) { %>
 <c:set var="count" value="0"/>
 <c:forEach var="tg" items="${tgc}" >
-<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
 	<a name="<c:out value="eng_trans_${count}"/>"/>&nbsp;
 	<c:set var="count" value="${count + 1}"/>
 	<TABLE cellpadding="7" cellspacing="0" border="0" align="left" width="60%">
 		<tr>
-			<td class="formTitle" height="20" colspan="2">
+			<th scope="col" class="formTitle" height="20" colspan="2">
 				Engineered Transgene - Model:
 				<camod:highlight>
 					<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>&nbsp;
 				</camod:highlight>
-			</td>
+			</th>
 		</tr>
 
 		<c:choose>
@@ -350,10 +350,10 @@
 			<td class="GreyBox" width="35%"><b>Transcriptional (Promoter)</b></td>
 			<td class="GreyBoxRightEnd" width="65%">
 			<c:if test="${not empty remColl}">
-			<table summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
+			<table cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
 				<tr>
-					<td class="formTitle" width="65%"><b>Transcriptional (Promoter)</b></td>
-					<td class="formTitle" width="35%"><b>Species</b></td>
+					<th scope="col" class="formTitle" width="65%"><b>Transcriptional (Promoter)</b></th>
+					<th scope="col" class="formTitle" width="35%"><b>Species</b></th>
 				</tr>
 				<c:forEach var="rem" items="${remColl}">
 					<tr>
@@ -436,10 +436,10 @@
 			<td class="GreyBox" width="35%"><b>Organ / Tissue Gene is Expressed in and Expression Level</b></td>
 			<td class="GreyBoxRightEnd" width="65%">
 				<c:if test="${not empty tg.expressionFeatureCollection}">
-					<table summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
+					<table cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
 						<tr>
-							<td class="formTitle" width="65%"><b>Organ (Expression Level)</b></td>
-							<td class="formTitle" width="35%"><b>Comment</b></td>
+							<th scope="col" class="formTitle" width="65%"><b>Organ (Expression Level)</b></th>
+							<th scope="col" class="formTitle" width="35%"><b>Comment</b></th>
 						</tr>
 						<c:forEach var="el" items="${tg.expressionFeatureCollection}">
 							<tr>
@@ -524,18 +524,18 @@
 <c:set var="count" value="0"/>
 <c:if test="${not empty genomicSegColl}">
 <c:forEach var="gs" items="${genomicSegColl}">
-<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
     <a name="<c:out value="gen_seg_${count}"/>"/>
 	<c:set var="count" value="${count + 1}"/>
 	<TABLE  cellpadding="7" cellspacing="0" border="0" align="left" width="60%">
 		<tr>
-			<td class="formTitle" height="20" colspan="2">
+			<th scope="col" class="formTitle" height="20" colspan="2">
 				Genomic Segment - Model:
 					<camod:highlight>
 						<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>&nbsp;
 					</camod:highlight>
-			</td>
+			</th>
 		</tr>
 		
 		<c:choose>
@@ -612,10 +612,10 @@
 			<td class="WhiteBox" width="35%"><b>Organ / Tissue Gene is Expressed in and Expression Level</b></td>
 			<td class="WhiteBoxRightEnd" width="65%">
 				<c:if test="${not empty gs.expressionFeatureCollection}">
-					<table summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
+					<table cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
 						<tr>
-							<td class="formTitle" width="65%"><b>Organ (Expression Level)</b></td>
-							<td class="formTitle" width="35%"><b>Comment</b></td>
+							<th scope="col" class="formTitle" width="65%"><b>Organ (Expression Level)</b></th>
+							<th scope="col" class="formTitle" width="35%"><b>Comment</b></th>
 						</tr>
 						<c:forEach var="el" items="${gs.expressionFeatureCollection}">
 							<tr>
@@ -728,20 +728,20 @@
 <c:set var="count" value="0"/>
 <c:if test="${not empty targetedModColl}">
 <c:forEach var="tm" items="${targetedModColl}">
-<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
-	<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">	
+	<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">	
 	<tr><td>
 	<a name="<c:out value="targ_mod_${count}"/>"/>
 	<c:set var="count" value="${count + 1}"/>
 	<TABLE cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
 		<tr>
-			<td class="formTitle" height="20" colspan="2">
+			<th scope="col" class="formTitle" height="20" colspan="2">
 				Targeted Modification - Model:
 					<camod:highlight>
 						<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>&nbsp;
 					</camod:highlight>
-			</td>
+			</th>
 		</tr>
         <tr>
             <td class="GreyBox" width="35%"><b>Gene</b></td>
@@ -821,10 +821,10 @@
 			<td class="WhiteBox" width="35%"><b>Organ / Tissue Gene is Expressed in and Expression Level</b></td>
 			<td class="WhiteBoxRightEnd" width="65%">
 				<c:if test="${not empty tm.expressionFeatureCollection}">					
-					<table summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
+					<table cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
 						<tr>
-							<td class="formTitle" width="65%"><b>Organ (Expression Level)</b></td>
-							<td class="formTitle" width="35%"><b>Comment</b></td>
+							<th scope="col" class="formTitle" width="65%"><b>Organ (Expression Level)</b></th>
+							<th scope="col" class="formTitle" width="35%"><b>Comment</b></th>
 						</tr>
 						<c:forEach var="el" items="${tm.expressionFeatureCollection}">
 							<tr>
@@ -993,18 +993,18 @@
 <c:set var="count" value="0"/>
 <c:if test="${not empty inducedMutColl}">
 <c:forEach var="im" items="${inducedMutColl}">
-<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
 	<a name="<c:out value="ind_mut_${count}"/>"/>
 	<c:set var="count" value="${count + 1}"/>
 	<TABLE cellpadding="7" cellspacing="0" border="0" align="left" width="60%">
 		<tr>
-			<td class="formTitle" height="20" colspan="2">
+			<th scope="col" class="formTitle" height="20" colspan="2">
 				Induced Mutation - Model:
 					<camod:highlight>
 						<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
 					</camod:highlight>
-			</td>
+			</th>
 		</tr>
 		
         <tr>
@@ -1079,10 +1079,10 @@
 			<td class="WhiteBox" width="35%"><b>Mutated Locus/Gene (Observation)</b></td>
 			<td class="WhiteBoxRightEnd" width="65%">
 				<c:if test="${not empty im.geneticAlteration}">
-					<table summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
+					<table cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
 						<tr>
-							<td class="formTitle" width="65%"><b>Mutated Locus/Gene (Observation)</b></td>
-							<td class="formTitle" width="35%"><b>Method of Observation</b></td>
+							<th scope="col" class="formTitle" width="65%"><b>Mutated Locus/Gene (Observation)</b></th>
+							<th scope="col" class="formTitle" width="35%"><b>Method of Observation</b></th>
 						</tr>
 						<tr>
 				            <td class="WhiteBox">
@@ -1152,18 +1152,18 @@
 <c:set var="count" value="0"/>
 <c:if test="${not empty smc}">
 <c:forEach var="sm" items="${smc}">
-<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
 	<a name="<c:out value="spon_mut_${count}"/>"/>
 	<c:set var="count" value="${count + 1}"/>
 	<TABLE  cellpadding="7" cellspacing="0" border="0" align="left" width="60%">
 		<tr>
-			<td class="formTitle" height="20" colspan="2">
+			<th scope="col" class="formTitle" height="20" colspan="2">
 				Spontaneous Mutation - Model:
 					<camod:highlight>
 						<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
 					</camod:highlight>
-			</td>
+			</th>
 		</tr>
         <tr>
             <td class="GreyBox" width="35%"><b>Gene</b></td>
@@ -1177,10 +1177,10 @@
 			<td class="WhiteBox" width="35%"><b>Mutated Locus/Gene (Observation)</b></td>
 			<td class="WhiteBoxRightEnd" width="65%">
 				<c:if test="${not empty sm.geneticAlteration}">
-					<table summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
+					<table cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
 						<tr>
-							<td class="formTitle" width="65%"><b>Mutated Locus/Gene (Observation)</b></td>
-							<td class="formTitle" width="35%"><b>Method of Observation</b></td>
+							<th scope="col" class="formTitle" width="65%"><b>Mutated Locus/Gene (Observation)</b></th>
+							<th scope="col" class="formTitle" width="35%"><b>Method of Observation</b></th>
 						</tr>
 						<tr>
 				            <td class="WhiteBox">
@@ -1259,9 +1259,9 @@
 </c:forEach>
 </c:if>
 
-<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
-	<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="60%">
+	<TABLE summary="This table is used to format page content" cellpadding="7" cellspacing="0" border="0" align="left" width="60%">
     <% pageContext.setAttribute(Parameters.MODELSECTIONVALUE, Pages.GENETIC_DESCRIPTION); %>
     <%@ include file="/jsp/includeComments.jsp" %>
     </TABLE>

@@ -62,13 +62,13 @@
 
 <!-- adminEditModels.jsp -->
 <!-- Main Content Begins -->
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <!-- Took this out of sidebar.jsp and has to go here to format correctly  -->
 <%@ include file="/jsp/adminMenu.jsp" %>
 <tr><td>
-	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
+	<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
 	<tr><td>	
-		<TABLE summary="" cellpadding="3" cellspacing="0" border="0" width="100%">
+		<TABLE cellpadding="3" cellspacing="0" border="0" width="100%">
 			<html:form action="SearchAdminAction.do" focus="modelId">
 			<tr>
 				<td class="formMessage" colspan="3">
@@ -84,14 +84,14 @@
 				</td>
 			</tr>
 			<tr>
-			    <td class="formTitle" height="20" colspan="8">Edit Models (SuperUser)&nbsp;
-			    	<camod:cshelp topic="screening_model_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>		
+			    <th scope="col" class="formTitle" height="20" colspan="8">Edit Models (SuperUser)&nbsp;
+			    	<camod:cshelp topic="screening_model_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></th>		
 			</tr>
 	
 			
 				<tr>
 				    <td class="formRequiredNotice" >&nbsp;</td>
-					<td class="formLabel"><label for="field1">Model Id:</label>
+					<td class="formLabel"><label for="modelId">Model Id:</label>
 					</td>
 					<td class="formField" colspan="4">			
 						<html:text styleClass="formFieldSized" styleId="modelId" property="modelId" size="20"/>
@@ -102,7 +102,7 @@
 				
 				<tr>
 				    <td class="formRequiredNotice" >&nbsp;</td>
-					<td class="formLabel"><label for="field1">Model Name / Model Descriptor: </label>
+					<td class="formLabel"><label for="modelDescriptor">Model Name / Model Descriptor: </label>
 					</td>
 					<td class="formField" >			
 						<html:text styleClass="formFieldSized" styleId="modelDescriptor" property="modelDescriptor" size="20"/>
@@ -111,9 +111,9 @@
 					</td>&nbsp;&nbsp;
 					
 					<td class="formRequiredNotice" width="15">&nbsp;</td>
-					<td class="formLabel"><label for="field3">State:</label></td>
+					<td class="formLabel"><label for="currentState">State:</label></td>
 					<td class="formField">
-				        <html:select styleClass="formFieldSized" size="1" property="currentState">
+				        <html:select styleId="currentState" styleClass="formFieldSized" size="1" property="currentState">
 				            <html:options name="<%=Dropdowns.CURATIONSTATESWITHBLANKDROP%>"/>
 			            </html:select>
 					</td>				
@@ -121,17 +121,17 @@
 				
 				<tr>
 				    <td class="formRequiredNotice" >&nbsp;</td>
-				    <td class="formLabel"><label for="field1">Screener:</label></td>
+				    <td class="formLabel"><label for="screener">Screener:</label></td>
 				    <td class="formField">			
-			            <html:select property="screener">
+			            <html:select styleId="screener" property="screener">
 				            <html:options name="<%=Dropdowns.USERSFORSCREENERROLEDROP%>"/>
 			            </html:select>
 				    </td>&nbsp;&nbsp;
 					
 				    <td class="formRequiredNotice" >&nbsp;</td>
-				    <td class="formLabel"><label for="field1">Editor:</label></td>
+				    <td class="formLabel"><label for="editor">Editor:</label></td>
 				    <td class="formField">			
-			            <html:select property="editor">
+			            <html:select styleId="editor" property="editor">
 				            <html:options name="<%=Dropdowns.USERSFOREDITORROLEDROP%>"/>
 			            </html:select>
 				    </td>				
@@ -139,18 +139,18 @@
 				
 				<tr>
 				    <td class="formRequiredNotice" >&nbsp;</td>
-					<td class="formLabel"><label for="field3">External Data Source:</label></td>
+					<td class="formLabel"><label for="externalSource">External Data Source:</label></td>
 					<td class="formField">				
-					<html:select styleClass="formFieldSized" size="1" property="externalSource" >
+					<html:select styleId="externalSource" styleClass="formFieldSized" size="1" property="externalSource" >
 						<html:options name="<%=Dropdowns.EXTERNALSOURCEQUERYDROP %>" />										
 					</html:select>
 				    </td>&nbsp;&nbsp;
 					
 				    <td class="formRequiredNotice" >&nbsp;</td>
-					<td class="formLabel"><label for="field2">PI's Name:</label></td>
+					<td class="formLabel"><label for="principalInvestigator">PI's Name:</label></td>
 					
 					<td class="formField">				
-						<html:select styleClass="formFieldSized" size="1" property="principalInvestigator" >
+						<html:select styleId="principalInvestigator" styleClass="formFieldSized" size="1" property="principalInvestigator" >
 							<html:options name="<%=Dropdowns.PRINCIPALINVESTIGATORQUERYALLDROP %>" />										
 						</html:select>			
 					</td>				
@@ -158,9 +158,9 @@
 				
 				<tr>
 				    <td class="formRequiredNotice" >&nbsp;</td>
-					<td class="formLabel"><label for="field3">Species:</label></td>
+					<td class="formLabel"><label for="species">Species:</label></td>
 					<td class="formField">				
-						<html:select property="species">
+						<html:select styleId="species" property="species">
 							<html:optionsCollection name="<%= Dropdowns.NONHUMANSPECIESDROP %>" />										
 						</html:select>			
 					</td>&nbsp;&nbsp;				
@@ -169,7 +169,7 @@
 				
 			<tr>
 				<td colspan="8" align="right">	
-					<TABLE cellpadding="0" cellspacing="0" border="0">
+					<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0">
 						<tr>
 							<td align="right">
 							  <html:submit styleClass="actionButton" onclick="blankModelId()">
@@ -217,7 +217,7 @@
 	         	<center>
 	             	<c:set var="inactiveLink" value="return confirm('Are you sure you want to inactivate this record (${row.modelDescriptor})?');"/>	         	
 				    <c:set var="uri" value="ChangeAnimalModelToInactiveAction.do?&aEvent=inactivate&aModelID=${row.modelId}"/>
-				         <a href='<c:out value="${uri}"/>' onclick='<c:out value="${inactiveLink}"/>' ><IMG src="/camod/images/remove.gif" border=0></a>
+				         <a href='<c:out value="${uri}"/>' onclick='<c:out value="${inactiveLink}"/>' ><IMG alt="Remove" src="/camod/images/remove.gif" border=0></a>
 				 </center>
 	       	 	</display:column>
 			</c:otherwise>

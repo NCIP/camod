@@ -1,29 +1,29 @@
-<%
-
-/**
+<% 
+ 
+/** 
+ *  
+ * $Id: customizeSearchResults.jsp,v 1.6 2006-08-15 14:50:33 pandyas Exp $ 
+ *  
+ * $Log: not supported by cvs2svn $ 
+ * Revision 1.5  2006/08/13 18:21:05  pandyas 
+ * updated on-line help from Robohelp to ePublisher - modified links 
  * 
- * $Id: customizeSearchResults.jsp,v 1.6 2006-08-15 14:50:33 pandyas Exp $
+ * Revision 1.4  2006/05/25 15:19:17  georgeda 
+ * Added new context sensitive text topics 
  * 
- * $Log: not supported by cvs2svn $
- * Revision 1.5  2006/08/13 18:21:05  pandyas
- * updated on-line help from Robohelp to ePublisher - modified links
- *
- * Revision 1.4  2006/05/25 15:19:17  georgeda
- * Added new context sensitive text topics
- *
- * Revision 1.3  2006/05/10 17:10:26  schroedn
- * Do not allow multiple selections from left to right
- *
- * Revision 1.2  2006/05/10 14:23:35  schroedn
- * New Features - Changes from code review
- *
- * Revision 1.1  2006/04/28 19:41:32  schroedn
- * Defect # 261, 238
- * Pages to edit user options, saved queries or query history
- *
- *
- */
-
+ * Revision 1.3  2006/05/10 17:10:26  schroedn 
+ * Do not allow multiple selections from left to right 
+ * 
+ * Revision 1.2  2006/05/10 14:23:35  schroedn 
+ * New Features - Changes from code review 
+ * 
+ * Revision 1.1  2006/04/28 19:41:32  schroedn 
+ * Defect # 261, 238 
+ * Pages to edit user options, saved queries or query history 
+ * 
+ * 
+ */ 
+ 
 %>
 
 <%@ include file="/jsp/header.jsp" %>
@@ -204,7 +204,7 @@
 
 <!-- custimizeSearchResults.jsp -->
 <!-- Main Content Begins -->										
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content"  cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<!-- Took this out of sidebar.jsp and has to go here to format correctly -->
 	<%@ include file="/jsp/searchMenu.jsp" %>	
 	<% if ( errorMessage != null ) { %>
@@ -214,19 +214,19 @@
 	<%} %>
 	
 	<tr><td>
-	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
+	<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
 	<tr><td>
 		
-			<TABLE summary="" cellpadding="5" cellspacing="0" border="0" align="left">
+			<TABLE cellpadding="5" cellspacing="0" border="0" align="left">
 				<tr>
-					<td class="formTitleBlue" height="20" colspan="4">
+					<th scope="col" formTitleBlue" height="20" colspan="4">
 						Customize Search Results&nbsp;<camod:cshelp topic="customizing_search_results_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/>
-					</td>
+					</th>
 				</tr>
 				
 				<tr>
 			    	<td class="formFieldLeftOnly">
-						Available Columns
+						<label for="columnsToDisplay">Available Columns</label>
 				    </td>
 		
 					<td class="formFieldNone">						
@@ -234,7 +234,7 @@
 					</td>	
 		
 		            <td class="formFieldNone">
-						Columns to Display (5 max)
+						<label for="selectedColumnsToDisplay">Columns to Display (5 max)</label>
 				    </td>
 							    
 		            <td  class="formFieldRightOnly">
@@ -244,20 +244,20 @@
 						
 				<tr>
 			    	<td class="formFieldLeftOnly">
-					    <html:select styleClass="formFieldUnSized" size="8" style="width: 225px"  property="columnsToDisplay">												
+					    <html:select styleId="columnsToDisplay" styleClass="formFieldUnSized" size="8" style="width: 225px"  property="columnsToDisplay">												
 					   		 <html:options name="<%= Dropdowns.SEARCHRESULTCOLUMNSDROP %>"/>					
 					    </html:select>
 					    <br>&nbsp;
 				    </td>
 		
 					<td class="formFieldNone">						
-					    <a href="javascript: moveSelectedOptionsRight(document.forms[0].columnsToDisplay, document.forms[0].selectedColumnsToDisplay);"><img border="0" src="/camod/images/rightarrow.gif"  NAME="rightarrow"></a>
+					    <a href="javascript: moveSelectedOptionsRight(document.forms[0].columnsToDisplay, document.forms[0].selectedColumnsToDisplay);"><img border="0" alt="Right Arrow" src="/camod/images/rightarrow.gif"  NAME="rightarrow"></a>
 					    <br>
-					    <a href="javascript: moveSelectedOptionsLeft(document.forms[0].selectedColumnsToDisplay, document.forms[0].columnsToDisplay);"><img border="0" src="/camod/images/leftarrow.gif"></a>						
+					    <a href="javascript: moveSelectedOptionsLeft(document.forms[0].selectedColumnsToDisplay, document.forms[0].columnsToDisplay);"><img border="0" alt="Left Arrow" src="/camod/images/leftarrow.gif"></a>						
 					</td>	
 		
 		            <td class="formFieldNone">		         
-					    <html:select styleClass="formFieldUnSized" size="8" multiple="true" style="width: 225px" property="selectedColumnsToDisplay">												
+					    <html:select styleId="selectedColumnsToDisplay" styleClass="formFieldUnSized" size="8" multiple="true" style="width: 225px" property="selectedColumnsToDisplay">												
 					        <html:options property="selectedColumnsToDisplay"/>
 					    </html:select><br>
 				       	* Model Descriptor <I>(required)</I><br>
@@ -265,17 +265,17 @@
 				    </td>
 							    
 		            <td  class="formFieldRightOnly">
-					    <a href="javascript: moveOptionUp(document.forms[0].selectedColumnsToDisplay);"><img border="0" src="/camod/images/uparrow.gif"></a>
+					    <a href="javascript: moveOptionUp(document.forms[0].selectedColumnsToDisplay);"><img alt="Up Arrow" border="0" src="/camod/images/uparrow.gif"></a>
 					    <br>
-					    <a href="javascript: moveOptionDown(document.forms[0].selectedColumnsToDisplay);"><img border="0" src="/camod/images/downarrow.gif"></a>						
+					    <a href="javascript: moveOptionDown(document.forms[0].selectedColumnsToDisplay);"><img border="0" alt="Down Arrow" src="/camod/images/downarrow.gif"></a>						
 				    </td>					    
 				</tr>
 								
 				<tr>
 					<td class="formFieldRightLeftOnly" height="20" colspan="4">																		
-					    <html:select styleClass="formFieldUnSized" size="1" property="itemsPerPage">												
+					    <html:select styleClass="formFieldUnSized" size="1" styleId="itemsPerPage" property="itemsPerPage">												
 					        <html:options name="<%= Dropdowns.ITEMSPERPAGEDROP %>"/>
-					    </html:select>&nbsp;Items per page						
+					    </html:select>&nbsp;<label for="itemsPerPage">Items per page</label>						
 						<br>
 					</td>
 				</tr>

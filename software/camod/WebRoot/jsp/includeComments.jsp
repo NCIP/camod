@@ -22,13 +22,13 @@
 
 <c:set var="uri" value="javascript: rs('commentWin','AddCommentsPopulateAction.do?${modelIdTag}=${mdl.id}&${modelSectionTag}=${modelSectionValue}',360,305);"/>
 <tr>
-    <td class="WhiteBoxFull" width="100%" colspan="2"><a href='<c:out value="${uri}"/>'><IMG src="images/comment.gif" border=0 align=middle> <b>Place your comment here</b></a></td>
+    <td class="WhiteBoxFull" width="100%" colspan="2"><a href='<c:out value="${uri}"/>'><IMG alt="Comments" src="images/comment.gif" border=0 align=middle> <b>Place your comment here</b></a></td>
 </tr>
     
 <% } else { %>
 
 <tr>
-    <td class="WhiteBoxFull" width="100%" colspan="2"><IMG src="images/comment.gif" border=0 align=middle> <b>Comments (Please login to submit new comments)</b></td>
+    <td class="WhiteBoxFull" width="100%" colspan="2"><IMG alt="Comments" src="images/comment.gif" border=0 align=middle> <b>Comments (Please login to submit new comments)</b></td>
 </tr>
 
 <% } %>

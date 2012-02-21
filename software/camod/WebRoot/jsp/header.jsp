@@ -11,12 +11,12 @@
 
 <BODY>
 
-<TABLE height="100%" cellSpacing=0 cellPadding=0 width="100%" summary="" border=0> <!-- This table is closed at the end of the footer.jsp -->
+<TABLE height="100%" cellSpacing=0 cellPadding=0 width="100%" summary="This table is used to format page content" border=0> <!-- This table is closed at the end of the footer.jsp -->
 <TBODY>
 <TR><TD>
 
 <!-- nci hdr begins -->
-      <TABLE class=hdrBG cellSpacing=0 cellPadding=0 width="100%" border=0>
+      <TABLE summary="This table is used to format page content" class=hdrBG cellSpacing=0 cellPadding=0 width="100%" border=0>
         <TR>
           <TD align=left width=283 height=37><A
             href="http://www.cancer.gov/"><IMG height=37
@@ -37,12 +37,12 @@
 
 <TR><TD vAlign=top height="100%">
 
-<TABLE height="100%" cellSpacing=0 cellPadding=0 summary="" border=0> <!-- This table is ended at the end of the Application footer of the footer.jsp -->
+<TABLE height="100%" cellSpacing=0 cellPadding=0 summary="This table is used to format page content" border=0> <!-- This table is ended at the end of the Application footer of the footer.jsp -->
         <TBODY>
         <TR><TD colSpan=2 height=50>
 
 <!-- application hdr begins -->
-            <TABLE class=subhdrBG cellSpacing=0 cellPadding=0 width="100%" border=0>
+            <TABLE summary="This table is used to format page content" class=subhdrBG cellSpacing=0 cellPadding=0 width="100%" border=0>
               <TBODY>
               <TR>
                 <TD align=left height=50><html:link styleClass="footerMenuLink" action="login"><IMG

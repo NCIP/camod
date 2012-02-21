@@ -38,7 +38,7 @@
     <c:set var="foundInvivoData" value="1"/>
   	<tr>
   		<td colspan="2">
-			<table summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
+			<table summary="This table is used to format page content" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 				<tr>
 					<td class="formTitleBlue" colspan="4" align="center">
 						In Vivo Screening Data

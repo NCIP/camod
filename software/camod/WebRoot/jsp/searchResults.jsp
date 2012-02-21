@@ -112,7 +112,7 @@
 
 <!-- searchResults.jsp -->
 <!-- Main Content Begins -->
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <!-- Took this out of sidebar.jsp and has to go here to format correctly -->
 <%@ include file="/jsp/searchMenu.jsp" %>
 <tr><td>
@@ -154,14 +154,14 @@
 
 
 
-    <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
+    <TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
 	<tr><td>
-		<TABLE cellpadding="7" cellspacing="0" border="0" class="contentBegins" width="100%">
+		<TABLE summary="This table is used to format page content" cellpadding="7" cellspacing="0" border="0" class="contentBegins" width="100%">
 		<tr>
 			<td>
 				<TABLE cellpadding="5" cellspacing="0" border="0" width="100%">
 					<TR>
-						<TD class="formTitle" height="20">Search Criteria ( <font color="red"><%= elapsedTimeSec %></font> seconds )</TD>
+						<TH scope="col" class="formTitle" height="20">Search Criteria ( <font color="red"><%= elapsedTimeSec %></font> seconds )</TH>
 					</TR>
 					<TR>
 						<TD class="formFieldAll"><c:out value="${criteriaTable}" escapeXml="false"/></TD>
@@ -169,7 +169,7 @@
 				</TABLE>												
 				
 			    <c:if test="${ dupName == 'true' }">
-					<TABLE border="0" class="contentPage" width="100%">
+					<TABLE summary="This table is used to format page content" border="0" class="contentPage" width="100%">
 						<TR>
 							<TD align="left" colspan="2" width="100%">
 								<font color="red">*The name "<c:out value="${dupNameValue}" escapeXml="false"/>" is already being used, please choose a different name.</font><br>
@@ -181,7 +181,7 @@
 				<c:choose>
 								    
 				    <c:when test="${ noSaveOption == 'true' }">
-						<TABLE border="0" class="contentPage" width="100%">
+						<TABLE summary="This table is used to format page content" border="0" class="contentPage" width="100%">
 							<TR>
 								<TD width="40%">&nbsp;</TD>
 								<TD align="right" width="60%">
@@ -193,7 +193,7 @@
 				    </c:when>
 	
 				    <c:when test="${ !empty reRunQuery }">
-						<TABLE border="0" class="contentPage" width="100%">
+						<TABLE summary="This table is used to format page content" border="0" class="contentPage" width="100%">
 							<TR>
 								<TD width="40%">&nbsp;</TD>
 								<TD align="right" width="60%">
@@ -206,13 +206,13 @@
 	
 					<c:when test="${ !empty aSavedQueryId }">
 						<html:form action="SaveQueryAction.do?method=save" focus="queryName">
-							<TABLE border="0" class="contentPage" width="100%">
+							<TABLE summary="This table is used to format page content" border="0" class="contentPage" width="100%">
 								<TR>
 									<TD width="20%">&nbsp;</TD>
 									<TD align="left" width="80%">				
-							 				<html:radio property="saveAsNew" value="no" />Update saved query "<c:out value="${aQueryName}" escapeXml="false"/>" with the new criteria. 
+							 				<html:radio styleId="save1" property="saveAsNew" value="no" /><label for="">Update saved query</label> "<c:out value="${aQueryName}" escapeXml="false"/>" with the new criteria. 
 							 				<br>
-											<html:radio property="saveAsNew" value="yes" />Save this criteria as a new saved query called <html:text styleClass="formFieldUnSized" value="My Saved Query" property="queryName" size="20"/>.             						           
+											<html:radio styleId="save2" property="saveAsNew" value="yes" /><label for="">Save this criteria</label> as a new saved query called <html:text styleClass="formFieldUnSized" value="My Saved Query" property="queryName" size="20"/>.             						           
 											<br>
 						                <input type="submit" value="Save Query" src="images/savequery.gif" />
 						            </TD>
@@ -223,13 +223,13 @@
 	
 				    <c:when test="${ !empty currentUser }">
 						<html:form action="SaveQueryAction.do?method=save" focus="queryName">
-							<TABLE border="0" class="contentPage" width="100%">
+							<TABLE summary="This table is used to format page content" border="0" class="contentPage" width="100%">
 								<TR>
 									<TD width="40%">&nbsp;</TD>
 									<TD align="right" width="60%">
-							            <html:text styleClass="formFieldUnSized" value="My Saved Query" property="queryName" size="20"/>
+							            <html:text styleId="queryName" styleClass="formFieldUnSized" value="My Saved Query" property="queryName" size="20"/>
 			            				<INPUT name="saveAsNew" value="yes" type="hidden"/>
-						                <input type="submit" value="Save Query" src="images/savequery.gif" />
+						                <input type="submit" value="Save Query" src="images/savequery.gif" /><label for="queryName">&#160;</label>
 						            </TD>
 						        </TR>
 					        </TABLE>
@@ -246,7 +246,7 @@
 		</tr>
 		
 		<tr><td>
-			<TABLE  cellpadding="10" cellspacing="0" border="0" width="100%">	
+			<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" width="100%">	
 				<tr>
 					<td class="formTitle" height="20" colspan="4">Search Results&nbsp;
 					<camod:cshelp topic="search_results_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/>
@@ -278,14 +278,14 @@
 							else if( resultColumns[i].equals("Model Descriptor") ) { %>
 					             <display:column href="/camod/ViewModelAction.do?unprotected_method=populateModelCharacteristics&" paramId="aModelID" paramProperty="id" title="Model Descriptor" sortable="true" >
 									<c:if test="${row.externalSource == 'Jax MTB'}">
-										<IMG src="/camod/images/mtb_logo.jpg">
+										<IMG alt="Jax MTB" src="/camod/images/mtb_logo.jpg">
 									</c:if>						             
 					                 <c:out escapeXml="false" value="${row.modelDescriptor}"/>
 									<c:if test="${not empty row.imageTitle}">
-										<IMG src="/camod/images/image_icon.jpg" width="20" height="20">
+										<IMG alt="Image Title" src="/camod/images/image_icon.jpg" width="20" height="20">
 									</c:if>	
 									<c:if test="${not empty row.microarray}">
-										<IMG src="/camod/images/microarray_icon.jpg" width="20" height="20">
+										<IMG alt="MicroArray" src="/camod/images/microarray_icon.jpg" width="20" height="20">
 									</c:if>																								                 	
 							     </display:column>										
 							<% }						

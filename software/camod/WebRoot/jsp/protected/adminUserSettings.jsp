@@ -9,11 +9,11 @@
 </SCRIPT>
 
 <!-- Main Content Begins -->  
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <!-- Took this out of sidebar.jsp and has to go here to format correctly -->
 <%@ include file="/jsp/adminMenu.jsp" %>
 <tr><td>		
-	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
+	<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
 	<html:form action="AdminUserSettingsAction.do" onsubmit="enableUsername()">
 	<tr><td>
 		<TABLE cellpadding="3" cellspacing="0" border="0" align="left">
@@ -32,54 +32,54 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="formTitle" height="20" colspan="3">User Settings for <c:out value="${userSettingsForm.firstName}"/> <c:out value="${userSettingsForm.lastName}"/>
-				&nbsp;<camod:cshelp topic="user_settings_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
+			<th scope="col" class="formTitle" height="20" colspan="3">User Settings for <c:out value="${userSettingsForm.firstName}"/> <c:out value="${userSettingsForm.lastName}"/>
+				&nbsp;<camod:cshelp topic="user_settings_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></th>
 		</tr>
         <tr>
 			<td class="formRequiredNotice" width="5">&nbsp</td>
-			<td class="formLabel"><label for="field2">Username</label></td>
+			<td class="formLabel"><label for="username">Username</label></td>
 
 			<td class="formField">
-				<html:text disabled="true" styleClass="formFieldSized" property="username" size="30"/>
+				<html:text disabled="true" styleClass="formFieldSized" styleId="username" property="username" size="30"/>
 			</td>
 			
 		</tr>
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
-			<td class="formRequiredLabel"><label for="field2">Institute / Organization</label></td>
+			<td class="formRequiredLabel"><label for="affiliation">Institute / Organization</label></td>
 			<td class="formField">
-				<html:text styleClass="formFieldSized" property="affiliation" size="30"/>
+				<html:text styleClass="formFieldSized" styleId="affiliation" property="affiliation" size="30"/>
 			</td>
 		</tr>
 		<tr>
 			<td class="formRequiredNotice" width="0">*</td>
-			<td class="formRequiredLabel"><label for="field1">First Name</label></td>
+			<td class="formRequiredLabel"><label for="firstName">First Name</label></td>
 			<td class="formField">
-				<html:text styleClass="formFieldSized" property="firstName" size="30"/>
-			</td>
-		</tr>
-		
-		<tr>
-			<td class="formRequiredNotice" width="0">*</td>
-			<td class="formRequiredLabel"><label for="field1">Last Name</label></td>
-			<td class="formField">
-				<html:text styleClass="formFieldSized" property="lastName" size="30"/>
+				<html:text styleClass="formFieldSized" styleId="firstName" property="firstName" size="30"/>
 			</td>
 		</tr>
 		
 		<tr>
 			<td class="formRequiredNotice" width="0">*</td>
-			<td class="formRequiredLabel"><label for="field1">Phone</label></td>
+			<td class="formRequiredLabel"><label for="lastName">Last Name</label></td>
 			<td class="formField">
-				<html:text styleClass="formFieldSized" property="phone" size="30"/>
+				<html:text styleClass="formFieldSized" styleId="lastName" property="lastName" size="30"/>
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="formRequiredNotice" width="0">*</td>
+			<td class="formRequiredLabel"><label for="phone">Phone</label></td>
+			<td class="formField">
+				<html:text styleClass="formFieldSized" styleId="phone" property="phone" size="30"/>
 			</td>
 		</tr>		
 
 		<tr>
 			<td class="formRequiredNotice" width="0">*</td>
-			<td class="formRequiredLabel"><label for="field1">Email</label></td>
+			<td class="formRequiredLabel"><label for="email">Email</label></td>
 			<td class="formField">
-				<html:text styleClass="formFieldSized" property="email" size="30"/>
+				<html:text styleClass="formFieldSized" styleId="email" property="email" size="30"/>
 			</td>
 		</tr>				
         <html:hidden property="principalInvestigator" />

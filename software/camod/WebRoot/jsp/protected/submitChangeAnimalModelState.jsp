@@ -8,13 +8,13 @@
 <%@ page import="gov.nih.nci.camod.Constants" %>
 
 <!-- submitChangeAnimalModelState.jsp -->
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <!-- Took this out of sidebar.jsp and has to go here to format correctly  -->
 <%@ include file="/jsp/adminMenu.jsp" %>
 <tr><td>
-	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
+	<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
 	<tr><td>
-	<TABLE summary="" cellpadding="3" cellspacing="0" border="0">
+	<TABLE cellpadding="3" cellspacing="0" border="0">
 	<html:form action="ChangeAnimalModelStateAction">
 		<tr>
 			<td class="formMessage" colspan="3">
@@ -31,16 +31,16 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="formTitle" height="20" colspan="3">
+			<th scope="col" class="formTitle" height="20" colspan="3">
 			    <bean:write name="action" /> AnimalModel <c:out value="${animalModelStateForm.modelDescriptor}" escapeXml="false" />
-			</td>
+			</th>
 		</tr>        
 		<logic:notEmpty name="<%=Constants.Dropdowns.USERSFORROLEDROP%>" >
 		    <tr>
 			    <td class="formRequiredNotice" width="5">*</td>
-			    <td class="formRequiredLabel"><label for="field1">Assigned To</label></td>
+			    <td class="formRequiredLabel"><label for="assignedTo">Assigned To</label></td>
 			    <td class="formField">			
-		            <html:select property="assignedTo">
+		            <html:select styleId="assignedTo" property="assignedTo">
 			            <html:optionsCollection name="<%=Constants.Dropdowns.USERSFORROLEDROP%>"/>
 		            </html:select>
 			    </td>
@@ -51,9 +51,9 @@
 		</logic:empty>
 		<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formRequiredLabel"><label for="field2">Remark</label></td>
+		<td class="formRequiredLabel"><label for="remark">Remark</label></td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldSized" property="remark" cols="32" rows="4"/>			
+					<html:textarea styleId="remark" styleClass="formFieldSized" property="remark" cols="32" rows="4"/>			
 			</td>
 		</tr>
         <html:hidden property="modelId" />
@@ -61,7 +61,7 @@
         <html:hidden property="event" />
 		<tr>
 			<td align="right" colspan="3">
-				<TABLE cellpadding="4" cellspacing="0" border="0">				
+				<TABLE summary="This table is used to format page content" cellpadding="4" cellspacing="0" border="0">				
 					  <html:submit styleClass="actionButton">
 						  <bean:message key="button.submit"/>
 					  </html:submit>

@@ -20,23 +20,23 @@
 
 <!-- login.jsp -->
 <!-- Main Content Begins -->  
-	  <table summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="55%" height="90%">
+	  <table summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="55%" height="90%">
 	  <!-- Took this out of sidebar.jsp and has to go here to format correctly - width must be < 75% above to display correctly -->
 	  <%@ include file="/jsp/homeMenu.jsp" %>
               <!-- banner begins -->
               <tr>
-                  <td valign=top class="bannerHome"><img src="/camod/images/banner.gif"></td>
+                  <td valign=top class="bannerHome"><img alt="Banner" src="/camod/images/banner.gif"></td>
               </tr>
               <!-- banner begins -->
 
               <tr>
                   <td height="100%">
-                      <table summary="" cellpadding="0" cellspacing="0" border="0" height="100%" >
+                      <table summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" height="100%" >
                           <tr>
                               <td width="70%">
                               
                                   <!-- welcome begins -->
-                                  <table summary="" cellpadding="0" cellspacing="0" border="0" height="100%">
+                                  <table summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" height="100%">
                                       <tr><td class="welcomeTitle" height="20">Welcome to the Cancer Models Database</td>
                                       </tr>
                                       <tr>
@@ -55,7 +55,7 @@
                               <td valign="top" width="30%">
 
                                   <!-- sidebar begins -->
-                                  <table summary="" cellpadding="0" cellspacing="0" border="0" height="100%">
+                                  <table summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" height="100%">
                                      <%                      
                                       // if user is already logged in, do not display the username/password login fields
                                       if ( request.getSession().getAttribute( "READDISCLAIMER" )== null ) { 
@@ -64,7 +64,7 @@
                                       <tr>
                                           <td valign="top">
 
-                                              <table summary="" cellpadding="2" cellspacing="0" border="0" width="100%" class="sidebarSection">
+                                              <table summary="This table is used to format page content" cellpadding="2" cellspacing="0" border="0" width="100%" class="sidebarSection">
                                                   <tr>
                                                       <td class="sidebarTitle" height="20">LOGIN TO caMOD &nbsp; 
                                                       <camod:cshelp topic="login_page_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/>&nbsp;
@@ -72,7 +72,7 @@
                                                    </tr>
                                                   <tr>
                                                       <td colspan="3">
-                                                          <table cellpadding="2" cellspacing="0" border="0">                                                                                                                                                              					                                                                                                                   
+                                                          <table summary="This table is used to format page content" cellpadding="2" cellspacing="0" border="0">                                                                                                                                                              					                                                                                                                   
                                                               <logic:messagesPresent>
 	                                                                  <tr>
 						                                                  
@@ -131,13 +131,13 @@
                                       <!-- what's new begins -->
                                       <tr>
                                           <td valign="top">
-                                              <table summary="" cellpadding="0" cellspacing="0" border="0" width="100%" class="sidebarSection">
+                                              <table summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" width="100%" class="sidebarSection">
                                                   <tr>
                                                       <td class="sidebarTitle" height="20">WHAT'S NEW</td>
                                                   </tr>
 
                                                   <tr>
-                                                      <td class="sidebarContent"><IMG src="/camod/images/bullet_point.gif" border=0>&nbsp;<html:link action="infoWhatsNew">View What's New</html:link></td>
+                                                      <td class="sidebarContent"><IMG alt="What's new" src="/camod/images/bullet_point.gif" border=0>&nbsp;<html:link action="infoWhatsNew">View What's New</html:link></td>
                                                   </tr>
                                               </table>
                                           </td>
@@ -147,7 +147,7 @@
                                       <!-- did you know? begins -->
                                       <tr>
                                           <td valign="top">
-                                              <table summary="" cellpadding="0" cellspacing="0" border="0" width="100%" height="100%" class="sidebarSection">
+                                              <table summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" width="100%" height="100%" class="sidebarSection">
                                                   <tr>
                                                       <td class="sidebarTitle" height="20">LEGAL RULES OF THE ROAD</td>
                                                   </tr>
@@ -193,6 +193,9 @@
 															'left=20,top=20,width=700,height=500,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"/><br/><br/>														
 
 				                                        <% } %>
+				                                        <div style="padding:5px;margin:5px; background-color:#fff; border:1px solid #416599;">
+															To view the User Guide, you may need to install the Adobe PDF Reader for your browser. Please click <a target="_new" href="http://get.adobe.com/reader/">here</a> to download this free plug-in.<br/>
+														</div>
 													</td>                                                                  
                                               	</tr>
                                               </table>
@@ -202,7 +205,7 @@
 										
                                       <!-- spacer cell begins (keep for dynamic expanding) -->
                                       <tr><td valign="top" height="100%">
-                                          <table summary="" cellpadding="0" cellspacing="0" border="0" width="100%" height="100%" class="sidebarSection">
+                                          <table summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" width="100%" height="100%" class="sidebarSection">
 
                                               <tr>
                                                   <td class="sidebarContent" valign="top">&nbsp;</td>

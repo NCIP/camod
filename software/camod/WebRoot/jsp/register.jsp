@@ -57,13 +57,13 @@
 
 <!-- register.jsp -->
 <!-- Main Content Begins --> 
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <!-- Took this out of sidebar.jsp and has to go here to format correctly  -->
 <%@ include file="/jsp/searchMenu.jsp" %>
 <tr><td>		
-	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
+	<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
 	<tr><td>
-	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
+	<TABLE summary="This table is used to format page content" cellpadding="3" cellspacing="0" border="0" align="left">
 	<html:form action="RegisterUserAction.do">
 		<tr>
 		    <logic:messagesPresent>
@@ -85,79 +85,79 @@
 		</tr>
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
-			<td class="formRequiredLabel"><label for="field2">Institute / Organization</label></td>			
+			<td class="formRequiredLabel"><label for="affiliation">Institute / Organization</label></td>			
 			<td class="formField">
-				<html:text styleClass="formFieldSized" property="affiliation" size="30"/>
+				<html:text styleId="affiliation" styleClass="formFieldSized" property="affiliation" size="30"/>
 			</td>
 		</tr>
 		<tr>
 			<td class="formRequiredNotice" width="0">*</td>
-			<td class="formRequiredLabel"><label for="field1">First Name</label></td>
+			<td class="formRequiredLabel"><label for="firstName">First Name</label></td>
 			<td class="formField">
-				<html:text styleClass="formFieldSized" property="firstName" size="30"/>
+				<html:text styleId="firstName" styleClass="formFieldSized" property="firstName" size="30"/>
 			</td>
 		</tr>		
 		<tr>
 			<td class="formRequiredNotice" width="0">*</td>
-			<td class="formRequiredLabel"><label for="field1">Last Name</label></td>
+			<td class="formRequiredLabel"><label for="lastName">Last Name</label></td>
 			<td class="formField">
-				<html:text styleClass="formFieldSized" property="lastName" size="30"/>
+				<html:text styleId="lastName" styleClass="formFieldSized" property="lastName" size="30"/>
 			</td>
 		</tr>		
 		<tr>
 			<td class="formRequiredNotice" width="0">*</td>
-			<td class="formRequiredLabel"><label for="field1">Phone</label></td>
+			<td class="formRequiredLabel"><label for="phone">Phone</label></td>
 			<td class="formField">
-				<html:text styleClass="formFieldSized" property="phone" size="30"/>
+				<html:text styleId="phone" styleClass="formFieldSized" property="phone" size="30"/>
 			</td>
 		</tr>
 		<tr>
 			<td class="formRequiredNotice" width="0">*</td>
-			<td class="formRequiredLabel"><label for="field1">Email</label></td>
+			<td class="formRequiredLabel"><label for="email">Email</label></td>
 			<td class="formField">
-				<html:text styleClass="formFieldSized" property="email" size="30"/>
+				<html:text styleId="email" styleClass="formFieldSized" property="email" size="30"/>
 			</td>
 		</tr>						
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Check if you are a principal investigator / lab chief</label></td>
+			<td class="formLabel"><label for="principalInvestigator">Check if you are a principal investigator / lab chief</label></td>
 			<td class="formField" align="left" >
-			    <html:checkbox styleClass="formFieldSized" property="principalInvestigator" onclick="checkFields()" > </html:checkbox>
+			    <html:checkbox styleId="principalInvestigator" styleClass="formFieldSized" property="principalInvestigator" onclick="checkFields()" > </html:checkbox>
 			</td>
 		</tr>
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
-			<td class="formRequiredLabel"><label for="field1">If you are not a principal investigator / lab chief, select your principal investigator from the list.  If your principal investigator is not in the list, please fill in information below.</label></td>
+			<td class="formRequiredLabel"><label for="piUsername">If you are not a principal investigator / lab chief, select your principal investigator from the list.  If your principal investigator is not in the list, please fill in information below.</label></td>
 			<td class="formField">
-				<html:select styleClass="formFieldSizedEnabled" size="1" property="piUsername"  onchange="checkFields()" >
+				<html:select styleId="piUsername" styleClass="formFieldSizedEnabled" size="1" property="piUsername"  onchange="checkFields()" >
 					<html:optionsCollection name="<%= Dropdowns.PRINCIPALINVESTIGATORDROP %>" />	
 				</html:select>
 			</td>
 		</tr>
 		<tr>
 			<td class="formRequiredNotice" width="0">*</td>
-			<td class="formRequiredLabel"><label for="field1">Principal Investigator First Name</label></td>
+			<td class="formRequiredLabel"><label for="piFirstName">Principal Investigator First Name</label></td>
 			<td class="formField">
-				<html:text styleClass="formFieldSizedEnabled" property="piFirstName" size="30"/>
+				<html:text styleId="piFirstName" styleClass="formFieldSizedEnabled" property="piFirstName" size="30"/>
 			</td>
 		</tr>		
 		<tr>
 			<td class="formRequiredNotice" width="0">*</td>
-			<td class="formRequiredLabel"><label for="field1">Principal Investigator Last Name</label></td>
+			<td class="formRequiredLabel"><label for="piLastName">Principal Investigator Last Name</label></td>
 			<td class="formField">
-				<html:text styleClass="formFieldSizedEnabled" property="piLastName" size="30"/>
+				<html:text styleId="piLastName" styleClass="formFieldSizedEnabled" property="piLastName" size="30"/>
 			</td>
 		</tr>
 		<tr>
 			<td class="formRequiredNotice" width="0">*</td>
-			<td class="formRequiredLabel"><label for="field1">Principal Investigator E-mail</label></td>
+			<td class="formRequiredLabel"><label for="piEmail">Principal Investigator E-mail</label></td>
 			<td class="formField">
-				<html:text styleClass="formFieldSizedEnabled" property="piEmail" size="30"/>
+				<html:text styleId="piEmail" styleClass="formFieldSizedEnabled" property="piEmail" size="30"/>
 			</td>
 		</tr>		
 		<tr>
 			<td align="right" colspan="3">
-				<TABLE cellpadding="4" cellspacing="0" border="0">				
+				<TABLE summary="This table is used to format page content" cellpadding="4" cellspacing="0" border="0">				
 					  <html:submit styleClass="actionButton">
 						  <bean:message key="button.submit"/>
 					  </html:submit>					  

@@ -7,13 +7,13 @@
 
 <!-- adminRolesAssignment.jsp -->
 <!-- Main Content Begins -->
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<!-- Took this out of sidebar.jsp and has to go here to format correctly -->
 	<%@ include file="/jsp/adminMenu.jsp" %>
 	<tr><td>
-	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
+	<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
 	<tr><td>	
-	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" width="100%">		
+	<TABLE cellpadding="3" cellspacing="0" border="0" width="100%">		
 		<tr>
 			<td class="formMessage" colspan="3">
 				<logic:messagesPresent>
@@ -28,16 +28,16 @@
 			</td>
 		</tr>
 		<tr>
-		    <td class="formTitle" height="20" colspan="4">Roles Management &nbsp;<camod:cshelp topic="roles_management_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>		
+		    <th scope="col" class="formTitle" height="20" colspan="4"><label for="currentRole">Roles Management</label> &nbsp;<camod:cshelp topic="roles_management_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></th>		
 		</tr>
 		<html:form action="AdminRolesAssignmentPopulateAction">
 		    <td class=resultsBoxGreyNoEnd>			
-		        <html:select property="currentRole">
+		        <html:select styleId="currentRole" property="currentRole">
 		            <html:options name="<%=Constants.Dropdowns.ROLESDROP%>" />
 	            </html:select>
 		    </td>
 	        <td  class="resultsBoxGreyNoStart" align="right" colspan="3">
-				<TABLE cellpadding="4" cellspacing="0" border="0">	
+				<TABLE summary="This table is used to format page content" cellpadding="4" cellspacing="0" border="0">	
 			        <html:submit styleClass="actionButton">
 					    <bean:message key="button.submit"/>
 				    </html:submit>	

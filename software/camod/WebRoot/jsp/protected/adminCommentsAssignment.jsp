@@ -11,11 +11,11 @@
 <% pageContext.setAttribute("commentsIdTag", Parameters.COMMENTSID); %>
 
 	   
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <!-- Took this out of sidebar.jsp and has to go here to format correctly  -->
 <%@ include file="/jsp/adminMenu.jsp" %>
 <tr><td>
-	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="50%" height="100%">
+	<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="50%" height="100%">
 	<tr><td>	
 		<TABLE cellpadding="3" cellspacing="0" border="0" width="100%">		
 			<tr>
@@ -32,19 +32,19 @@
 				</td>
 			</tr>
 			<tr>
-			    <td class="formTitle" height="20" colspan="4">Comments Assignment &nbsp;
+			    <th scope="col" class="formTitle" height="20" colspan="4"><label for="currentState">Comments Assignment</label> &nbsp;
 			    	<camod:cshelp topic="comments_assignment_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/> 
-			    </td>		
+			    </th>		
 			</tr>
 			<html:form action="AdminCommentsAssignmentPopulateAction">
 			    
 				<td class=resultsBoxGreyNoEnd>			
-				    <html:select property="currentState">
+				    <html:select styleId="currentState" property="currentState">
 				        <html:options name="<%=Constants.Dropdowns.CURATIONSTATESDROP%>"/>
 			        </html:select>
 				</td>
 		        <td  class="resultsBoxGreyNoStart" align="right" colspan="3">
-					<TABLE cellpadding="4" cellspacing="0" border="0">	
+					<TABLE summary="This table is used to format page content" cellpadding="4" cellspacing="0" border="0">	
 				        <html:submit styleClass="actionButton">
 						    <bean:message key="button.submit"/>
 					    </html:submit>	

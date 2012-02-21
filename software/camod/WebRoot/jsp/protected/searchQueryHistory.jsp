@@ -26,23 +26,23 @@
 <!-- searchQueryHistory.jsp -->
 <!-- Main Content Begins -->
 <DIV id="masterdiv">
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <!-- Took this out of sidebar.jsp and has to go here to format correctly -->
 <%@ include file="/jsp/searchMenu.jsp" %>
 <tr><td>
-<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">	
+<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">	
 <tr><td>
-	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" width="100%">	
+	<TABLE cellpadding="3" cellspacing="0" border="0" width="100%">	
 		<tr>
-			<td class="formTitleBlue" height="20" colspan="4">Query History ( Last 20 searches ) &nbsp;
-				<camod:cshelp topic="search_query_history_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>				
+			<th scope="col" class="formTitleBlue" height="20" colspan="4">Query History ( Last 20 searches ) &nbsp;
+				<camod:cshelp topic="search_query_history_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></th>				
 		</tr>
 
 		<tr>
-			<td class="greySubTitleLeft" width="45%">Query Name</td>
-			<td class="greySubTitleLeft" width="25%">Last Executed</td>
-			<td class="greySubTitleLeft" width="5%">Results</td>
-			<td class="greySubTitle" width="25%">Resubmit Query</td>
+			<th scope="col" class="greySubTitleLeft" width="45%">Query Name</th>
+			<th scope="col" class="greySubTitleLeft" width="25%">Last Executed</th>
+			<th scope="col" class="greySubTitleLeft" width="5%">Results</th>
+			<th scope="col" class="greySubTitle" width="25%">Resubmit Query</th>
 		</tr>
 						
 		<% if ( size > 0 ) { %>
@@ -51,14 +51,14 @@
 	             <td class="resultsBoxWhite" valign="top" width="45%">
 	             
 					<div id="menu<%=menuNumber%>" class="criteriaTitle" onclick="SwitchMenu('subMenu<%=menuNumber%>')" onmouseover="ChangeClass('menu<%=menuNumber%>','criteriaTitleOver')" onmouseout="ChangeClass('menu<%=menuNumber%>','criteriaTitle')">
-						<img src="images/arrow_closed.gif" border="0">&nbsp;<bean:write name="aQuery" property="queryName" filter="true"/>
+						<img alt="Query Name" src="images/arrow_closed.gif" border="0">&nbsp;<bean:write name="aQuery" property="queryName" filter="true"/>
 					</div>	
 					<span class="submasterdiv" id='subMenu<%=menuNumber%>'>
 						<table width="100%" cellpadding="0" cellspacing="0">
 							<tr>	
-								<td colspan="2">							    
+								<th scope="col" colspan="2">							    
 								    <b>Search Criteria</b><br>
-							    </td>
+							    </th>
 								<bean:define id="criteriaList" name="aQuery" property="savedQueryAttributes" />
 								<logic:iterate id="aCriteria" name="criteriaList" type="SavedQueryAttribute">							
 									<tr>
@@ -87,7 +87,7 @@
 	                <bean:write name="aQuery" property="numberResults" filter="true"/>&nbsp;
 	             </td>  	             
 	             <td class="resultsBoxWhiteEnd" valign="top" width="25%">
-	                <html:link action="SearchAdvancedAction.do" paramId="aQueryId" paramName="aQuery" paramProperty="id"><img border="0" src="images/resubmitquery.gif"></html:link>
+	                <html:link action="SearchAdvancedAction.do" paramId="aQueryId" paramName="aQuery" paramProperty="id"><img border="0" alt="Run Query" src="images/resubmitquery.gif"></html:link>
 	             </td>                              
    	         </TR>
 		</logic:iterate>

@@ -9,20 +9,20 @@
 
 <bean:define id="mdl" name="animalmodel"/>
 
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <!-- Took this out of sidebar.jsp and has to go here to format correctly -->
 <%@ include file="/jsp/searchMenu.jsp" %>
 <tr><td>
-	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%" >
+	<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%" >
 	<tr><td valign="top" colspan="2">
-		<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%">
+		<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%">
 		<tr><td>
 		
-			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">
+			<TABLE cellpadding="3" cellspacing="0" border="0" align="center" width="100%">
 			<tr>
-				<td class="formTitle" height="20" colspan="2">
+				<th scope="col" class="formTitle" height="20" colspan="2">
 				Images - Model:
-				<c:out value="${mdl.modelDescriptor}" escapeXml="false" /></td>				
+				<c:out value="${mdl.modelDescriptor}" escapeXml="false" /></th>				
 			</tr>
 			<tr><td>&nbsp;</td></tr>			
 
@@ -43,7 +43,7 @@
 							<img src="<c:out value="${p.thumbUrl}"/>" height="40" width="40" alt="Click on the image to open in a new Browser window" target="_blank">( Click to View )</a>
 						</c:if>	<br><br/>
 					
-						<TABLE summary="" cellpadding="0" cellspacing="0" border="0" align="center" width="100%">
+						<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" align="center" width="100%">
 						<tr>
 							<td class="resultsBoxWhiteAllSides" width="15%"><b>Title</b></td>
 							<td class="resultsBoxWhiteAllSidesNoLeft" width="85%">

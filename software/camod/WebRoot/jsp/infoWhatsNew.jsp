@@ -1,17 +1,17 @@
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp"%>
 <!-- Main Content Begins -->
-<TABLE class="contentPage" cellspacing="0" cellpadding="0" width="100%" summary="" border="0">
+<TABLE class="contentPage" cellspacing="0" cellpadding="0" width="100%" summary="This table is used to format page content" border="0">
 	<!-- Took this out of sidebar.jsp and has to go here to format correctly -->
 	<%@ include file="/jsp/searchMenu.jsp" %>
 	<TBODY><TR><TD valign="top">
-		<TABLE class="contentBegins" height="100%" cellspacing="0" cellpadding="10" width="60%" border="0">
+		<TABLE summary="This table is used to format page content" class="contentBegins" height="100%" cellspacing="0" cellpadding="10" width="60%" border="0">
 			<TBODY><TR><TD>
-				<TABLE class="contentPage" height="100%" cellspacing="0" cellpadding="0" width="100%" summary="" border="0">
+				<TABLE class="contentPage" height="100%" cellspacing="0" cellpadding="0" width="100%" summary="This table is used to format page content" border="0">
 						<TBODY><TR><TD valign="top">
-								<TABLE class="contentBegins" cellspacing="0" cellpadding="0" width="100%" border="0">
+								<TABLE summary="This table is used to format page content" class="contentBegins" cellspacing="0" cellpadding="0" width="100%" border="0">
 										<TBODY><TR><TD>
-												<TABLE cellspacing="0" cellpadding="3" width="100%" align="center" summary="" border="0">
+												<TABLE cellspacing="0" cellpadding="3" width="100%" align="center" summary="This table is used to format page content" border="0">
 													<TBODY>
 														<TR><TD class="formTitle" colspan="6" height="20">
 																What's New?	</TD>
@@ -20,7 +20,7 @@
 												</TABLE><br>
 
 
-												<TABLE cellspacing="0" cellpadding="3" width="100%" align="center" summary="" border="0">
+												<TABLE cellspacing="0" cellpadding="3" width="100%" align="center" summary="This table is used to format page content" border="0">
 													<TBODY>
 														   <TR>													
 																<TR>

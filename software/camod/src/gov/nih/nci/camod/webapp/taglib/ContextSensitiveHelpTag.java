@@ -219,7 +219,7 @@ public class ContextSensitiveHelpTag implements Tag, Serializable {
 					myPageContext.getOut().write(
 							"<a " + theHref + " onMouseOver=\"stm(" + theText
 									+ "," + theStyleClass
-									+ ")\" onMouseOut=\"htm();\"><img src=\""
+									+ ")\" onMouseOut=\"htm();\"><img alt=\"Help\" src=\""
 									+ myImage + "\" border=\"0\"/>" + "</a>");
 
 				} else {

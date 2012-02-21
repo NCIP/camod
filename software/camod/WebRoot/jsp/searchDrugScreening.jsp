@@ -14,13 +14,13 @@
 
 <!-- searchDrugScreening.jsp -->
 <!-- Main Content Begins -->
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<!-- Took this out of sidebar.jsp and has to go here to format correctly -->
 	<%@ include file="/jsp/searchMenu.jsp" %>
 	<tr><td>
-	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">	
+	<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">	
 	<tr><td>
-	<TABLE cellpadding="3" cellspacing="0" border="0">
+	<TABLE summary="This table is used to format page content" cellpadding="3" cellspacing="0" border="0">
 	    <tr>          
 		    <td colspan="3">          
 	            <logic:messagesPresent>
@@ -44,7 +44,7 @@
         <TR>
 	        <TD class=formRequiredNotice width=5>*</TD>
 	        <TD class=formRequiredLabel>
-	        	<LABEL for=field1>NSC Number:</LABEL>
+	        	<LABEL for="NSCNumber">NSC Number:</LABEL>
 	        </TD>
 	        <TD class=formField>
 	            <html:text styleClass="formFieldSized" styleId="NSCNumber" property="NSCNumber" size="30"/>
@@ -64,16 +64,16 @@
 	        <TD class=formRequiredNotice width=5>&nbsp;</TD>
 	        <TD class=formLabel>DTP yeast Screening Data</TD>
 	        <TD class=formField>
-		        <html:checkbox property="doYeast"/>
-	        	<LABEL for=box1>Find Yeast screening data for this compound</LABEL> 
+		        <html:checkbox styleId="doYeast" property="doYeast"/>
+	        	<LABEL for="doYeast">Find Yeast screening data for this compound</LABEL> 
 	        </TD>
 	    </TR>
 		<TR>
 	        <TD class=formRequiredNotice width=5>&nbsp;</TD>
 	        <TD class=formLabel>DTP in-vivo Data</TD>
 	        <TD class=formField>
-		        <html:checkbox property="doInvivo"/>
-	        	<LABEL for=box1>Find in-vivo screening data for this compound</LABEL> 
+		        <html:checkbox styleId="doInvivo" property="doInvivo"/>
+	        	<LABEL for="doInvivo">Find in-vivo screening data for this compound</LABEL> 
 	        </TD>
 	    </TR>
 
@@ -81,8 +81,8 @@
         <TD class=formRequiredNotice width=5>&nbsp;</TD>
         <TD class=formLabel>Pre-Clinical Trials</TD>
         <TD class=formField>
-	        <html:checkbox property="doPreClinical"/>
-        	<LABEL for=box1>Find pre-clinical trials with this compound</LABEL> 
+	        <html:checkbox styleId="doPreClinical" property="doPreClinical"/>
+        	<LABEL for="doPreClinical">Find pre-clinical trials with this compound</LABEL> 
         </TD>
         </TR>
 
@@ -90,8 +90,8 @@
         <TD class=formRequiredNotice width=5>&nbsp;</TD>
         <TD class=formLabel>Clinical Trials</TD>
         <TD class=formField>
-	        <html:checkbox property="doClinical"/>
-        	<LABEL for=box1>Find clinical trials with this compound</LABEL> 
+	        <html:checkbox styleId="doClinical" property="doClinical"/>
+        	<LABEL for="doClinical">Find clinical trials with this compound</LABEL> 
         </TD>
         </TR>
 
@@ -99,7 +99,7 @@
 		<td align="right" colspan="3">
 
 			<!-- action buttons begins -->
-			<TABLE cellpadding="4" cellspacing="0" border="0">
+			<TABLE summary="This table is used to format page content" cellpadding="4" cellspacing="0" border="0">
 			<tr>
 				<td>
 					  <html:submit styleClass="actionButton">

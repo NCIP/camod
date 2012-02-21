@@ -258,7 +258,7 @@
 
 <!-- searchAdvanced.jsp -->
 <!-- Main Content Begins -->
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<!-- Took this out of sidebar.jsp and has to go here to format correctly -->
 	<%@ include file="/jsp/searchMenu.jsp" %>
 	<html:form action="SearchAdvancedAction.do" focus="keyword" onsubmit="enableFields()">
@@ -267,13 +267,13 @@
 		<td class="formMessage" colspan="3"></td>	
 	</tr>
 	<tr><td>
-    <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+    <TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
     <tr><td>
 	
-	<TABLE summary="" cellpadding="3" cellspacing="0" border="0">
+	<TABLE summary="This table is used to format page content" cellpadding="3" cellspacing="0" border="0">
 	    <tr>
-	        <td class="formTitleBlue" height="20" colspan="3">Keyword Search:&nbsp;&nbsp;
-	        <html:text property="keyword" size="55"/>&nbsp;&nbsp;
+	        <td class="formTitleBlue" height="20" colspan="3"><label for="keyword">Keyword Search:</label>&nbsp;&nbsp;
+	        <html:text styleId="keyword" property="keyword" size="55"/>&nbsp;&nbsp;
 	        <input class="actionButton" type="submit" value="Search by Keyword" /></td>
 	    </tr>
 	    <tr><td></td></tr>
@@ -285,7 +285,7 @@
         	<td colspan="3">        
 		        <% if( aSavedQueryId != null ) { %>
 			        <br>
-					<TABLE border="0" class="contentPage" width="100%">
+					<TABLE summary="This table is used to format page content" border="0" class="contentPage" width="100%">
 						<TR>
 							<TD width="100%">
 								<font color="red">* Saved query <b>"<%= aQueryName %>"</b> is being edited. You will be prompted to save the changes after pressing Search.</font>
@@ -305,7 +305,7 @@
 		
 		<tr>
 		    <td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Model Name / Model Descriptor:</label> </td>
+			<td class="formLabel"><label for="modelDescriptor">Model Name / Model Descriptor:</label> </td>
 			<td class="formField">
 				<html:text styleClass="formFieldSized" styleId="modelDescriptor" property="modelDescriptor" size="30"/>
 				<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="modelDescriptor" target="modelDescriptor"
@@ -315,10 +315,10 @@
 					
 		<tr>
 			<td class="formRequiredNotice" width="0">&nbsp;</td>
-			<td class="formLabel"><label for="field2">PI's Name:</label></td>
+			<td class="formLabel"><label for="piName">PI's Name:</label></td>
 			
 			<td class="formField">				
-				<html:select styleClass="formFieldSized" size="1" property="piName" >
+				<html:select styleId="piName" styleClass="formFieldSized" size="1" property="piName" >
 					<html:options name="<%= Dropdowns.PRINCIPALINVESTIGATORQUERYDROP %>" />										
 				</html:select>			
 			</td>
@@ -326,9 +326,9 @@
 
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field3">Species:</label></td>
+			<td class="formLabel"><label for="species">Species:</label></td>
 			<td class="formField">				
-				<html:select styleClass="formFieldSized" size="1" property="species" onchange="getOrganDiseaseTree(this);">
+				<html:select styleId="species" styleClass="formFieldSized" size="1" property="species" onchange="getOrganDiseaseTree(this);">
 					<html:optionsCollection name="<%= Dropdowns.APPROVEDSPECIESDROP %>" />										
 				</html:select>				
 			</td>
@@ -339,54 +339,54 @@
  			<!-- Display anatomy tree based on species selected or default to mouse tree if no species selected (new screen) -->			
 			<c:choose>					
 				<c:when test="${searchspeciescommonname == 'Mouse'}">
-					<td class="formLabel"><label for="field1">Site of Lesion/Tumor:</label>&nbsp;
+					<td class="formLabel"><label for="organ">Site of Lesion/Tumor:</label>&nbsp;
 						<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />							
 					<a href="javascript:showMouseTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', false)">
-						<IMG src="images\selectUP.gif" align=middle border=0></a>
+						<IMG alt="Select from EVSTree" src="images\selectUP.gif" align=middle border=0></a>
 					</td>				
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">					
-						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
+						<html:text styleId="organ" styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
 						<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="organ" target="organTissueCode"
 	  					parameters="organTissueCode={organTissueCode}" className="autocomplete" minimumCharacters="1" />					
 					</td>				
 				</c:when>
 				<c:when test="${searchspeciescommonname == 'Rat'}">	
-					<td class="formLabel"><label for="field1">Site of Lesion/Tumor:</label>&nbsp;
+					<td class="formLabel"><label for="organ">Site of Lesion/Tumor:</label>&nbsp;
 						<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
 					<a href="javascript:showRatTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', false)">
-						<IMG src="images\selectUP.gif" align=middle border=0></a>
+						<IMG alt="Select from EVSTree" src="images\selectUP.gif" align=middle border=0></a>
 					</td>
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">										
-						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
+						<html:text styleId="organ" styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
 						<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="organ" target="organTissueCode"
 	  					parameters="organTissueCode={organTissueCode}" className="autocomplete" minimumCharacters="1" />						
 					</td>
 				</c:when>
 				<c:when test="${searchspeciescommonname == 'Zebrafish'}">
-					<td class="formLabel"><label for="field1">Site of Lesion/Tumor:</label>&nbsp;
+					<td class="formLabel"><label for="organ">Site of Lesion/Tumor:</label>&nbsp;
 						<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
 					<a href="javascript:showZebrafishTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', false)">
-						<IMG src="images\selectUP.gif" align=middle border=0></a>
+						<IMG alt="Select from EVSTree" src="images\selectUP.gif" align=middle border=0></a>
 					</td>
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">										
-						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
+						<html:text styleId="organ" styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
 						<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="organ" target="organTissueCode"
 	  					parameters="organTissueCode={organTissueCode}" className="autocomplete" minimumCharacters="1" />						
 					</td>
 				</c:when>	
 				<c:otherwise>
-					<td class="formLabel"><label for="field1">Site of Lesion/Tumor:</label>&nbsp;
+					<td class="formLabel"><label for="organ">Site of Lesion/Tumor:</label>&nbsp;
 					</td>				
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">					
-						<html:text styleClass="formFieldSized" disabled="false" property="organ" size="30"  />
+						<html:text styleId="organ" styleClass="formFieldSized" disabled="false" property="organ" size="30"  />
 						<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="organ" target="organTissueCode"
 	  					parameters="organTissueCode={organTissueCode}" className="autocomplete" minimumCharacters="1"/>					
 					</td>				
@@ -399,49 +399,49 @@
  			<!-- Display anatomy tree based on species selected or default to mouse tree if no species selected (new screen) --> 			
 	 		<c:choose>			
 				<c:when test="${searchspeciescommonname == 'Mouse'}">
-					<td class="formLabel"><label for="field2">Diagnosis:</label>&nbsp;				
+					<td class="formLabel"><label for="tumorClassification">Diagnosis:</label>&nbsp;				
 							<camod:cshelp topic="data_tree_help" key="DIAGNOSIS.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />					
 						<a href="javascript:showMouseDiagnosisTree('searchForm', 'diagnosisCode', 'diagnosisName', 'tumorClassification', false)">
-						<IMG src="images\selectUP.gif" align=middle border=0></a>	
+						<IMG alt="Select from EVSTree" src="images\selectUP.gif" align=middle border=0></a>	
 					</td>
 						<html:hidden property="diagnosisCode"/>		
 						<html:hidden property="diagnosisName"/>
 						<td class="formField">
-							<html:text styleClass="formFieldSized" disabled="true" property="tumorClassification"   size="30" />
+							<html:text styleId="tumorClassification" styleClass="formFieldSized" disabled="true" property="tumorClassification"   size="30" />
 							<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="tumorClassification" target="diagnosisCode"
   							parameters="diagnosisCode={diagnosisCode}" className="autocomplete" minimumCharacters="1" />							
 						</td>									
 				</c:when>
 				<c:when test="${searchspeciescommonname == 'Rat'}">
-					<td class="formLabel"><label for="field2">Diagnosis:</label>&nbsp;				
+					<td class="formLabel"><label for="tumorClassification">Diagnosis:</label>&nbsp;				
 						<camod:cshelp topic="data_tree_help" key="DIAGNOSIS.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />					
 						<a href="javascript:showRatDiagnosisTree('searchForm', 'diagnosisCode', 'diagnosisName', 'tumorClassification', false)">
-						<IMG src="images\selectUP.gif" align=middle border=0></a>	
+						<IMG alt="Select from EVSTree" src="images\selectUP.gif" align=middle border=0></a>	
 					</td>			
 						<html:hidden property="diagnosisCode"/>		
 						<html:hidden property="diagnosisName"/>
 						<td class="formField">
-							<html:text styleClass="formFieldSized" disabled="true" property="tumorClassification"   size="30" />
+							<html:text styleId="tumorClassification" styleClass="formFieldSized" disabled="true" property="tumorClassification"   size="30" />
 						</td>												
 				</c:when>
 				<c:when test="${searchspeciescommonname == 'Zebrafish'}">
-					<td class="formLabel"><label for="field2">Diagnosis:</label>&nbsp;				
+					<td class="formLabel"><label for="tumorClassification">Diagnosis:</label>&nbsp;				
 					</td>	
 						<td class="formField">
 								<html:hidden property="diagnosisCode"/>	
 								<html:hidden property="diagnosisName"/>													
-							<html:select styleClass="formFieldSized" size="1" property="tumorClassification" onchange="chkOtherDiagnosis();" >
+							<html:select styleId="tumorClassification" styleClass="formFieldSized" size="1" property="tumorClassification" onchange="chkOtherDiagnosis();" >
 								<html:optionsCollection name="<%= Constants.Dropdowns.ZEBRAFISHDIAGNOSISDROP %>" />										
 							</html:select>					
 						</td>
 				</c:when>							
 				<c:otherwise>
-					<td class="formLabel"><label for="field2">Diagnosis:</label>&nbsp;				
+					<td class="formLabel"><label for="tumorClassification">Diagnosis:</label>&nbsp;				
 					</td>
 						<html:hidden property="diagnosisCode"/>								
 						<html:hidden property="diagnosisName"/>
 						<td class="formField">
-							<html:text styleClass="formFieldSized" disabled="false" property="tumorClassification"   size="25" />
+							<html:text styleId="tumorClassification" styleClass="formFieldSized" disabled="false" property="tumorClassification"   size="25" />
 								<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="tumorClassification" target="diagnosisCode"
   								parameters="diagnosisCode={diagnosisCode}" className="autocomplete" minimumCharacters="1" />							
 						</td>				
@@ -456,9 +456,9 @@
 
 		<tr>
 		    <td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field3">Phenotype:</label></td>
+			<td class="formLabel"><label for="phenotype">Phenotype:</label></td>
 			<td class="formField">			
-					<html:text styleClass="formFieldSized" property="phenotype" size="30"/>
+					<html:text styleId="phenotype" styleClass="formFieldSized" property="phenotype" size="30"/>
 			</td>
 		</tr>
 		
@@ -469,12 +469,12 @@
 		<tr>
 		    <td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel">
-			<label for="field1">PubMed Identifier:</label> </td>			
+			<label for="pmid">PubMed Identifier:</label> </td>			
 			<td class="formField">	
-				<html:text styleClass="formFieldSized" property="pmid" size="30"/>&nbsp;&nbsp;						
+				<html:text styleId="pmid" styleClass="formFieldSized" property="pmid" size="30"/>&nbsp;&nbsp;						
 				<input type=button value="Find PMID" onClick="myRef = window.open('http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed','mywin',
 				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>
-				<label for="field1">&nbsp;&nbsp;</label>
+				&nbsp;&nbsp;
 			<br/>			
 			Note: Use the Find PMID button to search for the publication in PubMed.					
 			</td>
@@ -490,18 +490,18 @@
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel">Models with Transgene</td>
 			<td class="formField">
-			    <html:checkbox property="searchEngineeredTransgene" onclick="checkFields()" />
+			    <html:checkbox styleId="searchEngineeredTransgene" property="searchEngineeredTransgene" onclick="checkFields()" />
 			    <!-- NOTE: Needed to work around struts bug -->
 			    <input type="hidden" name="searchEngineeredTransgene" value="false">	
-				<label for="box1">Check here to search for models with <br>trangene data</label>
+				<label for="searchEngineeredTransgene">Check here to search for models with <br>trangene data</label>
 			</td>
 		</tr>
 
 		<tr>
 		    <td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field3">Transgene Name:</label></td>
+			<td class="formLabel"><label for="transgeneName">Transgene Name:</label></td>
 			<td class="formField">			
-				<html:select styleClass="formFieldSized" size="1" property="transgeneName" >
+				<html:select styleId="transgeneName" styleClass="formFieldSized" size="1" property="transgeneName" >
 					<html:options name="<%= Dropdowns.TRANSGENENAMEQUERYDROP %>" />												
 				</html:select>
 			</td>
@@ -511,18 +511,18 @@
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel">Models with Targeted Modification</td>
 			<td class="formField">
-			    <html:checkbox property="searchTargetedModification" onclick="checkFields()" />
+			    <html:checkbox styleId="searchTargetedModification" property="searchTargetedModification" onclick="checkFields()" />
 			    <!-- NOTE: Needed to work around struts bug -->
 			    <input type="hidden" name="searchTargetedModification" value="false">	
-				<label for="box1">Check here to search for models with <br>targeted modification data</label>
+				<label for="searchTargetedModification">Check here to search for models with <br>targeted modification data</label>
 			</td>
 		</tr>
 
 		<tr>
 		    <td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field3">Targeted Modification Gene Name:</label></td>
+			<td class="formLabel"><label for="geneName">Targeted Modification Gene Name:</label></td>
 			<td class="formField">			
-				<html:select styleClass="formFieldSized" size="1" property="geneName" >
+				<html:select styleId="geneName" styleClass="formFieldSized" size="1" property="geneName" >
 					<html:options name="<%= Dropdowns.TARGETEDMODNAMEQUERYDROP %>" />												
 				</html:select>
 			</td>
@@ -532,10 +532,10 @@
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel">
-				<label for="field1">Genomic Segment Designator:</label>
+				<label for="genomicSegDesignator">Genomic Segment Designator:</label>
 			</td>
 			<td class="formField">			
-				<html:select styleClass="formFieldSized" size="1" property="genomicSegDesignator" >
+				<html:select styleId="genomicSegDesignator" styleClass="formFieldSized" size="1" property="genomicSegDesignator" >
 					<html:options name="<%= Dropdowns.CLONEDESIGNATORQUERYDROP %>" />												
 				</html:select>
 			</td>
@@ -547,9 +547,9 @@
 			
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>		
-			<td class="formLabel"><label for="field3">Select Carcinogenic Agent Type:</label></td>
+			<td class="formLabel"><label for="carcinogenicIntervention">Select Carcinogenic Agent Type:</label></td>
 			<td class="formField">
-				<html:select styleClass="formFieldSized" size="1" property="carcinogenicIntervention" onchange="getOptions(this);">
+				<html:select styleId="carcinogenicIntervention" styleClass="formFieldSized" size="1" property="carcinogenicIntervention" onchange="getOptions(this);">
 					<html:options name="<%= Dropdowns.CARCINOGENICAGENTSQUERYDROP %>"/>												
 				</html:select>			
 			</td>
@@ -557,9 +557,9 @@
 
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field3">Select Carcinogenic Agent Name:</label></td>
+			<td class="formLabel"><label for="agentName">Select Carcinogenic Agent Name:</label></td>
 			<td class="formField">
-				<html:select styleClass="formFieldSized" size="1" property="agentName" >
+				<html:select styleId="agentName" styleClass="formFieldSized" size="1" property="agentName" >
 					<html:options name="<%= Dropdowns.ENVIRONMENTALFACTORNAMESDROP %>" />												
 				</html:select>
 			</td>
@@ -571,9 +571,9 @@
 
 		<tr>
 		    <td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field3">Cell Line:</label></td>
+			<td class="formLabel"><label for="cellLine">Cell Line:</label></td>
 			<td class="formField">			
-				<html:select styleClass="formFieldSized" size="1" property="cellLine" >
+				<html:select styleId="cellLine" styleClass="formFieldSized" size="1" property="cellLine" >
 					<html:options name="<%= Dropdowns.CELLLINENAMEQUERYDROP %>" />												
 				</html:select>
 			</td>			
@@ -586,17 +586,17 @@
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel">Models with Therapeutic Approaches</td>
 			<td class="formField">
-			    <html:checkbox property="searchTherapeuticApproaches" onclick="checkFields()" />
+			    <html:checkbox styleId="searchTherapeuticApproaches" property="searchTherapeuticApproaches" onclick="checkFields()" />
 			    <!-- NOTE: Needed to work around struts bug -->
 			    <input type="hidden" name="searchTherapeuticApproaches" value="false">	
-				<label for="box1">Check here to search for models with <br>therapeutic approaches data</label>
+				<label for="searchTherapeuticApproaches">Check here to search for models with <br>therapeutic approaches data</label>
 			</td>
 		</tr>
 		<tr>
 		    <td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field3">Compound/Drug:</label></td>
+			<td class="formLabel"><label for="therapeuticApproach">Compound/Drug:</label></td>
 			<td class="formField">			
-				<html:select styleClass="formFieldSized" size="1" property="therapeuticApproach" >
+				<html:select styleId="therapeuticApproach" styleClass="formFieldSized" size="1" property="therapeuticApproach" >
 					<html:options name="<%= Dropdowns.THERAPEUTICAPPROACHDRUGQUERYDROP %>" />												
 				</html:select>
 			</td>
@@ -610,10 +610,10 @@
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel">Models with Metastasis</td>
 			<td class="formField">
-			    <html:checkbox property="searchHistoMetastasis" />
+			    <html:checkbox styleId="searchHistoMetastasis" property="searchHistoMetastasis" />
 			    <!-- NOTE: Needed to work around struts bug -->
 			    <input type="hidden" name="searchHistoMetastasis" value="false">
-				<label for="box1">Check here to search for models with Metastasis</label>
+				<label for="searchHistoMetastasis">Check here to search for models with Metastasis</label>
 			</td>
 		</tr>
 		
@@ -624,10 +624,10 @@
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel">Transient Interference</td>
 			<td class="formField">
-			    <html:checkbox property="searchTransientInterference" />
+			    <html:checkbox styleId="searchTransientInterference" property="searchTransientInterference" />
 			    <!-- NOTE: Needed to work around struts bug -->
 			    <input type="hidden" name="searchTransientInterference" value="false">
-				<label for="box1">Check here to search for models with transient interference data</label>
+				<label for="searchTransientInterference">Check here to search for models with transient interference data</label>
 			</td>
 		</tr>
 		
@@ -638,10 +638,10 @@
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel">Microarray Data</td>
 			<td class="formField">
-			    <html:checkbox property="searchMicroArrayData" />
+			    <html:checkbox styleId="searchMicroArrayData" property="searchMicroArrayData" />
 			    <!-- NOTE: Needed to work around struts bug -->
 			    <input type="hidden" name="searchMicroArrayData" value="false">
-				<label for="box1">Check here to search for models with microarray data</label>
+				<label for="searchMicroArrayData">Check here to search for models with microarray data</label>
 			</td>
 		</tr>
 		
@@ -652,10 +652,10 @@
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel">Image Data</td>
 			<td class="formField">
-			    <html:checkbox property="searchImageData" />
+			    <html:checkbox styleId="searchImageData" property="searchImageData" />
 			    <!-- NOTE: Needed to work around struts bug -->
 			    <input type="hidden" name="searchImageData" value="false">
-				<label for="box1">Check here to search for models with images</label>
+				<label for="searchImageData">Check here to search for models with images</label>
 			</td>
 		</tr>		
 		
@@ -666,10 +666,10 @@
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel">Tool Strain</td>
 			<td class="formField">
-			    <html:checkbox property="searchToolStrain" />
+			    <html:checkbox styleId="searchToolStrain" property="searchToolStrain" />
 			    <!-- NOTE: Needed to work around struts bug -->
 			    <input type="hidden" name="searchToolStrain" value="false">
-				<label for="box1">Check here to search for tool strains <BR><BR>(A tool strain is a strain that does not develop cancer, 
+				<label for="searchToolStrain">Check here to search for tool strains <BR><BR>(A tool strain is a strain that does not develop cancer, 
 				<BR>but can be used to create cancer-bearing models. Example: strain carrying a floxed gene)</label>
 			</td>
 		</tr>
@@ -679,9 +679,9 @@
 		</tr>		
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field3">External Data Source:</label></td>
+			<td class="formLabel"><label for="externalSource">External Data Source:</label></td>
 			<td class="formField">				
-				<html:select styleClass="formFieldSized" size="1" property="externalSource" >
+				<html:select styleId="externalSource" styleClass="formFieldSized" size="1" property="externalSource" >
 					<html:options name="<%= Dropdowns.EXTERNALSOURCEQUERYDROP %>" />										
 				</html:select>				
 			</td>
@@ -690,7 +690,7 @@
 		<tr>			
 			<td align="right" colspan="3">
 				<!-- action buttons begins -->
-				<TABLE cellpadding="4" cellspacing="0" border="0">
+				<TABLE summary="This table is used to format page content" cellpadding="4" cellspacing="0" border="0">
 					  
 					  <html:submit styleClass="actionButton" onclick="blankKeyword()">
 						  Search

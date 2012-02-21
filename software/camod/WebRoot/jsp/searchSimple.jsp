@@ -170,7 +170,7 @@
 
 <!-- searchSimple.jsp -->
 <!-- Main Content Begins -->
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<!-- Took this out of sidebar.jsp and has to go here to format correctly -->
 	<%@ include file="/jsp/searchMenu.jsp" %>
 		<tr>
@@ -179,15 +179,15 @@
 	
 		</tr>
 	<tr><td>
-	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+	<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
 			
-	<TABLE summary="" cellpadding="5" cellspacing="0" border="0" align="left">
+	<TABLE summary="This table is used to format page content" cellpadding="5" cellspacing="0" border="0" align="left">
 	<html:form action="SearchSimpleAction.do" focus="keyword">
         <tr>
             <td class="formTitleBlue" height="20" colspan="3">
-                Keyword Search:&nbsp;&nbsp;
-                <html:text styleClass="formFieldSized" property="keyword" size="45"/>
+                <label for="keyword">Keyword Search:&nbsp;&nbsp;</label>
+                <html:text styleId="keyword" styleClass="formFieldSized" property="keyword" size="45"/>
                 &nbsp;&nbsp;
                 <input class="actionButton" type="submit" value="Search by Keyword" />
             </td>
@@ -201,7 +201,7 @@
         	<td colspan="3">        
 		        <% if( aSavedQueryId != null ) { %>
 			        <br>
-					<TABLE border="0" class="contentPage" width="100%">
+					<TABLE summary="This table is used to format page content" border="0" class="contentPage" width="100%">
 						<TR>
 							<TD width="100%">
 								<font color="red">* Saved query <b>"<%= aQueryName %>"</b> is being edited. You will be prompted to save the changes after pressing Search.</font>
@@ -221,7 +221,7 @@
 		
 		<tr>
 		    <td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Model Name / Model Descriptor:</label>
+			<td class="formLabel"><label for="modelDescriptor">Model Name / Model Descriptor:</label>
 			</td>
 			<td class="formField">			
 				<html:text styleClass="formFieldSized" styleId="modelDescriptor" property="modelDescriptor" size="30"/>
@@ -232,10 +232,10 @@
 		</tr>
 		<tr>
 			<td class="formRequiredNotice" width="0">&nbsp;</td>
-			<td class="formLabel"><label for="field2">Principal Investigator's Name:</label></td>
+			<td class="formLabel"><label for="piName">Principal Investigator's Name:</label></td>
 			
 			<td class="formField">				
-				<html:select styleClass="formFieldSized" size="1" property="piName" >
+				<html:select styleId="piName" styleClass="formFieldSized" size="1" property="piName" >
 					<html:options name="<%= Dropdowns.PRINCIPALINVESTIGATORQUERYDROP %>" />										
 				</html:select>
 			</td>
@@ -244,9 +244,9 @@
 		
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field3">Species:</label></td>
+			<td class="formLabel"><label for="species">Species:</label></td>
 			<td class="formField">				
-				<html:select styleClass="formFieldSized" size="1" property="species" onchange="getOrganTree(this);">
+				<html:select styleId="species" styleClass="formFieldSized" size="1" property="species" onchange="getOrganTree(this);">
 					<html:optionsCollection name="<%= Dropdowns.APPROVEDSPECIESDROP %>" />										
 				</html:select>			
 			</td>
@@ -257,54 +257,54 @@
  			<!-- Display anatomy tree based on species selected or default to mouse tree if no species selected (new screen) -->			
 			<c:choose>
 				<c:when test="${searchspeciescommonname == 'Mouse'}">
-					<td class="formLabel"><label for="field1">Site of Lesion/Tumor:</label>&nbsp;
+					<td class="formLabel"><label for="organ">Site of Lesion/Tumor:</label>&nbsp;
 						<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />							
 					<a href="javascript:showMouseTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', false)">
-						<IMG src="images\selectUP.gif" align=middle border=0></a>
+						<IMG alt="Select from EVSTree" src="images\selectUP.gif" align=middle border=0></a>
 					</td>				
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">					
-						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
+						<html:text styleId="organ" styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
 						<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="organ" target="organTissueCode"
 	  					parameters="organTissueCode={organTissueCode}" className="autocomplete" minimumCharacters="1" />					
 					</td>				
 				</c:when>
 				<c:when test="${searchspeciescommonname == 'Rat'}">	
-					<td class="formLabel"><label for="field1">Site of Lesion/Tumor:</label>&nbsp;
+					<td class="formLabel"><label for="organ">Site of Lesion/Tumor:</label>&nbsp;
 						<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
 					<a href="javascript:showRatTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', false)">
-						<IMG src="images\selectUP.gif" align=middle border=0></a>
+						<IMG alt="Select from EVSTree" src="images\selectUP.gif" align=middle border=0></a>
 					</td>
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">										
-						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
+						<html:text styleId="organ" styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
 						<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="organ" target="organTissueCode"
 	  					parameters="organTissueCode={organTissueCode}" className="autocomplete" minimumCharacters="1" />						
 					</td>
 				</c:when>
 				<c:when test="${searchspeciescommonname == 'Zebrafish'}">
-					<td class="formLabel"><label for="field1">Site of Lesion/Tumor:</label>&nbsp;
+					<td class="formLabel"><label for="organ">Site of Lesion/Tumor:</label>&nbsp;
 						<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
 					<a href="javascript:showZebrafishTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', false)">
-						<IMG src="images\selectUP.gif" align=middle border=0></a>
+						<IMG alt="Select from EVSTree" src="images\selectUP.gif" align=middle border=0></a>
 					</td>
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">										
-						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
+						<html:text styleId="organ" styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
 						<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="organ" target="organTissueCode"
 	  					parameters="organTissueCode={organTissueCode}" className="autocomplete" minimumCharacters="1" />						
 					</td>
 				</c:when>
 				<c:otherwise>
-					<td class="formLabel"><label for="field1">Site of Lesion/Tumor:</label>&nbsp;
+					<td class="formLabel"><label for="organ">Site of Lesion/Tumor:</label>&nbsp;
 					</td>				
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">					
-						<html:text styleClass="formFieldSized" disabled="false" property="organ" size="30"  />
+						<html:text styleId="organ" styleClass="formFieldSized" disabled="false" property="organ" size="30"  />
 						<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="organ" target="organTissueCode"
 	  					parameters="organTissueCode={organTissueCode}" className="autocomplete" minimumCharacters="1" />					
 					</td>				
@@ -316,7 +316,7 @@
 		
 		<tr>
 			<td colspan="3" align="right">	
-				<TABLE cellpadding="0" cellspacing="0" border="0">
+				<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0">
 					<tr>
 						<td align="right">
 						  <html:submit styleClass="actionButton" onclick="blankKeyword()">

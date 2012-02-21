@@ -102,18 +102,18 @@
 <bean:define id="mdl" name="animalmodel"/>
 <bean:define id="hpColl" name="mdl" property="histopathologyCollection"/>
 	
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<!-- Took this out of sidebar.jsp and has to go here to format correctly -->
 	<%@ include file="/jsp/searchMenu.jsp" %>
 	<tr><td>
 	
-	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
+	<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
 	<tr><td valign="top">
-		<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%">
+		<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%">
 		<tr><td>
-			<TABLE summary="" cellpadding="0" cellspacing="0" border="0" align="center" width="100%">	
+			<TABLE cellpadding="0" cellspacing="0" border="0" align="center" width="100%">	
 			<tr>
-				<td class="formTitle" height="20" width="100%">
+				<th scope="col" class="formTitle" height="20" width="100%">
 				Histopathology - Model:
 				<camod:highlight>
 					<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>&nbsp;
@@ -121,7 +121,7 @@
 						<IMG src="/camod/images/mtb_logo.jpg">
 					</c:if>						
 				</camod:highlight>
-				</td>				
+				</th>				
 			</tr>
 <%      
 	final List histopathColl = new ArrayList(((AnimalModel)mdl).getHistopathologyCollection());
@@ -130,21 +130,21 @@
 		<% if ( cc > 0 ) { %>
 		    <tr>
 		        <td>
-				    <table summary="" cellpadding="0" cellspacing="0" border="0" align="center" width="100%">
+				    <table cellpadding="0" cellspacing="0" border="0" align="center" width="100%">
 					    <tr>
-						    <td class="formTitleBlue" height="20" width="50%">
+						    <th scope="col" class="formTitleBlue" height="20" width="50%">
 								Organ / Tissue
-							</td>	
-							<td class="formTitleBlue" height="20" width="50%">
+							</th>	
+							<th scope="col" class="formTitleBlue" height="20" width="50%">
 								Diagnosis
-							</td>	
+							</th>	
 						</tr>
 					</table>
 				</td>
 		    </tr>
 		    <tr>
 			  	<td class="resultsBoxWhiteNoBottom" width="100%" align="left">
-                    <table summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">
+                    <table summary="This table is used to format page content" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">
 			            <c:forEach var="h" items="${hpColl}" varStatus="histstat">
 				  	        <tr>
 					  	        <td width="50%">
@@ -200,12 +200,12 @@
 	</TABLE>
 	
 	<c:forEach var="h" items="${hpColl}" varStatus="histstat">
-		<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">
+		<TABLE cellpadding="3" cellspacing="0" border="0" align="center" width="100%">
 			<tr>
 			    <a name="<c:out value="histo_${histstat.count}"/>"/>&nbsp;
-				<td class="formTitleBlue" height="20" colspan="2">
+				<th scope="col" class="formTitleBlue" height="20" colspan="2">
 					Lesion / Tumor in <camod:highlight><c:out value="${h.organ.name}"/>&nbsp;</camod:highlight>
-				</td>
+				</th>
 			</tr>				
 			
 			<tr>
@@ -327,11 +327,11 @@
 				<tr>
 					<td class="resultsBoxWhite" width="25%"><b>Clinical Markers</b></td>
 					<td class="resultsBoxWhiteEnd" width="75%">
-						<table summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="90%">
+						<table cellpadding="7" cellspacing="0" border="0" align="left" width="90%">
 						    <tr>
-							    <td class="formTitle" width="55%"><b>Clinical Marker Name</b></td>
-							    <td class="formTitle" width="25%"><b>Value</b></td>
-								<td class="formTitle" width="20%">Comment</td>							    
+							    <th scope="col" class="formTitle" width="55%"><b>Clinical Marker Name</b></th>
+							    <th scope="col" class="formTitle" width="25%"><b>Value</b></th>
+								<th scope="col" class="formTitle" width="20%">Comment</th>							    
 						    </tr>
 						    <c:forEach var="c" items="${cmColl}">
 							    	<tr>
@@ -359,12 +359,12 @@
         </TABLE>
 	    <bean:define id="mtsColl" name="h" property="metastasisCollection"/>
 	    <c:forEach var="m" items="${mtsColl}" varStatus="metastat">
-            <TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
+            <TABLE cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 				<tr>
 				    <a name="<c:out value="metas_${histstat.count}_${metastat.count}"/>"/>&nbsp;
-					<td class="greySubTitleLeftEnd" height="20" colspan="2">
+					<th scope="col" class="greySubTitleLeftEnd" height="20" colspan="2">
 						Metastasis in <c:out value="${m.organ.name}"/>&nbsp;
-					</td>
+					</th>
 				</tr>
 	
 				<tr>
@@ -469,9 +469,9 @@
 	</TABLE>
 </TABLE>
 
-<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
-	<TABLE cellpadding="7" cellspacing="0" border="0" align="left" width="60%">
+	<TABLE summary="This table is used to format page content" cellpadding="7" cellspacing="0" border="0" align="left" width="60%">
     <% pageContext.setAttribute(Parameters.MODELSECTIONVALUE, Pages.HISTOPATHOLOGY); %>
     <%@ include file="/jsp/includeComments.jsp" %>
     </TABLE>

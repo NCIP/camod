@@ -8,9 +8,9 @@
 <TR><TD class=footerMenu width="100%" height=20>
 
 <!-- Application Footer begins -->
-<TABLE width="100%" cellpadding="0" cellspacing="0" summary="" border="0">
+<TABLE width="100%" cellpadding="0" cellspacing="0" summary="This table is used to format page content" border="0">
 	<TR><TD height="20" width="100%" class="footerMenu">
-		    <TABLE summary="" cellpadding="0" cellspacing="0" border="0">
+		    <TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0">
 		     
 		     <tr>
 		     
@@ -54,7 +54,7 @@
 <TR><TD>
 
 <!-- Footer begins -->
-<TABLE class=ftrTable cellSpacing=0 cellPadding=0 width="100%" border=0>
+<TABLE summary="This table is used to format page content" class=ftrTable cellSpacing=0 cellPadding=0 width="100%" border=0>
         <TBODY>
         <TR>
           <TD vAlign=top>

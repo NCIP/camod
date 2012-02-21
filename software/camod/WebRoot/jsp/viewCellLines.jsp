@@ -53,21 +53,21 @@
 
 <bean:define id="mdl" name="animalmodel"/>
 
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<!-- Took this out of sidebar.jsp and has to go here to format correctly -->
 	<%@ include file="/jsp/searchMenu.jsp" %>
 	<tr><td>
 
-	<TABLE summary="" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
+	<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
 	<tr><td valign="top">
 		<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%">
 		<tr><td>
-			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" 
+			<TABLE cellpadding="3" cellspacing="0" border="0" 
 			align="center" width="100%">	
 			<tr>
-				<td class="formTitle" height="20" colspan="2">
+				<th scope="col" class="formTitle" height="20" colspan="2">
 				    Cell Lines - Model: <c:out value="${mdl.modelDescriptor}" escapeXml="false" />
-				</td>				
+				</th>				
 			</tr>
 			<c:forEach var="cl" items="${mdl.cellLineCollection}" 
 				       varStatus="stat">
@@ -127,7 +127,7 @@
 					<c:otherwise>
 					  <tr><td colspan="2">
 					  
-						<table summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">
+						<table summary="This table is used to format page content" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">
 						<c:forEach var="p" items="${cl.publicationCollection}" varStatus="stat2">
 							<tr>
 								<c:choose>
@@ -225,9 +225,9 @@
 	</td></tr></TABLE>
 </td></tr></TABLE>
 
-<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
-	<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="60%">
+	<TABLE summary="This table is used to format page content" cellpadding="7" cellspacing="0" border="0" align="left" width="60%">
     <% pageContext.setAttribute(Parameters.MODELSECTIONVALUE, Pages.CELL_LINES); %>
     <%@ include file="/jsp/includeComments.jsp" %>
     </TABLE>

@@ -67,18 +67,18 @@
 
 <bean:define id="mdl" name="animalmodel"/>
 
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <!-- Took this out of sidebar.jsp and has to go here to format correctly -->
 <%@ include file="/jsp/searchMenu.jsp" %>
 <tr><td>
-	<TABLE cellpadding="10" cellspacing="0" border="00" class="contentBegins" width="70%" height="100%">
+	<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="00" class="contentBegins" width="70%" height="100%">
 	<tr><td>
-	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
+	<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
 	<tr><td valign="top">
 	
-		<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%">
+		<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%">
 		<tr><td>
-				<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">
+				<TABLE summary="This table is used to format page content" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">
 				<tr>
 					<td class="formTitle" height="20" colspan="7">
 						Carcinogenic Agents - Model:
@@ -96,16 +96,16 @@
 				<c:set var="environmentalFactorType" value="Chemical / Drug"/>
 				<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
 				<c:if test="${not empty cdList}">
-					<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">
+					<TABLE cellpadding="3" cellspacing="0" border="1" align="center" width="100%">
 		
 					<tr>
-						<td class="formTitleBlue" height="20" colspan="7">Chemical / Drug</td>				
+						<th scope="col" class="formTitleBlue" height="20" colspan="7">Chemical / Drug</th>				
 					</tr>
 					<!--   Start of if externalSource is Jax MTB -->
 					<c:if test="${mdl.externalSource == 'Jax MTB'}">
 					<tr>
-						<td class="greySubTitleLeft" width="17%">Agent Type</td>
-						<td class="greySubTitleLeft" width="17%">Agent Name</td>				
+						<th scope="col" class="greySubTitleLeft" width="17%">Agent Type</th>
+						<th scope="col" class="greySubTitleLeft" width="17%">Agent Name</th>				
 					</tr>
 					
 					<c:forEach var="cd" items="${cdList}" varStatus="stat">
@@ -133,13 +133,13 @@
 					<!--   Start of if externalSource is empty (caMOD data) -->	
 					<c:if test="${empty mdl.externalSource}">
 					<tr>
-						<td class="greySubTitleLeft" width="17%">Chemical / Drug</td>
-						<td class="greySubTitleLeft" width="17%">Dose</td>
-						<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
-						<td class="greySubTitleLeft" width="17%">Administrative Route</td>
-						<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
-						<td class="greySubTitle" width="17%">Gender</td>
-						<td class="greySubTitle" width="17%">Comment</td>									
+						<th scope="col" class="greySubTitleLeft" width="17%">Chemical / Drug</th>
+						<th scope="col" class="greySubTitleLeft" width="17%">Dose</th>
+						<th scope="col" class="greySubTitleLeft" width="17%">Treatment Regimen</th>
+						<th scope="col" class="greySubTitleLeft" width="17%">Administrative Route</th>
+						<th scope="col" class="greySubTitleLeft" width="17%">Age at Treatment</th>
+						<th scope="col" class="greySubTitle" width="17%">Gender</th>
+						<th scope="col" class="greySubTitle" width="17%">Comment</th>									
 					</tr>
 					
 					<c:forEach var="cd" items="${cdList}" varStatus="stat">
@@ -214,16 +214,16 @@
 				<c:set var="environmentalFactorType" value="Growth Factor"/>
 				<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
 				<c:if test="${not empty cdList}">
-				<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
+				<TABLE cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
 				<tr>
-					<td class="formTitleBlue" height="20" colspan="7">Growth Factor</td>				
+					<th scope="col" class="formTitleBlue" height="20" colspan="7">Growth Factor</th>				
 				</tr>
 				
 				<!--   Start of if externalSource is Jax MTB -->
 				<c:if test="${mdl.externalSource == 'Jax MTB'}">
 				<tr>
-					<td class="greySubTitleLeft" width="17%">Agent Type</td>
-					<td class="greySubTitleLeft" width="17%">Agent Name</td>				jj
+					<th scope="col" class="greySubTitleLeft" width="17%">Agent Type</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Agent Name</th>				
 				</tr>
 				
 				<c:forEach var="cd" items="${cdList}" varStatus="stat">
@@ -251,13 +251,13 @@
 				<!--   Start of if externalSource is empty (caMOD data) -->	
 				<c:if test="${empty mdl.externalSource}">												
 				<tr>
-					<td class="greySubTitleLeft" width="17%">Growth Factor</td>
-					<td class="greySubTitleLeft" width="17%">Dose</td>
-					<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>	
-					<td class="greySubTitleLeft" width="17%">Administrative Route</td>
-					<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
-					<td class="greySubTitle" width="17%">Gender</td>
-					<td class="greySubTitle" width="17%">Comment</td>					
+					<th scope="col" class="greySubTitleLeft" width="17%">Growth Factor</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Dose</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Treatment Regimen</th>	
+					<th scope="col" class="greySubTitleLeft" width="17%">Administrative Route</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Age at Treatment</th>
+					<th scope="col" class="greySubTitle" width="17%">Gender</th>
+					<th scope="col" class="greySubTitle" width="17%">Comment</th>					
 				</tr>
 				<c:forEach var="cd" items="${cdList}" varStatus="stat">
 					<c:choose>
@@ -317,9 +317,9 @@
 				<c:set var="environmentalFactorType" value="Hormone"/>
 				<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
 				<c:if test="${not empty cdList}">
-				<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
+				<TABLE cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
 				<tr>
-					<td class="formTitleBlue" height="20" colspan="7">Hormone</td>				
+					<th scope="col" class="formTitleBlue" height="20" colspan="7">Hormone</th>				
 				</tr>
 				
 				<!--   Start of if externalSource is Jax MTB -->
@@ -354,13 +354,13 @@
 				<!--   Start of if externalSource is empty (caMOD data) -->	
 				<c:if test="${empty mdl.externalSource}">									
 				<tr>
-					<td class="greySubTitleLeft" width="17%">Hormone</td>
-					<td class="greySubTitleLeft" width="17%">Dose</td>
-					<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
-					<td class="greySubTitleLeft" width="17%">Administrative Route</td>
-					<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
-					<td class="greySubTitle" width="17%">Gender</td>
-					<td class="greySubTitle" width="17%">Comment</td>
+					<th scope="col" class="greySubTitleLeft" width="17%">Hormone</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Dose</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Treatment Regimen</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Administrative Route</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Age at Treatment</th>
+					<th scope="col" class="greySubTitle" width="17%">Gender</th>
+					<th scope="col" class="greySubTitle" width="17%">Comment</th>
 				</tr>
 				<c:forEach var="cd" items="${cdList}" varStatus="stat">
 					<c:choose>
@@ -422,7 +422,7 @@
 				<c:if test="${not empty cdList}">
 				<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
 				<tr>
-					<td class="formTitleBlue" height="20" colspan="7">Radiation</td>				
+					<th scope="col" class="formTitleBlue" height="20" colspan="7">Radiation</th>				
 				</tr>
 				
 				<!--   Start of if externalSource is Jax MTB -->
@@ -457,13 +457,13 @@
 				<!--   Start of if externalSource is empty (caMOD data) -->	
 				<c:if test="${empty mdl.externalSource}">									
 				<tr>
-					<td class="greySubTitleLeft" width="17%">Radiation</td>
-					<td class="greySubTitleLeft" width="17%">Dose</td>
-					<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>	
-					<td class="greySubTitleLeft" width="17%">Administrative Route</td>
-					<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
-					<td class="greySubTitle" width="17%">Gender</td>
-					<td class="greySubTitle" width="17%">Comment</td>	
+					<th scope="col" class="greySubTitleLeft" width="17%">Radiation</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Dose</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Treatment Regimen</th>	
+					<th scope="col" class="greySubTitleLeft" width="17%">Administrative Route</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Age at Treatment</th>
+					<th scope="col" class="greySubTitle" width="17%">Gender</th>
+					<th scope="col" class="greySubTitle" width="17%">Comment</th>	
 				</tr>
 				<c:forEach var="cd" items="${cdList}" varStatus="stat">
 					<c:choose>
@@ -523,9 +523,9 @@
 				<c:set var="environmentalFactorType" value="Other"/>
 				<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
 				<c:if test="${not empty cdList}">
-				<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
+				<TABLE cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
 				<tr>
-					<td class="formTitleBlue" height="20" colspan="7">Other / Surgery</td>
+					<th scope="col" class="formTitleBlue" height="20" colspan="7">Other / Surgery</th>
 				</tr>
 				<!--   Start of if externalSource is Jax MTB -->
 				<c:if test="${mdl.externalSource == 'Jax MTB'}">
@@ -559,11 +559,11 @@
 				<!--   Start of if externalSource is empty (caMOD data) -->	
 				<c:if test="${empty mdl.externalSource}">									
 				<tr>
-					<td class="greySubTitleLeft" width="30%">Surgery</td>
-					<td class="greySubTitleLeft" width="30%">Treatment Regimen</td>
-					<td class="greySubTitleLeft" width="20%">Age at Treatment</td>
-					<td class="greySubTitle" width="20%">Gender</td>
-					<td class="greySubTitle" width="17%">Comment</td>				
+					<th scope="col" class="greySubTitleLeft" width="30%">Surgery</th>
+					<th scope="col" class="greySubTitleLeft" width="30%">Treatment Regimen</th>
+					<th scope="col" class="greySubTitleLeft" width="20%">Age at Treatment</th>
+					<th scope="col" class="greySubTitle" width="20%">Gender</th>
+					<th scope="col" class="greySubTitle" width="17%">Comment</th>				
 				</tr>
 				<c:forEach var="cd" items="${cdList}" varStatus="stat">
 					<c:choose>
@@ -610,9 +610,9 @@
 				<c:set var="environmentalFactorType" value="Viral"/>
 				<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
 				<c:if test="${not empty cdList}">
-				<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
+				<TABLE cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
 				<tr>
-					<td class="formTitleBlue" height="20" colspan="7">Viral Treatment</td>
+					<th scope="col" class="formTitleBlue" height="20" colspan="7">Viral Treatment</th>
 				</tr>
 				
 				<!--   Start of if externalSource is Jax MTB -->
@@ -648,13 +648,13 @@
 				<!--   Start of if externalSource is empty (caMOD data) -->	
 				<c:if test="${empty mdl.externalSource}">						
 				<tr>
-					<td class="greySubTitleLeft" width="17%">Virus</td>
-					<td class="greySubTitleLeft" width="17%">Dose</td>
-					<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
-					<td class="greySubTitleLeft" width="17%">Administrative Route</td>
-					<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
-					<td class="greySubTitle" width="17%">Gender</td>
-					<td class="greySubTitle" width="17%">Comment</td>				
+					<th scope="col" class="greySubTitleLeft" width="17%">Virus</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Dose</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Treatment Regimen</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Administrative Route</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Age at Treatment</th>
+					<th scope="col" class="greySubTitle" width="17%">Gender</th>
+					<th scope="col" class="greySubTitle" width="17%">Comment</th>				
 				</tr>
 				
 				<c:forEach var="cd" items="${cdList}" varStatus="stat">
@@ -715,19 +715,19 @@
 				<c:set var="environmentalFactorType" value="Environment"/>
 				<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
 				<c:if test="${not empty cdList}">
-				<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
+				<TABLE cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
 				<tr>
-					<td class="formTitleBlue" height="20" colspan="7">Environment</td>				
+					<th scope="col" class="formTitleBlue" height="20" colspan="7">Environment</th>				
 				</tr>
 				
 				<tr>
-					<td class="greySubTitleLeft" width="17%">Environmental Factor</td>
-					<td class="greySubTitleLeft" width="17%">Dose</td>
-					<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
-					<td class="greySubTitleLeft" width="17%">Administrative Route</td>
-					<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
-					<td class="greySubTitle" width="17%">Gender</td>
-					<td class="greySubTitle" width="17%">Comment</td>				
+					<th scope="col" class="greySubTitleLeft" width="17%">Environmental Factor</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Dose</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Treatment Regimen</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Administrative Route</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Age at Treatment</th>
+					<th scope="col" class="greySubTitle" width="17%">Gender</th>
+					<th scope="col" class="greySubTitle" width="17%">Comment</th>				
 				</tr>
 				
 				<c:forEach var="cd" items="${cdList}" varStatus="stat">
@@ -786,18 +786,18 @@
 				<c:set var="environmentalFactorType" value="GeneDelivery"/>
 				<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
 				<c:if test="${not empty cdList}">
-				<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
+				<TABLE  cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
 				<tr>
-					<td class="formTitleBlue" height="20" colspan="7">Gene Delivery</td>				
+					<th scope="col" class="formTitleBlue" height="20" colspan="7">Gene Delivery</th>				
 				</tr>
 				<tr>
-					<td class="greySubTitleLeft" width="17%">Viral Vector</td>
-					<td class="greySubTitleLeft" width="17%">Gene</td>
-					<td class="greySubTitleLeft" width="17%">Organ</td>
-					<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>	
-					<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
-					<td class="greySubTitle" width="17%">Gender</td>
-					<td class="greySubTitle" width="17%">Comment</td>
+					<th scope="col" class="greySubTitleLeft" width="17%">Viral Vector</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Gene</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Organ</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Treatment Regimen</th>	
+					<th scope="col" class="greySubTitleLeft" width="17%">Age at Treatment</th>
+					<th scope="col" class="greySubTitle" width="17%">Gender</th>
+					<th scope="col" class="greySubTitle" width="17%">Comment</th>
 				</tr>
 				<c:forEach var="cd" items="${cdList}" varStatus="stat">
 					<c:choose>
@@ -848,17 +848,17 @@
 				<c:set var="environmentalFactorType" value="Nutrition"/>
 				<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
 				<c:if test="${not empty cdList}">
-				<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
+				<TABLE cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
 				<tr>
-					<td class="formTitleBlue" height="20" colspan="6">Nutrition</td>				
+					<th scope="col" class="formTitleBlue" height="20" colspan="6">Nutrition</th>				
 				</tr>
 				<tr>
-					<td class="greySubTitleLeft" width="20%">Nutritional Component / Diet</td>
-					<td class="greySubTitleLeft" width="20%">Dose</td>
-					<td class="greySubTitleLeft" width="20%">Treatment Regimen</td>
-					<td class="greySubTitleLeft" width="20%">Age at Treatment</td>
-					<td class="greySubTitle" width="20%">Gender</td>
-					<td class="greySubTitle" width="17%">Comment</td>				
+					<th scope="col" class="greySubTitleLeft" width="20%">Nutritional Component / Diet</th>
+					<th scope="col" class="greySubTitleLeft" width="20%">Dose</th>
+					<th scope="col" class="greySubTitleLeft" width="20%">Treatment Regimen</th>
+					<th scope="col" class="greySubTitleLeft" width="20%">Age at Treatment</th>
+					<th scope="col" class="greySubTitle" width="20%">Gender</th>
+					<th scope="col" class="greySubTitle" width="17%">Comment</th>				
 				</tr>
 				
 				<c:forEach var="cd" items="${cdList}" varStatus="stat">
@@ -907,15 +907,15 @@
 				<c:set var="environmentalFactorType" value="Antibody"/>
 				<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
 				<c:if test="${not empty cdList}">
-				<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
+				<TABLE cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
 				<tr>
-					<td class="formTitleBlue" height="20" colspan="7">Antibody</td>
+					<th scope="col" class="formTitleBlue" height="20" colspan="7">Antibody</th>
 				</tr>
 				<!--   Start of if externalSource is Jax MTB -->
 				<c:if test="${mdl.externalSource == 'Jax MTB'}">
 				<tr>
-					<td class="greySubTitleLeft" width="17%">Agent Type</td>
-					<td class="greySubTitleLeft" width="17%">Agent Name</td>				
+					<th scope="col" class="greySubTitleLeft" width="17%">Agent Type</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Agent Name</th>				
 				</tr>
 				
 				<c:forEach var="cd" items="${cdList}" varStatus="stat">
@@ -943,13 +943,13 @@
 				<!--   Start of if externalSource is empty (caMOD data) -->	
 				<c:if test="${empty mdl.externalSource}">									
 				<tr>
-					<td class="greySubTitleLeft" width="17%">Antibody</td>
-					<td class="greySubTitleLeft" width="17%">Dose</td>
-					<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
-					<td class="greySubTitleLeft" width="17%">Administrative Route</td>
-					<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
-					<td class="greySubTitle" width="17%">Gender</td>
-					<td class="greySubTitle" width="17%">Comment</td>
+					<th scope="col" class="greySubTitleLeft" width="17%">Antibody</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Dose</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Treatment Regimen</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Administrative Route</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Age at Treatment</th>
+					<th scope="col" class="greySubTitle" width="17%">Gender</th>
+					<th scope="col" class="greySubTitle" width="17%">Comment</th>
 				</tr>
 				<c:forEach var="cd" items="${cdList}" varStatus="stat">
 					<c:choose>
@@ -1008,15 +1008,15 @@
 				<c:set var="environmentalFactorType" value="Bacteria"/>
 				<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
 				<c:if test="${not empty cdList}">
-				<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
+				<TABLE cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
 				<tr>
-					<td class="formTitleBlue" height="20" colspan="7">Bacteria</td>
+					<th scope="col" class="formTitleBlue" height="20" colspan="7">Bacteria</th>
 				</tr>
 				<!--   Start of if externalSource is Jax MTB -->
 				<c:if test="${mdl.externalSource == 'Jax MTB'}">			
 				<tr>
-					<td class="greySubTitleLeft" width="17%">Agent Type</td>
-					<td class="greySubTitleLeft" width="17%">Agent Name</td>				
+					<th scope="col" class="greySubTitleLeft" width="17%">Agent Type</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Agent Name</th>				
 				</tr>
 				
 				<c:forEach var="cd" items="${cdList}" varStatus="stat">
@@ -1044,13 +1044,13 @@
 				<!--   Start of if externalSource is empty (caMOD data) -->	
 				<c:if test="${empty mdl.externalSource}">									
 				<tr>
-					<td class="greySubTitleLeft" width="17%">Bacteria</td>
-					<td class="greySubTitleLeft" width="17%">Dose</td>
-					<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
-					<td class="greySubTitleLeft" width="17%">Administrative Route</td>
-					<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
-					<td class="greySubTitle" width="17%">Gender</td>
-					<td class="greySubTitle" width="17%">Comment</td>
+					<th scope="col" class="greySubTitleLeft" width="17%">Bacteria</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Dose</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Treatment Regimen</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Administrative Route</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Age at Treatment</th>
+					<th scope="col" class="greySubTitle" width="17%">Gender</th>
+					<th scope="col" class="greySubTitle" width="17%">Comment</th>
 				</tr>
 				<c:forEach var="cd" items="${cdList}" varStatus="stat">
 					<c:choose>
@@ -1110,15 +1110,15 @@
 				<c:set var="environmentalFactorType" value="Plasmid"/>
 				<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
 				<c:if test="${not empty cdList}">
-				<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
+				<TABLE cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
 				<tr>
-					<td class="formTitleBlue" height="20" colspan="7">Plasmid</td>
+					<th scope="col" class="formTitleBlue" height="20" colspan="7">Plasmid</th>
 				</tr>
 				<!--   Start of if externalSource is Jax MTB -->
 				<c:if test="${mdl.externalSource == 'Jax MTB'}">			
 				<tr>
-					<td class="greySubTitleLeft" width="17%">Agent Type</td>
-					<td class="greySubTitleLeft" width="17%">Agent Name</td>				
+					<th scope="col" class="greySubTitleLeft" width="17%">Agent Type</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Agent Name</th>				
 				</tr>
 				
 				<c:forEach var="cd" items="${cdList}" varStatus="stat">
@@ -1146,13 +1146,13 @@
 				<!--   Start of if externalSource is empty (caMOD data) -->	
 				<c:if test="${empty mdl.externalSource}">									
 				<tr>
-					<td class="greySubTitleLeft" width="17%">Plasmid</td>
-					<td class="greySubTitleLeft" width="17%">Dose</td>
-					<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
-					<td class="greySubTitleLeft" width="17%">Administrative Route</td>
-					<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
-					<td class="greySubTitle" width="17%">Gender</td>
-					<td class="greySubTitle" width="17%">Comment</td>
+					<th scope="col" class="greySubTitleLeft" width="17%">Plasmid</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Dose</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Treatment Regimen</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Administrative Route</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Age at Treatment</th>
+					<th scope="col" class="greySubTitle" width="17%">Gender</th>
+					<th scope="col" class="greySubTitle" width="17%">Comment</th>
 				</tr>
 				<c:forEach var="cd" items="${cdList}" varStatus="stat">
 					<c:choose>
@@ -1211,15 +1211,15 @@
 				<c:set var="environmentalFactorType" value="Transposon"/>
 				<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
 				<c:if test="${not empty cdList}">
-				<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
+				<TABLE cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
 				<tr>
-					<td class="formTitleBlue" height="20" colspan="7">Transposon</td>
+					<th scope="col" class="formTitleBlue" height="20" colspan="7">Transposon</th>
 				</tr>
 				<!--   Start of if externalSource is Jax MTB -->
 				<c:if test="${mdl.externalSource == 'Jax MTB'}">			
 				<tr>
-					<td class="greySubTitleLeft" width="17%">Agent Type</td>
-					<td class="greySubTitleLeft" width="17%">Agent Name</td>				
+					<th scope="col" class="greySubTitleLeft" width="17%">Agent Type</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Agent Name</th>				
 				</tr>
 				
 				<c:forEach var="cd" items="${cdList}" varStatus="stat">
@@ -1247,13 +1247,13 @@
 				<!--   Start of if externalSource is empty (caMOD data) -->	
 				<c:if test="${empty mdl.externalSource}">									
 				<tr>
-					<td class="greySubTitleLeft" width="17%">Transposon</td>
-					<td class="greySubTitleLeft" width="17%">Dose</td>
-					<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
-					<td class="greySubTitleLeft" width="17%">Administrative Route</td>
-					<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
-					<td class="greySubTitle" width="17%">Gender</td>
-					<td class="greySubTitle" width="17%">Comment</td>
+					<th scope="col" class="greySubTitleLeft" width="17%">Transposon</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Dose</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Treatment Regimen</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Administrative Route</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Age at Treatment</th>
+					<th scope="col" class="greySubTitle" width="17%">Gender</th>
+					<th scope="col" class="greySubTitle" width="17%">Comment</th>
 				</tr>
 				<c:forEach var="cd" items="${cdList}" varStatus="stat">
 					<c:choose>
@@ -1312,15 +1312,15 @@
 				<c:set var="environmentalFactorType" value="Signaling Molecule"/>
 				<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
 				<c:if test="${not empty cdList}">
-				<TABLE summary="" cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
+				<TABLE cellpadding="3" cellspacing="0" border="1" align="center" width="100%">	
 				<tr>
-					<td class="formTitleBlue" height="20" colspan="7">Signaling Molecule</td>
+					<th scope="col" class="formTitleBlue" height="20" colspan="7">Signaling Molecule</th>
 				</tr>
 				<!--   Start of if externalSource is Jax MTB -->
 				<c:if test="${mdl.externalSource == 'Jax MTB'}">			
 				<tr>
-					<td class="greySubTitleLeft" width="17%">Agent Type</td>
-					<td class="greySubTitleLeft" width="17%">Agent Name</td>				
+					<th scope="col" class="greySubTitleLeft" width="17%">Agent Type</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Agent Name</th>				
 				</tr>
 				
 				<c:forEach var="cd" items="${cdList}" varStatus="stat">
@@ -1348,13 +1348,13 @@
 				<!--   Start of if externalSource is empty (caMOD data) -->	
 				<c:if test="${empty mdl.externalSource}">									
 				<tr>
-					<td class="greySubTitleLeft" width="17%">Signaling Molecule</td>
-					<td class="greySubTitleLeft" width="17%">Dose</td>
-					<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
-					<td class="greySubTitleLeft" width="17%">Administrative Route</td>
-					<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
-					<td class="greySubTitle" width="17%">Gender</td>
-					<td class="greySubTitle" width="17%">Comment</td>
+					<th scope="col" class="greySubTitleLeft" width="17%">Signaling Molecule</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Dose</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Treatment Regimen</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Administrative Route</th>
+					<th scope="col" class="greySubTitleLeft" width="17%">Age at Treatment</th>
+					<th scope="col" class="greySubTitle" width="17%">Gender</th>
+					<th scope="col" class="greySubTitle" width="17%">Comment</th>
 				</tr>
 				<c:forEach var="cd" items="${cdList}" varStatus="stat">
 					<c:choose>
@@ -1414,9 +1414,9 @@
 	</td></tr></TABLE>	    
  </td></tr></TABLE>
 
-		<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+		<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 		<tr><td>
-			<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="70%">
+			<TABLE summary="This table is used to format page content" cellpadding="7" cellspacing="0" border="0" align="left" width="70%">
 			    <% pageContext.setAttribute(Parameters.MODELSECTIONVALUE, Pages.CARCINOGENIC_INTERVENTION); %>
 			    <%@ include file="/jsp/includeComments.jsp" %>
 			 </TABLE>

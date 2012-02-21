@@ -4,7 +4,7 @@
 <TR><TD class=mainMenu width="100%" height=20>
 
 <!-- Main menu begins -->
-	<TABLE height=20 cellSpacing=0 cellPadding=0 summary=""	border=0>
+	<TABLE height=20 cellSpacing=0 cellPadding=0 summary="This table is used to format page content"	border=0>
 	<TBODY>
 		<TR>
 		<TD width=1>

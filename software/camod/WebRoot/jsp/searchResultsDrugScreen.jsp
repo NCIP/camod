@@ -17,16 +17,16 @@
 <bean:define id="agentList" name="<%=Constants.DRUG_SCREEN_SEARCH_RESULTS%>"/>
 <bean:define id="searchOption" name="drugScreenSearchOptions"/>
 
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<!-- Took this out of sidebar.jsp and has to go here to format correctly -->
 	<%@ include file="/jsp/searchMenu.jsp" %>
 	<tr><td>
-	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
+	<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
 	<tr><td valign="top">
-		<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%">
+		<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%">
 		<tr><td>
 		    <c:if test="${empty agentList}">
-				<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
+				<TABLE summary="This table is used to format page content"  cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 					<tr>
 						<td class="formTitle" height="20" colspan="4" align="center">Search Results</td>
 					</tr>
@@ -44,16 +44,16 @@
 			<c:set var="foundInvivoData" value="0"/>
 			<c:set var="foundPreClinicalData" value="0"/>
 			<c:set var="foundClinicalData" value="0"/>
-			<TABLE summary="" cellpadding="0" cellspacing="0" border="0" align="center" width="100%">
+			<TABLE  cellpadding="0" cellspacing="0" border="0" align="center" width="100%">
 				<tr>			
-				    <td class="formTitle" height="20" colspan="2" align="center">
+				    <th scope="col" class="formTitle" height="20" colspan="2" align="center">
 		                <b>Search Results for <c:out value="${agentName}"/></b>
 		                <br/>
 		                <b>
 							NSC: &nbsp;&nbsp;<c:out value="${nscNumber}"/><br/>
 							CAS: &nbsp;&nbsp; <c:out value="${casNumber}"/><br/>
 						</b>
-					</td>
+					</th>
 				</tr>
 				<tr><td>&nbsp;</td></tr>
 				<c:forEach var="agt" items="${agentList}" varStatus="stat">
@@ -71,7 +71,7 @@
 							</tr>
 						  	<tr>
 							  	<td colspan="2">
-									<table summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
+									<table summary="This table is used to format page content"  cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 										<c:forEach var="ivd" items="${modelList}" varStatus="stat2">
 											<c:choose>
 												<c:when test = "${stat2.count % 2 == 0}">

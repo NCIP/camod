@@ -10,13 +10,13 @@
 
 <!-- adminEditUser.jsp -->
 <!-- Main Content Begins -->
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <!-- Took this out of sidebar.jsp and has to go here to format correctly -->
 <%@ include file="/jsp/adminMenu.jsp" %>
 <tr><td>
-	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
+	<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
 	<tr><td>
-	<TABLE summary="" cellpadding="3" cellspacing="0" border="0">
+	<TABLE summary="This table is used to format page content" cellpadding="3" cellspacing="0" border="0">
 	<html:form method="get" action="AdminEditUserAction.do">
 		<tr>
 		    <logic:messagesPresent>
@@ -92,7 +92,7 @@
 	    
 		<tr>
 			<td align="right" colspan="3">
-				<TABLE cellpadding="4" cellspacing="0" border="0">				
+				<TABLE summary="This table is used to format page content" cellpadding="4" cellspacing="0" border="0">				
 					  <html:submit styleClass="actionButton">
 						  <bean:message key="button.submit"/>
 					  </html:submit>					  

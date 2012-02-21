@@ -176,7 +176,7 @@
 		<td class="greySubTitleLeftEnd" colspan=4><b>Publications:</b></td>
 	</tr>	
 	  <tr><td colspan="2">
-		<table summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
+		<table summary="This table is used to format page content" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 		<c:forEach var="p" items="${t.publicationCollection}" varStatus="stat2">
 		<tr>
 			<c:choose>
