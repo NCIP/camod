@@ -30,14 +30,14 @@
 
 <!-- submitJacksonLab.jsp -->
 <!-- Main Content Begins -->
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <!-- Took this out of sidebar.jsp and has to go here to format correctly  -->
 <%@ include file="/jsp/submitMenu.jsp" %>
 	<tr><td>
-		<TABLE summary="" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
+		<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
 			<tr><td valign="top">
 
-				<TABLE summary="" cellpadding="3" cellspacing="0" border="0"
+				<TABLE summary="This table is used to format page content" cellpadding="3" cellspacing="0" border="0"
 					align="left">
 					<html:form action="<%= actionName %>" focus="name">
 					<tr>
@@ -52,26 +52,26 @@
 
 					<tr>
 						<td class="formRequiredNotice" width="5">*</td>
-						<td class="formRequiredLabel"><label for="field1">Strain Name:</label></td>
+						<td class="formRequiredLabel"><label for="strainName">Strain Name:</label></td>
 						<td class="formField">
 							<html:hidden property="source" />
-							<html:text styleClass="formFieldUnSized" size="40" property="name" />
+							<html:text styleClass="formFieldUnSized" size="40" styleId="strainName" property="name" />
 						</td>
 					</tr>
 
 
 					<tr>
 						<td class="formRequiredNotice" width="5">&nbsp;</td>
-						<td class="formLabel">Stock Number: </td>
+						<td class="formLabel"><label for="stockNumber">Stock Number:</label> </td>
 						<td class="formField">
 						    <input type=button value="Find Info" onClick="myRef = window.open('http://jaxmice.jax.org/index.html','mywin','left=20,top=20,width=800,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>
-						    <html:text styleClass="formFieldSized" size="30" property="stockNumber" />
+						    <html:text styleClass="formFieldSized" size="30" styleId="stockNumber" property="stockNumber" />
 						</td>
 					</tr>
 
 					<tr>
 						<td align="right" colspan="3">
-						<TABLE cellpadding="4" cellspacing="0" border="0">
+						<TABLE summary="This table is used to format page content" cellpadding="4" cellspacing="0" border="0">
 
 							<html:submit styleClass="actionButton">
 								<bean:message key="button.submit" />

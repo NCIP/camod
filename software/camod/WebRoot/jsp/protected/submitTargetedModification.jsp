@@ -53,14 +53,14 @@
 
 <!-- submitTargetedModification.jsp -->
 <!-- Main Content Begins -->
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <!-- Took this out of sidebar.jsp and has to go here to format correctly  -->
 <%@ include file="/jsp/submitMenu.jsp" %>
 <tr><td>
-	<TABLE summary="" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
+	<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
 	<tr><td valign="top">	
 
-	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
+	<TABLE summary="This table is used to format page content" cellpadding="3" cellspacing="0" border="0" align="left">
 	<html:form action="<%= actionName %>" focus="name" enctype="multipart/form-data">
 	<tr>
 		<html:errors/>
@@ -74,18 +74,18 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field1">Targeted Gene/Locus:</label>
+		<td class="formRequiredLabel"><label for="tgName">Targeted Gene/Locus:</label>
 		</td>
 		<td class="formField">			
-			<html:text styleClass="formFieldSized" property="name" size="10" />		
+			<html:text styleClass="formFieldSized" styleId="tgName" property="name" size="10" />		
 		</td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field3">Type of Modification:</label>
+		<td class="formRequiredLabel"><label for="modificationType">Type of Modification:</label>
 		<td class="formField">
-			<html:select styleClass="formFieldSized" multiple="true" size="5" property="modificationType" onchange="chkTypeMod( this );" >
+			<html:select styleClass="formFieldSized" multiple="true" size="5" styleId="modificationType" property="modificationType" onchange="chkTypeMod( this );" >
 				<html:options name="<%= Dropdowns.TARGETEDMODIFICATIONDROP %>" />										
 			</html:select>
 			<br><br>
@@ -97,22 +97,22 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Other modification type:</label></td>
+		<td class="formLabel"><label for="otherModificationType">Other modification type:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="otherModificationType"  size="10" />	
+			<html:text styleClass="formFieldSized" styleId="otherModificationType" property="otherModificationType"  size="10" />	
 		</td>
 	</tr>
 
 	<tr>
                
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Entrez Gene ID:</label>
+		<td class="formLabel"><label for="geneIdentifier">Entrez Gene ID:</label>
 		</td>
 		<td class="formField">
 			<input type=button value="Find Gene ID" onClick="myRef = window.open('http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=gene','mywin',
 			'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>		
-			<label for="field1">&nbsp;&nbsp;</label>
-			<html:text styleClass="formFieldUnSized" property="geneIdentifier" size="20" />	
+			&nbsp;&nbsp;
+			<html:text styleClass="formFieldUnSized" styleId="geneIdentifier" property="geneIdentifier" size="20" />	
 	</tr>
 
 
@@ -120,12 +120,12 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel">Genetic Background:</td>
 		<td class="formField">
-			<label valign="TOP" for="field1">ES Cell Line: &nbsp;</label><br>
-				<html:text styleClass="formFieldSized" property="esCellLineName" size="10" />
+			<label valign="TOP" for="esCellLineName">ES Cell Line: &nbsp;</label><br>
+				<html:text styleClass="formFieldSized" styleId="esCellLineName" property="esCellLineName" size="10" />
 			<br>
 			<br>
-			<label valign="TOP" for="field1">Blastocyst:&nbsp;</label><br>
-				<html:text styleClass="formFieldSized" property="blastocystName" size="10" />
+			<label valign="TOP" for="blastocystName">Blastocyst:&nbsp;</label><br>
+				<html:text styleClass="formFieldSized" styleId="blastocystName" property="blastocystName" size="10" />
 		</td>
 	</tr>
 
@@ -133,17 +133,17 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel">Conditional?</td>
 		<td class="formField">
-			<html:radio property="conditionedBy" value="Conditional" onclick="chkConditional(this);" /> Conditional 
-			<html:radio property="conditionedBy" value="Not Conditional" onclick="chkConditional(this);" /> Not Conditional
+			<html:radio styleId="conditionedBy1" property="conditionedBy" value="Conditional" onclick="chkConditional(this);" /> <label for="conditionedBy1">Conditional</label> 
+			<html:radio styleId="conditionedBy2" property="conditionedBy" value="Not Conditional" onclick="chkConditional(this);" /> <label for="conditionedBy2">Not Conditional</label>
 		</td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Conditional Description:</label>
+		<td class="formLabel"><label for="condDesc">Conditional Description:</label>
 		</td>
 		<td class="formField">
-			<html:textarea styleClass="formFieldSized" property="description"  rows="4" cols="32" />		
+			<html:textarea styleClass="formFieldSized" styleId="condDesc" property="description"  rows="4" cols="32" />		
 		</td>
 	</tr>
 
@@ -152,26 +152,26 @@
 	<tr>
 		<c:if test="${modelspeciescommonname == 'Mouse'}">			
 				<td class="formRequiredNotice" width="5">&nbsp;</td>
-				<td class="formLabel"><label for="field2">MGI Identifier:</label>
+				<td class="formLabel"><label for="mgiId">MGI Identifier:</label>
 				</td>
 				<td class="formField">
 					<input type=button value="Find MGI ID" onClick="myRef = window.open('http://www.informatics.jax.org/','mywin',
 								'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>
-					<label for="field1">&nbsp;&nbsp;</label>
-					<html:text styleClass="formFieldUnSized" size="25" property="mgiId"  />
+					&nbsp;&nbsp;
+					<html:text styleClass="formFieldUnSized" size="25" styleId="mgiId" property="mgiId"  />
 				</td>
 		</c:if>				
 	</tr>	
 	<tr>
 		<c:if test="${modelspeciescommonname == 'Zebrafish'}">	
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field2">ZFIN Identifier:</label>
+			<td class="formLabel"><label for="zfinId">ZFIN Identifier:</label>
 			</td>
 			<td class="formField">
 				<input type=button value="Find ZFIN ID" onClick="myRef = window.open('http://zfin.org/','mywin',
 				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>
-				<label for="field1">&nbsp;&nbsp;</label>
-				<html:text styleClass="formFieldUnSized" size="25" property="zfinId"  />
+				&nbsp;&nbsp;
+				<html:text styleClass="formFieldUnSized" size="25" styleId="zfinId" property="zfinId"  />
 			</td>
 		</c:if>
 	</tr>	
@@ -179,32 +179,32 @@
 	<tr>
 		<c:if test="${modelspeciescommonname == 'Rat'}">	
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field2">RGD Identifier:</label>
+			<td class="formLabel"><label for="rgdId">RGD Identifier:</label>
 			</td>
 			<td class="formField">
 				<input type=button value="Find RGD ID" onClick="myRef = window.open('http://rgd.mcw.edu/strains/','mywin',
 				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>
-				<label for="field1">&nbsp;&nbsp;</label>
-				<html:text styleClass="formFieldUnSized" size="25" property="rgdId"  />
+				&nbsp;&nbsp;
+				<html:text styleClass="formFieldUnSized" size="25" styleId="rgdId" property="rgdId"  />
 			</td>
 		</c:if>
 	</tr>
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Construct Sequence:</label>
+		<td class="formLabel"><label for="constructSequence">Construct Sequence:</label>
 		</td>
 		<td class="formField">
-			<html:textarea styleClass="formFieldSized" property="constructSequence" rows="4" cols="32"  />	
+			<html:textarea styleClass="formFieldSized" styleId="constructSequence" property="constructSequence" rows="4" cols="32"  />	
 		</td>
 	</tr>	
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Comment:</label>
+		<td class="formLabel"><label for="comments">Comment:</label>
 		</td>
 		<td class="formField">
-		    <html:textarea styleClass="formFieldSized" property="comments" rows="4" cols="32" />
+		    <html:textarea styleClass="formFieldSized" styleId="comments" property="comments" rows="4" cols="32" />
 		</td>
 	</tr>
 	<tr>
@@ -213,7 +213,7 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Upload Construct Map<br>(Image of type .jpg, .jpeg, .gif or .png):</label></td>
+		<td class="formLabel"><label for="fileLocation">Upload Construct Map<br>(Image of type .jpg, .jpeg, .gif or .png):</label></td>
 		<td class="formField">
 				
 			<c:if test="${not empty targetedModificationForm.url}">
@@ -225,29 +225,29 @@
 				<br><br>													
 			</c:if>
 					
-			<html:file styleClass="formFieldSized" size="40" property="fileLocation" />	
+			<html:file styleClass="formFieldSized" size="40" styleId="fileLocation" property="fileLocation" />	
 		</td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Title of Construct: <br>(enter info only when uploading image)</label></td>
+		<td class="formLabel"><label for="constructTitle">Title of Construct: <br>(enter info only when uploading image)</label></td>
 		<td class="formField">
-			<html:textarea styleClass="formFieldSized" property="title" rows="4" cols="30" />
+			<html:textarea styleClass="formFieldSized" styleId="constructTitle" property="title" rows="4" cols="30" />
 		</td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Description of Construct:<br>(enter info only when uploading image)</label></td>
+		<td class="formLabel"><label for="descriptionOfConstruct">Description of Construct:<br>(enter info only when uploading image)</label></td>
 		<td class="formField">
-			<html:textarea styleClass="formFieldSized" property="descriptionOfConstruct"  rows="4" cols="30"  />
+			<html:textarea styleClass="formFieldSized" styleId="descriptionOfConstruct" property="descriptionOfConstruct"  rows="4" cols="30"  />
 		</td>
 	</tr>	
 
 	<tr>
 		<td align="right" colspan="3">
-			<TABLE cellpadding="4" cellspacing="0" border="0">
+			<TABLE summary="This table is used to format page content" cellpadding="4" cellspacing="0" border="0">
 			
 				  <html:submit styleClass="actionButton">
 					  <bean:message key="button.submit"/>

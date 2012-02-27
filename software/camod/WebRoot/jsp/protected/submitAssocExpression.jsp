@@ -54,15 +54,15 @@
 
 <!-- submitAssocExpression.jsp -->
 <!-- Main Content Begins -->
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <!-- Took this out of sidebar.jsp and has to go here to format correctly  -->
 <%@ include file="/jsp/submitMenu.jsp" %>
 <tr><td>
-	<TABLE summary="" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
+	<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
 	<tr><td valign="top">
 <!-- -->
 
-	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
+	<TABLE summary="This table is used to format page content" cellpadding="3" cellspacing="0" border="0" align="left">
 	<html:form action="<%= actionName %>" focus="name">
 	<tr>
 	    <html:errors/>
@@ -83,7 +83,7 @@
 				<td class="formRequiredLabel"><label for="field1">Organ / Tissue:</label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />							
 					<a href="javascript:showMouseTissueTree('associatedExpressionForm', 'organTissueCode', 'organTissueName', 'organ', true)">
-						<IMG src="images\selectUP.gif" align=middle border=0></a>
+						<IMG alt="Select Organ/Tissue" src="images\selectUP.gif" align=middle border=0></a>
 				</td>				
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
@@ -93,37 +93,37 @@
 				</c:when>
 				
 				<c:when test="${modelspeciescommonname == 'Rat'}">
-				<td class="formRequiredLabel"><label for="field1">Organ / Tissue:</label>&nbsp;
+				<td class="formRequiredLabel"><label for="organ">Organ / Tissue:</label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />					
 					<a href="javascript:showRatTissueTree('associatedExpressionForm', 'organTissueCode', 'organTissueName', 'organ', true)">
-						<IMG src="images\selectUP.gif" align=middle border=0></a>
+						<IMG alt="Select Organ/Tissue" src="images\selectUP.gif" align=middle border=0></a>
 				</td>
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">										
-						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
+						<html:text styleClass="formFieldSized" disabled="true" styleId="organ" property="organ" size="30"  />
 					</td>
 				</c:when>
 					
 				<c:when test="${modelspeciescommonname == 'Zebrafish'}">
-				<td class="formRequiredLabel"><label for="field1">Organ / Tissue:</label>&nbsp;
+				<td class="formRequiredLabel"><label for="organ">Organ / Tissue:</label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />					
 					<a href="javascript:showZebrafishTissueTree('associatedExpressionForm', 'organTissueCode', 'organTissueName', 'organ', true)">
-						<IMG src="images\selectUP.gif" align=middle border=0></a>
+						<IMG alt="Select Organ/Tissue" src="images\selectUP.gif" align=middle border=0></a>
 				</td>
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">										
-						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
+						<html:text styleClass="formFieldSized" disabled="true" styleId="organ" property="organ" size="30"  />
 					</td>
 				</c:when>
 				<c:otherwise>
-				<td class="formRequiredLabel"><label for="field1">Organ / Tissue:</label>&nbsp;				
+				<td class="formRequiredLabel"><label for="organ">Organ / Tissue:</label>&nbsp;				
 				</td>
 					<html:hidden property="organTissueCode"/>		
 					<html:hidden property="organTissueName"/>
 					<td class="formField">
-						<html:text styleClass="formFieldSized" disabled="false" property="organ"   size="25" />
+						<html:text styleClass="formFieldSized" disabled="false" styleId="organ" property="organ"   size="25" />
 					</td>				
 				</c:otherwise>				
     		</c:choose>
@@ -132,9 +132,9 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Expression Level:</label></td>
+		<td class="formLabel"><label for="expressionLevel">Expression Level:</label></td>
 		<td class="formField">				
-			<html:select styleClass="formFieldSized" size="1" property="expressionLevel" name="formdata" >
+			<html:select styleClass="formFieldSized" size="1" styleId="expressionLevel" property="expressionLevel" name="formdata" >
 				<html:options name="<%= Dropdowns.EXPRESSIONLEVELDROP %>" />										
 			</html:select>
 		</td>
@@ -142,16 +142,16 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Comment:</label>
+		<td class="formLabel"><label for="comments">Comment:</label>
 		</td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldSized" property="comments" cols="32" rows="4"/>			
+					<html:textarea styleClass="formFieldSized" styleId="comments" property="comments" cols="32" rows="4"/>			
 			</td>
 	</tr>		
 
 	<tr>
 		<td align="right" colspan="3">
-			<TABLE cellpadding="4" cellspacing="0" border="0">
+			<TABLE summary="This table is used to format page content" cellpadding="4" cellspacing="0" border="0">
 			
 				  <html:submit styleClass="actionButton">
 					  <bean:message key="button.submit"/>

@@ -57,7 +57,7 @@
         <TR>
 	        <TD class=formRequiredNotice width=5>*</TD>
 	        <TD colspan="2" class=formRequiredLabel>
-	        	<LABEL for=field1>One or more of the following selections must be checked</LABEL>
+	        	One or more of the following selections must be checked
 	        </TD>
         </TR>
 		<TR>

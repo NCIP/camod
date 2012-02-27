@@ -133,15 +133,15 @@
 
 <!-- submitHistopathology.jsp -->
 <!-- Main Content Begins -->
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <!-- Took this out of sidebar.jsp and has to go here to format correctly  -->
 <%@ include file="/jsp/submitMenu.jsp" %>
 <tr><td>
-	<TABLE summary="" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
+	<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
 	<tr><td valign="top">
 <!-- -->
 
-	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
+	<TABLE summary="This table is used to format page content" cellpadding="3" cellspacing="0" border="0" align="left">
 	<html:form action="<%= actionName %>" focus="organ">
 	<tr>
 		<html:errors/>
@@ -159,50 +159,50 @@
  			<!-- Display anatomy tree based on animal model species or allow for text entry if no specific tree exists -->
  			<c:choose>
 				<c:when test="${modelspeciescommonname == 'Mouse'}">
-					<td class="formRequiredLabel"><label for="field1">Site of Lesion/Tumor:</label>&nbsp;
+					<td class="formRequiredLabel"><label for="mouseOrgan">Site of Lesion/Tumor:</label>&nbsp;
 						<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />							
 					<a href="javascript:showMouseTissueTree('histopathologyForm', 'organTissueCode', 'organTissueName', 'organ', true)">
-						<IMG src="images\selectUP.gif" align=middle border=0></a>
+						<IMG alt="Select from EVSTree" src="images\selectUP.gif" align=middle border=0></a>
 					</td>
 								
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">					
-						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
+						<html:text styleClass="formFieldSized" disabled="true" styleId="mouseOrgan" property="organ" size="30"  />
 					</td>				
 				</c:when>
 				<c:when test="${modelspeciescommonname == 'Rat'}">	
-					<td class="formRequiredLabel"><label for="field1">Site of Lesion/Tumor:</label>&nbsp;
+					<td class="formRequiredLabel"><label for="ratOrgan">Site of Lesion/Tumor:</label>&nbsp;
 						<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
 					<a href="javascript:showRatTissueTree('histopathologyForm', 'organTissueCode', 'organTissueName', 'organ', true)">
-						<IMG src="images\selectUP.gif" align=middle border=0></a>
+						<IMG alt="Select from EVSTree" src="images\selectUP.gif" align=middle border=0></a>
 					</td>
 		
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">										
-						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
+						<html:text styleClass="formFieldSized" disabled="true" styleId="ratOrgan" property="organ" size="30"  />
 					</td>
 				</c:when>	
 				<c:when test="${modelspeciescommonname == 'Zebrafish'}">
-					<td class="formRequiredLabel"><label for="field1">Site of Lesion/Tumor:</label>&nbsp;
+					<td class="formRequiredLabel"><label for="zebOrgan">Site of Lesion/Tumor:</label>&nbsp;
 						<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
 					<a href="javascript:showZebrafishTissueTree('histopathologyForm', 'organTissueCode', 'organTissueName', 'organ', true)">
-						<IMG src="images\selectUP.gif" align=middle border=0></a>
+						<IMG alt="Select from EVSTree" src="images\selectUP.gif" align=middle border=0></a>
 					</td>
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">										
-						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
+						<html:text styleClass="formFieldSized" disabled="true" styleId="zebOrgan" property="organ" size="30"  />
 					</td>
 				</c:when>
 				<c:otherwise>
-					<td class="formRequiredLabel"><label for="field1">Site of Lesion/Tumor:</label>&nbsp;
+					<td class="formRequiredLabel"><label for="lesOrgan">Site of Lesion/Tumor:</label>&nbsp;
 					</td>
 					<html:hidden property="organTissueCode"/>		
 					<html:hidden property="organTissueName"/>
 					<td class="formField">
-						<html:text styleClass="formFieldSized" disabled="false" property="organ"   size="25" />
+						<html:text styleClass="formFieldSized" disabled="false" styleId="lesOrgan" property="organ"   size="25" />
 					</td>				
 				</c:otherwise>				
     		</c:choose>
@@ -214,7 +214,7 @@
  			<!-- Display disease tree based on animal model species or allow for text entry if no specific tree exists -->
 	 		<c:choose>			
 				<c:when test="${modelspeciescommonname == 'Mouse'}">
-					<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
+					<td class="formRequiredLabel"><label for="mouseTumorClassification">Diagnosis:</label>&nbsp;				
 							<camod:cshelp topic="data_tree_help" key="DIAGNOSIS.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />					
 						<a href="javascript:showMouseDiagnosisTree('histopathologyForm', 'diagnosisCode', 'diagnosisName', 'tumorClassification', true)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>	
@@ -222,11 +222,11 @@
 						<html:hidden property="diagnosisCode"/>		
 						<html:hidden property="diagnosisName"/>
 						<td class="formField">
-							<html:text styleClass="formFieldSized" disabled="true" property="tumorClassification"   size="30" />
+							<html:text styleClass="formFieldSized" disabled="true" styleId="mouseTumorClassification" property="tumorClassification"   size="30" />
 						</td>									
 				</c:when>
 				<c:when test="${modelspeciescommonname == 'Rat'}">
-					<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
+					<td class="formRequiredLabel"><label for="ratTumorClassification">Diagnosis:</label>&nbsp;				
 						<camod:cshelp topic="data_tree_help" key="DIAGNOSIS.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />					
 						<a href="javascript:showRatDiagnosisTree('histopathologyForm', 'diagnosisCode', 'diagnosisName', 'tumorClassification', true)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>	
@@ -234,16 +234,16 @@
 						<html:hidden property="diagnosisCode"/>		
 						<html:hidden property="diagnosisName"/>
 						<td class="formField">
-							<html:text styleClass="formFieldSized" disabled="true" property="tumorClassification"   size="30" />
+							<html:text styleClass="formFieldSized" disabled="true" styleId="ratTumorClassification" property="tumorClassification"   size="30" />
 						</td>												
 				</c:when>
 				<c:when test="${modelspeciescommonname == 'Zebrafish'}">
-					<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
+					<td class="formRequiredLabel"><label for="zebTumorClassification">Diagnosis:</label>&nbsp;				
 					</td>	
 						<td class="formField">
 								<html:hidden property="diagnosisCode"/>	
 								<html:hidden property="diagnosisName"/>													
-							<html:select styleClass="formFieldSized" size="1" property="tumorClassification" onchange="chkOtherDiagnosis();" >
+							<html:select styleClass="formFieldSized" size="1" styleId="zebTumorClassification" property="tumorClassification" onchange="chkOtherDiagnosis();" >
 								<html:optionsCollection name="<%= Constants.Dropdowns.ZEBRAFISHDIAGNOSISDROP %>" />										
 							</html:select>					
 							<br>
@@ -252,19 +252,19 @@
 					</tr>			
 						<tr>
 							<td class="formRequiredNotice" width="5">&nbsp;</td>
-							<td class="formLabel"><label for="field1">Other Diagnosis:</label></td>
+							<td class="formLabel"><label for="otherTumorClassification">Other Diagnosis:</label></td>
 							<td class="formField">
-								<html:text styleClass="formFieldSized" property="otherTumorClassification"  size="30" />
+								<html:text styleClass="formFieldSized" styleId="otherTumorClassification" property="otherTumorClassification"  size="30" />
 							</td>
 						</tr>						
 				</c:when>							
 				<c:otherwise>
-					<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
+					<td class="formRequiredLabel"><label for="otherTumorClassification1">Diagnosis:</label>&nbsp;				
 					</td>
 						<html:hidden property="diagnosisCode"/>								
 						<html:hidden property="diagnosisName"/>
 						<td class="formField">
-							<html:text styleClass="formFieldSized" disabled="false" property="tumorClassification"   size="25" />
+							<html:text styleClass="formFieldSized" disabled="false" styleId="otherTumorClassification1" property="tumorClassification"   size="25" />
 						</td>				
 				</c:otherwise>
 	    	</c:choose>
@@ -272,26 +272,26 @@
 
 		
 	<tr>
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Age of Tumor Onset:</label>
+		<td class="formRequiredNotice" width="5"><label for="ageOfOnsetUnit">&nbsp;</label></td>
+		<td class="formLabel"><label for="ageOfOnset">Age of Tumor Onset:</label>
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized" property="ageOfOnset"  size="10" />
+			<html:text styleClass="formFieldUnSized" styleId="ageOfOnset" property="ageOfOnset"  size="10" />
 			
-			<html:select styleClass="formFieldUnSized" size="1" property="ageOfOnsetUnit" >												
+			<html:select styleClass="formFieldUnSized" size="1" styleId="ageOfOnsetUnit" property="ageOfOnsetUnit" >												
 				<html:options name="<%= Dropdowns.AGEUNITSDROP %>"/>					
 			</html:select>
 		</td>
 	</tr>
 	
 	<tr>
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Age of Tumor Detection:</label>		
+		<td class="formRequiredNotice" width="5"><label for="ageOfDetectionUnit">&nbsp;</label></td>
+		<td class="formLabel"><label for="ageOfDetection">Age of Tumor Detection:</label>		
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized" property="ageOfDetection"  size="10" />
+			<html:text styleClass="formFieldUnSized" styleId="ageOfDetection" property="ageOfDetection"  size="10" />
 			
-			<html:select styleClass="formFieldUnSized" size="1" property="ageOfDetectionUnit" >												
+			<html:select styleClass="formFieldUnSized" size="1" styleId="ageOfDetectionUnit" property="ageOfDetectionUnit" >												
 				<html:options name="<%= Dropdowns.AGEUNITSDROP %>"/>					
 			</html:select>
 		</td>
@@ -299,96 +299,96 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Average Weight of Tumor (mg):</label></td>
+		<td class="formLabel"><label for="weightOfTumor">Average Weight of Tumor (mg):</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized" property="weightOfTumor"  size="10" />
+			<html:text styleClass="formFieldUnSized" styleId="weightOfTumor" property="weightOfTumor"  size="10" />
 		</td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Average Volume of Tumor (mm<sup>3</sup>): </label></td>
+		<td class="formLabel"><label for="volumeOfTumor">Average Volume of Tumor (mm<sup>3</sup>): </label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized" property="volumeOfTumor"  size="10" />
+			<html:text styleClass="formFieldUnSized" styleId="volumeOfTumor" property="volumeOfTumor"  size="10" />
 		</td>
 	</tr>
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Tumor Incidence over Lifetime (%)</label>
+		<td class="formLabel"><label for="tumorIncidenceRate">Tumor Incidence over Lifetime (%)</label>
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="tumorIncidenceRate" size="30" />
+			<html:text styleClass="formFieldSized" styleId="tumorIncidenceRate" property="tumorIncidenceRate" size="30" />
 		</td>
 	</tr>
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Survival Information:</label>
+		<td class="formLabel"><label for="survivalInfo">Survival Information:</label>
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="survivalInfo" size="30" />
+			<html:text styleClass="formFieldSized" styleId="survivalInfo" property="survivalInfo" size="30" />
 		</td>
 	</tr>
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Gross Description / Macroscopic Description<br> (Field holds 2,000 characters):</label>
+		<td class="formLabel"><label for="grossDescription">Gross Description / Macroscopic Description<br> (Field holds 2,000 characters):</label>
 		</td>
 		<td class="formField">
-			<html:textarea styleClass="formFieldSized" property="grossDescription" cols="32" rows="4"/>
+			<html:textarea styleClass="formFieldSized" styleId="grossDescription" property="grossDescription" cols="32" rows="4"/>
 		</td>
 	</tr>	
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Microscopic Description<br> (Field holds 2,000 characters):</label>
+		<td class="formLabel"><label for="microscopicDescription">Microscopic Description<br> (Field holds 2,000 characters):</label>
 		</td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldSized"  property="microscopicDescription" cols="32" rows="4"/>			
+					<html:textarea styleClass="formFieldSized"  styleId="microscopicDescription" property="microscopicDescription" cols="32" rows="4"/>			
 			</td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Genetic Alterations found in the Tumor:</label>
+		<td class="formLabel"><label for="observation">Genetic Alterations found in the Tumor:</label>
 		</td>
 		<td class="formField">
-			<html:textarea styleClass="formFieldSized" property="observation" cols="32" rows="4" onkeypress="chkObservation();"/>
+			<html:textarea styleClass="formFieldSized" styleId="observation" property="observation" cols="32" rows="4" onkeypress="chkObservation();"/>
 		</td>
 	</tr>
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Method of Observation:</label>
+		<td class="formLabel"><label for="methodOfObservation">Method of Observation:</label>
 		</td>
 		<td class="formField">
-			<html:textarea styleClass="formFieldSized" property="methodOfObservation" cols="32" rows="4"  />
+			<html:textarea styleClass="formFieldSized" styleId="methodOfObservation" property="methodOfObservation" cols="32" rows="4"  />
 		</td>
 	</tr>	
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Comparative Data from other Species:</label>
+		<td class="formLabel"><label for="comparativeData">Comparative Data from other Species:</label>
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="comparativeData" size="30" />
+			<html:text styleClass="formFieldSized" styleId="comparativeData" property="comparativeData" size="30" />
 		</td>
 	</tr>
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Comment:</label>
+		<td class="formLabel"><label for="comments">Comment:</label>
 		</td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldSized"  property="comments" cols="32" rows="4"/>			
+					<html:textarea styleClass="formFieldSized"  styleId="comments" property="comments" cols="32" rows="4"/>			
 			</td>
 	</tr>
 	
 	<tr>
 		<td align="right" colspan="3">
 			<!-- action buttons begins -->
-			<TABLE cellpadding="4" cellspacing="0" border="0">
+			<TABLE summary="This table is used to format page content" cellpadding="4" cellspacing="0" border="0">
 			
 				  <html:submit styleClass="actionButton">
 					  <bean:message key="button.submit"/>

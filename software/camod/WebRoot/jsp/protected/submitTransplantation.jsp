@@ -179,15 +179,15 @@
 
 <!-- submitTransplantation.jsp -->
 <!-- Main Content Begins -->
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <!-- Took this out of sidebar.jsp and has to go here to format correctly  -->
 <%@ include file="/jsp/submitMenu.jsp" %>
 <html:form action="<%= actionName %>" focus="name">
 <tr><td>
-	<TABLE summary="" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
+	<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
 	<tr><td valign="top">
 
-	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
+	<TABLE summary="This table is used to format page content" cellpadding="3" cellspacing="0" border="0" align="left">
 	
 	<tr>
 		<html:errors/>
@@ -201,43 +201,43 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field1">Name of Transplantation:</label>
+		<td class="formRequiredLabel"><label for="transName">Name of Transplantation:</label>
 		</td>
 		<td class="formField">
-				<html:text styleClass="formFieldSized" property="name"  size="30" />
+				<html:text styleClass="formFieldSized" styleId="transName" property="name"  size="30" />
 		</td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field3">Donor Species:</label></td>
+		<td class="formRequiredLabel"><label for="donorScientificName">Donor Species:</label></td>
 		<td class="formField">
 		<br>
-		<label for="field3">- if species is not listed, <br>then please select "Other" and then specify it below:</label>
+		- if species is not listed, <br>then please select "Other" and then specify it below:
 		<br>
 		<br>		
-			<html:select styleClass="formFieldSized" size="1" property="donorScientificName" onchange="getResults(this);" >
+			<html:select styleClass="formFieldSized" size="1" styleId="donorScientificName" property="donorScientificName" onchange="getResults(this);" >
 				<html:optionsCollection name="<%= Dropdowns.SPECIESQUERYDROP %>" />										
 			</html:select>
 		</td>
 	</tr>
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">if other Species:</label></td>
+			<td class="formLabel"><label for="otherDonorScientificName">if other Species:</label></td>
 			<td class="formField">					
-					<html:text styleClass="formFieldSized" property="otherDonorScientificName" size="30"/>			
+					<html:text styleClass="formFieldSized" styleId="otherDonorScientificName" property="otherDonorScientificName" size="30"/>			
 			</td>
 		</tr>	
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field3">Donor Strain:</label></td>
+		<td class="formRequiredLabel"><label for="donorEthinicityStrain">Donor Strain:</label></td>
 		<td class="formField">
 		<br>
-		<label for="field3">- if strain is not listed, <br>then please select "Other" and then specify it below:</label>
+		- if strain is not listed, <br>then please select "Other" and then specify it below:
 		<br>
 		<br>
-			<html:select styleClass="formFieldSized" size="1" property="donorEthinicityStrain" onchange="chkOtherStrain()">
+			<html:select styleClass="formFieldSized" size="1" styleId="donorEthinicityStrain" property="donorEthinicityStrain" onchange="chkOtherStrain()">
 				<html:options name="<%= Dropdowns.STRAINDROP %>" />
 			</html:select>
 		</td>
@@ -245,9 +245,9 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">if other Strain:</label></td>
+		<td class="formLabel"><label for="otherDonorEthinicityStrain">if other Strain:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized"  property="otherDonorEthinicityStrain" size="30" />	
+			<html:text styleClass="formFieldSized"  styleId="otherDonorEthinicityStrain" property="otherDonorEthinicityStrain" size="30" />	
 		</td>
 	</tr>
 	
@@ -256,64 +256,64 @@
  			<!-- Display anatomy tree based on animal model species or allow for text entry if no specific tree exists -->
  			<c:choose>
 				<c:when test="${donorspeciescommonname == 'Mouse'}">
-				<td class="formLabel"><label for="field1">Organ/Tissue:</label>&nbsp;
+				<td class="formLabel"><label for="mouseOrgan">Organ/Tissue:</label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />							
 					<a href="javascript:showMouseTissueTree('transplantationForm', 'organTissueCode', 'organTissueName', 'organ', true)">
-						<IMG src="images\selectUP.gif" align=middle border=0></a>
+						<IMG alt="Select from EVSTree" src="images\selectUP.gif" align=middle border=0></a>
 				</td>				
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">					
-						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="20" />
+						<html:text styleClass="formFieldSized" disabled="true" styleId="mouseOrgan" property="organ" size="20" />
 						<a href="javascript: clearField(document.forms[0].organ, document.forms[0].organTissueCode);"><img border="0" align=middle src="/camod/images/clear.gif"></a>						
 					</td>
 				</c:when>
 				<c:when test="${donorspeciescommonname == 'Rat'}">	
-				<td class="formLabel"><label for="field1">Organ/Tissue:</label>&nbsp;
+				<td class="formLabel"><label for="ratOrgan">Organ/Tissue:</label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
 					<a href="javascript:showRatTissueTree('transplantationForm', 'organTissueCode', 'organTissueName', 'organ', true)">
-						<IMG src="images\selectUP.gif" align=middle border=0></a>
+						<IMG alt="Select from EVSTree" src="images\selectUP.gif" align=middle border=0></a>
 				</td>
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">										
-						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="20"/>
+						<html:text styleClass="formFieldSized" disabled="true" styleId="ratOrgan" property="organ" size="20"/>
 						<a href="javascript: clearField(document.forms[0].organ, document.forms[0].organTissueCode);"><img border="0" align=middle src="/camod/images/clear.gif"></a>						
 					</td>
 				</c:when>	
 				<c:when test="${donorspeciescommonname == 'Zebrafish'}">
-				<td class="formLabel"><label for="field1">Organ/Tissue:</label>&nbsp;
+				<td class="formLabel"><label for="zebOrgan">Organ/Tissue:</label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
 					<a href="javascript:showZebrafishTissueTree('transplantationForm', 'organTissueCode', 'organTissueName', 'organ', true)">
-						<IMG src="images\selectUP.gif" align=middle border=0></a>
+						<IMG alt="Select from EVSTree" src="images\selectUP.gif" align=middle border=0></a>
 				</td>
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">										
-						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="20" />
+						<html:text styleClass="formFieldSized" disabled="true" styleId="zebOrgan" property="organ" size="20" />
 						<a href="javascript: clearField(document.forms[0].organ, document.forms[0].organTissueCode);"><img border="0" align=middle src="/camod/images/clear.gif"></a>						
 					</td>
 				</c:when>
 				<c:when test="${donorspeciescommonname == 'Human'}">
-				<td class="formLabel"><label for="field1">Organ/Tissue:</label>&nbsp;
+				<td class="formLabel"><label for="humanOrgan">Organ/Tissue:</label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
 					<a href="javascript:showHumanTissueTree('transplantationForm', 'organTissueCode', 'organTissueName', 'organ', true)">
-						<IMG src="images\selectUP.gif" align=middle border=0></a>
+						<IMG alt="Select from EVSTree" src="images\selectUP.gif" align=middle border=0></a>
 				</td>
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">										
-						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="20"  />
+						<html:text styleClass="formFieldSized" disabled="true" styleId="humanOrgan" property="organ" size="20"  />
 						<a href="javascript: clearField(document.forms[0].organ, document.forms[0].organTissueCode);"><img border="0" align=middle src="/camod/images/clear.gif"></a>						
 					</td>
 				</c:when>				
 				<c:otherwise>
-				<td class="formLabel"><label for="field1">Organ/Tissue:</label>&nbsp;
+				<td class="formLabel"><label for="otherOrgan">Organ/Tissue:</label>&nbsp;
 				</td>
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">										
-						<html:text styleClass="formFieldSized" disabled="false" property="organ" size="20"  />
+						<html:text styleClass="formFieldSized" disabled="false" styleId="otherOrgan" property="organ" size="20"  />
 					</td>				
 				</c:otherwise>				
     		</c:choose>
@@ -322,13 +322,13 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field3">Source Type:</label></td>
+		<td class="formRequiredLabel"><label for="sourceType">Source Type:</label></td>
 		<td class="formField">
 		<br>				
-		<label for="field3">- if transplantation type is not listed, <br>then please select "Other" and then specify it below:</label>
+		- if transplantation type is not listed, <br>then please select "Other" and then specify it below:
 		<br>
 		<br>		
-			<html:select styleClass="formFieldSized" size="1" property="sourceType" onclick="chkOtherSourceType(this);">
+			<html:select styleClass="formFieldSized" size="1" styleId="sourceType" property="sourceType" onclick="chkOtherSourceType(this);">
 				<html:options name="<%= Dropdowns.SOURCETYPEDROP %>" />	
 			</html:select>
 		</td>
@@ -336,40 +336,40 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">If other Source Type:</label></td>
+		<td class="formLabel"><label for="otherSourceType">If other Source Type:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="otherSourceType"  size="30" />	
+			<html:text styleClass="formFieldSized" styleId="otherSourceType" property="otherSourceType"  size="30" />	
 		</td>
 	</tr>	
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Parental Cell line:</label>
+		<td class="formLabel"><label for="parentalCellLineName">Parental Cell line:</label>
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="parentalCellLineName"  size="30" />	
+			<html:text styleClass="formFieldSized" styleId="parentalCellLineName" property="parentalCellLineName"  size="30" />	
 		</td>
 	</tr>			
 	<tr>
 			<td class="formRequiredNotice" width="3">&nbsp;</td>
-			<td class="formLabel"><label for="field1">ATTC number (if available):</label>
+			<td class="formLabel"><label for="atccNumber">ATTC number (if available):</label>
 			</td>
 			<td class="formField">		
 				<input type=button value="Find ATTC#" onClick="myRef = window.open('http://www.atcc.org/','mywin',
 				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>
-				<html:text styleClass="formFieldUnSized" size="15" property="atccNumber"  />
+				<html:text styleClass="formFieldUnSized" size="15" styleId="atccNumber" property="atccNumber"  />
 			</td>
 	</tr>	
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Conditioning Regimen:</label></td>
+		<td class="formLabel"><label for="conditioningRegimen">Conditioning Regimen:</label></td>
 		<td class="formField">
 		<br>
-		<label for="field1">- if conditioning regime is not listed, <br>then please select "Other" and then specify it below:</label>
+		- if conditioning regime is not listed, <br>then please select "Other" and then specify it below:
 		<br>
 		<br>
-			<html:select styleClass="formFieldSized" size="1" property="conditioningRegimen" onchange="chkOtherCondRegimen()">
+			<html:select styleClass="formFieldSized" size="1" styleId="conditioningRegimen" property="conditioningRegimen" onchange="chkOtherCondRegimen()">
 				<html:options name="<%= Dropdowns.CONDITIONINGREGIMEN %>" />
 			</html:select>
 		</td>
@@ -377,59 +377,59 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">if other Conditioning Regimen:</label></td>
+		<td class="formLabel"><label for="otherConditioningRegimen">if other Conditioning Regimen:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized"  property="otherConditioningRegimen" size="30" />	
+			<html:text styleClass="formFieldSized"  styleId="otherConditioningRegimen" property="otherConditioningRegimen" size="30" />	
 		</td>
 	</tr>		
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Genetic Alteration:</label>
+		<td class="formLabel"><label for="geneticManipulation">Genetic Alteration:</label>
 		</td>
 		<td class="formField">
-			<html:textarea styleClass="formFieldSized" property="geneticManipulation" cols="32" rows="4" onkeypress="chkObservation();" />
+			<html:textarea styleClass="formFieldSized" styleId="geneticManipulation" property="geneticManipulation" cols="32" rows="4" onkeypress="chkObservation();" />
 		</td>
 	</tr>	
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Method of Modification:</label>
+		<td class="formLabel"><label for="modificationDescription">Method of Modification:</label>
 		</td>
 		<td class="formField">
-			<html:textarea styleClass="formFieldSized" property="modificationDescription" cols="32" rows="4" disabled="true" />
+			<html:textarea styleClass="formFieldSized" styleId="modificationDescription" property="modificationDescription" cols="32" rows="4" disabled="true" />
 		</td>
 	</tr>
 
 
     <tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Amount of Cells:</label>
+		<td class="formLabel"><label for="cellAmount">Amount of Cells:</label>
 		</td>
 		<td class="formField">		
-			<html:text styleClass="formFieldUnSized" property="cellAmount"  size="15" />
+			<html:text styleClass="formFieldUnSized" styleId="cellAmount" property="cellAmount"  size="15" />
 		</td>
 	</tr>
 	
     <tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Growth Period:</label>
+		<td class="formLabel"><label for="growthPeriod">Growth Period:</label>
 		</td>
 		<td class="formField">		
-			<html:text styleClass="formFieldUnSized" property="growthPeriod"  size="15" />
+			<html:text styleClass="formFieldUnSized" styleId="growthPeriod" property="growthPeriod"  size="15" />
 		</td>
 	</tr>
 		
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Site of Administration:</label>
+		<td class="formLabel"><label for="administrativeSite">Site of Administration:</label>
 		</td>
 		<td class="formField">
 		<br>
-		<label for="field3">- if administration site is not listed, <br>then please select "Other" and then specify it below:</label>
+		- if administration site is not listed, <br>then please select "Other" and then specify it below:
 		<br>
 		<br>
-			<html:select styleClass="formFieldSized" size="1" property="administrativeSite"  onclick="chkOtherAdminSite();">												
+			<html:select styleClass="formFieldSized" size="1" styleId="administrativeSite" property="administrativeSite"  onclick="chkOtherAdminSite();">												
 				<html:options name="<%= Dropdowns.TRANSPLANTATIONADMINSITESDROP %>"/>					
 			</html:select>			
 		</td>
@@ -437,24 +437,24 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Other Site of Administration:</label></td>
+		<td class="formLabel"><label for="otherAdministrativeSite">Other Site of Administration:</label></td>
 		<td class="formField">					
-			<html:text styleClass="formFieldSized" size="30" property="otherAdministrativeSite" />			
+			<html:text styleClass="formFieldSized" size="30" styleId="otherAdministrativeSite" property="otherAdministrativeSite" />			
 		</td>
 	</tr>	
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Comment:</label>
+		<td class="formLabel"><label for="comments">Comment:</label>
 		</td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldSized" property="comments" cols="32" rows="4"/>			
+					<html:textarea styleClass="formFieldSized" styleId="comments" property="comments" cols="32" rows="4"/>			
 			</td>
 	</tr>	
 		
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field3">Host Species / Strain:</label></td>
+		<td class="formLabel">Host Species / Strain:</td>
 		<td class="formField">
 			<c:choose>
 				<c:when test="${empty modelstrain}">
@@ -469,7 +469,7 @@
 	
 	<tr>
 		<td align="right" colspan="3">
-			<TABLE cellpadding="4" cellspacing="0" border="0">
+			<TABLE summary="This table is used to format page content" cellpadding="4" cellspacing="0" border="0">
 			
 				  <html:submit styleClass="actionButton">
 					  <bean:message key="button.submit"/>

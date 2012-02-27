@@ -83,14 +83,14 @@
 
 <!-- submitTherapy.jsp -->
 <!-- Main Content Begins -->
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <!-- Took this out of sidebar.jsp and has to go here to format correctly  -->
 <%@ include file="/jsp/submitMenu.jsp" %>
 <tr><td>
-	<TABLE summary="" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
+	<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
 	<tr><td valign="top">
 
-	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
+	<TABLE summary="This table is used to format page content" cellpadding="3" cellspacing="0" border="0" align="left">
 	<html:form action="<%= actionName %>" focus="name" onsubmit="selectAll()">
 	<tr>
 		<html:errors/>
@@ -104,54 +104,54 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel" ><label for="field3">Drug / Compound Name:</label></td>
+		<td class="formRequiredLabel" ><label for="drugName">Drug / Compound Name:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" size="30" property="name" />	
+			<html:text styleClass="formFieldSized" size="30" styleId="drugName" property="name" />	
 		</td>
 	</tr>
 	
 	<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">NSC number:</label>
+			<td class="formLabel"><label for="nscNumber">NSC number:</label>
 			</td>
 			<td class="formField">		
 				<input type=button value="Find NSC #" onClick="myRef = window.open('http://dtp.nci.nih.gov/dtpstandard/chemname/index.jsp?field1=','mywin',
 				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>
-				<label for="field1">&nbsp;&nbsp;</label>
-				<html:text styleClass="formFieldUnSized" size="10" property="nscNumber" />
+				&nbsp;&nbsp;
+				<html:text styleClass="formFieldUnSized" size="10" styleId="nscNumber" property="nscNumber" />
 			</td>
 	</tr>
 
 	<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">CAS number:</label>
+			<td class="formLabel"><label for="casNumber">CAS number:</label>
 			</td>
 			<td class="formField">		
 				<input type=button value="Find CAS #" onClick="myRef = window.open('http://chemfinder.cambridgesoft.com/','mywin',
 				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>
-				<label for="field1">&nbsp;&nbsp;</label>
-				<html:text styleClass="formFieldUnSized" size="10" property="casNumber" />
+				&nbsp;&nbsp;
+				<html:text styleClass="formFieldUnSized" size="10" styleId="casNumber" property="casNumber" />
 			</td>
 	</tr>	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>        
-		<td class="formLabel"><label for="field3">Chemical Class:</label></td>
+		<td class="formLabel"><label for="chemicalClasses">Chemical Class:</label><label for="selectedChemicalClasses">&#160;</label></td>
 		<td class="formField">
 		    <center>
-		    <table>
+		    <table summary="This table is used to format page content">
 		    <tr>
-			    <html:select styleClass="formFieldUnSized" size="5"  multiple="true" style="width: 500px" property="chemicalClasses">												
+			    <html:select styleClass="formFieldUnSized" size="5"  multiple="true" style="width: 500px" styleId="chemicalClasses" property="chemicalClasses">												
 			    <html:options name="<%= Dropdowns.CHEMICALCLASSESDROP %>"/>					
 			    </html:select>
 			</tr>
 			<br>
 			<tr>
-			    <a href="javascript: transferItem(document.forms[0].chemicalClasses, document.forms[0].selectedChemicalClasses, 'YES');"><img border="0" src="/camod/images/downarrow.gif"></a>
-			    <a href="javascript: transferItem(document.forms[0].selectedChemicalClasses, document.forms[0].chemicalClasses, 'YES');"><img border="0" src="/camod/images/uparrow.gif"></a>
+			    <a href="javascript: transferItem(document.forms[0].chemicalClasses, document.forms[0].selectedChemicalClasses, 'YES');"><img alt="Move down" border="0" src="/camod/images/downarrow.gif"></a>
+			    <a href="javascript: transferItem(document.forms[0].selectedChemicalClasses, document.forms[0].chemicalClasses, 'YES');"><img alt="Move up" border="0" src="/camod/images/uparrow.gif"></a>
             </tr>
             <br>
             <tr>
-			    <html:select styleClass="formFieldUnSized" size="5" multiple="true" style="width: 500px" property="selectedChemicalClasses" >												
+			    <html:select styleClass="formFieldUnSized" size="5" multiple="true" style="width: 500px" styleId="selectedChemicalClasses" property="selectedChemicalClasses" >												
 			        <html:options property="selectedChemicalClasses" />
 			    </html:select>
 			</tr>
@@ -162,23 +162,23 @@
     
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>        
-		<td class="formLabel"><label for="field3">Biological Process:</label></td>
+		<td class="formLabel"><label for="processes">Biological Process:</label><label for="selectedProcesses">&#160;</label></td>
 		<td class="formField">
 		    <center>
-		    <table>
+		    <table summary="This table is used to format page content">
 		    <tr>
-			    <html:select styleClass="formFieldUnSized" size="5"  multiple="true" style="width: 500px" property="processes">												
+			    <html:select styleClass="formFieldUnSized" size="5"  multiple="true" style="width: 500px" styleId="processes" property="processes">												
 			    <html:options name="<%= Dropdowns.BIOLOGICALPROCESSDROP %>"/>					
 			    </html:select>
 			</tr>
 			<br>
 			<tr>
-			    <a href="javascript: transferItem(document.forms[0].processes, document.forms[0].selectedProcesses, 'YES');"><img border="0" src="/camod/images/downarrow.gif"></a>
-			    <a href="javascript: transferItem(document.forms[0].selectedProcesses, document.forms[0].processes, 'YES');"><img border="0" src="/camod/images/uparrow.gif"></a>
+			    <a href="javascript: transferItem(document.forms[0].processes, document.forms[0].selectedProcesses, 'YES');"><img alt="Move down" border="0" src="/camod/images/downarrow.gif"></a>
+			    <a href="javascript: transferItem(document.forms[0].selectedProcesses, document.forms[0].processes, 'YES');"><img alt="Move up" border="0" src="/camod/images/uparrow.gif"></a>
             </tr>
             <br>
             <tr>
-			    <html:select styleClass="formFieldUnSized" size="5" multiple="true" style="width: 500px" property="selectedProcesses" >												
+			    <html:select styleClass="formFieldUnSized" size="5" multiple="true" style="width: 500px" styleId="selectedProcesses" property="selectedProcesses" >												
 			        <html:options property="selectedProcesses" />
 			    </html:select>
 			</tr>
@@ -189,23 +189,23 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>        
-		<td class="formLabel"><label for="field3">Target:</label></td>
+		<td class="formLabel"><label for="targets">Target:</label><label for="selectedTargets">&#160;</label></td>
 		<td class="formField">
 		    <center>
-		    <table>
+		    <table summary="This table is used to format page content">
 		    <tr>
-			    <html:select styleClass="formFieldUnSized" size="5"  multiple="true" style="width: 500px" property="targets" >												
+			    <html:select styleClass="formFieldUnSized" size="5"  multiple="true" style="width: 500px" styleId="targets" property="targets" >												
 			    <html:options name="<%= Dropdowns.THERAPEUTICTARGETSDROP %>"/>					
 			    </html:select>
 			</tr>
 			<br>
 			<tr>
-			    <a href="javascript: transferItem(document.forms[0].targets, document.forms[0].selectedTargets, 'YES');"><img border="0" src="/camod/images/downarrow.gif"></a>
-			    <a href="javascript: transferItem(document.forms[0].selectedTargets, document.forms[0].targets, 'YES');"><img border="0" src="/camod/images/uparrow.gif"></a>
+			    <a href="javascript: transferItem(document.forms[0].targets, document.forms[0].selectedTargets, 'YES');"><img alt="Move down" border="0" src="/camod/images/downarrow.gif"></a>
+			    <a href="javascript: transferItem(document.forms[0].selectedTargets, document.forms[0].targets, 'YES');"><img alt="Move up" border="0" src="/camod/images/uparrow.gif"></a>
             </tr>
             <br>
             <tr>
-			    <html:select styleClass="formFieldUnSized" size="5" multiple="true" style="width: 500px" property="selectedTargets" >
+			    <html:select styleClass="formFieldUnSized" size="5" multiple="true" style="width: 500px" styleId="selectedTargets" property="selectedTargets" >
 			    <html:options property="selectedTargets" />
 			    </html:select>
 			</tr>
@@ -216,60 +216,60 @@
 				 	
  	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Experiment:</label>
+		<td class="formLabel"><label for="experiment">Experiment:</label>
 		</td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldUnSized" property="experiment" cols="60" rows="3"/>			
+					<html:textarea styleClass="formFieldUnSized" styleId="experiment" property="experiment" cols="60" rows="3"/>			
 			</td>
 	</tr>
 	<tr>
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Dose:</label></td>
+		<td class="formRequiredNotice" width="5"><label for="dosageUnit">&nbsp;</label></td>
+		<td class="formLabel"><label for="dosage">Dose:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized"  property="dosage" size="15"  />
-			<label for="field1">&nbsp;Units&nbsp;</label>			
-			<html:select styleClass="formFieldUnSized" size="1" property="dosageUnit" >												
+			<html:text styleClass="formFieldUnSized"  styleId="dosage" property="dosage" size="15"  />
+			&nbsp;Units&nbsp;			
+			<html:select styleClass="formFieldUnSized" size="1" styleId="dosageUnit" property="dosageUnit" >												
 				<html:options name="<%= Dropdowns.CHEMTHERAPYDOSEUNITSDROP %>"/>				
 			</html:select>
 		</td>
 	</tr> 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field3">Administrative Route:</label>
+		<td class="formLabel"><label for="administrativeRoute">Administrative Route:</label>
 		</td>
 		<td class="formField">
 		<br>
-		<label for="field3">- if Administration Route is not listed, <br>then please select "Other" and then specify it below:</label>
+		- if Administration Route is not listed, <br>then please select "Other" and then specify it below:
 		<br>
 		<br>
-			<html:select styleClass="formFieldSized" size="1" property="administrativeRoute"  onclick="chkOtherAdminRoute();">												
+			<html:select styleClass="formFieldSized" size="1" styleId="administrativeRoute" property="administrativeRoute"  onclick="chkOtherAdminRoute();">												
 				<html:options name="<%= Dropdowns.ADMINISTRATIVEROUTEDROP %>"/>					
 			</html:select>			
 		</td>
 	</tr>	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Other Administrative Route:</label></td>
+		<td class="formLabel"><label for="otherAdministrativeRoute">Other Administrative Route:</label></td>
 		<td class="formField">					
-			<html:text styleClass="formFieldSized" size="30" property="otherAdministrativeRoute" disabled="true"/>			
+			<html:text styleClass="formFieldSized" size="30" styleId="otherAdministrativeRoute" property="otherAdministrativeRoute" disabled="true"/>			
 		</td>
 	</tr>
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field3">Gender:</label></td>
+		<td class="formLabel"><label for="gender">Gender:</label></td>
 		<td class="formField">
-			<html:select styleClass="formFieldUnSized" size="1" property="type" >												
+			<html:select styleClass="formFieldUnSized" size="1" styleId="gender" property="type" >												
 				<html:options name="<%= Dropdowns.SEXDISTRIBUTIONDROP %>"/>					
 			</html:select>
 		</td>
 	</tr>
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Age at Treatment:</label></td>
+		<td class="formLabel"><label for="ageAtTreatment">Age at Treatment:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized" property="ageAtTreatment"  size="15"/>
-			<label for="field1">&nbsp;Units&nbsp;</label>
-			<html:select styleClass="formFieldUnSized" size="1" property="ageAtTreatmentUnit" >												
+			<html:text styleClass="formFieldUnSized" styleId="ageAtTreatment" property="ageAtTreatment"  size="15"/>
+			<label for="ageAtTreatmentUnit">&nbsp;Units&nbsp;</label>
+			<html:select styleClass="formFieldUnSized" size="1" styleId="ageAtTreatmentUnit" property="ageAtTreatmentUnit" >												
 				<html:options name="<%= Dropdowns.AGEUNITSDROP %>"/>					
 			</html:select>
 		</td>
@@ -280,18 +280,18 @@
 		<tr>
 			<td class="formRequiredNotice" width="10">&nbsp;</td>
 	
-					<td class="formLabel"><label for="field1">Developmental Stage:</label>&nbsp;
+					<td class="formLabel"><label for="developmentalStage">Developmental Stage:</label>&nbsp;
 						<camod:cshelp topic="data_tree_help" key="DEVELOPMENTALSTAGE.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />
 					<br>							
 					<a href="javascript:showZebrafishStageTree('therapyForm', 'developmentalStageCode', 'developmentalStageName', 'developmentalStage', true)">
-						<IMG src="images\selectUP.gif" align=middle border=0></a>
+						<IMG alt="Select from EVSTree" src="images\selectUP.gif" align=middle border=0></a>
 					</td>				
 					<html:hidden property="developmentalStageCode"/>
 					<input type="hidden" name="developmentalStageName" />
 					<td class="formField">					
-						<html:text styleClass="formFieldSized" disabled="true" property="developmentalStage" size="30"  />
+						<html:text styleClass="formFieldSized" disabled="true" styleId="developmentalStage" property="developmentalStage" size="30"  />
 						<a href="javascript: clearField(document.forms[0].developmentalStage, document.forms[0].developmentalStageCode);">
-						<img border="0" align=middle src="/camod/images/clear.gif"></a>						
+						<img alt="Clear the Selection" border="0" align=middle src="/camod/images/clear.gif"></a>						
 						
 					</td>
 		</tr>
@@ -299,18 +299,18 @@
 		
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Results:</label>
+		<td class="formLabel"><label for="results">Results:</label>
 		</td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldUnSized" property="results" cols="60" rows="3"/>			
+					<html:textarea styleClass="formFieldUnSized" styleId="results" property="results" cols="60" rows="3"/>			
 			</td>
 	</tr>
     <tr align="LEFT" valign="TOP">
         <td class="formRequiredNotice" width="5">&nbsp;</td>        
-        <TD class="formLabel"><label for="field1">Toxicity Grade:</label>
+        <TD class="formLabel"><label for="toxicityGrade">Toxicity Grade:</label>
         </TD>
 		<td class="formField" >
-			<html:select styleClass="formFieldUnSized" size="1" property="toxicityGrade" >												
+			<html:select styleClass="formFieldUnSized" size="1" styleId="toxicityGrade" property="toxicityGrade" >												
 				<html:options name="<%= Dropdowns.TOXICITYGRADESDROP %>" />					
 			</html:select>
 		</td>
@@ -318,34 +318,34 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Biomarker:</label>
+		<td class="formLabel"><label for="biomarker">Biomarker:</label>
 		</td>
 			<td class="formField">
-				<html:text styleClass="formFieldSized" size="30" property="biomarker" />			
+				<html:text styleClass="formFieldSized" size="30" styleId="biomarker" property="biomarker" />			
 			</td>
 	</tr>
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Tumor Response:</label>
+		<td class="formLabel"><label for="tumorResponse">Tumor Response:</label>
 		</td>
 			<td class="formField">
-				<html:text styleClass="formFieldSized" size="30" property="tumorResponse" />			
+				<html:text styleClass="formFieldSized" size="30" styleId="tumorResponse" property="tumorResponse" />			
 			</td>
 	</tr>		
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Comment:</label>
+		<td class="formLabel"><label for="comments">Comment:</label>
 		</td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldUnSized" property="comments" cols="60" rows="3"/>			
+					<html:textarea styleClass="formFieldUnSized" styleId="comments" property="comments" cols="60" rows="3"/>			
 			</td>
 	</tr>		
 	
 
 	<tr>
 		<td align="right" colspan="3">
-			<TABLE cellpadding="4" cellspacing="0" border="0">
+			<TABLE summary="This table is used to format page content" cellpadding="4" cellspacing="0" border="0">
 				
 					  <html:submit styleClass="actionButton">
 						  <bean:message key="button.submit"/>

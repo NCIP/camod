@@ -43,15 +43,15 @@
 	
 <!-- submitImages.jsp -->
 <!-- Main Content Begins -->
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <!-- Took this out of sidebar.jsp and has to go here to format correctly  -->
 <%@ include file="/jsp/submitMenu.jsp" %>
 <tr><td>
-	<TABLE summary="" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
+	<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
 	<tr><td valign="top">
 	<!-- -->
 
-	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
+	<TABLE summary="This table is used to format page content" cellpadding="3" cellspacing="0" border="0" align="left">
 		<tr>
 		    <html:errors/>
 			<td class="formMessage" colspan="3">* indicates a required field</td>
@@ -63,15 +63,15 @@
 
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
-			<td class="formRequiredLabel"><label for="field1">Title of Image<br>(Enter info only when uploading image)</label></td>
+			<td class="formRequiredLabel"><label for="imageTitle">Title of Image<br>(Enter info only when uploading image)</label></td>
 			<td class="formField">
-				<html:textarea styleClass="formFieldSized" property="title" rows="4" cols="40"/>
+				<html:textarea styleClass="formFieldSized" styleId="imageTitle" property="title" rows="4" cols="40"/>
 			</td>
 		</tr>
 
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
-			<td class="formRequiredLabel"><label for="field1">Upload Image<br>(Image of type .jpg, .jpeg, .gif, or .png)<br>(Required if Alternate URL not used)</label></td>
+			<td class="formRequiredLabel"><label for="fileLocation">Upload Image<br>(Image of type .jpg, .jpeg, .gif, or .png)<br>(Required if Alternate URL not used)</label></td>
 			<td class="formField">
 			
 			<c:if test="${not empty imageForm.url}">
@@ -83,60 +83,60 @@
 				<br><br>													
 			</c:if>
 						
-			<html:file styleClass="formFieldSized" size="40" property="fileLocation"/>	
+			<html:file styleClass="formFieldSized" size="40" styleId="fileLocation" property="fileLocation"/>	
 			
 			</td>
 		</tr>
 	
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
-			<td class="formRequiredLabel"><label for="field1">Alternate URL<br>(Required if Upload Image not used)</label>
+			<td class="formRequiredLabel"><label for="urlAlternEntry">Alternate URL<br>(Required if Upload Image not used)</label>
 			</td>
 			<td class="formField">
 				<br>
-				<label for="field3">Please enter a complete URL with http:// <br>(http, https, ftp schemes allowed)</label>
+				Please enter a complete URL with http:// <br>(http, https, ftp schemes allowed)
 				<br>
 				<br>			
-				<html:text styleClass="formFieldSized" property="urlAlternEntry" size="30"/>			
+				<html:text styleClass="formFieldSized" styleId="urlAlternEntry" property="urlAlternEntry" size="30"/>			
 			</td>
 		</tr>
 	
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field2">Description of Image<br>(Enter info only when uploading image)</label></td>
+			<td class="formLabel"><label for="descriptionOfConstruct">Description of Image<br>(Enter info only when uploading image)</label></td>
 			<td class="formField">
-				<html:textarea styleClass="formFieldSized" property="descriptionOfConstruct"  rows="4" cols="40" />	
+				<html:textarea styleClass="formFieldSized" styleId="descriptionOfConstruct" property="descriptionOfConstruct"  rows="4" cols="40" />	
 		</tr>
 		
 	<tr>
 
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Staining Method:</label>&nbsp;
+		<td class="formLabel"><label for="stainingMethod">Staining Method:</label>&nbsp;
 
 			<a href="javascript:showStainingMethodTree('imageForm', 'stainingMethodCode', 'stainingMethodName', 'stainingMethod', true)">
-				<IMG src="images\selectUP.gif" align=middle border=0>
+				<IMG alt="Select from EVSTree" src="images\selectUP.gif" align=middle border=0>
 			</a>
 		</td>						
 		<td class="formField">		
 			<html:hidden property="stainingMethodCode"/>
 			<input type="hidden" name="stainingMethodName" />				
-			<html:text styleClass="formFieldSized" disabled="true" property="stainingMethod" size="30"  />
-			<a href="javascript: clearField(document.forms[0].stainingMethod, document.forms[0].stainingMethodCode);"><img border="0" src="/camod/images/clear.gif"></a>
+			<html:text styleClass="formFieldSized" disabled="true" styleId="stainingMethod" property="stainingMethod" size="30"  />
+			<a href="javascript: clearField(document.forms[0].stainingMethod, document.forms[0].stainingMethodCode);"><img alt="Clear the Selection" border="0" src="/camod/images/clear.gif"></a>
 		</td>
 	</tr>			
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Comment:</label>
+		<td class="formLabel"><label for="comments">Comment:</label>
 		</td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldSized" property="comments" cols="32" rows="4"/>			
+					<html:textarea styleClass="formFieldSized" styleId="comments" property="comments" cols="32" rows="4"/>			
 			</td>
 	</tr>	
 				
 		<tr>
 			<td align="right" colspan="3">
-				<TABLE cellpadding="4" cellspacing="0" border="0">
+				<TABLE summary="This table is used to format page content" cellpadding="4" cellspacing="0" border="0">
 				
 					  <html:submit styleClass="actionButton">
 						  <bean:message key="button.submit"/>

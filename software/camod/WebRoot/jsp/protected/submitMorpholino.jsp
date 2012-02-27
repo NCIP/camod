@@ -62,15 +62,15 @@
 
 <!-- submitMorpholino.jsp -->
 <!-- Main Content Begins -->
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <!-- Took this out of sidebar.jsp and has to go here to format correctly  -->
 <%@ include file="/jsp/submitMenu.jsp" %>
 <tr><td>
-	<TABLE summary="" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
+	<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
 	<tr><td valign="top">
 <!-- -->
 
-	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
+	<TABLE summary="This table is used to format page content" cellpadding="3" cellspacing="0" border="0" align="left">
 	<tr>
 		<html:errors/>
 		<td class="formMessage" colspan="3">* indicates a required field</td>
@@ -84,13 +84,13 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field3">Source:</label></td>
+		<td class="formLabel"><label for="source">Source:</label></td>
 		<td class="formField">		
 			<br>
-			<label for="field3">(if source is not listed, then please<br>select "Other" from the list and specify it below)</label>
+			(if source is not listed, then please<br>select "Other" from the list and specify it below)
 			<br>
 			<br>			
-			<html:select styleClass="formFieldSized" size="1" property="source"  onclick="chkOtherSource();">												
+			<html:select styleClass="formFieldSized" size="1" styleId="source" property="source"  onclick="chkOtherSource();">												
 				<html:options name="<%= Dropdowns.MORPHOSOURCEDROP %>"/>					
 			</html:select>
 			
@@ -98,18 +98,18 @@
 	</tr>
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Other Source:</label></td>
+			<td class="formLabel"><label for="otherSource">Other Source:</label></td>
 			<td class="formField">					
-					<html:text styleClass="formFieldSized" size="30" property="otherSource" />			
+					<html:text styleClass="formFieldSized" size="30" styleId="otherSource" property="otherSource" />			
 			</td>
 		</tr>
 		
 
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Type:</label></td>
+			<td class="formLabel"><label for="morType">Type:</label></td>
 		<td class="formField">
-			<html:select styleClass="formFieldUnSized" size="1" property="type" >												
+			<html:select styleClass="formFieldUnSized" size="1" styleId="morType" property="type" >												
 				<html:options name="<%= Dropdowns.MORPHOTYPEDROP %>"/>					
 			</html:select>
 		</td>
@@ -119,9 +119,9 @@
 
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Sequence Direction:</label></td>
+			<td class="formLabel"><label for="sequenceDirection">Sequence Direction:</label></td>
 			<td class="formField">					
-				<html:select styleClass="formFieldUnSized" size="1" property="sequenceDirection" >												
+				<html:select styleClass="formFieldUnSized" size="1" styleId="sequenceDirection" property="sequenceDirection" >												
 					<html:options name="<%= Dropdowns.SEQUENCEDIRECTIONSDROP %>"/>					
 				</html:select>					
 			</td>
@@ -129,20 +129,20 @@
 
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
-			<td class="formRequiredLabel"><label for="field1">Targeted Region:</label></td>
+			<td class="formRequiredLabel"><label for="targetedRegion">Targeted Region:</label></td>
 			<td class="formField">					
-					<html:text styleClass="formFieldSized" size="30" property="targetedRegion" />			
+					<html:text styleClass="formFieldSized" size="30" styleId="targetedRegion" property="targetedRegion" />			
 			</td>
 		</tr>
 		
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Concentration:</label>
+		<td class="formLabel"><label for="concentration">Concentration:</label>
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized" property="concentration"  size="10" />
-			<label for="field1">&nbsp;Units&nbsp;</label>
-			<html:select styleClass="formFieldUnSized" size="1" property="concentrationUnit" >												
+			<html:text styleClass="formFieldUnSized" styleId="concentration" property="concentration"  size="10" />
+			<label for="concentrationUnit">&nbsp;Units&nbsp;</label>
+			<html:select styleClass="formFieldUnSized" size="1" styleId="concentrationUnit" property="concentrationUnit" >												
 				<html:options name="<%= Dropdowns.CONCENTRATIONUNITSDROP %>"/>					
 			</html:select>
 		</td>
@@ -150,30 +150,30 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field3">Delivery Method:</label></td>
+		<td class="formLabel"><label for="deliveryMethod">Delivery Method:</label></td>
 		<td class="formField">		
 			<br>
-			<label for="field3">(if delivery method is not listed, then please<br>select "Other" from the list and specify it below)</label>
+			(if delivery method is not listed, then please<br>select "Other" from the list and specify it below)
 			<br>
 			<br>			
-			<html:select styleClass="formFieldSized" size="1" property="deliveryMethod"  onclick="chkOtherMethod();">												
+			<html:select styleClass="formFieldSized" size="1" styleId="deliveryMethod" property="deliveryMethod"  onclick="chkOtherMethod();">												
 				<html:options name="<%= Dropdowns.DELIVERYMETHODDROP %>"/>					
 			</html:select>			
 		</td>
 	</tr>
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Other Delivery Method:</label></td>
+			<td class="formLabel"><label for="otherDeliveryMethod">Other Delivery Method:</label></td>
 			<td class="formField">					
-					<html:text styleClass="formFieldSized" size="30" property="otherDeliveryMethod" />			
+					<html:text styleClass="formFieldSized" size="30" styleId="otherDeliveryMethod" property="otherDeliveryMethod" />			
 			</td>
 	</tr>
 	
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Target Site:</label></td>
+			<td class="formLabel"><label for="targetSite">Target Site:</label></td>
 		<td class="formField">
-			<html:select styleClass="formFieldUnSized" size="1" property="targetSite" >												
+			<html:select styleClass="formFieldUnSized" size="1" styleId="targetSite" property="targetSite" >												
 				<html:options name="<%= Dropdowns.MORPHOLINOTARGETSITE %>"/>					
 			</html:select>
 		</td>
@@ -181,13 +181,13 @@
 		
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field3">Visualization Ligands:</label></td>
+		<td class="formLabel"><label for="visualLigand">Visualization Ligands:</label></td>
 		<td class="formField">		
 			<br>
-			<label for="field3">(if visual ligand is not listed, then please<br>select "Other" from the list and specify it below)</label>
+			(if visual ligand is not listed, then please<br>select "Other" from the list and specify it below)
 			<br>
 			<br>			
-			<html:select styleClass="formFieldSized" size="1" property="visualLigand"  onclick="chkOtherLigand();">												
+			<html:select styleClass="formFieldSized" size="1" styleId="visualLigand" property="visualLigand"  onclick="chkOtherLigand();">												
 				<html:options name="<%= Dropdowns.VISUALLIGANDSDROP %>"/>					
 			</html:select>
 			
@@ -195,25 +195,25 @@
 	</tr>
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Other Visualization Ligands:</label></td>
+			<td class="formLabel"><label for="otherVisualLigand">Other Visualization Ligands:</label></td>
 			<td class="formField">					
-					<html:text styleClass="formFieldSized" size="30" property="otherVisualLigand" />			
+					<html:text styleClass="formFieldSized" size="30" styleId="otherVisualLigand" property="otherVisualLigand" />			
 			</td>
 		</tr>
 		
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Comment:</label>
+		<td class="formLabel"><label for="comments">Comment:</label>
 		</td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldSized"  property="comments" cols="32" rows="4"/>			
+					<html:textarea styleClass="formFieldSized"  styleId="comments" property="comments" cols="32" rows="4"/>			
 			</td>
 	</tr>		
 	
 	<tr>
 		<td align="right" colspan="3">
 			<!-- action buttons begins -->
-			<TABLE cellpadding="4" cellspacing="0" border="0">
+			<TABLE summary="This table is used to format page content" cellpadding="4" cellspacing="0" border="0">
 			
 				  <html:submit styleClass="actionButton">
 					  <bean:message key="button.submit"/>

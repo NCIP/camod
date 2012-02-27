@@ -87,15 +87,15 @@
 
 <!-- submitInducedMutation.jsp -->
 <!-- Main Content Begins -->
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <!-- Took this out of sidebar.jsp and has to go here to format correctly  -->
 <%@ include file="/jsp/submitMenu.jsp" %>
 <tr><td>
-	<TABLE summary="" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
+	<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
 	<tr><td valign="top">
 <!-- -->
 
-	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
+	<TABLE summary="This table is used to format page content" cellpadding="3" cellspacing="0" border="0" align="left">
 	
 	<tr>
 		<html:errors/>
@@ -109,17 +109,17 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field1">Name of Inducing Agent:</label></td>
+		<td class="formRequiredLabel"><label for="indName">Name of Inducing Agent:</label></td>
 		<td class="formField">					
-			<html:text styleClass="formFieldSized" property="name" size="10" />		
+			<html:text styleClass="formFieldSized" styleId="indName" property="name" size="10" />		
 		</td>
 	</tr>
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel">Inducing Agent Category:</td>
+		<td class="formRequiredLabel"><label for="indType">Inducing Agent Category:</label></td>
 		<td class="formField">
-			<html:select styleClass="formFieldSized" size="1" property="type" onchange="chkInducingAgent();" >
+			<html:select styleClass="formFieldSized" size="1" styleId="indType" property="type" onchange="chkInducingAgent();" >
 				<html:optionsCollection name="<%= Dropdowns.INDUCEDMUTATIONDROP %>" />										
 			</html:select>
 			<br>
@@ -129,85 +129,85 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Other Category:</label></td>
+		<td class="formLabel"><label for="otherType">Other Category:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="otherType"  size="30" />		
+			<html:text styleClass="formFieldSized" styleId="otherType" property="otherType"  size="30" />		
 		</td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">CAS number:</label>
+		<td class="formLabel"><label for="casNumber">CAS number:</label>
 		</td>
 		<td class="formField">
 			<input type=button value="Find CAS #" onClick="myRef = window.open('http://chemfinder.cambridgesoft.com/','mywin',
 			'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>		
-			<label for="field1">&nbsp;&nbsp;</label>
-			<html:text styleClass="formFieldUnSized" property="casNumber" size="20" />		
+			&nbsp;&nbsp;
+			<html:text styleClass="formFieldUnSized" styleId="casNumber" property="casNumber" size="20" />		
 		</td>
 	</tr>
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Entrez Gene ID:</label>
+		<td class="formLabel"><label for="geneIdentifier">Entrez Gene ID:</label>
 		</td>
 		<td class="formField">
 		<input type=button value="Find Gene ID" onClick="myRef = window.open('http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=gene','mywin',
 		'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>		
-		<label for="field1">&nbsp;&nbsp;</label>
-		<html:text styleClass="formFieldUnSized" property="geneIdentifier" size="20" />		
+		&nbsp;&nbsp;
+		<html:text styleClass="formFieldUnSized" styleId="geneIdentifier" property="geneIdentifier" size="20" />		
 		</td>
 	</tr>
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Description:</label></td>
+		<td class="formLabel"><label for="indDesc">Description:</label></td>
 		<td class="formField">
-			<html:textarea styleClass="formFieldSized" property="description"  rows="4" cols="32"  />		
+			<html:textarea styleClass="formFieldSized" styleId="indDesc" property="description"  rows="4" cols="32"  />		
 		</td>
 	</tr>	
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Observation:</label>
+		<td class="formLabel"><label for="observation">Observation:</label>
 		</td>
 		<td class="formField">
-			<html:textarea styleClass="formFieldSized" property="observation" rows="4" cols="32" onkeypress="chkObservation();"/>		
+			<html:textarea styleClass="formFieldSized" styleId="observation" property="observation" rows="4" cols="32" onkeypress="chkObservation();"/>		
 		</td>
 	</tr>
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Method of Observation:</label>
+		<td class="formLabel"><label for="methodOfObservation">Method of Observation:</label>
 		</td>
 		<td class="formField">
-			<html:textarea styleClass="formFieldSized" property="methodOfObservation" rows="4" cols="32"  />		
+			<html:textarea styleClass="formFieldSized" styleId="methodOfObservation" property="methodOfObservation" rows="4" cols="32"  />		
 		</td>
 	</tr>
 		
 	<tr>
 		<c:if test="${modelspeciescommonname == 'Mouse'}">			
 				<td class="formRequiredNotice" width="5">&nbsp;</td>
-				<td class="formLabel"><label for="field2">MGI Identifier:</label>
+				<td class="formLabel"><label for="mgiId">MGI Identifier:</label>
 				</td>
 				<td class="formField">
 					<input type=button value="Find MGI ID" onClick="myRef = window.open('http://www.informatics.jax.org/','mywin',
 								'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>
-					<label for="field1">&nbsp;&nbsp;</label>
-					<html:text styleClass="formFieldUnSized" size="25" property="mgiId"  />
+					&nbsp;&nbsp;
+					<html:text styleClass="formFieldUnSized" size="25" styleId="mgiId" property="mgiId"  />
 				</td>
 		</c:if>				
 	</tr>	
 	<tr>
 		<c:if test="${modelspeciescommonname == 'Zebrafish'}">	
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field2">ZFIN Identifier:</label>
+			<td class="formLabel"><label for="zfinId">ZFIN Identifier:</label>
 			</td>
 			<td class="formField">
 				<input type=button value="Find ZFIN ID" onClick="myRef = window.open('http://zfin.org/','mywin',
 				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>
-				<label for="field1">&nbsp;&nbsp;</label>
-				<html:text styleClass="formFieldUnSized" size="25" property="zfinId"  />
+				&nbsp;&nbsp;
+				<html:text styleClass="formFieldUnSized" size="25" styleId="zfinId" property="zfinId"  />
 			</td>
 		</c:if>
 	</tr>	
@@ -215,29 +215,29 @@
 	<tr>
 		<c:if test="${modelspeciescommonname == 'Rat'}">	
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field2">RGD Identifier:</label>
+			<td class="formLabel"><label for="rgdId">RGD Identifier:</label>
 			</td>
 			<td class="formField">
 				<input type=button value="Find RGD ID" onClick="myRef = window.open('http://rgd.mcw.edu/strains/','mywin',
 				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>
-				<label for="field1">&nbsp;&nbsp;</label>
-				<html:text styleClass="formFieldUnSized" size="25" property="rgdId"  />
+				&nbsp;&nbsp;
+				<html:text styleClass="formFieldUnSized" size="25" styleId="rgdId" property="rgdId"  />
 			</td>
 		</c:if>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Comment:</label>
+		<td class="formLabel"><label for="comments">Comment:</label>
 		</td>
 		<td class="formField">
-			<html:textarea styleClass="formFieldSized" property="comments"  rows="4" cols="32"  />	
+			<html:textarea styleClass="formFieldSized" styleId="comments" property="comments"  rows="4" cols="32"  />	
 		</td>
 	</tr>
 	
 	<tr>
 		<td align="right" colspan="3">
-			<TABLE cellpadding="4" cellspacing="0" border="0">
+			<TABLE summary="This table is used to format page content" cellpadding="4" cellspacing="0" border="0">
 			
 				  <html:submit styleClass="actionButton">
 					  <bean:message key="button.submit"/>

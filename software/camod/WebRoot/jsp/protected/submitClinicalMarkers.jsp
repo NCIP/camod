@@ -28,14 +28,14 @@
 <!-- submitClinicalMarkers.jsp -->
 <!-- Main Content Begins -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <!-- Took this out of sidebar.jsp and has to go here to format correctly  -->
 <%@ include file="/jsp/submitMenu.jsp" %>
 <tr><td>
-	<TABLE summary="" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
+	<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
 	<tr><td valign="top">
 
-	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
+	<TABLE summary="This table is used to format page content" cellpadding="3" cellspacing="0" border="0" align="left">
 
 	<tr>
 		<html:errors/>
@@ -52,10 +52,10 @@
                 <TD class="formRequiredLabel">Select Clinical Marker:</TD>
 			<td class="formField">
 			<br>
-			<label for="field3">(if Clinical Marker is not listed, then please<br>select "Other" from the list and specify it below)</label>
+			<label for="cmName">(if Clinical Marker is not listed, then please<br>select "Other" from the list and specify it below)</label>
 			<br>
 			<br>						
-			<html:select styleClass="formFieldSized" size="1" property="name" onclick="chkOtherName( this );" >
+			<html:select styleClass="formFieldSized" size="1" styleId="cmName" property="name" onclick="chkOtherName( this );" >
 				<html:options name="<%= Dropdowns.CLINICALMARKERSDROP %>" />										
 			</html:select>
 			</td>
@@ -63,33 +63,33 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Other Clinical Marker:</label></td>
+		<td class="formLabel"><label for="otherName">Other Clinical Marker:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="otherName"  size="40" />
+			<html:text styleClass="formFieldSized" styleId="otherName" property="otherName"  size="40" />
 		</td>
 	</tr>	
 
         <TR align="LEFT" valign="TOP">
             <td class="formRequiredNotice" width="5">&nbsp;</td>                    
-            <TD class="formLabel">Value:</TD>
+            <TD class="formLabel"><label for="cmValue">Value:</label></TD>
 			<td class="formField">
-			<html:text styleClass="formFieldSized" size="30" property="value" />			
+			<html:text styleClass="formFieldSized" size="30" styleId="cmValue" property="value" />			
 		</td>
 	</tr>
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Comment:</label>
+		<td class="formLabel"><label for="comments">Comment:</label>
 		</td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldSized" property="comments" cols="32" rows="4"/>			
+					<html:textarea styleClass="formFieldSized" styleId="comments" property="comments" cols="32" rows="4"/>			
 			</td>
 	</tr>		
 
 	<tr>
 		<td align="right" colspan="3">
 			<!-- action buttons begins -->
-				<TABLE cellpadding="4" cellspacing="0" border="0">
+				<TABLE summary="This table is used to format page content" cellpadding="4" cellspacing="0" border="0">
 				
 					  <html:submit styleClass="actionButton">
 						  <bean:message key="button.submit"/>

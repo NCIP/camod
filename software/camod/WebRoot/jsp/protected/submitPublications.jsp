@@ -49,15 +49,15 @@ function trimRGDId(str)
 
 <!-- submitPublications.jsp -->
 <!-- Main Content Begins -->
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <!-- Took this out of sidebar.jsp and has to go here to format correctly  -->
 <%@ include file="/jsp/submitMenu.jsp" %>
 <tr><td>
 	
-	<TABLE summary="" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
+	<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
 	<tr><td valign="top">
 
-	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
+	<TABLE summary="This table is used to format page content" cellpadding="3" cellspacing="0" border="0" align="left">
 	<html:form action="<%= (String) pageContext.getAttribute("actionName") %>" focus="name">
 	<tr>
 		<html:errors/>
@@ -72,21 +72,21 @@ function trimRGDId(str)
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel">
-			<label for="field1">First Author:</label>						
+			<label for="authors">First Author:</label>						
 		</td>
 		
 		<td class="formField">
-			<label>(e.g. Doe JR)</label>
+			(e.g. Doe JR)
 			<br>
-			<html:text styleClass="formFieldSized" size="30" property="authors" />
+			<html:text styleClass="formFieldSized" size="30" styleId="authors" property="authors" />
 		</td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field3">Publication Status:</label></td>
+		<td class="formRequiredLabel"><label for="pubName">Publication Status:</label></td>
 		<td class="formField">
-			<html:select styleClass="formFieldUnSized" size="1" property="name" >												
+			<html:select styleClass="formFieldUnSized" size="1" styleId="pubName" property="name" >												
 				<html:options name="<%= Dropdowns.PUBDROP %>"/>					
 			</html:select>				
 		</td>
@@ -99,8 +99,8 @@ function trimRGDId(str)
 				was reported for the first time?
 		</td>
 		<td class="formField">
-			<html:radio property="firstTimeReported" value="yes" /> Yes 
-			<html:radio property="firstTimeReported" value="no" /> No  
+			<html:radio styleId="firstTimeReported1" property="firstTimeReported" value="yes" /> <label for="firstTimeReported1">Yes</label> 
+			<html:radio styleId="firstTimeReported2" property="firstTimeReported" value="no" /> <label for="firstTimeReported2">No</label>  
 		</td>
 	</tr>	
 	
@@ -121,12 +121,12 @@ function trimRGDId(str)
 		</td>		
 		
 		<td class="formField">
-			<label valign="TOP" for="field1"><a href="#" onClick="myRef = window.open('http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed','mywin',
-			'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()">Click to look up PubMed Identifier</a></label>
+			<a href="#" onClick="myRef = window.open('http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed','mywin',
+			'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()">Click to look up PubMed Identifier</a>
 			<br><br><br>
-			<label valign="TOP" for="field1">PMID: &nbsp;</label>
+			<label valign="TOP" for="pmid">PMID: &nbsp;</label>
 			<br>
-			<html:text styleClass="formFieldUnSized" size="20" property="pmid" />
+			<html:text styleClass="formFieldUnSized" size="20" styleId="pmid" property="pmid" />
 			<html:submit property="<%=Constants.Parameters.ACTION%>" onclick="javascript:pmid.value=trim(pmid.value)" >Fill in Fields</html:submit>		
 		</td>
 	</tr>
@@ -135,39 +135,39 @@ function trimRGDId(str)
 		<c:when test="${modelspeciescommonname == 'Zebrafish'}">	
 			<tr>
 					<td class="formRequiredNotice" width="3">&nbsp;</td>
-					<td class="formLabel"><label for="field1">ZFIN number:</label>
+					<td class="formLabel"><label for="zfinPubId">ZFIN number:</label>
 					</td>
 					<td class="formField">		
 						<input type=button value="Find ZFIN ID" onClick="myRef = window.open('http://zfin.org/cgi-bin/webdriver?MIval=aa-pubselect2.apg&select_from=PUBLICATION','mywin',
 						'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>
-						<label for="field1">&nbsp;&nbsp;</label>
-						<html:text styleClass="formFieldUnSized" size="20" property="zfinPubId" />
+						&nbsp;&nbsp;
+						<html:text styleClass="formFieldUnSized" size="20" styleId="zfinPubId" property="zfinPubId" />
 					</td>
 			</tr>
 		</c:when>
 		<c:when test="${modelspeciescommonname == 'Rat'}">	
 			<tr>
 					<td class="formRequiredNotice" width="3">&nbsp;</td>
-					<td class="formLabel"><label for="field1">RGD number:<br><br>Note: No special characters permitted in this field. Example RGD:1599131 should instead be 1599131</label>
+					<td class="formLabel"><label for="rgdPubId">RGD number:<br><br>Note: No special characters permitted in this field. Example RGD:1599131 should instead be 1599131</label>
 					</td>
 					<td class="formField">		
 						<input type=button value="Find RGD #" onClick="myRef = window.open('http://rgd.mcw.edu/rgdweb/search/references.html','mywin',
 						'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>
-						<label for="field1">&nbsp;&nbsp;</label>
-						<html:text styleClass="formFieldUnSized" size="20" property="rgdPubId" />
+						&nbsp;&nbsp;
+						<html:text styleClass="formFieldUnSized" size="20" styleId="rgdPubId" property="rgdPubId" />
 					</td>
 			</tr>
 		</c:when>
 		<c:otherwise>
 			<tr>
 					<td class="formRequiredNotice" width="3">&nbsp;</td>
-					<td class="formLabel"><label for="field1">J number:</label>
+					<td class="formLabel"><label for="jaxJNumber">J number:</label>
 					</td>
 					<td class="formField">		
 						<input type=button value="Find J #" onClick="myRef = window.open('http://www.informatics.jax.org/searches/reference_form.shtml','mywin',
 						'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>
-						<label for="field1">&nbsp;&nbsp;</label>
-						<html:text styleClass="formFieldUnSized" size="20" property="jaxJNumber" />
+						&nbsp;&nbsp;
+						<html:text styleClass="formFieldUnSized" size="20" styleId="jaxJNumber" property="jaxJNumber" />
 					</td>
 			</tr>		
 		</c:otherwise>
@@ -175,65 +175,65 @@ function trimRGDId(str)
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field1">Title of Publication:<br/><br/>
+		<td class="formRequiredLabel"><label for="jTitle">Title of Publication:<br/><br/>
 			Note: Either the PMID or the Title of Publication must be entered.</label></td>
 		<td class="formField">
-			<html:textarea styleClass="formFieldSized" property="title" cols="32" rows="4"/>
+			<html:textarea styleClass="formFieldSized" styleId="jTitle" property="title" cols="32" rows="4"/>
 		</td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Year of Publication:</label></td>
+		<td class="formLabel"><label for="year">Year of Publication:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized" size="10" property="year" />
+			<html:text styleClass="formFieldUnSized" size="10" styleId="year" property="year" />
 		</td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Journal:</label></td>
+		<td class="formLabel"><label for="journal">Journal:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized" size="30" property="journal" />
+			<html:text styleClass="formFieldUnSized" size="30" styleId="journal" property="journal" />
 		</td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Volume:</label></td>
+		<td class="formLabel"><label for="volume">Volume:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized" size="10" property="volume" />
+			<html:text styleClass="formFieldUnSized" size="10" styleId="volume" property="volume" />
 		</td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Start Page:</label></td>
+		<td class="formLabel"><label for="startPage">Start Page:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized" size="10" property="startPage" />
+			<html:text styleClass="formFieldUnSized" size="10" styleId="startPage" property="startPage" />
 		</td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">End Page:</label></td>
+		<td class="formLabel"><label for="endPage">End Page:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized" size="10" property="endPage" />
+			<html:text styleClass="formFieldUnSized" size="10" styleId="endPage" property="endPage" />
 		</td>
 	</tr>
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Comment:</label>
+		<td class="formLabel"><label for="comments">Comment:</label>
 		</td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldSized" property="comments" cols="32" rows="4"/>			
+					<html:textarea styleClass="formFieldSized" styleId="comments" property="comments" cols="32" rows="4"/>			
 			</td>
 	</tr>		
 
 	<tr>
 		<td align="right" colspan="3">
-			<TABLE cellpadding="4" cellspacing="0" border="0">
+			<TABLE summary="This table is used to format page content" cellpadding="4" cellspacing="0" border="0">
 			
 				  <html:submit styleClass="actionButton" onclick="javascript:pmid.value=trim(pmid.value)">
 					  <bean:message key="button.submit"/>

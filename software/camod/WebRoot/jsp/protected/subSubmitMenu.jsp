@@ -128,7 +128,7 @@
 		onmouseout="ChangeClass('menu1','masterTitle')"><IMG height=5 alt=""
 		src="images/subMenuArrow.gif" width=5> MODEL CHARACTERISTICS</div>
 	<span class="submasterdiv" id="sub1"> &nbsp;&nbsp;&nbsp;
-		<img src="images/aquadot.jpg" border="0"> 
+		<img alt="" src="images/aquadot.jpg" border="0"> 
 		<html:link styleClass="subMenuBlue" action="AnimalModelPopulateAction.do?method=populate">
 		<camod:shorten><%= request.getSession().getAttribute(Constants.MODELDESCRIPTOR)%></camod:shorten>
 		</html:link> <br><br>
@@ -139,14 +139,14 @@
 		onmouseout="ChangeClass('menu2','masterTitle')"><IMG height=5 alt=""
 		src="images/subMenuArrow.gif" width=5> GENETIC DESCRIPTION</div>
 	<span class="submasterdiv" id="sub2"> 
-		<img src="images/right_arrow.gif" border="0"> 		
+		<img alt="" src="images/right_arrow.gif" border="0"> 		
 		<html:link styleClass="subMenuRed" action="EngineeredTransgenePopulateAction.do?method=dropdown">
 					Enter Transgene
 		</html:link><br>
 
 		<logic:iterate id="aEngineeredTransgene"
 			name="engineeredtransgene_list" type="Transgene">&nbsp;&nbsp;&nbsp;&nbsp;
-			<img src="images/aquadot.jpg" border="0">
+			<img alt="" src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
 				action="EngineeredTransgenePopulateAction.do?method=populate"
 				paramId="aEngineeredTransgeneID" paramName="aEngineeredTransgene"
@@ -154,7 +154,7 @@
 				<camod:shorten><bean:write name="aEngineeredTransgene" property="name" filter="false" /></camod:shorten>
 			</html:link><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;			      
 			      
-			<img src="images/right_arrow.gif" border="0">
+			<img alt="" src="images/right_arrow.gif" border="0">
 			<html:link styleClass="subMenuDarkRed"
 				action="AssociatedExpressionPopulateAction.do?method=dropdown"
 				paramId="aEngineeredTransgeneID" paramName="aEngineeredTransgene"
@@ -171,7 +171,7 @@
 				<bean:define id="aEngineeredTransgeneID" name="aEngineeredTransgene"
 					property="id" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					
-				<img src="images/aquadot_red.jpg" border="0">
+				<img alt="" src="images/aquadot_red.jpg" border="0">
 				<a class="subMenuMedRed"
 					href="AssociatedExpressionPopulateAction.do?method=populate&aAssociatedExpressionID=<c:out value='${ aAssociatedExpressionID }' />&aEngineeredTransgeneID=<c:out value='${ aEngineeredTransgeneID }' />">
 				<camod:shorten length="21"><bean:write name="aExpressionFeature" property="organ.name"filter="false" /></camod:shorten> 
@@ -181,14 +181,14 @@
 			
 		</logic:iterate> 
 	
-		<img src="images/right_arrow.gif" border="0"> 	
+		<img alt="" src="images/right_arrow.gif" border="0"> 	
 		<html:link styleClass="subMenuRed" action="GenomicSegmentPopulateAction.do?method=dropdown">
 					Enter Genomic Segment
 		</html:link><br>
 		<logic:iterate id="aGenomicSegment" name="genomicsegment_list"
 			type="GenomicSegment">&nbsp;&nbsp;&nbsp;&nbsp;		
 				  
-			<img src="images/aquadot.jpg" border="0">
+			<img alt="" src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
 				action="GenomicSegmentPopulateAction.do?method=populate"
 				paramId="aGenomicSegmentID" paramName="aGenomicSegment"
@@ -196,7 +196,7 @@
 				<camod:shorten><bean:write name="aGenomicSegment" property="cloneDesignator" filter="false" /></camod:shorten>
 			</html:link><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		
-			<img src="images/right_arrow.gif" border="0">
+			<img alt="" src="images/right_arrow.gif" border="0">
 			<html:link styleClass="subMenuDarkRed"
 				action="AssociatedExpressionPopulateAction.do?method=dropdown"
 				paramId="aGenomicSegmentID" paramName="aGenomicSegment"
@@ -213,7 +213,7 @@
 				<bean:define id="aGenomicSegmentID" name="aGenomicSegment"
 					property="id" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;						
 						
-				<img src="images/aquadot_red.jpg" border="0">
+				<img alt="" src="images/aquadot_red.jpg" border="0">
 				<a class="subMenuMedRed"
 					href="AssociatedExpressionPopulateAction.do?method=populate&aAssociatedExpressionID=<c:out value='${ aAssociatedExpressionID }' />&aGenomicSegmentID=<c:out value='${ aGenomicSegmentID }' />">
 				    <camod:shorten length="21"><bean:write name="aExpressionFeature" property="organ.name" filter="false" /></camod:shorten> 
@@ -221,7 +221,7 @@
 				<br>
 			</logic:iterate>
 		
-		</logic:iterate> <img src="images/right_arrow.gif" border="0"> 
+		</logic:iterate> <img alt="" src="images/right_arrow.gif" border="0"> 
 		
 		<html:link styleClass="subMenuRed" action="TargetedModificationPopulateAction.do?method=dropdown">
 				Enter Targeted Modification
@@ -229,7 +229,7 @@
 		<logic:iterate id="aTargetedModification" name="targetedmodification_list"
 			 type="TargetedModification">&nbsp;&nbsp;&nbsp;&nbsp;			  
 				  
-			<img src="images/aquadot.jpg" border="0">
+			<img alt="" src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
 				action="TargetedModificationPopulateAction.do?method=populate"
 				paramId="aTargetedModificationID" paramName="aTargetedModification"
@@ -238,7 +238,7 @@
 			</html:link><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			      
 			      
-			<img src="images/right_arrow.gif" border="0">
+			<img alt="" src="images/right_arrow.gif" border="0">
 			<html:link styleClass="subMenuDarkRed"
 				action="AssociatedExpressionPopulateAction.do?method=dropdown"
 				paramId="aTargetedModificationID" paramName="aTargetedModification"
@@ -256,7 +256,7 @@
 				<bean:define id="aTargetedModificationID"
 					name="aTargetedModification" property="id" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;						
 						
-				<img src="images/aquadot_red.jpg" border="0">
+				<img alt="" src="images/aquadot_red.jpg" border="0">
 				<a class="subMenuMedRed"
 					href="AssociatedExpressionPopulateAction.do?method=populate&aAssociatedExpressionID=<c:out value='${ aAssociatedExpressionID }' />&aTargetedModificationID=<c:out value='${ aTargetedModificationID }' />">
 				    <camod:shorten length="21"><bean:write name="aExpressionFeature" property="organ.name" filter="false" /></camod:shorten> 
@@ -265,14 +265,14 @@
 			</logic:iterate>		
 		</logic:iterate> 
 	
-		<img src="images/right_arrow.gif" border="0"> 	
+		<img alt="" src="images/right_arrow.gif" border="0"> 	
 		<html:link styleClass="subMenuRed" action="InducedMutationPopulateAction.do?method=dropdown">
 				Enter Induced Mutation
 		</html:link><br>
 		<logic:iterate id="aInducedMutation" name="inducedmutation_list"
 			type="InducedMutation">&nbsp;&nbsp;&nbsp;&nbsp;
 				  
-			<img src="images/aquadot.jpg" border="0">
+			<img alt="" src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
 				action="InducedMutationPopulateAction.do?method=populate"
 				paramId="aInducedMutationID" paramName="aInducedMutation"
@@ -281,14 +281,14 @@
 			</html:link><br>
 		</logic:iterate> 
 	
-		<img src="images/right_arrow.gif" border="0"> 
+		<img alt="" src="images/right_arrow.gif" border="0"> 
 		<html:link styleClass="subMenuRed" action="SpontaneousMutationPopulateAction.do?method=dropdown">
 			Enter Spontaneous Mutation
 		</html:link><br>
 		<logic:iterate id="aSpontaneousMutation"
 			name="spontaneousmutation_list" type="SpontaneousMutation">&nbsp;&nbsp;&nbsp;&nbsp;
 				  
-			<img src="images/aquadot.jpg" border="0">
+			<img alt="" src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
 				action="SpontaneousMutationPopulateAction.do?method=populate"
 				paramId="aSpontaneousMutationID" paramName="aSpontaneousMutation"
@@ -302,7 +302,7 @@
 		onmouseover="ChangeClass('menu3','masterTitleOver')"
 		onmouseout="ChangeClass('menu3','masterTitle')"><IMG height=5 alt=""
 		src="images/subMenuArrow.gif" width=5> CARCINOGENIC INTERVENTIONS</div>
-	<span class="submasterdiv" class="submenu" id="sub3"> <img
+	<span class="submasterdiv" class="submenu" id="sub3"> <img alt=""
 		src="images/right_arrow.gif" border="0"> 
 		
 		<html:link styleClass="subMenuRed" action="AntibodyPopulateAction.do?method=dropdown">
@@ -311,7 +311,7 @@
 		<logic:iterate id="aCarcinogenExposure" name="antibody_list"
 			type="CarcinogenExposure">&nbsp;&nbsp;&nbsp;&nbsp;
 			
-			<img src="images/aquadot.jpg" border="0">
+			<img alt="" src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
 				action="AntibodyPopulateAction.do?method=populate"
 				paramId="aCarcinogenExposureID" paramName="aCarcinogenExposure"
@@ -319,7 +319,7 @@
 				<camod:shorten><bean:write name="aCarcinogenExposure"property="environmentalFactor.displayName" filter="false" /></camod:shorten>
 			</html:link>
 			<br>			
-		</logic:iterate> <img src="images/right_arrow.gif" border="0">
+		</logic:iterate> <img alt="" src="images/right_arrow.gif" border="0">
 		
 		<html:link styleClass="subMenuRed" action="BacteriaPopulateAction.do?method=dropdown">
 			Enter Bacteria
@@ -327,7 +327,7 @@
 		<logic:iterate id="aCarcinogenExposure" name="bacteria_list"
 			type="CarcinogenExposure">&nbsp;&nbsp;&nbsp;&nbsp;
 			
-			<img src="images/aquadot.jpg" border="0">
+			<img alt="" src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
 				action="BacteriaPopulateAction.do?method=populate"
 				paramId="aCarcinogenExposureID" paramName="aCarcinogenExposure"
@@ -335,7 +335,7 @@
 				<camod:shorten><bean:write name="aCarcinogenExposure"property="environmentalFactor.displayName" filter="false" /></camod:shorten>
 			</html:link>
 			<br>			
-		</logic:iterate> <img src="images/right_arrow.gif" border="0"> 		
+		</logic:iterate> <img alt="" src="images/right_arrow.gif" border="0"> 		
 
 		<html:link styleClass="subMenuRed" action="ChemicalDrugPopulateAction.do?method=dropdown">
 			Enter Chemical/Drug
@@ -343,7 +343,7 @@
 		<logic:iterate id="aCarcinogenExposure" name="chemicaldrug_list"
 			type="CarcinogenExposure">&nbsp;&nbsp;&nbsp;&nbsp;
 			
-			<img src="images/aquadot.jpg" border="0">
+			<img alt="" src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
 				action="ChemicalDrugPopulateAction.do?method=populate"
 				paramId="aCarcinogenExposureID" paramName="aCarcinogenExposure"
@@ -352,7 +352,7 @@
 			</html:link>
 			<br>
 			
-		</logic:iterate> <img src="images/right_arrow.gif" border="0"> 
+		</logic:iterate> <img alt="" src="images/right_arrow.gif" border="0"> 
 		
 		<html:link styleClass="subMenuRed" action="EnvironmentalFactorPopulateAction.do?method=dropdown">
 			Enter Environmental Factor
@@ -360,7 +360,7 @@
 		<logic:iterate id="aCarcinogenExposure" name="environmentalfactor_list"
 			type="CarcinogenExposure">&nbsp;&nbsp;&nbsp;&nbsp;
 			
-			<img src="images/aquadot.jpg" border="0">
+			<img alt="" src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
 				action="EnvironmentalFactorPopulateAction.do?method=populate"
 				paramId="aCarcinogenExposureID" paramName="aCarcinogenExposure"
@@ -368,7 +368,7 @@
 				<camod:shorten><bean:write name="aCarcinogenExposure" property="environmentalFactor.displayName" filter="false" /></camod:shorten>
 			</html:link>
 			<br>			
-		</logic:iterate> <img src="images/right_arrow.gif" border="0"> 
+		</logic:iterate> <img alt="" src="images/right_arrow.gif" border="0"> 
 		
 		<html:link styleClass="subMenuRed" action="GeneDeliveryPopulateAction.do?method=dropdown">
 			Enter Gene Delivery
@@ -376,7 +376,7 @@
 		<logic:iterate id="aCarcinogenExposure" name="genedelivery_list"
 			type="GeneDelivery">&nbsp;&nbsp;&nbsp;&nbsp;
 			
-			<img src="images/aquadot.jpg" border="0">
+			<img alt="" src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
 				action="GeneDeliveryPopulateAction.do?method=populate"
 				paramId="aCarcinogenExposureID" paramName="aCarcinogenExposure"
@@ -384,7 +384,7 @@
 				<camod:shorten><bean:write name="aCarcinogenExposure" property="geneInVirus" filter="false" /> </camod:shorten>
 			</html:link>
 			<br>			
-		</logic:iterate> <img src="images/right_arrow.gif" border="0"> 
+		</logic:iterate> <img alt="" src="images/right_arrow.gif" border="0"> 
 		
 		<html:link styleClass="subMenuRed" action="GrowthFactorPopulateAction.do?method=dropdown">
 			Enter Growth Factor
@@ -392,7 +392,7 @@
 		<logic:iterate id="aCarcinogenExposure" name="growthfactors_list"
 			type="CarcinogenExposure">&nbsp;&nbsp;&nbsp;&nbsp;
 			
-			<img src="images/aquadot.jpg" border="0">
+			<img alt="" src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
 				action="GrowthFactorPopulateAction.do?method=populate"
 				paramId="aCarcinogenExposureID" paramName="aCarcinogenExposure"
@@ -401,14 +401,14 @@
 			</html:link>
 			<br>
 			
-		</logic:iterate> <img src="images/right_arrow.gif" border="0"> 
+		</logic:iterate> <img alt="" src="images/right_arrow.gif" border="0"> 
 		<html:link styleClass="subMenuRed" action="HormonePopulateAction.do?method=dropdown">
 			Enter Hormone
 		</html:link><br>
 		<logic:iterate id="aCarcinogenExposure" name="hormone_list"
 			type="CarcinogenExposure">&nbsp;&nbsp;&nbsp;&nbsp;
 			
-			<img src="images/aquadot.jpg" border="0">
+			<img alt="" src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
 				action="HormonePopulateAction.do?method=populate"
 				paramId="aCarcinogenExposureID" paramName="aCarcinogenExposure"
@@ -416,7 +416,7 @@
 				<camod:shorten><bean:write name="aCarcinogenExposure" property="environmentalFactor.displayName" filter="false" /></camod:shorten>
 			</html:link>
 			<br>
-		</logic:iterate> <img src="images/right_arrow.gif" border="0"> 
+		</logic:iterate> <img alt="" src="images/right_arrow.gif" border="0"> 
 		
 		<html:link styleClass="subMenuRed" action="NutritionalFactorPopulateAction.do?method=dropdown">
 			Enter Nutritional Factor
@@ -424,7 +424,7 @@
 		<logic:iterate id="aCarcinogenExposure" name="nutritionalfactors_list"
 			type="CarcinogenExposure">&nbsp;&nbsp;&nbsp;&nbsp;
 			
-			<img src="images/aquadot.jpg" border="0">
+			<img alt="" src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
 				action="NutritionalFactorPopulateAction.do?method=populate"
 				paramId="aCarcinogenExposureID" paramName="aCarcinogenExposure"
@@ -432,7 +432,7 @@
 				<camod:shorten><bean:write name="aCarcinogenExposure" property="environmentalFactor.displayName" filter="false" /></camod:shorten>
 			</html:link>
 			<br>
-		</logic:iterate> <img src="images/right_arrow.gif" border="0"> 
+		</logic:iterate> <img alt="" src="images/right_arrow.gif" border="0"> 
 		
 		<html:link styleClass="subMenuRed" action="PlasmidPopulateAction.do?method=dropdown">
 			Enter Plasmid
@@ -440,7 +440,7 @@
 		<logic:iterate id="aCarcinogenExposure" name="plasmid_list"
 			type="CarcinogenExposure">&nbsp;&nbsp;&nbsp;&nbsp;
 			
-			<img src="images/aquadot.jpg" border="0">
+			<img alt="" src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
 				action="PlasmidPopulateAction.do?method=populate"
 				paramId="aCarcinogenExposureID" paramName="aCarcinogenExposure"
@@ -448,7 +448,7 @@
 				<camod:shorten><bean:write name="aCarcinogenExposure" property="environmentalFactor.displayName" filter="false" /></camod:shorten>
 			</html:link>
 			<br>
-		</logic:iterate> <img src="images/right_arrow.gif" border="0"> 
+		</logic:iterate> <img alt="" src="images/right_arrow.gif" border="0"> 
 				
 		<html:link styleClass="subMenuRed" action="RadiationPopulateAction.do?method=dropdown">
 			Enter Radiation
@@ -456,7 +456,7 @@
 		<logic:iterate id="aCarcinogenExposure" name="radiation_list"
 			type="CarcinogenExposure">&nbsp;&nbsp;&nbsp;&nbsp;
 			
-			<img src="images/aquadot.jpg" border="0">
+			<img alt="" src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
 				action="RadiationPopulateAction.do?method=populate"
 				paramId="aCarcinogenExposureID" paramName="aCarcinogenExposure"
@@ -464,7 +464,7 @@
 				<camod:shorten><bean:write name="aCarcinogenExposure" property="environmentalFactor.displayName" filter="false" /></camod:shorten>
 			</html:link>
 			<br>
-		</logic:iterate> <img src="images/right_arrow.gif" border="0"> 
+		</logic:iterate> <img alt="" src="images/right_arrow.gif" border="0"> 
 		
 		<html:link styleClass="subMenuRed" action="SignalingMoleculePopulateAction.do?method=dropdown">
 			Enter Signaling Molecule
@@ -472,7 +472,7 @@
 		<logic:iterate id="aCarcinogenExposure" name="signalingmolecule_list"
 			type="CarcinogenExposure">&nbsp;&nbsp;&nbsp;&nbsp;
 			
-			<img src="images/aquadot.jpg" border="0">
+			<img alt="" src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
 				action="SignalingMoleculePopulateAction.do?method=populate"
 				paramId="aCarcinogenExposureID" paramName="aCarcinogenExposure"
@@ -480,7 +480,7 @@
 				<camod:shorten><bean:write name="aCarcinogenExposure" property="environmentalFactor.displayName" filter="false" /></camod:shorten>
 			</html:link>
 			<br>
-		</logic:iterate> <img src="images/right_arrow.gif" border="0"> 		
+		</logic:iterate> <img alt="" src="images/right_arrow.gif" border="0"> 		
 		
 		<html:link styleClass="subMenuRed" action="SurgeryPopulateAction.do?method=dropdown">
 			Enter Surgery/Other
@@ -488,7 +488,7 @@
 		<logic:iterate id="aCarcinogenExposure" name="surgeryother_list"
 			type="CarcinogenExposure">&nbsp;&nbsp;&nbsp;&nbsp;
 			
-			<img src="images/aquadot.jpg" border="0">
+			<img alt="" src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
 				action="SurgeryPopulateAction.do?method=populate"
 				paramId="aCarcinogenExposureID" paramName="aCarcinogenExposure"
@@ -496,7 +496,7 @@
 				<camod:shorten><bean:write name="aCarcinogenExposure" property="environmentalFactor.displayName" filter="false" /></camod:shorten>
 			</html:link>
 			<br>
-		</logic:iterate> <img src="images/right_arrow.gif" border="0"> 
+		</logic:iterate> <img alt="" src="images/right_arrow.gif" border="0"> 
 		
 		<html:link styleClass="subMenuRed" action="TransposonPopulateAction.do?method=dropdown">
 			Enter Transposon
@@ -504,7 +504,7 @@
 		<logic:iterate id="aCarcinogenExposure" name="transposon_list"
 			type="CarcinogenExposure">&nbsp;&nbsp;&nbsp;&nbsp;
 			
-			<img src="images/aquadot.jpg" border="0">
+			<img alt="" src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
 				action="TransposonPopulateAction.do?method=populate"
 				paramId="aCarcinogenExposureID" paramName="aCarcinogenExposure"
@@ -512,7 +512,7 @@
 				<camod:shorten><bean:write name="aCarcinogenExposure" property="environmentalFactor.displayName" filter="false" /></camod:shorten>
 			</html:link>
 			<br>
-		</logic:iterate> <img src="images/right_arrow.gif" border="0"> 
+		</logic:iterate> <img alt="" src="images/right_arrow.gif" border="0"> 
 				
 		<html:link styleClass="subMenuRed" action="ViralTreatmentPopulateAction.do?method=dropdown">
 			Enter Viral Treatment
@@ -520,7 +520,7 @@
 		<logic:iterate id="aCarcinogenExposure" name="viraltreatment_list"
 			type="CarcinogenExposure">&nbsp;&nbsp;&nbsp;&nbsp;
 			
-			<img src="images/aquadot.jpg" border="0">
+			<img alt="" src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
 				action="ViralTreatmentPopulateAction.do?method=populate"
 				paramId="aCarcinogenExposureID" paramName="aCarcinogenExposure"
@@ -537,14 +537,14 @@
 		<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>TRANSIENT INTERFERENCE</div>
 		
 	<span class="submasterdiv" id="sub4">	
-		<img src="images/right_arrow.gif" border="0">	 
+		<img alt="" src="images/right_arrow.gif" border="0">	 
 			<html:link styleClass="subMenuRed" action="MorpholinoPopulateAction.do?method=dropdown&aConceptCode=C60700">
 				Enter Morpholino
 			</html:link><br>
 			
 			<logic:iterate id="aTransInt" name="morpholino_list" type="TransientInterference">&nbsp;&nbsp;&nbsp;&nbsp;
 			
-			<img src="images/aquadot.jpg" border="0">
+			<img alt="" src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
 				action="MorpholinoPopulateAction.do?method=populate"
 				paramId="aTransIntID" paramName="aTransInt" paramProperty="id">
@@ -553,13 +553,13 @@
 			<br>
 		</logic:iterate>
 		 
-		<img src="images/right_arrow.gif" border="0">	
+		<img alt="" src="images/right_arrow.gif" border="0">	
 			<html:link styleClass="subMenuRed" action="SirnaPopulateAction.do?method=dropdown&aConceptCode=C2191">
 				Enter siRNA
 			</html:link><br>
 			<logic:iterate id="aTransInt" name="sirna_list" type="TransientInterference">&nbsp;&nbsp;&nbsp;&nbsp;
 			
-			<img src="images/aquadot.jpg" border="0">
+			<img alt="" src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
 				action="SirnaPopulateAction.do?method=populate"
 				paramId="aTransIntID" paramName="aTransInt" paramProperty="id">
@@ -573,14 +573,14 @@
 		onmouseover="ChangeClass('menu5','masterTitleOver')"
 		onmouseout="ChangeClass('menu5','masterTitle')"><IMG height=5 alt=""
 		src="images/subMenuArrow.gif" width=5> PUBLICATIONS</div>
-	<span class="submasterdiv" id="sub5"> <img src="images/right_arrow.gif"
+	<span class="submasterdiv" id="sub5"> <img alt="" src="images/right_arrow.gif"
 		border="0"> 
 		<html:link styleClass="subMenuRed" action="PublicationPopulateAction.do?method=dropdown">
 			Enter Publications
 		</html:link><br>
 		<logic:iterate id="aPub" name="publication_list" type="Publication">&nbsp;&nbsp;&nbsp;&nbsp;
 			
-			<img src="images/aquadot.jpg" border="0">
+			<img alt="" src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
 				action="PublicationPopulateAction.do?method=populate"
 				paramId="aPubID" paramName="aPub" paramProperty="id">
@@ -594,7 +594,7 @@
 		onmouseover="ChangeClass('menu6','masterTitleOver')"
 		onmouseout="ChangeClass('menu6','masterTitle')"><IMG height=5 alt=""
 		src="images/subMenuArrow.gif" width=5> HISTOPATHOLOGY</div>
-	<span class="submasterdiv" id="sub6"> <img src="images/right_arrow.gif"
+	<span class="submasterdiv" id="sub6"> <img alt="" src="images/right_arrow.gif"
 		border="0"> 
 		<html:link styleClass="subMenuRed" action="HistopathologyPopulateAction.do?method=dropdown">
 			Enter Histopathology
@@ -603,7 +603,7 @@
 		<logic:iterate id="aHistopathology" name="histopathology_list"
 			type="Histopathology">&nbsp;&nbsp;&nbsp;
 			
-			<img src="images/aquadot.jpg" border="0">
+			<img alt="" src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
 				action="HistopathologyPopulateAction.do?method=populate"
 				paramId="aHistopathologyID" paramName="aHistopathology"
@@ -614,7 +614,7 @@
 
 		<!-- Begin Associated Metastasis Loop -->			      
 			      
-		<img src="images/right_arrow.gif" border="0">
+		<img alt="" src="images/right_arrow.gif" border="0">
 		<html:link styleClass="subMenuDarkRed"
 			action="AssociatedMetastasisPopulateAction.do?method=dropdown"
 			paramId="aHistopathologyID" paramName="aHistopathology"
@@ -632,7 +632,7 @@
 					property="id" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						
 					 
-				<img src="images/aquadot_red.jpg" border="0">
+				<img alt="" src="images/aquadot_red.jpg" border="0">
 				<a class="subMenuMedRed"
 					href="AssociatedMetastasisPopulateAction.do?method=populate&aAssociatedMetastasisID=<c:out value='${ aAssociatedMetastasisID }' />&aHistopathologyID=<c:out value='${ aHistopathologyID }' /> ">
 				    <camod:shorten length="21"><bean:write name="aAssociatedMetastasis" property="organ.name"filter="false" /></camod:shorten> 
@@ -643,7 +643,7 @@
 	
 			<!-- Begin Clinical Marker Loop -->
 				    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<img src="images/right_arrow.gif" border="0">
+			<img alt="" src="images/right_arrow.gif" border="0">
 			<html:link styleClass="subMenuDarkRed"
 				action="ClinicalMarkerPopulateAction.do?method=dropdown"
 				paramId="aHistopathologyID" paramName="aHistopathology"
@@ -660,7 +660,7 @@
 				<bean:define id="aHistopathologyID" name="aHistopathology"
 					property="id" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					
-				<img src="images/aquadot_red.jpg" border="0">	
+				<img alt="" src="images/aquadot_red.jpg" border="0">	
 				<a class="subMenuMedRed"
 					href="ClinicalMarkerPopulateAction.do?method=populate&aClinicalMarkerID=<c:out value='${ aClinicalMarkerID }' />&aHistopathologyID=<c:out value='${ aHistopathologyID }' /> ">
 				    <camod:shorten length="21"><bean:write name="aClinicalMarker" property="displayName" filter="false" /></camod:shorten> 
@@ -675,14 +675,14 @@
 		onmouseover="ChangeClass('menu7','masterTitleOver')"
 		onmouseout="ChangeClass('menu7','masterTitle')"><IMG height=5 alt=""
 		src="images/subMenuArrow.gif" width=5> THERAPEUTIC APPROACHES</div>
-	<span class="submasterdiv" id="sub7"> <img src="images/right_arrow.gif"
+	<span class="submasterdiv" id="sub7"> <img alt="" src="images/right_arrow.gif"
 		border="0"> 
 		<html:link styleClass="subMenuRed" action="TherapyPopulateAction.do?method=dropdown">
 			Enter Therapy
 		</html:link><br>
 		<logic:iterate id="aTherapy" name="therapy_list" type="Therapy">&nbsp;&nbsp;&nbsp;&nbsp;
 			
-			<img src="images/aquadot.jpg" border="0">
+			<img alt="" src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
 				action="TherapyPopulateAction.do?method=populate"
 				paramId="aTherapyID" paramName="aTherapy" paramProperty="id">
@@ -690,7 +690,7 @@
 			</html:link>
 			<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;			 
 					
-			<img src="images/right_arrow.gif" border="0">
+			<img alt="" src="images/right_arrow.gif" border="0">
 			<html:link styleClass="subMenuDarkRed"
 				action="PublicationPopulateAction.do?method=dropdown"
 				paramId="aTherapyID" paramName="aTherapy" paramProperty="id">
@@ -706,7 +706,7 @@
 				<bean:define id="aTherapyID" name="aTherapy" property="id" />					
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						
-				<img src="images/aquadot_red.jpg" border="0">
+				<img alt="" src="images/aquadot_red.jpg" border="0">
 				<a class="subMenuMedRed"
 					href="PublicationPopulateAction.do?method=populate&aPubID=<c:out value='${ aPublicationID }' />&aTherapyID=<c:out value='${aTherapyID}'/>">
 					<camod:shorten length="21"><c:out value="${aPublication.authors}" /></camod:shorten>
@@ -721,14 +721,14 @@
 		onmouseover="ChangeClass('menu8','masterTitleOver')"
 		onmouseout="ChangeClass('menu8','masterTitle')"><IMG height=5 alt=""
 		src="images/subMenuArrow.gif" width=5> CELL LINES</div>
-	<span class="submasterdiv" id="sub8"> <img src="images/right_arrow.gif"
+	<span class="submasterdiv" id="sub8"> <img alt="" src="images/right_arrow.gif"
 		border="0"> 
 		<html:link styleClass="subMenuRed" action="CellLinePopulateAction.do?method=dropdown">
 			Enter Cell Lines
 		</html:link><br>
 		<logic:iterate id="aCell" name="cellline_list" type="CellLine">	&nbsp;&nbsp;&nbsp;&nbsp;		 
 					 
-			<img src="images/aquadot.jpg" border="0">
+			<img alt="" src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
 				action="CellLinePopulateAction.do?method=populate" paramId="aCellID"
 				paramName="aCell" paramProperty="id">
@@ -736,7 +736,7 @@
 			</html:link>
 			<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
 					
-			<img src="images/right_arrow.gif" border="0">
+			<img alt="" src="images/right_arrow.gif" border="0">
 			<html:link styleClass="subMenuDarkRed"
 				action="PublicationPopulateAction.do?method=dropdown"
 				paramId="aCellID" paramName="aCell" paramProperty="id">
@@ -752,7 +752,7 @@
 				<bean:define id="aCellID" name="aCell" property="id" />					
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						
-				<img src="images/aquadot_red.jpg" border="0">
+				<img alt="" src="images/aquadot_red.jpg" border="0">
 				<a class="subMenuMedRed"
 					href="PublicationPopulateAction.do?method=populate&aPubID=<c:out value='${ aPublicationID }' />&aCellID=<c:out value='${aCellID }'/>">
 					<camod:shorten length="21"><bean:write name="aPublication" property="authors" filter="false" /></camod:shorten>
@@ -766,14 +766,14 @@
 		onmouseover="ChangeClass('menu9','masterTitleOver')"
 		onmouseout="ChangeClass('menu9','masterTitle')"><IMG height=5 alt=""
 		src="images/subMenuArrow.gif" width=5> IMAGES</div>
-	<span class="submasterdiv" id="sub9"> <img src="images/right_arrow.gif"
+	<span class="submasterdiv" id="sub9"> <img alt="" src="images/right_arrow.gif"
 		border="0"> 
 		<html:link styleClass="subMenuRed" action="ImagePopulateAction.do?method=dropdown">
 			Enter Images
 		</html:link><br>
 		<logic:iterate id="aImage" name="image_list" type="Image"> &nbsp;&nbsp;&nbsp;&nbsp;
 		
-			<img src="images/aquadot.jpg" border="0">
+			<img alt="" src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
 				action="ImagePopulateAction.do?method=populate" paramId="aImageID"
 				paramName="aImage" paramProperty="id">
@@ -787,14 +787,14 @@
 		onmouseover="ChangeClass('menu10','masterTitleOver')"
 		onmouseout="ChangeClass('menu10','masterTitle')"><IMG height=5 alt=""
 		src="images/subMenuArrow.gif" width=5> MICROARRAYS</div>
-	<span class="submasterdiv" id="sub10"> <img src="images/right_arrow.gif"
+	<span class="submasterdiv" id="sub10"> <img alt="" src="images/right_arrow.gif"
 		border="0"> 
 		<html:link styleClass="subMenuRed" action="submitMicroarrayData">
 			Enter Microarray Data
 		</html:link><br>		
 		<logic:iterate id="aMicroArrayData" name="microarraydata_list" type="MicroArrayData">	&nbsp;&nbsp;&nbsp;&nbsp;		 
 					 
-			<img src="images/aquadot.jpg" border="0">
+			<img alt="" src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
 				action="MicroArrayDataPopulateAction.do?method=populate" paramId="aMicroArrayDataID"
 				paramName="aMicroArrayData" paramProperty="id">
@@ -810,12 +810,12 @@
 			src="images/subMenuArrow.gif" width=5> MODEL AVAILABILITY</div>
 	<span class="submasterdiv" id="sub11"> 
 	
-		<img src="images/right_arrow.gif" border="0"> 
+		<img alt="" src="images/right_arrow.gif" border="0"> 
 		<html:link styleClass="subMenuRed" action="JacksonLabPopulateAction.do?method=dropdown&lab=Jackson Laboratory">Available from Jackson Lab.</html:link><br>
 		<logic:iterate id="aAvailability" name="jacksonlab_list"
 			type="AnimalAvailability">&nbsp;&nbsp;&nbsp;&nbsp;
 				 
-			<img src="images/aquadot.jpg" border="0">
+			<img alt="" src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
 				action="JacksonLabPopulateAction.do?method=populate"
 				paramId="aAvailabilityID" paramName="aAvailability"
@@ -825,12 +825,12 @@
 			<br>
 		</logic:iterate> 
 		
-		<img src="images/right_arrow.gif" border="0"> 
+		<img alt="" src="images/right_arrow.gif" border="0"> 
 		<html:link styleClass="subMenuRed" action="NCIMouseRepoPopulateAction.do?method=dropdown&lab=NCI Mouse Repository">Available from NCI Mouse Repo.</html:link><br>
 		<logic:iterate id="aAvailability" name="nci_repo_list"
 			type="AnimalAvailability">&nbsp;&nbsp;&nbsp;&nbsp;
 			
-			<img src="images/aquadot.jpg" border="0">
+			<img alt="" src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
 				action="NCIMouseRepoPopulateAction.do?method=populate"
 				paramId="aAvailabilityID" paramName="aAvailability"
@@ -840,12 +840,12 @@
 			<br>
 		</logic:iterate> 
 	
-		<img src="images/right_arrow.gif" border="0"> 
+		<img alt="" src="images/right_arrow.gif" border="0"> 
 		<html:link 	styleClass="subMenuRed" action="InvestigatorPopulateAction.do?method=dropdown&lab=Investigator">Available from Investigator</html:link><br>
 		<logic:iterate id="aAvailability" name="investigator_list"
 			type="AnimalAvailability">&nbsp;&nbsp;&nbsp;&nbsp;
 			
-			<img src="images/aquadot.jpg" border="0">
+			<img alt="" src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
 				action="InvestigatorPopulateAction.do?method=populate"
 				paramId="aAvailabilityID" paramName="aAvailability"
@@ -855,12 +855,12 @@
 			<br>
 		</logic:iterate> 
 	
-		<img src="images/right_arrow.gif" border="0"> 
+		<img alt="" src="images/right_arrow.gif" border="0"> 
 		<html:link styleClass="subMenuRed" action="ZFINPopulateAction.do?method=dropdown&lab=ZFIN">Available from ZFIN</html:link><br>
 		<logic:iterate id="aAvailability" name="zfin_list"
 			type="AnimalAvailability">&nbsp;&nbsp;&nbsp;&nbsp;
 			
-			<img src="images/aquadot.jpg" border="0">
+			<img alt="" src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
 				action="ZFINPopulateAction.do?method=populate"
 				paramId="aAvailabilityID" paramName="aAvailability"
@@ -875,14 +875,14 @@
 		onmouseover="ChangeClass('menu12','masterTitleOver')"
 		onmouseout="ChangeClass('menu12','masterTitle')"><IMG height=5 alt=""
 		src="images/subMenuArrow.gif" width=5> TRANSPLANTATION</div>
-	<span class="submasterdiv" id="sub12"> <img
+	<span class="submasterdiv" id="sub12"> <img alt="" 
 		src="images/right_arrow.gif" border="0"> 
 		<html:link styleClass="subMenuRed" action="TransplantationPopulateAction.do?method=dropdown">
 			Enter Transplantation
 		</html:link><br>
 		<logic:iterate id="aTransplantation" name="transplantation_list" type="Transplantation">&nbsp;&nbsp;&nbsp;&nbsp;
 			
-			<img src="images/aquadot.jpg" border="0">
+			<img alt="" src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
 				action="TransplantationPopulateAction.do?method=populate"
 				paramId="aTransplantationID" paramName="aTransplantation" paramProperty="id">

@@ -28,15 +28,15 @@
 
 <!-- submitInvestigator.jsp -->
 <!-- Main Content Begins -->
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <!-- Took this out of sidebar.jsp and has to go here to format correctly  -->
 <%@ include file="/jsp/submitMenu.jsp" %>
 <tr><td>
-	<TABLE  cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
+	<TABLE  summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
 	<tr><td valign="top">
 <!-- -->
 
-	<TABLE  cellpadding="3" cellspacing="0" border="0" align="left">
+	<TABLE  summary="This table is used to format page content" cellpadding="3" cellspacing="0" border="0" align="left">
 	<html:form action="<%= actionName %>" focus="name">
 	<tr>
 	    <html:errors/>
@@ -50,19 +50,19 @@
 	
         <tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field1">Strain Name:</label>
+		<td class="formRequiredLabel"><label for="strainName">Strain Name:</label>
 		</td>
 		<td class="formField">			
 				<html:hidden property="source" />
-				<html:text styleClass="formFieldSized" size="40" property="name"  />			
+				<html:text styleClass="formFieldSized" size="40" styleId="strainName" property="name"  />			
 		</td>
 	</tr>
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Principal Investigator:</label></td>
+			<td class="formLabel"><label for="principalInvestigator">Principal Investigator:</label></td>
 			<td class="formField">
-				<html:select styleClass="formFieldSized" size="1" property="principalInvestigator">
+				<html:select styleClass="formFieldSized" size="1" styleId="principalInvestigator" property="principalInvestigator">
 					<html:optionsCollection name="<%= Dropdowns.PRINCIPALINVESTIGATORDROP %>" />	
 				</html:select>
 			</td>
@@ -72,7 +72,7 @@
 	<tr>
 		<td align="right" colspan="3">
 			<!-- action buttons begins -->
-			<TABLE cellpadding="4" cellspacing="0" border="0">
+			<TABLE summary="This table is used to format page content" cellpadding="4" cellspacing="0" border="0">
 				
 					  <html:submit styleClass="actionButton">
 						  <bean:message key="button.submit"/>

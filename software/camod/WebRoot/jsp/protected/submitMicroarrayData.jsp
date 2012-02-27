@@ -32,15 +32,15 @@
 
 <!-- submitMicroarrayData.jsp -->
 <!-- Main Content Begins -->
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <!-- Took this out of sidebar.jsp and has to go here to format correctly  -->
 <%@ include file="/jsp/submitMenu.jsp" %>
 <tr><td>
-	<TABLE summary="" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
+	<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
 	<tr><td valign="top">
 <!-- -->
 
-	<TABLE summary="" cellpadding="6" cellspacing="0" border="0" align="left">
+	<TABLE summary="This table is used to format page content" cellpadding="6" cellspacing="0" border="0" align="left">
 	
 	<tr>
 		<html:errors/>
@@ -54,30 +54,30 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field1">Experiment Name:</label>
+		<td class="formRequiredLabel"><label for="experimentName">Experiment Name:</label>
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" size="30" property="experimentName" />			
+			<html:text styleClass="formFieldSized" size="30" styleId="experimentName" property="experimentName" />			
 		</td>
 	</tr>
 		
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field1">URL for Microarray data not stored in caArray:</label>
+		<td class="formRequiredLabel"><label for="micUrl">URL for Microarray data not stored in caArray:</label>
 		</td>
 		<td class="formField">
 		<br>
-		<label for="field3">Please enter a complete URL with http:// <br>(http, https, ftp schemes allowed)</label>
+		Please enter a complete URL with http:// <br>(http, https, ftp schemes allowed)
 		<br>
 		<br>		
-			<html:text styleClass="formFieldSized" size="30" property="url" />			
+			<html:text styleClass="formFieldSized" size="30" styleId="micUrl" property="url" />			
 		</td>
 	</tr>
 
 	<tr>
 		<td align="right" colspan="3">
 			<!-- action buttons begins -->
-				<TABLE cellpadding="4" cellspacing="0" border="0">
+				<TABLE summary="This table is used to format page content" cellpadding="4" cellspacing="0" border="0">
 			
 				  <html:submit styleClass="actionButton">
 					  <bean:message key="button.submit"/>

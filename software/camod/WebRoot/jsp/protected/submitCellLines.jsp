@@ -28,14 +28,14 @@
 
 <!-- submitCellLines.jsp -->
 <!-- Main Content Begins -->
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <!-- Took this out of sidebar.jsp and has to go here to format correctly  -->
 <%@ include file="/jsp/submitMenu.jsp" %>
 <tr><td>
-	<TABLE cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
+	<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
 	<tr><td valign="top">
 
-	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left" width="60%">
+	<TABLE summary="This table is used to format page content" cellpadding="3" cellspacing="0" border="0" align="left" width="60%">
 	<html:form action="<%= actionName %>" focus="cellLineName">	
 	<tr>
 		<html:errors/>
@@ -49,10 +49,10 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field1">Name of Cell Line:</label>
+		<td class="formRequiredLabel"><label for="cellLineName">Name of Cell Line:</label>
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" size="30" property="cellLineName" />			
+			<html:text styleClass="formFieldSized" size="30" styleId="cellLineName" property="cellLineName" />			
 		</td>
 	</tr>
 
@@ -62,48 +62,48 @@
  			<!-- Display anatomy tree based on animal model species or allow for text entry if no specific tree exists -->
  			<c:choose>
 				<c:when test="${modelspeciescommonname == 'Mouse'}">
-				<td class="formRequiredLabel"><label for="field1">Organ / Tissue:</label>&nbsp;
+				<td class="formRequiredLabel"><label for="mouseOrgan">Organ / Tissue:</label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />							
 					<a href="javascript:showMouseTissueTree('cellLineForm', 'organTissueCode', 'organTissueName', 'organ', true)">
-						<IMG src="images\selectUP.gif" align=middle ></a>
+						<IMG alt="Select from EVSTree" src="images\selectUP.gif" align=middle ></a>
 				</td>				
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">					
-						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
+						<html:text styleClass="formFieldSized" disabled="true" styleId="mouseOrgan" property="organ" size="30"  />
 					</td>				
 				</c:when>
 				<c:when test="${modelspeciescommonname == 'Rat'}">	
-				<td class="formRequiredLabel"><label for="field1">Organ / Tissue:</label>&nbsp;
+				<td class="formRequiredLabel"><label for="ratOrgan">Organ / Tissue:</label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
 					<a href="javascript:showRatTissueTree('cellLineForm', 'organTissueCode', 'organTissueName', 'organ', true)">
-						<IMG src="images\selectUP.gif" align=middle  ></a>
+						<IMG alt="Select from EVSTree" src="images\selectUP.gif" align=middle  ></a>
 				</td>
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">										
-						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
+						<html:text styleClass="formFieldSized" disabled="true" styleId="ratOrgan" property="organ" size="30"  />
 					</td>
 				</c:when>	
 				<c:when test="${modelspeciescommonname == 'Zebrafish'}">
-				<td class="formRequiredLabel"><label for="field1">Organ / Tissue:</label>&nbsp;
+				<td class="formRequiredLabel"><label for="zebOrgan">Organ / Tissue:</label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
 					<a href="javascript:showZebrafishTissueTree('cellLineForm', 'organTissueCode', 'organTissueName', 'organ', true)">
-						<IMG src="images\selectUP.gif" align=middle ></a>
+						<IMG alt="Select from EVSTree" src="images\selectUP.gif" align=middle ></a>
 				</td>
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">										
-						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
+						<html:text styleClass="formFieldSized" disabled="true" styleId="zebOrgan" property="organ" size="30"  />
 					</td>
 				</c:when>
 				<c:otherwise>
-				<td class="formRequiredLabel"><label for="field1">Organ / Tissue:</label>&nbsp;				
+				<td class="formRequiredLabel"><label for="otherOrgan">Organ / Tissue:</label>&nbsp;				
 				</td>
 					<html:hidden property="organTissueCode"/>		
 					<html:hidden property="organTissueName"/>
 					<td class="formField">
-						<html:text styleClass="formFieldSized" disabled="false" property="organ"   size="25" />
+						<html:text styleClass="formFieldSized" disabled="false" styleId="otherOrgan" property="organ"   size="25" />
 					</td>				
 				</c:otherwise>				
     		</c:choose>
@@ -111,35 +111,35 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Experiment:</label>
+		<td class="formLabel"><label for="experiment">Experiment:</label>
 		</td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldSized" property="experiment" cols="32" rows="4"/>			
+					<html:textarea styleClass="formFieldSized" styleId="experiment" property="experiment" cols="32" rows="4"/>			
 			</td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Results:</label>
+		<td class="formLabel"><label for="results">Results:</label>
 		</td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldSized" property="results" cols="32" rows="4"/>			
+					<html:textarea styleClass="formFieldSized" styleId="results" property="results" cols="32" rows="4"/>			
 			</td>
 	</tr>
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Comment:</label>
+		<td class="formLabel"><label for="comments">Comment:</label>
 		</td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldSized" property="comments" cols="32" rows="4"/>			
+					<html:textarea styleClass="formFieldSized" styleId="comments" property="comments" cols="32" rows="4"/>			
 			</td>
 	</tr>	
 
 	<tr>
 		<td align="right" colspan="3">
 			<!-- action buttons begins -->
-				<TABLE cellpadding="4" cellspacing="0" border="0">
+				<TABLE summary="This table is used to format page content" cellpadding="4" cellspacing="0" border="0">
 			
 				  <html:submit styleClass="actionButton">
 					  <bean:message key="button.submit"/>
