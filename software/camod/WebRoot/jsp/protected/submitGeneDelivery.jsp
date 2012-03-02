@@ -42,15 +42,15 @@
 
 <!-- submitGeneDelivery.jsp -->
 <!-- Main Content Begins -->
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <!-- Took this out of sidebar.jsp and has to go here to format correctly  -->
 <%@ include file="/jsp/submitMenu.jsp" %>
 <tr><td>
-	<TABLE summary="" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
+	<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
 	<tr><td valign="top">
 <!-- -->
 
-	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
+	<TABLE summary="This table is used to format page content" cellpadding="3" cellspacing="0" border="0" align="left">
 	<html:form action="<%= actionName %>" focus="name" >
 	<tr>
 		<html:errors/>
@@ -64,13 +64,13 @@
 
         <tr>
             <td class="formRequiredNotice" width="5">*</td>
-            <td class="formRequiredLabel"><label for="field2">Viral Vector:</label>
+            <td class="formRequiredLabel"><label for="viralVector">Viral Vector:</label>
             </td>
             <td class="formField">
-            <label for="field3">(if Viral Vector is not listed, then please <br>select "Other" from the list and specify it below)</label>
+            (if Viral Vector is not listed, then please <br>select "Other" from the list and specify it below)
             <br>		
 			<br>		
-			<html:select styleClass="formFieldSized" size="1" property="viralVector" onclick="chkOtherViralVector();">
+			<html:select styleClass="formFieldSized" size="1" styleId="viralVector" property="viralVector" onclick="chkOtherViralVector();">
 				<html:options name="<%= Dropdowns.VIRALVECTORDROP %>"/>					
 			</html:select>
 			
@@ -79,27 +79,27 @@
         
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Other Viral Vector:</label></td>
+		<td class="formLabel"><label for="otherViralVector">Other Viral Vector:</label></td>
 		<td class="formField">					
-			<html:text styleClass="formFieldSized" size="30" property="otherViralVector"/>			
+			<html:text styleClass="formFieldSized" size="30" styleId="otherViralVector" property="otherViralVector"/>			
 		</td>
 	</tr>        
         
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field1">Gene:</label>
+		<td class="formRequiredLabel"><label for="geneInVirus">Gene:</label>
 		</td>
 		<td class="formField">		
-			<html:text styleClass="formFieldSized" size="30" property="geneInVirus" />
+			<html:text styleClass="formFieldSized" size="30" styleId="geneInVirus" property="geneInVirus" />
 		</td>				
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Treatment Regimen:</label>		
+		<td class="formLabel"><label for="regimen">Treatment Regimen:</label>		
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="regimen" size="30"/>
+			<html:text styleClass="formFieldSized" styleId="regimen" property="regimen" size="30"/>
 		</td>
 	</tr>
 	
@@ -108,7 +108,7 @@
  			<!-- Display anatomy tree based on animal model species or allow for text entry if no specific tree exists -->
  			<c:choose>
 				<c:when test="${modelspeciescommonname == 'Mouse'}">
-				<td class="formLabel"><label for="field1">Injection Site: </label>&nbsp;
+				<td class="formLabel"><label for="organ">Injection Site: </label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />							
 					<a href="javascript:showMouseTissueTree('geneDeliveryForm', 'organTissueCode', 'organTissueName', 'organ', true)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>
@@ -116,12 +116,12 @@
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">					
-						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="20"  />
+						<html:text styleClass="formFieldSized" disabled="true" styleId="organ" property="organ" size="20"  />
 						<a href="javascript: clearField(document.forms[0].organ, document.forms[0].organTissueCode);"><img border="0" align=middle src="/camod/images/clear.gif"></a>						
 					</td>
 				</c:when>
 				<c:when test="${modelspeciescommonname == 'Rat'}">	
-				<td class="formLabel"><label for="field1">Injection Site: </label>&nbsp;
+				<td class="formLabel"><label for="organ">Injection Site: </label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
 					<a href="javascript:showRatTissueTree('geneDeliveryForm', 'organTissueCode', 'organTissueName', 'organ', true)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>
@@ -129,12 +129,12 @@
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">										
-						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="20"  />
+						<html:text styleClass="formFieldSized" disabled="true" styleId="organ" property="organ" size="20"  />
 						<a href="javascript: clearField(document.forms[0].organ, document.forms[0].organTissueCode);"><img border="0" align=middle src="/camod/images/clear.gif"></a>						
 					</td>
 				</c:when>	
 				<c:when test="${modelspeciescommonname == 'Zebrafish'}">
-				<td class="formLabel"><label for="field1">Injection Site: </label>&nbsp;
+				<td class="formLabel"><label for="organ">Injection Site: </label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
 					<a href="javascript:showZebrafishTissueTree('geneDeliveryForm', 'organTissueCode', 'organTissueName', 'organ', true)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>
@@ -142,17 +142,17 @@
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">										
-						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="20"  />
+						<html:text styleClass="formFieldSized" disabled="true" styleId="organ" property="organ" size="20"  />
 						<a href="javascript: clearField(document.forms[0].organ, document.forms[0].organTissueCode);"><img border="0" align=middle src="/camod/images/clear.gif"></a>						
 					</td>
 				</c:when>
 				<c:otherwise>
-					<td class="formLabel"><label for="field1">Injection Site:</label>&nbsp;
+					<td class="formLabel"><label for="organ">Injection Site:</label>&nbsp;
 					</td>
 					<html:hidden property="organTissueCode"/>		
 					<html:hidden property="organTissueName"/>
 					<td class="formField">
-						<html:text styleClass="formFieldSized" disabled="false" property="organ"   size="25" />
+						<html:text styleClass="formFieldSized" disabled="false" styleId="organ" property="organ"   size="25" />
 					</td>				
 				</c:otherwise>				
     		</c:choose>
@@ -160,11 +160,11 @@
 		
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Age at Treatment:</label></td>
+		<td class="formLabel"><label for="ageAtTreatment">Age at Treatment:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized" property="ageAtTreatment"  size="15"/>
-			<label for="field1">&nbsp;Units&nbsp;</label>
-			<html:select styleClass="formFieldUnSized" size="1" property="ageAtTreatmentUnit">												
+			<html:text styleClass="formFieldUnSized" styleId="ageAtTreatment" property="ageAtTreatment"  size="15"/>
+			<label for="ageAtTreatmentUnit">&nbsp;Units&nbsp;</label>
+			<html:select styleClass="formFieldUnSized" size="1" styleId="ageAtTreatmentUnit" property="ageAtTreatmentUnit">												
 				<html:options name="<%= Dropdowns.AGEUNITSDROP %>"/>					
 			</html:select>
 		</td>
@@ -172,9 +172,9 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field3">Gender:</label></td>
+		<td class="formLabel"><label for="gender">Gender:</label></td>
 		<td class="formField">
-			<html:select styleClass="formFieldUnSized" size="1" property="type">												
+			<html:select styleClass="formFieldUnSized" size="1" styleId="gender" property="type">												
 				<html:options name="<%= Dropdowns.SEXDISTRIBUTIONDROP %>"/>					
 			</html:select>
 		</td>
@@ -182,17 +182,17 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Comment:</label>
+		<td class="formLabel"><label for="comments">Comment:</label>
 		</td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldSized" property="comments" cols="32" rows="4"/>			
+					<html:textarea styleClass="formFieldSized" styleId="comments" property="comments" cols="32" rows="4"/>			
 			</td>
 	</tr>				
 
 	<tr>
 		<td align="right" colspan="3">
 			<!-- action buttons begins -->
-				<TABLE cellpadding="4" cellspacing="0" border="0">
+				<TABLE summary="This table is used to format page content" cellpadding="4" cellspacing="0" border="0">
 				
 					  <html:submit styleClass="actionButton">
 						  <bean:message key="button.submit"/>

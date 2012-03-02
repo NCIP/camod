@@ -30,15 +30,15 @@
 
 <!-- submitGrowthFactors.jsp -->
 <!-- Main Content Begins -->
-<TABLE cellpadding="1" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="1" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <!-- Took this out of sidebar.jsp and has to go here to format correctly  -->
 <%@ include file="/jsp/submitMenu.jsp" %>
 <tr><td>
-	<TABLE summary="" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
+	<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentPage" width="60%" height="100%">
 	<tr><td valign="top">
 <!-- -->
 
-	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
+	<TABLE summary="This table is used to format page content" cellpadding="3" cellspacing="0" border="0" align="left">
 	
 	<tr>
 	    <html:errors/>
@@ -52,13 +52,13 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field3">Growth Factor:</label></td>
+		<td class="formRequiredLabel"><label for="gName">Growth Factor:</label></td>
 		<td class="formField">
 			<br>
-			<label for="field3">(if Growth Factor is not listed, then please<br>select "Other" from the list and specify it below)</label>
+			(if Growth Factor is not listed, then please<br>select "Other" from the list and specify it below)
 			<br>
 			<br>
-			<html:select styleClass="formFieldSized" size="1" property="name"  onclick="chkOtherName( this );">												
+			<html:select styleClass="formFieldSized" size="1" styleId="gName" property="name"  onclick="chkOtherName( this );">												
 				<html:options name="<%= Dropdowns.GROWTHFACTORDROP %>"/>					
 			</html:select>	
 		</td>
@@ -66,20 +66,20 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Other Growth Factor:</label></td>
+		<td class="formLabel"><label for="otherName">Other Growth Factor:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="otherName"  size="30"  />
+			<html:text styleClass="formFieldSized" styleId="otherName" property="otherName"  size="30"  />
 		</td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Dose:</label>
+		<td class="formLabel"><label for="dosage">Dose:</label>
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized" property="dosage"  size="15" />
-			<label for="field1">&nbsp;Units&nbsp;</label>
-			<html:select styleClass="formFieldUnSized" size="1" property="dosageUnit" >												
+			<html:text styleClass="formFieldUnSized" styleId="dosage" property="dosage"  size="15" />
+			<label for="dosageUnit">&nbsp;Units&nbsp;</label>
+			<html:select styleClass="formFieldUnSized" size="1" styleId="dosageUnit" property="dosageUnit" >												
 				<html:options name="<%= Dropdowns.GROWTHFACTORDOSEUNITSDROP %>"/>					
 			</html:select>	
 		</td>
@@ -87,14 +87,14 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field3">Administrative Route:</label>
+		<td class="formLabel"><label for="administrativeRoute">Administrative Route:</label>
 		</td>
 		<td class="formField">
 		<br>
-		<label for="field3">- if Administration Route is not listed, <br>then please select "Other" and then specify it below:</label>
+		- if Administration Route is not listed, <br>then please select "Other" and then specify it below:
 		<br>
 		<br>
-			<html:select styleClass="formFieldSized" size="1" property="administrativeRoute"  onclick="chkOtherAdminRoute();">												
+			<html:select styleClass="formFieldSized" size="1" styleId="administrativeRoute" property="administrativeRoute"  onclick="chkOtherAdminRoute();">												
 				<html:options name="<%= Dropdowns.ADMINISTRATIVEROUTEDROP %>"/>					
 			</html:select>			
 		</td>
@@ -102,28 +102,28 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Other Administrative Route:</label></td>
+		<td class="formLabel"><label for="otherAdministrativeRoute">Other Administrative Route:</label></td>
 		<td class="formField">					
-			<html:text styleClass="formFieldSized" size="30" property="otherAdministrativeRoute" />			
+			<html:text styleClass="formFieldSized" size="30" styleId="otherAdministrativeRoute" property="otherAdministrativeRoute" />			
 		</td>
 	</tr>	
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Treatment Regimen:</label>		
+		<td class="formLabel"><label for="regimen">Treatment Regimen:</label>		
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="regimen" size="30" />
+			<html:text styleClass="formFieldSized" styleId="regimen" property="regimen" size="30" />
 		</td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Age at Treatment:</label></td>
+		<td class="formLabel"><label for="ageAtTreatment">Age at Treatment:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized" property="ageAtTreatment"  size="15" />
-			<label for="field1">&nbsp;Units&nbsp;</label>
-			<html:select styleClass="formFieldUnSized" size="1" property="ageAtTreatmentUnit" >												
+			<html:text styleClass="formFieldUnSized" styleId="ageAtTreatment" property="ageAtTreatment"  size="15" />
+			<label for="ageAtTreatmentUnit">&nbsp;Units&nbsp;</label>
+			<html:select styleClass="formFieldUnSized" size="1" styleId="ageAtTreatmentUnit" property="ageAtTreatmentUnit" >												
 				<html:options name="<%= Dropdowns.AGEUNITSDROP %>"/>					
 			</html:select>
 		</td>
@@ -131,9 +131,9 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field3">Gender:</label></td>
+		<td class="formLabel"><label for="gender">Gender:</label></td>
 		<td class="formField">
-			<html:select styleClass="formFieldUnSized" size="1" property="type" >												
+			<html:select styleClass="formFieldUnSized" size="1" styleId="gender" property="type" >												
 				<html:options name="<%= Dropdowns.SEXDISTRIBUTIONDROP %>"/>					
 			</html:select>
 		</td>
@@ -141,16 +141,16 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Comment:</label>
+		<td class="formLabel"><label for="comments">Comment:</label>
 		</td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldSized" property="comments" cols="32" rows="4"/>			
+					<html:textarea styleClass="formFieldSized" styleId="comments" property="comments" cols="32" rows="4"/>			
 			</td>
 	</tr>		
 
 	<tr>
 		<td align="right" colspan="3">
-			<TABLE cellpadding="4" cellspacing="0" border="0">
+			<TABLE summary="This table is used to format page content" cellpadding="4" cellspacing="0" border="0">
 			
 				  <html:submit styleClass="actionButton">
 					  <bean:message key="button.submit"/>

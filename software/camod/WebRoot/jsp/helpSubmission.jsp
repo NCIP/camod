@@ -68,7 +68,7 @@
 <p align="right"><a href="#toc">Back to TOC</a></p><A name="1-4"><H3 class="subhelp">1.4. Help Features</H3></A>
 <TABLE border="0" align="center" cellspacing="5" cellpadding="5" width="85%">
 	<TR align="LEFT" valign="TOP">
-		<TD><A href="help.html" onMouseOver="window.status='Quick Help Option 1'; return true" onMouseOut="window.status=''; return true" target="_blank"><IMG src="images/help.gif" width="49" height="18" hspace="10" vspace="0" border="0" alt="Quick Help Option 2" align="bottom"></A>
+		<TD><A href="help.html" target="_blank" title="Quick Help Option 1"><IMG src="images/help.gif" width="49" height="18" hspace="10" vspace="0" border="0" alt="Quick Help Option 2" align="bottom"></A>
 		</TD>
 		<TD>			Several Help features are build into this application.<BR>We have two Quick Help options and extended Help in the Help file.<BR><BR><B>Quick Help Option 1</B> - Move your mouse pointer over the help icon. A message will appear in the bottom part of your browser.<BR><B>Quick Help Option 2</B> - Move your mouse pointer over the help icon and hold it there for a second or two. A tool tip message will appear next to your mouse pointer.<BR><BR>Click on the help icon and <B>the Help file</B> will be displayed. The help file will open in a new browser window. You'll need to close the Help window in order to continue the submission process.
 		</TD>
