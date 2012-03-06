@@ -279,7 +279,7 @@
     	<echo>************  ${db.url}</echo>
     	<echo>************  ${db.username}</echo>
     	<echo>************  ${db.password}</echo>
-	<updateDatabase changeLogFile="${db.upgrade.file}" driver="${db.driver}" url="${db.url}" username="${db.username}" password="${db.password}" dropFirst="false" classpathref="liquibase.dependencies.path" />
+	<updateDatabase changeLogFile="${db.upgrade.file}" driver="${database.driver}" url="${database.url}" username="${database.user}" password="${database.password}" dropFirst="false" classpathref="liquibase.dependencies.path" />
     </target>
 
 
