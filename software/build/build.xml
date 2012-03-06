@@ -149,13 +149,13 @@
 	
 	<target name="update:camod-db">
 		<ant inheritAll="false" inheritRefs="false" antfile="${camod-webapp.build.file}" target="${camod-db.upgrade}" dir="${camod-webapp.base.dir}">
-			<property name="db.server" value="${database.server}" />
-			<property name="db.port" value="${database.port}" />
-			<property name="db.username" value="${database.system.user}" />
-			<property name="db.password" value="${database.system.password}" />
-			<property name="db.dbname" value="${database.name}" />
-			<property name="db.url" value="${database.url}" />
-			<property name="db.driver" value="${database.driver}" />
+			<property name="database.server" value="${database.server}" />
+			<property name="database.port" value="${database.port}" />
+			<property name="database.user" value="${database.user}" />
+			<property name="database.password" value="${database.password}" />
+			<property name="database.name" value="${database.name}" />
+			<property name="database.url" value="${database.url}" />
+			<property name="database.driver" value="${database.driver}" />
 		</ant>
 	</target>
 
