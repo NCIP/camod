@@ -5,13 +5,13 @@
     <property file="build.properties" />
 
     <!-- stage specific attributes -->
-    <filter token="db.host" value="${db.host}"/>
-    <filter token="db.port" value="${db.port}"/>
-    <filter token="db.username" value="${db.username}"/>
-    <filter token="db.password" value="${db.password}"/>
-    <filter token="db.dbname" value="${db.dbname}"/>
-    <filter token="db.url" value="${db.url}"/>
-    <filter token="db.driver" value="${db.driver}"/>
+    <filter token="database.host" value="${database.host}"/>
+    <filter token="database.port" value="${database.port}"/>
+    <filter token="database.user" value="${database.user}"/>
+    <filter token="database.password" value="${database.password}"/>
+    <filter token="database.name" value="${database.name}"/>
+    <filter token="database.url" value="${database.url}"/>
+    <filter token="database.driver" value="${database.driver}"/>
     <filter token="common.resources.dir" value="${common.resources.dir}"/>
     <filter token="caimage.host" value="${caimage.host}"/>
     <filter token="caimage.modelview.uri" value="${caimage.modelview.uri}"/>
@@ -275,10 +275,10 @@
     
     <target name="upgrade-db">
     	<echo>************  ${db.upgrade.file}</echo>
-    	<echo>************  ${db.driver}</echo>
-    	<echo>************  ${db.url}</echo>
-    	<echo>************  ${db.username}</echo>
-    	<echo>************  ${db.password}</echo>
+    	<echo>************  ${database.driver}</echo>
+    	<echo>************  ${database.url}</echo>
+    	<echo>************  ${database.user}</echo>
+    	<echo>************  ${database.password}</echo>
 	<updateDatabase changeLogFile="${db.upgrade.file}" driver="${database.driver}" url="${database.url}" username="${database.user}" password="${database.password}" dropFirst="false" classpathref="liquibase.dependencies.path" />
     </target>
 
