@@ -20,7 +20,10 @@
 	<!-- Copy grid service to BDA folder (modify properties file in install.xml)  -->
 	<target name="copy-grid-service" depends="zip-globus-lib-files-to-bda,update-grid-service-local">	
 		<echoproperties prefix="grid"/>
-		<zip destfile="${grid.service.build.dir}/wsrf.zip" basedir="${temp.dir}" />			
+		<zip destfile="${grid.service.build.dir}/wsrf.zip" basedir="${temp.dir}" />	
+		
+		<copy file="${log4j.file}" todir="${common.dir}"/>
+    		<copy file="${ojdbc14.file}" todir="${common.dir}"/>
 	</target>
 	
 	<!-- Configure grid service for the various tiers (modify properties file)  -->
