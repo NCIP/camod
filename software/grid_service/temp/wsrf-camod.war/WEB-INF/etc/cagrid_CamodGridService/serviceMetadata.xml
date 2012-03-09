@@ -54,7 +54,7 @@
     <ns9:PointOfContact affiliation="NCICB" email="" firstName="Denise" lastName="Warzel" phoneNumber="" role="Maintainer"/>
     <ns9:PointOfContact affiliation="NCICB" email="" firstName="Stephen" lastName="Reckford" phoneNumber="" role="Maintainer"/>
     <ns9:PointOfContact affiliation="NCICB" email="" firstName="Juli" lastName="Klemm" phoneNumber="" role="Maintainer"/>
-    <ns9:PointOfContact affiliation="NCICB" email="pandyas@mail.nih.gov" firstName="Sima" lastName="Pandya" phoneNumber="301-451-2216" role="Developer"/>
+    <ns9:PointOfContact affiliation="NCICB" email="prakasht@mail.nih.gov" firstName="Thiagarajan" lastName="Prakash" phoneNumber="301-443-4409" role="Developer"/>
    </ns9:pointOfContactCollection>
   </ns9:ResearchCenter>
  </ns1:hostingResearchCenter>

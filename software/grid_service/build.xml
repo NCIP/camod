@@ -110,6 +110,7 @@
 		<delete dir="${artifacts.dir}" failonerror="false"/>
 		<mkdir dir="${artifacts.dir}"/>
 		<delete file="${temp.dir}/${grid.service.war.filename}/WEB-INF/lib/commons-logging.jar"/>
+		<delete dir="${temp.dir}/WEB-INF" failonerror="false"/>
 	</target>	
 	
 </project>
