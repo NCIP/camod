@@ -10,7 +10,12 @@
 
 <!-- Needed for tooltips -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
-<SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>	
+<SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>
+<SCRIPT src="/camod/scripts/PublicationManager.js" type=text/javascript></SCRIPT>
+<script type='text/javascript'
+	src='/camod/dwr/interface/PublicationManager.js'></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script>	
 
 <script type="text/javascript">
 <!--
@@ -127,7 +132,7 @@ function trimRGDId(str)
 			<label valign="TOP" for="pmid">PMID: &nbsp;</label>
 			<br>
 			<html:text styleClass="formFieldUnSized" size="20" styleId="pmid" property="pmid" />
-			<html:submit property="<%=Constants.Parameters.ACTION%>" onclick="javascript:pmid.value=trim(pmid.value)" >Fill in Fields</html:submit>		
+			<html:button property="<%=Constants.Parameters.ACTION%>" onclick="javascript:fillPubMedInfo()" >Fill in Fields</html:button>		
 		</td>
 	</tr>
 

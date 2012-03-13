@@ -22,14 +22,14 @@
 <!-- Took this out of sidebar.jsp and has to go here to format correctly -->
 <%@ include file="/jsp/searchMenu.jsp" %>
 <tr><td>
-<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
+<TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="60%" height="100%">
 <tr><td>
 	<TABLE cellpadding="3" cellspacing="0" border="0" align="left" width="100%">
 
 		<tr>
             <logic:messagesPresent>
                 <td>
-                    <TABLE width="100%">
+                    <TABLE summary="This table is used to format page content" width="100%">
                         <tr>
 				        <br>
 						<b><font color=red>

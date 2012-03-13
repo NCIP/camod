@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dwr PUBLIC "-//GetAhead Limited//DTD Direct Web Remoting 2.0//EN" "http://getahead.org/dwr/dwr20.dtd">
+<dwr>
+	<allow>
+		<create creator="new" javascript="PublicationManager" scope="session">
+			<param name="class"
+				value="gov.nih.nci.camod.webapp.dwr.DWRPublicationManager" />
+			<include method="searchPubMedById" />
+			<include method="retrievePubMedInfo" />
+		</create>
+		<convert converter="bean"
+			match="gov.nih.nci.camod.bean.PublicationBean">
+			<param name="include"
+				value="authors, domainFile, primaryAuthor" />
+		</convert>
+		<convert converter="bean"
+			match="gov.nih.nci.camod.bean.XmlPublication">
+			<param name="exclude"
+				value="keywordCollection" />
+		</convert>
+		<convert converter="bean"
+			match="gov.nih.nci.camod.bean.Author">
+			<param name="include" value="id, firstName, lastName, initial" />
+		</convert>
+		
+	</allow>
+</dwr>

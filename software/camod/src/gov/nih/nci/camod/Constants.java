@@ -301,6 +301,28 @@ package gov.nih.nci.camod;
  */
 public class Constants {
 	
+	// Default date format for exported file name.
+	public static final String EXPORT_FILE_DATE_FORMAT = "yyyyMMdd_HH-mm-ss-SSS";
+
+	/* image file name extension */
+	public static final String[] IMAGE_FILE_EXTENSIONS = { "AVS", "BMP", "CIN",
+			"DCX", "DIB", "DPX", "FITS", "GIF", "ICO", "JFIF", "JIF", "JPE",
+			"JPEG", "JPG", "MIFF", "OTB", "P7", "PALM", "PAM", "PBM", "PCD",
+			"PCDS", "PCL", "PCX", "PGM", "PICT", "PNG", "PNM", "PPM", "PSD",
+			"RAS", "SGI", "SUN", "TGA", "TIF", "TIFF", "WMF", "XBM", "XPM",
+			"YUV", "CGM", "DXF", "EMF", "EPS", "MET", "MVG", "ODG", "OTG",
+			"STD", "SVG", "SXD", "WMF" };
+	
+	public static final String AUTO_COPY_ANNOTATION_PREFIX = "COPY";
+	
+	public static final String DATE_FORMAT = "MM/dd/yyyy";
+	
+	public static final String DOI_PREFIX = "http://dx.doi.org/";
+
+	public static final String PUBMED_PREFIX = "http://www.ncbi.nlm.nih.gov/pubmed/";
+	
+	public static final String PUBMED_XML_PREFIX="http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmode=xml&id=";
+
 
     /** The name of the ResourceBundle used in this application */
     public static final String BUNDLE_KEY = "ApplicationResources";
