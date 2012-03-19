@@ -286,8 +286,6 @@
 <c:forEach var="tg" items="${tgc}" >
 <TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
-	<a name="<c:out value="eng_trans_${count}"/>"/>&nbsp;
-	<c:set var="count" value="${count + 1}"/>
 	<TABLE cellpadding="7" cellspacing="0" border="0" align="left" width="60%">
 		<tr>
 			<th scope="col" class="formTitle" height="20" colspan="2">
@@ -295,6 +293,8 @@
 				<camod:highlight>
 					<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>&nbsp;
 				</camod:highlight>
+				<a name="<c:out value="eng_trans_${count}"/>"/>
+				<c:set var="count" value="${count + 1}"/>
 			</th>
 		</tr>
 
@@ -526,8 +526,6 @@
 <c:forEach var="gs" items="${genomicSegColl}">
 <TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
-    <a name="<c:out value="gen_seg_${count}"/>"/>
-	<c:set var="count" value="${count + 1}"/>
 	<TABLE  cellpadding="7" cellspacing="0" border="0" align="left" width="60%">
 		<tr>
 			<th scope="col" class="formTitle" height="20" colspan="2">
@@ -535,6 +533,8 @@
 					<camod:highlight>
 						<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>&nbsp;
 					</camod:highlight>
+					<a name="<c:out value="gen_seg_${count}"/>"/>
+					<c:set var="count" value="${count + 1}"/>
 			</th>
 		</tr>
 		
@@ -995,8 +995,6 @@
 <c:forEach var="im" items="${inducedMutColl}">
 <TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
-	<a name="<c:out value="ind_mut_${count}"/>"/>
-	<c:set var="count" value="${count + 1}"/>
 	<TABLE cellpadding="7" cellspacing="0" border="0" align="left" width="60%">
 		<tr>
 			<th scope="col" class="formTitle" height="20" colspan="2">
@@ -1004,6 +1002,8 @@
 					<camod:highlight>
 						<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
 					</camod:highlight>
+					<a name="<c:out value="ind_mut_${count}"/>"/>
+					<c:set var="count" value="${count + 1}"/>
 			</th>
 		</tr>
 		
@@ -1154,8 +1154,6 @@
 <c:forEach var="sm" items="${smc}">
 <TABLE summary="This table is used to format page content" cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
-	<a name="<c:out value="spon_mut_${count}"/>"/>
-	<c:set var="count" value="${count + 1}"/>
 	<TABLE  cellpadding="7" cellspacing="0" border="0" align="left" width="60%">
 		<tr>
 			<th scope="col" class="formTitle" height="20" colspan="2">
@@ -1163,6 +1161,8 @@
 					<camod:highlight>
 						<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
 					</camod:highlight>
+					<a name="<c:out value="spon_mut_${count}"/>"/>
+					<c:set var="count" value="${count + 1}"/>
 			</th>
 		</tr>
         <tr>
