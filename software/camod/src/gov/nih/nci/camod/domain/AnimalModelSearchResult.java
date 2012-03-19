@@ -1044,20 +1044,22 @@ public class AnimalModelSearchResult implements Comparable
         {
             fetchAnimalModel();
             Set<Image> set = myAnimalModel.getImageCollection();
-            Iterator<Image> setIter = set.iterator();
             myImageTitle = "";
-
-            while (setIter.hasNext())
-            {
-                Image it = (Image) setIter.next();
-
-                myImageTitle += "<IMG src=\"/camod/images/image.gif\"> ";
-                if (it.getTitle() != null)
-                {
-                    myImageTitle += it.getTitle();
-                }
-
-                myImageTitle += "<br>";
+            if ( set != null ) {	
+	            Iterator<Image> setIter = set.iterator();
+	
+	            while (setIter.hasNext())
+	            {
+	                Image it = (Image) setIter.next();
+	
+	                myImageTitle += "<IMG src=\"/camod/images/image.gif\"> ";
+	                if (it.getTitle() != null)
+	                {
+	                    myImageTitle += it.getTitle();
+	                }
+	
+	                myImageTitle += "<br>";
+	            }
             }
         }
         return myImageTitle;
