@@ -243,7 +243,7 @@
 			<td class="WhiteBox" width="20%"><b>Website for add. info</b></td>
 			<td class="WhiteBoxRightEnd" width="70%">
 					<a target="_blank" href="<c:out value="${mdl.url}"/>" ><c:out value="${mdl.url}" escapeXml="false"/></a>&nbsp;
-					<c:if "test = {not empty mdl.url}">
+					<c:if test ="{not empty mdl.url}">
 						&nbsp;<a class="sideMenuLink" href="html/disclaimer.html" target="new">Disclaimer</a>
 					</c:if>					
 			</td>
