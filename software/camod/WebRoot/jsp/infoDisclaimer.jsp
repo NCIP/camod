@@ -36,9 +36,15 @@
 				private institutions or organizations. Other parties may retain all rights to publish or produce these 
 				documents. Commercial use of the documents on this site may be protected under United States and foreign 
 				copyright laws. In addition, some of the data may be the subject of patent applications or issued patents, 
-				and you may need to seek a license for its commercial use. You are encouraged to review important 
-				Use Guidelines by clicking on the buttons below
-				<br><br>
+				and you may need to seek a license for its commercial use. <br/><br/>
+				<b>EXTERNAL SITE DISCLAIMER:</b>The U.S. Government, NIH, NCI CBIIT, and their employees and contractors do not make any warranty, express 
+				or implied, including warranties of fitness for a particular purpose, with respect to resources or tools 
+				listed in the caBIG® Community Code Resource Directory.  Links to other Internet sites are provided only 
+				for the convenience of users:  NIH and NCI CBIIT are not responsible for the availability or content of 
+				external sites. See the <a href="https://cabig.nci.nih.gov/community-code/disclosure.htm">complete disclosure statement</a>
+				<br/>
+				You are encouraged to review important Use Guidelines by clicking on the buttons below.
+				<br/><br/>
 				<a href="infoPrivacyNotice.do"><b>USE GUIDELINES:</b></a> Posting of Data and Results/Downloading of Materials/Copyright Status/Privacy 
 				Notice/Monitoring of Website/External Links/Disclaimer of Liability/Disclaimer of Endorsement 
 				

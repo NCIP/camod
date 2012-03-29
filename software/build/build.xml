@@ -147,6 +147,10 @@
 	<target name="build:camod-grid-api" depends="build:camod-api, build:camod-grid-service" description="Call Grid Service and API targets">
 	</target>
 	
+	<target name="deploy:camod-webapp" depends="build:camod-webapp">
+	    	<copy file="${camod-webapp.dist.dir}/camod.war" todir="${jboss.deploy.dir}" overwrite="true"/>
+    	</target>
+	
 	<target name="update:camod-db">
 		<ant inheritAll="false" inheritRefs="false" antfile="${camod-webapp.build.file}" target="${camod-db.upgrade}" dir="${camod-webapp.base.dir}">
 			<property name="database.server" value="${database.server}" />

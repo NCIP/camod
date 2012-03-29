@@ -93,7 +93,11 @@
 			<td class="GreyBox"><b>ATCC number of Cell Line:</b></td>
 			<td class="GreyBoxRightEnd">
 			<a target="atcc" href="http://www.atcc.org/SearchCatalogs/Linkin?id=<c:out value="${t.atccNumber}"/>&partner=NIH">
-			<c:out value="${t.atccNumber}" escapeXml="false"/>&nbsp;</a></td> 		
+			<c:out value="${t.atccNumber}" escapeXml="false"/>&nbsp;</a>&nbsp;
+			<c:if test="${not empty t.atccNumber}">
+				&nbsp;<a class="sideMenuLink" href="html/disclaimer.html" target="new">Disclaimer</a>
+			</c:if>
+			</td> 		
 		</tr>
 
 		<tr>

@@ -36,18 +36,18 @@ camod.grid.jboss.server.hostname=cbiovdev5058.nci.nih.gov
 #################################
 # Required for local installs
 database.re-create=true
-database.system.user=system
-database.system.password=123456
-database.system.url=jdbc:oracle:thin:@nci-01731998.nci.nih.gov:1521:XE
+database.system.user=camoddev22
+database.system.password=fsb#4625
+database.system.url=jdbc:oracle:thin:@ncidb-nci-d.nci.nih.gov:1564:NCIDEV
 
 # Require for all installs
 database.type=oracle
-database.server=nci-01731998.nci.nih.gov
-database.port=1521
-database.name=XE
-database.user=camoddev1
-database.password=dev!234
-database.url=jdbc:oracle:thin:@nci-01731998.nci.nih.gov:1521:XE
+database.server=ncidb-nci-d.nci.nih.gov
+database.port=1564
+database.name=NCIDEV
+database.user=camoddev22
+database.password=fsb#4625
+database.url=jdbc:oracle:thin:@ncidb-nci-d.nci.nih.gov:1564:NCIDEV
 database.driver=oracle.jdbc.OracleDriver
 
 ##############
@@ -86,4 +86,10 @@ caimage.genconview.uri=http://ncias-d330-v.nci.nih.gov:19080/adore-djatoka/image
 
 evs.uri=http://lexevsapi51.nci.nih.gov/lexevsapi51
 
+########################
+# JBOSS LOCAL SETTINGS #
+########################
 
+jboss.install.dir=C:/bin/jboss-4.0.5.GA/
+jboss.server.name=default
+jboss.deploy.dir=${jboss.install.dir}server/${jboss.server.name}/deploy

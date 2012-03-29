@@ -81,18 +81,19 @@
         <mkdir dir="${build.dir}"/>
             <war destfile="${build.dir}/${app.war.name}.war"         	
              webxml="${webapp.dir}/WEB-INF/web.xml">
-            <fileset file="${webapp.dir}/*.*" />
-            <zipfileset dir="${webapp.dir}/common" prefix="common" />
-            <zipfileset dir="${webapp.dir}/images" prefix="images" />
-            <zipfileset dir="${webapp.dir}/scripts" prefix="scripts" />
-            <zipfileset dir="${webapp.dir}/styles" prefix="styles" />
-            <zipfileset dir="${webapp.dir}/config" prefix="config" />
-            <zipfileset dir="${webapp.dir}/WebHelp" prefix="WebHelp" />              	
-            <zipfileset dir="${webapp.dir}/jsp" prefix="jsp" />
-        	<zipfileset dir="${webapp.dir}/js" prefix="js" />
-            <webinf dir="${webapp.dir}/WEB-INF"/>
-            <classes dir="${build.classes.dir}" />
-        </war>
+		    <fileset file="${webapp.dir}/*.*" />
+		    <zipfileset dir="${webapp.dir}/common" prefix="common" />
+		    <zipfileset dir="${webapp.dir}/images" prefix="images" />
+		    <zipfileset dir="${webapp.dir}/scripts" prefix="scripts" />
+		    <zipfileset dir="${webapp.dir}/styles" prefix="styles" />
+		    <zipfileset dir="${webapp.dir}/config" prefix="config" />
+		    <zipfileset dir="${webapp.dir}/WebHelp" prefix="WebHelp" />              	
+		    <zipfileset dir="${webapp.dir}/jsp" prefix="jsp" />
+		    <zipfileset dir="${webapp.dir}/js" prefix="js" />
+		    <zipfileset dir="${webapp.dir}/html" prefix="html" />
+		    <webinf dir="${webapp.dir}/WEB-INF"/>
+		    <classes dir="${build.classes.dir}" />
+            </war>
     </target>
 
     <!--

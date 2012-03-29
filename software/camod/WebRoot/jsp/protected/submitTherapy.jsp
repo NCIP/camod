@@ -130,7 +130,7 @@
 				<input type=button value="Find CAS #" onClick="myRef = window.open('http://chemfinder.cambridgesoft.com/','mywin',
 				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>
 				&nbsp;&nbsp;
-				<html:text styleClass="formFieldUnSized" size="10" styleId="casNumber" property="casNumber" />
+				<html:text styleClass="formFieldUnSized" size="10" styleId="casNumber" property="casNumber" />&nbsp;&nbsp;<a class="sideMenuLink" href="html/disclaimer.html" target="new">Disclaimer</a>
 			</td>
 	</tr>	
 	<tr>

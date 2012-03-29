@@ -885,7 +885,7 @@
 				<td class="GreyBoxRightEnd" width="65%">
 				<a target="_blank" href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=<c:out value="${tm.mutationIdentifier.mgiId}"/>&selectedQuery=Genes+and+Markers">
 				    <c:out value="${tm.mutationIdentifier.mgiId}"/>
-				</a>
+				</a>&nbsp;&nbsp;<a class="sideMenuLink" href="html/disclaimer.html" target="new">Disclaimer</a>
 				</td>
 			</c:if>&nbsp;
 			
@@ -893,7 +893,7 @@
 			<td class="GreyBox" width="35%"><b>ZFIN Number</b></td>
 				<td class="GreyBoxRightEnd" width="65%"> 
 				<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-genotypeview.apg&OID=<c:out value="${tm.mutationIdentifier.zfinId}"/>">				 
-				    <c:out value="${tm.mutationIdentifier.zfinId}"/>
+				    <c:out value="${tm.mutationIdentifier.zfinId}"/>&nbsp;&nbsp;<a class="sideMenuLink" href="html/disclaimer.html" target="new">Disclaimer</a>
 				</a>
 				</td>
 			</c:if>&nbsp;
@@ -902,7 +902,7 @@
 			<td class="GreyBox" width="35%"><b>RGD Number</b></td>
 				<td class="GreyBoxRightEnd" width="65%">
 				<a target="_blank" href="http://rgd.mcw.edu/tools/strains/strains_view.cgi?id=<c:out value="${tm.mutationIdentifier.rgdId}"/>">
-				    <c:out value="${tm.mutationIdentifier.rgdId}"/>
+				    <c:out value="${tm.mutationIdentifier.rgdId}"/>&nbsp;&nbsp;<a class="sideMenuLink" href="html/disclaimer.html" target="new">Disclaimer</a>
 				</a>
 				</td>
 			</c:if>&nbsp;			

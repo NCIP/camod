@@ -830,3 +830,15 @@ table.activeUserList, body#activeUsers span.pagelinks {
   border-top: 1px solid #9bc;
   border-bottom: 1px solid #9bc;
 }
+
+a:hover.sideMenuLink {
+   color: black; /* light gray */
+}
+
+a:link.sideMenuLink,a:visited.sideMenuLink,a:active.sideMenuLink {
+	/* for the text links at the top of the footer */
+	color: black; 
+	white-space: nowrap;
+	text-decoration: underline;
+	font-size: 0.8em;
+}

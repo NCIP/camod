@@ -63,7 +63,7 @@ function trimRGDId(str)
 	<tr><td valign="top">
 
 	<TABLE summary="This table is used to format page content" cellpadding="3" cellspacing="0" border="0" align="left">
-	<html:form action="<%= (String) pageContext.getAttribute("actionName") %>" focus="name">
+	<html:form action="<%= (String) pageContext.getAttribute("actionName") %>" focus="name" enctype="multipart/form-data">
 	<tr>
 		<html:errors/>
 		<td class="formMessage" colspan="3">* indicates a required field</td>
@@ -172,7 +172,7 @@ function trimRGDId(str)
 						<input type=button value="Find J #" onClick="myRef = window.open('http://www.informatics.jax.org/searches/reference_form.shtml','mywin',
 						'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>
 						&nbsp;&nbsp;
-						<html:text styleClass="formFieldUnSized" size="20" styleId="jaxJNumber" property="jaxJNumber" />
+						<html:text styleClass="formFieldUnSized" size="20" styleId="jaxJNumber" property="jaxJNumber" />&nbsp;&nbsp;<a class="sideMenuLink" href="html/disclaimer.html" target="new">Disclaimer</a>
 					</td>
 			</tr>		
 		</c:otherwise>

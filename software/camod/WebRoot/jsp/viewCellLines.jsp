@@ -149,7 +149,11 @@
 									<td class="WhiteBoxRightEnd" width="70%"><a name="authors"><c:out value="${p.authors}" escapeXml="false"/></a>&nbsp;</td>
 								</tr>
 								<tr>
-									<td class="GreyBox" width="30%"><b>References:</b></td>
+									<td class="GreyBox" width="30%"><b>References:</b>
+									<c:if test="${(not empty p.zfinPubId) || (not empty p.jaxJNumber)}">
+										<br/><a class="sideMenuLink" href="html/disclaimer.html" target="new">Disclaimer</a>
+									</c:if>
+									</td>
 										<!-- Two choose required so we can check for emtpy ZFIN or J Numbers-->			
 										<td class="GreyBoxRightEnd" width="70%">
 											<c:choose>
