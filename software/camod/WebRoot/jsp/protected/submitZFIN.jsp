@@ -64,7 +64,8 @@
 			<td class="formField">
 				<input type=button value="Find Info" onClick="myRef = window.open('http://zebrafish.org/zirc/home/guide.php','mywin',
 				'left=20,top=20,width=800,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>
-				<html:text styleClass="formFieldSized" size="30" styleId="stockNumber" property="stockNumber"  />&nbsp;&nbsp;<a class="sideMenuLink" href="html/disclaimer.html" target="new">Disclaimer</a>			
+				<html:text styleClass="formFieldSized" size="30" styleId="stockNumber" property="stockNumber"  />&nbsp;&nbsp;<a class="sideMenuLink" href="#" onClick="myRef = window.open('html/disclaimer.html#external','mywin',
+										'left=20,top=20,width=800,height=200,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()">Disclaimer</a>			
 			</td>
         </tr>
         

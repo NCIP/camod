@@ -357,7 +357,8 @@
 			<td class="formField">		
 				<input type=button value="Find ATTC#" onClick="myRef = window.open('http://www.atcc.org/','mywin',
 				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"></input>
-				<html:text styleClass="formFieldUnSized" size="15" styleId="atccNumber" property="atccNumber"  />&nbsp;&nbsp;<a class="sideMenuLink" href="html/disclaimer.html" target="new">Disclaimer</a>
+				<html:text styleClass="formFieldUnSized" size="15" styleId="atccNumber" property="atccNumber"  />&nbsp;&nbsp;<a class="sideMenuLink" href="#" onClick="myRef = window.open('html/disclaimer.html#external','mywin',
+										'left=20,top=20,width=800,height=200,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()">Disclaimer</a>
 			</td>
 	</tr>	
 	

@@ -37,12 +37,25 @@
 				documents. Commercial use of the documents on this site may be protected under United States and foreign 
 				copyright laws. In addition, some of the data may be the subject of patent applications or issued patents, 
 				and you may need to seek a license for its commercial use. <br/><br/>
-				<b>EXTERNAL SITE DISCLAIMER:</b>The U.S. Government, NIH, NCI CBIIT, and their employees and contractors do not make any warranty, express 
-				or implied, including warranties of fitness for a particular purpose, with respect to resources or tools 
-				listed in the caBIG® Community Code Resource Directory.  Links to other Internet sites are provided only 
-				for the convenience of users:  NIH and NCI CBIIT are not responsible for the availability or content of 
-				external sites. See the <a href="https://cabig.nci.nih.gov/community-code/disclosure.htm">complete disclosure statement</a>
-				<br/>
+				<b>PRIVACY ACT NOTIFICATION STATEMENT: </b>The caMOD web portal requires users to
+				register before submitting data to the repository. The primary use
+				of the portal is to allow the National Cancer Institute to provide a
+				repository as a public service to foster the rapid dissemination of
+				cancer models to the scientific community and the
+				public. Collection of this information is authorized under Title IV
+				of the PHS Act, Section 410[285]. This information may be disclosed
+				to researchers for research purposes, contractors responsible for
+				the maintenance of the repository and to other registered repository
+				users for non-commercial, scientific and educational purposes.
+				Submission of this information is voluntary, however, in order for
+				us to register you as a user of this repository, you should complete
+				all fields. For additional information, please refer to the Legal
+				Rules noted above, and the link to our Privacy Policy.<br/><br/>
+				<b>EXTERNAL SITE DISCLAIMER: </b>Some NIH sites may provide links to other Internet sites only for the 
+				convenience of World Wide Web users. NIH is not responsible for the availability or content of these 
+				external sites, nor does NIH endorse, warrant or guarantee the products, services or information described 
+				or offered at these other Internet sites.
+				<br/><br/>
 				You are encouraged to review important Use Guidelines by clicking on the buttons below.
 				<br/><br/>
 				<a href="infoPrivacyNotice.do"><b>USE GUIDELINES:</b></a> Posting of Data and Results/Downloading of Materials/Copyright Status/Privacy 
