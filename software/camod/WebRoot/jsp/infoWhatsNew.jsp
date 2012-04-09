@@ -25,7 +25,7 @@
 														   <TR>													
 																<TR>
 																	<TD class="formTitleBlue" colspan="2" height="20">
-																		Release of caMOD 2.7 - Feb 2011
+																		Release of caMOD 2.7.1 - May 2012
 																	</TD>
 																</TR>
 
@@ -41,26 +41,17 @@
 																</TR>
 																<TR>
 																	<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">
-																		LexEVS connection upgraded in EVSTree
+																		Various bug-fixes
 																	</TD>
 																	<TD
 																		style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
 																		width="80%">
-																		The connection to the LexEVS API was upgraded to use version 5.1 in the EVSTree application.  The data displayed to the user remains the same. 
-																		The search functionality was upgraded. 
+																		PubMed URL has changed and needed an update to use the XML format (JIRA# CAMOD-998) <br/>
+																		Added a disclaimer when redirecting to external sites (JIRA# CAMOD-999) <br/>
+																		MGI link to phenotypic allele detail page is broken for all engineered gene categories except targeted modification while using Firefox (JIRA# CAMOD-1000)
+																		Completed activities to make caMOD 508 compliant. 
 																	</TD>
 																</TR>
-																<TR>
-																	<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">
-																		Various bug fixes related to the LexEVS 5.1 upgrade.
-																	</TD>
-																	<TD
-																		style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
-																		width="80%">
-																		There were various fixes made that directly related to the changes in the LexEVS API.  The organs are being retrieved from the database for performance and the Therapy sections were upgraded.  In addition, metastatis data was loaded from a previous source.  
-																	</TD>
-																</TR>
-																															
 														</TR>			
 												    </TBODY>
 											    </TABLE><br>																

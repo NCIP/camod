@@ -23,8 +23,8 @@
  Release Notes 
      
                              caMOD
-                          Version 2.7
-                          Feb 2011
+                          Version 2.7.1
+                          May 2012
 
        National Cancer Institute's Center for Biomedical Informatics and Information Technology 
  
@@ -44,10 +44,10 @@
  
  
 ================================================================ 
-    1.0 caMOD Version 2.7 Introduction and History 
+    1.0 caMOD Version 2.7.1 Introduction and History 
 ================================================================ 
   
-    caMOD 2.7, the Cancer Models Database, is a open source data management 
+    caMOD 2.7.1, the Cancer Models Database, is a open source data management 
     system developed for the management and sharing of data of animal models. 
     caMOD features controlled vocabularies from a shared, publicly accessible metadata repository (caDSR) and 
     enterprise vocabulary services (EVS) from the National 
@@ -65,6 +65,9 @@
 ================================================================ 
     2.0 Release History 
 ================================================================ 
+     caMOD Version 2.7.1
+    --	May 2012
+     
      caMOD Version 2.7
     --	Feb 2011
 
@@ -108,20 +111,17 @@
     3.0 New Features and Updates 
 ================================================================ 
 
-LexEVS connection upgraded
-The connection to the LexEVS API was upgraded to use version 5.1 for the EVSTree application.  The data displayed to the user remains the same. 
-The search functionality for the vocabulary trees has been upgraded.
+None.
    
    
 ================================================================ 
     4.0 Defects Fixed Since Last Release 
 ================================================================ 
- 
-Misspelling on transgene submission page (JIRA# CAMOD-954)
-Retrieve organ information for search results pages from DB not directly from LexEVS (JIRA# CAMOD-969)
-Metastases are gone from earlier models (JIRA# CAMOD-974)
-Therapeutic approaches search page not shown - user gets blank page (JIRA# CAMOD-975)
-Submission of Zebrafish with Therapy and developmental stages throws error (JIRA# CAMOD-976)
+
+PubMed URL has changed and needed an update to use the XML format (JIRA# CAMOD-998)
+Added a disclaimer when redirecting to external sites (JIRA# CAMOD-999)
+MGI link to phenotypic allele detail page is broken for all engineered gene categories except targeted modification while using Firefox (JIRA# CAMOD-1000)
+Completed activities to make caMOD 508 compliant.
  
 ================================================================ 
     5.0 Known Issues/Defects 
