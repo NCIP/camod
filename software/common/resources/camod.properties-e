@@ -6,7 +6,7 @@
 coordinator.username=ulrike
 
 # Superuser usernames.  Can edit all models
-superuser.usernames=pandyas,ulrike,colbertma,curatorcamod,camodcurator2,prakasht
+superuser.usernames=pandyas,ulrike,colbertma,curatorcamod,camodcurator2,prakasht,marksc
 
 # EVS properties
 evs.uri=@EVS_URI@
