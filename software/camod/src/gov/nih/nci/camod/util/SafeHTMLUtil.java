@@ -101,6 +101,7 @@ public class SafeHTMLUtil {
         clean = StringUtils.replace(clean, ")", "");
         clean = StringUtils.replace(clean, "/", "");
         clean = StringUtils.replace(clean, "\\", "");
+        clean = StringUtils.replace(clean, "alert", "cleaned");
         if(clean.length()==0){
                 clean = "empty";
         }
@@ -115,6 +116,30 @@ public class SafeHTMLUtil {
         clean = StringUtils.replace(clean, "\"", "");
         clean = StringUtils.replace(clean, "$", "");
         clean = StringUtils.replace(clean, "\\", "");
+        clean = StringUtils.replace(clean, "/", "");
+        clean = StringUtils.replace(clean, "<", "");
+        clean = StringUtils.replace(clean, ">", "");   
+        clean = StringUtils.replace(clean, "=", "");       
+        clean = StringUtils.replace(clean, "alert", "cleaned");
+        if(clean.length()==0){
+                clean = "empty";
+        }
+        return clean;       
+    }    
+
+    // clean method that only cleans {, }, script, %, \, \\ 
+    public static String cleanSpecies(String s)    {
+        String clean = Translate.decode(s).replace("{", "").replace("}", "");
+        clean = StringUtils.replace(clean, "script", "");
+        clean = StringUtils.replace(clean, "%", "");
+        clean = StringUtils.replace(clean, "\"", "");
+        clean = StringUtils.replace(clean, "$", "");
+        clean = StringUtils.replace(clean, "\\", "");
+        clean = StringUtils.replace(clean, "/", "");
+        clean = StringUtils.replace(clean, "<", "");
+        clean = StringUtils.replace(clean, ">", "");   
+        clean = StringUtils.replace(clean, "=", "");       
+        clean = StringUtils.replace(clean, "alert", "cleaned");
         if(clean.length()==0){
                 clean = "empty";
         }

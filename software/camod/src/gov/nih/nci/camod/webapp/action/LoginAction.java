@@ -145,6 +145,7 @@ public final class LoginAction extends BaseAction {
         }
         
         String theUsername = loginForm.getUsername().toLowerCase();
+        request.getSession().invalidate();
         
 		// If user name is in our DB proceed.  Or fail immediately (prevent SQL injection)
         if (SafeHTMLUtil.isValidStringValue(theUsername,Constants.Dropdowns.USERNAMEINDATABASE,request))

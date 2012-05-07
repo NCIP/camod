@@ -388,6 +388,10 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
     public void setSpecies(String species)
     {
         this.species = species;
+        
+        if (this.species != null && !this.species.equals(""))  {
+            this.species = SafeHTMLUtil.cleanSpecies(this.species);
+        } 
     }
     
     public String getExternalSource()
