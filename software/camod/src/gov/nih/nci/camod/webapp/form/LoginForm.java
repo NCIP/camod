@@ -12,6 +12,8 @@ import gov.nih.nci.camod.util.SafeHTMLUtil;
 
 import java.io.Serializable;
 import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMapping;
 
 public class LoginForm extends BaseForm implements Serializable {
@@ -59,4 +61,14 @@ public class LoginForm extends BaseForm implements Serializable {
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
             // reset any boolean data types to false
         }
+	
+	@SuppressWarnings("deprecation")
+	public ActionErrors validate(ActionMapping mapping,
+			HttpServletRequest request) {
+		ActionErrors errors = new ActionErrors();
+		// For Appscan Session Fixation Error
+		request.getSession().invalidate();
+		
+		return errors;
+	}
 }
