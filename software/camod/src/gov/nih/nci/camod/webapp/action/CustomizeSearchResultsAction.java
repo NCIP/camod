@@ -53,6 +53,11 @@ public class CustomizeSearchResultsAction extends BaseAction
     {
 
         log.debug("Entering CustomizeSearchResultsAction.execute");
+        
+		if (!isTokenValid(request)) {
+			return mapping.findForward("failed");
+		}
+
 
         // Create a form to edit
         CustomizeSearchResultsForm customResultsForm = (CustomizeSearchResultsForm) form;
@@ -139,7 +144,8 @@ public class CustomizeSearchResultsAction extends BaseAction
 
         log.debug("Forwarding to model section: " + theForward);
         log.debug("Exiting CustomizeSearchResultsAction.execute");
-
+        resetToken(request);
+        
         return mapping.findForward(theForward);
     }
 }

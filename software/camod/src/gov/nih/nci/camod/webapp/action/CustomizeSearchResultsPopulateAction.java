@@ -116,6 +116,8 @@ public class CustomizeSearchResultsPopulateAction extends BaseAction
 
         log.debug("Forwarding to model section: " + theForward);
         log.debug("Exiting CustomizeSearchResultsAction.execute");
+        
+        saveToken(request);
 
         return mapping.findForward(theForward);
     }

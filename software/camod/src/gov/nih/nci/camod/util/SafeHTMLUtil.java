@@ -54,323 +54,327 @@ package gov.nih.nci.camod.util;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang.StringUtils;
-import org.htmlparser.util.Translate; 
+import org.htmlparser.util.Translate;
 
 public class SafeHTMLUtil {
-	
-    public static String clean(String s)    {
-        String clean = Translate.decode(s).replace("<", "").replace(">", "");
-        clean = StringUtils.replace(clean, "script", "");    
-        clean = StringUtils.replace(clean, "%", "");
-        clean = StringUtils.replace(clean, "#", "");
-        clean = StringUtils.replace(clean, ";", "");
-        clean = StringUtils.replace(clean, "'", "");
-        clean = StringUtils.replace(clean, "\"", "");
-        clean = StringUtils.replace(clean, "$", "");
-        clean = StringUtils.replace(clean, "&", "");
-        clean = StringUtils.replace(clean, "(", "");
-        clean = StringUtils.replace(clean, ")", "");
-        clean = StringUtils.replace(clean, "/", "");
-        clean = StringUtils.replace(clean, "\\", "");
-        clean = StringUtils.replace(clean, "&", "");
-        clean = StringUtils.replace(clean, "=", "");        
-        clean = StringUtils.replace(clean, "quot", "");         
-        clean = StringUtils.replace(clean, "javascript", "");
-        clean = StringUtils.replace(clean, "alert", "cleaned");
-        clean = StringUtils.replace(clean, "CR", "");
-        clean = StringUtils.replace(clean, "LF", "");
-        clean = StringUtils.replace(clean, "<", "");
-        clean = StringUtils.replace(clean, ">", "");        
-        if(clean.length()==0){
-                clean = "empty";
-        }
-        return clean;       
-    }
- 
-    // clean method that allows the apostrophe (')
-    public static String cleanKeyword(String s)    {
-        String clean = Translate.decode(s).replace("<", "").replace(">", "");
-        clean = StringUtils.replace(clean, "script", "");
-        clean = StringUtils.replace(clean, "%", "");
-        clean = StringUtils.replace(clean, "#", "");
-        clean = StringUtils.replace(clean, ";", "");
-        clean = StringUtils.replace(clean, "\"", "");
-        clean = StringUtils.replace(clean, "$", "");
-        clean = StringUtils.replace(clean, "&", "");
-        clean = StringUtils.replace(clean, "(", "");
-        clean = StringUtils.replace(clean, ")", "");
-        clean = StringUtils.replace(clean, "/", "");
-        clean = StringUtils.replace(clean, "\\", "");
-        clean = StringUtils.replace(clean, "alert", "cleaned");
-        if(clean.length()==0){
-                clean = "empty";
-        }
-        return clean;       
-    }    
 
-    // clean method that only cleans {, }, script, %, \, \\ 
-    public static String cleanModelDescriptor(String s)    {
-        String clean = Translate.decode(s).replace("{", "").replace("}", "");
-        clean = StringUtils.replace(clean, "script", "");
-        clean = StringUtils.replace(clean, "%", "");
-        clean = StringUtils.replace(clean, "\"", "");
-        clean = StringUtils.replace(clean, "$", "");
-        clean = StringUtils.replace(clean, "\\", "");
-        clean = StringUtils.replace(clean, "/", "");
-        clean = StringUtils.replace(clean, "<", "");
-        clean = StringUtils.replace(clean, ">", "");   
-        clean = StringUtils.replace(clean, "=", "");       
-        clean = StringUtils.replace(clean, "alert", "cleaned");
-        if(clean.length()==0){
-                clean = "empty";
-        }
-        return clean;       
-    }    
+	public static String clean(String s) {
+		String clean = Translate.decode(s).replace("<", "").replace(">", "");
+		clean = StringUtils.replace(clean, "script", "");
+		clean = StringUtils.replace(clean, "%", "");
+		clean = StringUtils.replace(clean, "#", "");
+		clean = StringUtils.replace(clean, ";", "");
+		clean = StringUtils.replace(clean, "'", "");
+		clean = StringUtils.replace(clean, "\"", "");
+		clean = StringUtils.replace(clean, "$", "");
+		clean = StringUtils.replace(clean, "&", "");
+		clean = StringUtils.replace(clean, "(", "");
+		clean = StringUtils.replace(clean, ")", "");
+		clean = StringUtils.replace(clean, "/", "");
+		clean = StringUtils.replace(clean, "\\", "");
+		clean = StringUtils.replace(clean, "&", "");
+		clean = StringUtils.replace(clean, "=", "");
+		clean = StringUtils.replace(clean, "quot", "");
+		clean = StringUtils.replace(clean, "javascript", "");
+		clean = StringUtils.replace(clean, "alert", "cleaned");
+		clean = StringUtils.replace(clean, "CR", "");
+		clean = StringUtils.replace(clean, "LF", "");
+		clean = StringUtils.replace(clean, "<", "");
+		clean = StringUtils.replace(clean, ">", "");
+		if (clean.length() == 0) {
+			clean = "empty";
+		}
+		return clean;
+	}
 
-    // clean method that only cleans {, }, script, %, \, \\ 
-    public static String cleanSpecies(String s)    {
-        String clean = Translate.decode(s).replace("{", "").replace("}", "");
-        clean = StringUtils.replace(clean, "script", "");
-        clean = StringUtils.replace(clean, "%", "");
-        clean = StringUtils.replace(clean, "\"", "");
-        clean = StringUtils.replace(clean, "$", "");
-        clean = StringUtils.replace(clean, "\\", "");
-        clean = StringUtils.replace(clean, "/", "");
-        clean = StringUtils.replace(clean, "<", "");
-        clean = StringUtils.replace(clean, ">", "");   
-        clean = StringUtils.replace(clean, "=", "");       
-        clean = StringUtils.replace(clean, "alert", "cleaned");
-        if(clean.length()==0){
-                clean = "empty";
-        }
-        return clean;       
-    }    
+	public static String cleanScript(String s) {
+		String clean = Translate.decode(s).replace("<", "").replace(">", "");
+		clean = StringUtils.replace(clean, "script", "");
+		clean = StringUtils.replace(clean, "javascript", "");
+		clean = StringUtils.replace(clean, "alert", "cleaned");
+		clean = StringUtils.replace(clean, "<", "");
+		clean = StringUtils.replace(clean, ">", "");
+		if (clean.length() == 0) {
+			clean = "empty";
+		}
+		return clean;
+	}
 
-    // clean method that allows ', &
-    public static String cleanPhenotype(String s)    {
-        String clean = Translate.decode(s).replace("<", "").replace(">", "");
-        clean = StringUtils.replace(clean, "script", "");
-        clean = StringUtils.replace(clean, "%", "");
-        clean = StringUtils.replace(clean, "#", "");
-        clean = StringUtils.replace(clean, ";", "");
-        clean = StringUtils.replace(clean, "\"", "");
-        clean = StringUtils.replace(clean, "$", "");
-        clean = StringUtils.replace(clean, "(", "");
-        clean = StringUtils.replace(clean, ")", "");
-        clean = StringUtils.replace(clean, "/", "");
-        clean = StringUtils.replace(clean, "\\", "");
-        if(clean.length()==0){
-                clean = "empty";
-        }
-        return clean;       
-    }    
-    
-    // clean method that allows <, >, (, ), /
-    public static String cleanGeneName(String s)    {
-        String clean = Translate.decode(s).replace("[", "").replace("]", "");
-        clean = StringUtils.replace(clean, "script", "");       
-        clean = StringUtils.replace(clean, "%", "");
-        clean = StringUtils.replace(clean, "#", "");
-        clean = StringUtils.replace(clean, ";", "");
-        clean = StringUtils.replace(clean, "'", "");
-        clean = StringUtils.replace(clean, "\"", "");
-        clean = StringUtils.replace(clean, "$", "");
-        clean = StringUtils.replace(clean, "&", "");
-        clean = StringUtils.replace(clean, "\\", "");
-        if(clean.length()==0){
-                clean = "empty";
-        }
-        return clean;       
-    }
-    
-    // clean method that allows <, >, (, ), /
-    public static String cleanLDAP(String s)    {
-        String clean = Translate.decode(s).replace("[", "").replace("]", "");
-        clean = StringUtils.replace(clean, "#", "");       
-        clean = StringUtils.replace(clean, ",", "");
-        clean = StringUtils.replace(clean, "+", "");
-        clean = StringUtils.replace(clean, "\"", "");
-        clean = StringUtils.replace(clean, "\\", "");
-        clean = StringUtils.replace(clean, "\"", "");
-        clean = StringUtils.replace(clean, "<", "");
-        clean = StringUtils.replace(clean, ">", "");
-        clean = StringUtils.replace(clean, ";", "");
-        clean = StringUtils.replace(clean, "(", "");
-        clean = StringUtils.replace(clean, ")", "");
-        if(clean.length()==0){
-                clean = "empty";
-        }
-        return clean;       
-    }    
-    
-    // allows &, ", /, ?, and . that are used in redirects
-    public static String cleanRedirect(String s)    {
-        String clean = Translate.decode(s).replace("<", "").replace(">", "");
-        clean = StringUtils.replace(clean, "script", "");
-        clean = StringUtils.replace(clean, "probe", "");         
-        clean = StringUtils.replace(clean, "%", "");
-        clean = StringUtils.replace(clean, "#", "");
-        clean = StringUtils.replace(clean, ";", "");
-        clean = StringUtils.replace(clean, "'", "");
-        clean = StringUtils.replace(clean, "\"", "");
-        clean = StringUtils.replace(clean, "$", "");
-        clean = StringUtils.replace(clean, "(", "");
-        clean = StringUtils.replace(clean, ")", "");
-        clean = StringUtils.replace(clean, "/", "");
-        clean = StringUtils.replace(clean, "\\", "");
-        if(clean.length()==0){
-                clean = "empty";
-        }
-        return clean;       
-    } 
-    
-    /**
-     * A utlity method to check the valid value againts the dropdown options
-     * Author for method: 
-     * @param input - the data to be validated
-     * @param source - the source against which the input to be validated
-     * @param request - http request
-     * @return boolean
-     */
-    public static boolean isValidValue(String input, String source, HttpServletRequest request)
-    {
-        String trimInput = input.trim();
-        
-        // validate for intentCode
-        List dropDownList = (List) request.getSession().getAttribute(source);        
-        NameValue nv = null ;
-        boolean validValue = true ;
-        if (trimInput != null && trimInput.length() > 0 && dropDownList != null )
-        {
-            // assign the value to false
-            validValue = false ;
-            
-            for (int i = 0 ; i < dropDownList.size() ; i++ )
-            {               
-                nv  = (NameValue) dropDownList.get(i);
-                if (nv.getValue().equals(input))
-                {
-                    validValue = true ;
-                    break ;
-                }
-            }
-        }
-        return validValue ;
-    }
-    
-    /**
-     * A utility method to check the valid value against a string values
-     * Author for method: 
-     * @param input - the data to be validated
-     * @param source - the source against which the input to be validated
-     * @param request - http request
-     * @return boolean
-     */    
-    public static boolean isValidStringValue(String input , String source , HttpServletRequest request)
-    {
-        // validate for intentCode
-        List dropDownList = (List) request.getSession().getAttribute(source);        
-        String nv = null ;
-        boolean validValue = true ;
-        if (input != null && input.length() > 0 && dropDownList != null )
-        {
-            // assign the value to false
-            validValue = false ;
-             
-            for (int i = 0 ; i < dropDownList.size() ; i++ )
-            {               
-                nv  =  (String)dropDownList.get(i); 
-                if (nv.equals(input))
-                {
-                    validValue = true ;
-                    break ;
-                }
-            }
-        }
-        return validValue ;
-    }
-    
-    // This method needs testing for successful searches
-    // This is a special case where one of the agent names contains a special character "/" or space
-    //  i.e. Chemical / Drug, Growth Factor, and Signaling Molecule are valid selection options
-    public static boolean isLetterOrDigitWithExceptions(String input)
-    { 
-        // validate for intentCode
-        boolean validValue = true ;
-        if (input != null && !input.equals("Chemical / Drug") && !input.equals("Growth Factor") && !input.equals("Signaling Molecule"))
-        {
-            for (int i = 0; i < input.length(); i++)
-            {        	
-	            if (!Character.isLetterOrDigit(input.charAt(i)))
-	                return false;
-            }
-        } else if (input.equals("Chemical / Drug")){
-        	input = "ChemicalDrug";
-            for (int i = 0; i < input.length(); i++)
-            {        	
-	            if (!Character.isLetterOrDigit(input.charAt(i)))
-	                return false;
-            }        	
-        } else if (input.equals("Growth Factor")){
-        	input = "GrowthFactor";
-            for (int i = 0; i < input.length(); i++)
-            {        	
-	            if (!Character.isLetterOrDigit(input.charAt(i)))
-	                return false;
-            }        	
-        } else if (input.equals("Signaling Molecule")){
-        	input = "SignalingMolecule";
-            for (int i = 0; i < input.length(); i++)
-            {        	
-	            if (!Character.isLetterOrDigit(input.charAt(i)))
-	                return false;
-            }        	
-        }
-        
-        return true; 
-    }    
-    
-    // This method needs testing for successful searches
-    public static boolean isJavaIdentifierPart(String input)
-    { 
-        for (int i = 0; i < input.length(); i++)
-        {
-                if (!Character.isJavaIdentifierPart(input.charAt(i)))
-                return false;
-        }
-        return true;
-    }  
-    
-    // This method needs testing for successful searches
-    public static String trimInput(String input)
-    { 
-        for (int i = 0; i < input.length(); i++)
-        {
-                input = input.trim();
-        }
-        return input;
-    }     
-    
-    
-    // This method needs testing for successful searches
-    public static boolean isLetterOrDigit(String input)
-    {  
-        for (int i = 0; i < input.length(); i++)
-        {
-                if (!Character.isLetterOrDigit(input.charAt(i)))
-                return false;
-        }
-        return true;
-    } 
-    
-    // This method needs testing for successful searches
-    public static boolean isLetter(String input)
-    {  
-        for (int i = 0; i < input.length(); i++)
-        {
-                if (!Character.isLetter(input.charAt(i)))
-                return false;
-        }
-        return true;
-    }     
+	// clean method that allows the apostrophe (')
+	public static String cleanKeyword(String s) {
+		String clean = Translate.decode(s).replace("<", "").replace(">", "");
+		clean = StringUtils.replace(clean, "script", "");
+		clean = StringUtils.replace(clean, "%", "");
+		clean = StringUtils.replace(clean, "#", "");
+		clean = StringUtils.replace(clean, ";", "");
+		clean = StringUtils.replace(clean, "\"", "");
+		clean = StringUtils.replace(clean, "$", "");
+		clean = StringUtils.replace(clean, "&", "");
+		clean = StringUtils.replace(clean, "(", "");
+		clean = StringUtils.replace(clean, ")", "");
+		clean = StringUtils.replace(clean, "/", "");
+		clean = StringUtils.replace(clean, "\\", "");
+		clean = StringUtils.replace(clean, "alert", "cleaned");
+		if (clean.length() == 0) {
+			clean = "empty";
+		}
+		return clean;
+	}
+
+	// clean method that only cleans {, }, script, %, \, \\
+	public static String cleanModelDescriptor(String s) {
+		String clean = Translate.decode(s).replace("{", "").replace("}", "");
+		clean = StringUtils.replace(clean, "script", "");
+		clean = StringUtils.replace(clean, "%", "");
+		clean = StringUtils.replace(clean, "\"", "");
+		clean = StringUtils.replace(clean, "$", "");
+		clean = StringUtils.replace(clean, "\\", "");
+		clean = StringUtils.replace(clean, "/", "");
+		clean = StringUtils.replace(clean, "<", "");
+		clean = StringUtils.replace(clean, ">", "");
+		clean = StringUtils.replace(clean, "=", "");
+		clean = StringUtils.replace(clean, "alert", "cleaned");
+		if (clean.length() == 0) {
+			clean = "empty";
+		}
+		return clean;
+	}
+
+	// clean method that only cleans {, }, script, %, \, \\
+	public static String cleanSpecies(String s) {
+		String clean = Translate.decode(s).replace("{", "").replace("}", "");
+		clean = StringUtils.replace(clean, "script", "");
+		clean = StringUtils.replace(clean, "%", "");
+		clean = StringUtils.replace(clean, "\"", "");
+		clean = StringUtils.replace(clean, "$", "");
+		clean = StringUtils.replace(clean, "\\", "");
+		clean = StringUtils.replace(clean, "/", "");
+		clean = StringUtils.replace(clean, "<", "");
+		clean = StringUtils.replace(clean, ">", "");
+		clean = StringUtils.replace(clean, "=", "");
+		clean = StringUtils.replace(clean, "alert", "cleaned");
+		if (clean.length() == 0) {
+			clean = "empty";
+		}
+		return clean;
+	}
+
+	// clean method that allows ', &
+	public static String cleanPhenotype(String s) {
+		String clean = Translate.decode(s).replace("<", "").replace(">", "");
+		clean = StringUtils.replace(clean, "script", "");
+		clean = StringUtils.replace(clean, "%", "");
+		clean = StringUtils.replace(clean, "#", "");
+		clean = StringUtils.replace(clean, ";", "");
+		clean = StringUtils.replace(clean, "\"", "");
+		clean = StringUtils.replace(clean, "$", "");
+		clean = StringUtils.replace(clean, "(", "");
+		clean = StringUtils.replace(clean, ")", "");
+		clean = StringUtils.replace(clean, "/", "");
+		clean = StringUtils.replace(clean, "\\", "");
+		if (clean.length() == 0) {
+			clean = "empty";
+		}
+		return clean;
+	}
+
+	// clean method that allows <, >, (, ), /
+	public static String cleanGeneName(String s) {
+		String clean = Translate.decode(s).replace("[", "").replace("]", "");
+		clean = StringUtils.replace(clean, "script", "");
+		clean = StringUtils.replace(clean, "%", "");
+		clean = StringUtils.replace(clean, "#", "");
+		clean = StringUtils.replace(clean, ";", "");
+		clean = StringUtils.replace(clean, "'", "");
+		clean = StringUtils.replace(clean, "\"", "");
+		clean = StringUtils.replace(clean, "$", "");
+		clean = StringUtils.replace(clean, "&", "");
+		clean = StringUtils.replace(clean, "\\", "");
+		if (clean.length() == 0) {
+			clean = "empty";
+		}
+		return clean;
+	}
+
+	// clean method that allows <, >, (, ), /
+	public static String cleanLDAP(String s) {
+		String clean = Translate.decode(s).replace("[", "").replace("]", "");
+		clean = StringUtils.replace(clean, "#", "");
+		clean = StringUtils.replace(clean, ",", "");
+		clean = StringUtils.replace(clean, "+", "");
+		clean = StringUtils.replace(clean, "\"", "");
+		clean = StringUtils.replace(clean, "\\", "");
+		clean = StringUtils.replace(clean, "\"", "");
+		clean = StringUtils.replace(clean, "<", "");
+		clean = StringUtils.replace(clean, ">", "");
+		clean = StringUtils.replace(clean, ";", "");
+		clean = StringUtils.replace(clean, "(", "");
+		clean = StringUtils.replace(clean, ")", "");
+		if (clean.length() == 0) {
+			clean = "empty";
+		}
+		return clean;
+	}
+
+	// allows &, ", /, ?, and . that are used in redirects
+	public static String cleanRedirect(String s) {
+		String clean = Translate.decode(s).replace("<", "").replace(">", "");
+		clean = StringUtils.replace(clean, "script", "");
+		clean = StringUtils.replace(clean, "probe", "");
+		clean = StringUtils.replace(clean, "%", "");
+		clean = StringUtils.replace(clean, "#", "");
+		clean = StringUtils.replace(clean, ";", "");
+		clean = StringUtils.replace(clean, "'", "");
+		clean = StringUtils.replace(clean, "\"", "");
+		clean = StringUtils.replace(clean, "$", "");
+		clean = StringUtils.replace(clean, "(", "");
+		clean = StringUtils.replace(clean, ")", "");
+		clean = StringUtils.replace(clean, "/", "");
+		clean = StringUtils.replace(clean, "\\", "");
+		if (clean.length() == 0) {
+			clean = "empty";
+		}
+		return clean;
+	}
+
+	/**
+	 * A utlity method to check the valid value againts the dropdown options
+	 * Author for method:
+	 * 
+	 * @param input
+	 *            - the data to be validated
+	 * @param source
+	 *            - the source against which the input to be validated
+	 * @param request
+	 *            - http request
+	 * @return boolean
+	 */
+	public static boolean isValidValue(String input, String source,
+			HttpServletRequest request) {
+		String trimInput = input.trim();
+
+		// validate for intentCode
+		List dropDownList = (List) request.getSession().getAttribute(source);
+		NameValue nv = null;
+		boolean validValue = true;
+		if (trimInput != null && trimInput.length() > 0 && dropDownList != null) {
+			// assign the value to false
+			validValue = false;
+
+			for (int i = 0; i < dropDownList.size(); i++) {
+				nv = (NameValue) dropDownList.get(i);
+				if (nv.getValue().equals(input)) {
+					validValue = true;
+					break;
+				}
+			}
+		}
+		return validValue;
+	}
+
+	/**
+	 * A utility method to check the valid value against a string values Author
+	 * for method:
+	 * 
+	 * @param input
+	 *            - the data to be validated
+	 * @param source
+	 *            - the source against which the input to be validated
+	 * @param request
+	 *            - http request
+	 * @return boolean
+	 */
+	public static boolean isValidStringValue(String input, String source,
+			HttpServletRequest request) {
+		// validate for intentCode
+		List dropDownList = (List) request.getSession().getAttribute(source);
+		String nv = null;
+		boolean validValue = true;
+		if (input != null && input.length() > 0 && dropDownList != null) {
+			// assign the value to false
+			validValue = false;
+
+			for (int i = 0; i < dropDownList.size(); i++) {
+				nv = (String) dropDownList.get(i);
+				if (nv.equals(input)) {
+					validValue = true;
+					break;
+				}
+			}
+		}
+		return validValue;
+	}
+
+	// This method needs testing for successful searches
+	// This is a special case where one of the agent names contains a special
+	// character "/" or space
+	// i.e. Chemical / Drug, Growth Factor, and Signaling Molecule are valid
+	// selection options
+	public static boolean isLetterOrDigitWithExceptions(String input) {
+		// validate for intentCode
+		boolean validValue = true;
+		if (input != null && !input.equals("Chemical / Drug")
+				&& !input.equals("Growth Factor")
+				&& !input.equals("Signaling Molecule")) {
+			for (int i = 0; i < input.length(); i++) {
+				if (!Character.isLetterOrDigit(input.charAt(i)))
+					return false;
+			}
+		} else if (input.equals("Chemical / Drug")) {
+			input = "ChemicalDrug";
+			for (int i = 0; i < input.length(); i++) {
+				if (!Character.isLetterOrDigit(input.charAt(i)))
+					return false;
+			}
+		} else if (input.equals("Growth Factor")) {
+			input = "GrowthFactor";
+			for (int i = 0; i < input.length(); i++) {
+				if (!Character.isLetterOrDigit(input.charAt(i)))
+					return false;
+			}
+		} else if (input.equals("Signaling Molecule")) {
+			input = "SignalingMolecule";
+			for (int i = 0; i < input.length(); i++) {
+				if (!Character.isLetterOrDigit(input.charAt(i)))
+					return false;
+			}
+		}
+
+		return true;
+	}
+
+	// This method needs testing for successful searches
+	public static boolean isJavaIdentifierPart(String input) {
+		for (int i = 0; i < input.length(); i++) {
+			if (!Character.isJavaIdentifierPart(input.charAt(i)))
+				return false;
+		}
+		return true;
+	}
+
+	// This method needs testing for successful searches
+	public static String trimInput(String input) {
+		for (int i = 0; i < input.length(); i++) {
+			input = input.trim();
+		}
+		return input;
+	}
+
+	// This method needs testing for successful searches
+	public static boolean isLetterOrDigit(String input) {
+		for (int i = 0; i < input.length(); i++) {
+			if (!Character.isLetterOrDigit(input.charAt(i)))
+				return false;
+		}
+		return true;
+	}
+
+	// This method needs testing for successful searches
+	public static boolean isLetter(String input) {
+		for (int i = 0; i < input.length(); i++) {
+			if (!Character.isLetter(input.charAt(i)))
+				return false;
+		}
+		return true;
+	}
 }

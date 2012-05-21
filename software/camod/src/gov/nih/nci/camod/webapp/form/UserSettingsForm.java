@@ -55,7 +55,11 @@ public class UserSettingsForm extends BaseForm implements UserSettingsData, Seri
         // Clean the parameter
         if (this.username != null && !this.username.equals(""))  {
                 this.username = SafeHTMLUtil.clean(this.username);
-        }         
+        }  
+        
+        if( this.username.equals("empty") ) {
+        	this.username = "";
+        }
     }
 
     /**
@@ -91,7 +95,12 @@ public class UserSettingsForm extends BaseForm implements UserSettingsData, Seri
         // Clean the parameter
         if (this.affiliation != null && !this.affiliation.equals(""))  {
                 this.affiliation = SafeHTMLUtil.clean(this.affiliation);
-        }        
+        }     
+        
+        if( this.affiliation.equals("empty") ) {
+        	this.affiliation = "";
+        }
+
     }
 
     /**
@@ -107,6 +116,15 @@ public class UserSettingsForm extends BaseForm implements UserSettingsData, Seri
      */
     public void setEmail(String email) {
         this.email = email;
+
+    	if (this.email != null && !this.email.equals(""))  {
+            this.email = SafeHTMLUtil.clean(this.email);
+    	}
+    	
+    	if( this.email.equals("empty") ) {
+        	this.email = "";
+        }
+    	
     }
 
     /**
@@ -125,7 +143,11 @@ public class UserSettingsForm extends BaseForm implements UserSettingsData, Seri
         // Clean the parameter
         if (this.firstName != null && !this.firstName.equals(""))  {
                 this.firstName = SafeHTMLUtil.clean(this.firstName);
-        }        
+        }   
+        
+        if( this.firstName.equals("empty") ) {
+        	this.firstName = "";
+        }
     }
 
     /**
@@ -159,7 +181,11 @@ public class UserSettingsForm extends BaseForm implements UserSettingsData, Seri
         // Clean the parameter
         if (this.lastName != null && !this.lastName.equals(""))  {
                 this.lastName = SafeHTMLUtil.clean(this.lastName);
-        }         
+        }  
+        
+        if( this.lastName.equals("empty") ) {
+        	this.lastName = "";
+        }
     }
 
     /**
@@ -175,6 +201,15 @@ public class UserSettingsForm extends BaseForm implements UserSettingsData, Seri
      */
     public void setPhone(String phone) {
         this.phone = phone;
+
+    	if (this.phone != null && !this.phone.equals(""))  {
+            this.phone = SafeHTMLUtil.clean(this.phone);
+    	}
+    	
+    	if( this.phone.equals("empty") ) {
+        	this.phone = "";
+        }
+    	
     }
 
     /**
@@ -193,7 +228,11 @@ public class UserSettingsForm extends BaseForm implements UserSettingsData, Seri
         // Clean the parameter
         if (this.piFirstName != null && !this.piFirstName.equals(""))  {
                 this.piFirstName = SafeHTMLUtil.clean(this.piFirstName);
-        }        
+        }    
+        
+        if( this.piFirstName.equals("empty") ) {
+        	this.piFirstName = "";
+        }
     }
 
     /**
@@ -212,7 +251,11 @@ public class UserSettingsForm extends BaseForm implements UserSettingsData, Seri
         // Clean the parameter
         if (this.piLastName != null && !this.piLastName.equals(""))  {
                 this.piLastName = SafeHTMLUtil.clean(this.piLastName);
-        }        
+        }  
+        
+        if( this.piLastName.equals("empty") ) {
+        	this.piLastName = "";
+        }
     }
 
     /**
@@ -231,7 +274,11 @@ public class UserSettingsForm extends BaseForm implements UserSettingsData, Seri
         // Clean the parameter
         if (this.piUsername != null && !this.piUsername.equals(""))  {
                 this.piUsername = SafeHTMLUtil.clean(this.piUsername);
-        }        
+        }  
+        
+        if( this.piUsername.equals("empty") ) {
+        	this.piUsername = "";
+        }
     }
 
     public String getPiEmail() {
@@ -240,5 +287,14 @@ public class UserSettingsForm extends BaseForm implements UserSettingsData, Seri
 
     public void setPiEmail(String piEmail) {
         this.piEmail = piEmail;
+
+    	if (this.piEmail != null && !this.piEmail.equals(""))  {
+            this.piEmail = SafeHTMLUtil.clean(this.piEmail);
+    	}
+    	
+    	if( this.piEmail.equals("empty") ) {
+        	this.piEmail = "";
+        }
+    	
     }
 }

@@ -107,7 +107,7 @@ public class CriteriaTableUtil
         {
             if (sData.getSpecies().length() > 0)
             {
-                theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.Species") + "</td><td class=\"formFieldNone\">" + sData.getSpecies() + "</td></tr>";
+                theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.Species") + "</td><td class=\"formFieldNone\">" + SafeHTMLUtil.cleanScript(sData.getSpecies()) + "</td></tr>";
             }
         }
         
@@ -116,7 +116,7 @@ public class CriteriaTableUtil
         {
             if (sData.getPmid().length() > 0)
             {
-                theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.Pmid") + "</td><td class=\"formFieldNone\">" + sData.getPmid() + "</td></tr>";
+                theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.Pmid") + "</td><td class=\"formFieldNone\">" + SafeHTMLUtil.cleanScript(sData.getPmid()) + "</td></tr>";
             }
         }
         
@@ -125,7 +125,7 @@ public class CriteriaTableUtil
         {
             if (sData.getOrganTissueName().length() > 0)
             {
-                theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.OrganTissueName") + "</td><td class=\"formFieldNone\"><camod:shorten>" + sData.getOrganTissueName() + "</camod:shorten></td></tr>";
+                theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.OrganTissueName") + "</td><td class=\"formFieldNone\"><camod:shorten>" + SafeHTMLUtil.cleanScript(sData.getOrganTissueName()) + "</camod:shorten></td></tr>";
 
             }
         }
@@ -135,7 +135,7 @@ public class CriteriaTableUtil
         {
             if (sData.getOrgan().length() > 0)
             {
-                theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.Organ") + "</td><td class=\"formFieldNone\"><camod:shorten>" + sData.getOrgan() + "</camod:shorten></td></tr>";
+                theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.Organ") + "</td><td class=\"formFieldNone\"><camod:shorten>" + SafeHTMLUtil.cleanScript(sData.getOrgan()) + "</camod:shorten></td></tr>";
 
             }
         }
@@ -167,7 +167,7 @@ public class CriteriaTableUtil
         {
             if (sData.getCarcinogenicIntervention().trim().length() > 0)
             {        	
-            theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.CarcinogenicIntervention") + "</td><td class=\"formFieldNone\">" + sData.getCarcinogenicIntervention() + "</td></tr>";
+            theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.CarcinogenicIntervention") + "</td><td class=\"formFieldNone\">" + SafeHTMLUtil.cleanScript(sData.getCarcinogenicIntervention()) + "</td></tr>";
             }
         }
         
@@ -176,7 +176,7 @@ public class CriteriaTableUtil
         {
             if (sData.getAgentName().trim().length() > 0)
             {
-                theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.AgentName") + "</td><td class=\"formFieldNone\">" + sData.getAgentName() + "</td></tr>";
+                theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.AgentName") + "</td><td class=\"formFieldNone\">" + SafeHTMLUtil.cleanScript(sData.getAgentName()) + "</td></tr>";
             }
         }        
 
@@ -195,7 +195,7 @@ public class CriteriaTableUtil
         {
             if (sData.getTransgeneName().trim().length() > 0)
             {
-                theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.TransgeneName") + "</td><td class=\"formFieldNone\">" + sData.getTransgeneName() + "</td></tr>";
+                theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.TransgeneName") + "</td><td class=\"formFieldNone\">" + SafeHTMLUtil.cleanScript(sData.getTransgeneName()) + "</td></tr>";
             }
         }         
 
@@ -203,7 +203,7 @@ public class CriteriaTableUtil
         {
             if (sData.getGenomicSegDesignator().trim().length() > 0)
             {
-                theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.GenomicSegDesignator") + "</td><td class=\"formFieldNone\">" + sData.getGenomicSegDesignator() + "</td></tr>";
+                theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.GenomicSegDesignator") + "</td><td class=\"formFieldNone\">" + SafeHTMLUtil.cleanScript(sData.getGenomicSegDesignator()) + "</td></tr>";
             }
         }
         
@@ -211,7 +211,7 @@ public class CriteriaTableUtil
         {
             if (sData.getGeneName().trim().length() > 0)
             {
-                theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.GeneName") + "</td><td class=\"formFieldNone\">" + sData.getGeneName() + "</td></tr>";
+                theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.GeneName") + "</td><td class=\"formFieldNone\">" + SafeHTMLUtil.cleanScript(sData.getGeneName()) + "</td></tr>";
             }
         }        
 
@@ -219,7 +219,7 @@ public class CriteriaTableUtil
         {
             if (sData.getInducedMutationAgent().trim().length() > 0)
             {
-                theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.InducedMutationAgent") + "</td><td class=\"formFieldNone\">" + sData.getInducedMutationAgent() + "</td></tr>";
+                theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.InducedMutationAgent") + "</td><td class=\"formFieldNone\">" + SafeHTMLUtil.cleanScript(sData.getInducedMutationAgent()) + "</td></tr>";
             }
         }
 
@@ -237,7 +237,7 @@ public class CriteriaTableUtil
         {
             if (sData.getCellLine().trim().length() > 0)
             {
-                theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.CellLine") + "</td><td class=\"formFieldNone\">" + sData.getCellLine() + "</td></tr>";
+                theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.CellLine") + "</td><td class=\"formFieldNone\">" + SafeHTMLUtil.cleanScript(sData.getCellLine()) + "</td></tr>";
             }
         }
 
@@ -252,7 +252,7 @@ public class CriteriaTableUtil
         {
             if (sData.getTherapeuticApproach().trim().length() > 0)
             {
-                theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.TherapeuticApproach") + "</td><td class=\"formFieldNone\">" + sData.getTherapeuticApproach() + "</td></tr>";
+                theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.TherapeuticApproach") + "</td><td class=\"formFieldNone\">" + SafeHTMLUtil.cleanScript(sData.getTherapeuticApproach()) + "</td></tr>";
             }
         }
 
