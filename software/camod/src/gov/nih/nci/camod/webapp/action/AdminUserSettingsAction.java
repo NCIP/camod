@@ -47,6 +47,10 @@ public class AdminUserSettingsAction extends BaseAction {
         log.trace("Entering execute");
 
         String theForward = "next";
+        if (!isTokenValid(inRequest)) {
+			return inMapping.findForward("failure");
+		}
+        
         // The user didn't press the cancel button
         if (isCancelled(inRequest)) {
             theForward = "cancel";
@@ -121,6 +125,8 @@ public class AdminUserSettingsAction extends BaseAction {
             }
         }
         log.trace("Exiting execute");
+        resetToken(inRequest);
+
 
         return inMapping.findForward(theForward);
     }

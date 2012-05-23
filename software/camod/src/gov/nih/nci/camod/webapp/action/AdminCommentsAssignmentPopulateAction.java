@@ -63,9 +63,18 @@ public class AdminCommentsAssignmentPopulateAction extends BaseAction
         try
         {
             NewDropdownUtil.populateDropdown(inRequest, Constants.Dropdowns.CURATIONSTATESDROP, Constants.Admin.COMMENT_CURATION_WORKFLOW);
+            
+        	if (theForm.getCurrentState() == null)
+        	{
+        		saveToken(inRequest);
+        	}
 
             if (theForm.getCurrentState() != null)
             {
+            	if (!isTokenValid(inRequest)) {
+        			return inMapping.findForward("failure");
+        		}
+            	
                 Comments theQBEComments = new Comments();
                 theQBEComments.setState(theForm.getCurrentState());
 
@@ -97,6 +106,13 @@ public class AdminCommentsAssignmentPopulateAction extends BaseAction
 
         log.trace("Exiting execute");
 
+        if (theForm.getCurrentState() != null)
+        {
+        	resetToken(inRequest);
+        	saveToken(inRequest);
+        }
+
+        
         return inMapping.findForward("next");
     }
 }

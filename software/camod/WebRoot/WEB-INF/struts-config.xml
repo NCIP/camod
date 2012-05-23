@@ -1857,7 +1857,13 @@
 	        unknown="false"
 	        validate="false"
 	        input="login">
-            <set-property property="secure" value="false" />    
+            <set-property property="secure" value="false" />  
+            <forward 
+	            name="failure"  
+	            redirect="true"
+	            path="/login.do">
+	        </forward> 	                                        
+              
     </action>
     
     <!-- MicroArrayDataForm -->
@@ -2491,6 +2497,11 @@
 			name="next"
 			path="/adminCommentsAssignment.do">
 		</forward>
+		<forward 
+	            name="failure"  
+	            redirect="true"
+	            path="/login.do">
+	    </forward> 	                                        
      </action>
      
      <action 

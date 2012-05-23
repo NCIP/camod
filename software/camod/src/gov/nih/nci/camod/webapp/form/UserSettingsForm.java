@@ -206,7 +206,7 @@ public class UserSettingsForm extends BaseForm implements UserSettingsData, Seri
             this.phone = SafeHTMLUtil.clean(this.phone);
     	}
     	
-    	if( this.phone.equals("empty") ) {
+    	if( this.phone == null || this.phone.equals("empty") ) {
         	this.phone = "";
         }
     	

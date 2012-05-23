@@ -83,7 +83,8 @@ public class AdminUserSettingsPopulateAction extends BaseAction
         }
 
         log.trace("Exiting execute");
-
+        saveToken(inRequest);
+        
         return inMapping.findForward("next");
     }
 }

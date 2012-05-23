@@ -53,6 +53,14 @@ public class LogoutAction extends BaseAction {
             HttpServletResponse response) throws IOException, ServletException
 	{
 		log.debug("Entered LogoutAction: " );
+		
+		String sID = request.getHeader("Referer");
+    	
+    	// prevents Referer Header injection
+    	if ( sID != null && sID != "" && !sID.contains("camod")) {
+    		return (mapping.findForward("failure"));
+    	}
+    	
 		// Remove the logged in credential attributes
 		request.getSession().removeAttribute("camod.loggedon.username");
 		request.getSession().removeAttribute("camod.loggedon.userroles");		
