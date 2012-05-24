@@ -31,6 +31,12 @@ public class SearchAdminAssignmentAction extends BaseAction {
 		String theAction = (String) inRequest
 		.getParameter(Constants.Parameters.ACTION);
 		String theForward = "next";
+		
+		String sID = inRequest.getHeader("Referer");
+		// prevents Referer Header injection
+    	if ( sID != null && sID != "" && !sID.contains("camod")) {
+    		return (mapping.findForward("failure"));
+    	}
 
 		// Clear the form
 		if ("Clear".equals(theAction)) {
