@@ -121,6 +121,7 @@ None.
 PubMed URL has changed and needed an update to use the XML format (JIRA# CAMOD-998)
 Added a disclaimer when redirecting to external sites (JIRA# CAMOD-999)
 MGI link to phenotypic allele detail page is broken for all engineered gene categories except targeted modification while using Firefox (JIRA# CAMOD-1000)
+Registration fields accepting Invalid Data has been fixed. (JIRA# CAMOD-1004)
 Completed activities to make caMOD 508 compliant.
  
 ================================================================ 
