@@ -470,7 +470,9 @@
 				<td class="WhiteBoxRightEnd" width="65%">
 				<a target="_blank" href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=<c:out value="${tg.mutationIdentifier.mgiId}"/>&selectedQuery=Genes+and+Markers">
 				    <c:out value="${tg.mutationIdentifier.mgiId}"/>
-				</a>
+				</a>&nbsp;
+				<a class="sideMenuLink" href="#" onClick="myRef = window.open('html/disclaimer.html#external','mywin',
+						'left=20,top=20,width=800,height=200,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()">Disclaimer</a>
 				</td>
 			</c:if>&nbsp;
 			
@@ -479,7 +481,9 @@
 				<td class="WhiteBoxRightEnd" width="65%">  
 				<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-genotypeview.apg&OID=<c:out value="${tg.mutationIdentifier.zfinId}"/>">
 				    <c:out value="${tg.mutationIdentifier.zfinId}"/>
-				</a>
+				</a>&nbsp;
+				<a class="sideMenuLink" href="#" onClick="myRef = window.open('html/disclaimer.html#external','mywin',
+						'left=20,top=20,width=800,height=200,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()">Disclaimer</a>
 				</td>
 			</c:if>&nbsp;
 			
@@ -488,7 +492,9 @@
 				<td class="WhiteBoxRightEnd" width="65%">
 				<a target="_blank" href="http://rgd.mcw.edu/tools/strains/strains_view.cgi?id=<c:out value="${tg.mutationIdentifier.rgdId}"/>">
 				    <c:out value="${tg.mutationIdentifier.rgdId}"/>
-				</a>
+				</a>&nbsp;
+				<a class="sideMenuLink" href="#" onClick="myRef = window.open('html/disclaimer.html#external','mywin',
+						'left=20,top=20,width=800,height=200,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()">Disclaimer</a>
 				</td>
 			</c:if>&nbsp;			
 		</tr>
