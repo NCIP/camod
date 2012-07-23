@@ -56,6 +56,9 @@ public class SpontaneousMutationAction extends BaseAction {
             HttpServletResponse response) throws Exception {
 
         log.trace("Entering edit");
+		if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
 
         // Grab the current SpontaneousMutation we are working with related to
         // this
@@ -124,6 +127,8 @@ public class SpontaneousMutationAction extends BaseAction {
         }
 
         log.trace("Exiting edit");
+		resetToken(request);
+
         return mapping.findForward("AnimalModelTreePopulateAction");
     }
 
@@ -141,6 +146,9 @@ public class SpontaneousMutationAction extends BaseAction {
             HttpServletResponse response) throws Exception {
 
         log.trace("Entering save");
+		if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
 
         // Create a form to edit
         SpontaneousMutationForm spontaneousMutationForm = (SpontaneousMutationForm) form;
@@ -185,6 +193,8 @@ public class SpontaneousMutationAction extends BaseAction {
         }
 
         log.trace("Exiting save");
+		resetToken(request);
+
         return mapping.findForward("AnimalModelTreePopulateAction");
     }
 }

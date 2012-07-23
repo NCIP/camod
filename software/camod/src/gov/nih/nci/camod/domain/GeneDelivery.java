@@ -21,6 +21,7 @@ package gov.nih.nci.camod.domain;
 
 import gov.nih.nci.camod.util.Duplicatable;
 import gov.nih.nci.camod.util.HashCodeUtil;
+import gov.nih.nci.camod.util.SafeHTMLUtil;
 
 import java.io.Serializable;
 
@@ -62,7 +63,7 @@ public class GeneDelivery extends BaseObject implements Comparable, Serializable
      */
     public String getGeneInVirus()
     {
-        return geneInVirus;
+        return SafeHTMLUtil.cleanMinimal(geneInVirus);
     }
 
     /**
@@ -79,7 +80,7 @@ public class GeneDelivery extends BaseObject implements Comparable, Serializable
      */
     public String getViralVector()
     {
-        return viralVector;
+        return SafeHTMLUtil.cleanMinimal(viralVector);
     }
 
     /**
@@ -130,7 +131,7 @@ public class GeneDelivery extends BaseObject implements Comparable, Serializable
      * we must use the plural form comments.
      */
     public String getComments() {
-        return comments;
+        return SafeHTMLUtil.cleanMinimal(comments);
     }
 
     /**
@@ -188,7 +189,7 @@ public class GeneDelivery extends BaseObject implements Comparable, Serializable
 	 * @return the viralVectorAlternEntry
 	 */
 	public String getViralVectorAlternEntry() {
-		return viralVectorAlternEntry;
+		return SafeHTMLUtil.cleanMinimal(viralVectorAlternEntry);
 	}
 
 	/**
@@ -208,7 +209,7 @@ public class GeneDelivery extends BaseObject implements Comparable, Serializable
         {
             theDisplayName = "Other - " + viralVectorAlternEntry;
         }
-        return theDisplayName;
+        return SafeHTMLUtil.cleanMinimal(theDisplayName);
     }	
 
 }

@@ -46,6 +46,13 @@ public class AdminUserSettingsPopulateAction extends BaseAction
                                  HttpServletResponse inResponse) throws Exception
     {
         log.trace("Entering execute");
+        
+		String sID = inRequest.getHeader("Referer");
+    	
+    	// prevents Referer Header injection
+    	if ( sID != null && sID != "" && !sID.contains("camod")) {
+    		return (inMapping.findForward("failure"));
+    	}
 
         UserSettingsForm theForm = (UserSettingsForm) inForm;
 

@@ -107,6 +107,7 @@ public class SirnaPopulateAction extends BaseAction
 
         // Prepopulate all dropdown fields, set the global Constants to the following
         this.dropdown(request, response);
+		saveToken(request);
 
         return mapping.findForward("submitSirna");
     }
@@ -138,6 +139,7 @@ public class SirnaPopulateAction extends BaseAction
         this.dropdown(request, response);
 
         log.debug("<SirnaPopulateAction dropdown> Exiting ActionForward dropdown()");
+		saveToken(request);
 
         return mapping.findForward("submitSirna");
     }

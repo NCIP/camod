@@ -103,6 +103,10 @@ public final class AnimalModelAction extends BaseAction {
 
 		log.debug("Entering AnimalModelAction.save");
 		log.debug("AnimalModelAction.delete current user= " + request.getSession().getAttribute(Constants.CURRENTUSER));
+        
+		if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
 
 		ModelCharacteristicsForm theModelChar = (ModelCharacteristicsForm) form;
 
@@ -199,6 +203,7 @@ public final class AnimalModelAction extends BaseAction {
 		}
 
 		log.debug("Exiting save");
+		resetToken(request);
 		return mapping.findForward(theForward);
 	}
 
@@ -218,6 +223,10 @@ public final class AnimalModelAction extends BaseAction {
 
 		log.debug("Entering AnimalModelAction.edit");
 		log.debug("AnimalModelAction.edit current user= " + request.getSession().getAttribute(Constants.CURRENTUSER));
+		
+        if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
 		
 		// Grab the current modelID from the session
 		String theModelId = (String) request.getSession().getAttribute(
@@ -325,6 +334,7 @@ public final class AnimalModelAction extends BaseAction {
 
 		log.debug("Exiting edit");
 
+		resetToken(request);
 		return mapping.findForward(theForward);
 	}
 

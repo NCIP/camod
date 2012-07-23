@@ -68,6 +68,10 @@ public class SurgeryAction extends BaseAction {
 		}
 
         log.debug("<SurgeryAction edit> Entering... ");
+        
+		if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
 		
         // Grab the current modelID from the session
         String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
@@ -117,6 +121,7 @@ public class SurgeryAction extends BaseAction {
 			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
 			saveErrors(request, theMsg);
 		}
+		resetToken(request);
 
 		return mapping.findForward("AnimalModelTreePopulateAction");
 	}
@@ -139,6 +144,9 @@ public class SurgeryAction extends BaseAction {
 
 		log.debug("<SurgeryAction save> Entering... ");
 
+		if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
 		// Grab the current modelID from the session
 		String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
 
@@ -168,6 +176,7 @@ public class SurgeryAction extends BaseAction {
 			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
 			saveErrors(request, theMsg);
 		}
+		resetToken(request);
 
 		return mapping.findForward("AnimalModelTreePopulateAction");
 	}

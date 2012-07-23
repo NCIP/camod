@@ -49,6 +49,8 @@
  */
 package gov.nih.nci.camod.domain;
 
+import gov.nih.nci.camod.util.SafeHTMLUtil;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -346,7 +348,7 @@ public class AnimalModel extends AbstractCancerModel {
 	 * @return Returns the externalSource.
 	 */
 	public String getExternalSource() {
-		return externalSource;
+		return SafeHTMLUtil.cleanMinimal(externalSource);
 	}
 
 	/**
@@ -361,7 +363,7 @@ public class AnimalModel extends AbstractCancerModel {
 	 * @return Returns the externalSourceIdentifier.
 	 */
 	public String getExternalSourceIdentifier() {
-		return externalSourceIdentifier;
+		return SafeHTMLUtil.cleanMinimal(externalSourceIdentifier);
 	}
 
 	/**
@@ -376,7 +378,7 @@ public class AnimalModel extends AbstractCancerModel {
      * @return Returns the developmentalStage.
      */
     public String getDevelopmentalStage() {
-        return developmentalStage;
+        return SafeHTMLUtil.cleanMinimal(developmentalStage);
     }
 
     /**
@@ -557,7 +559,7 @@ public class AnimalModel extends AbstractCancerModel {
      * we must use the plural form comments.
      */
     public String getComments() {
-        return comments;
+        return SafeHTMLUtil.cleanMinimal(comments);
     }
 
     /**

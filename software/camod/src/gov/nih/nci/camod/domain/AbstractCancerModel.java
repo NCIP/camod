@@ -16,6 +16,8 @@ package gov.nih.nci.camod.domain;
 
 import gov.nih.nci.camod.util.Duplicatable;
 import gov.nih.nci.camod.util.HashCodeUtil;
+import gov.nih.nci.camod.util.SafeHTMLUtil;
+
 import java.io.Serializable;
 import java.util.*;
 
@@ -56,7 +58,7 @@ public class AbstractCancerModel extends BaseObject implements Serializable, Can
      */
     public String getExperimentDesign()
     {
-        return experimentDesign;
+        return SafeHTMLUtil.cleanMinimal(experimentDesign);
     }
 
     /**
@@ -73,7 +75,7 @@ public class AbstractCancerModel extends BaseObject implements Serializable, Can
      */
     public String getState()
     {
-        return state;
+        return SafeHTMLUtil.cleanMinimal(state);
     }
 
     /**

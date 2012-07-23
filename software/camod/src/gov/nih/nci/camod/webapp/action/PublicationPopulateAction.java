@@ -119,6 +119,7 @@ public class PublicationPopulateAction extends BaseAction {
 		// following
 		this.dropdown(request, response);
 		
+		saveToken(request);
 		return mapping.findForward("submitPublications");
 	}
 

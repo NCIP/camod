@@ -61,6 +61,10 @@ public final class EnvironmentalFactorAction extends BaseAction {
 			log.debug("Entering 'save' method");
 		}
 
+		if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
+		
 		EnvironmentalFactorForm envForm = (EnvironmentalFactorForm) form;
 
         log.info("<EnvironmentalFactorAction save> following Characteristics:" + "\n\t name: "
@@ -94,6 +98,7 @@ public final class EnvironmentalFactorAction extends BaseAction {
 			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
 			saveErrors(request, theMsg);
 		}
+		resetToken(request);
 
 		return mapping.findForward("AnimalModelTreePopulateAction");
 	}
@@ -112,6 +117,10 @@ public final class EnvironmentalFactorAction extends BaseAction {
 			HttpServletResponse response) throws Exception {
 
 		log.debug("Entering 'edit' method");
+		
+		if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
 
 		// Grab the current CarcinogenExposure we are working with related to this
 		// animalModel
@@ -171,6 +180,7 @@ public final class EnvironmentalFactorAction extends BaseAction {
 			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
 			saveErrors(request, theMsg);
 		}
+		resetToken(request);
 
 		return mapping.findForward("AnimalModelTreePopulateAction");
 	}

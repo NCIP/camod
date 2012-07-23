@@ -19,6 +19,7 @@ package gov.nih.nci.camod.domain;
 
 import gov.nih.nci.camod.util.Duplicatable;
 import gov.nih.nci.camod.util.EvsTreeUtil;
+import gov.nih.nci.camod.util.SafeHTMLUtil;
 
 import java.io.Serializable;
 import java.util.*;
@@ -43,7 +44,7 @@ public class Agent extends BaseObject implements Serializable, Duplicatable {
      */
     public String getName()
     {
-        return name;
+        return SafeHTMLUtil.cleanMinimal(name);
     }
 
     /**
@@ -59,7 +60,7 @@ public class Agent extends BaseObject implements Serializable, Duplicatable {
      */
     public String getConceptCode()
     {
-        return conceptCode;
+        return SafeHTMLUtil.cleanMinimal(conceptCode);
     }
 
     /**
@@ -98,7 +99,7 @@ public class Agent extends BaseObject implements Serializable, Duplicatable {
      */
     public String getCasNumber()
     {
-        return casNumber;
+        return SafeHTMLUtil.cleanMinimal(casNumber);
     }
 
     /**
@@ -128,7 +129,7 @@ public class Agent extends BaseObject implements Serializable, Duplicatable {
      * we must use the plural form comments.
      */
     public String getComments() {
-        return comments;
+        return SafeHTMLUtil.cleanMinimal(comments);
     }
 
     /**
@@ -145,7 +146,7 @@ public class Agent extends BaseObject implements Serializable, Duplicatable {
      * @return Returns the source.
      */
     public String getSource() {
-        return source;
+        return SafeHTMLUtil.cleanMinimal(source);
     }
 
     /**

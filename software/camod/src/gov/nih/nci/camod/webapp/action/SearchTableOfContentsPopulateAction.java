@@ -54,13 +54,12 @@ public class SearchTableOfContentsPopulateAction extends BaseAction {
     		log.info("SearchTableOfContentsPopulateAction cleaned headername: " + headername);
     	}     	
 
-    	String sID2 = null;
-    	// get and clean header to prevent SQL injection
-        if (request.getHeader("Referer") != null){
-        	sID2 = request.getHeader("Referer");
-            log.info("cleaned Referer: " + sID2);
-            sID2 = SafeHTMLUtil.clean(sID2);
-        }     	
+		sID = request.getHeader("Referer");
+    	
+    	// prevents Referer Header injection
+    	if ( sID != null && sID != "" && !sID.contains("camod")) {
+    		return (mapping.findForward("failure"));
+    	}    	
 
         // Get the curation manager workflow XML
         TOCManager theTOCManager = new TOCManager(getServlet().getServletContext().getRealPath("/")

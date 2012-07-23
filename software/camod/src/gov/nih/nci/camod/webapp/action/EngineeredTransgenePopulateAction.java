@@ -272,6 +272,7 @@ public class EngineeredTransgenePopulateAction extends BaseAction
 
         // setup dropdown menus
         this.dropdown(request, response);
+        saveToken(request);
 
         return mapping.findForward("submitEngineeredTransgene");
     }
@@ -285,6 +286,7 @@ public class EngineeredTransgenePopulateAction extends BaseAction
 
         // setup dropdown menus
         this.dropdown(request, response);
+        saveToken(request);
 
         return mapping.findForward("submitEngineeredTransgene");
     }

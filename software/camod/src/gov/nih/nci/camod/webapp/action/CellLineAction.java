@@ -67,6 +67,9 @@ public final class CellLineAction extends BaseAction {
 			HttpServletResponse response) throws Exception {
 
 		log.debug("Entering edit");
+		if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
 
 		CellLineForm cellLineForm = (CellLineForm) form;
 
@@ -119,6 +122,8 @@ public final class CellLineAction extends BaseAction {
 		}
 
 		log.trace("Exiting edit");
+		resetToken(request);
+
 		return mapping.findForward("AnimalModelTreePopulateAction");
 	}
 
@@ -136,6 +141,9 @@ public final class CellLineAction extends BaseAction {
 			HttpServletResponse response) throws Exception {
 
 		log.trace("Entering save");
+		if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
 
 		CellLineForm cellLineForm = (CellLineForm) form;
 
@@ -178,6 +186,8 @@ public final class CellLineAction extends BaseAction {
 		}
 
 		log.trace("Exiting save");
+		resetToken(request);
+
 		return mapping.findForward(theForward);
 	}
 }

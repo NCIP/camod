@@ -86,6 +86,7 @@ public class BacteriaPopulateAction extends BaseAction {
 		// Prepopulate all dropdown fields, set the global Constants to the
 		// following
 		this.dropdown(request, response);
+		saveToken(request);
 
 		return mapping.findForward("submitBacteria");
 	}
@@ -113,6 +114,7 @@ public class BacteriaPopulateAction extends BaseAction {
 		this.dropdown(request, response);
 
         log.debug("<BacteriaPopulateAction dropdown> exiting... ");
+		saveToken(request);
 
 		return mapping.findForward("submitBacteria");
 	}

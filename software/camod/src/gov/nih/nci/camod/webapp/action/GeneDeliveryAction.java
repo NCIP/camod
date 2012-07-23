@@ -71,6 +71,9 @@ public final class GeneDeliveryAction extends BaseAction {
             HttpServletResponse response) throws Exception {
 
         log.debug("<GeneDeliveryAction> Entering edit");
+		if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}        
 
         // Create a form to edit
         GeneDeliveryForm geneDeliveryForm = (GeneDeliveryForm) form;
@@ -130,6 +133,8 @@ public final class GeneDeliveryAction extends BaseAction {
         }
 
         log.debug("<GeneDeliveryAction> Exiting edit");
+		resetToken(request);
+
         return mapping.findForward("AnimalModelTreePopulateAction");
     }
 
@@ -147,6 +152,9 @@ public final class GeneDeliveryAction extends BaseAction {
             HttpServletResponse response) throws Exception {
 
         log.debug("<GeneDeliveryAction> Entering save");
+		if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
 
         // Create a form to edit
         GeneDeliveryForm geneDeliveryForm = (GeneDeliveryForm) form;
@@ -194,6 +202,8 @@ public final class GeneDeliveryAction extends BaseAction {
         }
 
         log.trace("<GeneDeliveryAction> Exiting save");
+		resetToken(request);
+
         return mapping.findForward(theForward);
     }
 }

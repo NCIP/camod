@@ -33,6 +33,8 @@ package gov.nih.nci.camod.domain;
 
 import gov.nih.nci.camod.util.Duplicatable;
 import gov.nih.nci.camod.util.HashCodeUtil;
+import gov.nih.nci.camod.util.SafeHTMLUtil;
+
 import java.io.Serializable;
 import java.util.*;
 
@@ -56,7 +58,7 @@ public class CellLine extends BaseObject implements Comparable, Serializable, Du
      */
     public String getName()
     {
-        return name;
+        return SafeHTMLUtil.cleanMinimal(name);
     }
 
     /**
@@ -73,7 +75,7 @@ public class CellLine extends BaseObject implements Comparable, Serializable, Du
      */
     public String getExperiment()
     {
-        return experiment;
+        return SafeHTMLUtil.cleanMinimal(experiment);
     }
 
     /**
@@ -90,7 +92,7 @@ public class CellLine extends BaseObject implements Comparable, Serializable, Du
      */
     public String getResults()
     {
-        return results;
+        return SafeHTMLUtil.cleanMinimal(results);
     }
 
     /**
@@ -108,7 +110,7 @@ public class CellLine extends BaseObject implements Comparable, Serializable, Du
      */
     public String getComments()
     {
-        return comments;
+        return SafeHTMLUtil.cleanMinimal(comments);
     }
 
     /**

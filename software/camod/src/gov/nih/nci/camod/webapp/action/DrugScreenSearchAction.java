@@ -114,12 +114,12 @@ public final class DrugScreenSearchAction extends BaseAction {
                 sID = SafeHTMLUtil.clean(sID);
             }
             
-        	// get and clean header to prevent SQL injection
-            if (request.getHeader("Referer") != null){
-            	sID = request.getHeader("Referer");
-                log.info("cleaned Referer: " + sID);
-                sID = SafeHTMLUtil.clean(sID);
-            }        	
+    		sID = request.getHeader("Referer");
+        	
+        	// prevents Referer Header injection
+        	if ( sID != null && sID != "" && !sID.contains("camod")) {
+        		return (mapping.findForward("failure"));
+        	}        	
         	
 			HQLParameter[] theParams = new HQLParameter[1];
 			theParams[0] = new HQLParameter();

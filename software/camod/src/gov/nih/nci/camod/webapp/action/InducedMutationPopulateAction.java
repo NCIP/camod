@@ -110,7 +110,7 @@ public class InducedMutationPopulateAction extends BaseAction {
         }
         // setup dropdown menus
         this.dropdown(request, response);
-
+        saveToken(request);
         return mapping.findForward("submitInducedMutation");
     }
 
@@ -121,7 +121,7 @@ public class InducedMutationPopulateAction extends BaseAction {
 
         // setup dropdown menus
         this.dropdown(request, response);
-
+        saveToken(request);
         return mapping.findForward("submitInducedMutation");
     }
 

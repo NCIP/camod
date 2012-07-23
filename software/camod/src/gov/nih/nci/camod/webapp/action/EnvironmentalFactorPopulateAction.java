@@ -109,6 +109,7 @@ public class EnvironmentalFactorPopulateAction extends BaseAction {
         // Prepopulate all dropdown fields, set the global Constants to the
         // following
         this.dropdown(request, response);
+		saveToken(request);
 
         return mapping.findForward("submitEnvironmentalFactors");
 
@@ -129,6 +130,7 @@ public class EnvironmentalFactorPopulateAction extends BaseAction {
 
         // setup dropdown menus
         this.dropdown(request, response);
+		saveToken(request);
 
         return mapping.findForward("submitEnvironmentalFactors");
     }

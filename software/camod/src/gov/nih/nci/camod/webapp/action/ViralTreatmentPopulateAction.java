@@ -108,6 +108,7 @@ public class ViralTreatmentPopulateAction extends BaseAction {
 
 		// Store the Form in session to be used by the JSP
 		request.getSession().setAttribute(Constants.FORMDATA, viralTreatmentForm);
+		saveToken(request);
 
 		return mapping.findForward("submitViralTreatment");
 	}
@@ -135,6 +136,7 @@ public class ViralTreatmentPopulateAction extends BaseAction {
 		this.dropdown(request, response);
 
 		log.debug("<ViralTreatmentPopulateAction> exiting... ");
+		saveToken(request);
 
 		return mapping.findForward("submitViralTreatment");
 	}

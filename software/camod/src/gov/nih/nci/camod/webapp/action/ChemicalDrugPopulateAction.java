@@ -135,6 +135,8 @@ public class ChemicalDrugPopulateAction extends BaseAction
                 chemicalDrugForm.setComments(ce.getEnvironmentalFactor().getComments());
             }            
         }
+		saveToken(request);
+
         return mapping.findForward("submitChemicalDrug");
     }
 
@@ -156,6 +158,7 @@ public class ChemicalDrugPopulateAction extends BaseAction
 
         // setup dropdown menus
         this.dropdown(request, response);
+		saveToken(request);
 
         return mapping.findForward("submitChemicalDrug");
     }

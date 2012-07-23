@@ -72,6 +72,9 @@ public class AvailabilityAction extends BaseAction {
 			HttpServletResponse response) throws Exception {
 
 		log.debug("<AvailabilityAction> Entering edit");
+        if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
 
 		// Create a form to edit
 		AvailabilityForm availabilityForm = (AvailabilityForm) form;
@@ -132,6 +135,8 @@ public class AvailabilityAction extends BaseAction {
 		}
 
 		log.debug("<AvailabilityAction> Exiting edit");
+		resetToken(request);
+
 		return mapping.findForward(theForward);
 	}
 
@@ -149,6 +154,9 @@ public class AvailabilityAction extends BaseAction {
 			HttpServletResponse response) throws Exception {
 
 		log.debug("<AvailabilityAction> Entering save");
+        if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
 		
 		// Grab the current modelID from the session
 		String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
@@ -189,6 +197,8 @@ public class AvailabilityAction extends BaseAction {
 		}
 
 		log.trace("<AvailabilityAction> Exiting save");
+		resetToken(request);
+
 		return mapping.findForward("AnimalModelTreePopulateAction");
 	}
 

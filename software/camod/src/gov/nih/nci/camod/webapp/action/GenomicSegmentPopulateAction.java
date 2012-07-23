@@ -121,6 +121,7 @@ public class GenomicSegmentPopulateAction extends BaseAction {
 
         }
 
+        saveToken(request);
         return mapping.findForward("submitGenomicSegment");
     }
 
@@ -130,6 +131,7 @@ public class GenomicSegmentPopulateAction extends BaseAction {
         // setup dropdown menus
         this.dropdown(request, response);
 
+        saveToken(request);
         return mapping.findForward("submitGenomicSegment");
     }
 

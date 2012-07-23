@@ -117,6 +117,7 @@ public class RadiationPopulateAction extends BaseAction {
 		// Prepopulate all dropdown fields, set the global Constants to the
 		// following
 		this.dropdown(request, response);
+		saveToken(request);
 
 		return mapping.findForward("submitRadiation");
 
@@ -145,6 +146,7 @@ public class RadiationPopulateAction extends BaseAction {
 		this.dropdown(request, response);
 
 		log.debug("<RadiationPopulateAction dropdown> before return submitRadiation ");
+		saveToken(request);
 
 		return mapping.findForward("submitRadiation");
 

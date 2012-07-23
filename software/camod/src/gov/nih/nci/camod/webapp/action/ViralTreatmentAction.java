@@ -73,6 +73,10 @@ public class ViralTreatmentAction extends BaseAction {
 		}
 
         log.debug("<ViralTreatmentAction edit> Entering... ");
+        
+		if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
 		
         // Grab the current modelID from the session
         String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
@@ -126,6 +130,7 @@ public class ViralTreatmentAction extends BaseAction {
 			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
 			saveErrors(request, theMsg);
 		}
+		resetToken(request);
 
 		return mapping.findForward("AnimalModelTreePopulateAction");
 	}
@@ -147,6 +152,10 @@ public class ViralTreatmentAction extends BaseAction {
 		}
 
 		log.debug("<ViralTreatmentAction save> Entering... ");
+		
+		if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
 
 		// Grab the current modelID from the session
 		String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
@@ -181,6 +190,7 @@ public class ViralTreatmentAction extends BaseAction {
 			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
 			saveErrors(request, theMsg);
 		}
+		resetToken(request);
 
 		return mapping.findForward("AnimalModelTreePopulateAction");
 	}

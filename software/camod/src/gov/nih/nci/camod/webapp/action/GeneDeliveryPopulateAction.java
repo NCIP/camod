@@ -145,6 +145,7 @@ public class GeneDeliveryPopulateAction extends BaseAction {
 		// Prepopulate all dropdown fields, set the global Constants to the
 		// following
 		this.dropdown(request, response);
+		saveToken(request);
 
 		return mapping.findForward("submitGeneDelivery");
 
@@ -171,6 +172,7 @@ public class GeneDeliveryPopulateAction extends BaseAction {
 
 		log
 				.info("<GeneDeliveryPopulateAction dropdown> before return submitRadiation ");
+		saveToken(request);
 
 		return mapping.findForward("submitGeneDelivery");
 

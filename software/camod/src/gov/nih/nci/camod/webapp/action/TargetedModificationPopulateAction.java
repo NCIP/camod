@@ -163,7 +163,8 @@ public class TargetedModificationPopulateAction extends BaseAction
 
         // setup dropdown menus
         this.dropdown(request, response);
-
+        saveToken(request);
+        
         return mapping.findForward("submitTargetedModification");
     }
 
@@ -177,6 +178,7 @@ public class TargetedModificationPopulateAction extends BaseAction
         // setup dropdown menus
         this.dropdown(request, response);
 
+        saveToken(request);
         return mapping.findForward("submitTargetedModification");
     }
 

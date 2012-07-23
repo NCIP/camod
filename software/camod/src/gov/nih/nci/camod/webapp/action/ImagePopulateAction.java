@@ -115,6 +115,7 @@ public class ImagePopulateAction extends BaseAction {
 			}
 		}
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STAININGDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
+        saveToken(request);
 		return mapping.findForward("submitImages");
 	}
 
@@ -125,6 +126,7 @@ public class ImagePopulateAction extends BaseAction {
 		
         //NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STAININGDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
 		
+		saveToken(request);
 		return mapping.findForward("submitImages");
 	}
 }

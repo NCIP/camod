@@ -73,6 +73,9 @@ public class ChemicalDrugAction extends BaseAction {
 			HttpServletResponse response) throws Exception {
 
 		log.debug("<ChemicalDrugAction> Entering 'edit' method");
+		if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
 
 		// Grab the current CarcinogenExposure we are working with related to this animalModel
 		String aCarcinogenExposureID = request.getParameter("aCarcinogenExposureID");
@@ -123,6 +126,7 @@ public class ChemicalDrugAction extends BaseAction {
 			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
 			saveErrors(request, theMsg);
 		}
+		resetToken(request);
 
 		return mapping.findForward("AnimalModelTreePopulateAction");
 	}
@@ -141,6 +145,9 @@ public class ChemicalDrugAction extends BaseAction {
 			HttpServletResponse response) throws Exception {
 		if (log.isDebugEnabled()) {
 			log.debug("<ChemicalDrugAction> Entering 'save' method");
+		}
+		if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
 		}
         
         ChemicalDrugForm chemicalDrugForm = (ChemicalDrugForm) form;        
@@ -181,6 +188,7 @@ public class ChemicalDrugAction extends BaseAction {
 			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
 			saveErrors(request, theMsg);
 		}
+		resetToken(request);
 
 		return mapping.findForward("AnimalModelTreePopulateAction");
 	}

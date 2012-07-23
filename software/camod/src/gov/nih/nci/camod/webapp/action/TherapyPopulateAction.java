@@ -212,6 +212,7 @@ public class TherapyPopulateAction extends BaseAction
         this.dropdown(request, response);
         log.trace("Exiting TherapyPopulateAction.populate");
 
+        saveToken(request);
         return mapping.findForward("submitTherapy");
     }
 
@@ -237,6 +238,7 @@ public class TherapyPopulateAction extends BaseAction
 
         log.debug("<TherapyPopulateAction dropdown> Exiting ActionForward dropdown()");
 
+        saveToken(request);
         return mapping.findForward("submitTherapy");
     }
 

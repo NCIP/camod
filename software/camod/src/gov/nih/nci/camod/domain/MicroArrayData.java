@@ -18,6 +18,7 @@ import java.io.Serializable;
 
 import gov.nih.nci.camod.util.Duplicatable;
 import gov.nih.nci.camod.util.HashCodeUtil;
+import gov.nih.nci.camod.util.SafeHTMLUtil;
 
 /**
  * @author rajputs
@@ -72,7 +73,7 @@ public class MicroArrayData extends BaseObject implements Comparable, Serializab
      */
     public String getExperimentName()
     {
-        return experimentName;
+        return SafeHTMLUtil.cleanMinimal(experimentName);
     }
 
     /**

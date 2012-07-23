@@ -121,6 +121,7 @@ public class MorpholinoPopulateAction extends BaseAction
 
         // Prepopulate all dropdown fields, set the global Constants to the following
         this.dropdown(request, response);
+		saveToken(request);
 
         return mapping.findForward("submitMorpholino");
     }
@@ -154,6 +155,7 @@ public class MorpholinoPopulateAction extends BaseAction
         this.dropdown(request, response);		
         
         log.debug("<MorpholinoPopulateAction dropdown> Exiting ActionForward dropdown()");
+		saveToken(request);
 
         return mapping.findForward("submitMorpholino");
     }

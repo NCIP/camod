@@ -57,6 +57,9 @@ public final class EngineeredTransgeneAction extends BaseAction {
     public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         log.trace("Entering edit");
+        if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
 
         // Create a form to edit
         EngineeredTransgeneForm engineeredTransgeneForm = (EngineeredTransgeneForm) form;
@@ -165,6 +168,8 @@ public final class EngineeredTransgeneAction extends BaseAction {
         }
 
         log.trace("Exiting edit");
+		resetToken(request);
+
         return mapping.findForward(theForward);
     }
 
@@ -182,6 +187,9 @@ public final class EngineeredTransgeneAction extends BaseAction {
             HttpServletResponse response) throws Exception {
 
         log.trace("Entering save");
+        if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
 
         // Create a form to edit
         EngineeredTransgeneForm engineeredTransgeneForm = (EngineeredTransgeneForm) form;
@@ -269,6 +277,8 @@ public final class EngineeredTransgeneAction extends BaseAction {
         }
 
         log.trace("Exiting save");
+		resetToken(request);
+
         return mapping.findForward(theForward);
     }
 }

@@ -85,6 +85,9 @@ public final class TransplantationAction extends BaseAction
                               HttpServletResponse response) throws Exception
     {
         log.debug("<TransplantationAction> Entering edit");
+        if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
 
         // Create a form to edit
         TransplantationForm transplantationForm = (TransplantationForm) form;
@@ -182,6 +185,7 @@ public final class TransplantationAction extends BaseAction
         }
 
         log.debug("<TransplantationAction> Exiting edit");
+		resetToken(request);
         return mapping.findForward("AnimalModelTreePopulateAction");
     }
 
@@ -201,6 +205,9 @@ public final class TransplantationAction extends BaseAction
                               HttpServletResponse response) throws Exception
     {
         log.trace("<TransplantationAction> Entering save");
+        if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
 
         // Create a form to edit
         TransplantationForm transplantationForm = (TransplantationForm) form;
@@ -259,6 +266,7 @@ public final class TransplantationAction extends BaseAction
         }
 
         log.trace("<TransplantationAction> Exiting save");
+		resetToken(request);
         return mapping.findForward("AnimalModelTreePopulateAction");
     }
 }

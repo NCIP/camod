@@ -39,6 +39,8 @@ package gov.nih.nci.camod.domain;
 
 import gov.nih.nci.camod.service.impl.QueryManagerSingleton;
 import gov.nih.nci.camod.util.HashCodeUtil;
+import gov.nih.nci.camod.util.SafeHTMLUtil;
+
 import java.util.*;
 
 /**
@@ -74,7 +76,7 @@ public class Transplantation extends AbstractCancerModel implements Comparable
      */
     public String getAdministrativeSite()
     {
-        return administrativeSite;
+        return SafeHTMLUtil.cleanMinimal(administrativeSite);
     }
 
     /**
@@ -131,7 +133,7 @@ public class Transplantation extends AbstractCancerModel implements Comparable
      */
     public String getAtccNumber()
     {
-        return atccNumber;
+        return SafeHTMLUtil.cleanMinimal(atccNumber);
     }
 
     /**
@@ -147,7 +149,7 @@ public class Transplantation extends AbstractCancerModel implements Comparable
      */
     public String getCellAmount()
     {
-        return cellAmount;
+        return SafeHTMLUtil.cleanMinimal(cellAmount);
     }
 
     /**
@@ -163,7 +165,7 @@ public class Transplantation extends AbstractCancerModel implements Comparable
      */
     public String getGrowthPeriod()
     {
-        return growthPeriod;
+        return SafeHTMLUtil.cleanMinimal(growthPeriod);
     }
 
     /**
@@ -200,7 +202,7 @@ public class Transplantation extends AbstractCancerModel implements Comparable
      */
     public String getGeneticManipulation()
     {
-        return geneticManipulation;
+        return SafeHTMLUtil.cleanMinimal(geneticManipulation);
     }
 
     /**
@@ -216,7 +218,7 @@ public class Transplantation extends AbstractCancerModel implements Comparable
      */
     public String getModificationDescription()
     {
-        return modificationDescription;
+        return SafeHTMLUtil.cleanMinimal(modificationDescription);
     }
 
     /**
@@ -233,7 +235,7 @@ public class Transplantation extends AbstractCancerModel implements Comparable
      */
     public String getParentalCellLineName()
     {
-        return parentalCellLineName;
+        return SafeHTMLUtil.cleanMinimal(parentalCellLineName);
     }
 
     /**
@@ -308,7 +310,7 @@ public class Transplantation extends AbstractCancerModel implements Comparable
      */
     public String getConditioningRegimen()
     {
-        return conditioningRegimen;
+        return SafeHTMLUtil.cleanMinimal(conditioningRegimen);
     }
 
     /**
@@ -320,7 +322,7 @@ public class Transplantation extends AbstractCancerModel implements Comparable
     }
 
 	public String getName() {
-		return name;
+		return SafeHTMLUtil.cleanMinimal(name);
 	}
 
 	public void setName(String name) {
@@ -328,7 +330,7 @@ public class Transplantation extends AbstractCancerModel implements Comparable
 	}
 
 	public String getSourceType() {
-		return sourceType;
+		return SafeHTMLUtil.cleanMinimal(sourceType);
 	}
 
 	public void setSourceType(String sourceType) {
@@ -339,7 +341,7 @@ public class Transplantation extends AbstractCancerModel implements Comparable
 	 * @return the comments
 	 */
 	public String getComments() {
-		return comments;
+		return SafeHTMLUtil.cleanMinimal(comments);
 	}
 
 	/**
@@ -353,7 +355,7 @@ public class Transplantation extends AbstractCancerModel implements Comparable
 	 * @return the sourceTypeAlternEntry
 	 */
 	public String getSourceTypeAlternEntry() {
-		return sourceTypeAlternEntry;
+		return SafeHTMLUtil.cleanMinimal(sourceTypeAlternEntry);
 	}
 
 	/**
@@ -367,7 +369,7 @@ public class Transplantation extends AbstractCancerModel implements Comparable
 	 * @return the adminSiteAlternEntry
 	 */
 	public String getAdminSiteAlternEntry() {
-		return adminSiteAlternEntry;
+		return SafeHTMLUtil.cleanMinimal(adminSiteAlternEntry);
 	}
 
 	/**
@@ -381,7 +383,7 @@ public class Transplantation extends AbstractCancerModel implements Comparable
 	 * @return the condRegimenAlternEntry
 	 */
 	public String getCondRegimenAlternEntry() {
-		return condRegimenAlternEntry;
+		return SafeHTMLUtil.cleanMinimal(condRegimenAlternEntry);
 	}
 
 	/**

@@ -37,6 +37,8 @@ package gov.nih.nci.camod.domain;
 
 import gov.nih.nci.camod.util.Duplicatable;
 import gov.nih.nci.camod.util.HashCodeUtil;
+import gov.nih.nci.camod.util.SafeHTMLUtil;
+
 import java.io.Serializable;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -65,7 +67,7 @@ public class AnimalAvailability extends BaseObject implements Comparable, Serial
         {
             theDisplayName = "Strain";
         }
-        return theDisplayName;
+        return SafeHTMLUtil.cleanMinimal(theDisplayName);
     }
 
     /**
@@ -73,7 +75,7 @@ public class AnimalAvailability extends BaseObject implements Comparable, Serial
      */
     public String getName()
     {
-        return name;
+        return SafeHTMLUtil.cleanMinimal(name);
     }
 
     /**
@@ -90,7 +92,7 @@ public class AnimalAvailability extends BaseObject implements Comparable, Serial
      */
     public String getStockNumber()
     {
-        return stockNumber;
+        return SafeHTMLUtil.cleanMinimal(stockNumber);
     }
 
     /**

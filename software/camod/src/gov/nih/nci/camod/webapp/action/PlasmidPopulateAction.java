@@ -85,6 +85,7 @@ public class PlasmidPopulateAction extends BaseAction {
 		// Prepopulate all dropdown fields, set the global Constants to the
 		// following
 		this.dropdown(request, response);
+		saveToken(request);
 
 		return mapping.findForward("submitPlasmid");
 	}
@@ -112,6 +113,7 @@ public class PlasmidPopulateAction extends BaseAction {
 		this.dropdown(request, response);
 
         log.debug("<PlasmidPopulateAction dropdown> exiting... ");
+		saveToken(request);
 
 		return mapping.findForward("submitPlasmid");
 	}

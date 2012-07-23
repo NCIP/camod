@@ -11,6 +11,7 @@ package gov.nih.nci.camod.domain;
 import java.io.Serializable;
 
 import gov.nih.nci.camod.util.Duplicatable;
+import gov.nih.nci.camod.util.SafeHTMLUtil;
 
 /**
  * @author rajputs
@@ -45,7 +46,7 @@ public class Phenotype extends BaseObject implements Serializable, Duplicatable
      */
     public String getBreedingNotes()
     {
-        return breedingNotes;
+        return SafeHTMLUtil.cleanMinimal(breedingNotes);
     }
 
     /**
@@ -62,7 +63,7 @@ public class Phenotype extends BaseObject implements Serializable, Duplicatable
      */
     public String getDescription()
     {
-        return description;
+        return SafeHTMLUtil.cleanMinimal(description);
     }
 
     /**

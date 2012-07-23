@@ -181,6 +181,7 @@ public class AnimalModelPopulateAction extends BaseAction {
 
 		log.debug("Exiting AnimalModelPopulateAction.populate");
 
+		saveToken(request);
 		return mapping.findForward("submitModelCharacteristics");
 
 	}
@@ -208,6 +209,7 @@ public class AnimalModelPopulateAction extends BaseAction {
 
 		log.debug("Exiting AnimalModelPopulateAction.dropdown");
 
+		saveToken(request);
 		return mapping.findForward("submitNewModel");
 	}
 

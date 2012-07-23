@@ -65,6 +65,9 @@ public final class ImageAction extends BaseAction {
             HttpServletResponse response) throws Exception {
 
         log.trace("Entering save");
+		if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
 
         // Create a form to edit
         ImageForm imageForm = (ImageForm) form;
@@ -148,6 +151,8 @@ public final class ImageAction extends BaseAction {
         }
 
         log.trace("Exiting save");
+		resetToken(request);
+
         return mapping.findForward(theForward);
     }
 
@@ -165,6 +170,9 @@ public final class ImageAction extends BaseAction {
             HttpServletResponse response) throws Exception {
 
         log.trace("Entering save");
+		if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
 
         // Create a form to edit
         ImageForm imageForm = (ImageForm) form;
@@ -221,6 +229,8 @@ public final class ImageAction extends BaseAction {
         }
 
         log.trace("Exiting save");
+		resetToken(request);
+
         return mapping.findForward(theForward);
     }
 }

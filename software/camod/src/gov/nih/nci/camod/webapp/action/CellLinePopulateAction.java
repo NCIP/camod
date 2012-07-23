@@ -110,6 +110,7 @@ public class CellLinePopulateAction extends BaseAction {
 
 		}
 
+		saveToken(request);
 		return mapping.findForward("submitCellLines");
 	}
 
@@ -125,6 +126,7 @@ public class CellLinePopulateAction extends BaseAction {
 	 */
 	public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		saveToken(request);
 		return mapping.findForward("submitCellLines");
 	}
 

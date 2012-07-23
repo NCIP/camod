@@ -84,12 +84,12 @@ public class AdminRolesPopulateAction extends BaseAction {
             sID = SafeHTMLUtil.clean(sID);
         }
         
-        // get and clean Referer header to prevent SQL injection
-        if (inRequest.getHeader("Referer") != null){
-        	sID = inRequest.getHeader("Referer");
-            log.debug("sID: " + sID);
-            sID = SafeHTMLUtil.clean(sID);
-        }            
+		sID = inRequest.getHeader("Referer");
+    	
+    	// prevents Referer Header injection
+    	if ( sID != null && sID != "" && !sID.contains("camod")) {
+    		return (inMapping.findForward("failure"));
+    	}            
         
 		AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
 		CommentsManager theCommentsManager = (CommentsManager) getBean("commentsManager");

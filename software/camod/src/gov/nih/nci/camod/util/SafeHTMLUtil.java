@@ -86,6 +86,21 @@ public class SafeHTMLUtil {
 		}
 		return clean;
 	}
+	
+	public static String cleanMinimal(String s) {
+		if( s != null ) {
+			String clean = Translate.decode(s).replace("<", "").replace(">", "");
+			clean = StringUtils.replace(clean, "script", "");
+			clean = StringUtils.replace(clean, "javascript", "");
+			clean = StringUtils.replace(clean, "alert", "cleaned");
+			if (clean.length() == 0) {
+				clean = "empty";
+			}
+			return clean;
+		}
+		
+		return s;
+	}	
 
 	public static String cleanScript(String s) {
 		String clean = Translate.decode(s).replace("<", "").replace(">", "");

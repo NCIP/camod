@@ -24,6 +24,8 @@
 package gov.nih.nci.camod.domain;
 
 import gov.nih.nci.camod.util.Duplicatable;
+import gov.nih.nci.camod.util.SafeHTMLUtil;
+
 import java.io.Serializable;
 
 public class TransientInterference extends BaseObject implements Serializable, Duplicatable
@@ -54,11 +56,11 @@ public class TransientInterference extends BaseObject implements Serializable, D
     {
         if (source != null && source.length() > 0)
         {
-            return source;
+            return SafeHTMLUtil.cleanMinimal(source);
         }
         else
         {
-            return sourceAlternEntry;
+            return SafeHTMLUtil.cleanMinimal(sourceAlternEntry);
         }
     }
 
@@ -67,7 +69,7 @@ public class TransientInterference extends BaseObject implements Serializable, D
      */
     public String getSource()
     {
-        return source;
+        return SafeHTMLUtil.cleanMinimal(source);
     }
 
     /**
@@ -84,7 +86,7 @@ public class TransientInterference extends BaseObject implements Serializable, D
      */
     public String getType()
     {
-        return type;
+        return SafeHTMLUtil.cleanMinimal(type);
     }
 
     /**
@@ -102,7 +104,7 @@ public class TransientInterference extends BaseObject implements Serializable, D
      */
     public String getSequenceDirection()
     {
-        return sequenceDirection;
+        return SafeHTMLUtil.cleanMinimal(sequenceDirection);
     }
 
     /**
@@ -120,7 +122,7 @@ public class TransientInterference extends BaseObject implements Serializable, D
      */
     public String getTargetedRegion()
     {
-        return targetedRegion;
+        return SafeHTMLUtil.cleanMinimal(targetedRegion);
     }
 
     /**
@@ -138,7 +140,7 @@ public class TransientInterference extends BaseObject implements Serializable, D
      */
     public String getConcentration()
     {
-        return concentration;
+        return SafeHTMLUtil.cleanMinimal(concentration);
     }
 
     /**
@@ -155,7 +157,7 @@ public class TransientInterference extends BaseObject implements Serializable, D
      */
     public String getConcentrationUnit()
     {
-        return concentrationUnit;
+        return SafeHTMLUtil.cleanMinimal(concentrationUnit);
     }
 
     /**
@@ -173,7 +175,7 @@ public class TransientInterference extends BaseObject implements Serializable, D
      */
     public String getDeliveryMethod()
     {
-        return deliveryMethod;
+        return SafeHTMLUtil.cleanMinimal(deliveryMethod);
     }
 
     /**
@@ -183,11 +185,11 @@ public class TransientInterference extends BaseObject implements Serializable, D
     {
         if (deliveryMethod != null && deliveryMethod.length() > 0)
         {
-            return deliveryMethod;
+            return SafeHTMLUtil.cleanMinimal(deliveryMethod);
         }
         else
         {
-            return deliveryMethodAlternEntry;
+            return SafeHTMLUtil.cleanMinimal(deliveryMethodAlternEntry);
         }
     }
     
@@ -207,11 +209,11 @@ public class TransientInterference extends BaseObject implements Serializable, D
     {
         if (visualLigand != null && visualLigand.length() > 0)
         {
-            return visualLigand;
+            return SafeHTMLUtil.cleanMinimal(visualLigand);
         }
         else
         {
-            return visualLigandAlternEntry;
+            return SafeHTMLUtil.cleanMinimal(visualLigandAlternEntry);
         }
     }
     
@@ -220,7 +222,7 @@ public class TransientInterference extends BaseObject implements Serializable, D
      */
     public String getVisualLigand()
     {
-        return visualLigand;
+        return SafeHTMLUtil.cleanMinimal(visualLigand);
     }
 
     /**
@@ -238,7 +240,7 @@ public class TransientInterference extends BaseObject implements Serializable, D
      */
     public String getComments()
     {
-        return comments;
+        return SafeHTMLUtil.cleanMinimal(comments);
     }
 
     /**
@@ -288,7 +290,7 @@ public class TransientInterference extends BaseObject implements Serializable, D
     }
 
 	public String getTargetSite() {
-		return targetSite;
+		return SafeHTMLUtil.cleanMinimal(targetSite);
 	}
 
 	public void setTargetSite(String targetSite) {
@@ -299,7 +301,7 @@ public class TransientInterference extends BaseObject implements Serializable, D
 	 * @return the deliveryMethodAlternEntry
 	 */
 	public String getDeliveryMethodAlternEntry() {
-		return deliveryMethodAlternEntry;
+		return SafeHTMLUtil.cleanMinimal(deliveryMethodAlternEntry);
 	}
 
 	/**
@@ -313,7 +315,7 @@ public class TransientInterference extends BaseObject implements Serializable, D
 	 * @return the visualLigandAlternEntry
 	 */
 	public String getVisualLigandAlternEntry() {
-		return visualLigandAlternEntry;
+		return SafeHTMLUtil.cleanMinimal(visualLigandAlternEntry);
 	}
 
 	/**
@@ -327,7 +329,7 @@ public class TransientInterference extends BaseObject implements Serializable, D
 	 * @return the sourceAlternEntry
 	 */
 	public String getSourceAlternEntry() {
-		return sourceAlternEntry;
+		return SafeHTMLUtil.cleanMinimal(sourceAlternEntry);
 	}
 
 	/**

@@ -13,6 +13,7 @@ package gov.nih.nci.camod.domain;
 
 import gov.nih.nci.camod.util.Duplicatable;
 import gov.nih.nci.camod.util.HashCodeUtil;
+import gov.nih.nci.camod.util.SafeHTMLUtil;
 
 import java.io.Serializable;
 import java.util.*;
@@ -149,7 +150,7 @@ public class Histopathology extends BaseObject implements Comparable, Serializab
      */
     public String getAgeOfOnset()
     {
-        return ageOfOnset;
+        return SafeHTMLUtil.cleanMinimal(ageOfOnset);
     }
 
     /**
@@ -165,7 +166,7 @@ public class Histopathology extends BaseObject implements Comparable, Serializab
      */
     public String getAgeOfOnsetUnit()
     {
-        return ageOfOnsetUnit;
+        return SafeHTMLUtil.cleanMinimal(ageOfOnsetUnit);
     }
 
     /**
@@ -182,7 +183,7 @@ public class Histopathology extends BaseObject implements Comparable, Serializab
      */
     public String getAgeOfDetection()
     {
-        return ageOfDetection;
+        return SafeHTMLUtil.cleanMinimal(ageOfDetection);
     }
 
     /**
@@ -198,7 +199,7 @@ public class Histopathology extends BaseObject implements Comparable, Serializab
      */
     public String getAgeOfDetectionUnit()
     {
-        return ageOfDetectionUnit;
+        return SafeHTMLUtil.cleanMinimal(ageOfDetectionUnit);
     }
 
     /**
@@ -215,7 +216,7 @@ public class Histopathology extends BaseObject implements Comparable, Serializab
      */
     public String getComments()
     {
-        return comments;
+        return SafeHTMLUtil.cleanMinimal(comments);
     }
 
     /**
@@ -232,7 +233,7 @@ public class Histopathology extends BaseObject implements Comparable, Serializab
      */
     public String getComparativeData()
     {
-        return comparativeData;
+        return SafeHTMLUtil.cleanMinimal(comparativeData);
     }
 
     /**
@@ -249,7 +250,7 @@ public class Histopathology extends BaseObject implements Comparable, Serializab
      */
     public String getGrossDescription()
     {
-        return grossDescription;
+        return SafeHTMLUtil.cleanMinimal(grossDescription);
     }
 
     /**
@@ -267,7 +268,7 @@ public class Histopathology extends BaseObject implements Comparable, Serializab
      */
     public String getMicroscopicDescription()
     {
-        return microscopicDescription;
+        return SafeHTMLUtil.cleanMinimal(microscopicDescription);
     }
 
     /**
@@ -284,7 +285,7 @@ public class Histopathology extends BaseObject implements Comparable, Serializab
      */
     public String getRelationalOperation()
     {
-        return relationalOperation;
+        return SafeHTMLUtil.cleanMinimal(relationalOperation);
     }
 
     /**
@@ -301,7 +302,7 @@ public class Histopathology extends BaseObject implements Comparable, Serializab
      */
     public String getSurvivalInfo()
     {
-        return survivalInfo;
+        return SafeHTMLUtil.cleanMinimal(survivalInfo);
     }
 
     /**
@@ -318,7 +319,7 @@ public class Histopathology extends BaseObject implements Comparable, Serializab
      */
     public String getTumorIncidenceRate()
     {
-        return tumorIncidenceRate;
+        return SafeHTMLUtil.cleanMinimal(tumorIncidenceRate);
     }
 
     /**
@@ -335,7 +336,7 @@ public class Histopathology extends BaseObject implements Comparable, Serializab
      */
     public String getVolumeOfTumor()
     {
-        return volumeOfTumor;
+        return SafeHTMLUtil.cleanMinimal(volumeOfTumor);
     }
 
     /**
@@ -352,7 +353,7 @@ public class Histopathology extends BaseObject implements Comparable, Serializab
      */
     public String getWeightOfTumor()
     {
-        return weightOfTumor;
+        return SafeHTMLUtil.cleanMinimal(weightOfTumor);
     }
 
     /**

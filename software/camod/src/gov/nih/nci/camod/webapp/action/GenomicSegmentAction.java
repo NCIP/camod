@@ -58,6 +58,11 @@ public final class GenomicSegmentAction extends BaseAction {
     public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         log.trace("Entering edit");
+        
+        if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
+		
 
         // Create a form to edit
         GenomicSegmentForm genomicSegmentForm = (GenomicSegmentForm) form;
@@ -145,6 +150,8 @@ public final class GenomicSegmentAction extends BaseAction {
         }
 
         log.trace("Exiting edit");
+		resetToken(request);
+
         return mapping.findForward(theForward);
     }
 
@@ -162,6 +169,11 @@ public final class GenomicSegmentAction extends BaseAction {
             HttpServletResponse response) throws Exception {
 
         log.trace("Entering save");
+        
+        if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
+		
 
         // Create a form to edit
         GenomicSegmentForm genomicSegmentForm = (GenomicSegmentForm) form;
@@ -222,6 +234,8 @@ public final class GenomicSegmentAction extends BaseAction {
         }
 
         log.trace("Exiting save");
+		resetToken(request);
+
         return mapping.findForward(theForward);
     }
 }

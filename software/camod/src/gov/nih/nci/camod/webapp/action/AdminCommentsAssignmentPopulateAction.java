@@ -57,6 +57,13 @@ public class AdminCommentsAssignmentPopulateAction extends BaseAction
                                  HttpServletResponse inResponse) throws Exception
     {
         log.trace("Entering execute");
+        
+		String sID = inRequest.getHeader("Referer");
+    	
+    	// prevents Referer Header injection
+    	if ( sID != null && sID != "" && !sID.contains("camod")) {
+    		return (inMapping.findForward("failure"));
+    	}
 
         CurationAssignmentForm theForm = (CurationAssignmentForm) inForm;
 

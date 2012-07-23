@@ -21,6 +21,7 @@ import java.io.Serializable;
 import java.util.*;
 import gov.nih.nci.camod.util.Duplicatable;
 import gov.nih.nci.camod.util.HashCodeUtil;
+import gov.nih.nci.camod.util.SafeHTMLUtil;
 
 /**
  * @author rajputs
@@ -117,7 +118,7 @@ public class EngineeredGene extends BaseObject implements Comparable, Serializab
      */
     public String getComments()
     {
-        return comments;
+        return SafeHTMLUtil.cleanMinimal(comments);
     }
 
     /**
@@ -168,7 +169,7 @@ public class EngineeredGene extends BaseObject implements Comparable, Serializab
      */
     public String getName()
     {
-        return name;
+        return SafeHTMLUtil.cleanMinimal(name);
     }
 
     /**
@@ -257,7 +258,7 @@ public class EngineeredGene extends BaseObject implements Comparable, Serializab
 	 * @return the engineeredGeneType
 	 */
 	public String getEngineeredGeneType() {
-		return engineeredGeneType;
+		return SafeHTMLUtil.cleanMinimal(engineeredGeneType);
 	}
 
 	/**

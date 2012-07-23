@@ -64,7 +64,10 @@ public final class InducedMutationAction extends BaseAction {
     public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.trace("Entering edit");        
+        log.trace("Entering edit");       
+		if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
         
         InducedMutationForm inducedMutationForm = (InducedMutationForm) form;
         
@@ -136,6 +139,8 @@ public final class InducedMutationAction extends BaseAction {
         }
 
         log.trace("Exiting edit");
+		resetToken(request);
+
         return mapping.findForward("AnimalModelTreePopulateAction");
     }
 
@@ -153,6 +158,9 @@ public final class InducedMutationAction extends BaseAction {
             HttpServletResponse response) throws Exception {
 
         log.debug("<InducedMutationAction save> Entering save");
+		if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
 
         // Create a form to edit
         InducedMutationForm inducedMutationForm = (InducedMutationForm) form;
@@ -197,6 +205,8 @@ public final class InducedMutationAction extends BaseAction {
         }
 
         log.trace("Exiting save");
+		resetToken(request);
+
         return mapping.findForward("AnimalModelTreePopulateAction");
     }
 }

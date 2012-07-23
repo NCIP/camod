@@ -79,6 +79,9 @@ public final class TherapyAction extends BaseAction {
 			HttpServletResponse response) throws Exception {
 
 		log.debug("<TherapyAction> Entering edit");
+		if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
 		
         // Grab the current modelID from the session
         String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
@@ -141,6 +144,8 @@ public final class TherapyAction extends BaseAction {
 			saveErrors(request, theMsg);
 		}
 
+		resetToken(request);
+
 		return mapping.findForward("AnimalModelTreePopulateAction");
 
 	}
@@ -159,6 +164,9 @@ public final class TherapyAction extends BaseAction {
 			HttpServletResponse response) throws Exception {
 
 		log.debug("<TherapyAction> Entering save");
+		if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
 
 		// Grab the current modelID from the session
 		String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
@@ -207,6 +215,8 @@ public final class TherapyAction extends BaseAction {
 			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
 			saveErrors(request, theMsg);
 		}
+
+		resetToken(request);
 
 		return mapping.findForward("AnimalModelTreePopulateAction");
 	}

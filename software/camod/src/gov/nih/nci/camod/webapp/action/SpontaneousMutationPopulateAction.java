@@ -90,6 +90,8 @@ public class SpontaneousMutationPopulateAction extends BaseAction {
 
         }
 
+		saveToken(request);
+
         return mapping.findForward("submitSpontaneousMutation");
     }
 
@@ -98,6 +100,7 @@ public class SpontaneousMutationPopulateAction extends BaseAction {
 
         log.debug("<SpontaneousMutationPopulateAction dropdown> Entering dropdown() ");
 
+		saveToken(request);
         return mapping.findForward("submitSpontaneousMutation");
     }
 

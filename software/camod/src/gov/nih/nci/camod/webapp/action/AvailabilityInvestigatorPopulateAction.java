@@ -121,6 +121,7 @@ public class AvailabilityInvestigatorPopulateAction extends BaseAction {
         this.dropdown(request, response);
 
         log.debug("<AvailabilityInvestigatorPopulateAction populate> Exiting ");
+        saveToken(request);
 
         return mapping.findForward("submitInvestigator");
     }
@@ -151,6 +152,7 @@ public class AvailabilityInvestigatorPopulateAction extends BaseAction {
         this.dropdown(request, response);
 
         log.debug("<AvailabilityInvestigatorPopulateAction ActionForward dropdown> Exiting ");
+        saveToken(request);
 
         return mapping.findForward("submitInvestigator");
 

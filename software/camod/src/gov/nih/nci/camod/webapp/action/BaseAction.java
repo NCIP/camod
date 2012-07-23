@@ -78,6 +78,9 @@ public class BaseAction extends MappingDispatchAction
         String theMethodName = null;
         if (theParameter != null && theParameter.length() > 0) {
             theMethodName = request.getParameter(theParameter);
+            if (theMethodName != null && !theMethodName.matches("^[a-zA-Z]*$")) {
+            	return this.unspecified(mapping, form, request, response);
+    		}
             return dispatchMethod(mapping, form, request, response, theMethodName);
         } 
         else 

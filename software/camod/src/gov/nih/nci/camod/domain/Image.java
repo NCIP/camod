@@ -39,6 +39,7 @@ package gov.nih.nci.camod.domain;
 import gov.nih.nci.camod.Constants.CaImage;
 import gov.nih.nci.camod.util.Duplicatable;
 import gov.nih.nci.camod.util.HashCodeUtil;
+import gov.nih.nci.camod.util.SafeHTMLUtil;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -80,7 +81,7 @@ public class Image extends BaseObject implements Comparable, Serializable, Dupli
      */
     public String getTitle()
     {
-        return title;
+        return SafeHTMLUtil.cleanMinimal(title);
     }
 
     /**
@@ -97,7 +98,7 @@ public class Image extends BaseObject implements Comparable, Serializable, Dupli
      */
     public String getDescription()
     {
-        return description;
+        return SafeHTMLUtil.cleanMinimal(description);
     }
 
     /**
@@ -132,7 +133,7 @@ public class Image extends BaseObject implements Comparable, Serializable, Dupli
      * we must use the plural form comments.
      */
     public String getComments() {
-        return comments;
+        return SafeHTMLUtil.cleanMinimal(comments);
     }
 
     /**

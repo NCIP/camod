@@ -275,6 +275,7 @@ public class TransplantationPopulateAction extends BaseAction
         // following
         this.dropdown(request, response, transplantationForm);
 
+        saveToken(request);
         return mapping.findForward("submitTransplantation");
 
     }
@@ -304,6 +305,7 @@ public class TransplantationPopulateAction extends BaseAction
 
         log.debug("<TransplantationPopulateAction dropdown> before return submitTransplantation ");
 
+        saveToken(request);
         return mapping.findForward("submitTransplantation");
 
     }

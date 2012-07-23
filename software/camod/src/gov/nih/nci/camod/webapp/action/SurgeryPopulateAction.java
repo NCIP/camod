@@ -84,7 +84,8 @@ public class SurgeryPopulateAction extends BaseAction {
 		// Prepopulate all dropdown fields, set the global Constants to the
 		// following
 		this.dropdown(request, response);
-		
+		saveToken(request);
+
 		return mapping.findForward("submitSurgeryOther");
 	}
 
@@ -107,6 +108,7 @@ public class SurgeryPopulateAction extends BaseAction {
 
 		// setup dropdown menus
 		this.dropdown(request, response);
+		saveToken(request);
 
 		return mapping.findForward("submitSurgeryOther");
 	}

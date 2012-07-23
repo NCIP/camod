@@ -17,6 +17,7 @@ package gov.nih.nci.camod.domain;
 import java.io.Serializable;
 import gov.nih.nci.camod.util.Duplicatable;
 import gov.nih.nci.camod.util.HashCodeUtil;
+import gov.nih.nci.camod.util.SafeHTMLUtil;
 
 /**
  * @author rajputs
@@ -54,7 +55,7 @@ public class SpontaneousMutation extends BaseObject implements Comparable, Seria
      */
     public String getName()
     {
-        return name;
+        return SafeHTMLUtil.cleanMinimal(name);
     }
 
     /**
@@ -72,7 +73,7 @@ public class SpontaneousMutation extends BaseObject implements Comparable, Seria
      */
     public String getComments()
     {
-        return comments;
+        return SafeHTMLUtil.cleanMinimal(comments);
     }
 
     /**

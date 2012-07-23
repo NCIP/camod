@@ -146,12 +146,12 @@ public class RegisterUserAction extends BaseAction {
 	            sID = SafeHTMLUtil.clean(sID);
 	        }
 	        
-	    	// get and clean header to prevent SQL injection
-	        if (inRequest.getHeader("Referer") != null){
-	        	sID = inRequest.getHeader("Referer");
-	            log.info("cleaned Referer: " + sID);
-	            sID = SafeHTMLUtil.clean(sID);
-	        } 
+			sID = inRequest.getHeader("Referer");
+	    	
+	    	// prevents Referer Header injection
+	    	if ( sID != null && sID != "" && !sID.contains("camod")) {
+	    		return (inMapping.findForward("failure"));
+	    	}
 	        
 	        // Clean all headers for security scan (careful about what chars you allow)
 	    	String headername = "";

@@ -64,6 +64,11 @@ public class TransientInterferenceAction extends BaseAction
     {
         log.debug("<TransientInterferenceAction> Entering edit method");
         
+		if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
+
+        
         // Grab the current modelID from the session
         String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
 
@@ -129,6 +134,7 @@ public class TransientInterferenceAction extends BaseAction
             theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
             saveErrors(request, theMsg);
         }
+		resetToken(request);
 
         return mapping.findForward("AnimalModelTreePopulateAction");
     }
@@ -150,6 +156,11 @@ public class TransientInterferenceAction extends BaseAction
     {
 
         log.debug("<TransientInterferenceAction> Entering 'save' method");
+        
+		if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
+
         
         // Grab the current modelID from the session
         String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
@@ -205,6 +216,8 @@ public class TransientInterferenceAction extends BaseAction
         }
 
         log.debug("Exiting save");
+		resetToken(request);
+        
         return mapping.findForward("AnimalModelTreePopulateAction");
     }
     

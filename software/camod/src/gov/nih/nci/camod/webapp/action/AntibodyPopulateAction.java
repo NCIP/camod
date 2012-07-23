@@ -90,6 +90,7 @@ public class AntibodyPopulateAction extends BaseAction {
 		// Prepopulate all dropdown fields, set the global Constants to the
 		// following
 		this.dropdown(request, response);
+		saveToken(request);
 
 		return mapping.findForward("submitAntibody");
 	}
@@ -117,6 +118,7 @@ public class AntibodyPopulateAction extends BaseAction {
 		this.dropdown(request, response);
 
         log.debug("<AntibodyPopulateAction dropdown> exiting... ");
+		saveToken(request);
 
 		return mapping.findForward("submitAntibody");
 	}

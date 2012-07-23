@@ -96,6 +96,9 @@ public class HistopathologyAction extends BaseAction {
             HttpServletResponse response) throws Exception {
 
         log.debug("<HistopathologyAction> Entering 'edit' method");
+    	if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
 
         // Grab the current aHistopathID from the session
         String aHistopathologyID = request.getParameter("aHistopathologyID");
@@ -165,6 +168,7 @@ public class HistopathologyAction extends BaseAction {
             saveErrors(request, theMsg);
         }
 
+		resetToken(request);
         return mapping.findForward("AnimalModelTreePopulateAction");
     }
 
@@ -272,6 +276,9 @@ public class HistopathologyAction extends BaseAction {
             HttpServletResponse response) throws Exception {
 
         log.debug("<HistopathologyAction> Entering 'save' method");
+    	if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
 
         // Grab the current modelID from the session
         String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
@@ -327,6 +334,7 @@ public class HistopathologyAction extends BaseAction {
             saveErrors(request, theMsg);
         }
         log.debug("<HistopathologyAction> Exiting saveHistopathology");
+		resetToken(request);
         return mapping.findForward("AnimalModelTreePopulateAction");
     }
 

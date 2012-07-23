@@ -208,6 +208,7 @@ public class HistopathologyPopulateAction extends BaseAction {
         // following
         this.dropdown(request, response);
 
+        saveToken(request);
         return mapping.findForward("submitHistopathology");
     }
 
@@ -229,6 +230,7 @@ public class HistopathologyPopulateAction extends BaseAction {
         // setup dropdown menus
         this.dropdown(request, response);
 
+        saveToken(request);
         return mapping.findForward("submitHistopathology");
     }
 

@@ -106,6 +106,7 @@ public class HormonePopulateAction extends BaseAction {
 		// Prepopulate all dropdown fields, set the global Constants to the
 		// following
 		this.dropdown(request, response);
+		saveToken(request);
 
 		return mapping.findForward("submitHormone");
 	}
@@ -133,6 +134,7 @@ public class HormonePopulateAction extends BaseAction {
 		this.dropdown(request, response);
 
         log.debug("<HormonePopulateAction dropdown> exiting... ");
+		saveToken(request);
 
 		return mapping.findForward("submitHormone");
 	}

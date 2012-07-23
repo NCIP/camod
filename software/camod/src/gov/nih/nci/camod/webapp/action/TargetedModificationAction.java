@@ -61,6 +61,9 @@ public final class TargetedModificationAction extends BaseAction {
             HttpServletResponse response) throws Exception {
 
         log.debug("<TargetedModificationAction> Entering edit");
+		if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
 
         // Grab the current modelID from the session
         String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
@@ -139,6 +142,7 @@ public final class TargetedModificationAction extends BaseAction {
         }
 
         log.debug("< TargetedModificationAction> Exiting edit");
+		resetToken(request);
 
         return mapping.findForward(theForward);
     }
@@ -157,6 +161,9 @@ public final class TargetedModificationAction extends BaseAction {
             HttpServletResponse response) throws Exception {
 
         log.debug("<TargetedModificationAction> Entering save");
+		if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
 
         // Create a form to edit
         TargetedModificationForm targetedModificationForm = (TargetedModificationForm) form;
@@ -221,6 +228,8 @@ public final class TargetedModificationAction extends BaseAction {
         }
 
         log.debug("<TargetedModificationAction> Exiting save");
+		resetToken(request);
+
         return mapping.findForward(theForward);
     }
 }

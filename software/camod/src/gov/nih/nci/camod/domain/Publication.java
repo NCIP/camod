@@ -26,6 +26,7 @@ package gov.nih.nci.camod.domain;
 
 import java.io.Serializable;
 import gov.nih.nci.camod.util.Duplicatable;
+import gov.nih.nci.camod.util.SafeHTMLUtil;
 import gov.nih.nci.camod.util.WrapTextUtil;
 
 /**
@@ -57,7 +58,7 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
      */
     public String getAuthors()
     {
-        return authors;
+        return SafeHTMLUtil.cleanMinimal(authors);
     }
 
     /**
@@ -88,7 +89,7 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
      */
     public String getEndPage()
     {
-        return endPage;
+        return SafeHTMLUtil.cleanMinimal(endPage);
     }
 
     /**
@@ -106,7 +107,7 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
      */
     public String getJournal()
     {
-        return journal;
+        return SafeHTMLUtil.cleanMinimal(journal);
     }
 
     /**
@@ -157,7 +158,7 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
      */
     public String getStartPage()
     {
-        return startPage;
+        return SafeHTMLUtil.cleanMinimal(startPage);
     }
 
     /**
@@ -174,7 +175,7 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
      */
     public String getTitle()
     {
-        return title;
+        return SafeHTMLUtil.cleanMinimal(title);
     }
 
     /**
@@ -191,7 +192,7 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
      */
     public String getVolume()
     {
-        return volume;
+        return SafeHTMLUtil.cleanMinimal(volume);
     }
 
     /**
@@ -242,7 +243,7 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
      */
     public String getJaxJNumber()
     {
-        return jaxJNumber;
+        return SafeHTMLUtil.cleanMinimal(jaxJNumber);
     }
 
     /**
@@ -259,7 +260,7 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
      * we must use the plural form comments.
      */
     public String getComments() {
-        return comments;
+        return SafeHTMLUtil.cleanMinimal(comments);
     }
 
     /**
@@ -290,7 +291,7 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
     }
 
 	public String getZfinPubId() {
-		return zfinPubId;
+		return SafeHTMLUtil.cleanMinimal(zfinPubId);
 	}
 
 	public void setZfinPubId(String zfinPubId) {
@@ -298,7 +299,7 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
 	}
 
 	public String getRgdPubId() {
-		return rgdPubId;
+		return SafeHTMLUtil.cleanMinimal(rgdPubId);
 	}
 
 	public void setRgdPubId(String rgdPubId) {

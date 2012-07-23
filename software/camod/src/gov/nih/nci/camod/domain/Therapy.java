@@ -19,6 +19,8 @@ package gov.nih.nci.camod.domain;
 
 import gov.nih.nci.camod.util.Duplicatable;
 import gov.nih.nci.camod.util.HashCodeUtil;
+import gov.nih.nci.camod.util.SafeHTMLUtil;
+
 import java.io.Serializable;
 import java.util.*;
 
@@ -64,7 +66,7 @@ public class Therapy extends BaseObject implements Comparable, Serializable, Dup
      */
     public String getExperiment()
     {
-        return experiment;
+        return SafeHTMLUtil.cleanMinimal(experiment);
     }
 
     /**
@@ -81,7 +83,7 @@ public class Therapy extends BaseObject implements Comparable, Serializable, Dup
      */
     public String getBiomarker()
     {
-        return biomarker;
+        return SafeHTMLUtil.cleanMinimal(biomarker);
     }
 
     /**
@@ -98,7 +100,7 @@ public class Therapy extends BaseObject implements Comparable, Serializable, Dup
      */
     public String getToxicityGrade()
     {
-        return toxicityGrade;
+        return SafeHTMLUtil.cleanMinimal(toxicityGrade);
     }
 
     /**
@@ -115,7 +117,7 @@ public class Therapy extends BaseObject implements Comparable, Serializable, Dup
      */
     public String getTumorResponse()
     {
-        return tumorResponse;
+        return SafeHTMLUtil.cleanMinimal(tumorResponse);
     }
 
     /**
@@ -159,7 +161,7 @@ public class Therapy extends BaseObject implements Comparable, Serializable, Dup
      */
     public String getComments()
     {
-        return comments;
+        return SafeHTMLUtil.cleanMinimal(comments);
     }
 
     /**
@@ -191,7 +193,7 @@ public class Therapy extends BaseObject implements Comparable, Serializable, Dup
      */
     public String getResults()
     {
-        return results;
+        return SafeHTMLUtil.cleanMinimal(results);
     }
 
     /**

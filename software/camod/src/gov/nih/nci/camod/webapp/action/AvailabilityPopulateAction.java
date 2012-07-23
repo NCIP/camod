@@ -73,6 +73,7 @@ public class AvailabilityPopulateAction extends BaseAction {
 			availabilityForm.setStockNumber(avilablity.getStockNumber());
 		}
 
+		saveToken(request);
 		return mapping.findForward("next");
 	}
 
@@ -95,6 +96,7 @@ public class AvailabilityPopulateAction extends BaseAction {
 		String theSource = (String) request.getParameter("lab");
 		availabilityForm.setSource(theSource);
 
+		saveToken(request);
 		return mapping.findForward("next");
 
 	}

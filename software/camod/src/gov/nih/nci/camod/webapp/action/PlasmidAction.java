@@ -38,6 +38,10 @@ public class PlasmidAction extends BaseAction {
 		if (log.isDebugEnabled()) {
 			log.debug("Entering 'edit' method");
 		}
+		
+		if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
 
         // Grab the current CarcinogenExposure we are working with related to this animalModel
         String aCarcinogenExposureID = request.getParameter("aCarcinogenExposureID");
@@ -83,6 +87,7 @@ public class PlasmidAction extends BaseAction {
 			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
 			saveErrors(request, theMsg);
 		}
+		resetToken(request);
 
 		return mapping.findForward("AnimalModelTreePopulateAction");
 	}
@@ -101,6 +106,10 @@ public class PlasmidAction extends BaseAction {
 			HttpServletResponse response) throws Exception {
 		if (log.isDebugEnabled()) {
 			log.debug("Entering 'save' method");
+		}
+		
+		if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
 		}
 
 		// Grab the current modelID from the session
@@ -132,6 +141,7 @@ public class PlasmidAction extends BaseAction {
 			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
 			saveErrors(request, theMsg);
 		}
+		resetToken(request);
 
 		return mapping.findForward("AnimalModelTreePopulateAction");
 	}

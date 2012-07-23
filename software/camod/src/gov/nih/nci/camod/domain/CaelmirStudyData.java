@@ -10,6 +10,7 @@ package gov.nih.nci.camod.domain;
 import java.io.Serializable;
 import gov.nih.nci.camod.util.Duplicatable;
 import gov.nih.nci.camod.util.HashCodeUtil;
+import gov.nih.nci.camod.util.SafeHTMLUtil;
 
 public class CaelmirStudyData extends BaseObject implements Comparable, Serializable, Duplicatable{
 
@@ -27,7 +28,7 @@ public class CaelmirStudyData extends BaseObject implements Comparable, Serializ
 	 * @return the description
 	 */
 	public String getDescription() {
-		return description;
+		return SafeHTMLUtil.cleanMinimal(description);
 	}
 	/**
 	 * @param description the description to set
@@ -39,7 +40,7 @@ public class CaelmirStudyData extends BaseObject implements Comparable, Serializ
 	 * @return the email
 	 */
 	public String getEmail() {
-		return email;
+		return SafeHTMLUtil.cleanMinimal(email);
 	}
 	/**
 	 * @param email the email to set
@@ -51,7 +52,7 @@ public class CaelmirStudyData extends BaseObject implements Comparable, Serializ
 	 * @return the hypothesis
 	 */
 	public String getHypothesis() {
-		return hypothesis;
+		return SafeHTMLUtil.cleanMinimal(hypothesis);
 	}
 	/**
 	 * @param hypothesis the hypothesis to set
@@ -63,7 +64,7 @@ public class CaelmirStudyData extends BaseObject implements Comparable, Serializ
 	 * @return the institution
 	 */
 	public String getInstitution() {
-		return institution;
+		return SafeHTMLUtil.cleanMinimal(institution);
 	}
 	/**
 	 * @param institution the institution to set
@@ -75,7 +76,7 @@ public class CaelmirStudyData extends BaseObject implements Comparable, Serializ
 	 * @return the investigatorName
 	 */
 	public String getInvestigatorName() {
-		return investigatorName;
+		return SafeHTMLUtil.cleanMinimal(investigatorName);
 	}
 	/**
 	 * @param investigatorName the investigatorName to set
@@ -102,7 +103,7 @@ public class CaelmirStudyData extends BaseObject implements Comparable, Serializ
      */
     public String getCancerModel()
     {
-        return cancerModel;
+        return SafeHTMLUtil.cleanMinimal(cancerModel);
     }
 
     /**
@@ -146,7 +147,7 @@ public class CaelmirStudyData extends BaseObject implements Comparable, Serializ
 	 * @return the studyName
 	 */
 	public String getStudyName() {
-		return studyName;
+		return SafeHTMLUtil.cleanMinimal(studyName);
 	}
 	/**
 	 * @param studyName the studyName to set

@@ -67,13 +67,12 @@ public class ViewTOCSearchResultsAction extends BaseAction {
             sID = SafeHTMLUtil.clean(sID);
         }  
         
-        String sID2 = null;
-    	// get and clean header to prevent SQL injection
-        if (request.getHeader("Referer") != null){
-        	sID2 = request.getHeader("Referer");
-        	log.info("cleaned Referer: " + sID2);
-            sID2 = SafeHTMLUtil.clean(sID2);
-        } 
+		sID = request.getHeader("Referer");
+    	
+    	// prevents Referer Header injection
+    	if ( sID != null && sID != "" && !sID.contains("camod")) {
+    		return (mapping.findForward("failure"));
+    	}
         
         // Clean all headers for security scan (careful about what chars you allow)
     	String headername = "";

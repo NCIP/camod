@@ -202,6 +202,9 @@ public final class PublicationAction extends BaseAction {
 			HttpServletResponse response) throws Exception {
 
 		log.debug("Entering PublicationAction.edit");
+		if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
 
 		// Create a form to edit
 		PublicationForm pubForm = (PublicationForm) form;
@@ -277,6 +280,7 @@ public final class PublicationAction extends BaseAction {
 			saveErrors(request, theMsg);
 		}
 
+		resetToken(request);
 		return mapping.findForward("AnimalModelTreePopulateAction");
 	}
 
@@ -293,6 +297,9 @@ public final class PublicationAction extends BaseAction {
 			HttpServletResponse response) throws Exception {
 
 		log.debug("Entering 'save' method");
+		if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
 
 		PublicationForm pubForm = (PublicationForm) form;
 
@@ -334,6 +341,7 @@ public final class PublicationAction extends BaseAction {
 			saveErrors(request, theMsg);
 		}
 
+		resetToken(request);
 		return mapping.findForward("AnimalModelTreePopulateAction");
 	}
 }
