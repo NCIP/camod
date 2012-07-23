@@ -94,7 +94,7 @@ public class SafeHTMLUtil {
 			clean = StringUtils.replace(clean, "javascript", "");
 			clean = StringUtils.replace(clean, "alert", "cleaned");
 			if (clean.length() == 0) {
-				clean = "empty";
+				clean = "";
 			}
 			return clean;
 		}
