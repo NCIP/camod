@@ -169,6 +169,9 @@ public class Treatment extends BaseObject implements Serializable, Duplicatable
      */
     public String getRegimen()
     {
+    	if( regimen == null )
+    		regimen = "";
+    	
         return regimen;
     }
 
@@ -183,7 +186,10 @@ public class Treatment extends BaseObject implements Serializable, Duplicatable
 
     public String getRoute()
     {
-        StringTokenizer parser = new StringTokenizer(this.regimen, ",");
+        StringTokenizer parser = new StringTokenizer(this.getRegimen(), ",");
+        if(!parser.hasMoreTokens())
+        	return "";
+        
         route = parser.nextToken();
 
         while (parser.hasMoreTokens() && !route.startsWith("Drug given-"))
@@ -208,7 +214,10 @@ public class Treatment extends BaseObject implements Serializable, Duplicatable
     public String getSchedule()
     {
 
-        StringTokenizer parser = new StringTokenizer(this.regimen, ",");
+        StringTokenizer parser = new StringTokenizer(this.getRegimen(), ",");
+        if(!parser.hasMoreTokens())
+        	return "";
+
         route = parser.nextToken();
         while (parser.hasMoreTokens() && !route.startsWith("Schedule-"))
         {
@@ -227,7 +236,10 @@ public class Treatment extends BaseObject implements Serializable, Duplicatable
     public String getVehicle()
     {
 
-        StringTokenizer parser = new StringTokenizer(this.regimen, ",");
+        StringTokenizer parser = new StringTokenizer(this.getRegimen(), ",");
+        if(!parser.hasMoreTokens())
+        	return "";
+
         route = "";
         while (parser.hasMoreTokens() && !route.startsWith(" Vehicle-"))
         {
