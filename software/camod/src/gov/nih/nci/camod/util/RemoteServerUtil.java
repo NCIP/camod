@@ -74,7 +74,7 @@ public class RemoteServerUtil {
 	  	String _service = "EvsServiceInfo";	  	
 
 		try {
-			String serviceUrl = "http://lexevsapi51.nci.nih.gov/lexevsapi51";
+			String serviceUrl = "http://lexevsapi60.nci.nih.gov/lexevsapi60";
 
 			System.out.println("serverURL : " + serviceUrl);
 	    	  
