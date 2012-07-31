@@ -82,6 +82,7 @@ import org.LexGrid.LexBIG.LexBIGService.CodedNodeSet;
 import org.LexGrid.LexBIG.LexBIGService.LexBIGService;
 import org.LexGrid.LexBIG.Utility.ConvenienceMethods;
 import org.LexGrid.concepts.Concept;
+import org.LexGrid.concepts.Entity;
 import org.LexGrid.LexBIG.DataModel.Collections.ConceptReferenceList;
 
 
@@ -94,7 +95,7 @@ public class EvsTreeUtil
     static private final Log log = LogFactory.getLog(EvsTreeUtil.class);
     static private Map<String, String> ourDescriptions = new HashMap<String, String>();
     static private LexBIGService appService = null;
-	static String serviceUrl = "http://lexevsapi51.nci.nih.gov/lexevsapi51";
+	static String serviceUrl = "http://lexevsapi60.nci.nih.gov/lexevsapi60";
 
    
     private EvsTreeUtil()  {
@@ -124,7 +125,7 @@ public class EvsTreeUtil
         try {
         	log.info("getConceptByCode inside try.");
         	
-        	if (appService != null) {
+        	if (appService != null && codingSchemeName != null && !codingSchemeName.equals("")) {
 	        	cns =  appService.getCodingSchemeConcepts(codingSchemeName, null);			
 	        	log.info("getConceptByCode got cns.");
 	        	
@@ -138,7 +139,7 @@ public class EvsTreeUtil
 		       if (matches.getResolvedConceptReferenceCount() > 0) {
 		    	   log.info("getConceptByCode matches.getResolvedConceptReferenceCount() > 0." );
 		 			ResolvedConceptReference ref = (ResolvedConceptReference)matches.enumerateResolvedConceptReference().nextElement();
-    	    		Concept entry = ref.getReferencedEntry();
+    	    		Entity entry = ref.getReferencedEntry();
     	    		myConcept = entry.getEntityDescription().getContent();
     	    		log.info("getConceptByCode myConcept: " + myConcept);
    	    	} else {
