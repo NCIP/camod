@@ -520,6 +520,23 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         theDuplicatedModel.getAvailability().setModifiedDate(null);
         theDuplicatedModel.getAvailability().setEnteredDate(new Date());
         
+        // for some reason, the null value parent ids are set to 0. following is the fix.
+        Set <Histopathology>hSet = theDuplicatedModel.getHistopathologyCollection();
+        for( Histopathology histopathology: hSet) {
+        	if (histopathology.getParentHistopathologyId() != null && histopathology.getParentHistopathologyId() == 0 ) {
+        		histopathology.setParentHistopathologyId(null);
+        	}
+        	
+            Set <Histopathology>mSet = histopathology.getMetastasisCollection();
+            for( Histopathology metaStastasis: mSet) {
+            	// for some reason, this gets populated with parent object's abscancermodelid. reset to null
+           		metaStastasis.setAbsCancerModelId(null);
+            }
+        	
+        }
+        
+      
+        
         theDuplicatedModel.setState("Incomplete");
         
         log.debug("In AnimalModelManagerImpl.duplicate state" + theDuplicatedModel.getState());
