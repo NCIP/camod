@@ -98,6 +98,7 @@ public class NutritionalFactorPopulateAction extends BaseAction {
 		// Prepopulate all dropdown fields, set the global Constants to the
 		// following
 		this.dropdown(request, response);
+		saveToken(request);
 
 		return mapping.findForward("submitNutritionalFactors");
 	}
@@ -125,6 +126,7 @@ public class NutritionalFactorPopulateAction extends BaseAction {
 		this.dropdown(request, response);
 
 		log.debug("<NutritionalFactorPopulateAction dropdown> before return submitRadiation ");
+		saveToken(request);
 
 		return mapping.findForward("submitNutritionalFactors");
 

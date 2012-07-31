@@ -68,6 +68,10 @@ public class NutritionalFactorAction extends BaseAction {
 		if (log.isDebugEnabled()) {
 			log.debug("Entering 'edit' method");
 		}
+		
+		if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
 
         // Grab the current CarcinogenExposure we are working with related to this animalModel
         String aCarcinogenExposureID = request.getParameter("aCarcinogenExposureID");
@@ -119,6 +123,7 @@ public class NutritionalFactorAction extends BaseAction {
 			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
 			saveErrors(request, theMsg);
 		}
+		resetToken(request);
 
 		return mapping.findForward("AnimalModelTreePopulateAction");
 	}
@@ -138,6 +143,11 @@ public class NutritionalFactorAction extends BaseAction {
 		if (log.isDebugEnabled()) {
 			log.debug("Entering 'save' method");
 		}
+		
+		if (!isTokenValid(request)) {
+			return mapping.findForward("failure");
+		}
+		
 		NutritionalFactorForm nutritForm = (NutritionalFactorForm) form;
 
         log.info("<NutritionalFactorAction save> following Characteristics:" + "\n\t name: "
@@ -172,6 +182,7 @@ public class NutritionalFactorAction extends BaseAction {
 			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
 			saveErrors(request, theMsg);
 		}
+		resetToken(request);
 
 		return mapping.findForward("AnimalModelTreePopulateAction");
 	}
