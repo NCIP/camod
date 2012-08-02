@@ -51,7 +51,7 @@
 	(<a href="#" onClick="myRef = window.open('http://dtp.nci.nih.gov/dtpstandard/servlet/ChemData?queryHOLD=&searchtype=NSC&chemnameboolean=and&outputformat=html&searchlist=<c:out value='${agt.nscNumber}'/>&Submit=Submit','mywin','left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()">Chemical Structure</a>)
 	</c:if>
 	</td>
-<tr>
+</tr>
 <tr>
 	<td class="resultsBoxGrey" width="25%"><b>CAS Number</b></td>
 	<td class="resultsBoxGreyEnd" width="75%" colspan="1">&nbsp;
@@ -60,7 +60,7 @@
 	(<a href="#" onClick="myRef = window.open('http://dtp.nci.nih.gov/dtpstandard/servlet/ChemData?queryHOLD=&searchtype=CAS&chemnameboolean=and&outputformat=html&searchlist=<c:out value='${agt.casNumber}'/>&Submit=Submit','mywin','left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()">Chemical Structure</a>)
 	</c:if>		
 	</td>
-<tr>				
+</tr>				
 <tr>
 	<td class="resultsBoxWhite" width="25%"><b>Chemical Class</b></td>
 	<td class="resultsBoxWhiteEnd" width="75%" colspan="1">
@@ -74,7 +74,7 @@
 		</c:forEach>
 	</ul>&nbsp;
 	</td>
-<tr>
+</tr>
 <tr>
 	<td class="resultsBoxGrey" width="25%" ><b>Biological Process</b></td>
 	<td class="resultsBoxGreyEnd" width="75%" colspan="1">
@@ -86,7 +86,7 @@
 		</c:forEach>
 	</ul>&nbsp;
 	</td>
-<tr>			
+</tr>			
 <tr>
 	<td class="resultsBoxWhite" width="25%"><b>Target</b></td>
 	<td class="resultsBoxWhiteEnd" width="75%" colspan="1">
@@ -98,6 +98,23 @@
 		</c:forEach>
 	</ul>&nbsp;
 	</td>
+</tr>
+<c:set var="nscNumber" value="${agt.nscNumber}"/>
+<c:set var="relatedModels" value="${relatedModelsByNSC[nscNumber]}"/>
+<c:if test="${not empty relatedModels}">
+	<tr>
+		<td class="GreyBox" width="30%"><b>Other caMOD entries with the same NSC Number:</b></td>
+		<td class="GreyBoxRightEnd" width="70%">		
+			<logic:iterate id="mdl" name="relatedModels" indexId="idx">	
+				<c:forEach  items="${mdl.modelDescriptor}" >
+				<a target="_blank" href="ViewModelAction.do?unprotected_method=populateModelCharacteristics&aModelID=<c:out value="${mdl.id}"/>"/><c:out value="${mdl.modelDescriptor}" escapeXml="false"/></a>
+				&nbsp;(<c:out value="${mdl.id}" escapeXml="false"/>)</br>						
+				</c:forEach>			
+			</logic:iterate>
+		</td>
+	</tr>
+</c:if>
 <tr>
     <td colspan="2" align="right"><a href="#">Top</a></td>
+</tr>
 <tr><td>&nbsp;</td></tr>

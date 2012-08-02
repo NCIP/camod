@@ -3872,6 +3872,219 @@ public class QueryManagerImpl extends BaseManager
 		}
 
 	}
+	
+    // Related models by PMID
+    public List getRelatedModelsForThisPMID(Long pmidNumber, String modelId) throws PersistenceException
+    {
+    	List theAnimalModels = null;
+    	List pmids = null;
+        
+        // Search for PMID
+        if (pmidNumber != null && 
+        		pmidNumber.toString().length() > 0 )
+        {
+        	log.info( "Searching PMIDs" );
+        	
+        	String thePublicationQuery1 = " from AnimalModel as am where am.state = 'Edited-approved' "
+				        				+ " AND am.availability.releaseDate <= sysdate " 
+						        		+ " AND am.id IN " 
+						        		+ " (select distinct th.absCancerModelId from Therapy th, TherapyPublication tp, Publication p " 
+						        		+ " where th.id = tp.therapyId and tp.publicationId = p.id and p.pmid = '" + pmidNumber + "' ) "
+						        		+ " AND am.id NOT IN "
+						        		+ " (select distinct th.absCancerModelId from Therapy th " 
+						        		+ " where th.absCancerModelId = '" + modelId + "' ) "					        		
+						        		+ " ORDER BY am.id asc ";
+        	
+        	String thePublicationQuery2 = " from AnimalModel as am where am.state = 'Edited-approved' "
+										+ " AND am.availability.releaseDate <= sysdate " 
+						        		+ " AND am.id IN " 
+						        		+ " (select distinct acmp.absCancerModelId  from  AbsCanModPublication acmp, Publication p " 
+						        		+ "	where  acmp.publicationId = p.id and p.pmid = '" + pmidNumber + "') "
+						        		+ " AND am.id NOT IN "
+						        		+ " (select distinct acmp.absCancerModelId  from  AbsCanModPublication acmp "
+						        		+ "	where acmp.absCancerModelId = '" + modelId + "') "
+        								+ " ORDER BY am.id asc ";
+        								
+        	String thePublicationQuery3 = " from AnimalModel as am where am.state = 'Edited-approved' "
+										+ " AND am.availability.releaseDate <= sysdate " 
+						        		+ " AND am.id IN " 
+						        		+ " (select distinct cl.absCancerModelId from CellLine cl, CellLinePublication cp, Publication p " 
+						        		+ " where cl.id = cp.cellLineId and cp.publicationId = p.id and p.pmid = '" + pmidNumber + "' ) "
+						        		+ " AND am.id NOT IN "
+						        		+ " (select distinct cl.absCancerModelId from CellLine cl "
+						        		+ " where cl.absCancerModelId = '" + modelId + "' ) "
+        								+ " ORDER BY am.id asc ";
+        	
+        	log.info("HQL1= " + thePublicationQuery1 );
+        	log.info("HQL2= " + thePublicationQuery2 );
+        	log.info("HQL3= " + thePublicationQuery3 );
+        	
+        	Query query1 = HibernateUtil.getSession().createQuery(thePublicationQuery1);
+        	log.info("query1= " + query1.toString() );
+        	Query query2 = HibernateUtil.getSession().createQuery(thePublicationQuery2);
+        	Query query3 = HibernateUtil.getSession().createQuery(thePublicationQuery3);
+        	
+        	List list1 = query1.list();
+        	log.info("list1.size()= " + list1.size() );
+        	List list2 = query2.list();
+        	log.info("list2.size()= " + list2.size() );
+        	List list3 = query3.list();
+        	log.info("list3.size()= " + list3.size() );
+        	
+        	// List of all AnimalModels with PMIDs
+       		list1.addAll(list2);
+        	list1.addAll(list3);
+        	
+        	// List of all distinct AnimalModel Ids
+        	HashSet unique = new HashSet(list1);
+        	pmids = new ArrayList( unique );  
+        	
+        	theAnimalModels = (List) pmids;
+       	
+        	// throws java.lang.ClassCastException: gov.nih.nci.camod.domain.AnimalModel 
+        	//Collections.sort(theAnimalModels, String.CASE_INSENSITIVE_ORDER);
+        	log.info( "theAnimalModels : " + theAnimalModels.size() );        	
+        }
+           
+    	return theAnimalModels;           
+        
+    }
+
+    // Related models by NSC number
+    public List getRelatedModelsForThisNSC(Long nscNumber, String modelId) throws PersistenceException
+    {
+    	List theAnimalModels = null;
+    	List nscNums = null;
+        
+        // Search for PMID
+        if (nscNumber != null && 
+        		modelId != null )
+        {
+        	log.info( "Searching nscNumber" );
+        	
+        	String theAgentQuery1 = " from AnimalModel as am where am.state = 'Edited-approved' "
+				        				+ " AND am.availability.releaseDate <= sysdate " 
+						        		+ " AND am.id IN " 
+						        		+ " (select distinct t.absCancerModelId from Therapy t, Agent a " 
+						        		+ " where t.agent.id = a.id and a.nscNumber = '" + nscNumber + "' ) " 
+						        		+ " AND am.id NOT IN "		
+						        		+ " (select t.absCancerModelId from Therapy t " 
+						        		+ " where t.absCancerModelId = '" + modelId + "' ) ";
+     	
+        	
+        	log.info("HQL1= " + theAgentQuery1 );
+        	
+        	Query query1 = HibernateUtil.getSession().createQuery(theAgentQuery1);
+        	log.info("query1= " + query1.toString() );
+        	
+        	List list1 = query1.list();
+        	log.info("list1.size()= " + list1.size() );      
+        	
+        	// List of all distinct AnimalModel Ids
+        	HashSet unique = new HashSet(list1);
+        	nscNums = new ArrayList( unique );  
+        	
+        	theAnimalModels = (List) nscNums;
+       	
+        	// throws java.lang.ClassCastException: gov.nih.nci.camod.domain.AnimalModel 
+        	//Collections.sort(theAnimalModels, String.CASE_INSENSITIVE_ORDER);
+        	log.info( "theAnimalModels : " + theAnimalModels.size() );        	
+        }
+           
+    	return theAnimalModels;    
+         
+    }
+    
+    // Related models by NSC number
+    public List getRelatedModelsForThisMGI(String mgiId, String modelId) throws PersistenceException
+    {
+    	List theAnimalModels = null;
+    	List mgiIds = null;
+        
+        // Search for MGI
+        if (mgiId != null && 
+        		modelId != null )
+        {
+        	log.info( "Searching MGI" );
+        	
+        	String theAgentQuery1 = " from AnimalModel as am where am.state = 'Edited-approved' "
+				        				+ " AND am.availability.releaseDate <= sysdate " 
+						        		+ " AND am.id IN " 
+						        		+ " (select distinct eg.absCancerModelId from EngineeredGene eg, MutationIdentifier mi " 
+						        		+ " where eg.mutationIdentifier.id = mi.id and mi.id = '" + mgiId + "' ) " 
+						        		+ " AND am.id NOT IN "		
+						        		+ " (select eg.absCancerModelId from EngineeredGene eg " 
+						        		+ " where eg.absCancerModelId = '" + modelId + "' ) ";
+     	
+        	
+        	log.info("HQL1= " + theAgentQuery1 );
+        	
+        	Query query1 = HibernateUtil.getSession().createQuery(theAgentQuery1);
+        	log.info("query1= " + query1.toString() );
+        	
+        	List list1 = query1.list();
+        	log.info("list1.size()= " + list1.size() );      
+        	
+        	// List of all distinct AnimalModel Ids
+        	HashSet unique = new HashSet(list1);
+        	mgiIds = new ArrayList( unique );  
+        	
+        	theAnimalModels = (List) mgiIds;
+       	
+        	// throws java.lang.ClassCastException: gov.nih.nci.camod.domain.AnimalModel 
+        	//Collections.sort(theAnimalModels, String.CASE_INSENSITIVE_ORDER);
+        	log.info( "theAnimalModels : " + theAnimalModels.size() );        	
+        }
+           
+    	return theAnimalModels;    
+         
+    }
+    
+    // Related models by Entrez gene id
+    // P53 genes can return 70+ models - so provide a link that runs this query into the searchResults page
+    // instead of listing all 70+ models in a text box (do if have time)
+    public List getRelatedModelsForThisEntrezGene(Long entrezGeneId, String modelId) throws PersistenceException
+    {
+    	List theAnimalModels = null;
+    	List entrezGenes = null;
+        
+        // Search for PMID
+        if (entrezGeneId != null && 
+        		modelId != null )
+        {
+        	log.info( "Searching entrezGene" );
+        	
+        	String theGeneQuery1 = " from AnimalModel as am where am.state = 'Edited-approved' "
+				        				+ " AND am.availability.releaseDate <= sysdate " 
+						        		+ " AND am.id IN " 
+						        		+ " (select distinct eg.absCancerModelId from EngineeredGene eg, GeneIdentifier gi " 
+						        		+ " where eg.geneIdentifer.id = gi.id and gi.entrezGene.id = '" + entrezGeneId + "' ) " ;
+
+     	
+        	
+        	log.info("HQL1= " + theGeneQuery1 );
+        	
+        	Query query1 = HibernateUtil.getSession().createQuery(theGeneQuery1);
+        	log.info("query1= " + query1.toString() );
+        	
+        	List list1 = query1.list();
+        	log.info("list1.size()= " + list1.size() );      
+        	
+        	// List of all distinct AnimalModel Ids
+        	HashSet unique = new HashSet(list1);
+        	entrezGenes = new ArrayList( unique );  
+        	
+        	theAnimalModels = (List) entrezGenes;
+       	
+        	// throws java.lang.ClassCastException: gov.nih.nci.camod.domain.AnimalModel 
+        	//Collections.sort(theAnimalModels, String.CASE_INSENSITIVE_ORDER);
+        	log.info( "theAnimalModels : " + theAnimalModels.size() );        	
+        }
+           
+    	return theAnimalModels;    
+         
+    }
+	
 }
 
 class _sortAnimalModels implements java.util.Comparator {
@@ -3891,3 +4104,4 @@ class _sortAnimalModels implements java.util.Comparator {
 			return 0;
 	}
 }
+

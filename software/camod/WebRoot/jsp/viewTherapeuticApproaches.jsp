@@ -41,6 +41,7 @@
 
 <bean:define id="mdl" name="animalmodel"/>
 <bean:define id="ta" name="therapeuticApproachesColl"/>
+<bean:define id="mdlByNscid" name="relatedModelsByNSC"/>
 <!--  bean:define id="csd" name="caelmirStudyData"/ -->
 <TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<!-- Took this out of sidebar.jsp and has to go here to format correctly -->

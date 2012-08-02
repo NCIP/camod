@@ -95,6 +95,7 @@
 
 <bean:define id="mdl" name="animalmodel"/>
 <bean:define id="pubColl" name="publications"/>
+<bean:define id="mdlByPmid" name="relatedModelsByPmid"/>
 <!-- bean:define id="pubAuthors" name="publicationAuthors"/-->
 
 <TABLE summary="This table is used to format page content" cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
@@ -241,6 +242,23 @@
 			<td class="WhiteBox" width="30%"><b>Comment:</b></td>
 			<td class="WhiteBoxRightEnd" width="70%"><camod:highlight><c:out value="${p.comments}" escapeXml="false"/>&nbsp;</camod:highlight></td>
 		</tr>
+		
+		<c:set var="pmidId" value="${p.pmid}"/>
+		<c:set var="relatedModels" value="${relatedModelsByPmid[pmidId]}"/>
+		<c:if test="${not empty relatedModels}">
+		<tr>
+			<td class="GreyBox" width="30%"><b>Other caMOD entries citing this publication:</b></td>
+			<td class="GreyBoxRightEnd" width="70%">		
+				<logic:iterate id="mdl" name="relatedModels" indexId="idx">	
+					<c:forEach  items="${mdl.modelDescriptor}" >
+					<a target="_blank" href="ViewModelAction.do?unprotected_method=populateModelCharacteristics&aModelID=<c:out value="${mdl.id}"/>"/><c:out value="${mdl.modelDescriptor}" escapeXml="false"/></a>
+					&nbsp;(<c:out value="${mdl.id}" escapeXml="false"/>)</br>						
+					</c:forEach>			
+				</logic:iterate>
+			</td>
+		</tr>
+		</c:if>
+		
 
 	</TABLE>
 	</td></tr>

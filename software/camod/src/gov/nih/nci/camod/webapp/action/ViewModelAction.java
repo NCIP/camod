@@ -227,6 +227,7 @@ import gov.nih.nci.camod.domain.Comments;
 import gov.nih.nci.camod.domain.EngineeredGene;
 import gov.nih.nci.camod.domain.GeneIdentifier;
 import gov.nih.nci.camod.domain.GenomicSegment;
+import gov.nih.nci.camod.domain.Publication;
 import gov.nih.nci.camod.domain.Transplantation;
 import gov.nih.nci.camod.domain.InducedMutation;
 import gov.nih.nci.camod.domain.Person;
@@ -630,11 +631,29 @@ public class ViewModelAction extends BaseAction
         setCancerModel(request);
         String modelID = request.getParameter("aModelID");
         List pubs = null;
+        List modelsByPMIDColl = new ArrayList();
+        final Map<Long, List> pmidAnimalModelMap = new HashMap<Long, List>();
+
         
         try
         {
             pubs = QueryManagerSingleton.instance().getAllPublications(Long.valueOf(modelID).longValue());
             log.debug("pubs.size(): " + pubs.size());
+            
+            Iterator it = pubs.iterator();
+            
+            while (it.hasNext())
+            {
+            	Publication p = (Publication) it.next();
+            	log.info("ViewModelAction  modelID: " + modelID);
+            	log.info("ViewModelAction  p.getId().toString(): " + p.getId().toString());
+            	if(p != null){
+            		Long pmid = p.getPmid();
+            		modelsByPMIDColl = QueryManagerSingleton.instance().getRelatedModelsForThisPMID(pmid, modelID);
+            		log.info("ViewModelAction  modelsByPMIDColl: " + modelsByPMIDColl.size());           		
+            		pmidAnimalModelMap.put(pmid, modelsByPMIDColl);
+            	}
+            }
         }
         catch (Exception e)
         {
@@ -642,6 +661,7 @@ public class ViewModelAction extends BaseAction
             e.printStackTrace();
         }
         request.getSession().setAttribute(Constants.PUBLICATIONS, pubs);
+        request.getSession().setAttribute(Constants.RELATED_MODELS_BY_PMID, pmidAnimalModelMap);
         setComments(request, Constants.Pages.PUBLICATIONS);
         return mapping.findForward("viewPublications");
     }
@@ -719,6 +739,8 @@ public class ViewModelAction extends BaseAction
         final HashMap<Long, Collection> yeastResults = new HashMap<Long, Collection>();
         final HashMap<Long, Collection> invivoResults = new HashMap<Long, Collection>();
         final List<Therapy> therapeuticApprochesColl = new ArrayList<Therapy>();
+        List modelsByNSCColl = new ArrayList();
+        final Map<Long, List> nscAnimalModelMap = new HashMap<Long, List>();
 
         String modelID = request.getParameter(Constants.Parameters.MODELID);
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
@@ -732,8 +754,17 @@ public class ViewModelAction extends BaseAction
         while (it.hasNext())
         {
             Therapy t = (Therapy) it.next();
+            log.info("ViewModelAction  NscNumber: " + t.getAgent().getNscNumber());                     
+
             if (t != null)
             {
+            	if(t.getAgent().getNscNumber() !=null){
+	            	// get related models by NSC number  
+	            	Long nscNumber= t.getAgent().getNscNumber();
+	            	modelsByNSCColl = QueryManagerSingleton.instance().getRelatedModelsForThisNSC(nscNumber, modelID);
+	            	log.info("ViewModelAction  modelsByNSCColl: " + modelsByNSCColl.size()); 
+	            	nscAnimalModelMap.put(nscNumber, modelsByNSCColl);            	
+            	}
                 therapeuticApprochesColl.add(t);
             }
             // Sort therapy in order entered as requested by user
@@ -772,6 +803,7 @@ public class ViewModelAction extends BaseAction
         request.getSession().setAttribute(Constants.CLINICAL_PROTOCOLS, clinProtocols);
         request.getSession().setAttribute(Constants.YEAST_DATA, yeastResults);
         request.getSession().setAttribute(Constants.INVIVO_DATA, invivoResults);
+        request.getSession().setAttribute(Constants.RELATED_MODELS_BY_NSC, nscAnimalModelMap);
 
         setComments(request, Constants.Pages.THERAPEUTIC_APPROACHES);
         

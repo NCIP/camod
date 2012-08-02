@@ -379,6 +379,19 @@ public class Constants {
      * used to disable the Organ/Disease tree for non-mouse models.
      */ 
     public static final String AMMODELSPECIES = "animalmodelspecies";    
+    
+    // The collection of models with the same PMID
+    public static final String RELATED_MODELS_BY_PMID = "relatedModelsByPmid";   
+    
+    // The collection of models with the same entrez gene id
+    public static final String RELATED_MODELS_BY_ENTREZ_GENE = "relatedModelsByEntrezGeneId";
+    
+    // The collection of models with the same NSC number
+    public static final String RELATED_MODELS_BY_NSC = "relatedModelsByNSC";
+    
+    // The collection of models with the same PMID
+    public static final String RELATED_MODELS_BY_MGI = "relatedModelsByMgi";     
+    
 
 
     /**
@@ -775,7 +788,7 @@ public class Constants {
         public static final String CARCINOGENIC_INTERVENTION = "Carcinogenic Interventions Page";
 
         public static final String PUBLICATIONS = "Publications page";
-
+        
         public static final String HISTOPATHOLOGY = "Histopathology Page";
 
         public static final String THERAPEUTIC_APPROACHES = "Therapeutic Approaches Page";
