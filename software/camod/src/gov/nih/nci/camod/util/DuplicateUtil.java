@@ -124,9 +124,9 @@ public class DuplicateUtil
                     srcHistory.add(src);
 
                     // instantiate a new instance of this class       
-                    // check for virtual enahancer classes (i.e. hibernate lazy loaders)
+                    // check for virtual enahancer & javassist classes (i.e. hibernate lazy loaders)
                     Class duplicateClass = null;
-                    if (src.getClass().getName().indexOf("$$Enhancer") > -1)
+                    if (src.getClass().getName().indexOf("$$Enhancer") > -1 || src.getClass().getName().indexOf("$$_javassist") > -1 )
                     {
                         duplicateClass = src.getClass().getSuperclass();
                     }
@@ -218,6 +218,7 @@ public class DuplicateUtil
             }
             catch (Exception ex)
             {
+            	ex.printStackTrace();
                 throw new Exception("Error during Bean Duplicate: " + ex);
             }
         } // src=null check
