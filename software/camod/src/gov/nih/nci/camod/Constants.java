@@ -389,9 +389,14 @@ public class Constants {
     // The collection of models with the same NSC number
     public static final String RELATED_MODELS_BY_NSC = "relatedModelsByNSC";
     
-    // The collection of models with the same PMID
+    // The collection of models with the same MGI
     public static final String RELATED_MODELS_BY_MGI = "relatedModelsByMgi";     
     
+    // The collection of models with the same ZFIN
+    public static final String RELATED_MODELS_BY_ZFIN = "relatedModelsByZFin";     
+
+    // The collection of models with the same RGD
+    public static final String RELATED_MODELS_BY_RGD = "relatedModelsByRgd";     
 
 
     /**

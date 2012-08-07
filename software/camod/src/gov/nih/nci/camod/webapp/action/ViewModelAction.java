@@ -243,6 +243,7 @@ import gov.nih.nci.camod.service.TransplantationManager;
 import gov.nih.nci.camod.service.impl.QueryManagerSingleton;
 import gov.nih.nci.camod.util.SafeHTMLUtil;
 import gov.nih.nci.common.domain.DatabaseCrossReference;
+import gov.nih.nci.common.persistence.exception.PersistenceException;
 import gov.nih.nci.system.applicationservice.CaBioApplicationService;
 import gov.nih.nci.system.client.ApplicationServiceProvider;
 import java.io.BufferedReader;
@@ -444,6 +445,20 @@ public class ViewModelAction extends BaseAction
         final List<SpontaneousMutation> smc = new ArrayList<SpontaneousMutation>(am.getSpontaneousMutationCollection());
         Iterator it = egc.iterator();
         int imCnt = 0;// InducedMutation
+        
+     // Variables for related models
+        List modelsByMGIColl = new ArrayList();
+        final Map<String, List> mgiAnimalModelMap = new HashMap<String, List>(); 
+        
+        List modelsByEntrezGeneIdColl = new ArrayList();
+        final Map<String, List> entrezGeneAnimalModelMap = new HashMap<String, List>();
+        
+        List modelsByZFinColl = new ArrayList();
+        final Map<String, List> zfinAnimalModelMap = new HashMap<String, List>();
+        
+        List modelsByRgdColl = new ArrayList();
+        final Map<String, List> rgdAnimalModelMap = new HashMap<String, List>(); 
+        
         while (it.hasNext())
         {
             EngineeredGene eg = (EngineeredGene) it.next();
@@ -451,11 +466,23 @@ public class ViewModelAction extends BaseAction
             {
                 tgc.add(eg);
                 tgCnt++;
+                
+             // Get related models by mutation identifier
+                Transgene t = (Transgene) eg;
+                populateRelatedMutationModels(modelID, mgiAnimalModelMap,
+						zfinAnimalModelMap, rgdAnimalModelMap,
+						t);
             }
             else if (eg instanceof GenomicSegment)
             {
                 gsc.add(eg);
                 gsCnt++;
+                
+             // Get related models by mutation identifier
+                GenomicSegment t = (GenomicSegment) eg;
+                populateRelatedMutationModels(modelID, mgiAnimalModelMap,
+						zfinAnimalModelMap, rgdAnimalModelMap,
+						t);
             }
             else if (eg instanceof TargetedModification)
             {
@@ -499,6 +526,26 @@ public class ViewModelAction extends BaseAction
                     {
                         log.error("ViewModelAction Unable to get information from caBIO", e);
                     }
+                    
+                    /* Get list of related models by entrez gene id
+                    if (geneIdentifier != null)
+                    {
+                        log.info("ViewModelAction  pubs.size(): " + geneIdentifier.size());
+                        Iterator it = geneIdentifier.iterator();
+                    	
+                    }
+                    */
+                    
+                    modelsByEntrezGeneIdColl = QueryManagerSingleton.instance().getRelatedModelsForThisEntrezGene(geneIdentifier.getEntrezGeneID(), modelID);
+	            	log.info("ViewModelAction  modelsByEntrezGeneIdColl: " + modelsByEntrezGeneIdColl.size()); 
+	            	entrezGeneAnimalModelMap.put(geneIdentifier.getEntrezGeneID(), modelsByEntrezGeneIdColl); 
+	            	
+	            	TargetedModification t = (TargetedModification) eg;
+	                populateRelatedMutationModels(modelID, mgiAnimalModelMap,
+							zfinAnimalModelMap, rgdAnimalModelMap,
+							t);
+
+                    
                
                 }
             }
@@ -506,7 +553,43 @@ public class ViewModelAction extends BaseAction
             {
                 imc.add(eg);
                 imCnt++;
+                
+                InducedMutation t = (InducedMutation) eg;
+                populateRelatedMutationModels(modelID, mgiAnimalModelMap,
+						zfinAnimalModelMap, rgdAnimalModelMap,
+						t);
             }
+        }
+        
+        // Find related models for SpontaneousMutation
+        for( SpontaneousMutation sm: smc) {
+    		if (sm.getMutationIdentifier() != null && sm.getMutationIdentifier().getMgiId() != null) {
+    			// get related models by MGI number  
+    			String mgiId= sm.getMutationIdentifier().getMgiId();
+    			if(! mgiAnimalModelMap.containsKey(mgiId)) {
+    				modelsByMGIColl = QueryManagerSingleton.instance().getRelatedModelsForThisMGI(mgiId, modelID, false);
+    				log.info("ViewModelAction  modelsByMGIColl: " + modelsByMGIColl.size()); 
+    				mgiAnimalModelMap.put(mgiId, modelsByMGIColl);
+    			}
+    			
+    		} else if (sm.getMutationIdentifier() != null && sm.getMutationIdentifier().getRgdId() != null){
+    			// get related models by RGD number
+    			String rgdId= sm.getMutationIdentifier().getRgdId();
+    			if(! rgdAnimalModelMap.containsKey(rgdId)) {
+    				modelsByRgdColl = QueryManagerSingleton.instance().getRelatedModelsForThisRgd(rgdId, modelID, false);
+    				log.info("ViewModelAction  modelsByRgdColl: " + modelsByRgdColl.size()); 
+    				rgdAnimalModelMap.put(rgdId, modelsByRgdColl);
+    			}
+    			
+    		} else if (sm.getMutationIdentifier() != null && sm.getMutationIdentifier().getZfinId() != null){
+    			// get related models by ZFIN number
+    			String zfinId= sm.getMutationIdentifier().getZfinId();
+    			if(! zfinAnimalModelMap.containsKey(zfinId)) {
+    				modelsByZFinColl = QueryManagerSingleton.instance().getRelatedModelsForThisZFin(zfinId, modelID, false);
+    				log.info("ViewModelAction  modelsByZFinColl: " + modelsByZFinColl.size()); 
+    				zfinAnimalModelMap.put(zfinId, modelsByZFinColl);  
+    			}
+    		}
         }
 
         log.info("<populateEngineeredGene> " + "egcCnt=" + egcCnt + "tgc=" + tgCnt + "gsc=" + gsCnt + "tmc=" + tmCnt + "imc=" + imCnt);
@@ -517,12 +600,56 @@ public class ViewModelAction extends BaseAction
         request.getSession().setAttribute(Constants.TARGETED_MOD_GENE_MAP, tmGeneMap);
         request.getSession().setAttribute(Constants.INDUCED_MUT_COLL, imc);
         request.getSession().setAttribute(Constants.SPONTANEOUS_MUT_COLL, smc);
+        
+     // attributes for the related models by mgi, zfin, rgd, and entrez gene id
+        request.getSession().setAttribute(Constants.RELATED_MODELS_BY_MGI, mgiAnimalModelMap);
+        request.getSession().setAttribute(Constants.RELATED_MODELS_BY_RGD, rgdAnimalModelMap);
+        request.getSession().setAttribute(Constants.RELATED_MODELS_BY_ZFIN, zfinAnimalModelMap);
+        request.getSession().setAttribute(Constants.RELATED_MODELS_BY_ENTREZ_GENE, entrezGeneAnimalModelMap);
+        
         log.debug("<populateEngineeredGene> set attributes done.");
 
         setComments(request, Constants.Pages.GENETIC_DESCRIPTION);
 
         return mapping.findForward("viewGeneticDescription");
     }
+
+	private void populateRelatedMutationModels(String modelID,
+			Map<String, List> mgiAnimalModelMap,
+			Map<String, List> zfinAnimalModelMap,
+			Map<String, List> rgdAnimalModelMap, EngineeredGene t)
+			throws PersistenceException {
+		List modelsByMGIColl = new ArrayList();
+		List modelsByZFinColl = new ArrayList();
+		List modelsByRgdColl = new ArrayList();
+		if (t.getMutationIdentifier() != null && t.getMutationIdentifier().getMgiId() != null) {
+			// get related models by MGI number  
+			String mgiId= t.getMutationIdentifier().getMgiId();
+			if(! mgiAnimalModelMap.containsKey(mgiId)) {
+				modelsByMGIColl = QueryManagerSingleton.instance().getRelatedModelsForThisMGI(mgiId, modelID, true);
+				log.info("ViewModelAction  modelsByMGIColl: " + modelsByMGIColl.size()); 
+				mgiAnimalModelMap.put(mgiId, modelsByMGIColl);
+			}
+			
+		} else if (t.getMutationIdentifier() != null && t.getMutationIdentifier().getRgdId() != null){
+			// get related models by RGD number
+			String rgdId= t.getMutationIdentifier().getRgdId();
+			if(! rgdAnimalModelMap.containsKey(rgdId)) {
+				modelsByRgdColl = QueryManagerSingleton.instance().getRelatedModelsForThisRgd(rgdId, modelID, true);
+				log.info("ViewModelAction  modelsByRgdColl: " + modelsByRgdColl.size()); 
+				rgdAnimalModelMap.put(rgdId, modelsByRgdColl);
+			}
+			
+		} else if (t.getMutationIdentifier() != null && t.getMutationIdentifier().getZfinId() != null){
+			// get related models by ZFIN number
+			String zfinId= t.getMutationIdentifier().getZfinId();
+			if(! zfinAnimalModelMap.containsKey(zfinId)) {
+				modelsByZFinColl = QueryManagerSingleton.instance().getRelatedModelsForThisZFin(zfinId, modelID, true);
+				log.info("ViewModelAction  modelsByZFinColl: " + modelsByZFinColl.size()); 
+				zfinAnimalModelMap.put(zfinId, modelsByZFinColl);  
+			}
+		}
+	}
 
     /**
      * Populate the session and/or request with the objects necessary to display

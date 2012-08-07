@@ -3995,8 +3995,8 @@ public class QueryManagerImpl extends BaseManager
          
     }
     
-    // Related models by NSC number
-    public List getRelatedModelsForThisMGI(String mgiId, String modelId) throws PersistenceException
+    // Related models by MGI Id
+    public List getRelatedModelsForThisMGI(String mgiId, String modelId, boolean isEngineeredGene) throws PersistenceException
     {
     	List theAnimalModels = null;
     	List mgiIds = null;
@@ -4007,14 +4007,27 @@ public class QueryManagerImpl extends BaseManager
         {
         	log.info( "Searching MGI" );
         	
-        	String theAgentQuery1 = " from AnimalModel as am where am.state = 'Edited-approved' "
-				        				+ " AND am.availability.releaseDate <= sysdate " 
-						        		+ " AND am.id IN " 
-						        		+ " (select distinct eg.absCancerModelId from EngineeredGene eg, MutationIdentifier mi " 
-						        		+ " where eg.mutationIdentifier.id = mi.id and mi.id = '" + mgiId + "' ) " 
-						        		+ " AND am.id NOT IN "		
-						        		+ " (select eg.absCancerModelId from EngineeredGene eg " 
-						        		+ " where eg.absCancerModelId = '" + modelId + "' ) ";
+        	String theAgentQuery1 = "";
+        	
+        	if( isEngineeredGene )
+	        	theAgentQuery1 = " from AnimalModel as am where am.state = 'Edited-approved' "
+					        				+ " AND am.availability.releaseDate <= sysdate " 
+							        		+ " AND am.id IN " 
+							        		+ " (select distinct eg.absCancerModelId from EngineeredGene eg, MutationIdentifier mi " 
+							        		+ " where eg.mutationIdentifier.id = mi.id and mi.mgiId = '" + mgiId + "' ) " 
+							        		+ " AND am.id NOT IN "		
+							        		+ " (select eg.absCancerModelId from EngineeredGene eg " 
+							        		+ " where eg.absCancerModelId = '" + modelId + "' ) ";
+        	else
+	        	theAgentQuery1 = " from AnimalModel as am where am.state = 'Edited-approved' "
+					        				+ " AND am.availability.releaseDate <= sysdate " 
+							        		+ " AND am.id IN " 
+							        		+ " (select distinct sm.absCancerModelId from SpontaneousMutation sm, MutationIdentifier mi " 
+							        		+ " where sm.mutationIdentifier.id = mi.id and mi.mgiId = '" + mgiId + "' ) " 
+							        		+ " AND am.id NOT IN "		
+							        		+ " (select sm.absCancerModelId from SpontaneousMutation sm " 
+							        		+ " where sm.cancerModel.id = '" + modelId + "' ) ";
+        		
      	
         	
         	log.info("HQL1= " + theAgentQuery1 );
@@ -4040,10 +4053,125 @@ public class QueryManagerImpl extends BaseManager
          
     }
     
+    // Related models by Rgd ID
+    public List getRelatedModelsForThisRgd(String rgdId, String modelId, boolean isEngineeredGene) throws PersistenceException
+    {
+    	List theAnimalModels = null;
+    	List rgdIds = null;
+        
+        // Search for MGI
+        if (rgdId != null && 
+        		modelId != null )
+        {
+        	log.info( "Searching Rgd" );
+        	
+        	String theAgentQuery1 = "";
+        	if(isEngineeredGene )
+        		theAgentQuery1 = " from AnimalModel as am where am.state = 'Edited-approved' "
+				        				+ " AND am.availability.releaseDate <= sysdate " 
+						        		+ " AND am.id IN " 
+						        		+ " (select distinct eg.absCancerModelId from EngineeredGene eg, MutationIdentifier mi " 
+						        		+ " where eg.mutationIdentifier.id = mi.id and mi.rgdId = '" + rgdId + "' ) " 
+						        		+ " AND am.id NOT IN "		
+						        		+ " (select eg.absCancerModelId from EngineeredGene eg " 
+						        		+ " where eg.absCancerModelId = '" + modelId + "' ) ";
+        	else
+        		theAgentQuery1 = " from AnimalModel as am where am.state = 'Edited-approved' "
+				        				+ " AND am.availability.releaseDate <= sysdate " 
+						        		+ " AND am.id IN " 
+						        		+ " (select distinct sm.absCancerModelId from SpontaneousMutation sm, MutationIdentifier mi " 
+						        		+ " where sm.mutationIdentifier.id = mi.id and mi.rgdId = '" + rgdId + "' ) " 
+						        		+ " AND am.id NOT IN "		
+						        		+ " (select sm.absCancerModelId from SpontaneousMutation sm " 
+						        		+ " where sm.cancerModel.id = '" + modelId + "' ) ";
+        		
+     	
+        	
+        	log.info("HQL1= " + theAgentQuery1 );
+        	
+        	Query query1 = HibernateUtil.getSession().createQuery(theAgentQuery1);
+        	log.info("query1= " + query1.toString() );
+        	
+        	List list1 = query1.list();
+        	log.info("list1.size()= " + list1.size() );      
+        	
+        	// List of all distinct AnimalModel Ids
+        	HashSet unique = new HashSet(list1);
+        	rgdIds = new ArrayList( unique );  
+        	
+        	theAnimalModels = (List) rgdIds;
+       	
+        	// throws java.lang.ClassCastException: gov.nih.nci.camod.domain.AnimalModel 
+        	//Collections.sort(theAnimalModels, String.CASE_INSENSITIVE_ORDER);
+        	log.info( "theAnimalModels : " + theAnimalModels.size() );        	
+        }
+           
+    	return theAnimalModels;    
+         
+    }
+
+    // Related models by ZFin ID
+    public List getRelatedModelsForThisZFin(String zfinId, String modelId, boolean isEngineeredGene) throws PersistenceException
+    {
+    	List theAnimalModels = null;
+    	List zfinIds = null;
+        
+        // Search for MGI
+        if (zfinId != null && 
+        		modelId != null )
+        {
+        	log.info( "Searching ZFin" );
+        	
+        	String theAgentQuery1 = "";
+        	
+        	if(isEngineeredGene)
+        		theAgentQuery1 = " from AnimalModel as am where am.state = 'Edited-approved' "
+				        				+ " AND am.availability.releaseDate <= sysdate " 
+						        		+ " AND am.id IN " 
+						        		+ " (select distinct eg.absCancerModelId from EngineeredGene eg, MutationIdentifier mi " 
+						        		+ " where eg.mutationIdentifier.id = mi.id and mi.zfinId = '" + zfinId + "' ) " 
+						        		+ " AND am.id NOT IN "		
+						        		+ " (select eg.absCancerModelId from EngineeredGene eg " 
+						        		+ " where eg.absCancerModelId = '" + modelId + "' ) ";
+        	else
+        		theAgentQuery1 = " from AnimalModel as am where am.state = 'Edited-approved' "
+				        				+ " AND am.availability.releaseDate <= sysdate " 
+						        		+ " AND am.id IN " 
+						        		+ " (select distinct sm.absCancerModelId from SpontaneousMutation sm, MutationIdentifier mi " 
+						        		+ " where sm.mutationIdentifier.id = mi.id and mi.zfinId = '" + zfinId + "' ) " 
+						        		+ " AND am.id NOT IN "		
+						        		+ " (select sm.absCancerModelId from SpontaneousMutation sm " 
+						        		+ " where sm.absCancerModelId = '" + modelId + "' ) ";
+        		
+     	
+        	
+        	log.info("HQL1= " + theAgentQuery1 );
+        	
+        	Query query1 = HibernateUtil.getSession().createQuery(theAgentQuery1);
+        	log.info("query1= " + query1.toString() );
+        	
+        	List list1 = query1.list();
+        	log.info("list1.size()= " + list1.size() );      
+        	
+        	// List of all distinct AnimalModel Ids
+        	HashSet unique = new HashSet(list1);
+        	zfinIds = new ArrayList( unique );  
+        	
+        	theAnimalModels = (List) zfinIds;
+       	
+        	// throws java.lang.ClassCastException: gov.nih.nci.camod.domain.AnimalModel 
+        	//Collections.sort(theAnimalModels, String.CASE_INSENSITIVE_ORDER);
+        	log.info( "theAnimalModels : " + theAnimalModels.size() );        	
+        }
+           
+    	return theAnimalModels;    
+         
+    }
+
     // Related models by Entrez gene id
     // P53 genes can return 70+ models - so provide a link that runs this query into the searchResults page
     // instead of listing all 70+ models in a text box (do if have time)
-    public List getRelatedModelsForThisEntrezGene(Long entrezGeneId, String modelId) throws PersistenceException
+    public List getRelatedModelsForThisEntrezGene(String entrezGeneId, String modelId) throws PersistenceException
     {
     	List theAnimalModels = null;
     	List entrezGenes = null;
@@ -4057,8 +4185,11 @@ public class QueryManagerImpl extends BaseManager
         	String theGeneQuery1 = " from AnimalModel as am where am.state = 'Edited-approved' "
 				        				+ " AND am.availability.releaseDate <= sysdate " 
 						        		+ " AND am.id IN " 
-						        		+ " (select distinct eg.absCancerModelId from EngineeredGene eg, GeneIdentifier gi " 
-						        		+ " where eg.geneIdentifer.id = gi.id and gi.entrezGene.id = '" + entrezGeneId + "' ) " ;
+						        		+ " (select distinct tm.absCancerModelId from TargetedModification tm, GeneIdentifier gi " 
+						        		+ " where tm.geneIdentifier.id = gi.id and gi.entrezGeneID = '" + entrezGeneId + "' ) "
+						        		+ " AND am.id NOT IN "		
+						        		+ " (select eg.absCancerModelId from EngineeredGene eg " 
+						        		+ " where eg.absCancerModelId = '" + modelId + "' ) ";						        		
 
      	
         	

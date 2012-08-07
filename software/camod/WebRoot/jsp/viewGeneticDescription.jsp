@@ -514,6 +514,39 @@
 				</camod:highlight>
 			</td>
 		</tr>
+		
+		<c:set var="relatedModels" value=""/>
+		<c:choose> 
+  			<c:when test="${not empty tg.mutationIdentifier.mgiId}">
+				<c:set var="mgiId" value="${tg.mutationIdentifier.mgiId}"/>
+				<c:set var="relatedModels" value="${relatedModelsByMgi[mgiId]}"/>
+				<c:set var="relatedModelsText" value="Other caMOD entries citing this MGI Id:"/>
+  			</c:when>
+  			<c:when test="${not empty tg.mutationIdentifier.rgdId}">
+				<c:set var="rgdId" value="${tg.mutationIdentifier.rgdId}"/>
+				<c:set var="relatedModels" value="${relatedModelsByRgd[rgdId]}"/>
+				<c:set var="relatedModelsText" value="Other caMOD entries citing this RGD Id:"/>
+  			</c:when>
+  			<c:when test="${not empty tg.mutationIdentifier.zfinId}">
+				<c:set var="zfinId" value="${tg.mutationIdentifier.zfinId}"/>
+				<c:set var="relatedModels" value="${relatedModelsByZFin[zfinId]}"/>
+				<c:set var="relatedModelsText" value="Other caMOD entries citing this ZFIN Id:"/>
+  			</c:when>
+  		</c:choose>	
+  				 
+		<c:if test="${not empty relatedModels}">
+			<tr>
+				<td class="GreyBox" width="30%"><b><c:out value="${relatedModelsText}" escapeXml="false"/></b></td>
+				<td class="GreyBoxRightEnd" width="70%">		
+					<logic:iterate id="rmdl" name="relatedModels" indexId="idx">	
+						<c:forEach  items="${rmdl.modelDescriptor}" >
+						<a target="_blank" href="ViewModelAction.do?unprotected_method=populateModelCharacteristics&aModelID=<c:out value="${rmdl.id}"/>"/><c:out value="${rmdl.modelDescriptor}" escapeXml="false"/></a>
+						&nbsp;(<c:out value="${rmdl.id}" escapeXml="false"/>)</br>						
+						</c:forEach>			
+					</logic:iterate>
+				</td>
+			</tr>
+		</c:if>
 	</TABLE>
 	
 </td></tr>
@@ -720,6 +753,40 @@
 				</camod:highlight>		
 			</td>
 		</tr>
+		
+		<c:set var="relatedModels" value=""/>
+		<c:choose> 
+  			<c:when test="${not empty gs.mutationIdentifier.mgiId}">
+				<c:set var="mgiId" value="${gs.mutationIdentifier.mgiId}"/>
+				<c:set var="relatedModels" value="${relatedModelsByMgi[mgiId]}"/>
+				<c:set var="relatedModelsText" value="Other caMOD entries citing this MGI Id:"/>
+  			</c:when>
+  			<c:when test="${not empty gs.mutationIdentifier.rgdId}">
+				<c:set var="rgdId" value="${gs.mutationIdentifier.rgdId}"/>
+				<c:set var="relatedModels" value="${relatedModelsByRgd[rgdId]}"/>
+				<c:set var="relatedModelsText" value="Other caMOD entries citing this RGD Id:"/>
+  			</c:when>
+  			<c:when test="${not empty gs.mutationIdentifier.zfinId}">
+				<c:set var="zfinId" value="${gs.mutationIdentifier.zfinId}"/>
+				<c:set var="relatedModels" value="${relatedModelsByZFin[zfinId]}"/>
+				<c:set var="relatedModelsText" value="Other caMOD entries citing this ZFIN Id:"/>
+  			</c:when>
+  		</c:choose>	
+  				 
+		<c:if test="${not empty relatedModels}">
+			<tr>
+				<td class="GreyBox" width="30%"><b><c:out value="${relatedModelsText}" escapeXml="false"/></b></td>
+				<td class="GreyBoxRightEnd" width="70%">		
+					<logic:iterate id="rmdl" name="relatedModels" indexId="idx">	
+						<c:forEach  items="${rmdl.modelDescriptor}" >
+						<a target="_blank" href="ViewModelAction.do?unprotected_method=populateModelCharacteristics&aModelID=<c:out value="${rmdl.id}"/>"/><c:out value="${rmdl.modelDescriptor}" escapeXml="false"/></a>
+						&nbsp;(<c:out value="${rmdl.id}" escapeXml="false"/>)</br>						
+						</c:forEach>			
+					</logic:iterate>
+				</td>
+			</tr>
+		</c:if>
+		
 	</TABLE>
 </td></tr>
 <tr>
@@ -987,8 +1054,57 @@
 	            </td>
 	        </tr>
 		</c:if>
-	</TABLE>
-</td></tr></TABLE>	
+		<c:set var="entrezGeneId" value="${tm.geneIdentifier.entrezGeneID}"/>
+		<c:set var="relatedModels" value="${relatedModelsByEntrezGeneId[entrezGeneId]}"/>
+		<c:if test="${not empty relatedModels}">
+		<tr>
+			<td class="GreyBox" width="30%"><b>Other caMOD entries citing this gene:</b></td>
+			<td class="GreyBoxRightEnd" width="70%">		
+				<logic:iterate id="rmdl" name="relatedModels" indexId="idx">	
+					<c:forEach  items="${rmdl.modelDescriptor}" >
+					<a target="_blank" href="ViewModelAction.do?unprotected_method=populateModelCharacteristics&aModelID=<c:out value="${rmdl.id}"/>"/><c:out value="${rmdl.modelDescriptor}" escapeXml="false"/></a>
+					&nbsp;(<c:out value="${rmdl.id}" escapeXml="false"/>)</br>						
+					</c:forEach>			
+				</logic:iterate>
+			</td>
+		</tr>
+		</c:if>
+		
+		<c:set var="relatedModels" value=""/>
+		<c:choose> 
+  			<c:when test="${not empty tm.mutationIdentifier.mgiId}">
+				<c:set var="mgiId" value="${tm.mutationIdentifier.mgiId}"/>
+				<c:set var="relatedModels" value="${relatedModelsByMgi[mgiId]}"/>
+				<c:set var="relatedModelsText" value="Other caMOD entries citing this MGI Id:"/>
+  			</c:when>
+  			<c:when test="${not empty tm.mutationIdentifier.rgdId}">
+				<c:set var="rgdId" value="${tm.mutationIdentifier.rgdId}"/>
+				<c:set var="relatedModels" value="${relatedModelsByRgd[rgdId]}"/>
+				<c:set var="relatedModelsText" value="Other caMOD entries citing this RGD Id:"/>
+  			</c:when>
+  			<c:when test="${not empty tm.mutationIdentifier.zfinId}">
+				<c:set var="zfinId" value="${tm.mutationIdentifier.zfinId}"/>
+				<c:set var="relatedModels" value="${relatedModelsByZFin[zfinId]}"/>
+				<c:set var="relatedModelsText" value="Other caMOD entries citing this ZFIN Id:"/>
+  			</c:when>
+  		</c:choose>	
+  				 
+		<c:if test="${not empty relatedModels}">
+			<tr>
+				<td class="GreyBox" width="30%"><b><c:out value="${relatedModelsText}" escapeXml="false"/></b></td>
+				<td class="GreyBoxRightEnd" width="70%">		
+					<logic:iterate id="rmdl" name="relatedModels" indexId="idx">	
+						<c:forEach  items="${rmdl.modelDescriptor}" >
+						<a target="_blank" href="ViewModelAction.do?unprotected_method=populateModelCharacteristics&aModelID=<c:out value="${rmdl.id}"/>"/><c:out value="${rmdl.modelDescriptor}" escapeXml="false"/></a>
+						&nbsp;(<c:out value="${rmdl.id}" escapeXml="false"/>)</br>						
+						</c:forEach>			
+					</logic:iterate>
+				</td>
+			</tr>
+		</c:if>
+</TABLE>
+</td></tr>
+</TABLE>	
 </td></tr>
 <tr>
     <td colspan="2" align="right"><a href="#">Top</a></td>
@@ -1148,6 +1264,40 @@
 			</td>
 		</tr>
 		
+		<c:set var="relatedModels" value=""/>
+		<c:choose> 
+  			<c:when test="${not empty im.mutationIdentifier.mgiId}">
+				<c:set var="mgiId" value="${im.mutationIdentifier.mgiId}"/>
+				<c:set var="relatedModels" value="${relatedModelsByMgi[mgiId]}"/>
+				<c:set var="relatedModelsText" value="Other caMOD entries citing this MGI Id:"/>
+  			</c:when>
+  			<c:when test="${not empty im.mutationIdentifier.rgdId}">
+				<c:set var="rgdId" value="${im.mutationIdentifier.rgdId}"/>
+				<c:set var="relatedModels" value="${relatedModelsByRgd[rgdId]}"/>
+				<c:set var="relatedModelsText" value="Other caMOD entries citing this RGD Id:"/>
+  			</c:when>
+  			<c:when test="${not empty im.mutationIdentifier.zfinId}">
+				<c:set var="zfinId" value="${im.mutationIdentifier.zfinId}"/>
+				<c:set var="relatedModels" value="${relatedModelsByZFin[zfinId]}"/>
+				<c:set var="relatedModelsText" value="Other caMOD entries citing this ZFIN Id:"/>
+  			</c:when>
+  		</c:choose>	
+  				 
+		<c:if test="${not empty relatedModels}">
+			<tr>
+				<td class="GreyBox" width="30%"><b><c:out value="${relatedModelsText}" escapeXml="false"/></b></td>
+				<td class="GreyBoxRightEnd" width="70%">		
+					<logic:iterate id="rmdl" name="relatedModels" indexId="idx">	
+						<c:forEach  items="${rmdl.modelDescriptor}" >
+						<a target="_blank" href="ViewModelAction.do?unprotected_method=populateModelCharacteristics&aModelID=<c:out value="${rmdl.id}"/>"/><c:out value="${rmdl.modelDescriptor}" escapeXml="false"/></a>
+						&nbsp;(<c:out value="${rmdl.id}" escapeXml="false"/>)</br>						
+						</c:forEach>			
+					</logic:iterate>
+				</td>
+			</tr>
+		</c:if>
+		
+		
 	</TABLE>
 </td></tr>
 <tr>
@@ -1259,6 +1409,39 @@
 				</camod:highlight>
 			</td>
 		</tr>
+		
+		<c:set var="relatedModels" value=""/>
+		<c:choose> 
+  			<c:when test="${not empty sm.mutationIdentifier.mgiId}">
+				<c:set var="mgiId" value="${sm.mutationIdentifier.mgiId}"/>
+				<c:set var="relatedModels" value="${relatedModelsByMgi[mgiId]}"/>
+				<c:set var="relatedModelsText" value="Other caMOD entries citing this MGI Id:"/>
+  			</c:when>
+  			<c:when test="${not empty sm.mutationIdentifier.rgdId}">
+				<c:set var="rgdId" value="${sm.mutationIdentifier.rgdId}"/>
+				<c:set var="relatedModels" value="${relatedModelsByRgd[rgdId]}"/>
+				<c:set var="relatedModelsText" value="Other caMOD entries citing this RGD Id:"/>
+  			</c:when>
+  			<c:when test="${not empty sm.mutationIdentifier.zfinId}">
+				<c:set var="zfinId" value="${sm.mutationIdentifier.zfinId}"/>
+				<c:set var="relatedModels" value="${relatedModelsByZFin[zfinId]}"/>
+				<c:set var="relatedModelsText" value="Other caMOD entries citing this ZFIN Id:"/>
+  			</c:when>
+  		</c:choose>	
+  				 
+		<c:if test="${not empty relatedModels}">
+			<tr>
+				<td class="GreyBox" width="30%"><b><c:out value="${relatedModelsText}" escapeXml="false"/></b></td>
+				<td class="GreyBoxRightEnd" width="70%">		
+					<logic:iterate id="rmdl" name="relatedModels" indexId="idx">	
+						<c:forEach  items="${rmdl.modelDescriptor}" >
+						<a target="_blank" href="ViewModelAction.do?unprotected_method=populateModelCharacteristics&aModelID=<c:out value="${rmdl.id}"/>"/><c:out value="${rmdl.modelDescriptor}" escapeXml="false"/></a>
+						&nbsp;(<c:out value="${rmdl.id}" escapeXml="false"/>)</br>						
+						</c:forEach>			
+					</logic:iterate>
+				</td>
+			</tr>
+		</c:if>		
 	</TABLE>
 </td></tr>
 <tr>
