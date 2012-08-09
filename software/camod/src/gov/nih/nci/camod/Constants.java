@@ -397,6 +397,9 @@ public class Constants {
 
     // The collection of models with the same RGD
     public static final String RELATED_MODELS_BY_RGD = "relatedModelsByRgd";     
+    
+ // The collection of models with the same MicroArray URL & Experiment Title
+    public static final String RELATED_MODELS_BY_MICROARRAY = "relatedModelsByMicroArray";
 
 
     /**

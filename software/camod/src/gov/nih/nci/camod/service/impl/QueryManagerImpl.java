@@ -4216,6 +4216,50 @@ public class QueryManagerImpl extends BaseManager
          
     }
 	
+    public List getRelatedModelsForThisMicroArray(String url, String experimentName, String modelId) throws PersistenceException
+    {
+    	List theAnimalModels = null;
+    	List microArrays = null;
+        
+        // Search for PMID
+        if (url != null && experimentName != null && modelId != null )
+        {
+        	log.info( "Searching microArrays" );
+        	
+        	String theMicroArrayQuery1 = " from AnimalModel as am where am.state = 'Edited-approved' "
+				        				+ " AND am.availability.releaseDate <= sysdate " 
+						        		+ " AND am.id IN " 
+						        		+ " (select distinct mad.absCancerModelId from MicroArrayData mad " 
+						        		+ " where mad.url = '" + url + "' "
+						        		+ " and mad.experimentName = '" + experimentName + "' ) "
+						        		+ " AND am.id NOT IN "		
+						        		+ " (select mad.absCancerModelId from MicroArrayData mad " 
+						        		+ " where mad.absCancerModelId = '" + modelId + "' ) ";		
+        	
+        	
+        	log.info("HQL1= " + theMicroArrayQuery1 );
+        	
+        	Query query1 = HibernateUtil.getSession().createQuery(theMicroArrayQuery1);
+        	log.info("query1= " + query1.toString() );
+        	
+        	List list1 = query1.list();
+        	log.info("list1.size()= " + list1.size() );      
+        	
+        	// List of all distinct AnimalModel Ids
+        	HashSet unique = new HashSet(list1);
+        	microArrays = new ArrayList( unique );  
+        	
+        	theAnimalModels = (List) microArrays;
+       	
+        	// throws java.lang.ClassCastException: gov.nih.nci.camod.domain.AnimalModel 
+        	//Collections.sort(theAnimalModels, String.CASE_INSENSITIVE_ORDER);
+        	log.info( "theAnimalModels : " + theAnimalModels.size() );        	
+        }
+           
+    	return theAnimalModels;    
+         
+    }
+
 }
 
 class _sortAnimalModels implements java.util.Comparator {

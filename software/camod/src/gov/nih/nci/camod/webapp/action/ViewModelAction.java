@@ -227,6 +227,7 @@ import gov.nih.nci.camod.domain.Comments;
 import gov.nih.nci.camod.domain.EngineeredGene;
 import gov.nih.nci.camod.domain.GeneIdentifier;
 import gov.nih.nci.camod.domain.GenomicSegment;
+import gov.nih.nci.camod.domain.MicroArrayData;
 import gov.nih.nci.camod.domain.Publication;
 import gov.nih.nci.camod.domain.Transplantation;
 import gov.nih.nci.camod.domain.InducedMutation;
@@ -1184,7 +1185,22 @@ public class ViewModelAction extends BaseAction
 	        log.debug("methodName: " + methodName);
         } 
         
+        List modelsByMicroArrayColl = new ArrayList();
+        final Map<String, List> microArrayAnimalModelMap = new HashMap<String, List>();
+        
         setCancerModel(request);
+        
+        AnimalModel am = (AnimalModel)request.getSession().getAttribute(Constants.ANIMALMODEL);
+        Set<MicroArrayData> maColl = am.getMicroArrayDataCollection();
+        String modelID = request.getParameter(Constants.Parameters.MODELID);
+        
+        for( MicroArrayData ma: maColl) {
+            modelsByMicroArrayColl = QueryManagerSingleton.instance().getRelatedModelsForThisMicroArray(ma.getUrl(), ma.getExperimentName(), modelID);
+        	log.info("ViewModelAction  modelsByMicroArrayColl: " + modelsByMicroArrayColl.size()); 
+        	microArrayAnimalModelMap.put(ma.getUrl(), modelsByMicroArrayColl); 
+        }
+        
+
         //Get external properties file
 		Properties camodProperties = new Properties();
 		String camodPropertiesFileName = null;
@@ -1207,6 +1223,7 @@ public class ViewModelAction extends BaseAction
 
         request.setAttribute("uri_start", camodProperties.getProperty("caarray.uri_start"));
         request.setAttribute("uri_end", camodProperties.getProperty("caarray.uri_end"));
+        request.getSession().setAttribute(Constants.RELATED_MODELS_BY_MICROARRAY, microArrayAnimalModelMap);
 
         setComments(request, Constants.Pages.MICROARRAY);
 
