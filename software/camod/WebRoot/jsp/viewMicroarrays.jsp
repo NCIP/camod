@@ -19,7 +19,7 @@
 			<TABLE cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 
 			<tr>
-				<th scope="col" class="formTitle" height="20">
+				<th scope="col" class="formTitle" height="20" colspan="2">
 				Microarrays - Model:
 				<c:out value="${mdl.modelDescriptor}" escapeXml="false"/></th>
 			</tr>			
@@ -29,7 +29,7 @@
 				<c:choose>
 					<c:when test="${empty ma.experimentId}">
 							<tr>
-								<td class="resultsBoxGreyEnd">
+								<td class="resultsBoxGreyEnd"  colspan="2">
 					                <ul>
 					                	<li>
 					                	<a href='<c:out value="${ma.url}"/>' target="_blank"><c:out value="${ma.experimentName}"/></a>
@@ -40,7 +40,7 @@
 					</c:when>					
 					<c:otherwise>
 						<tr>
-							<td class="resultsBoxGreyEnd">
+							<td class="resultsBoxGreyEnd" colspan="2">
 				                <ul>
 				                	<li>
 				                	<c:set var="uri" value="${uri_start}${ma.experimentId}${uri_end}"/>
@@ -50,7 +50,23 @@
 							</td>
 						</tr>								
 					</c:otherwise>			
-				</c:choose>			
+				</c:choose>	
+				<c:set var="maUrl" value="${ma.url}"/>
+				<c:set var="relatedModels" value="${relatedModelsByMicroArray[maUrl]}"/>
+				<c:if test="${not empty relatedModels}">
+				<tr>
+					<td class="GreyBox" width="30%"><b>Other caMOD entries citing this MicroArray:</b></td>
+					<td class="GreyBoxRightEnd" width="70%">		
+						<logic:iterate id="rmdl" name="relatedModels" indexId="idx">	
+							<c:forEach  items="${rmdl.modelDescriptor}" >
+							<a target="_blank" href="ViewModelAction.do?unprotected_method=populateModelCharacteristics&aModelID=<c:out value="${rmdl.id}"/>"/><c:out value="${rmdl.modelDescriptor}" escapeXml="false"/></a>
+							&nbsp;(<c:out value="${rmdl.id}" escapeXml="false"/>)</br>						
+							</c:forEach>			
+						</logic:iterate>
+					</td>
+				</tr>
+				</c:if>
+						
 			</c:forEach>	
 									
             <tr><td></td></tr>
