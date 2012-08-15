@@ -1,5 +1,5 @@
 /**
- * 
+ *
  * $Id: PublicationPopulateAction.java,v 1.18 2008-08-14 19:00:13 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
@@ -15,7 +15,7 @@
  * Revision 1.14  2006/04/17 19:09:41  pandyas
  * caMod 2.1 OM changes
  *
- * 
+ *
  */
 
 
@@ -38,7 +38,7 @@ import org.apache.struts.action.ActionMapping;
 public class PublicationPopulateAction extends BaseAction {
 
 	/**
-	 * 
+	 *
 	 * @param mapping
 	 * @param form
 	 * @param request
@@ -46,7 +46,7 @@ public class PublicationPopulateAction extends BaseAction {
 	 * @return
 	 * @throws Exception
 	 */
-	public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) 
+	public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
 		log.debug("<PublicationPopulateAction populate> Entering populate() ");
@@ -54,13 +54,13 @@ public class PublicationPopulateAction extends BaseAction {
 		// Create a form to edit
 		PublicationForm pubForm = (PublicationForm) form;
 
-		String aPubID = request.getParameter("aPubID");		
+		String aPubID = request.getParameter("aPubID");
 		String aCellID = request.getParameter("aCellID");
 		String aTherapyID = request.getParameter("aTherapyID");
 
 		pubForm.setACellID( aCellID );
 		pubForm.setATherapyID( aTherapyID );
-		
+
 		// Use the current animalModel based on the ID stored in the session
 		PublicationManager thePublicationManager = (PublicationManager) getBean("publicationManager");
 		Publication thePublication = thePublicationManager.get(aPubID);
@@ -83,22 +83,22 @@ public class PublicationPopulateAction extends BaseAction {
 			if (thePublication.getEndPage() != null) {
 				pubForm.setEndPage(thePublication.getEndPage().toString());
 			}
-			
+
 			if (thePublication.getComments() != null && thePublication.getComments().length() >0) {
 				pubForm.setComments(thePublication.getComments());
-			}			
+			}
 			// Populate either the JNumber or zfin id - only one is inserted during submission
             if (thePublication.getJaxJNumber() != null) {
                 pubForm.setJaxJNumber(thePublication.getJaxJNumber());
             } else if(thePublication.getZfinPubId() != null) {
-            	pubForm.setZfinPubId(thePublication.getZfinPubId());            	
+            	pubForm.setZfinPubId(thePublication.getZfinPubId());
             }
-            
+
             if ( thePublication.getRgdPubId() != null )
             {
             	pubForm.setRgdPubId( thePublication.getRgdPubId() );
             }
-            
+
 			if (thePublication.getPmid() != null) {
 				pubForm.setPmid(thePublication.getPmid().toString());
 			}
@@ -118,13 +118,13 @@ public class PublicationPopulateAction extends BaseAction {
 		// Prepopulate all dropdown fields, set the global Constants to the
 		// following
 		this.dropdown(request, response);
-		
+
 		saveToken(request);
 		return mapping.findForward("submitPublications");
 	}
 
 	/**
-	 * 
+	 *
 	 * @param mapping
 	 * @param form
 	 * @param request
@@ -132,37 +132,38 @@ public class PublicationPopulateAction extends BaseAction {
 	 * @return
 	 * @throws Exception
 	 */
-	public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) 
+	public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
-		
-		String aPubID = request.getParameter( "aPubID" );	
+
+		String aPubID = request.getParameter( "aPubID" );
 		String aCellID = request.getParameter( "aCellID" );
 		String aTherapyID = request.getParameter( "aTherapyID" );
-		
+
 		// Create a form to edit
 		PublicationForm pubForm = (PublicationForm) form;
-		
+
 		pubForm.setAPubID( aPubID );
 		pubForm.setACellID( aCellID );
 		pubForm.setATherapyID( aTherapyID );
 
 		this.dropdown( request, response );
-		
+
+		saveToken(request);
 		return mapping.findForward("submitPublications");
 	}
 
 	/**
 	 * Populate all drowpdowns for this type of form
-	 * 
+	 *
 	 * @param request
 	 * @param response
 	 * @throws Exception
 	 */
-	public void dropdown(HttpServletRequest request, HttpServletResponse response) 
+	public void dropdown(HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
 		log.debug("<PublicationPopulateAction dropdown> Entering void dropdown()");
-		
+
 		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.PUBDROP, Constants.Dropdowns.ADD_BLANK);
 	}
 }
