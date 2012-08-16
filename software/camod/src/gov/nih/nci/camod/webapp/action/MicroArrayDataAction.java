@@ -131,9 +131,10 @@ public final class MicroArrayDataAction extends BaseAction {
     throws Exception {
     	
 		log.trace("Entering save");
-        if (!isTokenValid(request)) {
+/*        if (!isTokenValid(request)) {
 			return mapping.findForward("failure");
 		}
+*/		
         
 		MicroArrayDataForm microArrayDataForm = (MicroArrayDataForm) form;		
 		//CellLineForm cellLineForm = (CellLineForm) form;
@@ -175,7 +176,7 @@ public final class MicroArrayDataAction extends BaseAction {
 		}
 
 		log.trace("Exiting save");
-		resetToken(request);
+//		resetToken(request);
 
 		return mapping.findForward(theForward);
 	}
