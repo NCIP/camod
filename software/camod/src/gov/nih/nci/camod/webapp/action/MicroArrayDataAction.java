@@ -1,5 +1,5 @@
 /**
- * 
+ *
  * $Id: MicroArrayDataAction.java,v 1.7 2008-08-14 20:09:18 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
@@ -12,7 +12,7 @@
  * Revision 1.4  2006/04/17 19:09:41  pandyas
  * caMod 2.1 OM changes
  *
- * 
+ *
  */
 
 
@@ -43,7 +43,7 @@ import org.apache.struts.action.*;
  * MicroArrayDataAction Class
  */
 public final class MicroArrayDataAction extends BaseAction {
-	   
+
     /**
      * Edit
      * @param mapping
@@ -58,18 +58,19 @@ public final class MicroArrayDataAction extends BaseAction {
                               HttpServletResponse response)
     throws Exception {
 		log.trace("Entering edit");
-        if (!isTokenValid(request)) {
+/*        if (!isTokenValid(request)) {
 			return mapping.findForward("failure");
 		}
+*/
 
-		MicroArrayDataForm microArrayDataForm = (MicroArrayDataForm) form;	
-		
+		MicroArrayDataForm microArrayDataForm = (MicroArrayDataForm) form;
+
 		// Grab the current aCellID from the session
 		String aMicroArrayID = request.getParameter("aMicroArrayDataID");
-		
-		log.debug("<MicroArrayDataAction save> following Characteristics:" 
-				+ "\n\t CellLineName: " + microArrayDataForm.getExperimentName() 
-				+ "\n\t Experiment: " + microArrayDataForm.getUrl()				
+
+		log.debug("<MicroArrayDataAction save> following Characteristics:"
+				+ "\n\t CellLineName: " + microArrayDataForm.getExperimentName()
+				+ "\n\t Experiment: " + microArrayDataForm.getUrl()
 				+ "\n\t user: " + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
 		String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
@@ -77,13 +78,13 @@ public final class MicroArrayDataAction extends BaseAction {
 		try {
 			MicroArrayDataManager theMicroArrayDataManager = (MicroArrayDataManager) getBean("microArrayDataManager");
             if ("Delete".equals(theAction)) {
-                
+
                 // Grab the current modelID from the session
                 String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
                 AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
                 AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
-                
+
                 theMicroArrayDataManager.remove(aMicroArrayID, theAnimalModel);
 
 				ActionMessages msg = new ActionMessages();
@@ -111,7 +112,7 @@ public final class MicroArrayDataAction extends BaseAction {
 		}
 
 		log.trace("Exiting edit");
-		resetToken(request);
+//		resetToken(request);
 
 		return mapping.findForward("AnimalModelTreePopulateAction");
     }
@@ -129,21 +130,22 @@ public final class MicroArrayDataAction extends BaseAction {
                               HttpServletRequest request,
                               HttpServletResponse response)
     throws Exception {
-    	
+
 		log.trace("Entering save");
-        if (!isTokenValid(request)) {
+/*        if (!isTokenValid(request)) {
 			return mapping.findForward("failure");
 		}
-        
-		MicroArrayDataForm microArrayDataForm = (MicroArrayDataForm) form;		
+*/
+
+		MicroArrayDataForm microArrayDataForm = (MicroArrayDataForm) form;
 		//CellLineForm cellLineForm = (CellLineForm) form;
 
 		// Grab the current modelID from the session
 		String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
-		log.debug("<MicroArrayDataAction save> following Characteristics:" 
-				+ "\n\t CellLineName: " + microArrayDataForm.getExperimentName() 
-				+ "\n\t Experiment: " + microArrayDataForm.getUrl()				
+		log.debug("<MicroArrayDataAction save> following Characteristics:"
+				+ "\n\t CellLineName: " + microArrayDataForm.getExperimentName()
+				+ "\n\t Experiment: " + microArrayDataForm.getUrl()
 				+ "\n\t user: " + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
 		String theForward = "AnimalModelTreePopulateAction";
@@ -175,7 +177,7 @@ public final class MicroArrayDataAction extends BaseAction {
 		}
 
 		log.trace("Exiting save");
-		resetToken(request);
+//		resetToken(request);
 
 		return mapping.findForward(theForward);
 	}
