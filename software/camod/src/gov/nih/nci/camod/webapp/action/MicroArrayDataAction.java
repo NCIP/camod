@@ -58,10 +58,10 @@ public final class MicroArrayDataAction extends BaseAction {
                               HttpServletResponse response)
     throws Exception {
 		log.trace("Entering edit");
-        if (!isTokenValid(request)) {
+/*        if (!isTokenValid(request)) {
 			return mapping.findForward("failure");
 		}
-
+*/
 		MicroArrayDataForm microArrayDataForm = (MicroArrayDataForm) form;	
 		
 		// Grab the current aCellID from the session
@@ -111,7 +111,7 @@ public final class MicroArrayDataAction extends BaseAction {
 		}
 
 		log.trace("Exiting edit");
-		resetToken(request);
+//		resetToken(request);
 
 		return mapping.findForward("AnimalModelTreePopulateAction");
     }
