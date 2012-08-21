@@ -180,7 +180,7 @@
                                                       <td class="sidebarTitle" height="20">DID YOU KNOW?</td>
                                                   </tr>
                                                   <tr>
-                                                      <td class="sidebarContent" valign="top">caMOD 2.7.1 was released in May 2012.<br/><br/>
+                                                      <td class="sidebarContent" valign="top">caMOD 2.7.1 was released in September 2012.<br/><br/>
                                                       <html:link action="infoReleaseNotes.do">Release Notes</html:link><br/><br/>
                                                       </td>
                                                   </tr>
