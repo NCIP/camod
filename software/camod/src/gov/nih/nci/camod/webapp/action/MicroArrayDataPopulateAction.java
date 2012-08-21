@@ -64,7 +64,7 @@ public class MicroArrayDataPopulateAction extends BaseAction {
 			microArrayForm.setUrl(microArray.getUrl());			
 		}
 		
-		saveToken(request);
+//		saveToken(request);
 		return mapping.findForward("submitMicroarrayData");
 	}	
 

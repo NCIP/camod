@@ -26,7 +26,7 @@ caarray.host=caarraydb.nci.nih.gov
 #caimage.ftp.password=ncicblts
 caimage.ftp.server=lpgftp.nci.nih.gov
 caimage.ftp.username=lizardftp
-caimage.ftp.password=1amL!zrd
+caimage.ftp.password=xxxxxxxxx
 #caimage.host=cancerimages.nci.nih.gov
 caimage.host=@CAIMAGE_HOST@
 
@@ -59,7 +59,7 @@ ldap.initial.context.factory=com.sun.jndi.ldap.LdapCtxFactory
 #ldap.provider.url=ldaps://ncids4a.nci.nih.gov:636
 #ldap.provider.url=ldaps://cbioweb.nci.nih.gov:636
 #ldap.provider.url=ldaps://cbioweb-stage-ldap.nci.nih.gov:636
-ldap.provider.url=ldaps://ncids1b.nci.nih.gov:
+ldap.provider.url=ldaps://cbioweb-stage-ldap.nci.nih.gov:636
 ldap.security.authentication=simple
 ldap.security.protocol=ssl
 ldap.context=ou=nci,o=nih
