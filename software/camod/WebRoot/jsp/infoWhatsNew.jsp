@@ -25,7 +25,7 @@
 														   <TR>													
 																<TR>
 																	<TD class="formTitleBlue" colspan="2" height="20">
-																		Release of caMOD 2.7.1 - May 2012
+																		Release of caMOD 2.7.2 - October 2012
 																	</TD>
 																</TR>
 
@@ -41,16 +41,38 @@
 																</TR>
 																<TR>
 																	<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">
+																		Model Connection Changes
+																	</TD>
+																	<TD
+																		style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
+																		width="80%">
+																		Models are considered to be related when they have one or more of the following attributes have common values. They are the following: <br />
+																		<ul>
+																			<li>Entez Gene ID</li>
+																			<li>Allele identifier</li>
+																			<li>PMID number</li>
+																			<li>NSC number</li>
+																			<li>Microarray experiment data</li>
+																		</ul>  
+																		caMOD has been enhanced to display the related models as links within various pages. The following pages will display the related models if available.<br/>
+																		<ul>
+																			<li>GENETIC DESCRIPTION</li>
+																			<li>PUBLICATIONS</li>
+																			<li>THERAPEUTIC APPROACHES</li> 
+																			<li>MICROARRAYS</li>
+																		</ul>
+																	</TD>
+																</TR>																
+																<TR>
+																	<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">
 																		Various bug-fixes
 																	</TD>
 																	<TD
 																		style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
 																		width="80%">
-																		PubMed URL has changed and needed an update to use the XML format (JIRA# CAMOD-998) <br/>
-																		Added a disclaimer when redirecting to external sites (JIRA# CAMOD-999) <br/>
-																		MGI link to phenotypic allele detail page is broken for all engineered gene categories except targeted modification while using Firefox (JIRA# CAMOD-1000) <br/>
-																		Registration fields accepting Invalid Data has been fixed. (JIRA# CAMOD-1004) <br/>
-																		Completed activities to make caMOD 508 compliant. 
+																		Issue with duplication does not work for some fields has been fixed. (JIRA# CAMOD-656) <br/>
+																		Issue with images are not being displayed for some models has been fixed. (JIRA# CAMOD-994) <br/>
+																		Home Page link broken while viewing search results has been fixed. (JIRA# CAMOD-1010) <br/>
 																	</TD>
 																</TR>
 														</TR>			

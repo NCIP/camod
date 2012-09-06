@@ -23,8 +23,8 @@
  Release Notes 
      
                              caMOD
-                          Version 2.7.1
-                          May 2012
+                          Version 2.7.2
+                          October 2012
 
        National Cancer Institute's Center for Biomedical Informatics and Information Technology 
  
@@ -44,7 +44,7 @@
  
  
 ================================================================ 
-    1.0 caMOD Version 2.7.1 Introduction and History 
+    1.0 caMOD Version 2.7.2 Introduction and History 
 ================================================================ 
   
     caMOD 2.7.1, the Cancer Models Database, is a open source data management 
@@ -65,8 +65,11 @@
 ================================================================ 
     2.0 Release History 
 ================================================================ 
+     caMOD Version 2.7.2
+    --	October 2012
+
      caMOD Version 2.7.1
-    --	May 2012
+    --	September 2012
      
      caMOD Version 2.7
     --	Feb 2011
@@ -111,19 +114,30 @@
     3.0 New Features and Updates 
 ================================================================ 
 
-None.
+Model Connection Changes -
+
+Models are considered to be related when they have one or more of the following attributes have common values. They are the following: 
+	-- Entez Gene ID
+	-- Allele identifier
+	-- PMID number
+	-- NSC number
+	-- Microarray experiment data
+
+caMOD has been enhanced to display the related models as links within various pages. The following pages will display the related models if available.
+	-- GENETIC DESCRIPTION
+	-- PUBLICATIONS
+	-- THERAPEUTIC APPROACHES 
+	-- MICROARRAYS
    
    
 ================================================================ 
     4.0 Defects Fixed Since Last Release 
 ================================================================ 
 
-PubMed URL has changed and needed an update to use the XML format (JIRA# CAMOD-998)
-Added a disclaimer when redirecting to external sites (JIRA# CAMOD-999)
-MGI link to phenotypic allele detail page is broken for all engineered gene categories except targeted modification while using Firefox (JIRA# CAMOD-1000)
-Registration fields accepting Invalid Data has been fixed. (JIRA# CAMOD-1004)
-Completed activities to make caMOD 508 compliant.
- 
+Issue with duplication does not work for some fields has been fixed. (JIRA# CAMOD-656) 
+Issue with images are not being displayed for some models has been fixed. (JIRA# CAMOD-994) 
+Home Page link broken while viewing search results has been fixed. (JIRA# CAMOD-1010) 
+
 ================================================================ 
     5.0 Known Issues/Defects 
 ================================================================ 
