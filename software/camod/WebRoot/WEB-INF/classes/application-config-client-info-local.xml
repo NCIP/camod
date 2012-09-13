@@ -21,7 +21,7 @@
 	<bean id="cabio43ApplicationService" class="org.springframework.aop.framework.ProxyFactoryBean">
 		<property name="target">
 			<bean class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
-				<property name="serviceUrl" value="http://cabioapi.nci.nih.gov/cabio43/http/applicationService"/>
+				<property name="serviceUrl" value="http://cabioapi-stage.nci.nih.gov/cabio43/http/applicationService"/>
 				<property name="serviceInterface" value="gov.nih.nci.system.applicationservice.CaBioApplicationService"/>
 				<property name="httpInvokerRequestExecutor">
 				<bean class="gov.nih.nci.system.springframework.remoting.httpinvoker.GSIHttpInvokerRequestExecutor"/>
@@ -38,7 +38,7 @@
 				<bean class="org.acegisecurity.providers.rcp.RemoteAuthenticationProvider">
 					<property name="remoteAuthenticationManager">
 						<bean class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
-						    <property name="serviceUrl" value="http://cabioapi.nci.nih.gov/cabio43/http/remoteAuthenticationManager"/>
+						    <property name="serviceUrl" value="http://cabioapi-stage.nci.nih.gov/cabio43/http/remoteAuthenticationManager"/>
 						    <property name="serviceInterface" value="org.acegisecurity.providers.rcp.RemoteAuthenticationManager"/>
 						</bean>
 					</property>
