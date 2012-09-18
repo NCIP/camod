@@ -14,13 +14,15 @@
 	<property name="globus.lib.dir" value="${grid.service.dir}/globus_lib_files" />
 	<property name="resource.file.jboss-globus-lib" value="jboss-globus-libs-cagrid1_2.zip" />
 	<property name="grid.service.war.filename" value="wsrf-camod.war" />
+	<property name="grid.service.war.dir" value="grid1.4" />
+	<property name="grid.service.war.temp.dir" value="${grid.service.war.dir}/temp" />
 	
 	<property name="any.filename" value="camod.war" />
 		
 	<!-- Copy grid service to BDA folder (modify properties file in install.xml)  -->
 	<target name="copy-grid-service" depends="zip-globus-lib-files-to-bda,update-grid-service-local">	
 		<echoproperties prefix="grid"/>
-		<zip destfile="${grid.service.build.dir}/wsrf.zip" basedir="${temp.dir}" />	
+		<zip destfile="${grid.service.build.dir}/wsrf.zip" basedir="${grid.service.war.temp.dir}" />	
 		
 		<copy file="${log4j.file}" todir="${common.dir}"/>
     		<copy file="${ojdbc14.file}" todir="${common.dir}"/>
@@ -37,48 +39,48 @@
 	<!--                    Configure Remote Service  (Moved to BDA install.xml)                         -->
 	<!-- ************************************************************************************************-->
 	<target name="config-remote-service-url" depends="config-index-service-url">
-		    <replaceregexp file="${temp.dir}/${grid.service.war.filename}/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml" match="http://localhost:8080" replace="http://${camod.grid.jboss.server.hostname}" />
-		    <replaceregexp file="${temp.dir}/${grid.service.war.filename}/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml" match="8080" replace="${camod.grid.jboss.server.port}" />
+		    <replaceregexp file="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml" match="http://localhost:8080" replace="http://${camod.grid.jboss.server.hostname}" />
+		    <replaceregexp file="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/etc/cagrid_${grid.service.name}/jndi-config.xml" match="8080" replace="${camod.grid.jboss.server.port}" />
 	</target>	
 	
 	<!-- ************************************************************************************************-->
 	<!--                     Configure Index Service  (Moved to BDA install.xml)                         -->
 	<!-- ************************************************************************************************-->
 	<target name="config-index-service-url" depends="config-service-metadata">
-		<replace file="${temp.dir}/${grid.service.war.filename}/WEB-INF/etc/cagrid_${grid.service.name}/${grid.service.name}_registration.xml" token="http://cagrid-index.nci.nih.gov:8080/wsrf/services/DefaultIndexService" value="${camod.grid.index.url}"/>
+		<replace file="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/etc/cagrid_${grid.service.name}/${grid.service.name}_registration.xml" token="http://cagrid-index.nci.nih.gov:8080/wsrf/services/DefaultIndexService" value="${camod.grid.index.url}"/>
 		
-		<replace file="${temp.dir}/${grid.service.war.filename}/WEB-INF/etc/globus_resolution_service/jndi-config.xml" token="localhost:8080" value="${camod.grid.jboss.server.hostname}:${camod.grid.jboss.server.port}"/>
-		<replace file="${temp.dir}/${grid.service.war.filename}/WEB-INF/web.xml" token="19080" value="${camod.grid.jboss.server.port}"/>
+		<replace file="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/etc/globus_resolution_service/jndi-config.xml" token="localhost:8080" value="${camod.grid.jboss.server.hostname}:${camod.grid.jboss.server.port}"/>
+		<replace file="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/web.xml" token="19080" value="${camod.grid.jboss.server.port}"/>
 		
-		<copy file="conf/server-config.wsdd.template" tofile="${temp.dir}/${grid.service.war.filename}/WEB-INF/etc/globus_wsrf_core/server-config.wsdd" overwrite="true"/>
-		<replace file="${temp.dir}/${grid.service.war.filename}/WEB-INF/etc/globus_wsrf_core/server-config.wsdd" token="@LOGICAL_HOST@" value="${camod.grid.jboss.server.hostname}"/>
+		<copy file="conf/server-config.wsdd.template" tofile="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/etc/globus_wsrf_core/server-config.wsdd" overwrite="true"/>
+		<replace file="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/etc/globus_wsrf_core/server-config.wsdd" token="@LOGICAL_HOST@" value="${camod.grid.jboss.server.hostname}"/>
 		
-		<copy file="conf/web.xml.template" tofile="${temp.dir}/${grid.service.war.filename}/WEB-INF/web.xml" overwrite="true"/>
-		<replace file="${temp.dir}/${grid.service.war.filename}/WEB-INF/web.xml" token="@SERVER_PORT@" value="${camod.grid.jboss.server.port}"/>
-		<replace file="${temp.dir}/${grid.service.war.filename}/WEB-INF/web.xml" token="@APP_NAME@" value="${camod-grid-service.name}"/>		
+		<copy file="conf/web.xml.template" tofile="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/web.xml" overwrite="true"/>
+		<replace file="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/web.xml" token="@SERVER_PORT@" value="${camod.grid.jboss.server.port}"/>
+		<replace file="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/web.xml" token="@APP_NAME@" value="${camod-grid-service.name}"/>		
 	
 	</target>
 	
 	<!-- ************************************************************************************************-->
 	<!--                             Configure   Service    Metadata  (skip for NCICB)                   -->
 	<!-- ************************************************************************************************-->
-	<target name="config-service-metadata" >
-		<copy file="conf/serviceMetadata.xml.template" tofile="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" overwrite="true"/>
-		<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@SERVICE_NAME@" value="${grid.service.name}"/>
-	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@DISPLAY_NAME@" value="${displayName}"/>
-   	    <replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@SHORT_NAME@" value="${shortName}"/>
-	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@COUNTRY@" value="${country}"/>
-	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@LOCALITY@" value="${locality}"/>
-	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@POSTAL_CODE@" value="${postalCode}"/>
-	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@STATE@" value="${stateProvince}"/>
-	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@STREET1@" value="${street1}"/>
-	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@STREET2@" value="${street2}"/>
-	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@AFFILIATION@" value="${affiliation}"/>
-	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@EMAIL@" value="${email}"/>
-	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@FIRST_NAME@" value="${firstName}"/>
-	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@LAST_NAME@" value="${lastName}"/>
-	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@PHONE_NUMBER@" value="${phoneNumber}"/>
-	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@ROLE@" value="${role}"/>
+	<target name="config-service-metadata" depends="unzip-grid-service">
+		<copy file="conf/serviceMetadata.xml.template" tofile="${grid.service.war.temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" overwrite="true"/>
+		<replace file="${grid.service.war.temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@SERVICE_NAME@" value="${grid.service.name}"/>
+	   	<replace file="${grid.service.war.temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@DISPLAY_NAME@" value="${displayName}"/>
+   	    <replace file="${grid.service.war.temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@SHORT_NAME@" value="${shortName}"/>
+	   	<replace file="${grid.service.war.temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@COUNTRY@" value="${country}"/>
+	   	<replace file="${grid.service.war.temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@LOCALITY@" value="${locality}"/>
+	   	<replace file="${grid.service.war.temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@POSTAL_CODE@" value="${postalCode}"/>
+	   	<replace file="${grid.service.war.temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@STATE@" value="${stateProvince}"/>
+	   	<replace file="${grid.service.war.temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@STREET1@" value="${street1}"/>
+	   	<replace file="${grid.service.war.temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@STREET2@" value="${street2}"/>
+	   	<replace file="${grid.service.war.temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@AFFILIATION@" value="${affiliation}"/>
+	   	<replace file="${grid.service.war.temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@EMAIL@" value="${email}"/>
+	   	<replace file="${grid.service.war.temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@FIRST_NAME@" value="${firstName}"/>
+	   	<replace file="${grid.service.war.temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@LAST_NAME@" value="${lastName}"/>
+	   	<replace file="${grid.service.war.temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@PHONE_NUMBER@" value="${phoneNumber}"/>
+	   	<replace file="${grid.service.war.temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@ROLE@" value="${role}"/>
 	</target>	
 
     <!-- TARGET: copy_remote_api_war (used by BDA)
@@ -102,15 +104,20 @@
 	<target name="jar-any-file">
 		<delete dir="${artifacts.dir}" failonerror="false"/>
 		<mkdir dir="${artifacts.dir}"/>
-		<jar destfile="${artifacts.dir}/${any.filename}" basedir="${temp.dir}"/>
+		<jar destfile="${artifacts.dir}/${any.filename}" basedir="${grid.service.war.temp.dir}"/>
 	</target>	
 
 	<!-- LOCAL: Jar the grid service after modifying it for the various tiers (used outside BDA) -->
 	<target name="update-grid-service-local" depends="config-remote-service-url">
 		<delete dir="${artifacts.dir}" failonerror="false"/>
 		<mkdir dir="${artifacts.dir}"/>
-		<delete file="${temp.dir}/${grid.service.war.filename}/WEB-INF/lib/commons-logging.jar"/>
-		<delete dir="${temp.dir}/WEB-INF" failonerror="false"/>
+		<delete file="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/lib/commons-logging.jar"/>
+		<delete dir="${grid.service.war.temp.dir}/WEB-INF" failonerror="false"/>
 	</target>	
+	
+	<!-- Unzip Grid Service war  -->
+	<target name="unzip-grid-service">	
+		<unzip src="${grid.service.war.dir}/wsrf-camod.war.zip" dest="${grid.service.war.temp.dir}" />
+	</target>
 	
 </project>
