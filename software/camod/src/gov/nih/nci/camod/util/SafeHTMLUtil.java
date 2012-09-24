@@ -1,5 +1,5 @@
 /**
- * 
+ *
  * $Id: SafeHTMLUtil.java,v 1.10 2008-08-27 13:58:21 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
@@ -41,9 +41,9 @@
  * Concolidated all utility methods in new class
  * Re: Apps Scan run 05/15/2008
  *
- * 
+ *
  *  Author for class name and clean():  Ryan Landy
- *  Utility to clean malicious characters from code to prevent 
+ *  Utility to clean malicious characters from code to prevent
  *  SQL injection attacks
  *  Addeed utility methods from other sources to one central class
  *  htmlparser.jar  version 1.6  	release June 10, 2006
@@ -86,7 +86,7 @@ public class SafeHTMLUtil {
 		}
 		return clean;
 	}
-	
+
 	public static String cleanMinimal(String s) {
 		if( s != null ) {
 			String clean = Translate.decode(s).replace("<", "").replace(">", "");
@@ -98,9 +98,9 @@ public class SafeHTMLUtil {
 			}
 			return clean;
 		}
-		
+
 		return s;
-	}	
+	}
 
 	public static String cleanScript(String s) {
 		String clean = Translate.decode(s).replace("<", "").replace(">", "");
@@ -144,7 +144,6 @@ public class SafeHTMLUtil {
 		clean = StringUtils.replace(clean, "\"", "");
 		clean = StringUtils.replace(clean, "$", "");
 		clean = StringUtils.replace(clean, "\\", "");
-		clean = StringUtils.replace(clean, "/", "");
 		clean = StringUtils.replace(clean, "<", "");
 		clean = StringUtils.replace(clean, ">", "");
 		clean = StringUtils.replace(clean, "=", "");
@@ -255,7 +254,7 @@ public class SafeHTMLUtil {
 	/**
 	 * A utlity method to check the valid value againts the dropdown options
 	 * Author for method:
-	 * 
+	 *
 	 * @param input
 	 *            - the data to be validated
 	 * @param source
@@ -290,7 +289,7 @@ public class SafeHTMLUtil {
 	/**
 	 * A utility method to check the valid value against a string values Author
 	 * for method:
-	 * 
+	 *
 	 * @param input
 	 *            - the data to be validated
 	 * @param source
