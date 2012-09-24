@@ -539,10 +539,10 @@
 				<td class="GreyBox" width="30%"><b><c:out value="${relatedModelsText}" escapeXml="false"/></b></td>
 				<td class="GreyBoxRightEnd" width="70%">		
 					<logic:iterate id="rmdl" name="relatedModels" indexId="idx">	
-						<c:forEach  items="${rmdl.modelDescriptor}" >
+						<!-- c:forEach  items="${rmdl.modelDescriptor}" -->
 						<a target="_blank" href="ViewModelAction.do?unprotected_method=populateModelCharacteristics&aModelID=<c:out value="${rmdl.id}"/>"/><c:out value="${rmdl.modelDescriptor}" escapeXml="false"/></a>
 						&nbsp;(<c:out value="${rmdl.id}" escapeXml="false"/>)</br>						
-						</c:forEach>			
+						<!-- /c:forEach -->			
 					</logic:iterate>
 				</td>
 			</tr>
@@ -778,10 +778,10 @@
 				<td class="GreyBox" width="30%"><b><c:out value="${relatedModelsText}" escapeXml="false"/></b></td>
 				<td class="GreyBoxRightEnd" width="70%">		
 					<logic:iterate id="rmdl" name="relatedModels" indexId="idx">	
-						<c:forEach  items="${rmdl.modelDescriptor}" >
+						<!-- c:forEach  items="${rmdl.modelDescriptor}" -->
 						<a target="_blank" href="ViewModelAction.do?unprotected_method=populateModelCharacteristics&aModelID=<c:out value="${rmdl.id}"/>"/><c:out value="${rmdl.modelDescriptor}" escapeXml="false"/></a>
 						&nbsp;(<c:out value="${rmdl.id}" escapeXml="false"/>)</br>						
-						</c:forEach>			
+						<!-- /c:forEach -->			
 					</logic:iterate>
 				</td>
 			</tr>
@@ -1061,10 +1061,10 @@
 			<td class="GreyBox" width="30%"><b>Other caMOD entries citing this gene:</b></td>
 			<td class="GreyBoxRightEnd" width="70%">		
 				<logic:iterate id="rmdl" name="relatedModels" indexId="idx">	
-					<c:forEach  items="${rmdl.modelDescriptor}" >
+					<!--  c:forEach  items="${rmdl.modelDescriptor}" -->
 					<a target="_blank" href="ViewModelAction.do?unprotected_method=populateModelCharacteristics&aModelID=<c:out value="${rmdl.id}"/>"/><c:out value="${rmdl.modelDescriptor}" escapeXml="false"/></a>
 					&nbsp;(<c:out value="${rmdl.id}" escapeXml="false"/>)</br>						
-					</c:forEach>			
+					<!-- /c:forEach -->			
 				</logic:iterate>
 			</td>
 		</tr>
@@ -1094,10 +1094,10 @@
 				<td class="GreyBox" width="30%"><b><c:out value="${relatedModelsText}" escapeXml="false"/></b></td>
 				<td class="GreyBoxRightEnd" width="70%">		
 					<logic:iterate id="rmdl" name="relatedModels" indexId="idx">	
-						<c:forEach  items="${rmdl.modelDescriptor}" >
+						<!--  c:forEach  items="${rmdl.modelDescriptor}" -->
 						<a target="_blank" href="ViewModelAction.do?unprotected_method=populateModelCharacteristics&aModelID=<c:out value="${rmdl.id}"/>"/><c:out value="${rmdl.modelDescriptor}" escapeXml="false"/></a>
 						&nbsp;(<c:out value="${rmdl.id}" escapeXml="false"/>)</br>						
-						</c:forEach>			
+						<!-- /c:forEach -->			
 					</logic:iterate>
 				</td>
 			</tr>
@@ -1288,10 +1288,10 @@
 				<td class="GreyBox" width="30%"><b><c:out value="${relatedModelsText}" escapeXml="false"/></b></td>
 				<td class="GreyBoxRightEnd" width="70%">		
 					<logic:iterate id="rmdl" name="relatedModels" indexId="idx">	
-						<c:forEach  items="${rmdl.modelDescriptor}" >
+						<!-- c:forEach  items="${rmdl.modelDescriptor}" -->
 						<a target="_blank" href="ViewModelAction.do?unprotected_method=populateModelCharacteristics&aModelID=<c:out value="${rmdl.id}"/>"/><c:out value="${rmdl.modelDescriptor}" escapeXml="false"/></a>
 						&nbsp;(<c:out value="${rmdl.id}" escapeXml="false"/>)</br>						
-						</c:forEach>			
+						<!-- /c:forEach -->			
 					</logic:iterate>
 				</td>
 			</tr>
@@ -1434,10 +1434,10 @@
 				<td class="GreyBox" width="30%"><b><c:out value="${relatedModelsText}" escapeXml="false"/></b></td>
 				<td class="GreyBoxRightEnd" width="70%">		
 					<logic:iterate id="rmdl" name="relatedModels" indexId="idx">	
-						<c:forEach  items="${rmdl.modelDescriptor}" >
+						<!-- c:forEach  items="${rmdl.modelDescriptor}" -->
 						<a target="_blank" href="ViewModelAction.do?unprotected_method=populateModelCharacteristics&aModelID=<c:out value="${rmdl.id}"/>"/><c:out value="${rmdl.modelDescriptor}" escapeXml="false"/></a>
 						&nbsp;(<c:out value="${rmdl.id}" escapeXml="false"/>)</br>						
-						</c:forEach>			
+						<!-- /c:forEach -->			
 					</logic:iterate>
 				</td>
 			</tr>
