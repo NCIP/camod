@@ -3936,7 +3936,7 @@ public class QueryManagerImpl extends BaseManager
         	list1.addAll(list3);
         	
         	// List of all distinct AnimalModel Ids
-        	HashSet unique = new HashSet(list1);
+        	LinkedHashSet unique = new LinkedHashSet(list1);
         	pmids = new ArrayList( unique );  
         	
         	theAnimalModels = (List) pmids;
@@ -3969,8 +3969,8 @@ public class QueryManagerImpl extends BaseManager
 						        		+ " where t.agent.id = a.id and a.nscNumber = '" + nscNumber + "' ) " 
 						        		+ " AND am.id NOT IN "		
 						        		+ " (select t.absCancerModelId from Therapy t " 
-						        		+ " where t.absCancerModelId = '" + modelId + "' ) ";
-     	
+						        		+ " where t.absCancerModelId = '" + modelId + "' ) "
+        								+ " ORDER BY am.id asc ";
         	
         	log.info("HQL1= " + theAgentQuery1 );
         	
@@ -3981,7 +3981,7 @@ public class QueryManagerImpl extends BaseManager
         	log.info("list1.size()= " + list1.size() );      
         	
         	// List of all distinct AnimalModel Ids
-        	HashSet unique = new HashSet(list1);
+        	LinkedHashSet unique = new LinkedHashSet(list1);
         	nscNums = new ArrayList( unique );  
         	
         	theAnimalModels = (List) nscNums;
@@ -4017,7 +4017,8 @@ public class QueryManagerImpl extends BaseManager
 							        		+ " where eg.mutationIdentifier.id = mi.id and mi.mgiId = '" + mgiId + "' ) " 
 							        		+ " AND am.id NOT IN "		
 							        		+ " (select eg.absCancerModelId from EngineeredGene eg " 
-							        		+ " where eg.absCancerModelId = '" + modelId + "' ) ";
+							        		+ " where eg.absCancerModelId = '" + modelId + "' ) "
+							        		+ " ORDER BY am.id asc ";
         	else
 	        	theAgentQuery1 = " from AnimalModel as am where am.state = 'Edited-approved' "
 					        				+ " AND am.availability.releaseDate <= sysdate " 
@@ -4026,7 +4027,8 @@ public class QueryManagerImpl extends BaseManager
 							        		+ " where sm.mutationIdentifier.id = mi.id and mi.mgiId = '" + mgiId + "' ) " 
 							        		+ " AND am.id NOT IN "		
 							        		+ " (select sm.absCancerModelId from SpontaneousMutation sm " 
-							        		+ " where sm.cancerModel.id = '" + modelId + "' ) ";
+							        		+ " where sm.cancerModel.id = '" + modelId + "' ) "
+							        		+ " ORDER BY am.id asc ";
         		
      	
         	
@@ -4039,7 +4041,7 @@ public class QueryManagerImpl extends BaseManager
         	log.info("list1.size()= " + list1.size() );      
         	
         	// List of all distinct AnimalModel Ids
-        	HashSet unique = new HashSet(list1);
+        	LinkedHashSet unique = new LinkedHashSet(list1);
         	mgiIds = new ArrayList( unique );  
         	
         	theAnimalModels = (List) mgiIds;
@@ -4074,7 +4076,8 @@ public class QueryManagerImpl extends BaseManager
 						        		+ " where eg.mutationIdentifier.id = mi.id and mi.rgdId = '" + rgdId + "' ) " 
 						        		+ " AND am.id NOT IN "		
 						        		+ " (select eg.absCancerModelId from EngineeredGene eg " 
-						        		+ " where eg.absCancerModelId = '" + modelId + "' ) ";
+						        		+ " where eg.absCancerModelId = '" + modelId + "' ) "
+						        		+ " ORDER BY am.id asc ";
         	else
         		theAgentQuery1 = " from AnimalModel as am where am.state = 'Edited-approved' "
 				        				+ " AND am.availability.releaseDate <= sysdate " 
@@ -4083,7 +4086,8 @@ public class QueryManagerImpl extends BaseManager
 						        		+ " where sm.mutationIdentifier.id = mi.id and mi.rgdId = '" + rgdId + "' ) " 
 						        		+ " AND am.id NOT IN "		
 						        		+ " (select sm.absCancerModelId from SpontaneousMutation sm " 
-						        		+ " where sm.cancerModel.id = '" + modelId + "' ) ";
+						        		+ " where sm.cancerModel.id = '" + modelId + "' ) "
+						        		+ " ORDER BY am.id asc ";
         		
      	
         	
@@ -4096,7 +4100,7 @@ public class QueryManagerImpl extends BaseManager
         	log.info("list1.size()= " + list1.size() );      
         	
         	// List of all distinct AnimalModel Ids
-        	HashSet unique = new HashSet(list1);
+        	LinkedHashSet unique = new LinkedHashSet(list1);
         	rgdIds = new ArrayList( unique );  
         	
         	theAnimalModels = (List) rgdIds;
@@ -4132,7 +4136,8 @@ public class QueryManagerImpl extends BaseManager
 						        		+ " where eg.mutationIdentifier.id = mi.id and mi.zfinId = '" + zfinId + "' ) " 
 						        		+ " AND am.id NOT IN "		
 						        		+ " (select eg.absCancerModelId from EngineeredGene eg " 
-						        		+ " where eg.absCancerModelId = '" + modelId + "' ) ";
+						        		+ " where eg.absCancerModelId = '" + modelId + "' ) "
+						        		+ " ORDER BY am.id asc ";
         	else
         		theAgentQuery1 = " from AnimalModel as am where am.state = 'Edited-approved' "
 				        				+ " AND am.availability.releaseDate <= sysdate " 
@@ -4141,7 +4146,8 @@ public class QueryManagerImpl extends BaseManager
 						        		+ " where sm.mutationIdentifier.id = mi.id and mi.zfinId = '" + zfinId + "' ) " 
 						        		+ " AND am.id NOT IN "		
 						        		+ " (select sm.absCancerModelId from SpontaneousMutation sm " 
-						        		+ " where sm.absCancerModelId = '" + modelId + "' ) ";
+						        		+ " where sm.absCancerModelId = '" + modelId + "' ) "
+						        		+ " ORDER BY am.id asc ";
         		
      	
         	
@@ -4154,7 +4160,7 @@ public class QueryManagerImpl extends BaseManager
         	log.info("list1.size()= " + list1.size() );      
         	
         	// List of all distinct AnimalModel Ids
-        	HashSet unique = new HashSet(list1);
+        	LinkedHashSet unique = new LinkedHashSet(list1);
         	zfinIds = new ArrayList( unique );  
         	
         	theAnimalModels = (List) zfinIds;
@@ -4189,7 +4195,8 @@ public class QueryManagerImpl extends BaseManager
 						        		+ " where tm.geneIdentifier.id = gi.id and gi.entrezGeneID = '" + entrezGeneId + "' ) "
 						        		+ " AND am.id NOT IN "		
 						        		+ " (select eg.absCancerModelId from EngineeredGene eg " 
-						        		+ " where eg.absCancerModelId = '" + modelId + "' ) ";						        		
+						        		+ " where eg.absCancerModelId = '" + modelId + "' ) "
+						        		+ " ORDER BY am.id asc ";
 
      	
         	
@@ -4202,7 +4209,7 @@ public class QueryManagerImpl extends BaseManager
         	log.info("list1.size()= " + list1.size() );      
         	
         	// List of all distinct AnimalModel Ids
-        	HashSet unique = new HashSet(list1);
+        	LinkedHashSet unique = new LinkedHashSet(list1);
         	entrezGenes = new ArrayList( unique );  
         	
         	theAnimalModels = (List) entrezGenes;
@@ -4234,7 +4241,8 @@ public class QueryManagerImpl extends BaseManager
 						        		+ " and mad.experimentName = '" + experimentName + "' ) "
 						        		+ " AND am.id NOT IN "		
 						        		+ " (select mad.absCancerModelId from MicroArrayData mad " 
-						        		+ " where mad.absCancerModelId = '" + modelId + "' ) ";		
+						        		+ " where mad.absCancerModelId = '" + modelId + "' ) "
+						        		+ " ORDER BY am.id asc ";
         	
         	
         	log.info("HQL1= " + theMicroArrayQuery1 );
@@ -4246,7 +4254,7 @@ public class QueryManagerImpl extends BaseManager
         	log.info("list1.size()= " + list1.size() );      
         	
         	// List of all distinct AnimalModel Ids
-        	HashSet unique = new HashSet(list1);
+        	LinkedHashSet unique = new LinkedHashSet(list1);
         	microArrays = new ArrayList( unique );  
         	
         	theAnimalModels = (List) microArrays;
