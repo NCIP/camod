@@ -47,7 +47,7 @@
     1.0 caMOD Version 2.7.2 Introduction and History 
 ================================================================ 
   
-    caMOD 2.7.1, the Cancer Models Database, is a open source data management 
+    caMOD 2.7.2, the Cancer Models Database, is a open source data management 
     system developed for the management and sharing of data of animal models. 
     caMOD features controlled vocabularies from a shared, publicly accessible metadata repository (caDSR) and 
     enterprise vocabulary services (EVS) from the National 
