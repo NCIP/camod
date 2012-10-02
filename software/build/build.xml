@@ -124,6 +124,7 @@
 			<property name="caimage.modelview.uri" value="${caimage.modelview.uri}" />
 			<property name="caimage.genconview.uri" value="${caimage.genconview.uri}" />
 			<property name="evs.uri" value="${evs.uri}" />
+			<property name="user.registration.email" value="${user.registration.email}" />
 			<property name="mail.smtp.server" value="${mail.smtp.server}" />
 			<property name="ldap.url" value="${ldap.url}" />
 			<property name="ldap.basedn" value="${ldap.basedn}" />
