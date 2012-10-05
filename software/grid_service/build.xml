@@ -10,10 +10,10 @@
 	<property name="temp.dir" value="temp" />
 	<property name="war.dir" value="war" />
 	<property name="grid.service.dir" value="grid_service" />
-	<property name="grid.service.war" value="grid_service/wsrf-camod.war" />
+	<property name="grid.service.war" value="grid_service/wsrf.war" />
 	<property name="globus.lib.dir" value="${grid.service.dir}/globus_lib_files" />
 	<property name="resource.file.jboss-globus-lib" value="jboss-globus-libs-cagrid1_2.zip" />
-	<property name="grid.service.war.filename" value="wsrf-camod.war" />
+	<property name="grid.service.war.filename" value="wsrf.war" />
 	<property name="grid.service.war.dir" value="grid1.4" />
 	<property name="grid.service.war.temp.dir" value="${grid.service.war.dir}/temp" />
 	
