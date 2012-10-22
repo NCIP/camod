@@ -84,9 +84,9 @@
 	</target>	
 	
 	<target name="config-hibernate-cfg">
-		<replaceregexp file="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/hibernate.cfg.xml" match="database.user" replace="${database.user}" />
-		<replaceregexp file="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/hibernate.cfg.xml" match="database.password" replace="${database.password}" />
-		<replaceregexp file="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/hibernate.cfg.xml" match="database.url" replace="${database.url}" />
+		<replaceregexp file="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/classes/hibernate.cfg.xml" match="database.user" replace="${database.user}" />
+		<replaceregexp file="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/classes/hibernate.cfg.xml" match="database.password" replace="${database.password}" />
+		<replaceregexp file="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/classes/hibernate.cfg.xml" match="database.url" replace="${database.url}" />
 	</target>
 
     <!-- TARGET: copy_remote_api_war (used by BDA)
