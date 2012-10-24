@@ -65,22 +65,22 @@
 	<!--                             Configure   Service    Metadata  (skip for NCICB)                   -->
 	<!-- ************************************************************************************************-->
 	<target name="config-service-metadata" depends="unzip-grid-service,config-hibernate-cfg">
-		<copy file="conf/serviceMetadata.xml.template" tofile="${grid.service.war.temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" overwrite="true"/>
-		<replace file="${grid.service.war.temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@SERVICE_NAME@" value="${grid.service.name}"/>
-	   	<replace file="${grid.service.war.temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@DISPLAY_NAME@" value="${displayName}"/>
-   	    <replace file="${grid.service.war.temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@SHORT_NAME@" value="${shortName}"/>
-	   	<replace file="${grid.service.war.temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@COUNTRY@" value="${country}"/>
-	   	<replace file="${grid.service.war.temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@LOCALITY@" value="${locality}"/>
-	   	<replace file="${grid.service.war.temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@POSTAL_CODE@" value="${postalCode}"/>
-	   	<replace file="${grid.service.war.temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@STATE@" value="${stateProvince}"/>
-	   	<replace file="${grid.service.war.temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@STREET1@" value="${street1}"/>
-	   	<replace file="${grid.service.war.temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@STREET2@" value="${street2}"/>
-	   	<replace file="${grid.service.war.temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@AFFILIATION@" value="${affiliation}"/>
-	   	<replace file="${grid.service.war.temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@EMAIL@" value="${email}"/>
-	   	<replace file="${grid.service.war.temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@FIRST_NAME@" value="${firstName}"/>
-	   	<replace file="${grid.service.war.temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@LAST_NAME@" value="${lastName}"/>
-	   	<replace file="${grid.service.war.temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@PHONE_NUMBER@" value="${phoneNumber}"/>
-	   	<replace file="${grid.service.war.temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@ROLE@" value="${role}"/>
+		<copy file="conf/serviceMetadata.xml.template" tofile="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" overwrite="true"/>
+		<replace file="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@SERVICE_NAME@" value="${grid.service.name}"/>
+	   	<replace file="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@DISPLAY_NAME@" value="${displayName}"/>
+   	    <replace file="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@SHORT_NAME@" value="${shortName}"/>
+	   	<replace file="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@COUNTRY@" value="${country}"/>
+	   	<replace file="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@LOCALITY@" value="${locality}"/>
+	   	<replace file="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@POSTAL_CODE@" value="${postalCode}"/>
+	   	<replace file="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@STATE@" value="${stateProvince}"/>
+	   	<replace file="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@STREET1@" value="${street1}"/>
+	   	<replace file="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@STREET2@" value="${street2}"/>
+	   	<replace file="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@AFFILIATION@" value="${affiliation}"/>
+	   	<replace file="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@EMAIL@" value="${email}"/>
+	   	<replace file="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@FIRST_NAME@" value="${firstName}"/>
+	   	<replace file="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@LAST_NAME@" value="${lastName}"/>
+	   	<replace file="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@PHONE_NUMBER@" value="${phoneNumber}"/>
+	   	<replace file="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@ROLE@" value="${role}"/>
 	</target>	
 	
 	<target name="config-hibernate-cfg">
