@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ns1:ServiceMetadata xmlns:ns1="gme://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata">
   <ns1:serviceDescription>
-    <ns2:Service xmlns:ns2="gme://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata.service" description="@DISPLAY_NAME@" name="@SERVICE_NAME@" version="1.4">
+    <ns2:Service xmlns:ns2="gme://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata.service" description="@DESCRIPTION@" name="@SERVICE_NAME@" version="1.4">
       <ns2:pointOfContactCollection>
         <ns3:PointOfContact xmlns:ns3="gme://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata.common" affiliation="NCICB" email="ulrike@nci.nih.gov" firstName="Ulli" lastName="Wagner" phoneNumber="" role="Business Analyst" />
       </ns2:pointOfContactCollection>

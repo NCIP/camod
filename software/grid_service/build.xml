@@ -81,6 +81,7 @@
 	   	<replace file="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@LAST_NAME@" value="${lastName}"/>
 	   	<replace file="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@PHONE_NUMBER@" value="${phoneNumber}"/>
 	   	<replace file="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@ROLE@" value="${role}"/>
+		<replace file="${grid.service.war.temp.dir}/${grid.service.war.filename}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@DESCRIPTION@" value="${description}"/>
 	</target>	
 	
 	<target name="config-hibernate-cfg">
