@@ -247,6 +247,9 @@ import gov.nih.nci.common.domain.DatabaseCrossReference;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
 import gov.nih.nci.system.applicationservice.CaBioApplicationService;
 import gov.nih.nci.system.client.ApplicationServiceProvider;
+import gov.nih.nci.camod.biodbnet.BioDBnetService;
+import gov.nih.nci.camod.biodbnet.Db2DbParams;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -496,6 +499,21 @@ public class ViewModelAction extends BaseAction
                 {
                     log.info("Connecting to caBIO to look up gene " + geneIdentifier);
                     // the geneId is available
+                    Gene myGene = new Gene();
+                    BioDBnetService bioDBnetService = BioDBnetService.getService();
+                    Db2DbParams db2DbParams = bioDBnetService.setupInputs(geneIdentifier.getEntrezGeneID());
+
+                    db2DbParams = bioDBnetService.setupOutput(db2DbParams, BioDBnetService.GENE_INFO);
+                    myGene = bioDBnetService.searchForGeneInfo(myGene, db2DbParams);
+                    
+                    db2DbParams = bioDBnetService.setupOutput(db2DbParams, BioDBnetService.BIOCARTA_PATHWAY_NAME);
+                    myGene = bioDBnetService.searchForBiocartaPathways(myGene, db2DbParams);
+
+                    db2DbParams = bioDBnetService.setupOutput(db2DbParams, BioDBnetService.GENE_ONTOLOGY);
+                    myGene = bioDBnetService.searchForGeneOntology(myGene, db2DbParams);
+
+                    tmGeneMap.put(tm.getId(), myGene);
+            /*
                     try
                     {
                     	CaBioApplicationService appService = (CaBioApplicationService)ApplicationServiceProvider.getApplicationService();
@@ -527,7 +545,7 @@ public class ViewModelAction extends BaseAction
                     {
                         log.error("ViewModelAction Unable to get information from caBIO", e);
                     }
-                    
+             */
                     /* Get list of related models by entrez gene id
                     if (geneIdentifier != null)
                     {
