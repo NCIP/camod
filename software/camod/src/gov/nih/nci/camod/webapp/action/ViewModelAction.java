@@ -503,15 +503,9 @@ public class ViewModelAction extends BaseAction
                     BioDBnetService bioDBnetService = BioDBnetService.getService();
                     Db2DbParams db2DbParams = bioDBnetService.setupInputs(geneIdentifier.getEntrezGeneID());
 
-                    db2DbParams = bioDBnetService.setupOutput(db2DbParams, BioDBnetService.GENE_INFO);
-                    myGene = bioDBnetService.searchForGeneInfo(myGene, db2DbParams);
+                    db2DbParams = bioDBnetService.setupOutput(db2DbParams, BioDBnetService.GENETIC_INFO_ALL);
+                    myGene = bioDBnetService.search(myGene, db2DbParams);
                     
-                    db2DbParams = bioDBnetService.setupOutput(db2DbParams, BioDBnetService.BIOCARTA_PATHWAY_NAME);
-                    myGene = bioDBnetService.searchForBiocartaPathways(myGene, db2DbParams);
-
-                    db2DbParams = bioDBnetService.setupOutput(db2DbParams, BioDBnetService.GENE_ONTOLOGY);
-                    myGene = bioDBnetService.searchForGeneOntology(myGene, db2DbParams);
-
                     tmGeneMap.put(tm.getId(), myGene);
             /*
                     try

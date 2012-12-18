@@ -21,7 +21,7 @@ public class BioDBnetService {
 	public static final String GENE_INFO = "Gene Info, Taxon ID";
 	public static final String BIOCARTA_PATHWAY_NAME = "Biocarta Pathway Name";
 	public static final String GENE_ONTOLOGY = "GO - Biological Process, GO - Cellular Component, GO - Molecular Function";
-	public static final String GENETIC_INFO = "Gene Info, Gene Symbol, Taxon ID, Biocarta Pathway Name, GO - Biological Process, GO - Cellular Component, GO - Molecular Function";
+	public static final String GENETIC_INFO_ALL = "Gene Info, Taxon ID, Biocarta Pathway Name, GO - Biological Process, GO - Cellular Component, GO - Molecular Function";
 	
 	static {
 		service = new BioDBnet();
@@ -53,12 +53,8 @@ public class BioDBnetService {
 		return client.db2Db(db2DbParams);
 	}
 	
-	public static Gene searchForBiocartaPathways(Gene gene, Db2DbParams db2DbParams) {
-		String db2dbResult = search(db2DbParams);
-		
-		db2dbResult = db2dbResult.substring( db2dbResult.indexOf(db2DbParams.getInputValues()) + db2DbParams.getInputValues().length() + 1 );
-		 
-		 String[] arr = db2dbResult.split(";");
+	public static Gene setupBiocartaPathways(Gene gene, String bioCartaPathways) {
+		 String[] arr = bioCartaPathways.split(";");
 		 Collection<Pathway> pathwayCollection = new ArrayList<Pathway>();
 		 for ( int i=0;i<arr.length;i++ ) {
 			 if( arr[i].indexOf("[") != -1) {
@@ -74,12 +70,11 @@ public class BioDBnetService {
 		 return gene;
 	}
 	
-	public static Gene searchForGeneInfo(Gene gene, Db2DbParams db2DbParams) {
-		String db2dbResult = search(db2DbParams);
+	public static Gene setupGeneInfo(Gene gene, String geneInfo) {
 		
-		db2dbResult = db2dbResult.substring( db2dbResult.indexOf("[") );
+		geneInfo = geneInfo.substring( geneInfo.indexOf("[") );
 		 
-		 String[] arr = db2dbResult.split("]");
+		 String[] arr = geneInfo.split("]");
 		 for ( int i=0;i<arr.length;i++ ) {
 			 if( arr[i].indexOf("Gene Symbol:") != -1 ) {
 				 gene.setSymbol(arr[i].substring( arr[i].indexOf(":") + 2 ) );
@@ -87,9 +82,20 @@ public class BioDBnetService {
 			 else if( arr[i].indexOf("Description:") != -1 ) {
 				 gene.setFullName(arr[i].substring( arr[i].indexOf(":") + 2 ) );
 			 }
-			 else if( arr[i].indexOf("Scientific Name:") != -1 ) {
+		 }
+		 
+		 return gene;
+	}
+	
+	public static Gene setupTaxonId(Gene gene, String taxonId) {
+		
+		 taxonId = taxonId.substring( taxonId.indexOf("[") );
+		 
+		 String[] taxonArr = taxonId.split("]");
+		 for ( int i=0;i<taxonArr.length;i++ ) {
+			 if( taxonArr[i].indexOf("Scientific Name:") != -1 ) {
 				 Taxon taxon = new Taxon();
-				 taxon.setAbbreviation(arr[i].substring( arr[i].indexOf(":") + 2 ) );
+				 taxon.setAbbreviation(taxonArr[i].substring( taxonArr[i].indexOf(":") + 2 ) );
 				 gene.setTaxon(taxon);
 			 }
 		 }
@@ -97,14 +103,8 @@ public class BioDBnetService {
 		 return gene;
 	}
 	
-	public static Gene searchForGeneOntology(Gene gene, Db2DbParams db2DbParams) {
-		 String db2dbResult = search(db2DbParams);
-		
-		 db2dbResult = db2dbResult.substring( db2dbResult.indexOf(db2DbParams.getInputValues()) + db2DbParams.getInputValues().length() + 1 );
-		 // multiple GO Search in the Params. need to remove TABs and insert ;
-		 db2dbResult = db2dbResult.replaceAll("]\t", "];");
-		 
-		 String[] arr = db2dbResult.split(";");
+	public static Gene setupGeneOntology(Gene gene, String geneOntologies) {
+		 String[] arr = geneOntologies.split(";");
 		 Collection<GeneOntology> geneOntologyCollection = new ArrayList<GeneOntology>();
 		 for ( int i=0;i<arr.length;i++ ) {
 			 if( arr[i].indexOf("[") != -1) {
@@ -125,6 +125,24 @@ public class BioDBnetService {
 		 
 		 gene.setGeneOntologyCollection(geneOntologyCollection);
 		 return gene;
+	}
+	
+	public static Gene search(Gene gene, Db2DbParams db2DbParams) {
+		String db2dbResult = search(db2DbParams);
+		// Remove Headers
+		db2dbResult = db2dbResult.substring(db2dbResult.indexOf("\n")+1);
+		
+		// Split Columns
+		String[] geneInfoArray = db2dbResult.split("\t");
+		
+		gene = setupGeneInfo(gene, geneInfoArray[1]);
+		gene = setupTaxonId(gene, geneInfoArray[2]);
+		gene = setupBiocartaPathways(gene, geneInfoArray[3]);
+		
+		String geneOntologies = geneInfoArray[4] + ";" + geneInfoArray[5] + ";" + geneInfoArray[6] + ";";
+		gene = setupGeneOntology(gene, geneOntologies);
+		
+		return gene;
 	}
 
 }
