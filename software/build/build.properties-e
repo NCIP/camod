@@ -86,10 +86,12 @@ caimage.genconview.uri=http://ncias-d330-v.nci.nih.gov:19080/adore-djatoka/image
 
 evs.uri=http://lexevsapi51.nci.nih.gov/lexevsapi51
 
+user.registration.email=ulrike@mail.nih.gov
+
 ########################
 # JBOSS LOCAL SETTINGS #
 ########################
 
-jboss.install.dir=C:/bin/jboss-4.0.5.GA/
+jboss.install.dir=C:/bin/jboss-5.1.0.GA/
 jboss.server.name=default
 jboss.deploy.dir=${jboss.install.dir}server/${jboss.server.name}/deploy

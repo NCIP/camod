@@ -59,6 +59,7 @@
 		    <filter token="CAIMAGE_MODELVIEW" value="${caimage.modelview.uri}"/>
 		    <filter token="CAIMAGE_GENCONVIEW" value="${caimage.genconview.uri}"/>
     	  	<filter token="EVS_URI" value="${evs.uri}"/>
+    	  	<filter token="USER_REGISTRATION_EMAIL" value="${user.registration.email}"/>
 		  </filterset>
 	</copy>
 	

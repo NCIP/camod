@@ -1314,24 +1314,26 @@ public class AnimalModelSearchResult implements Comparable
             	// simply display organ.name since EVSPreferredDescription is too slow in LexEVS 5.x API
             	String theOrgan = theHistopathology.getOrgan().getName();
             	
-                if (!theOrgans.contains(theOrgan))
-                {
-                    theOrgans.add(theOrgan);
-                    theMetas.put(theOrgan, new TreeSet<String>());
-                }
-
-                TreeSet<String> theMetaSet = theMetas.get(theOrgan);
-                Set<Histopathology> theMetastasisSet = theHistopathology.getMetastasisCollection();
-                
-                for (Histopathology theMetastasis : theMetastasisSet)
-                {
-                	// simply display organ.name since EVSPreferredDescription is too slow in LexEVS 5.x API
-                    String theMetaOrgan = theMetastasis.getOrgan().getName();
-                    if (!theMetaSet.contains(theMetaOrgan))
-                    {
-                        theMetaSet.add(theMetaOrgan);
-                    }
-                }
+            	if( theOrgan != null ) {
+	            	if (!theOrgans.contains(theOrgan))
+	                {
+	                    theOrgans.add(theOrgan);
+	                    theMetas.put(theOrgan, new TreeSet<String>());
+	                }
+	
+	                TreeSet<String> theMetaSet = theMetas.get(theOrgan);
+	                Set<Histopathology> theMetastasisSet = theHistopathology.getMetastasisCollection();
+	                
+	                for (Histopathology theMetastasis : theMetastasisSet)
+	                {
+	                	// simply display organ.name since EVSPreferredDescription is too slow in LexEVS 5.x API
+	                    String theMetaOrgan = theMetastasis.getOrgan().getName();
+	                    if (!theMetaSet.contains(theMetaOrgan))
+	                    {
+	                        theMetaSet.add(theMetaOrgan);
+	                    }
+	                }
+            	}
             }
         }
 
