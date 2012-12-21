@@ -20,7 +20,7 @@ public class WebServiceClient {
 		 
 		 String input = "Gene ID";
 		 String inputValues = "18128";	
-		 String outputs = "Gene Info, Gene Symbol, Taxon ID, Biocarta Pathway Name, GO - Biological Process, GO - Cellular Component, GO - Molecular Function";
+		 String outputs = "Gene Info, Gene Symbol, Taxon ID, Biocarta Pathway Name, GO - Biological Process, GO - Cellular Component, GO - Molecular Function, UniGene ID";
 //		 String outputs = "Gene Info, Taxon ID";
 //		 String outputs = "Biocarta Pathway Name";
 //		 String outputs = "GO - Biological Process, GO - Cellular Component, GO - Molecular Function";
@@ -56,6 +56,7 @@ public class WebServiceClient {
 		 System.out.println(test[5]);
 		 System.out.println(test[6]);
 		 System.out.println(test[7]);
+		 System.out.println(test[8]);
 //		 String dbFindResult = client.dbFind(output, inputValues, taxonId);
 //		 String dbWalkResult = client.dbWalk(dbPath, inputValues, taxonId);
 //		 String dbOrthoResult = client.dbOrtho(input, output, inputValues, taxonId, outputTaxon);

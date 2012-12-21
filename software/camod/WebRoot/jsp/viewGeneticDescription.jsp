@@ -1007,9 +1007,9 @@
 	            <td class="GreyBox" width="35%"><b>Gene Info</b></td>
 	            <td class="GreyBoxRightEnd" width="65%">
 	            	<camod:highlight>
-	            		<c:out value="${gene.taxon.abbreviation}" escapeXml="false"/>.&nbsp; 
-			            <c:out value="${gene.symbol}" escapeXml="false"/>.&nbsp; 
-		    	        <c:out value="${gene.fullName}" escapeXml="false"/>&nbsp;
+			            <c:out value="${gene.symbol}" escapeXml="false"/>&nbsp; 
+		    	        <c:out value="(${gene.fullName})" escapeXml="false"/>,&nbsp;
+	            		<c:out value="${gene.taxon.scientificName}" escapeXml="false"/>&nbsp;		    	        
 		    	    </camod:highlight>
 	            </td>
 	        </tr>
@@ -1046,7 +1046,7 @@
 						<c:forEach var="item" items="${gene.pathwayCollection}">
 							<li>
 							<a target="_blank" 
-				 				href="http://cmap.nci.nih.gov/Pathways/BioCarta/<c:out value="${item.name}" escapeXml="false"/>">
+				 				href="http://www.biocarta.com/pathfiles/<c:out value="${item.name}" escapeXml="false"/>.asp">
 				 				<c:out value="${item.displayValue}" escapeXml="false"/>
 					 		</a></li>
 						</c:forEach>

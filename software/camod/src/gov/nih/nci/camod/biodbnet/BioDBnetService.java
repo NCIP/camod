@@ -21,7 +21,7 @@ public class BioDBnetService {
 	public static final String GENE_INFO = "Gene Info, Taxon ID";
 	public static final String BIOCARTA_PATHWAY_NAME = "Biocarta Pathway Name";
 	public static final String GENE_ONTOLOGY = "GO - Biological Process, GO - Cellular Component, GO - Molecular Function";
-	public static final String GENETIC_INFO_ALL = "Gene Info, Taxon ID, Biocarta Pathway Name, GO - Biological Process, GO - Cellular Component, GO - Molecular Function";
+	public static final String GENETIC_INFO_ALL = "Gene Info, Taxon ID, Biocarta Pathway Name, GO - Biological Process, GO - Cellular Component, GO - Molecular Function, UniGene ID";
 	
 	static {
 		service = new BioDBnet();
@@ -53,13 +53,14 @@ public class BioDBnetService {
 		return client.db2Db(db2DbParams);
 	}
 	
-	public static Gene setupBiocartaPathways(Gene gene, String bioCartaPathways) {
+	private static Gene setupBiocartaPathways(Gene gene, String bioCartaPathways) {
 		 String[] arr = bioCartaPathways.split(";");
 		 Collection<Pathway> pathwayCollection = new ArrayList<Pathway>();
 		 for ( int i=0;i<arr.length;i++ ) {
 			 if( arr[i].indexOf("[") != -1) {
 				 Pathway pathway = new Pathway();
-				 pathway.setName(arr[i].substring(0, arr[i].indexOf("[")));
+				 String pathwayName = arr[i].substring(0, arr[i].indexOf("[")-1).trim();
+				 pathway.setName(pathwayName);
 				 pathway.setDisplayValue(arr[i].substring(arr[i].indexOf(":") + 1, arr[i].indexOf("]")).trim());
 				 
 				 pathwayCollection.add(pathway);
@@ -70,7 +71,7 @@ public class BioDBnetService {
 		 return gene;
 	}
 	
-	public static Gene setupGeneInfo(Gene gene, String geneInfo) {
+	private static Gene setupGeneInfo(Gene gene, String geneInfo) {
 		
 		geneInfo = geneInfo.substring( geneInfo.indexOf("[") );
 		 
@@ -87,7 +88,7 @@ public class BioDBnetService {
 		 return gene;
 	}
 	
-	public static Gene setupTaxonId(Gene gene, String taxonId) {
+	private static Gene setupTaxonId(Gene gene, String taxonId) {
 		
 		 taxonId = taxonId.substring( taxonId.indexOf("[") );
 		 
@@ -95,7 +96,7 @@ public class BioDBnetService {
 		 for ( int i=0;i<taxonArr.length;i++ ) {
 			 if( taxonArr[i].indexOf("Scientific Name:") != -1 ) {
 				 Taxon taxon = new Taxon();
-				 taxon.setAbbreviation(taxonArr[i].substring( taxonArr[i].indexOf(":") + 2 ) );
+				 taxon.setScientificName(taxonArr[i].substring( taxonArr[i].indexOf(":") + 2 ) );
 				 gene.setTaxon(taxon);
 			 }
 		 }
@@ -103,7 +104,7 @@ public class BioDBnetService {
 		 return gene;
 	}
 	
-	public static Gene setupGeneOntology(Gene gene, String geneOntologies) {
+	private static Gene setupGeneOntology(Gene gene, String geneOntologies) {
 		 String[] arr = geneOntologies.split(";");
 		 Collection<GeneOntology> geneOntologyCollection = new ArrayList<GeneOntology>();
 		 for ( int i=0;i<arr.length;i++ ) {
@@ -127,6 +128,19 @@ public class BioDBnetService {
 		 return gene;
 	}
 	
+	private static Gene setupClusTerId(Gene gene, String unigeneId) {
+		 String[] unigeneArr = unigeneId.split("\\.");
+		 if( unigeneArr.length >= 2 ) {
+			 gene.getTaxon().setAbbreviation(unigeneArr[0]);
+			 if( unigeneArr[1].indexOf(";") > -1 )
+				 gene.setClusterId(Long.valueOf(unigeneArr[1].substring(0, unigeneArr[1].indexOf(";") )));
+			 else
+				 gene.setClusterId(Long.valueOf(unigeneArr[1].substring(0, unigeneArr[1].indexOf("\n") )));
+		 }
+		 		 
+		 return gene;
+	}
+	
 	public static Gene search(Gene gene, Db2DbParams db2DbParams) {
 		String db2dbResult = search(db2DbParams);
 		// Remove Headers
@@ -141,6 +155,8 @@ public class BioDBnetService {
 		
 		String geneOntologies = geneInfoArray[4] + ";" + geneInfoArray[5] + ";" + geneInfoArray[6] + ";";
 		gene = setupGeneOntology(gene, geneOntologies);
+		
+		gene = setupClusTerId(gene, geneInfoArray[7]);
 		
 		return gene;
 	}
