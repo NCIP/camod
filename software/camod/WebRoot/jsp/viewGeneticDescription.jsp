@@ -1038,7 +1038,12 @@
 	           	</td>
 	        </tr>
 	        <tr>
-	            <td valign="top" class="WhiteBox" width="35%"><b>BioCarta Pathways</b></td>
+	            <td valign="top" class="WhiteBox" width="35%"><b>BioCarta Pathways</b>
+		            <c:if test="${(not empty gene.pathwayCollection)}">
+						<br/><a class="sideMenuLink" href="#" onClick="myRef = window.open('html/disclaimer.html#external','mywin',
+						'left=20,top=20,width=800,height=200,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()">Disclaimer</a>
+					</c:if>
+	            </td>
 	            <td valign="top" class="whiteBoxRightEnd" width="65%">
 		        <font size="-2" color="#666699">Pathway information courtesy of <A target="_blank" href="http://www.biocarta.com">BioCarta</a></font>
 		        <br>
