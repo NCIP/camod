@@ -471,8 +471,8 @@
 				<a target="_blank" href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=<c:out value="${tg.mutationIdentifier.mgiId}"/>&selectedQuery=Genes+and+Markers">
 				    <c:out value="${tg.mutationIdentifier.mgiId}"/>
 				</a>&nbsp;
-				<a class="sideMenuLink" href="#" onClick="myRef = window.open('html/disclaimer.html#external','mywin',
-						'left=20,top=20,width=800,height=200,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()">Disclaimer</a>
+				<input type="button" value="Disclaimer" onclick="myRef = window.open('html/disclaimer.html#external','mywin',
+						'left=20,top=20,width=800,height=200,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()" class="submitLink"/>
 				</td>
 			</c:if>&nbsp;
 			
@@ -482,8 +482,8 @@
 				<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-genotypeview.apg&OID=<c:out value="${tg.mutationIdentifier.zfinId}"/>">
 				    <c:out value="${tg.mutationIdentifier.zfinId}"/>
 				</a>&nbsp;
-				<a class="sideMenuLink" href="#" onClick="myRef = window.open('html/disclaimer.html#external','mywin',
-						'left=20,top=20,width=800,height=200,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()">Disclaimer</a>
+				<input type="button" value="Disclaimer" onclick="myRef = window.open('html/disclaimer.html#external','mywin',
+						'left=20,top=20,width=800,height=200,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()" class="submitLink"/>
 				</td>
 			</c:if>&nbsp;
 			
@@ -493,8 +493,8 @@
 				<a target="_blank" href="http://rgd.mcw.edu/tools/strains/strains_view.cgi?id=<c:out value="${tg.mutationIdentifier.rgdId}"/>">
 				    <c:out value="${tg.mutationIdentifier.rgdId}"/>
 				</a>&nbsp;
-				<a class="sideMenuLink" href="#" onClick="myRef = window.open('html/disclaimer.html#external','mywin',
-						'left=20,top=20,width=800,height=200,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()">Disclaimer</a>
+				<input type="button" value="Disclaimer" onclick="myRef = window.open('html/disclaimer.html#external','mywin',
+						'left=20,top=20,width=800,height=200,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()" class="submitLink"/>
 				</td>
 			</c:if>&nbsp;			
 		</tr>
@@ -958,8 +958,9 @@
 				<td class="GreyBoxRightEnd" width="65%">
 				<a target="_blank" href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=<c:out value="${tm.mutationIdentifier.mgiId}"/>&selectedQuery=Genes+and+Markers">
 				    <c:out value="${tm.mutationIdentifier.mgiId}"/>
-				</a>&nbsp;&nbsp;<a class="sideMenuLink" href="#" onClick="myRef = window.open('html/disclaimer.html#external','mywin',
-										'left=20,top=20,width=800,height=200,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()">Disclaimer</a>
+				</a>&nbsp;&nbsp;				<input type="button" value="Disclaimer" onclick="myRef = window.open('html/disclaimer.html#external','mywin',
+						'left=20,top=20,width=800,height=200,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()" class="submitLink"/>
+
 				</td>
 			</c:if>&nbsp;
 			
@@ -967,8 +968,9 @@
 			<td class="GreyBox" width="35%"><b>ZFIN Number</b></td>
 				<td class="GreyBoxRightEnd" width="65%"> 
 				<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-genotypeview.apg&OID=<c:out value="${tm.mutationIdentifier.zfinId}"/>">				 
-				    <c:out value="${tm.mutationIdentifier.zfinId}"/>&nbsp;&nbsp;<a class="sideMenuLink" href="#" onClick="myRef = window.open('html/disclaimer.html#external','mywin',
-										'left=20,top=20,width=800,height=200,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()">Disclaimer</a>
+				    <c:out value="${tm.mutationIdentifier.zfinId}"/>&nbsp;&nbsp;				<input type="button" value="Disclaimer" onclick="myRef = window.open('html/disclaimer.html#external','mywin',
+						'left=20,top=20,width=800,height=200,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()" class="submitLink"/>
+
 				</a>
 				</td>
 			</c:if>&nbsp;
@@ -977,8 +979,9 @@
 			<td class="GreyBox" width="35%"><b>RGD Number</b></td>
 				<td class="GreyBoxRightEnd" width="65%">
 				<a target="_blank" href="http://rgd.mcw.edu/tools/strains/strains_view.cgi?id=<c:out value="${tm.mutationIdentifier.rgdId}"/>">
-				    <c:out value="${tm.mutationIdentifier.rgdId}"/>&nbsp;&nbsp;<a class="sideMenuLink" href="#" onClick="myRef = window.open('html/disclaimer.html#external','mywin',
-										'left=20,top=20,width=800,height=200,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()">Disclaimer</a>
+				    <c:out value="${tm.mutationIdentifier.rgdId}"/>&nbsp;&nbsp;				<input type="button" value="Disclaimer" onclick="myRef = window.open('html/disclaimer.html#external','mywin',
+						'left=20,top=20,width=800,height=200,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()" class="submitLink"/>
+
 				</a>
 				</td>
 			</c:if>&nbsp;			
@@ -1040,8 +1043,9 @@
 	        <tr>
 	            <td valign="top" class="WhiteBox" width="35%"><b>BioCarta Pathways</b>
 		            <c:if test="${(not empty gene.pathwayCollection)}">
-						<br/><a class="sideMenuLink" href="#" onClick="myRef = window.open('html/disclaimer.html#external','mywin',
-						'left=20,top=20,width=800,height=200,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()">Disclaimer</a>
+						<br/><input type="button" value="Disclaimer" onclick="myRef = window.open('html/disclaimer.html#external','mywin',
+						'left=20,top=20,width=800,height=200,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()" class="submitLink"/>
+
 					</c:if>
 	            </td>
 	            <td valign="top" class="whiteBoxRightEnd" width="65%">

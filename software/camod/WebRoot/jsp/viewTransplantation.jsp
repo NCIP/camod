@@ -95,8 +95,8 @@
 			<a target="atcc" href="http://www.atcc.org/SearchCatalogs/Linkin?id=<c:out value="${t.atccNumber}"/>&partner=NIH">
 			<c:out value="${t.atccNumber}" escapeXml="false"/>&nbsp;</a>&nbsp;
 			<c:if test="${not empty t.atccNumber}">
-				&nbsp;<a class="sideMenuLink" href="#" onClick="myRef = window.open('html/disclaimer.html#external','mywin',
-										'left=20,top=20,width=800,height=200,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()">Disclaimer</a>
+				&nbsp;<input type="button" value="Disclaimer" onclick="myRef = window.open('html/disclaimer.html#external','mywin',
+						'left=20,top=20,width=800,height=200,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()" class="submitLink"/>
 			</c:if>
 			</td> 		
 		</tr>

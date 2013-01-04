@@ -66,8 +66,8 @@
 							<td class="resultsBoxGrey" width="15%"><b>Alternate URL</b></td>
 							<td class="resultsBoxGreyEnd" width="85%">
 							<a href='<c:out value="${p.urlAlternEntry}"/>' target="_blank"><c:out value="${p.urlAlternEntry}"/></a>&nbsp;<br/>
-							<a class="sideMenuLink" href="#" onClick="myRef = window.open('html/disclaimer.html#external','mywin',
-										'left=20,top=20,width=800,height=200,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()">Disclaimer</a>
+							<input type="button" value="Disclaimer" onclick="myRef = window.open('html/disclaimer.html#external','mywin',
+						'left=20,top=20,width=800,height=200,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()" class="submitLink"/>
 							</td>
 						</tr>					
 						<tr>

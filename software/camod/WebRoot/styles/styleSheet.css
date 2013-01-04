@@ -842,3 +842,11 @@ a:link.sideMenuLink,a:visited.sideMenuLink,a:active.sideMenuLink {
 	text-decoration: underline;
 	font-size: 0.8em;
 }
+
+.submitLink {
+background-color: transparent;
+text-decoration: underline;
+border: none;
+cursor: pointer;
+cursor: hand;
+}

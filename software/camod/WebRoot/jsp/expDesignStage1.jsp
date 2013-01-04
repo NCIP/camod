@@ -59,8 +59,8 @@
 				      	<A href="JavaScript:void window.open('http://genome-www4.stanford.edu/cgi-bin/SGD/locus.pl?sgdid=S0002359','mywin','left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');"><I>mgt1</I></A> and 
 			    	  	<A href="JavaScript:void window.open('http://genome-www4.stanford.edu/cgi-bin/SGD/locus.pl?locus=rad14','mywin','left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');"><I>rad14</I></A> + 
       					<A href="JavaScript:void window.open('http://genome-www4.stanford.edu/cgi-bin/SGD/locus.pl?locus=cln2','mywin','left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');"><I>CLN2oe</I></A>.
-      					<br/><a class="sideMenuLink" href="#" onClick="myRef = window.open('html/disclaimer.html#external','mywin',
-										'left=20,top=20,width=800,height=200,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()">Disclaimer</a>
+      					<br/><input type="button" value="Disclaimer" onclick="myRef = window.open('html/disclaimer.html#external','mywin',
+						'left=20,top=20,width=800,height=200,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()" class="submitLink"/>
 					</TD>
 				</TR>
 				<TR>

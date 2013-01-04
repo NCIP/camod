@@ -151,8 +151,8 @@
 								<tr>
 									<td class="GreyBox" width="30%"><b>References:</b>
 									<c:if test="${(not empty p.zfinPubId) || (not empty p.jaxJNumber)}">
-										<br/><a class="sideMenuLink" href="#" onClick="myRef = window.open('html/disclaimer.html#external','mywin',
-										'left=20,top=20,width=800,height=200,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()">Disclaimer</a>
+										<br/><input type="button" value="Disclaimer" onclick="myRef = window.open('html/disclaimer.html#external','mywin',
+						'left=20,top=20,width=800,height=200,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()" class="submitLink"/>
 									</c:if>
 									</td>
 										<!-- Two choose required so we can check for emtpy ZFIN or J Numbers-->			
