@@ -183,7 +183,7 @@
          treeParams += paramName+"="+paramsHT[paramName]+";";
       }
       
-      targetURL = '/EVSTree/webtree/WebTreeMain.jsp?treeParams='+treeParams+'&skin='+skin;
+      targetURL = '/camod/webtree/WebTreeMain.jsp?treeParams='+treeParams+'&skin='+skin;
 
       // open target window
       windowOpen(targetURL, 1000, 1000, paramsHT.windowTitle);
