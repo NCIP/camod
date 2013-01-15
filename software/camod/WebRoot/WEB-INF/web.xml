@@ -43,6 +43,10 @@
 			/WEB-INF/applicationContext-*.xml
 		</param-value>
 	</context-param>
+	<context-param>
+		<param-name>gov.nih.nci.evs.app.logging.info</param-name>
+		<param-value>/local/content/evstree/EVSinfoLog.txt</param-value>
+    </context-param>
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>
@@ -157,6 +161,24 @@
 		</init-param>
 	</servlet>
   
+  <servlet>
+		<servlet-name>InitTreeServlet</servlet-name>
+        <servlet-class>gov.nih.nci.evs.app.servlet.InitTreeServlet</servlet-class>
+	 	<load-on-startup>1</load-on-startup> 
+	</servlet>
+	<servlet>
+		<servlet-name>InitializeLog</servlet-name>
+        <servlet-class>gov.nih.nci.evs.app.servlet.InitializeLog</servlet-class>
+		<load-on-startup>1</load-on-startup> 
+	</servlet>	
+	<servlet-mapping>
+        	<servlet-name>
+            		InitializeLog
+        	</servlet-name>
+        	<url-pattern>
+            		/Log
+        	</url-pattern>
+	</servlet-mapping>
 
   <servlet-mapping>
     <servlet-name>autocomplete</servlet-name>
