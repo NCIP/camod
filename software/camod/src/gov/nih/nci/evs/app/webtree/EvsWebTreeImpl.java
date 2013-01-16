@@ -149,7 +149,7 @@ public class EvsWebTreeImpl extends WebTree {
           if (tree == null) {
             tree = getTreeFromEvs(vocabularyName, rootNode);
 
-            PrintUtility.printTree(tree);
+//            PrintUtility.printTree(tree);
             
             // add new tree to cache
             if (cacheFlag && tree != null && conceptTreeCache != null) {                     
