@@ -119,7 +119,7 @@ public class HighlightTextTag implements Tag, BodyTag, Serializable
             try
             {
 
-                if (myKeyword != null && !myKeyword.equals("") && !myKeyword.equals(" ") )
+                if (myKeyword != null && !myKeyword.equals("") && !myKeyword.equals(" ") && !myKeyword.equals("href"))
                 {
                     // Create a pattern to match cat
                     Pattern inPattern = Pattern.compile("(?i)(" + myKeyword + ")");

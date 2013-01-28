@@ -61,6 +61,7 @@ public class SafeHTMLUtil {
 	public static String clean(String s) {
 		String clean = Translate.decode(s).replace("<", "").replace(">", "");
 		clean = StringUtils.replace(clean, "script", "");
+		clean = StringUtils.replace(clean, "iframe", "");
 		clean = StringUtils.replace(clean, "%", "");
 		clean = StringUtils.replace(clean, "#", "");
 		clean = StringUtils.replace(clean, ";", "");
@@ -70,7 +71,7 @@ public class SafeHTMLUtil {
 		clean = StringUtils.replace(clean, "&", "");
 		clean = StringUtils.replace(clean, "(", "");
 		clean = StringUtils.replace(clean, ")", "");
-		clean = StringUtils.replace(clean, "/", "");
+//		clean = StringUtils.replace(clean, "/", "");
 		clean = StringUtils.replace(clean, "\\", "");
 		clean = StringUtils.replace(clean, "&", "");
 		clean = StringUtils.replace(clean, "=", "");
@@ -89,7 +90,8 @@ public class SafeHTMLUtil {
 	
 	public static String cleanMinimal(String s) {
 		if( s != null ) {
-			String clean = Translate.decode(s).replace("<", "").replace(">", "");
+//			String clean = Translate.decode(s).replace("<", "").replace(">", "");
+			String clean = s;
 			clean = StringUtils.replace(clean, "script", "");
 			clean = StringUtils.replace(clean, "javascript", "");
 			clean = StringUtils.replace(clean, "alert", "cleaned");
@@ -103,12 +105,14 @@ public class SafeHTMLUtil {
 	}	
 
 	public static String cleanScript(String s) {
-		String clean = Translate.decode(s).replace("<", "").replace(">", "");
+//		String clean = Translate.decode(s).replace("<", "").replace(">", "");
+		String clean = s;
 		clean = StringUtils.replace(clean, "script", "");
 		clean = StringUtils.replace(clean, "javascript", "");
 		clean = StringUtils.replace(clean, "alert", "cleaned");
-		clean = StringUtils.replace(clean, "<", "");
-		clean = StringUtils.replace(clean, ">", "");
+		clean = StringUtils.replace(clean, "iframe", "");
+//		clean = StringUtils.replace(clean, "<", "");
+//		clean = StringUtils.replace(clean, ">", "");
 		if (clean.length() == 0) {
 			clean = "empty";
 		}
@@ -117,8 +121,11 @@ public class SafeHTMLUtil {
 
 	// clean method that allows the apostrophe (')
 	public static String cleanKeyword(String s) {
-		String clean = Translate.decode(s).replace("<", "").replace(">", "");
+//		String clean = Translate.decode(s).replace("<", "").replace(">", "");
+		String clean = s;
 		clean = StringUtils.replace(clean, "script", "");
+		clean = StringUtils.replace(clean, "javascript", "");
+		clean = StringUtils.replace(clean, "iframe", "");
 		clean = StringUtils.replace(clean, "%", "");
 		clean = StringUtils.replace(clean, "#", "");
 		clean = StringUtils.replace(clean, ";", "");
@@ -127,7 +134,7 @@ public class SafeHTMLUtil {
 		clean = StringUtils.replace(clean, "&", "");
 		clean = StringUtils.replace(clean, "(", "");
 		clean = StringUtils.replace(clean, ")", "");
-		clean = StringUtils.replace(clean, "/", "");
+//		clean = StringUtils.replace(clean, "/", "");
 		clean = StringUtils.replace(clean, "\\", "");
 		clean = StringUtils.replace(clean, "alert", "cleaned");
 		if (clean.length() == 0) {
@@ -140,13 +147,14 @@ public class SafeHTMLUtil {
 	public static String cleanModelDescriptor(String s) {
 		String clean = Translate.decode(s).replace("{", "").replace("}", "");
 		clean = StringUtils.replace(clean, "script", "");
+		clean = StringUtils.replace(clean, "javascript", "");
 		clean = StringUtils.replace(clean, "%", "");
 		clean = StringUtils.replace(clean, "\"", "");
 		clean = StringUtils.replace(clean, "$", "");
 		clean = StringUtils.replace(clean, "\\", "");
-		clean = StringUtils.replace(clean, "<", "");
-		clean = StringUtils.replace(clean, ">", "");
-		clean = StringUtils.replace(clean, "=", "");
+//		clean = StringUtils.replace(clean, "<", "");
+//		clean = StringUtils.replace(clean, ">", "");
+//		clean = StringUtils.replace(clean, "=", "");
 		clean = StringUtils.replace(clean, "alert", "cleaned");
 		if (clean.length() == 0) {
 			clean = "empty";
@@ -158,14 +166,15 @@ public class SafeHTMLUtil {
 	public static String cleanSpecies(String s) {
 		String clean = Translate.decode(s).replace("{", "").replace("}", "");
 		clean = StringUtils.replace(clean, "script", "");
+		clean = StringUtils.replace(clean, "javascript", "");
 		clean = StringUtils.replace(clean, "%", "");
 		clean = StringUtils.replace(clean, "\"", "");
 		clean = StringUtils.replace(clean, "$", "");
 		clean = StringUtils.replace(clean, "\\", "");
-		clean = StringUtils.replace(clean, "/", "");
-		clean = StringUtils.replace(clean, "<", "");
-		clean = StringUtils.replace(clean, ">", "");
-		clean = StringUtils.replace(clean, "=", "");
+//		clean = StringUtils.replace(clean, "/", "");
+//		clean = StringUtils.replace(clean, "<", "");
+//		clean = StringUtils.replace(clean, ">", "");
+//		clean = StringUtils.replace(clean, "=", "");
 		clean = StringUtils.replace(clean, "alert", "cleaned");
 		if (clean.length() == 0) {
 			clean = "empty";
@@ -175,8 +184,10 @@ public class SafeHTMLUtil {
 
 	// clean method that allows ', &
 	public static String cleanPhenotype(String s) {
-		String clean = Translate.decode(s).replace("<", "").replace(">", "");
+//		String clean = Translate.decode(s).replace("<", "").replace(">", "");
+		String clean = s;
 		clean = StringUtils.replace(clean, "script", "");
+		clean = StringUtils.replace(clean, "javascript", "");
 		clean = StringUtils.replace(clean, "%", "");
 		clean = StringUtils.replace(clean, "#", "");
 		clean = StringUtils.replace(clean, ";", "");
@@ -184,7 +195,7 @@ public class SafeHTMLUtil {
 		clean = StringUtils.replace(clean, "$", "");
 		clean = StringUtils.replace(clean, "(", "");
 		clean = StringUtils.replace(clean, ")", "");
-		clean = StringUtils.replace(clean, "/", "");
+//		clean = StringUtils.replace(clean, "/", "");
 		clean = StringUtils.replace(clean, "\\", "");
 		if (clean.length() == 0) {
 			clean = "empty";
@@ -196,6 +207,7 @@ public class SafeHTMLUtil {
 	public static String cleanGeneName(String s) {
 		String clean = Translate.decode(s).replace("[", "").replace("]", "");
 		clean = StringUtils.replace(clean, "script", "");
+		clean = StringUtils.replace(clean, "javascript", "");
 		clean = StringUtils.replace(clean, "%", "");
 		clean = StringUtils.replace(clean, "#", "");
 		clean = StringUtils.replace(clean, ";", "");
@@ -232,8 +244,10 @@ public class SafeHTMLUtil {
 
 	// allows &, ", /, ?, and . that are used in redirects
 	public static String cleanRedirect(String s) {
-		String clean = Translate.decode(s).replace("<", "").replace(">", "");
+//		String clean = Translate.decode(s).replace("<", "").replace(">", "");
+		String clean = s;
 		clean = StringUtils.replace(clean, "script", "");
+		clean = StringUtils.replace(clean, "javascript", "");
 		clean = StringUtils.replace(clean, "probe", "");
 		clean = StringUtils.replace(clean, "%", "");
 		clean = StringUtils.replace(clean, "#", "");
