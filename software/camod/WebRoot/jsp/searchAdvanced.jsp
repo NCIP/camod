@@ -342,7 +342,7 @@
 					<td class="formLabel"><label for="organ">Site of Lesion/Tumor:</label>&nbsp;
 						<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />							
 					<a href="javascript:showMouseTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', false)">
-						<IMG alt="Select from EVSTree" src="images\selectUP.gif" align=middle border=0></a>
+						<IMG alt="Select from EVSTree" src="images/selectUP.gif" align=middle border=0></a>
 					</td>				
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
@@ -356,7 +356,7 @@
 					<td class="formLabel"><label for="organ">Site of Lesion/Tumor:</label>&nbsp;
 						<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
 					<a href="javascript:showRatTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', false)">
-						<IMG alt="Select from EVSTree" src="images\selectUP.gif" align=middle border=0></a>
+						<IMG alt="Select from EVSTree" src="images/selectUP.gif" align=middle border=0></a>
 					</td>
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
@@ -370,7 +370,7 @@
 					<td class="formLabel"><label for="organ">Site of Lesion/Tumor:</label>&nbsp;
 						<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
 					<a href="javascript:showZebrafishTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', false)">
-						<IMG alt="Select from EVSTree" src="images\selectUP.gif" align=middle border=0></a>
+						<IMG alt="Select from EVSTree" src="images/selectUP.gif" align=middle border=0></a>
 					</td>
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
@@ -402,7 +402,7 @@
 					<td class="formLabel"><label for="tumorClassification">Diagnosis:</label>&nbsp;				
 							<camod:cshelp topic="data_tree_help" key="DIAGNOSIS.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />					
 						<a href="javascript:showMouseDiagnosisTree('searchForm', 'diagnosisCode', 'diagnosisName', 'tumorClassification', false)">
-						<IMG alt="Select from EVSTree" src="images\selectUP.gif" align=middle border=0></a>	
+						<IMG alt="Select from EVSTree" src="images/selectUP.gif" align=middle border=0></a>	
 					</td>
 						<html:hidden property="diagnosisCode"/>		
 						<html:hidden property="diagnosisName"/>
@@ -416,7 +416,7 @@
 					<td class="formLabel"><label for="tumorClassification">Diagnosis:</label>&nbsp;				
 						<camod:cshelp topic="data_tree_help" key="DIAGNOSIS.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />					
 						<a href="javascript:showRatDiagnosisTree('searchForm', 'diagnosisCode', 'diagnosisName', 'tumorClassification', false)">
-						<IMG alt="Select from EVSTree" src="images\selectUP.gif" align=middle border=0></a>	
+						<IMG alt="Select from EVSTree" src="images/selectUP.gif" align=middle border=0></a>	
 					</td>			
 						<html:hidden property="diagnosisCode"/>		
 						<html:hidden property="diagnosisName"/>

@@ -1,6 +1,6 @@
 <%@ include file="/common/taglibs.jsp"%>
 
-<TR><TD class=subMenuPrimaryTitle height=22>SEARCH MOUSE MODELS</TD></TR>
+<TR><TD class=subMenuPrimaryTitle height=22>SEARCH MODELS</TD></TR>
 <TR><TD class=subMenuPrimaryItems>
 <DIV>
 	<IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5>

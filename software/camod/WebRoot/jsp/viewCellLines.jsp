@@ -168,7 +168,7 @@
 											<c:choose>
 													<c:when test="${not empty p.jaxJNumber}">										
 														<c:out value="${p.jaxJNumber}"/>&nbsp;<br/>												
-															<a target="_blank" href="http://www.informatics.jax.org/searches/accession_report.cgi?id=<c:out value="${p.jaxJNumber}"/>">MGI</a>
+															<a target="_blank" href="http://www.informatics.jax.org/reference/<c:out value="${p.jaxJNumber}"/>">MGI</a>
 															<br/>
 															<a target="_blank" href="http://tumor.informatics.jax.org/mtbwi/referenceDetails.do?accId=<c:out value="${p.jaxJNumber}"/>">MTB</a>
 													</c:when>				

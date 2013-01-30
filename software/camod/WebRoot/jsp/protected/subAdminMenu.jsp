@@ -41,7 +41,7 @@
 	&nbsp;<html:link styleClass="subMenuPrimary" action="AdminRolesPopulateAction">ADMIN ROLES</html:link>
 	<BR>
 	<IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5>
-	&nbsp;<html:link styleClass="subMenuPrimary" action="AdminCommentsAssignmentPopulateAction">VIEW COMMENT ASSIGNMENT</html:link>
+	&nbsp;<html:link styleClass="subMenuPrimary" action="AdminCommentsAssignmentPopulateAction?link=true">VIEW COMMENT ASSIGNMENT</html:link>
 	<BR>
 	<IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5>
 	&nbsp;<html:link styleClass="subMenuPrimary" action="AdminModelsAssignmentPopulateAction" onclick="blankCurrentState()">VIEW MODEL ASSIGNMENT</html:link>
