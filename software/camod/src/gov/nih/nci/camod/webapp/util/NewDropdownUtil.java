@@ -531,6 +531,9 @@ public class NewDropdownUtil
             }
         }
         log.debug("Exiting getQueryOnlySpeciesList.size " + theReturnList.size());
+        
+        Collections.sort(theReturnList);
+        
         return theReturnList;
     }
     
@@ -569,6 +572,9 @@ public class NewDropdownUtil
                 }
             }
         }
+        
+        Collections.sort(theReturnList);
+        
         return theReturnList;
     }
 

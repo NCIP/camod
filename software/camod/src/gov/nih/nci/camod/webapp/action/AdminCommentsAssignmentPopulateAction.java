@@ -59,6 +59,7 @@ public class AdminCommentsAssignmentPopulateAction extends BaseAction
         log.trace("Entering execute");
         
 		String sID = inRequest.getHeader("Referer");
+		String link = inRequest.getParameter("link");
     	
     	// prevents Referer Header injection
     	if ( sID != null && sID != "" && !sID.contains("camod")) {
@@ -71,7 +72,13 @@ public class AdminCommentsAssignmentPopulateAction extends BaseAction
         {
             NewDropdownUtil.populateDropdown(inRequest, Constants.Dropdowns.CURATIONSTATESDROP, Constants.Admin.COMMENT_CURATION_WORKFLOW);
             
-        	if (theForm.getCurrentState() == null)
+            // the user clicked the View Comment Assignment link
+            if( link != null && link.equals("true")) {
+        		theForm.setCurrentState(null);
+        		inRequest.getSession().removeAttribute(Constants.ADMIN_COMMENTS_SEARCH_RESULTS);
+        	}
+            
+            if (theForm.getCurrentState() == null)
         	{
         		saveToken(inRequest);
         	}
