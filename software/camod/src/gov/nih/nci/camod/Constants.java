@@ -291,6 +291,11 @@
  */
 package gov.nih.nci.camod;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
+
 
 /**
  * Constant values used throughout the application.
@@ -300,6 +305,31 @@ package gov.nih.nci.camod;
  * </p>
  */
 public class Constants {
+	
+	public static String USER_GUIDE_WIKI_LINK = "";
+	public static String WIKI_HELP_MAIN = "";
+	
+	static {
+		String wikihelpPropertiesFileName = System.getProperty("gov.nih.nci.camod.wikihelpProperties");
+		Properties wikihelpProperties = new Properties();
+
+		try {
+			
+			FileInputStream in = new FileInputStream(wikihelpPropertiesFileName);
+			
+			wikihelpProperties.load(in);
+	
+			} 
+			catch (FileNotFoundException e) {
+				e.printStackTrace();			
+			} catch (IOException e) {
+				e.printStackTrace();			
+			}
+			WIKI_HELP_MAIN = wikihelpProperties.getProperty("wiki_help_main");
+			String userGuide = wikihelpProperties.getProperty("user_guide");
+			
+			USER_GUIDE_WIKI_LINK = WIKI_HELP_MAIN + userGuide;
+	}
 	
 	// Default date format for exported file name.
 	public static final String EXPORT_FILE_DATE_FORMAT = "yyyyMMdd_HH-mm-ss-SSS";
