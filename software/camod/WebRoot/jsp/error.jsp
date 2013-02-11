@@ -14,11 +14,11 @@
 			</P>
 			<P align="justify">
 			
-			If you need more assistance please contact NCICB Application Support as outlined below.
+			If you need more assistance please contact NCI CBIIT Application Support as outlined below.
 			
 			<br/><br/><b>URL:&nbsp</b> <a href="http://ncicbsupport.nci.nih.gov/sw/">http://ncicbsupport.nci.nih.gov/sw/</a><br/>
-			<b>Email:&nbsp</b> <a href="mailto:ncicb@pop.nci.nih.gov?subject=caArray System Error">ncicb@pop.nci.nih.gov</a><br/>
-			<b>Phone:&nbsp</b> 301-451-4384 or toll free: 888-478-4423
+			<b>Email:&nbsp</b> <a href="mailto:ncicbiit@mail.nih.gov?subject=caMOD System Error">ncicbiit@mail.nih.gov</a><br/>
+			<b>Phone:&nbsp</b> 240-276-5541 or toll free: 888-478-4423
 			
 			</P>
 		</TD>

@@ -37,17 +37,6 @@
 			</TD>		
 			<% } %>
 	
-			<!--TD class=footerMenuItem onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onclick="document.location.href='#'" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" height=20>
-				<A class=footerMenuItem
-				 onClick="myRef = window.open('../WebHelp/caMOD_Online_Help/index.html','mywin',
-										'left=20,top=20,width=800,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()" >HELP</A></TD>
-		
-			
-			<TD>
-			
-			<TD>
-				<IMG height=16 alt="" src="/camod/images/mainMenuSeparator.gif" width=1>
-			</TD-->
 		</TR>
 	</TBODY>
 	</TABLE>

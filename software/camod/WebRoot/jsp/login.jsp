@@ -155,7 +155,7 @@
                                                   </tr>
 
                                                   <tr>
-                                                      <td class="sidebarContent"><IMG alt="What's New" src="/camod/images/bullet_point.gif" border=0>&nbsp;<html:link action="infoWhatsNew">View What's New</html:link></td>
+                                                      <td class="sidebarContent"><IMG alt="What's New" src="/camod/images/bullet_point.gif" border=0>&nbsp;<a href='<%=Constants.WIKI_HELP_MAIN%>caMOD+2.7.3+Release+Notes' target='_new'>View What's New</a></td>
                                                   </tr>
                                               </table>
                                           </td>
@@ -181,7 +181,7 @@
                                                   </tr>
                                                   <tr>
                                                       <td class="sidebarContent" valign="top">caMOD 2.7.3 was released in April 2013.<br/><br/>
-                                                      <html:link action="infoReleaseNotes.do">Release Notes</html:link><br/><br/>
+                                                      <a href='<%=Constants.WIKI_HELP_MAIN%>caMOD+Release+History' target='_new'>Release History</a><br/><br/>
                                                       </td>
                                                   </tr>
                                                 <tr>                                                  
@@ -191,7 +191,7 @@
 														<input type="submit" value="User Guide" onClick="myRef = window.open('./WebHelp/caMOD_Online_Help/UserGuide.pdf','mywin',
 															'left=20,top=20,width=900,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"/>
 														&nbsp;
-														<input type="submit" value="Help" onClick="myRef = window.open('./WebHelp/caMOD_Online_Help/index.html','mywin',
+														<input type="submit" value="Help" id="<%=Constants.USER_GUIDE_WIKI_LINK%>" onClick="myRef = window.open(this.id,'mywin',
 															'left=20,top=20,width=700,height=500,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"/><br/><br/>
 														<div style="padding:5px;margin:5px; background-color:#fff; border:1px solid #416599;">
 															To view the User Guide, you may need to install the Adobe PDF Reader for your browser. Please click <a target="_new" href="http://get.adobe.com/reader/">here</a> to download this free plug-in.<br/>

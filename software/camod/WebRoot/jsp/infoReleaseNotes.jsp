@@ -171,7 +171,7 @@ Home Page link broken while viewing search results has been fixed. (JIRA# CAMOD-
     The NCI Center for Bioinformatics 
     --  http://ncicb.nci.nih.gov/ 
      
-    NCICB Application Support 
+    NCI CBIIT Application Support 
     --  http://ncicb.nci.nih.gov/NCICB/support 
  
     caMOD 
