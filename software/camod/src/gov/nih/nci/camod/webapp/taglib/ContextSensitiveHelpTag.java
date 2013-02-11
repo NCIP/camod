@@ -21,13 +21,20 @@
 package gov.nih.nci.camod.webapp.taglib;
 
 import gov.nih.nci.camod.Constants;
+import gov.nih.nci.camod.webapp.servlet.AutocompleteServlet;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 import javax.servlet.jsp.*;
 import javax.servlet.jsp.tagext.Tag;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * Custom tag for context sensitive help.
@@ -35,6 +42,8 @@ import javax.servlet.jsp.tagext.Tag;
 public class ContextSensitiveHelpTag implements Tag, Serializable {
 
 	private static final long serialVersionUID = 5618297483211863400L;
+	
+	static private final Log log = LogFactory.getLog(ContextSensitiveHelpTag.class);	
 
 	private PageContext myPageContext = null;
 
@@ -56,6 +65,8 @@ public class ContextSensitiveHelpTag implements Tag, Serializable {
 	private String myStyleClass = "style_0";
 
 	private String myJavascriptKey = "help_javascript";
+	
+	private String wikiSiteBeginKey = "wiki_help_main";
 
 	public void setPageContext(PageContext inPageContext) {
 		myPageContext = inPageContext;
@@ -188,6 +199,7 @@ public class ContextSensitiveHelpTag implements Tag, Serializable {
 
 		try {
 			String theHref = "";
+			String wikiSiteBegin = "";
 			try {
 				// Get the text
 				ResourceBundle theBundle = ResourceBundle.getBundle(myBundle);
@@ -196,17 +208,46 @@ public class ContextSensitiveHelpTag implements Tag, Serializable {
 				if (myTopic != null) {
 					// if topic=tooltip makes this not an onclick - used for tool tips
 					if (!myTopic.equals(Constants.OnlineHelp.SKIP)) {
-						String theTopic;
-						try {
-							theTopic = theBundle.getString(myTopic);
-						} catch (Exception e) {
-							theTopic = myTopic;
-						}
+						String theTopic = "";
+//						try {
+//							theTopic = theBundle.getString(myTopic);
+//						} catch (Exception e) {
+//							theTopic = myTopic;
+//						}
 						// swap theMapId (RoboHelp) for the topic (ePublisher)
 						// here
-						String theJavascript = theBundle
-								.getString(myJavascriptKey);
-						theHref = "href=\"" + theJavascript + theTopic + "')\"";
+						String theJavascript = theBundle.getString(myJavascriptKey);
+						
+						Properties wikihelpProperties = new Properties();
+						try {
+
+							String wikihelpPropertiesFileName = null;
+
+							wikihelpPropertiesFileName = System.getProperty("gov.nih.nci.camod.wikihelpProperties");
+							
+							try {
+							
+							FileInputStream in = new FileInputStream(wikihelpPropertiesFileName);
+							wikihelpProperties.load(in);
+					
+							} 
+							catch (FileNotFoundException e) {
+								log.error("Caught exception finding file for properties: ", e);
+								e.printStackTrace();			
+							} catch (IOException e) {
+								log.error("Caught exception finding file for properties: ", e);
+								e.printStackTrace();			
+							}
+							wikiSiteBegin =  wikihelpProperties.getProperty(wikiSiteBeginKey);
+							theTopic = wikihelpProperties.getProperty(myTopic);
+						}
+
+						// Default to 100 on an exception
+						catch (Exception e) {
+							System.err.println("Error loading system.properties file");
+							e.printStackTrace();
+						}
+						theHref = "href=\"" + theJavascript + wikiSiteBegin + theTopic + "')\"";
 					}
 				} else if (myHref != null) {
 					 theHref = "href=\"" + myHref + "\"";
