@@ -71,6 +71,8 @@
 	</copy>		
 			
 	<copy file="${common.resources.dir}/jboss-conf/properties-service.xml" todir="${build.dir}" />
+	
+	<copy file="${common.resources.dir}/wikihelp.properties" todir="${build.dir}" />	
 
     </target>	
     <!--
