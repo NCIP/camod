@@ -61,7 +61,7 @@
     <attribute name="Properties">
     	gov.nih.nci.camod.camodProperties=/local/content/camod/config/camod.properties
 	gov.nih.nci.camod.mailProperties=/local/content/camod/config/mail.properties
-	gov.nih.nci.camod.wikihelpProperties=C:/local/content/camod/config/wikihelp.properties
+	gov.nih.nci.camod.wikihelpProperties=/local/content/camod/config/wikihelp.properties
     </attribute>
 </mbean>
 
