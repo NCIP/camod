@@ -33,7 +33,12 @@
 		<tr>
 			<th scope="col" class="formTitle" height="20" colspan="3">
 			    <bean:write name="action" /> AnimalModel <c:out value="${animalModelStateForm.modelDescriptor}" escapeXml="false" />&nbsp;
-		    	<camod:cshelp topic="${wiki_cs_help}" key="ignore" image="/camod/images/iconHelp.gif" text=""/>
+			    <c:if test="${wiki_cs_help eq 1}">
+		    		<camod:cshelp topic="assigning_screener_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/>
+		    	</c:if>
+			    <c:if test="${wiki_cs_help eq 2}">
+		    		<camod:cshelp topic="assigning_an_editor_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/>
+		    	</c:if>
 			</th>
 		</tr>        
 		<logic:notEmpty name="<%=Constants.Dropdowns.USERSFORROLEDROP%>" >
