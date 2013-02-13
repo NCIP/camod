@@ -105,14 +105,17 @@ public class ChangeAnimalModelStatePopulateAction extends BaseAction {
 			inRequest.getSession().setAttribute(Constants.Dropdowns.USERSFORROLEDROP, null);
 
 			log.debug("<ChangeAnimalModelStatePopulateAction> The model id: " + theModelId + " and event: " + theEvent);
-
+			inRequest.setAttribute("wiki_cs_help", "");
+			
 			// Setting the action. This is used to customize the jsp display
 			if (theEvent.equals(Constants.Admin.Actions.ASSIGN_SCREENER)) {
 				inRequest.setAttribute("action", "Assigning Screener to ");
+				inRequest.setAttribute("wiki_cs_help", "assigning_screener_help");
 				NewDropdownUtil.populateDropdown(inRequest, Constants.Dropdowns.USERSFORROLEDROP,
 						Constants.Admin.Roles.SCREENER);
 			} else if (theEvent.equals(Constants.Admin.Actions.ASSIGN_EDITOR)) {
 				inRequest.setAttribute("action", "Assigning Editor to ");
+				inRequest.setAttribute("wiki_cs_help", "assigning_an_editor_help");
 				NewDropdownUtil.populateDropdown(inRequest, Constants.Dropdowns.USERSFORROLEDROP,
 						Constants.Admin.Roles.EDITOR);
 			} else if (theEvent.equals(Constants.Admin.Actions.NEED_MORE_INFO)) {
