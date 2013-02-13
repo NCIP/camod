@@ -32,7 +32,8 @@
 		</tr>
 		<tr>
 			<th scope="col" class="formTitle" height="20" colspan="3">
-			    <bean:write name="action" /> AnimalModel <c:out value="${animalModelStateForm.modelDescriptor}" escapeXml="false" />
+			    <bean:write name="action" /> AnimalModel <c:out value="${animalModelStateForm.modelDescriptor}" escapeXml="false" />&nbsp;
+		    	<camod:cshelp topic="${wiki_cs_help}" key="ignore" image="/camod/images/iconHelp.gif" text=""/>
 			</th>
 		</tr>        
 		<logic:notEmpty name="<%=Constants.Dropdowns.USERSFORROLEDROP%>" >
