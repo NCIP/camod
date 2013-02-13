@@ -20,7 +20,7 @@
 	<html:form method="get" action="AdminEditUserRolesAction.do">
 		<tr>
 			<td class="formTitle" height="20" colspan="3">Edit User Roles for <c:out value="${rolesAssignmentForm.displayName}"/>
-				&nbsp;<camod:cshelp topic="edit_user_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
+				&nbsp;<camod:cshelp topic="edit_user_roles_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 		</tr>
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp</td>

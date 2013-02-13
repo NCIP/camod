@@ -30,7 +30,7 @@
 		</tr>
 		<tr>
 		    <th scope="col" class="formTitle" height="20" colspan="3"><label for="userId">User Management</label> &nbsp;
-		    	<camod:cshelp topic="edit_user_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></th>		
+		    	<camod:cshelp topic="user_management_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></th>		
 		</tr>
 		<html:form action="AdminEditUserPopulateAction">
 		    
