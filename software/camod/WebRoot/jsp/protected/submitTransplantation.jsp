@@ -196,7 +196,7 @@
 	
 	<tr>
 		<td class="formTitle" height="20" colspan="3">Transplantation
-			<camod:cshelp topic="xenograft_transplant_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
+			<camod:cshelp topic="transplant_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 	</tr>
 
 	<tr>
