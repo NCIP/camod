@@ -188,14 +188,8 @@
                                                    <td class="sidebarContent" >
 													                                                      
 														<!-- works when first getting to page - before login -->
-														<input type="submit" value="User Guide" onClick="myRef = window.open('./WebHelp/caMOD_Online_Help/UserGuide.pdf','mywin',
-															'left=20,top=20,width=900,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()"/>
-														&nbsp;
 														<input type="submit" value="Help" id="<%=Constants.USER_GUIDE_WIKI_LINK%>" onClick="myRef = window.open(this.id,'mywin',
 															'left=20,top=20,width=700,height=500,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"/><br/><br/>
-														<div style="padding:5px;margin:5px; background-color:#fff; border:1px solid #416599;">
-															To view the User Guide, you may need to install the Adobe PDF Reader for your browser. Please click <a target="_new" href="http://get.adobe.com/reader/">here</a> to download this free plug-in.<br/>
-														</div>
 													</td>                                                                  
                                               	</tr>
                                               </table>
