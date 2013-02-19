@@ -39,6 +39,12 @@
 			    <c:if test="${wiki_cs_help eq 2}">
 		    		<camod:cshelp topic="assigning_an_editor_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/>
 		    	</c:if>
+		    	<c:if test="${wiki_cs_help eq 3}">
+		    		<camod:cshelp topic="rejecting_model_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/>
+		    	</c:if>
+		    	<c:if test="${wiki_cs_help eq 4}">
+		    		<camod:cshelp topic="approving_model_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/>
+		    	</c:if>
 			</th>
 		</tr>        
 		<logic:notEmpty name="<%=Constants.Dropdowns.USERSFORROLEDROP%>" >

@@ -146,7 +146,7 @@
 	
 	<tr>
 		<td class="formTitle" height="20" colspan="3">Associated Metastasis&nbsp;
-			<camod:cshelp topic="histopathology_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/>
+			<camod:cshelp topic="associated_metastasis_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/>
 		</td>
 
 	</tr>
