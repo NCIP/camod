@@ -285,7 +285,7 @@
 						<camod:cshelp topic="data_tree_help" key="DEVELOPMENTALSTAGE.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />
 					<br>							
 					<a href="javascript:showZebrafishStageTree('therapyForm', 'developmentalStageCode', 'developmentalStageName', 'developmentalStage', true)">
-						<IMG alt="Select from EVSTree" src="images\selectUP.gif" align=middle border=0></a>
+						<IMG alt="Select from EVSTree" src="images/selectUP.gif" align=middle border=0></a>
 					</td>				
 					<html:hidden property="developmentalStageCode"/>
 					<input type="hidden" name="developmentalStageName" />

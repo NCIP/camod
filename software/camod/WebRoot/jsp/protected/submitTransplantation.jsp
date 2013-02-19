@@ -259,7 +259,7 @@
 				<td class="formLabel"><label for="mouseOrgan">Organ/Tissue:</label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />							
 					<a href="javascript:showMouseTissueTree('transplantationForm', 'organTissueCode', 'organTissueName', 'organ', true)">
-						<IMG alt="Select from EVSTree" src="images\selectUP.gif" align=middle border=0></a>
+						<IMG alt="Select from EVSTree" src="images/selectUP.gif" align=middle border=0></a>
 				</td>				
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
@@ -272,7 +272,7 @@
 				<td class="formLabel"><label for="ratOrgan">Organ/Tissue:</label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
 					<a href="javascript:showRatTissueTree('transplantationForm', 'organTissueCode', 'organTissueName', 'organ', true)">
-						<IMG alt="Select from EVSTree" src="images\selectUP.gif" align=middle border=0></a>
+						<IMG alt="Select from EVSTree" src="images/selectUP.gif" align=middle border=0></a>
 				</td>
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
@@ -285,7 +285,7 @@
 				<td class="formLabel"><label for="zebOrgan">Organ/Tissue:</label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
 					<a href="javascript:showZebrafishTissueTree('transplantationForm', 'organTissueCode', 'organTissueName', 'organ', true)">
-						<IMG alt="Select from EVSTree" src="images\selectUP.gif" align=middle border=0></a>
+						<IMG alt="Select from EVSTree" src="images/selectUP.gif" align=middle border=0></a>
 				</td>
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
@@ -298,7 +298,7 @@
 				<td class="formLabel"><label for="humanOrgan">Organ/Tissue:</label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
 					<a href="javascript:showHumanTissueTree('transplantationForm', 'organTissueCode', 'organTissueName', 'organ', true)">
-						<IMG alt="Select from EVSTree" src="images\selectUP.gif" align=middle border=0></a>
+						<IMG alt="Select from EVSTree" src="images/selectUP.gif" align=middle border=0></a>
 				</td>
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />

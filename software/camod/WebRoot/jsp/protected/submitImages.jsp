@@ -114,7 +114,7 @@
 		<td class="formLabel"><label for="stainingMethod">Staining Method:</label>&nbsp;
 
 			<a href="javascript:showStainingMethodTree('imageForm', 'stainingMethodCode', 'stainingMethodName', 'stainingMethod', true)">
-				<IMG alt="Select from EVSTree" src="images\selectUP.gif" align=middle border=0>
+				<IMG alt="Select from EVSTree" src="images/selectUP.gif" align=middle border=0>
 			</a>
 		</td>						
 		<td class="formField">		

@@ -111,7 +111,7 @@
 				<td class="formLabel"><label for="organ">Injection Site: </label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />							
 					<a href="javascript:showMouseTissueTree('geneDeliveryForm', 'organTissueCode', 'organTissueName', 'organ', true)">
-						<IMG src="images\selectUP.gif" align=middle border=0></a>
+						<IMG src="images/selectUP.gif" align=middle border=0></a>
 				</td>				
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
@@ -124,7 +124,7 @@
 				<td class="formLabel"><label for="organ">Injection Site: </label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
 					<a href="javascript:showRatTissueTree('geneDeliveryForm', 'organTissueCode', 'organTissueName', 'organ', true)">
-						<IMG src="images\selectUP.gif" align=middle border=0></a>
+						<IMG src="images/selectUP.gif" align=middle border=0></a>
 				</td>
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
@@ -137,7 +137,7 @@
 				<td class="formLabel"><label for="organ">Injection Site: </label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
 					<a href="javascript:showZebrafishTissueTree('geneDeliveryForm', 'organTissueCode', 'organTissueName', 'organ', true)">
-						<IMG src="images\selectUP.gif" align=middle border=0></a>
+						<IMG src="images/selectUP.gif" align=middle border=0></a>
 				</td>
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />

@@ -65,7 +65,7 @@
 				<td class="formRequiredLabel"><label for="mouseOrgan">Organ / Tissue:</label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />							
 					<a href="javascript:showMouseTissueTree('cellLineForm', 'organTissueCode', 'organTissueName', 'organ', true)">
-						<IMG alt="Select from EVSTree" src="images\selectUP.gif" align=middle ></a>
+						<IMG alt="Select from EVSTree" src="images/selectUP.gif" align=middle ></a>
 				</td>				
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
@@ -77,7 +77,7 @@
 				<td class="formRequiredLabel"><label for="ratOrgan">Organ / Tissue:</label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
 					<a href="javascript:showRatTissueTree('cellLineForm', 'organTissueCode', 'organTissueName', 'organ', true)">
-						<IMG alt="Select from EVSTree" src="images\selectUP.gif" align=middle  ></a>
+						<IMG alt="Select from EVSTree" src="images/selectUP.gif" align=middle  ></a>
 				</td>
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
@@ -89,7 +89,7 @@
 				<td class="formRequiredLabel"><label for="zebOrgan">Organ / Tissue:</label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
 					<a href="javascript:showZebrafishTissueTree('cellLineForm', 'organTissueCode', 'organTissueName', 'organ', true)">
-						<IMG alt="Select from EVSTree" src="images\selectUP.gif" align=middle ></a>
+						<IMG alt="Select from EVSTree" src="images/selectUP.gif" align=middle ></a>
 				</td>
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
