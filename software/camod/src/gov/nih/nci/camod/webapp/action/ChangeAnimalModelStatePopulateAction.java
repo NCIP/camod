@@ -150,6 +150,7 @@ public class ChangeAnimalModelStatePopulateAction extends BaseAction {
 				theForm.setAssignedTo(theCoordinator);
 
 				inRequest.setAttribute("action", "Rejecting ");
+				inRequest.setAttribute("wiki_cs_help", "3");
 			} else if (theEvent.equals(Constants.Admin.Actions.SCREENER_APPROVE) || theEvent.equals(Constants.Admin.Actions.EDITOR_APPROVE)) {
 
 				
@@ -177,6 +178,7 @@ public class ChangeAnimalModelStatePopulateAction extends BaseAction {
 				theForm.setAssignedTo(theCoordinator);
 				
 				inRequest.setAttribute("action", "Approving ");
+				inRequest.setAttribute("wiki_cs_help", "4");
 				
 			} else if (theEvent.equals(Constants.Admin.Actions.INACTIVATE)) {
 
