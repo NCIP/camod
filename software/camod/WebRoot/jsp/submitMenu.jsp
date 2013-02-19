@@ -15,7 +15,7 @@
 
 		<!-- link 1 begins -->
 		<TD height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-		  &nbsp;&nbsp;<a class="footerMenuLink" href="jsp/viewLicense.jsp">HOME</a>&nbsp;&nbsp;
+		  &nbsp;&nbsp;<a class="footerMenuLink" href="/camod/jsp/viewLicense.jsp">HOME</a>&nbsp;&nbsp;
 		</TD>
 		<!-- link 1 ends -->
 
