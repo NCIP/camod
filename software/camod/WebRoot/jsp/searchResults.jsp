@@ -269,7 +269,7 @@
 					<%
 					    for (int i = 0; i < resultColumns.length; i++) {
 					    	
-							if( resultColumns[i].equals("Model Identifier") ) { %>
+							if( resultColumns[i].equals("Unique Model Identifier") ) { %>
 							     <display:column title="Unique Model Identifier" sortable="true" headerClass="sortable" >
 							         <camod:highlight><c:out escapeXml="false" value="${row.modelId}"/></camod:highlight>
 							     </display:column>	 							
