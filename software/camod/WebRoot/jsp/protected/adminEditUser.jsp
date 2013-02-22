@@ -36,7 +36,7 @@
 		<tr>
 			<td class="formTitle" height="20" colspan="3">
 			<c:if test="${empty editUserForm.id}">
-			    Add User &nbsp;<camod:cshelp topic="add_user_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/>
+			    Add User &nbsp;<camod:cshelp topic="edit_user_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/>
 			</c:if>
 			<c:if test="${not empty editUserForm.id}">
 			    Edit User&nbsp;<camod:cshelp topic="edit_user_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/>
