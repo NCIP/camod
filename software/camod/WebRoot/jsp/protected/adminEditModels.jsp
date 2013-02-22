@@ -85,7 +85,7 @@
 			</tr>
 			<tr>
 			    <th scope="col" class="formTitle" height="20" colspan="8">Edit Models (SuperUser)&nbsp;
-			    	<camod:cshelp topic="screening_model_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></th>		
+			    	<camod:cshelp topic="admin_edit_models_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></th>		
 			</tr>
 	
 			
