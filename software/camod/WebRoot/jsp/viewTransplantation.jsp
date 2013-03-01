@@ -92,7 +92,7 @@
 		<tr>		
 			<td class="GreyBox"><b>ATCC number of Cell Line:</b></td>
 			<td class="GreyBoxRightEnd">
-			<a target="atcc" href="http://www.atcc.org/SearchCatalogs/Linkin?id=<c:out value="${t.atccNumber}"/>&partner=NIH">
+			<a target="atcc" href="http://www.atcc.org/Products/All/<c:out value="${t.atccNumber}"/>.aspx">
 			<c:out value="${t.atccNumber}" escapeXml="false"/>&nbsp;</a>&nbsp;
 			<c:if test="${not empty t.atccNumber}">
 				&nbsp;<input type="button" value="Disclaimer" onclick="myRef = window.open('html/disclaimer.html#external','mywin',
