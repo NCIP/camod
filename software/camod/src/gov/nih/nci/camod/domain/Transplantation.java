@@ -1,7 +1,7 @@
 /**
- * 
+ *
  * $Id: Transplantation.java,v 1.3 2009-03-25 16:19:39 pandyas Exp $
- * 
+ *
  * $Log: not supported by cvs2svn $
  * Revision 1.2  2008/11/05 04:57:02  schroedn
  * gForge #17515 Query for Transplant TOC not returning correct results, fix
@@ -33,7 +33,7 @@
  * Revision 1.9  2005/11/11 16:27:26  pandyas
  * added javadocs
  *
- * 
+ *
  */
 package gov.nih.nci.camod.domain;
 
@@ -50,7 +50,7 @@ public class Transplantation extends AbstractCancerModel implements Comparable
 {
     private static final long serialVersionUID = 3257445453799404851L;
 
-    private String name;    
+    private String name;
     private String geneticManipulation;
     private String modificationDescription;
     private String parentalCellLineName;
@@ -61,16 +61,16 @@ public class Transplantation extends AbstractCancerModel implements Comparable
     private String sourceType;
     private String sourceTypeAlternEntry;
     private String administrativeSite;
-    private String adminSiteAlternEntry;  
+    private String adminSiteAlternEntry;
     private String conditioningRegimen;
-    private String condRegimenAlternEntry;      
+    private String condRegimenAlternEntry;
     private TumorCode tumorCode;
     private Set<InvivoResult> invivoResultCollection = new TreeSet<InvivoResult>();
     private Species donorSpecies;
     private Organ organ;
-    private String comments;    
+    private String comments;
 
-    
+
     /**
      * @return Returns the administrativeSite.
      */
@@ -86,10 +86,10 @@ public class Transplantation extends AbstractCancerModel implements Comparable
     {
         this.administrativeSite = administrativeSite;
     }
-    
+
     /**
      * @return Returns the invivoResultCollection.
-     * @throws Exception 
+     * @throws Exception
      */
     public List getInvivoResultCollectionByNSC(String inNSCNumber) throws Exception
     {
@@ -133,7 +133,7 @@ public class Transplantation extends AbstractCancerModel implements Comparable
      */
     public String getAtccNumber()
     {
-        return SafeHTMLUtil.cleanMinimal(atccNumber);
+        return SafeHTMLUtil.cleanMinimal(atccNumber.trim());
     }
 
     /**
