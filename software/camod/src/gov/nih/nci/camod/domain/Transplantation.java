@@ -133,7 +133,7 @@ public class Transplantation extends AbstractCancerModel implements Comparable
      */
     public String getAtccNumber()
     {
-        return SafeHTMLUtil.cleanMinimal(atccNumber);
+        return SafeHTMLUtil.cleanMinimal(atccNumber.trim());
     }
 
     /**
