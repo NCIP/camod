@@ -51,7 +51,7 @@
 		    	  			that increase yeast&rsquo;s sensitivity to drugs. 3 strains contained single mutations in genes of interest: 
 			      		<A href="JavaScript:void window.open('http://www.yeastgenome.org/cgi-bin/locus.fpl?locus=rad50','mywin','left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');"><I>rad50</I></A>, 
 				      	<A href="JavaScript:void window.open('http://www.yeastgenome.org/cgi-bin/locus.fpl?locus=rad53','mywin','left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');"><I>mec2-1</I></A> or 
-					  	<A href="JavaScript:void window.open('http://www.yeastgenome.org/cgi-bin/locus.fpl?locus=bub3#summaryParagraph','mywin','left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');"><I>bub3</I></A>. 
+					  	<A href="JavaScript:void window.open('http://www.yeastgenome.org/cgi-bin/locus.fpl?locus=bub3','mywin','left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');"><I>bub3</I></A>. 
 				  			3 strains were doubly mutant: 
 					  	<A href="JavaScript:void window.open('http://www.yeastgenome.org/cgi-bin/locus.fpl?locus=rad18','mywin','left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');"><I>rad18</I></A> + 
 			    	  	<A href="JavaScript:void window.open('http://www.yeastgenome.org/cgi-bin/locus.fpl?locus=mlh1','mywin','left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');"><I>mlh1</I></A>, 
