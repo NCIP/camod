@@ -269,12 +269,16 @@
 					<%
 					    for (int i = 0; i < resultColumns.length; i++) {
 					    	
-							if( resultColumns[i].equals("Unique Model Identifier") ) { %>
+							if( resultColumns[i].equals("Model Identifier") ) { %>
 							     <display:column title="Unique Model Identifier" sortable="true" headerClass="sortable" >
 							         <camod:highlight><c:out escapeXml="false" value="${row.modelId}"/></camod:highlight>
 							     </display:column>	 							
 							<% }					    	
-					    	
+					    	else if( resultColumns[i].equals("Unique Model Identifier") ) { %>
+							     <display:column title="Unique Model Identifier" sortable="true" headerClass="sortable" >
+							         <camod:highlight><c:out escapeXml="false" value="${row.modelId}"/></camod:highlight>
+							     </display:column>	 							
+							<% }
 							else if( resultColumns[i].equals("Model Descriptor") ) { %>
 					             <display:column href="/camod/ViewModelAction.do?unprotected_method=populateModelCharacteristics&" paramId="aModelID" paramProperty="id" title="Model Descriptor" sortable="true" >
 									<c:if test="${row.externalSource == 'Jax MTB'}">
