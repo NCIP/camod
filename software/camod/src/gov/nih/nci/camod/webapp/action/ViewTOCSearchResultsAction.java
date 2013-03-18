@@ -70,8 +70,7 @@ public class ViewTOCSearchResultsAction extends BaseAction {
 		sID = request.getHeader("Referer");
     	
     	// prevents Referer Header injection
-    	if ( sID != null && sID != "" && sID.contains("camod")) {}
-    	if ( sID != null && sID != "" && sID.contains("emice")) {}
+    	if ( sID != null && sID != "" && ( sID.contains("camod") ||  sID.contains("emice"))) {}
     	else {
     		return (mapping.findForward("failure"));
     	}
