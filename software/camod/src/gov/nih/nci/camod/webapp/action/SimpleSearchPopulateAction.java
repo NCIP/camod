@@ -72,6 +72,13 @@ public class SimpleSearchPopulateAction extends BaseAction {
      */
     public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
+    	
+    	boolean isRequestedSessionIdFromURL = ((HttpServletRequest) request).isRequestedSessionIdFromURL(); 
+    	
+    	if (isRequestedSessionIdFromURL) {
+    		request.getSession().invalidate();
+    		request.getSession(true);
+    	}
 
         log.debug("In SimpleSearchPopulateAction.populate");
         
