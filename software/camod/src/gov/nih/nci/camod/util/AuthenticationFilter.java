@@ -54,12 +54,16 @@ public class AuthenticationFilter implements Filter {
 	    	String isloginpage = ((HttpServletRequest) request).getRequestURI();
 	        boolean isRequestedSessionIdFromURL = ((HttpServletRequest) request).isRequestedSessionIdFromURL();  
         
-        	if(isloginpage!=null && !isRequestedSessionIdFromURL &&( 
+/*        	if(isloginpage!=null && !isRequestedSessionIdFromURL &&( 
         			isloginpage.endsWith("/ReturnUserModels.do") ||
         			isloginpage.endsWith("/camod/")
-        			))	{
+        			))	{	*/
         		//System.out.println("AuthenticationFilter.doFilter /ReturnUserModels.do loop ");
         		//just continue, so they can login
+        	if(isloginpage!=null && !isRequestedSessionIdFromURL &&( 
+        			isloginpage.endsWith("/ReturnUserModels.do")) || (isloginpage!=null && 
+        			isloginpage.endsWith("/camod/"))
+        			)	{        		
         		generateNewSession((HttpServletRequest) request);
         		chain.doFilter(request, response);
                 return;
