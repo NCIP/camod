@@ -37,7 +37,7 @@ camod.grid.jboss.server.hostname=cbiovdev5058.nci.nih.gov
 # Required for local installs
 database.re-create=true
 database.system.user=camoddev22
-database.system.password=fsb#4625
+database.system.password=
 database.system.url=jdbc:oracle:thin:@ncidb-nci-d.nci.nih.gov:1564:NCIDEV
 
 # Require for all installs
@@ -46,7 +46,7 @@ database.server=ncidb-nci-d.nci.nih.gov
 database.port=1564
 database.name=NCIDEV
 database.user=camoddev22
-database.password=fsb#4625
+database.password=
 database.url=jdbc:oracle:thin:@ncidb-nci-d.nci.nih.gov:1564:NCIDEV
 database.driver=oracle.jdbc.OracleDriver
 
