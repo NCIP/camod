@@ -1,3 +1,11 @@
+/*L
+ *  Copyright SAIC
+ *  Copyright SAIC-Frederick
+ *
+ *  Distributed under the OSI-approved BSD 3-Clause License.
+ *  See http://ncip.github.com/camod/LICENSE.txt for details.
+ */
+
 /*
  * $Id: CaelmirStudyData.java,v 1.1 2007-12-27 22:35:27 pandyas Exp $
  *

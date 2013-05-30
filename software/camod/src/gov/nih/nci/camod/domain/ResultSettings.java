@@ -1,3 +1,11 @@
+/*L
+ *  Copyright SAIC
+ *  Copyright SAIC-Frederick
+ *
+ *  Distributed under the OSI-approved BSD 3-Clause License.
+ *  See http://ncip.github.com/camod/LICENSE.txt for details.
+ */
+
 /**
  * 
  * $Id: ResultSettings.java,v 1.3 2006-05-10 14:13:51 schroedn Exp $

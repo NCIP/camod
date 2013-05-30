@@ -1,3 +1,11 @@
+/*L
+ *  Copyright SAIC
+ *  Copyright SAIC-Frederick
+ *
+ *  Distributed under the OSI-approved BSD 3-Clause License.
+ *  See http://ncip.github.com/camod/LICENSE.txt for details.
+ */
+
 /**
  * 
  * $Id: TargetedModificationPopulateAction.java,v 1.18 2007-10-31 18:03:30 pandyas Exp $

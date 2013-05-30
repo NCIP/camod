@@ -1,3 +1,11 @@
+<%--L
+   Copyright SAIC
+   Copyright SAIC-Frederick
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/camod/LICENSE.txt for details.
+L--%>
+
 <%
  /*
   *   $Id: viewModelCharacteristics.jsp,v 1.51 2008-09-22 17:33:37 pandyas Exp $

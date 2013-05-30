@@ -1,3 +1,11 @@
+/*L
+   Copyright SAIC
+   Copyright SAIC-Frederick
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/camod/LICENSE.txt for details.
+L*/
+
 -- I had an old DATOP file to match the following metastasis records
 -- JIRA #CAMOD-974  	 Metastases are gone from earlier models
 -- Matches were made based on the close promiximity of the histopathology Ids and the context of the model entry 

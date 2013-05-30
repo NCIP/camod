@@ -1,3 +1,11 @@
+/*L
+   Copyright SAIC
+   Copyright SAIC-Frederick
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/camod/LICENSE.txt for details.
+L*/
+
 -- Update the Organ table to clean up organ.name field
 update organ o
 set o.NAME=replace(o.NAME, ' (MMHCC)', '')

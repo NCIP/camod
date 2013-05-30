@@ -1,3 +1,11 @@
+/*L
+   Copyright SAIC
+   Copyright SAIC-Frederick
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/camod/LICENSE.txt for details.
+L*/
+
 -- Add new column named thumb_url and populate column with data from the URL column 
 -- The column data will be different for tif images only
 ALTER TABLE image

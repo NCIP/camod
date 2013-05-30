@@ -1,0 +1,280 @@
+caMOD
+Copyright (c) 2006, SAIC, SAIC-Frederick
+
+This project is distributed under the BSD 3-Clause License.
+Please see LICENSE file for details.
+
+
+This project was developed as part of the NCI caBIG initiative.
+
+The cancer models database (caMOD) provides information about animal models for human cancer to the public research community.
+* Data Submission: Data in caMOD are extracted from the public scientific literature by curators or they are directly submitted by scientists.
+* Search: Users can retrieve information about the making of models, their genetic descriptions, histopathology, images, microarray data, and therapeutic trials in which the models were used, and other information as well.
+* System Function Administration: The Admin function provides services for user registration, review of submitted models and database management.
+
+The primary users of this tool are researchers interested in detailed information about animal models of human cancer.
+
+The project was initially developed by SAIC and SAIC-Frederick under funding from the CBIIT office of the National Cancer Institute.
+
+In 2013, as part of the National Cancer Informatics Program (NCIP) Open Development Initiative, 
+the caMOD source code was migrated to GitHub to allow further development by the broader community.
+
+This project includes as sub-components other projects that are copyrighted by third parties and that distributed under various licenses. Please find a summary in the list below:
+
+1) select.js:
+   Copyright by Matthias Hertel
+   Distributed under a Creative Commons Attribution 2.0 Germany License
+2) scriptaculous.js:
+   Copyright by Thomas Fuchs 
+   Distributed under:
+3) overlibmws.js
+   Copyright by Foteos Macrides 
+   Distributed under http://www.macridesweb.com/oltest/license.html
+4) helptip.js
+   Copyright by Erik Arvidsson 
+   Distributed under WebFX Non-Commercial License, WebFX Commercial license, The GNU General Public License
+5) scriptaculous.js:
+   Copyright by Thomas Fuchs  
+   Distributed under:
+6) ajaxtags-1.2-beta2.js
+   Copyright by Darren L. Spurgeon
+   Distributed under http://www.apache.org/licenses/LICENSE-2.0
+7) XTrustProvider.java
+   Copyright by F5 Networks, Inc
+   Distributed under The GNU General Public License 
+8) RemoteServerUtil.java
+   Copyright by NGIT
+   Distributed under: 
+9) RecursiveTreeBuilder.java:
+   Copyright by Mayo Foundation 
+   Distributed under the Eclipse Public License 
+   
+
+==================== Copyright notice by Thomas Fuchs =========================
+   
+// Copyright (c) 2005 Thomas Fuchs (http://script.aculo.us, http://mir.aculo.us)
+//
+// Permission is hereby granted, free of charge, to any person obtaining
+// a copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to
+// permit persons to whom the Software is furnished to do so, subject to
+// the following conditions:
+//
+// The above copyright notice and this permission notice shall be
+// included in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+// WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+
+==================== Copyright notice by Foteos Macrides =========================
+
+/*
+ Do not remove or change this notice.
+ overlibmws.js core module - Copyright Foteos Macrides 2002-2005. All rights reserved.
+   Initial: August 18, 2002 - Last Revised: June 8, 2005
+ This module is subject to the same terms of usage as for Erik Bosrup's overLIB,
+ though only a minority of the code and API now correspond with Erik's version.
+ See the overlibmws Change History and Command Reference via:
+
+        http://www.macridesweb.com/oltest/
+
+ Published under an open source license: http://www.macridesweb.com/oltest/license.html
+ Give credit on sites that use overlibmws and submit changes so others can use them as well.
+ You can get Erik's version via: http://www.bosrup.com/web/overlib/
+
+
+==================== Copyright notice by Erik Arvidsson =========================
+
+ 
+        	                         Help Tip 1.12                                 |
+ |-----------------------------------------------------------------------------|
+ |                         Created by Erik Arvidsson                           |
+ |                  (http://webfx.eae.net/contact.html#erik)                   |
+ |                      For WebFX (http://webfx.eae.net/)                      |
+ |-----------------------------------------------------------------------------|
+ |           A tool tip like script that can be used for context help          |
+ |-----------------------------------------------------------------------------|
+ |                  Copyright (c) 1999 - 2002 Erik Arvidsson                   |
+ |-----------------------------------------------------------------------------|
+ | This software is provided "as is", without warranty of any kind, express or |
+ | implied, including  but not limited  to the warranties of  merchantability, |
+ | fitness for a particular purpose and noninfringement. In no event shall the |
+ | authors or  copyright  holders be  liable for any claim,  damages or  other |
+ | liability, whether  in an  action of  contract, tort  or otherwise, arising |
+ | from,  out of  or in  connection with  the software or  the  use  or  other |
+ | dealings in the software.                                                   |
+ | - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - |
+ | This  software is  available under the  three different licenses  mentioned |
+ | below.  To use this software you must chose, and qualify, for one of those. |
+ | - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - |
+ | The WebFX Non-Commercial License          http://webfx.eae.net/license.html |
+ | Permits  anyone the right to use the  software in a  non-commercial context |
+ | free of charge.                                                             |
+ | - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - |
+ | The WebFX Commercial license           http://webfx.eae.net/commercial.html |
+ | Permits the  license holder the right to use  the software in a  commercial |
+ | context. Such license must be specifically obtained, however it's valid for |
+ | any number of  implementations of the licensed software.                    |
+ | - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - |
+ | GPL - The GNU General Public License    http://www.gnu.org/licenses/gpl.txt |
+ | Permits anyone the right to use and modify the software without limitations |
+ | as long as proper  credits are given  and the original  and modified source |
+ | code are included. Requires  that the final product, software derivate from |
+ | the original  source or any  software  utilizing a GPL  component, such  as |
+ | this, is also licensed under the GPL license.                               
+
+
+
+==================== Copyright notice by Thomas Fuchs =========================
+
+ // Copyright (c) 2005 Thomas Fuchs (http://script.aculo.us, http://mir.aculo.us)
+ //
+ // Permission is hereby granted, free of charge, to any person obtaining
+ // a copy of this software and associated documentation files (the
+ // "Software"), to deal in the Software without restriction, including
+ // without limitation the rights to use, copy, modify, merge, publish,
+ // distribute, sublicense, and/or sell copies of the Software, and to
+ // permit persons to whom the Software is furnished to do so, subject to
+ // the following conditions:
+ //
+ // The above copyright notice and this permission notice shall be
+ // included in all copies or substantial portions of the Software.
+ //
+ // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ // LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+ // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+ // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+ *
+
+==================== Copyright notice by Darren L. Spurgeon =========================
+/**
+ * Copyright 2005 Darren L. Spurgeon
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
+==================== Copyright notice by F5 Networks, Inc =========================
+
+/*
+ * The contents of this file are subject to the "END USER LICENSE AGREEMENT FOR F5
+ * Software Development Kit for iControl"; you may not use this file except in
+ * compliance with the License. The License is included in the iControl
+ * Software Development Kit.
+ *
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and limitations
+ * under the License.
+ *
+ * The Original Code is iControl Code and related documentation
+ * distributed by F5.
+ *
+ * Portions created by F5 are Copyright (C) 1996-2004 F5 Networks
+ * Inc. All Rights Reserved.  iControl (TM) is a registered trademark of
+ * F5 Networks, Inc.
+ *
+ * Alternatively, the contents of this file may be used under the terms
+ * of the GNU General Public License (the "GPL"), in which case the
+ * provisions of GPL are applicable instead of those above.  If you wish
+ * to allow use of your version of this file only under the terms of the
+ * GPL and not to allow others to use your version of this file under the
+ * License, indicate your decision by deleting the provisions above and
+ * replace them with the notice and other provisions required by the GPL.
+ * If you do not delete the provisions above, a recipient may use your
+ * version of this file under either the License or the GPL.
+ */
+
+
+==================== Copyright notice by NGIT =========================
+
+
+/**
+ * <!-- LICENSE_TEXT_START -->
+ * Copyright 2008,2009 NGIT. This software was developed in conjunction
+ * with the National Cancer Institute, and so to the extent government
+ * employees are co-authors, any rights in such works shall be subject
+ * to Title 17 of the United States Code, section 105.
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *   1. Redistributions of source code must retain the above copyright
+ *      notice, this list of conditions and the disclaimer of Article 3,
+ *      below. Redistributions in binary form must reproduce the above
+ *      copyright notice, this list of conditions and the following
+ *      disclaimer in the documentation and/or other materials provided
+ *      with the distribution.
+ *   2. The end-user documentation included with the redistribution,
+ *      if any, must include the following acknowledgment:
+ *      "This product includes software developed by NGIT and the National
+ *      Cancer Institute."   If no such end-user documentation is to be
+ *      included, this acknowledgment shall appear in the software itself,
+ *      wherever such third-party acknowledgments normally appear.
+ *   3. The names "The National Cancer Institute", "NCI" and "NGIT" must
+ *      not be used to endorse or promote products derived from this software.
+ *   4. This license does not authorize the incorporation of this software
+ *      into any third party proprietary programs. This license does not
+ *      authorize the recipient to use any trademarks owned by either NCI
+ *      or NGIT
+ *   5. THIS SOFTWARE IS PROVIDED "AS IS," AND ANY EXPRESSED OR IMPLIED
+ *      WARRANTIES, (INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ *      OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE) ARE
+ *      DISCLAIMED. IN NO EVENT SHALL THE NATIONAL CANCER INSTITUTE,
+ *      NGIT, OR THEIR AFFILIATES BE LIABLE FOR ANY DIRECT, INDIRECT,
+ *      INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+ *      BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ *      LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ *      CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ *      LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+ *      ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ *      POSSIBILITY OF SUCH DAMAGE.
+ * <!-- LICENSE_TEXT_END -->
+ */
+
+
+
+==================== Copyright notice by Mayo Foundation =========================
+
+/*******************************************************************************
+ * Copyright: (c) 2004-2009 Mayo Foundation for Medical Education and
+ * Research (MFMER). All rights reserved. MAYO, MAYO CLINIC, and the
+ * triple-shield Mayo logo are trademarks and service marks of MFMER.
+ *
+ * Except as contained in the copyright notice above, or as used to identify
+ * MFMER as the author of this software, the trade names, trademarks, service
+ * marks, or product names of the copyright holder shall not be used in
+ * advertising, promotion or otherwise in connection with this software without
+ * prior written authorization of the copyright holder.
+ *
+ * Licensed under the Eclipse Public License, Version 1.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *              http://www.eclipse.org/legal/epl-v10.html
+ *
+ *
+ *******************************************************************************
+

@@ -1,3 +1,11 @@
+<%--L
+   Copyright SAIC
+   Copyright SAIC-Frederick
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/camod/LICENSE.txt for details.
+L--%>
+
 <%
  /*
   *   $Id: includeComments.jsp,v 1.5 2005-11-16 17:03:06 georgeda Exp $

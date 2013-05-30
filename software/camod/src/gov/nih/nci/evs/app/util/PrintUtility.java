@@ -1,21 +1,21 @@
 /*******************************************************************************
- * Copyright: (c) 2004-2009 Mayo Foundation for Medical Education and 
+ * Copyright: (c) 2004-2009 Mayo Foundation for Medical Education and
  * Research (MFMER). All rights reserved. MAYO, MAYO CLINIC, and the
  * triple-shield Mayo logo are trademarks and service marks of MFMER.
- * 
- * Except as contained in the copyright notice above, or as used to identify 
+ *
+ * Except as contained in the copyright notice above, or as used to identify
  * MFMER as the author of this software, the trade names, trademarks, service
  * marks, or product names of the copyright holder shall not be used in
  * advertising, promotion or otherwise in connection with this software without
  * prior written authorization of the copyright holder.
- *   
+ *
  * Licensed under the Eclipse Public License, Version 1.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at 
- *   
+ * You may obtain a copy of the License at
+ *
  *  		http://www.eclipse.org/legal/epl-v10.html
- * 
- *  		
+ *
+ *
  *******************************************************************************/
 
 package gov.nih.nci.evs.app.util;
@@ -54,17 +54,17 @@ import org.LexGrid.concepts.Concept;
 
 /**
  * The Class PrintUtility.
- * 
+ *
  * @author <a href="https://cabig-kc.nci.nih.gov/Vocab/KC/index.php/LexBig_and_LexEVS">The LexEVS Team</a>
  */
 public class PrintUtility {
-	
 
-	
+
+
 	public static void printTree(DefaultMutableTreeNode treeNode){
 		printChildren(treeNode, 0);
 	}
-	
+
 	public static void printChildren(DefaultMutableTreeNode treeNode, int level){
 		Object obj = treeNode.getUserObject();
 		TreeNode node = (TreeNode)obj;
@@ -73,9 +73,9 @@ public class PrintUtility {
 		for(int i=0;i<treeNode.getChildCount();i++){
 			DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode)treeNode.getChildAt(i);
 			printChildren(dmtn, level + 1);
-		}		
-	}	
-	
+		}
+	}
+
 	private static String getIndent(int level){
 		//System.out.println("Entered getIndent");
 		String indent = "";
@@ -84,19 +84,19 @@ public class PrintUtility {
 		}
 		return indent;
 	}
-	
+
 	/**
 	 * Prints the.
-	 * 
+	 *
 	 * @param assocs the assocs
 	 */
 	public static void print(AssociationList assocs){
 		print(assocs, 0);
-	}	
+	}
 
 	/**
 	 * Prints the.
-	 * 
+	 *
 	 * @param assocs the assocs
 	 * @param depth the depth
 	 */
@@ -108,34 +108,34 @@ public class PrintUtility {
 					print(concept, depth+1);
 				}
 			}
-		}	
+		}
 	}
-	
+
 	/**
 	 * Prints the.
-	 * 
+	 *
 	 * @param ref the ref
 	 */
 	public static void print(ResolvedConceptReference ref){
 		print(ref, 0);
 	}
-	
+
 	/**
 	 * Prints the.
-	 * 
+	 *
 	 * @param ref the ref
 	 * @param depth the depth
 	 */
 	private static void print(ResolvedConceptReference ref, int depth){
 		String code = ref.getConceptCode();
-		
+
 		String description;
 		if(ref.getEntityDescription() != null){
 			description = ref.getEntityDescription().getContent();
 		} else {
 			description = "";
 		}
-		
+
 		System.out.println(buildPrefix(depth) + "Code: " + code + ", Description: " + description + " Hash: " + ref.hashCode());
 		if(ref.getSourceOf() != null){
 			print(ref.getSourceOf(), depth+1);
@@ -144,10 +144,10 @@ public class PrintUtility {
 			print(ref.getTargetOf(), depth+1);
 		}
 	}
-	
+
 	/**
 	 * Prints the.
-	 * 
+	 *
 	 * @param list the list
 	 */
 	public static void print(ResolvedConceptReferenceList list){
@@ -159,10 +159,10 @@ public class PrintUtility {
 	public static void print(AssociatedConcept ref){
         print(ref, 0);
     }
-	
+
 	/**
 	 * Prints the.
-	 * 
+	 *
 	 * @param ref the ref
 	 * @param depth the depth
 	 */
@@ -175,7 +175,7 @@ public class PrintUtility {
 		}
 		System.out.println(buildPrefix(depth) + "Code: " + ref.getCode() + ", Description: " + description + " Hash: " + ref.hashCode());
 		print(ref.getAssociationQualifiers(), "Qualifiers", depth + 1);
-		
+
 		if(ref.getSourceOf() != null){
 			print(ref.getSourceOf(), depth+1);
 		}
@@ -183,7 +183,7 @@ public class PrintUtility {
 			print(ref.getTargetOf(), depth+1);
 		}
 	}
-	
+
 	private static void print(NameAndValueList nameAndValueList, String label, int depth){
 	    if(nameAndValueList != null) {
 	        System.out.println(buildPrefix(depth, false) + label + ":");
@@ -191,12 +191,12 @@ public class PrintUtility {
 	            System.out.println(buildPrefix(depth + 1, false) + "/ Name: " + nv.getName());
 	            System.out.println(buildPrefix(depth + 1, false) + "\\ Value: " + nv.getContent());
 	        }
-	    }  
-	}	
-	
+	    }
+	}
+
 	/**
 	 * Prints the.
-	 * 
+	 *
 	 * @param summary the summary
 	 */
 	public static void print(CodingSchemeSummary summary){
@@ -204,10 +204,10 @@ public class PrintUtility {
 		System.out.println(" - Formal Name: " + summary.getFormalName());
 		System.out.println(" - Version: " + summary.getRepresentsVersion());
 	}
-	
+
 	/**
 	 * Prints the.
-	 * 
+	 *
 	 * @param csrl the csrl
 	 */
 	public static void print(CodingSchemeRenderingList csrl){
@@ -215,10 +215,10 @@ public class PrintUtility {
 			print(rendering.getCodingSchemeSummary());
 		}
 	}
-	
+
 	/**
 	 * Prints the.
-	 * 
+	 *
 	 * @param ed the ed
 	 */
 	public static void print(ExtensionDescription ed){
@@ -227,10 +227,10 @@ public class PrintUtility {
 		System.out.println(" - Extension Base Class: " + ed.getExtensionBaseClass());
 		System.out.println(" - Extension Implementing Class: " + ed.getExtensionClass());
 	}
-	
+
 	/**
 	 * Prints the.
-	 * 
+	 *
 	 * @param edl the edl
 	 */
 	public static void print(ExtensionDescriptionList edl){
@@ -238,10 +238,10 @@ public class PrintUtility {
 			print(description);
 		}
 	}
-	
+
 	/**
 	 * Prints the.
-	 * 
+	 *
 	 * @param cs the cs
 	 */
 	public static void print(CodingScheme cs){
@@ -249,29 +249,29 @@ public class PrintUtility {
 		System.out.println(" - Formal Name: " + cs.getFormalName());
 		System.out.println(" - Version: " + cs.getRepresentsVersion());
 	}
-	
+
 	/**
 	 * Prints the.
-	 * 
+	 *
 	 * @param entity the entity
 	 */
 	public static void print(Concept entity){
 		System.out.println("Code: " + entity.getEntityCode());
 		System.out.println(" - Description: " + entity.getEntityDescription().getContent());
 	}
-	
+
 	/**
 	 * Prints the.
-	 * 
+	 *
 	 * @param obj the obj
 	 */
 	public static void print(Object obj){
 		System.out.println("Result is: " + obj.toString());
 	}
-	
+
 	/**
 	 * Prints the.
-	 * 
+	 *
 	 * @param cns the cns
 	 */
 	public static void print(CodedNodeSet cns){
@@ -285,10 +285,10 @@ public class PrintUtility {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	/**
 	 * Prints the.
-	 * 
+	 *
 	 * @param cng the cng
 	 */
 	public static void print(CodedNodeGraph cng) {
@@ -304,12 +304,12 @@ public class PrintUtility {
 			}
 		} catch (Exception e) {
 			throw new RuntimeException(e);
-		} 
+		}
 	}
-	
+
 	/**
 	 * Prints the.
-	 * 
+	 *
 	 * @param lbsm the lbsm
 	 */
 	public static void print(LexBIGServiceConvenienceMethods lbsm) {
@@ -319,10 +319,10 @@ public class PrintUtility {
 			System.out.println(m.getName());
 		}
 	}
-	
+
 	/**
 	 * Prints the.
-	 * 
+	 *
 	 * @param lbsm the lbsm
 	 */
 	public static void print(LexBIGServiceManager lbsm) {
@@ -332,12 +332,12 @@ public class PrintUtility {
 			System.out.println(m.getName());
 		}
 	}
-	
+
 	/**
 	 * Builds the prefix.
-	 * 
+	 *
 	 * @param depth the depth
-	 * 
+	 *
 	 * @return the string
 	 */
 	private static String buildPrefix(int depth){
@@ -347,7 +347,7 @@ public class PrintUtility {
 		}
 		return prefix;
 	}
-	
+
 	private static String buildPrefix(int depth, boolean buildArrows){
         String prefix = "";
         for(int i=0;i<depth;i++){
@@ -357,18 +357,18 @@ public class PrintUtility {
             } else {
                 padding = "    ";
             }
-            
+
             prefix = prefix + padding;
         }
         return prefix;
     }
-	
-	
+
+
 	protected static void printTo(String code, String relation, LexBIGService lbSvc, String scheme, CodingSchemeVersionOrTag csvt)
 	throws LBException
 {
 	System.out.println("Points to ...");
-	
+
 	// Perform the query ...
 	NameAndValue nv = new NameAndValue();
 	NameAndValueList nvList = new NameAndValueList();
@@ -386,7 +386,7 @@ public class PrintUtility {
 	if (matches.getResolvedConceptReferenceCount() > 0) {
 		ResolvedConceptReference ref =
 			(ResolvedConceptReference) matches.enumerateResolvedConceptReference().nextElement();
-		
+
 		// Print the associations
 		AssociationList sourceof = ref.getSourceOf();
 		Association[] associations = sourceof.getAssociation();
@@ -404,7 +404,7 @@ public class PrintUtility {
 		}
 	}
 }
-	
+
 	/**
 	 * Display relations from the given code to other concepts.
 	 * @param code
@@ -419,7 +419,7 @@ public class PrintUtility {
 	{
 		// Perform the query ...
 		System.out.println("Pointed at by ...");
-		
+
 		// Perform the query ...
 		NameAndValue nv = new NameAndValue();
 		NameAndValueList nvList = new NameAndValueList();
@@ -437,7 +437,7 @@ public class PrintUtility {
 		if (matches.getResolvedConceptReferenceCount() > 0) {
 			ResolvedConceptReference ref =
 				(ResolvedConceptReference) matches.enumerateResolvedConceptReference().nextElement();
-			
+
 			// Print the associations
 			AssociationList targetof = ref.getTargetOf();
 			Association[] associations = targetof.getAssociation();
@@ -453,7 +453,7 @@ public class PrintUtility {
 									"**No Description**":ed.getContent()));
 				}
 			}
-		}			
-	
-	}	
+		}
+
+	}
 }
