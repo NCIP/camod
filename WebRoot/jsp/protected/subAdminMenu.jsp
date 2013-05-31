@@ -1,3 +1,11 @@
+<%--L
+   Copyright SAIC
+   Copyright SAIC-Frederick
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/camod/LICENSE.txt for details.
+L--%>
+
 <%
 /*
  * $Id: subAdminMenu.jsp,v 1.10 2005-11-18 21:07:44 georgeda Exp $

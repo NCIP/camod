@@ -1,3 +1,11 @@
+/*L
+ *  Copyright SAIC
+ *  Copyright SAIC-Frederick
+ *
+ *  Distributed under the OSI-approved BSD 3-Clause License.
+ *  See http://ncip.github.com/camod/LICENSE.txt for details.
+ */
+
 /*
  *  $Id: TaxonManagerImpl.java,v 1.8 2005-12-01 13:43:36 georgeda Exp $
  * 

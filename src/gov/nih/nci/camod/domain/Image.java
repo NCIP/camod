@@ -1,3 +1,11 @@
+/*L
+ *  Copyright SAIC
+ *  Copyright SAIC-Frederick
+ *
+ *  Distributed under the OSI-approved BSD 3-Clause License.
+ *  See http://ncip.github.com/camod/LICENSE.txt for details.
+ */
+
 /*
  * 
  * $Id: Image.java,v 1.8 2005-11-08 16:47:49 georgeda Exp $

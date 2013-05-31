@@ -1,3 +1,11 @@
+/*L
+ *  Copyright SAIC
+ *  Copyright SAIC-Frederick
+ *
+ *  Distributed under the OSI-approved BSD 3-Clause License.
+ *  See http://ncip.github.com/camod/LICENSE.txt for details.
+ */
+
 /**
  * $Id: SearchForm.java,v 1.7 2005-11-16 19:43:30 georgeda Exp $
  * 
