@@ -1,4 +1,13 @@
 <?xml version='1.0' encoding='windows-1252' ?>
+
+<!--L
+   Copyright SAIC
+   Copyright SAIC-Frederick
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/camod/LICENSE.txt for details.
+L-->
+
 <tocdata>
 <book name="Getting Started in caMOD" >
   <item name="Introduction to caMOD" url="Introduction_to_caMOD.htm" />

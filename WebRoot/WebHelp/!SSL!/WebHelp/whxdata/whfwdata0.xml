@@ -1,4 +1,13 @@
 <?xml version='1.0' encoding='windows-1252' ?>
+
+<!--L
+   Copyright SAIC
+   Copyright SAIC-Frederick
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/camod/LICENSE.txt for details.
+L-->
+
 <ftswdata>
 <key name="0"> 19,69, </key>
 <key name="005"> 34, </key>
