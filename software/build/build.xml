@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
+<!--L
+   Copyright SAIC
+   Copyright SAIC-Frederick
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/camod/LICENSE.txt for details.
+L-->
+
 <project name="camod" default="build:all" basedir=".">
 	<description>
 		This is the master build file for the caMOD project.  caMOD web application, caMOD grid service and caMOD API

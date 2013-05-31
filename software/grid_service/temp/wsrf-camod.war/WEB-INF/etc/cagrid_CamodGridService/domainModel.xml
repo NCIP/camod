@@ -1,3 +1,11 @@
+<!--L
+   Copyright SAIC
+   Copyright SAIC-Frederick
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/camod/LICENSE.txt for details.
+L-->
+
 <ns1:DomainModel projectDescription="Version 2.5 Object model for Cancer Models application" projectLongName="caMOD_2.5" projectShortName="caMOD_2.5" projectVersion="2.5" xmlns:ns1="gme://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata.dataservice">
  <ns1:exposedUMLAssociationCollection>
   <ns1:UMLAssociation bidirectional="false">

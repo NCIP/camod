@@ -1,3 +1,11 @@
+<!--L
+   Copyright SAIC
+   Copyright SAIC-Frederick
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/camod/LICENSE.txt for details.
+L-->
+
 <ns1:Deployment deployDateTime="1226091339530" deploymentPrefix="cagrid" serviceDeploymentDirName="cagrid_CamodGridService" serviceName="CamodGridService" xsi:type="ns1:Deployment" xmlns:ns1="gme://gov.nih.nci.cagrid.introduce/1/Deployment" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <Jars xsi:type="ns1:Jars">
   <Jar location="." name="acegi-security-1.0.4.jar" xsi:type="ns1:Jar"/>

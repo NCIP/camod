@@ -1,3 +1,11 @@
+<%--L
+   Copyright SAIC
+   Copyright SAIC-Frederick
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/camod/LICENSE.txt for details.
+L--%>
+
 <base href="http://<%= request.getServerName()%>:<%= request.getServerPort()%>/caarray/">
 <link rel="stylesheet" type="text/css" href="css/caArray.css" />
 <%@ include file="/jsp/header.jsp" %>

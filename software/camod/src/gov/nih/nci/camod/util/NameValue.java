@@ -1,3 +1,11 @@
+/*L
+ *  Copyright SAIC
+ *  Copyright SAIC-Frederick
+ *
+ *  Distributed under the OSI-approved BSD 3-Clause License.
+ *  See http://ncip.github.com/camod/LICENSE.txt for details.
+ */
+
 package gov.nih.nci.camod.util;
 
 /**
@@ -6,8 +14,6 @@ package gov.nih.nci.camod.util;
  * @author Naveen Amiruddin
  * @version 1.0
  *
- * copyright NCI 2007.  All rights reserved.
- * This code may not be used without the express written permission of the copyright holder, NCI.
  */
 
 public class NameValue
