@@ -18,7 +18,7 @@ You will find more details about the caMOD in the following links:
  * [Issue Tracker] (https://tracker.nci.nih.gov/browse/CAMOD)
  * [Code Repository] (https://github.com/NCIP/camod)
  * [User Guide] (http://cancermodels.nci.nih.gov/camod/WebHelp/caMOD_Online_Help/UserGuide.pdf)
- * [Release Notes] (https://wiki.nci.nih.gov/display/caBIO/caBIO+4.3.2+Release+Notes)
+ * [Release Notes] (https://wiki.nci.nih.gov/display/caMOD/caMOD+Release+Notes)
  * [Hosted instance] (http://cancermodels.nci.nih.gov/camod/)
 
 Please join us in further developing and improving caMOD.
