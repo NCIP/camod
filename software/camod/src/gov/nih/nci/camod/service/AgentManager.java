@@ -31,6 +31,5 @@ public interface AgentManager {
 	public Agent get(String id) throws Exception;
     public void save(Agent agent) throws Exception;
     public void remove(String id) throws Exception;
-	public Collection getClinicalProtocols(Agent a);
 	public List getYeastResults(Agent a, boolean useNscNumber);
 }

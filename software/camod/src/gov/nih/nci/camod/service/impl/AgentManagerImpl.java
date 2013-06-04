@@ -31,11 +31,7 @@ import gov.nih.nci.camod.domain.Agent;
 import gov.nih.nci.camod.service.AgentManager;
 import gov.nih.nci.camod.util.DrugScreenResult;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
-import gov.nih.nci.system.applicationservice.CaBioApplicationService;
-import gov.nih.nci.system.client.ApplicationServiceProvider;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 public class AgentManagerImpl extends BaseManager implements AgentManager
@@ -87,7 +83,7 @@ public class AgentManagerImpl extends BaseManager implements AgentManager
         log.debug("In AgentManagerImpl.save");
         super.remove(id, Agent.class);
     }
-
+/*
     public Collection getClinicalProtocols(Agent a)
     {
     	CaBioApplicationService appService = null;
@@ -131,7 +127,7 @@ public class AgentManagerImpl extends BaseManager implements AgentManager
         }
         return protocols;
     }
-
+*/
     public List<DrugScreenResult> getYeastResults(Agent a,
                                                   boolean useNscNumber)
     {

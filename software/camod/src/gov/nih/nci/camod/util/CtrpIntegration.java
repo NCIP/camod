@@ -83,13 +83,13 @@ public class CtrpIntegration {
 		
 		return document;
 	}
-	public Collection parseXmlDoc(Document document) {
+	public Collection<ClinicalTrialProtocol> parseXmlDoc(Document document) {
 		System.out.println("Root element :" + document.getRootElement().getName());
 		
 		Element rootNode = document.getRootElement();
 		List list = rootNode.getChildren("studyProtocol");
 		
-		Collection clinicalTrialProtocolCollection = new ArrayList();
+		Collection<ClinicalTrialProtocol> clinicalTrialProtocolCollection = new ArrayList();
  
 		for (int i = 0; i < list.size(); i++) {
  
@@ -105,7 +105,7 @@ public class CtrpIntegration {
 		   clinicalTrialProtocol.setCurrentStatus(node.getChildText("studyStatusCode"));
 		   
 		   clinicalTrialProtocolCollection.add(clinicalTrialProtocol);
- 
+ /*
 		   System.out.println("***********************");
 		   System.out.println("leadOrganizationName : " + node.getChildText("leadOrganizationName"));
 		   System.out.println("nciIdentifier " + node.getChildText("nciIdentifier"));
@@ -114,11 +114,20 @@ public class CtrpIntegration {
 		   System.out.println("phaseName" + node.getChildText("phaseName"));
 		   System.out.println("piFullName " + node.getChildText("piFullName"));
 		   System.out.println("studyStatusCode " + node.getChildText("studyStatusCode"));
+*/		   
  		}
 		
 		return clinicalTrialProtocolCollection;
 
 		
+	}
+	
+	public Collection<ClinicalTrialProtocol> getClinicalProtocols(Long nscNumber) {
+		String url = PropertyUtil.getProperty("ctrp.url") + nscNumber;
+		
+		Document document = retrieveXmlDoc(url);
+		
+		return parseXmlDoc(document);
 	}
 
 	/**
@@ -134,10 +143,12 @@ public class CtrpIntegration {
 		
 //		url = "http://trials-dev.nci.nih.gov/registry/rest/studyProtocols?agentNsc=737664";
 
-		
+	
 		Document document = ctrpIntegration.retrieveXmlDoc(url);
 		
 		Collection<ClinicalTrialProtocol> clinicalTrialProtocolCollection = ctrpIntegration.parseXmlDoc(document);
+		
+//		Collection<ClinicalTrialProtocol> clinicalTrialProtocolCollection = ctrpIntegration.getClinicalProtocols(new Long(737664));
 		
 		for( ClinicalTrialProtocol clinicalTrialProtocol: clinicalTrialProtocolCollection) {
 			System.out.println("<<<<<<<<<<<<<<<<<<<");

@@ -231,6 +231,7 @@ import gov.nih.nci.camod.domain.Agent;
 import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.CaelmirStudyData;
 import gov.nih.nci.camod.domain.CarcinogenExposure;
+import gov.nih.nci.camod.domain.ClinicalTrialProtocol;
 import gov.nih.nci.camod.domain.Comments;
 import gov.nih.nci.camod.domain.EngineeredGene;
 import gov.nih.nci.camod.domain.GeneIdentifier;
@@ -250,6 +251,7 @@ import gov.nih.nci.camod.service.CommentsManager;
 import gov.nih.nci.camod.service.PersonManager;
 import gov.nih.nci.camod.service.TransplantationManager;
 import gov.nih.nci.camod.service.impl.QueryManagerSingleton;
+import gov.nih.nci.camod.util.CtrpIntegration;
 import gov.nih.nci.camod.util.SafeHTMLUtil;
 import gov.nih.nci.common.domain.DatabaseCrossReference;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
@@ -382,13 +384,7 @@ public class ViewModelAction extends BaseAction
             sID = SafeHTMLUtil.clean(sID);
         }
         
-		sID = request.getHeader("Referer");
-    	
-    	// prevents Referer Header injection
-    	if ( sID != null && sID != "" && !sID.contains("camod")) {
-    		return (mapping.findForward("failure"));
-    	}    
-    
+
         // Clean all headers for security scan (careful about what chars you allow)
     	String headername = "";
     	for(Enumeration e = request.getHeaderNames(); e.hasMoreElements();){
@@ -927,7 +923,10 @@ public class ViewModelAction extends BaseAction
                 if (nscNumber != null)                		                	
                 {
                 	log.info("nscNumber: " + nscNumber);
-                    Collection protocols = myAgentManager.getClinicalProtocols(a);
+                    //Collection protocols = myAgentManager.getClinicalProtocols(a);
+                	CtrpIntegration ctrpIntegration = new CtrpIntegration();
+					Collection<ClinicalTrialProtocol> protocols = ctrpIntegration.getClinicalProtocols(a.getNscNumber());
+					
                     clinProtocols.put(nscNumber, protocols);
                     log.info("clinProtocols.size(): " + clinProtocols.size());
                     // get the yeast data

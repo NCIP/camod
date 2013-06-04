@@ -56,8 +56,10 @@ package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.Agent;
+import gov.nih.nci.camod.domain.ClinicalTrialProtocol;
 import gov.nih.nci.camod.service.AgentManager;
 import gov.nih.nci.camod.service.impl.QueryManagerSingleton;
+import gov.nih.nci.camod.util.CtrpIntegration;
 import gov.nih.nci.camod.util.SafeHTMLUtil;
 import gov.nih.nci.camod.webapp.form.DrugScreenSearchForm;
 import gov.nih.nci.common.persistence.Search;
@@ -168,7 +170,10 @@ public final class DrugScreenSearchAction extends BaseAction {
                     
 					if (theNscNumber != null) {
 						if (theForm.isDoClinical()) {
-							Collection protocols = myAgentManager.getClinicalProtocols(a);
+							//Collection protocols = myAgentManager.getClinicalProtocols(a);
+							CtrpIntegration ctrpIntegration = new CtrpIntegration();
+							Collection<ClinicalTrialProtocol> protocols = ctrpIntegration.getClinicalProtocols(a.getNscNumber());
+							
 							clinProtocols.put(theNscNumber, protocols);
 						}
 						if (theForm.isDoPreClinical()) {
