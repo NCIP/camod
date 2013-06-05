@@ -15,11 +15,6 @@ import java.util.Comparator;
 
 import edu.emory.mathcs.backport.java.util.Collections;
 
-import gov.nih.nci.cabio.domain.Gene;
-import gov.nih.nci.cabio.domain.GeneOntology;
-import gov.nih.nci.cabio.domain.Pathway;
-import gov.nih.nci.cabio.domain.Taxon;
-
 public class BioDBnetService {
 	static BioDBnet service = null;
 	static BioDBnetPortType client = null;

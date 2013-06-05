@@ -11,15 +11,6 @@ L-->
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
     
-    <!-- Import the files for each remote service -->
-    <import resource="application-config-client-info.xml"/>
-    
-    <!-- Make an entry for ServiceInfo for each remote service. The default service bean must be called "ServiceInfo" -->
-    <alias alias="ServiceInfo" name="cabio43ServiceInfo"/>
-    
-    <!-- Quick access to the server URL -->
-    <bean id="RemoteServerURL" class="java.lang.String">
-        <constructor-arg><value>http://localhost:8080/cabio43</value></constructor-arg>
-    </bean>
+
     
 </beans>

@@ -31,9 +31,9 @@ L--%>
 				<b><c:out value="${cpitem.title}"/></b><br/>
 				<br/>
 				<c:choose>			
-					<c:when test="${not empty cpitem.PDQIdentifier}">
-						Additional Info from PDQ: 
-						<a target="_blank" href="http://www.cancer.gov/clinicaltrials/<c:out value="${cpitem.PDQIdentifier}"/>"><c:out value="${cpitem.PDQIdentifier}"/></a>
+					<c:when test="${not empty cpitem.NCTIdentifier}">
+						Additional Info from NCT: 
+						<a target="_blank" href="http://clinicaltrials.gov/show/<c:out value="${cpitem.NCTIdentifier}"/>"><c:out value="${cpitem.NCTIdentifier}"/></a>
 						<br/>
 					</c:when>
 					<c:otherwise>

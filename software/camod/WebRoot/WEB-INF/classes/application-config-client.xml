@@ -12,12 +12,8 @@ L-->
 <beans>
  
  <!-- Import the files for each remote service -->
- <import resource="application-config-client-local.xml"/>
  <import resource="application-config-client-remote.xml"/>
  
-    <!-- Make an entry for ServiceInfo for each remote service. The default service bean must be called " cabio43ServiceInfo " -->
-    <alias alias="caBIO" name="cabio43ServiceInfo"/>  
-   
     <!-- Make an entry for ServiceInfo for each remote service. The default service bean must be called " EvsServiceInfo " -->
     <alias alias="Evs" name="EvsServiceInfo"/>  
  

@@ -225,7 +225,7 @@
 package gov.nih.nci.camod.webapp.action;
 
 import edu.wustl.common.util.CaElmirInterfaceManager;
-import gov.nih.nci.cabio.domain.Gene;
+import gov.nih.nci.camod.biodbnet.Gene;
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.Agent;
 import gov.nih.nci.camod.domain.AnimalModel;
@@ -253,10 +253,7 @@ import gov.nih.nci.camod.service.TransplantationManager;
 import gov.nih.nci.camod.service.impl.QueryManagerSingleton;
 import gov.nih.nci.camod.util.CtrpIntegration;
 import gov.nih.nci.camod.util.SafeHTMLUtil;
-import gov.nih.nci.common.domain.DatabaseCrossReference;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
-import gov.nih.nci.system.applicationservice.CaBioApplicationService;
-import gov.nih.nci.system.client.ApplicationServiceProvider;
 import gov.nih.nci.camod.biodbnet.BioDBnetService;
 import gov.nih.nci.camod.biodbnet.Db2DbParams;
 
@@ -501,7 +498,7 @@ public class ViewModelAction extends BaseAction
                 GeneIdentifier geneIdentifier = tm.getGeneIdentifier();                
                 if (geneIdentifier != null)
                 {
-                    log.info("Connecting to caBIO to look up gene " + geneIdentifier);
+                    log.info("Connecting to BioDBnet to look up gene " + geneIdentifier);
                     // the geneId is available
                     Gene myGene = new Gene();
                     BioDBnetService bioDBnetService = BioDBnetService.getService();
