@@ -92,6 +92,13 @@ public class AdvancedSearchPopulateAction extends BaseAction {
 
         log.debug("In AdvancedSearchPopulateAction.populate");	
         
+    	boolean isRequestedSessionIdFromURL = ((HttpServletRequest) request).isRequestedSessionIdFromURL(); 
+    	
+    	if (isRequestedSessionIdFromURL) {
+    		request.getSession().invalidate();
+    		request.getSession(true);
+    	}
+        
         // Clean all headers for security scan (careful about what chars you allow)
     	String headername = "";
     	for(Enumeration e = request.getHeaderNames(); e.hasMoreElements();){
