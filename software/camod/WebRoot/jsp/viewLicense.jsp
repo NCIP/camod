@@ -170,7 +170,7 @@ L--%>
                                                       <td class="sidebarTitle" height="20">DID YOU KNOW?</td>
                                                   </tr>
                                                   <tr>
-                                                      <td class="sidebarContent" valign="top">caMOD 2.7.3 was released in April 2013.<br/><br/>
+                                                      <td class="sidebarContent" valign="top">caMOD 2.7.4 was released in August 2013.<br/><br/>
                                                       <a href='<%=Constants.WIKI_HELP_MAIN%>caMOD+Release+History' target='_new'>Release History</a><br/><br/>
                                                       </td>
                                                   </tr>
