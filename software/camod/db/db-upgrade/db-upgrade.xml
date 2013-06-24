@@ -132,10 +132,14 @@ L-->
     </sql>
 	</changeSet>
 	
+	<!-- 
+	
 	<changeSet id="2.6.1_1_all_sql_for_caIMAGE_upgrade_and_enhancements" author="pandyas">                            
 		<comment>Modify schema for caIMAGE upgrade and additional features</comment>
 		<sqlFile path="db/db-upgrade/oracle/camod_upgrade_2.6.1.sql"/>
 	</changeSet> 
+	
+	 -->
 	
 	<!--
 	<changeSet id="2.6.1_2_populate_thumb_url_for_caIMAGE_upgrade_and_enhancements" author="pandyas">                            
@@ -148,6 +152,8 @@ L-->
 		<comment>Update the roles for a test user</comment>
         <sqlFile path="db/db-upgrade/oracle/camod_upgrade_2.6.2_1.sql"/>
 	</changeSet-->
+	
+	<!-- 
 	
 	<changeSet id="2.7_1_update_organ_name" author="pandyas">                            
 		<comment>Update the organ name field</comment>
@@ -162,7 +168,9 @@ L-->
 	<changeSet id="2.7_3_update_for_missing_metastasis_data" author="pandyas">                            
 		<comment>Update the PARENT_HISTOPATHOLOGY_ID field</comment>
         <sqlFile path="db/db-upgrade/oracle/camod_upgrade_2.7_3.sql"/>
-	</changeSet>			
+	</changeSet>	
+	
+	 -->		
 
 </databaseChangeLog>
 
