@@ -20,6 +20,7 @@ You will find more details about the caMOD in the following links:
  * [User Guide] (http://cancermodels.nci.nih.gov/camod/WebHelp/caMOD_Online_Help/UserGuide.pdf)
  * [Release Notes] (https://wiki.nci.nih.gov/x/bgEIBg)
  * [Production Instance] (http://cancermodels.nci.nih.gov/camod/)
+ * [Documentation] (https://github.com/NCIP/camod-docs)
  * [Listserv] (https://list.nih.gov/archives/camod_users-l.html)
 
 Please join us in further developing and improving caMOD.
