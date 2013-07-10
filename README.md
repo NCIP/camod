@@ -8,6 +8,8 @@ The cancer models database (caMOD) provides information about animal models for 
 
 The primary users of this tool are researchers interested in detailed information about animal models of human cancer.
 
+It is written in Java using caBIO, caGrid, caCORE CSM, caCORE SDK, Struts, Tiles, Hibernate, Castor, Apache Commons, LexEVS, Lucene, Spring Framework technologies.
+
 The caMOD is distributed under the BSD 3-Clause License.
 Please see the NOTICE and LICENSE files for details.
 
