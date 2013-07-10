@@ -7,13 +7,6 @@ Please see LICENSE file for details.
 
 This project was developed as part of the NCI caBIG initiative.
 
-The cancer models database (caMOD) provides information about animal models for human cancer to the public research community.
-* Data Submission: Data in caMOD are extracted from the public scientific literature by curators or they are directly submitted by scientists.
-* Search: Users can retrieve information about the making of models, their genetic descriptions, histopathology, images, microarray data, and therapeutic trials in which the models were used, and other information as well.
-* System Function Administration: The Admin function provides services for user registration, review of submitted models and database management.
-
-The primary users of this tool are researchers interested in detailed information about animal models of human cancer.
-
 The project was initially developed by SAIC and SAIC-Frederick under funding from the CBIIT office of the National Cancer Institute.
 
 In 2013, as part of the National Cancer Informatics Program (NCIP) Open Development Initiative, 
