@@ -8,18 +8,20 @@ The cancer models database (caMOD) provides information about animal models for 
 
 The primary users of this tool are researchers interested in detailed information about animal models of human cancer.
 
+It is written in Java using caBIO, caGrid, caCORE CSM, caCORE SDK, Struts, Tiles, Hibernate, Castor, Apache Commons, LexEVS, Lucene, Spring Framework technologies.
+
 The caMOD is distributed under the BSD 3-Clause License.
 Please see the NOTICE and LICENSE files for details.
 
 You will find more details about the caMOD in the following links:
- * [Home Page] (https://wiki.nci.nih.gov/display/caMOD/caMOD)
- * [NCI OSDI] (https://wiki.nci.nih.gov/display/caBIGCommunityCode/CBIIT+Open+Source+Development+Initiative)
- * [Listserv] (https://list.nih.gov/archives/camod_users-l.html)
+ * [Community Wiki] (https://wiki.nci.nih.gov/x/z4MYAQ)
  * [Issue Tracker] (https://tracker.nci.nih.gov/browse/CAMOD)
  * [Code Repository] (https://github.com/NCIP/camod)
  * [User Guide] (http://cancermodels.nci.nih.gov/camod/WebHelp/caMOD_Online_Help/UserGuide.pdf)
- * [Release Notes] (https://wiki.nci.nih.gov/display/caMOD/caMOD+Release+Notes)
- * [Hosted instance] (http://cancermodels.nci.nih.gov/camod/)
+ * [Release Notes] (https://wiki.nci.nih.gov/x/bgEIBg)
+ * [NCI Hosted Instance] (http://cancermodels.nci.nih.gov/camod/)
+ * [Documentation] (https://github.com/NCIP/camod-docs)
+ * [Listserv] (https://list.nih.gov/archives/camod_users-l.html)
 
 Please join us in further developing and improving caMOD.
 
