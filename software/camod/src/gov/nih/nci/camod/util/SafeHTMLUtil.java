@@ -77,8 +77,8 @@ public class SafeHTMLUtil {
 		clean = StringUtils.replace(clean, "\"", "");
 		clean = StringUtils.replace(clean, "$", "");
 		clean = StringUtils.replace(clean, "&", "");
-		clean = StringUtils.replace(clean, "(", "");
-		clean = StringUtils.replace(clean, ")", "");
+//		clean = StringUtils.replace(clean, "(", "");
+//		clean = StringUtils.replace(clean, ")", "");
 //		clean = StringUtils.replace(clean, "/", "");
 		clean = StringUtils.replace(clean, "\\", "");
 		clean = StringUtils.replace(clean, "&", "");
@@ -140,8 +140,8 @@ public class SafeHTMLUtil {
 		clean = StringUtils.replace(clean, "\"", "");
 		clean = StringUtils.replace(clean, "$", "");
 		clean = StringUtils.replace(clean, "&", "");
-		clean = StringUtils.replace(clean, "(", "");
-		clean = StringUtils.replace(clean, ")", "");
+//		clean = StringUtils.replace(clean, "(", "");
+//		clean = StringUtils.replace(clean, ")", "");
 //		clean = StringUtils.replace(clean, "/", "");
 		clean = StringUtils.replace(clean, "\\", "");
 		clean = StringUtils.replace(clean, "alert", "cleaned");
@@ -201,8 +201,8 @@ public class SafeHTMLUtil {
 		clean = StringUtils.replace(clean, ";", "");
 		clean = StringUtils.replace(clean, "\"", "");
 		clean = StringUtils.replace(clean, "$", "");
-		clean = StringUtils.replace(clean, "(", "");
-		clean = StringUtils.replace(clean, ")", "");
+//		clean = StringUtils.replace(clean, "(", "");
+//		clean = StringUtils.replace(clean, ")", "");
 //		clean = StringUtils.replace(clean, "/", "");
 		clean = StringUtils.replace(clean, "\\", "");
 		if (clean.length() == 0) {
@@ -242,8 +242,8 @@ public class SafeHTMLUtil {
 		clean = StringUtils.replace(clean, "<", "");
 		clean = StringUtils.replace(clean, ">", "");
 		clean = StringUtils.replace(clean, ";", "");
-		clean = StringUtils.replace(clean, "(", "");
-		clean = StringUtils.replace(clean, ")", "");
+//		clean = StringUtils.replace(clean, "(", "");
+//		clean = StringUtils.replace(clean, ")", "");
 		if (clean.length() == 0) {
 			clean = "empty";
 		}
@@ -263,8 +263,8 @@ public class SafeHTMLUtil {
 		clean = StringUtils.replace(clean, "'", "");
 		clean = StringUtils.replace(clean, "\"", "");
 		clean = StringUtils.replace(clean, "$", "");
-		clean = StringUtils.replace(clean, "(", "");
-		clean = StringUtils.replace(clean, ")", "");
+//		clean = StringUtils.replace(clean, "(", "");
+//		clean = StringUtils.replace(clean, ")", "");
 		clean = StringUtils.replace(clean, "/", "");
 		clean = StringUtils.replace(clean, "\\", "");
 		if (clean.length() == 0) {

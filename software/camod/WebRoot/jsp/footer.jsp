@@ -65,17 +65,12 @@ L--%>
         <TBODY>
         <TR>
           <TD vAlign=top>
-            <DIV align=center><A href="http://www.cancer.gov/"><IMG height=31
-            alt="National Cancer Institute" src="/camod/images/footer_nci.gif"
-            width=63 border=0></A> <A href="http://www.dhhs.gov/"><IMG height=31
-            alt="Department of Health and Human Services"
-            src="/camod/images/footer_hhs.gif" width=39 border=0></A> <A
-            href="http://www.nih.gov/"><IMG height=31
-            alt="National Institutes of Health"
-            src="/camod/images/footer_nih.gif" width=46 border=0></A> <A
-            href="http://www.firstgov.gov/"><IMG height=31 alt=FirstGov.gov
-            src="/camod/images/footer_firstgov.gif" width=91 border=0></A>
-          </DIV>
+            <div align="center" style='line-height: 1.2em; font-size: 0.7em; font-family: Arial,Helvetica,sans-serif; '>
+				<a href="http://www.dhhs.gov/" style="text-decoration: none" target="new">Department of Health and Human Services</a>&nbsp;|&nbsp;
+				<a href="http://www.nih.gov/" style="text-decoration: none" target="new">National Institutes of Health</a>&nbsp;|&nbsp;
+								<a href="http://www.cancer.gov/" style="text-decoration: none" target="new">National Cancer Institute</a>&nbsp;|&nbsp; 
+				<a href="http://www.usa.gov/" style="text-decoration: none" target="new">USA.gov</a>
+			</div>
 	  </TD>
 	  </TR>
 	</TBODY>

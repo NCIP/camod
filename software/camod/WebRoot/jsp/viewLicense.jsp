@@ -145,7 +145,7 @@ L--%>
                                                   </tr>
 
                                                   <tr>
-                                                      <td class="sidebarContent"><IMG alt="What's new" src="/camod/images/bullet_point.gif" border=0>&nbsp;<a href='<%=Constants.WIKI_HELP_MAIN%>caMOD+2.7.3+Release+Notes' target='_new'>View What's New</a></td>
+                                                      <td class="sidebarContent"><IMG alt="What's new" src="/camod/images/bullet_point.gif" border=0>&nbsp;<a href='<%=Constants.WIKI_HELP_MAIN%>caMOD+2.7.4+Release+Notes' target='_new'>View What's New</a></td>
                                                   </tr>
                                               </table>
                                           </td>
