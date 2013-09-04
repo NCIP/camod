@@ -51,7 +51,7 @@ import org.apache.struts.config.ForwardConfig;
  * @author schroedlni
  * 
  */
-public class CustomRequestProcessor extends SecureRequestProcessor {
+public class CustomRequestProcessor extends RequestProcessor {
 
     protected final Log log = LogFactory.getLog(getClass());
 
