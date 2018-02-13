@@ -14,12 +14,10 @@ The caMOD is distributed under the BSD 3-Clause License.
 Please see the NOTICE and LICENSE files for details.
 
 You will find more details about the caMOD in the following links:
- * [Community Wiki] (https://wiki.nci.nih.gov/x/z4MYAQ)
+ * [Community Wiki] (https://wiki.nci.nih.gov/x/z4MYAQ) (Requires login. Email [NCI CBIIT Application Support](mailto:ncicbiit@mail.nih.gov) for access.)
  * [Issue Tracker] (https://tracker.nci.nih.gov/browse/CAMOD)
  * [Code Repository] (https://github.com/NCIP/camod)
- * [User Guide] (http://cancermodels.nci.nih.gov/camod/WebHelp/caMOD_Online_Help/UserGuide.pdf)
- * [Release Notes] (https://wiki.nci.nih.gov/x/bgEIBg)
- * [NCI Hosted Instance] (http://cancermodels.nci.nih.gov/camod/)
+ * [Release Notes] (https://wiki.nci.nih.gov/x/bgEIBg) http://cancermodels.nci.nih.gov/camod/WebHelp/caMOD_Online_Help/UserGuide.pdf
  * [Documentation] (https://github.com/NCIP/camod-docs)
  * [Listserv] (https://list.nih.gov/archives/camod_users-l.html)
 
